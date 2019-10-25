@@ -43,7 +43,7 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///prizm_server")
+    "default": env.db("DATABASE_URL", default="postgres://seungminkim:TMDALS236!@@127.0.0.1:5432/prizm")
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
