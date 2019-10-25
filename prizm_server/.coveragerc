@@ -1,0 +1,5 @@
+[run]
+include = prizm_server/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin
