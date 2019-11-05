@@ -36,6 +36,8 @@ Werkzeug = ">=0.15.3"
 Sphinx = "==2.2.0"
 django_coverage_plugin = "==1.6.0"
 django-cors-headers = "*"
+awsebcli = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
