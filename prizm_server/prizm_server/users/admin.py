@@ -12,6 +12,25 @@ class UserAdmin(auth_admin.UserAdmin):
 
     form = UserChangeForm
     add_form = UserCreationForm
-    fieldsets = (("User", {"fields": ("name",)}),) + auth_admin.UserAdmin.fieldsets
-    list_display = ["username", "name", "is_superuser"]
-    search_fields = ["name"]
+    list_display = ["username", "name", "is_superuser", 'user_type', 'country_code']
+    search_fields = ["name", 'email']
+    fieldsets = [
+        ('개인정보', {'fields': [
+            'username',
+            'name',
+            'email',
+            'country_code',
+            'country_number',
+            'mobile',
+            'birth',
+            'user_type',
+            'instagram_account',
+
+        ]}),
+        ('권한', {'fields': (
+            'is_active',
+            'is_staff',
+            'is_superuser',
+            'password'
+        )})
+    ]
