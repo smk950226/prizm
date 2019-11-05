@@ -38,15 +38,20 @@ class Container extends Component{
     }
 
     render(){
-        return(
-            <Navigation 
-            {...this.props} 
-            {...this.state} 
-            openMenu={this._openMenu}
-            closeMenu={this._closeMenu}
-            handleShowMenu={this._handleShowMenu}
-            />
-        )
+        if(this.state.pageType === '/welcome/'){
+            return null
+        }
+        else{
+            return(
+                <Navigation 
+                {...this.props} 
+                {...this.state} 
+                openMenu={this._openMenu}
+                closeMenu={this._closeMenu}
+                handleShowMenu={this._handleShowMenu}
+                />
+            )
+        }
     }
 }
 

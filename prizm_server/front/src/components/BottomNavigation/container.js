@@ -18,12 +18,17 @@ class Container extends Component{
     }
 
     render(){
-        return(
-            <Navigation 
-            {...this.props} 
-            {...this.state} 
-            />
-        )
+        if(this.state.pageType === '/welcome/'){
+            return null
+        }
+        else{
+            return(
+                <Navigation 
+                {...this.props} 
+                {...this.state} 
+                />
+            )
+        }
     }
 }
 
