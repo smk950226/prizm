@@ -7,6 +7,8 @@ from django.views import defaults as default_views
 from prizm_server import views
 
 urlpatterns = [
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),

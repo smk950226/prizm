@@ -73,6 +73,9 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "rest_framework",
     'corsheaders',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
 ]
 
 LOCAL_APPS = [
@@ -255,3 +258,15 @@ SOCIALACCOUNT_ADAPTER = "prizm_server.users.adapters.SocialAccountAdapter"
 # Your stuff...
 # ------------------------------------------------------------------------------
 CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
+
+REST_USE_JWT = True
+ACCOUNT_LOGOUT_ON_GET = True
+JWT_AUTH = {
+    'JWT_VERIFY_EXPIRATION': False
+} 
