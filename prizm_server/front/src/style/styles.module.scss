@@ -153,6 +153,12 @@ html{
 .gray-a6{
     color: $gray-a6;
 }
+.gray-33{
+    color: $gray-33;
+}
+.pink{
+    color: $pink;
+}
 
 .bg-white{
     background-color: $white;
@@ -166,6 +172,12 @@ html{
 .bg-gray-a6{
     background-color: $gray-a6;
 }
+.bg-gray-33{
+    background-color: $gray-33;
+}
+.bg-pink{
+    background-color: $pink;
+}
 
 .font-60-120{
     font-size: 60px;
@@ -176,7 +188,9 @@ html{
         font-size: 120px;
     }
 }
-
+.position-relative{
+    position: relative;
+}
 .position-home-title{
     position: absolute;
     top: 10%;
@@ -219,6 +233,13 @@ html{
         height: 0px;
     }
 }
+.position-dropdown{
+    position: absolute;
+    top: 40px;
+    z-index: 10;
+    border: 1px solid $gray-97;
+    border-top: none;
+}
 
 .text-input-1{
     background-color: $white;
@@ -230,6 +251,61 @@ html{
     max-width: 600px;
     height: 60px;
     justify-content: center;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
+.text-input-2{
+    background-color: 'transparent';
+    font-size: 13px;
+    border: none;
+    border-bottom: 1px solid $gray-97;
+    outline: none;
+    width: 100%;
+    justify-content: center;
+    padding: 14px 0 8.5px;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
+.text-input-3{
+    background-color: 'transparent';
+    font-size: 13px;
+    border: none;
+    border-bottom: 1px solid $gray-97;
+    outline: none;
+    width: calc(100% - 81px);
+    justify-content: center;
+    padding: 14px 0 8.5px;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
+.text-input-4{
+    background-color: 'transparent';
+    font-size: 13px;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 16px;
+    justify-content: center;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
+.country-number-input{
+    background-color: 'transparent';
+    font-size: 13px;
+    border: none;
+    border-bottom: 1px solid $gray-97;
+    outline: none;
+    width: 65px;
+    justify-content: center;
+    padding: 14px 0 8.5px;
 
     &::placeholder {
         color: $gray-8e;
@@ -254,6 +330,16 @@ html{
 .overflow-hidden{
     overflow: hidden !important;
 }
+.overflow-y-scroll{
+    overflow-y: scroll !important;
+}
+
+.hidden{
+    visibility: hidden !important;
+}
+.none{
+    display: none;
+}
 
 .container-customer{
     max-width: 768px !important;
@@ -263,4 +349,35 @@ html{
 .icon-menu{
     width: 24px;
     height: 24px;
+}
+
+.safearea{
+    padding-top: 72px;
+    padding-bottom: 48px;
+}
+
+.pt-45{
+    padding-top: 2rem;
+}
+
+.opacity-4{
+    opacity: .4;
+}
+.opacity-7{
+    opacity: .7;
+}
+
+.border-dropdown{
+    border: 1px solid $gray-97;
+    border-top: none;
+}
+
+.btn{
+    cursor: pointer;
+
+    &:hover,
+    &:active,
+    &:focus{
+        opacity: .7;
+    }
 }

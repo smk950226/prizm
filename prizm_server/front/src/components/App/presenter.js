@@ -5,6 +5,7 @@ import Home from '../Home';
 import Welcome from '../Welcome';
 import Navigation from '../Navigation';
 import BottomNavigation from '../BottomNavigation';
+import SignUp from '../SignUp';
 import styles from '../../style/styles.module.scss';
 
 const App = (props) => {
@@ -59,6 +60,7 @@ const GeneralRoute = props => (
     <Switch>
         <Route exact path='/' component={Home} key={1} />
         <Route exact path='/welcome/' component={Welcome} key={2} />
+        <Route exact path='/signup/' component={SignUp} key={3} />
     </Switch>
 )
 

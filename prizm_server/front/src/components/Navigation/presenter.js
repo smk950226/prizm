@@ -43,6 +43,7 @@ class Navigation extends Component{
             customCrossIcon={false} 
             width={258}
             onStateChange={handleShowMenu}
+            disableAutoFocus={true}
             >
                 <div className={`${styles.bgWhite} ${styles.heightFull}`} style={{zIndex: 3}}>
                     hihi

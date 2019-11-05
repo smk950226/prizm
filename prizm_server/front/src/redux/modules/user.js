@@ -4,6 +4,7 @@ require('isomorphic-fetch');
 
 const SAVE_TOKEN = 'SAVE_TOKEN';
 const LOGOUT = 'LOGOUT';
+const SET_PROFILE = 'SET_PROFILE';
 
 function saveToken(token) {
     return {
@@ -18,6 +19,13 @@ function logout(){
     }
 };
 
+function setProfile(profile) {
+    return {
+        type: SET_PROFILE,
+        profile
+    }
+}
+
 function getSaveToken(token){
     return (dispatch) => {
         dispatch(saveToken(token))
@@ -27,6 +35,78 @@ function getSaveToken(token){
 function getLogout(){
     return (dispatch) => {
         dispatch(logout());
+    }
+}
+
+function signUp(email, password, name, birth, countryNumber, countryCode, mobile){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/rest-auth/registration/`, {
+           method: 'POST',
+           headers: {
+               "Content-Type": "application/json"
+           },
+           body: JSON.stringify({
+               username: email,
+               password1: password,
+               password2: password,
+               name,
+               birth,
+               countryNumber,
+               email,
+               mobile,
+               countryCode
+           })
+        })
+        .then(response => response.json())
+        .then(json => {
+            if(json.token){
+                return {
+                    token: json.token
+                }
+            }
+            else{
+                return false
+            }
+        })
+        .catch(err => console.log(err));
+    }
+}
+
+function checkDuplicate(email, mobile, countryNumber){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/check/duplicate/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                mobile,
+                countryNumber
+            })
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
+function getProfileByToken(token){
+    return (dispatch) => {
+        fetch(`${FETCH_URL}/api/users/profile`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setProfile(json)))
     }
 }
 
@@ -41,6 +121,8 @@ function reducer(state = initialState, action){
             return applySetToken(state, action);
         case LOGOUT:
             return applyLogout(state, action);
+        case SET_PROFILE:
+            return applySetProfile(state, action);
         default:
            return state;
     }
@@ -64,8 +146,19 @@ function applyLogout(state, action){
     };
 };
 
+function applySetProfile(state, action){
+    const { profile } = action;
+    return {
+        ...state,
+        profile
+    }
+}
+
 const actionCreators = {
-    
+    checkDuplicate,
+    signUp,
+    getProfileByToken,
+    getSaveToken
 }
 
 export { actionCreators }

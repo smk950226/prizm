@@ -57,6 +57,7 @@
     "react-burger-menu": "^2.6.11",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
+    "react-dropdown": "^1.6.4",
     "react-ionicons": "^3.0.1",
     "react-is-scrolling": "^1.0.1",
     "react-redux": "^7.1.1",
