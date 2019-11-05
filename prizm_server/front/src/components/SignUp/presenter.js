@@ -501,9 +501,9 @@ const COUNTRY_CODE = [
 const SignUp = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
-            <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer} ${props.page !== 'signup' && styles.opacity4}`} onClick={() => props.handleChangePage('signup')}>{context.t("Sign Up")}</p>
+            <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer}`}>{context.t("Sign Up")}</p>
             <p className={`${styles.fontBold} ${styles.font17} ${styles.mx2}`}>|</p>
-            <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer} ${props.page !== 'signin' && styles.opacity4}`} onClick={() => props.handleChangePage('signin')}>{context.t("Sign In")}</p>
+            <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer} ${styles.opacity4}`} onClick={props.goSignIn}>{context.t("Sign In")}</p>
         </div>
         <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{context.t("Full name")}</p>
         <div className={`${styles.widthFull}`}>
@@ -575,8 +575,6 @@ const SignUp = (props, context) => (
 )
 
 SignUp.propTypes = {
-    page: PropTypes.string.isRequired,
-    handleChangePage: PropTypes.func.isRequired,
     handleInputChange: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
@@ -592,7 +590,8 @@ SignUp.propTypes = {
     handleShowCountryCode: PropTypes.func.isRequired,
     handleCountryCodeChange: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    submit: PropTypes.func.isRequired
+    submit: PropTypes.func.isRequired,
+    goSignIn: PropTypes.func.isRequired
 }
 
 SignUp.contextTypes = {

@@ -72,6 +72,35 @@ function signUp(email, password, name, birth, countryNumber, countryCode, mobile
     }
 }
 
+function login(username, password){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/rest-auth/login/`, {
+            method: 'POST',
+            headers: {
+               "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then((json) => {
+            if(json.token){
+                return {
+                    token: json.token
+                }
+            }
+            else{
+                return false
+            }
+        })
+        .catch(err => console.log(err));
+    }
+}
+
 function checkDuplicate(email, mobile, countryNumber){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/api/users/check/duplicate/`, {
@@ -158,7 +187,8 @@ const actionCreators = {
     checkDuplicate,
     signUp,
     getProfileByToken,
-    getSaveToken
+    getSaveToken,
+    login
 }
 
 export { actionCreators }

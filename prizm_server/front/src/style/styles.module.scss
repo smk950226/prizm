@@ -126,6 +126,9 @@ html{
 .height-full-percent{
     height: 100%;
 }
+.min-height-full{
+    min-height: 100vh;
+}
 .width-full{
     width: 100%;
 }
@@ -310,6 +313,13 @@ html{
     &::placeholder {
         color: $gray-8e;
     }
+}
+.check-box{
+    cursor: pointer;
+    border: 2px solid $pink;
+    width: 16px;
+    height: 16px;
+    background-color: $white;
 }
 
 .circle-gray-8e-40{

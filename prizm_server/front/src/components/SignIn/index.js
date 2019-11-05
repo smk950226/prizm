@@ -13,11 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
-        checkDuplicate: (email, mobile, countryNumber) => {
-            return dispatch(userActions.checkDuplicate(email, mobile, countryNumber))
-        },
-        signUp: (email, password, name, birth, countryNumber, countryCode, mobile) => {
-            return dispatch(userActions.signUp(email, password, name, birth, countryNumber, countryCode, mobile))
+        login: (email, password) => {
+            return dispatch(userActions.login(email, password))
         },
         getProfileByToken: (token) => {
             dispatch(userActions.getProfileByToken(token))
@@ -28,8 +25,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
-        goSignIn: () => {
-            dispatch(push('/signin/'))
+        goSignUp: () => {
+            dispatch(push('/signup/'))
         }
     }
 }

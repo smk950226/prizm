@@ -6,11 +6,12 @@ import Welcome from '../Welcome';
 import Navigation from '../Navigation';
 import BottomNavigation from '../BottomNavigation';
 import SignUp from '../SignUp';
+import SignIn from '../SignIn';
 import styles from '../../style/styles.module.scss';
 
 const App = (props) => {
     return(
-        <div className={`${styles.widthFull} ${styles.heightFull}`}>
+        <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
             <Navigation />
             <GeneralRouteContainer />
             <BottomNavigation showBtmNav={props.showBtmNav} />
@@ -61,6 +62,7 @@ const GeneralRoute = props => (
         <Route exact path='/' component={Home} key={1} />
         <Route exact path='/welcome/' component={Welcome} key={2} />
         <Route exact path='/signup/' component={SignUp} key={3} />
+        <Route exact path='/signin/' component={SignIn} key={4} />
     </Switch>
 )
 

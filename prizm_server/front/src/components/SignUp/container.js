@@ -9,7 +9,8 @@ class Container extends Component{
         signUp: PropTypes.func.isRequired,
         getProfileByToken: PropTypes.func.isRequired,
         getSaveToken: PropTypes.func.isRequired,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        goSignIn: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -17,7 +18,6 @@ class Container extends Component{
     }
 
     state = {
-        page: 'signup',
         name: "",
         email: "",
         countryNumber: "",
@@ -37,12 +37,6 @@ class Container extends Component{
         if(this.props.isLoggedIn){
             this.props.goHome()
         }
-    }
-
-    _handleChangePage = (page) => {
-        this.setState({
-            page
-        })
     }
 
     _handleInputChange = (event) => {
@@ -209,7 +203,6 @@ class Container extends Component{
             <SignUp 
             {...this.props} 
             {...this.state} 
-            handleChangePage={this._handleChangePage}
             handleInputChange={this._handleInputChange}
             handleCountryNumberChange={this._handleCountryNumberChange}
             handleShowCountryNumber={this._handleShowCountryNumber}
