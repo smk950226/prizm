@@ -16,6 +16,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("api/users/", include("prizm_server.users.urls", namespace="users")),
+    path("api/common/", include("prizm_server.common.urls", namespace="common")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     re_path(r'^$', views.ReactAppView.as_view()),

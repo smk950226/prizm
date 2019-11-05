@@ -13,12 +13,38 @@ class Container extends Component{
         });
     }
 
+    _handleKeyPress = (event) => {
+        const { key } = event;
+        const { username } = this.state;
+        if(username !== ""){
+            if (key === "Enter") {
+                event.preventDefault();
+                alert('제출되었습니다.')
+                this.setState({
+                    username: ""
+                })
+            }
+        }
+    }
+
+    _submit = () => {
+        const { username } = this.state;
+        if(username !== ""){
+            alert('제출되었습니다.')
+            this.setState({
+                username: ""
+            })
+        }
+    }
+
     render(){
         return (
             <Home 
             {...this.props} 
             {...this.state}
             handleInputChange={this._handleInputChange}
+            handleKeyPress={this._handleKeyPress}
+            submit={this._submit}
             />
         )
     }

@@ -1,6 +1,59 @@
 @import "reset-css";
 @import "./bootstrap/bootstrap-grid.scss";
 
+@font-face {
+    font-family: 'NanumSquare';
+    src: url('../assets/fonts/Nanum/NanumSquareOTFL00.eot');
+    src: local('나눔스퀘어OTF Light'), local('NanumSquareOTFL00'),
+        url('../assets/fonts/Nanum/NanumSquareOTFL00.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFL00.woff2') format('woff2'),
+        url('../assets/fonts/Nanum/NanumSquareOTFL00.woff') format('woff'),
+        url('../assets/fonts/Nanum/NanumSquareOTFL00.otf') format('opentype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFL00.ttf') format('truetype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFL00.svg#NanumSquareOTFL00') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NanumSquare';
+    src: url('../assets/fonts/Nanum/NanumSquareOTFR00.eot');
+    src: local('나눔스퀘어OTF'), local('NanumSquareOTFR00'),
+        url('../assets/fonts/Nanum/NanumSquareOTFR00.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFR00.woff2') format('woff2'),
+        url('../assets/fonts/Nanum/NanumSquareOTFR00.woff') format('woff'),
+        url('../assets/fonts/Nanum/NanumSquareOTFR00.otf') format('opentype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFR00.ttf') format('truetype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFR00.svg#NanumSquareOTFR00') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NanumSquare';
+    src: url('../assets/fonts/Nanum/NanumSquareOTFB00.eot');
+    src: local('나눔스퀘어OTF Bold'), local('NanumSquareOTFB00'),
+        url('../assets/fonts/Nanum/NanumSquareOTFB00.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFB00.woff2') format('woff2'),
+        url('../assets/fonts/Nanum/NanumSquareOTFB00.woff') format('woff'),
+        url('../assets/fonts/Nanum/NanumSquareOTFB00.otf') format('opentype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFB00.ttf') format('truetype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFB00.svg#NanumSquareOTFB00') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NanumSquare';
+    src: url('../assets/fonts/Nanum/NanumSquareOTFEB00.eot');
+    src: local('나눔스퀘어OTF ExtraBold'), local('NanumSquareOTFEB00'),
+        url('../assets/fonts/Nanum/NanumSquareOTFEB00.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFEB00.woff2') format('woff2'),
+        url('../assets/fonts/Nanum/NanumSquareOTFEB00.woff') format('woff'),
+        url('../assets/fonts/Nanum/NanumSquareOTFEB00.otf') format('opentype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFEB00.ttf') format('truetype'),
+        url('../assets/fonts/Nanum/NanumSquareOTFEB00.svg#NanumSquareOTFEB00') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
 .scroll-none{
     overflow: auto;
     -ms-overflow-style: none !important;
@@ -12,6 +65,7 @@
 html{
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
+    font-family: 'NanumSquare', sans-serif;
 }
 .mobile-only{
     display: inherit;
@@ -29,13 +83,16 @@ html{
 }
 
 .font-light{
-    font-weight: 200;
+    font-weight: 100;
 }
 .font-normal{
     font-weight: 400;
 }
 .font-bold{
     font-weight: 600;
+}
+.font-extra-bold{
+    font-weight: 900;
 }
 .text-center{
     text-align: center !important;
@@ -90,12 +147,24 @@ html{
 .gray-2f{
     color: $gray-2f;
 }
+.gray-8e{
+    color: $gray-8e;
+}
+.gray-a6{
+    color: $gray-a6;
+}
 
 .bg-white{
     background-color: $white;
 }
 .bg-gray-2f{
     background-color: $gray-2f;
+}
+.bg-gray-8e{
+    background-color: $gray-8e;
+}
+.bg-gray-a6{
+    background-color: $gray-a6;
 }
 
 .font-60-120{
@@ -124,9 +193,34 @@ html{
 .text-input-1{
     background-color: $white;
     font-size: 16px;
-    padding: 20px 10px;
+    padding-left: 10px;
     border: none;
     outline: none;
-    width: 90%;
+    width: calc(90% - 40px - 1rem);
     max-width: 600px;
+    height: 60px;
+    justify-content: center;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
+
+.circle-gray-8e-40{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid $gray-8e;
+    overflow: hidden;
+}
+.circle-black-40{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid $black;
+    overflow: hidden;
+}
+
+.overflow-hidden{
+    overflow: hidden !important;
 }
