@@ -60,6 +60,7 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
+    "react-video-cover": "^1.2.2",
     "redux": "^4.0.4",
     "redux-i18n": "^1.5.19",
     "redux-thunk": "^2.3.0",

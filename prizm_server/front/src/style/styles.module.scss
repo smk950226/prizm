@@ -1,2 +1,132 @@
 @import "reset-css";
 @import "./bootstrap/bootstrap-grid.scss";
+
+.scroll-none{
+    overflow: auto;
+    -ms-overflow-style: none !important;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+html{
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+.mobile-only{
+    display: inherit;
+}
+.mobile-none{
+    display: none;
+}
+@media (min-width: 768px) {
+    .mobile-only{
+        display: none;
+    }
+    .mobile-none{
+        display: inherit;
+    }
+}
+
+.font-light{
+    font-weight: 200;
+}
+.font-normal{
+    font-weight: 400;
+}
+.font-bold{
+    font-weight: 600;
+}
+.text-center{
+    text-align: center !important;
+}
+.text-left{
+    text-align: left !important;
+}
+.text-right{
+    text-align: right !important;
+}
+.italic{
+    font-style: italic;
+}
+
+@for $i from 1 through 100 {
+    .height-#{$i} { height: #{$i}vh; }
+}
+@for $i from 1 through 100 {
+    .height-#{$i}-percent { height: '#{$i}%'; }
+}
+@for $i from 1 through 100 {
+    .width-#{$i} { width: '#{$i}%'; }
+}
+@for $i from 10 through 60 {
+    .font-#{$i} { font-size: #{$i}px; }
+}
+
+.height-full{
+    height: 100vh;
+}
+.height-full-percent{
+    height: 100%;
+}
+.width-full{
+    width: 100%;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.absolute-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.white{
+    color: $white;
+}
+.gray-2f{
+    color: $gray-2f;
+}
+
+.bg-white{
+    background-color: $white;
+}
+.bg-gray-2f{
+    background-color: $gray-2f;
+}
+
+.font-60-120{
+    font-size: 60px;
+}
+
+@media (min-width: 768px){
+    .font-60-120{
+        font-size: 120px;
+    }
+}
+
+.position-home-title{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.position-home-logo{
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.text-input-1{
+    background-color: $white;
+    font-size: 16px;
+    padding: 20px 10px;
+    border: none;
+    outline: none;
+    width: 90%;
+    max-width: 600px;
+}
