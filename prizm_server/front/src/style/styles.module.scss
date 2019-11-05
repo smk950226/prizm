@@ -116,7 +116,7 @@ html{
 @for $i from 1 through 100 {
     .width-#{$i} { width: '#{$i}%'; }
 }
-@for $i from 10 through 60 {
+@for $i from 8 through 60 {
     .font-#{$i} { font-size: #{$i}px; }
 }
 
@@ -189,6 +189,36 @@ html{
     left: 50%;
     transform: translateX(-50%);
 }
+.position-nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: '100%';
+}
+.position-nav-description{
+    position: absolute;
+    bottom: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.position-btm-nav{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: '100%';
+    height: 48px;
+    -webkit-transition: height .6s;
+    -moz-transition: height .6s;
+    -o-transition: height .6s;
+    transition: height .6s;
+
+
+    &.hide{
+        height: 0px;
+    }
+}
 
 .text-input-1{
     background-color: $white;
@@ -223,4 +253,14 @@ html{
 
 .overflow-hidden{
     overflow: hidden !important;
+}
+
+.container-customer{
+    max-width: 768px !important;
+    margin: auto;
+}
+
+.icon-menu{
+    width: 24px;
+    height: 24px;
 }

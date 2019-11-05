@@ -54,9 +54,11 @@
     "postcss-safe-parser": "4.0.1",
     "react": "^16.11.0",
     "react-app-polyfill": "^1.0.4",
+    "react-burger-menu": "^2.6.11",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
     "react-ionicons": "^3.0.1",
+    "react-is-scrolling": "^1.0.1",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
@@ -93,9 +95,9 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ]
   },
   "babel": {
