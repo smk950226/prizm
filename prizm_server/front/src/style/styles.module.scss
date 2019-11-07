@@ -343,6 +343,9 @@ html{
 .overflow-y-scroll{
     overflow-y: scroll !important;
 }
+.overflow-x-scroll{
+    overflow-x: scroll !important;
+}
 
 .hidden{
     visibility: hidden !important;
@@ -355,10 +358,46 @@ html{
     max-width: 768px !important;
     margin: auto;
 }
+.container-portfolio{
+    height: 100px;
+    width: 100%;
+    overflow-x: scroll;
+}
+.container-image{
+    height: 100%;
+    width: 100%;
+    max-height: 100px;
+    max-width: 100px;
+}
+.container-profile{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+@media (min-width: 768px){
+    .container-portfolio{
+        height: 150px;
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .container-image{
+        height: 100%;
+    width: 100%;
+        max-height: 150px;
+        max-width: 150px;
+    }
+}
 
 .icon-menu{
     width: 24px;
     height: 24px;
+}
+.icon-instagram{
+    width: 12px;
+    height: 12px;
 }
 
 .safearea{
@@ -390,4 +429,27 @@ html{
     &:focus{
         opacity: .7;
     }
+}
+
+.bg-newyork{
+    background-image: url('../assets/images/newyork.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box;
+    background-position: center center;
+    background-attachment: scroll;
+}
+
+.banner{
+    height: 74px;
+}
+
+.profile-image{
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 20px;
+}
+.portfolio-image{
+    border-radius: 1px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
 }
