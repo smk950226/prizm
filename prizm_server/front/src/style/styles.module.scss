@@ -348,6 +348,20 @@ html{
         color: $gray-8e;
     }
 }
+.text-input-5{
+    background-color: 'transparent';
+    font-size: 13px;
+    border: none;
+    border-bottom: 1px solid $gray-97;
+    outline: none;
+    width: 50px;
+    justify-content: center;
+    height: 25px;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
 .country-number-input{
     background-color: 'transparent';
     font-size: 13px;
@@ -464,6 +478,14 @@ textarea {
 .container-map{
     height: 170px;
 }
+.container-modal{
+    width: calc(100vw - 32px);
+    max-width: 736px;
+}
+
+.container-modal+button{
+    display: none !important;
+}
 
 @media (min-width: 768px){
     .container-portfolio{
@@ -493,6 +515,10 @@ textarea {
 .icon-arrow-down{
     width: 10px;
     height: 5px;
+}
+.icon-arrow-right{
+    width: 5px;
+    height: 10px;
 }
 .icon-check{
     width: 9px;
@@ -565,4 +591,26 @@ textarea {
 
 .border-pink{
     border: 1px solid $pink;
+}
+
+.arrow-animated {
+    transition: all ease 0.4s;
+}
+.arrow-animated.rotate {
+    transform: rotate( 180deg );
+}
+
+.slide{
+    min-height: 100px;
+    -webkit-transition: height .6s;
+    -moz-transition: height .6s;
+    -o-transition: height .6s;
+    transition: height .6s;
+    overflow: hidden;
+
+
+    &.hide{
+        min-height: 0;
+        height: 0px;
+    }
 }

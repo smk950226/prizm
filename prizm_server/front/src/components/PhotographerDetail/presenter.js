@@ -9,6 +9,10 @@ import Rating from 'react-rating';
 import MdStar from 'react-ionicons/lib/MdStar';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { GOOGLE_API_KEY } from '../../config/secrets';
+import { SlideDown } from 'react-slidedown';
+import 'react-slidedown/lib/slidedown.css';
+import Calendar from 'react-calendar';
+import Modal from 'react-responsive-modal';
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -36,6 +40,38 @@ const ProfileDivLg = styled.div`
     background-attachment: scroll;
 `
 
+const hourList = [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23'
+]
+
+const minList = [
+    '00',
+    '30'
+]
+
 class PhotographerDetail extends Component{
     static propTypes = {
         photographer: PropTypes.array,
@@ -54,7 +90,42 @@ class PhotographerDetail extends Component{
         selectedOption: PropTypes.object.isRequired,
         handleInputChange: PropTypes.func.isRequired,
         comment: PropTypes.string.isRequired,
-        isSubmitting: PropTypes.bool.isRequired
+        isSubmitting: PropTypes.bool.isRequired,
+        open1: PropTypes.func.isRequired,
+        close1: PropTypes.func.isRequired,
+        open2: PropTypes.func.isRequired,
+        close2: PropTypes.func.isRequired,
+        open3: PropTypes.func.isRequired,
+        close3: PropTypes.func.isRequired,
+        open4: PropTypes.func.isRequired,
+        close4: PropTypes.func.isRequired,
+        show1: PropTypes.bool.isRequired,
+        show2: PropTypes.bool.isRequired,
+        show3: PropTypes.bool.isRequired,
+        show4: PropTypes.bool.isRequired,
+        openCalendar1: PropTypes.func.isRequired,
+        closeCalendar1: PropTypes.func.isRequired,
+        showCalendar1: PropTypes.bool.isRequired,
+        openCalendar2: PropTypes.func.isRequired,
+        closeCalendar2: PropTypes.func.isRequired,
+        showCalendar2: PropTypes.bool.isRequired,
+        selectDate: PropTypes.func.isRequired,
+        selectedDate :PropTypes.any.isRequired,
+        confirmDate: PropTypes.func.isRequired,
+        dateConfirm: PropTypes.bool.isRequired,
+        selectDateStep: PropTypes.number.isRequired,
+        changeDateStep: PropTypes.func.isRequired,
+        selectedHour: PropTypes.string.isRequired,
+        selectedMin: PropTypes.string.isRequired,
+        selectHour: PropTypes.func.isRequired,
+        selectMin: PropTypes.func.isRequired,
+        handleShowHourList: PropTypes.func.isRequired,
+        handleShowMinList: PropTypes.func.isRequired,
+        showHourList: PropTypes.bool.isRequired,
+        showMinList: PropTypes.bool.isRequired,
+        selectDateRange: PropTypes.func.isRequired,
+        selectedStartDate: PropTypes.any.isRequired,
+        selectedEndDate: PropTypes.any.isRequired
     }
 
     static contextTypes = {
@@ -67,9 +138,9 @@ class PhotographerDetail extends Component{
     }
 
     render(){
-        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting } = this.props;
+        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate } = this.props;
         return(
-            <div className={`${styles.safeareaTop}`}>
+            <div className={`${styles.safeareaTop} ${styles.containerCustomer}`}>
                 {loading ? (
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                         <Loader type="Oval" color="#d66c8b" height={20} width={20} />
@@ -133,42 +204,45 @@ class PhotographerDetail extends Component{
                         <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                 <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Select Location")}</p>
-                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown}`} />
+                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} onClick={show1 ? selectedLocation.id ? this.props.close1 : null : this.props.open1} />
                             </div>
-                            {photographer.location_set && photographer.location_set.length > 0 ? (
-                                <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
-                                    {photographer.location_set.map((location, index) => (
-                                        <div key={index} className={`${styles.containerLocation} ${selectedLocation.id === location.id ? styles.selected : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${index === photographer.location_set.length - 1 ? null : styles.mr3}`} onClick={selectedLocation.id === location.id ? this.props.blankLocation : () => this.props.selectLocation(location)}>
-                                            <div>
-                                                <p className={`${styles.font10}`}>{this.context.t(`Location ${index + 1}`)}</p>
-                                                <p className={`${styles.fontBold} ${styles.font11} ${styles.mt1}`}>{location.name}</p>
+                            <SlideDown closed={!show1} className={'my-dropdown-slidedown'}>
+                                {photographer.location_set && photographer.location_set.length > 0 ? (
+                                    <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
+                                        {photographer.location_set.map((location, index) => (
+                                            <div key={index} className={`${styles.containerLocation} ${selectedLocation.id === location.id ? styles.selected : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${index === photographer.location_set.length - 1 ? null : styles.mr3}`} onClick={selectedLocation.id === location.id ? this.props.blankLocation : () => this.props.selectLocation(location)}>
+                                                <div>
+                                                    <p className={`${styles.font10}`}>{this.context.t(`Location ${index + 1}`)}</p>
+                                                    <p className={`${styles.fontBold} ${styles.font11} ${styles.mt1}`}>{location.name}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 지역이 없습니다.")}</p>
-                            )}
-                            {selectedLocation.lat ? (
-                                <div className={`${styles.mt3}`}>
-                                    <Map
-                                    isMarkerShown={true}
-                                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-                                    loadingElement={<div style={{ height: `100%` }} />}
-                                    containerElement={<div className={`${styles.containerMap}`} />}
-                                    mapElement={<div style={{ height: `100%` }} />}
-                                    lng={selectedLocation.lng}
-                                    lat={selectedLocation.lat}
-                                    />
-                                </div>
-                            ) : null}
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 지역이 없습니다.")}</p>
+                                )}
+                                {selectedLocation.lat ? (
+                                    <div className={`${styles.mt3}`}>
+                                        <Map
+                                        isMarkerShown={true}
+                                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                                        loadingElement={<div style={{ height: `100%` }} />}
+                                        containerElement={<div className={`${styles.containerMap}`} />}
+                                        mapElement={<div style={{ height: `100%` }} />}
+                                        lng={selectedLocation.lng}
+                                        lat={selectedLocation.lat}
+                                        />
+                                    </div>
+                                ) : null}
+                            </SlideDown>
                         </div>
                         <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                         <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                 <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Date&Time")}</p>
-                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown}`} />
+                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`} onClick={(dateConfirm ) ? show2 ? this.props.close2 : this.props.open2 : null}/>
                             </div>
+                            <SlideDown closed={!show2}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 1 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(1)}>
                                 <div className={`${styles.checkBox} ${dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                     {dateOption === 1 && (
@@ -179,6 +253,16 @@ class PhotographerDetail extends Component{
                                     <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I have a specific date in mind")}</p>
                                 </div>
                             </div>
+                            {dateConfirm && (dateOption === 1) && (
+                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+                                    <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedDate.getFullYear()}/${selectedDate.getMonth() + 1}/${selectedDate.getDate()}`}</p>
+                                    </div>
+                                    <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedHour}:${selectedMin}`}</p>
+                                    </div>
+                                </div>
+                            )}
                             <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 2 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(2)}>
                                 <div className={`${styles.checkBox} ${dateOption !== 2 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                     {dateOption === 2 && (
@@ -189,13 +273,25 @@ class PhotographerDetail extends Component{
                                     <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")}</p>
                                 </div>
                             </div>
+                            {dateConfirm && (dateOption === 2) && (
+                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+                                    <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedStartDate.getFullYear()}/${selectedStartDate.getMonth() + 1}/${selectedStartDate.getDate()}`}</p>
+                                    </div>
+                                    <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedEndDate.getFullYear()}/${selectedEndDate.getMonth() + 1}/${selectedEndDate.getDate()}`}</p>
+                                    </div>
+                                </div>
+                            )}
+                            </SlideDown>
                         </div>
                         <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                         <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                 <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. Service&Pricing")}</p>
-                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown}`} />
+                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`} onClick={selectedOption.id ? show3 ?  this.props.close3 : this.props.open3 : null}/>
                             </div>
+                            <SlideDown closed={!show3}>
                             <div className={`${styles.my3}`}>
                                 {photographer.option_set && photographer.option_set.length > 0 ? (
                                     photographer.option_set.map((option, index) => (
@@ -213,17 +309,20 @@ class PhotographerDetail extends Component{
                                     <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 옵션이 없습니다.")}</p>
                                 )}
                             </div>
+                            </SlideDown>
                         </div>
                         <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                         <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                 <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments")}</p>
-                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown}`} />
+                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show4 ? styles.rotate : null}`} />
                             </div>
+                            <SlideDown closed={!show4}>
                             <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("comment")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("submit the request")}</p>
                             </div>
+                            </SlideDown>
                         </div>
                         <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                             <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("Find other photogrpahes in New York")}</p>
@@ -231,6 +330,106 @@ class PhotographerDetail extends Component{
                         </div>
                     </Fragment>
                 )}
+                <Modal
+                open={showCalendar1} 
+                onClose={this.props.closeCalendar1} 
+                center
+                classNames={`${styles.px0}`}
+                styles={{ overlay: { background: "rgba(0,0,0,0.2)", padding: 0 }, modal: { padding: 0 }}}
+                >
+                    <div className={`${styles.containerModal}`}>
+                        {selectDateStep === 1 && (
+                            <Fragment>
+                                <Calendar
+                                locale={'en'}
+                                calendarType={'US'}
+                                className={`${styles.p3} ${styles.containerModal}`}
+                                nextLabel={<span><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Month")} className={`${styles.iconArrowRight}`} /></span>}
+                                next2Label={<span><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Year")} className={`${styles.iconArrowRight}`} /><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Year")} className={`${styles.iconArrowRight}`} /></span>}
+                                prevLabel={<span><img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Prev Month")} className={`${styles.iconArrowRight}`} /></span>}
+                                prev2Label={<span><img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Prev Year")} className={`${styles.iconArrowRight}`} /><img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Prev Year")} className={`${styles.iconArrowRight}`} /></span>}
+                                navigationLabel={({ date, view, label }) => <p className={`${styles.fontBold} ${styles.font14}`}>{label}</p>}
+                                tileClassName={`${styles.font12}`}
+                                value={selectedDate}
+                                onChange={this.props.selectDate}
+                                />
+                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={() => this.props.changeDateStep(2)}>
+                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Next")}</p>
+                                </div>
+                            </Fragment>
+                        )}
+                        {selectDateStep === 2 && (
+                            <Fragment>
+                                <div className={`${styles.p3}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                        <div className={`${styles.col1} ${styles.px0}`}>
+                                            <img src={require('../../assets/images/icon_arrow_left.png')} alt={this.context.t("Before")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} onClick={() => this.props.changeDateStep(1)} />
+                                        </div>
+                                        <div className={`${styles.col10} ${styles.px0}`}>
+                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.textCenter}`}>{`${selectedDate.getFullYear()}.${selectedDate.getMonth() + 1}.${selectedDate.getDay()}`}</p>
+                                        </div>
+                                    </div>
+                                    <div className={`${styles.py5}`}>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                            <div className={`${styles.textInput5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} type={"text"} name={"time"} onClick={this.props.handleShowHourList} style={{position: 'relative'}}>
+                                                <p className={`${styles.font13} ${styles.mx2} ${styles.textCenter}`}>{selectedHour}</p>
+                                                {showHourList && (
+                                                    <div style={{position: 'absolute', top: 25, width: 50, maxHeight: 150}} className={`${styles.bgWhite} ${styles.borderDropdown} ${styles.overflowYScroll}`}>
+                                                        {hourList.map((hour,index) => (
+                                                            <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer} ${styles.textCenter}`} onClick={() => this.props.selectHour(hour)}>{hour}</p>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <p className={`${styles.font13} ${styles.mx2}`}>:</p>
+                                            <div className={`${styles.textInput5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} type={"text"} name={"time"} onClick={this.props.handleShowMinList} style={{position: 'relative'}}>
+                                                <p className={`${styles.font13} ${styles.mx2} ${styles.textCenter}`}>{selectedMin}</p>
+                                                {showMinList && (
+                                                    <div style={{position: 'absolute', top: 25, width: 50, maxHeight: 150}} className={`${styles.bgWhite} ${styles.borderDropdown} ${styles.overflowYScroll}`}>
+                                                        {minList.map((min,index) => (
+                                                            <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer} ${styles.textCenter}`} onClick={() => this.props.selectMin(min)}>{min}</p>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirmDate}>
+                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
+                                </div>
+                            </Fragment>
+                        )}
+                    </div>
+                </Modal>
+                <Modal
+                open={showCalendar2} 
+                onClose={this.props.closeCalendar2} 
+                center
+                classNames={`${styles.px0}`}
+                styles={{ overlay: { background: "rgba(0,0,0,0.2)", padding: 0 }, modal: { padding: 0 }}}
+                >
+                    <div className={`${styles.containerModal}`}>
+                        <Fragment>
+                            <Calendar
+                            locale={'en'}
+                            calendarType={'US'}
+                            selectRange={true}
+                            className={`${styles.p3} ${styles.containerModal}`}
+                            nextLabel={<span><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Month")} className={`${styles.iconArrowRight}`} /></span>}
+                            next2Label={<span><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Year")} className={`${styles.iconArrowRight}`} /><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Year")} className={`${styles.iconArrowRight}`} /></span>}
+                            prevLabel={<span><img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Prev Month")} className={`${styles.iconArrowRight}`} /></span>}
+                            prev2Label={<span><img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Prev Year")} className={`${styles.iconArrowRight}`} /><img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Prev Year")} className={`${styles.iconArrowRight}`} /></span>}
+                            navigationLabel={({ date, view, label }) => <p className={`${styles.fontBold} ${styles.font14}`}>{label}</p>}
+                            tileClassName={`${styles.font12}`}
+                            onChange={this.props.selectDateRange}
+                            />
+                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirmDate}>
+                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
+                            </div>
+                        </Fragment>
+                    </div>
+                </Modal>
             </div>
         )
     }
