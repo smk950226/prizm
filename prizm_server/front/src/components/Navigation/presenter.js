@@ -21,7 +21,7 @@ class Navigation extends Component{
     }
 
     render(){
-        const { logout, goHome, isLoggedIn, profile, pageType, showMenu, openMenu, closeMenu, handleShowMenu } = this.props;
+        const { showMenu, openMenu, handleShowMenu } = this.props;
         return(
             <Fragment>
             <div className={`${styles.positionNav} ${styles.widthFull} ${styles.py4} ${styles.bgWhite} ${styles.px3}`} style={{zIndex: 2}}>
@@ -30,7 +30,7 @@ class Navigation extends Component{
                         <img src={require('../../assets/images/icon_menu.png')} alt={this.context.t("MENU")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={openMenu} />
                     </div>
                     <div className={`${styles.col10} ${styles.px0}`}>
-                        <p className={`${styles.textCenter} ${styles.fontBold} ${styles.font16}`}>{this.context.t("PRIZM")}</p>
+                        <p className={`${styles.textCenter} ${styles.fontBold} ${styles.font16} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
                     </div>
                 </div>
                 <div className={`${styles.widthFull} ${styles.positionNavDescription}`}>

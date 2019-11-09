@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import styled from 'styled-components';
 import PortfolioSlider from '../PortfolioSlider';
+import { Link } from 'react-router-dom';
 
 const ProfileDiv = styled.div`
     width: 40px;
@@ -61,10 +61,12 @@ class Home extends Component{
                             <Fragment key={photographer.id}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb4}`}>
                                     <div>
+                                        <Link to={`/photographer/${photographer.id}/`} style={{textDecoration: 'none', color: 'black'}}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                             <ProfileDiv image={photographer.profile_image} />
                                             <p className={`${styles.fontBold} ${styles.font13} ${styles.ml3}`}>{photographer.nickname}</p>
                                         </div>
+                                        </Link>
                                     </div>
                                     <a target={'_blank'} href={`https://instagram.com/${photographer.user.instagram_account}/`} className={`${styles.bgGray33} ${styles.px2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} style={{height: 25}}>
                                         <img src={require('../../assets/images/icon_instagram.png')} alt={"Instagram"} className={`${styles.iconInstagram}`} />

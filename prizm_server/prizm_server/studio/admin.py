@@ -24,3 +24,9 @@ class LocationAdmin(admin.ModelAdmin):
 class OptionAdmin(admin.ModelAdmin):
     list_display = ['id', 'photographer', 'title']
     list_display_links = ['id', 'photographer']
+
+
+@admin.register(models.Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['id', 'photographer', 'user']
+    list_display_links = ['id', 'photographer']

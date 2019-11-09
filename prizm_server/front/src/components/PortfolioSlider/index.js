@@ -37,7 +37,7 @@ class PortfolioSlider extends Component{
             return null;
         })
         return(
-            <div className={`${styles.containerPortfolio} ${styles.row} ${styles.alignItemsEnd} ${styles.mb4} ${styles.flexNowrap}`}>
+            <div className={`${styles.containerPortfolio} ${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.mb4} ${styles.flexNowrap}`}>
                 {portfolio.map((port, index) => (
                     <img key={port.id} src={port.image} alt={port.photographer} className={`${index === portfolio.length - 1 ? null : styles.mr2} ${styles.cursorPointer} ${styles.portfolioImage}`} style={{width: port.width > port.height ? 100 : port.width*100/port.height, height: port.height > port.width ? 100 : port.height*100/port.width}} onClick={() => this._openPortfolio(index)} />
                 ))}

@@ -9,6 +9,8 @@ class Photographer(models.Model):
     education = models.CharField(_('Education'), max_length = 255)
     career = models.CharField(_('Career'), max_length = 255)
     studio_id = models.CharField(_('Studio ID'), max_length = 255)
+    portfolio_url = models.CharField(_('Portfolio URL'), max_length = 500, blank = True, null = True)
+    description = models.TextField(_('Description'))
 
     def __str__(self):
         return self.nickname
@@ -17,6 +19,22 @@ class Photographer(models.Model):
         ordering = ['nickname']
         verbose_name = _('Photographer')
         verbose_name_plural = _('Photographer')
+
+
+    @property
+    def total_rating(self):
+        reviews = self.review_set.all()
+        total = 0
+        if reviews.count() > 0:
+            for review in reviews:
+                total += review.rate
+            total /= reviews.count()
+
+        return total
+    
+    @property
+    def review_count(self):
+        return self.review_set.count()
 
 
 class Portfolio(models.Model):
@@ -63,3 +81,20 @@ class Option(models.Model):
         ordering = ['-id']
         verbose_name = _('Photographer Option')
         verbose_name_plural = _('Photographer Option')
+
+
+class Review(models.Model):
+    photographer = models.ForeignKey(Photographer, on_delete = models.CASCADE)
+    user  = models.ForeignKey('users.User', on_delete = models.CASCADE)
+    rate = models.FloatField(_("Rating"))
+    comment = models.TextField(_("Comment"))
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    def __str__(self):
+        return self.photographer.nickname + '-comment-' + self.user.email
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Photographer Review')
+        verbose_name_plural = _('Photographer Review')

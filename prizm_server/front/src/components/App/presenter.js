@@ -1,12 +1,13 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from '../Home';
 import Welcome from '../Welcome';
 import Navigation from '../Navigation';
 import BottomNavigation from '../BottomNavigation';
 import SignUp from '../SignUp';
 import SignIn from '../SignIn';
+import PhotographerDetail from '../PhotographerDetail';
 import styles from '../../style/styles.module.scss';
 
 const App = (props) => {
@@ -63,6 +64,7 @@ const GeneralRoute = props => (
         <Route exact path='/welcome/' component={Welcome} key={2} />
         <Route exact path='/signup/' component={SignUp} key={3} />
         <Route exact path='/signin/' component={SignIn} key={4} />
+        <Route exact path='/photographer/:photographerId/' component={PhotographerDetail} key={5} />
     </Switch>
 )
 

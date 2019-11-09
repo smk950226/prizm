@@ -42,6 +42,25 @@ function getPhotographerListMore(page){
     }
 }
 
+function getPhotographerDetail(photographerId){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/studio/photographer/detail/?photographerId=${photographerId}`, {
+           headers: {
+               "Content-Type": "application/json"
+           }
+        })
+        .then(response => {
+            if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     
 };
@@ -65,7 +84,8 @@ function applySetPhotographerList(state, action){
 
 const actionCreators = {
     getPhotographerList,
-    getPhotographerListMore
+    getPhotographerListMore,
+    getPhotographerDetail
 }
 
 export { actionCreators }
