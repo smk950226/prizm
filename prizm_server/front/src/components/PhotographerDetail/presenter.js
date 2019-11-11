@@ -132,7 +132,9 @@ class PhotographerDetail extends Component{
         request: PropTypes.object,
         submit: PropTypes.func.isRequired,
         requestSubmitted: PropTypes.bool.isRequired,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        dateRange: PropTypes.array.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
@@ -145,7 +147,7 @@ class PhotographerDetail extends Component{
     }
 
     render(){
-        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted } = this.props;
+        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted, dateRange, isLoggedIn } = this.props;
         return(
             <div className={`${requestSubmitted ? styles.safearea : isConfirmPage ? styles.safearea : styles.safeareaTop} ${styles.containerCustomer} ${requestSubmitted ? `${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : null}`}>
                 {loading ? (
@@ -157,7 +159,7 @@ class PhotographerDetail extends Component{
                         !isConfirmPage ? (
                             <Fragment>
                                 {photographer.portfolio_set && photographer.portfolio_set.length > 0 ? (
-                                    <PortfolioSlider portfolio={photographer.portfolio_set} />
+                                    <PortfolioSlider portfolio={photographer.portfolio_set} nickname={photographer.nickname} lg={false} />
                                 ) : (
                                     null
                                 )}
@@ -264,10 +266,10 @@ class PhotographerDetail extends Component{
                                     </div>
                                     {dateConfirm && (dateOption === 1) && (
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
-                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => this.props.openCalendar1(1)}>
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()}`}</p>
                                             </div>
-                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => this.props.openCalendar1()}>
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedHour}:${selectedMin}`}</p>
                                             </div>
                                         </div>
@@ -284,10 +286,10 @@ class PhotographerDetail extends Component{
                                     </div>
                                     {dateConfirm && (dateOption === 2) && (
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
-                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={this.props.openCalendar2}>
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedStartDate.getFullYear()}/${String(selectedStartDate.getMonth() + 1).length === 2 ? (selectedStartDate.getMonth() + 1) : '0'.concat(String(selectedStartDate.getMonth() + 1))}/${selectedStartDate.getDate()}`}</p>
                                             </div>
-                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={this.props.openCalendar2}>
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedEndDate.getFullYear()}/${String(selectedEndDate.getMonth() + 1).length === 2 ? (selectedEndDate.getMonth() + 1) : '0'.concat(String(selectedEndDate.getMonth() + 1))}/${selectedEndDate.getDate()}`}</p>
                                             </div>
                                         </div>
@@ -329,7 +331,7 @@ class PhotographerDetail extends Component{
                                     <SlideDown closed={!show4}>
                                     <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("comment")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goConfirm}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("submit the request")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{isLoggedIn ? this.context.t("submit the request") : this.context.t("sign up & submit the request")}</p>
                                     </div>
                                     </SlideDown>
                                 </div>
@@ -528,6 +530,7 @@ class PhotographerDetail extends Component{
                             locale={'en'}
                             calendarType={'US'}
                             selectRange={true}
+                            value={dateRange.length > 0 ? dateRange : null}
                             className={`${styles.p3} ${styles.containerModal}`}
                             nextLabel={<span><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Month")} className={`${styles.iconArrowRight}`} /></span>}
                             next2Label={<span><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Year")} className={`${styles.iconArrowRight}`} /><img src={require('../../assets/images/icon_right.png')} alt={this.context.t("Next Year")} className={`${styles.iconArrowRight}`} /></span>}

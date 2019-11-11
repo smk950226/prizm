@@ -52,8 +52,12 @@ class Home extends Component{
         const { photographerList } = this.props;
         return(
             <div className={`${styles.containerCustomer} ${styles.safearea}`}>
-                <div className={`${styles.bgNewyork} ${styles.widthFull} ${styles.banner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                {/* <div className={`${styles.bgNewyork} ${styles.widthFull} ${styles.banner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                     <p className={`${styles.font16} ${styles.fontBold} ${styles.white}`}>{this.context.t("NEWYORK")}</p>
+                </div> */}
+                <div className={`${styles.widthFull} ${styles.banner}`} style={{position: 'relative'}}>
+                    <video id="video_background" src={require('../../assets/videos/newyork.mp4')} className={`${styles.widthFull} ${styles.banner}`} style={{objectFit: 'cover'}} autoPlay={true} loop={true} muted={true} playsInline={true} />
+                    <p className={`${styles.font16} ${styles.fontBold} ${styles.white} ${styles.absoluteCenter}`}>{this.context.t("NEWYORK")}</p>
                 </div>
                 <div className={`${styles.mt4} ${styles.px3}`} ref={"photographerContainer"}>
                     {photographerList && photographerList.length > 0 ? (
@@ -74,7 +78,7 @@ class Home extends Component{
                                     </a>
                                 </div>
                                 {photographer.portfolio_set.length > 0 ? (
-                                    <PortfolioSlider portfolio={photographer.portfolio_set} />
+                                    <PortfolioSlider portfolio={photographer.portfolio_set} nickname={photographer.nickname} lg={true} />
                                 ) : (
                                     null
                                 )}

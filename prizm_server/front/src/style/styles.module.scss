@@ -460,10 +460,15 @@ textarea {
     max-width: 768px !important;
     margin: auto;
 }
+.container-portfolio-lg{
+    height: 100px;
+    width: 100%;
+    overflow-x: scroll !important;
+}
 .container-portfolio{
     height: 100px;
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: scroll !important;
 }
 .container-image{
     height: 100%;
@@ -509,10 +514,10 @@ textarea {
 }
 
 @media (min-width: 768px){
-    .container-portfolio{
-        height: 150px;
+    .container-portfolio-lg{
+        height: 300px;
         width: 100%;
-        overflow-x: scroll;
+        overflow-x: scroll !important;
     }
     .container-image{
         height: 100%;
@@ -618,6 +623,7 @@ textarea {
 .portfolio-image{
     border-radius: 1px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+    flex: 0 0 auto;
 }
 
 .arrow-animated {

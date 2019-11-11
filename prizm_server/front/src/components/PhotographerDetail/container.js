@@ -47,7 +47,8 @@ class Container extends Component{
             showMinList: false,
             isConfirmPage: props.location.state ? props.location.state.isConfirmPage ? props.location.state.isConfirmPage : false : false,
             fromAuth: props.location.state ? props.location.state.fromAuth ? props.location.state.fromAuth : false : false,
-            requestSubmitted: false
+            requestSubmitted: false,
+            dateRange: []
         }
     }
 
@@ -116,10 +117,18 @@ class Container extends Component{
         })
     }
 
-    _openCalendar1 = () => {
-        this.setState({
-            showCalendar1: true
-        })
+    _openCalendar1 = (selectDateStep) => {
+        if(selectDateStep === 1){
+            this.setState({
+                showCalendar1: true,
+                selectDateStep: 1
+            })
+        }
+        else{
+            this.setState({
+                showCalendar1: true
+            })
+        }
     }
 
     _closeCalendar1 = () => {
@@ -259,7 +268,8 @@ class Container extends Component{
     _selectDateRange = (range) => {
         this.setState({
             selectedStartDate: range[0],
-            selectedEndDate: range[1]
+            selectedEndDate: range[1],
+            dateRange: range
         })
     }
 
