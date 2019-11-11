@@ -6,7 +6,8 @@ class Container extends Component{
     static propTypes = {
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
-        showBtmNav: PropTypes.bool.isRequired
+        showBtmNav: PropTypes.bool.isRequired,
+        goMySchedule: PropTypes.func.isRequired
     }
 
     constructor(props){
