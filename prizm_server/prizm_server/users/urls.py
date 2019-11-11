@@ -4,5 +4,5 @@ from . import views
 app_name = "users"
 urlpatterns = [
     path('check/duplicate/', views.CheckDuplicate.as_view()),
-    path('profile', views.Profile.as_view()),
+    path('profile/', views.Profile.as_view()),
 ]

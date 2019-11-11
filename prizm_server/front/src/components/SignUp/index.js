@@ -51,6 +51,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     fromAuth: true
                 }
             }))
+        },
+        getNotificationByToken: (token) => {
+            dispatch(userActions.getNotificationByToken(token))
         }
     }
 }

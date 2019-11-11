@@ -15,6 +15,8 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/static/manifest.json" />
+    <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -54,6 +56,17 @@
       }
       .react-calendar__tile--hasActive{
         background: #d66c8b !important;
+      }
+      .slick-slide {
+        outline: none;
+      }
+      .slick-slide:focus,
+      .slick-slide:focus a {
+        outline: none;
+      }
+      .slick-slider * { outline: none; }
+      .slick-list {
+        outline: none !important;
       }
     </style>
     <title>PRIZM</title>

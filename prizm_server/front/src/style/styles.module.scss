@@ -143,6 +143,11 @@ html{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.absolute-vertical-center{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 .black{
     color: $black;
@@ -524,6 +529,10 @@ textarea {
     width: 9px;
     height: 7px;
 }
+.icon-arrow{
+    width: 15px;
+    height: 12px;
+}
 
 .safearea{
     padding-top: 72px;
@@ -612,5 +621,15 @@ textarea {
     &.hide{
         min-height: 0;
         height: 0px;
+    }
+}
+
+.outline-none{
+    outline: none !important;
+
+    &:hover,
+    &:active,
+    &:focus{
+        outline: none !important;
     }
 }

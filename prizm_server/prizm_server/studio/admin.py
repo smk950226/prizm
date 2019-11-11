@@ -34,5 +34,5 @@ class ReviewAdmin(admin.ModelAdmin):
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'photographer', 'specific_date', 'start_date', 'end_date']
+    list_display = ['id', 'user', 'photographer', 'date_option', 'specific_date', 'start_date', 'end_date']
     list_display_links = ['id', 'user', 'photographer']

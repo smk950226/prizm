@@ -82,6 +82,7 @@ LOCAL_APPS = [
     "prizm_server.users.apps.UsersConfig",
     "prizm_server.common.apps.CommonConfig",
     "prizm_server.studio.apps.StudioConfig",
+    "prizm_server.notification.apps.NotificationConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

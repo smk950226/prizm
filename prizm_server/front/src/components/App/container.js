@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import App from './presenter';
 
 class Container extends Component{
+    static propTypes = {
+        profile: PropTypes.object,
+        initApp: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired,
+        notification: PropTypes.array
+    }
+
     state = {
         lastScrollTop: 0,
         delta: 30,

@@ -8,6 +8,9 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
         profile: PropTypes.object,
+        notification: PropTypes.array,
+        goSignIn: PropTypes.func.isRequired,
+        goSignUp: PropTypes.func.isRequired
     }
 
     constructor(props){
@@ -16,6 +19,14 @@ class Container extends Component{
         this.state = {
             pageType: pathname,
             showMenu: false
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if(prevProps.pathname !== this.props.pathname){
+            this.setState({
+                showMenu: false
+            })
         }
     }
 
@@ -37,6 +48,13 @@ class Container extends Component{
         })
     }
 
+    _logout = () => {
+        this.props.logout()
+        this.setState({
+            showMenu: false
+        })
+    }
+
     render(){
         if(this.state.pageType === '/welcome/'){
             return null
@@ -49,6 +67,7 @@ class Container extends Component{
                 openMenu={this._openMenu}
                 closeMenu={this._closeMenu}
                 handleShowMenu={this._handleShowMenu}
+                logout={this._logout}
                 />
             )
         }

@@ -9,35 +9,95 @@ import SignUp from '../SignUp';
 import SignIn from '../SignIn';
 import PhotographerDetail from '../PhotographerDetail';
 import styles from '../../style/styles.module.scss';
+import Loader from 'react-loader-spinner';
 
 const App = (props) => {
     return(
-        <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
-            <Navigation />
-            <GeneralRouteContainer />
-            <BottomNavigation showBtmNav={props.showBtmNav} />
-        </div>
+        <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} />
     )
 }
 
 export default App; 
 
 App.propTypes = {
-    showBtmNav: PropTypes.bool.isRequired
+    showBtmNav: PropTypes.bool.isRequired,
+    initApp: PropTypes.func.isRequired,
+    profile: PropTypes.object,
+    isLoggedIn: PropTypes.bool.isRequired,
+    notification: PropTypes.array
 }
 
 class GeneralRouteContainer extends Component{
     static propTypes = {
-        
+        initApp: PropTypes.func.isRequired,
+        profile: PropTypes.object,
+        isLoggedIn: PropTypes.bool.isRequired,
+        showBtmNav: PropTypes.bool.isRequired,
+        notification: PropTypes.array
     }
 
     state = {
-        
+        loading: true,
+        fetchedProfile: false,
+        fetchedNotification: false,
+        fetchClear: false
+    }
+
+    componentDidMount = async() => {
+        const { isLoggedIn, initApp, profile } = this.props;
+        if(isLoggedIn){
+            await initApp()
+        }
+        else{
+            this.setState({
+                loading: false
+            })
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedProfile, fetchedNotification } = prevState;
+        if((!fetchedProfile) || (!fetchedNotification)){
+            let update = {}
+            if(nextProps.profile){
+                update.fetchedProfile = true
+            }
+            if(nextProps.notification){
+                update.fetchedNotification = true
+            }
+
+            return update
+        }
+        else{
+            return null
+        }
+    }
+
+    componentDidUpdate = () => {
+        if(this.state.fetchedProfile && this.state.fetchedNotification && !this.state.fetchClear){
+            this.setState({
+                loading: false,
+                fetchClear: true,
+            })
+        }
     }
 
     render(){
+        const { loading } = this.state;
+        const { showBtmNav } = this.props;
+        if(loading){
+            return(
+                <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                    <Loader type="Oval" color="#d66c8b" height={20} width={20} />
+                </div>
+            )
+        }
         return(
-            <GeneralRoute />
+            <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
+                <Navigation />
+                <GeneralRoute />
+                <BottomNavigation showBtmNav={showBtmNav} />
+            </div>
         )
     }
 }

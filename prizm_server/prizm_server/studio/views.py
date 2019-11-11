@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from . import serializers, models
 from prizm_server.common.pagination import MainPageNumberPagination
+from prizm_server.notification import models as notification_models
 from django.utils.translation import ugettext_lazy as _
 
 import datetime, pytz
@@ -69,7 +70,7 @@ class Order(APIView):
                     specific_date = specific
                 )
                 order.save()
-
+                
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
 
             elif date_option == 2:
@@ -86,7 +87,7 @@ class Order(APIView):
                     location = location,
                     option = option,
                     comment = comment,
-                    date_option = 'Specific',
+                    date_option = 'Range',
                     start_date = start,
                     end_date = end
                 )

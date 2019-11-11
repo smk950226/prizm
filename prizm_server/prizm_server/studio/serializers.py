@@ -47,3 +47,14 @@ class PhotographerPortfolioSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Photographer
         fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'education', 'career', 'studio_id', 'portfolio_set', 'portfolio_url', 'description', 'total_rating', 'review_count']
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    user = users_serializers.ProfileSerializer()
+    photographer = PhotographerPortfolioSerializer()
+    location = LocationSerializer()
+    option = OptionSerializer()
+    
+    class Meta:
+        model = models.Order
+        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date']

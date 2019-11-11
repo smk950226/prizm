@@ -5,6 +5,7 @@ require('isomorphic-fetch');
 const SAVE_TOKEN = 'SAVE_TOKEN';
 const LOGOUT = 'LOGOUT';
 const SET_PROFILE = 'SET_PROFILE';
+const SET_NOTIFICATION = 'SET_NOTIFICATION';
 
 function saveToken(token) {
     return {
@@ -23,6 +24,13 @@ function setProfile(profile) {
     return {
         type: SET_PROFILE,
         profile
+    }
+}
+
+function setNotification(notification){
+    return {
+        type: SET_NOTIFICATION,
+        notification
     }
 }
 
@@ -119,9 +127,10 @@ function checkDuplicate(email, mobile, countryNumber){
     }
 }
 
-function getProfileByToken(token){
-    return (dispatch) => {
-        fetch(`${FETCH_URL}/api/users/profile`, {
+function getProfile(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        fetch(`${FETCH_URL}/api/users/profile/`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `JWT ${token}`
@@ -139,6 +148,67 @@ function getProfileByToken(token){
     }
 }
 
+function getProfileByToken(token){
+    return (dispatch) => {
+        fetch(`${FETCH_URL}/api/users/profile/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setProfile(json)))
+    }
+}
+
+function getNotification(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        fetch(`${FETCH_URL}/api/notification/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setNotification(json)))
+    }
+}
+
+function getNotificationByToken(token){
+    return (dispatch) => {
+        fetch(`${FETCH_URL}/api/notification/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setNotification(json)))
+    }
+}
+
 const initialState = {
     isLoggedIn: localStorage.getItem('jwt') ? true : false,
     token: localStorage.getItem('jwt')
@@ -152,6 +222,8 @@ function reducer(state = initialState, action){
             return applyLogout(state, action);
         case SET_PROFILE:
             return applySetProfile(state, action);
+        case SET_NOTIFICATION:
+            return applySetNotification(state, action);
         default:
            return state;
     }
@@ -183,13 +255,24 @@ function applySetProfile(state, action){
     }
 }
 
+function applySetNotification(state, action){
+    const { notification } = action;
+    return {
+        ...state,
+        notification
+    }
+}
+
 const actionCreators = {
     checkDuplicate,
     signUp,
     getProfileByToken,
     getSaveToken,
     login,
-    getLogout
+    getLogout,
+    getProfile,
+    getNotification,
+    getNotificationByToken
 }
 
 export { actionCreators }
