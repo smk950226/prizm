@@ -9,7 +9,7 @@ const MySchedule = (props, context) => (
             <div className={`${styles.mt45}`}>
                 {props.orderList.map((order, index) => (
                     <div key={order.id} className={`${styles.py3} ${(index === props.orderList.length - 1) ? null : styles.borderBtmGrayDc}`}>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={() => props.goMyScheduleDetail(order.id, order)}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                 {order.status === 'pending' && (
                                     <p className={`${styles.fontBold} ${styles.font13}`} style={{width: 65}}>{context.t("Pending")}</p>
@@ -45,7 +45,8 @@ const MySchedule = (props, context) => (
 )
 
 MySchedule.propTypes = {
-    orderList: PropTypes.array
+    orderList: PropTypes.array,
+    goMyScheduleDetail: PropTypes.func.isRequired
 }
 
 MySchedule.contextTypes = {

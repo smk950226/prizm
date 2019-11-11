@@ -239,6 +239,28 @@ function getOrderList(){
     }
 }
 
+function getOrderDetail(orderId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/order/detail/?orderId=${orderId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 function getOrderListByToken(token){
     return (dispatch) => {
         fetch(`${FETCH_URL}/api/studio/order/`, {
@@ -335,7 +357,8 @@ const actionCreators = {
     getNotification,
     getNotificationByToken,
     getOrderList,
-    getOrderListByToken
+    getOrderListByToken,
+    getOrderDetail
 }
 
 export { actionCreators }

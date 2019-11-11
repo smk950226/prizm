@@ -7,7 +7,8 @@ class Container extends Component{
         orderList: PropTypes.array,
         getOrderList: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
-        isLoggedIn: PropTypes.bool.isRequired
+        isLoggedIn: PropTypes.bool.isRequired,
+        goMyScheduleDetail: PropTypes.func.isRequired
     }
 
     componentDidMount = async() => {

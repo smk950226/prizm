@@ -105,3 +105,17 @@ class Order(APIView):
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('요청 정보를 입력해주세요.')})
+
+
+class OrderDetail(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format = None):
+        order_id = request.query_params.get('orderId', None)
+        if order_id:
+            user = request.user
+            order = models.Order.objects.get(id = order_id)
+            serializer = serializers.OrderSerializer(order)
+
+            return Response(status = status.HTTP_200_OK, data = serializer.data)
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})

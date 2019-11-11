@@ -8,6 +8,7 @@ import BottomNavigation from '../BottomNavigation';
 import SignUp from '../SignUp';
 import SignIn from '../SignIn';
 import MySchedule from '../MySchedule';
+import MyScheduleDetail from '../MyScheduleDetail';
 import PhotographerDetail from '../PhotographerDetail';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -133,6 +134,7 @@ const GeneralRoute = props => (
         <Route exact path='/signin/' component={SignIn} key={4} />
         <Route exact path='/photographer/:photographerId/' component={PhotographerDetail} key={5} />
         <Route exact path='/my/schedule/' component={MySchedule} key={6} />
+        <Route exact path='/my/schedule/:orderId' component={MyScheduleDetail} key={7} />
     </Switch>
 )
 
