@@ -188,7 +188,8 @@ const actionCreators = {
     signUp,
     getProfileByToken,
     getSaveToken,
-    login
+    login,
+    getLogout
 }
 
 export { actionCreators }

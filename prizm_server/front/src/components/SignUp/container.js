@@ -10,30 +10,37 @@ class Container extends Component{
         getProfileByToken: PropTypes.func.isRequired,
         getSaveToken: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
-        goSignIn: PropTypes.func.isRequired
+        goSignIn: PropTypes.func.isRequired,
+        goDetail: PropTypes.func.isRequired
     }
 
     static contextTypes = {
         t: PropTypes.func
     }
 
-    state = {
-        name: "",
-        email: "",
-        countryNumber: "",
-        mobile: "",
-        password: "",
-        birth: "",
-        countryCode: {},
-        emailForm: false,
-        passwordForm: false,
-        birthForm: false,
-        showCountryNumber: false,
-        showCountryCode: false,
-        isSubmitting: false
+    constructor(props){
+        super(props)
+        this.state = {
+            name: "",
+            email: "",
+            countryNumber: "",
+            mobile: "",
+            password: "",
+            birth: "",
+            countryCode: {},
+            emailForm: false,
+            passwordForm: false,
+            birthForm: false,
+            showCountryNumber: false,
+            showCountryCode: false,
+            isSubmitting: false,
+            goRequest: props.location.state ? props.location.state.goRequest ? props.location.state.goRequest : false : false,
+            photographerId: props.location.state ? props.location.state.photographerId ? props.location.state.photographerId : null : null
+        }
     }
 
     componentDidMount = () => {
+        window.scrollTo(0,0)
         if(this.props.isLoggedIn){
             this.props.goHome()
         }
@@ -139,8 +146,8 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, email, countryNumber, mobile, password, birth, countryCode, emailForm, passwordForm, birthForm } = this.state;
-        const { checkDuplicate, signUp, getProfileByToken, getSaveToken, goHome } = this.props;
+        const { isSubmitting, name, email, countryNumber, mobile, password, birth, countryCode, emailForm, passwordForm, birthForm, goRequest, photographerId } = this.state;
+        const { checkDuplicate, signUp, getProfileByToken, getSaveToken, goHome, goDetail } = this.props;
         if(!isSubmitting){
             if(name && email && countryNumber && mobile && password && birth && countryCode){
                 if(emailForm){
@@ -158,7 +165,12 @@ class Container extends Component{
                                         isSubmitting: false
                                     })
                                     getSaveToken(result.token)
-                                    goHome()
+                                    if(goRequest){
+                                        goDetail(photographerId)
+                                    }
+                                    else{
+                                        goHome()
+                                    }
                                 }
                                 else{
                                     this.setState({

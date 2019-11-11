@@ -4,11 +4,38 @@ require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 const SET_PHOTOGRAPHER_LIST = 'SET_PHOTOGRAPHER_LIST';
+const SET_REQUEST = 'SET_REQUEST';
+const RESET_REQUEST = 'RESET_REQUEST';
 
 function setPhotographerList(photographerList) {
     return {
         type: SET_PHOTOGRAPHER_LIST,
         photographerList
+    }
+}
+
+function setRequest(request){
+    return {
+        type: SET_REQUEST,
+        request
+    }
+}
+
+function resetRequest(){
+    return {
+        type: RESET_REQUEST
+    }
+}
+
+function getRequest(request){
+    return (dispatch) => {
+        dispatch(setRequest(request))
+    }
+}
+
+function removeRequest(){
+    return (dispatch) => {
+        dispatch(resetRequest())
     }
 }
 
@@ -61,14 +88,53 @@ function getPhotographerDetail(photographerId){
     }
 }
 
+function createRequest(photographerId, locationId, optionId, comment, dateOption, date, hour, min, startDate, endDate){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/order/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                photographerId, 
+                locationId, 
+                optionId, 
+                comment, 
+                dateOption, 
+                date, 
+                hour,
+                min,
+                startDate, 
+                endDate
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
-    
+    request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
 
 function reducer(state = initialState, action){
     switch(action.type){
         case SET_PHOTOGRAPHER_LIST:
             return applySetPhotographerList(state, action);
+        case SET_REQUEST:
+            return applySetRequest(state, action);
+        case RESET_REQUEST:
+            return applyResetRequest(state, action);
         default:
            return state;
     }
@@ -82,10 +148,31 @@ function applySetPhotographerList(state, action){
     };
 };
 
+function applySetRequest(state, action){
+    const { request } = action;
+    const requestJson = JSON.stringify(request)
+    localStorage.setItem("request", requestJson);
+    return {
+        ...state,
+        request
+    }
+}
+
+function applyResetRequest(state, action){
+    localStorage.removeItem("request")
+    return {
+        ...state,
+        request: {}
+    }
+}
+
 const actionCreators = {
     getPhotographerList,
     getPhotographerListMore,
-    getPhotographerDetail
+    getPhotographerDetail,
+    createRequest,
+    getRequest,
+    removeRequest
 }
 
 export { actionCreators }

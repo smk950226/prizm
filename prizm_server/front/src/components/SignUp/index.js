@@ -28,8 +28,29 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
-        goSignIn: () => {
-            dispatch(push('/signin/'))
+        goSignIn: (goRequest) => {
+            dispatch(push({
+                pathname: `/signin/`,
+                state: { goRequest }
+            }))
+        },
+        goSignIn: (goRequest, photographerId) => {
+            dispatch(push({
+                pathname: `/signin/`,
+                state: { 
+                    goRequest,
+                    photographerId
+                }
+            }))
+        },
+        goDetail: (photographerId) => {
+            dispatch(push({
+                pathname: `/photographer/${photographerId}/`,
+                state: { 
+                    isConfirmPage: true,
+                    fromAuth: true
+                }
+            }))
         }
     }
 }

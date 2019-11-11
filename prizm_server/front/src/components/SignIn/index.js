@@ -25,8 +25,23 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
-        goSignUp: () => {
-            dispatch(push('/signup/'))
+        goSignUp: (goRequest, photographerId) => {
+            dispatch(push({
+                pathname: `/signup/`,
+                state: { 
+                    goRequest,
+                    photographerId
+                }
+            }))
+        },
+        goDetail: (photographerId) => {
+            dispatch(push({
+                pathname: `/photographer/${photographerId}/`,
+                state: { 
+                    isConfirmPage: true,
+                    fromAuth: true
+                }
+            }))
         }
     }
 }

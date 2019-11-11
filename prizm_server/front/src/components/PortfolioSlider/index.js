@@ -4,6 +4,10 @@ import styles from '../../style/styles.module.scss';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 class PortfolioSlider extends Component{
     static propTypes = {
         portfolio: PropTypes.array.isRequired
@@ -11,7 +15,15 @@ class PortfolioSlider extends Component{
 
     state = {
         isOpen: false,
-        photoIndex: 0
+        photoIndex: 0,
+        update: false
+    }
+
+    componentDidMount = async() => {
+        await sleep(500)
+        this.setState({
+            update: true
+        })
     }
 
     _openPortfolio = (photoIndex) => {
@@ -30,12 +42,13 @@ class PortfolioSlider extends Component{
 
     render(){
         const { portfolio } = this.props;
-        const { isOpen, photoIndex } = this.state;
+        const { isOpen, photoIndex, update } = this.state;
         const images = []
         portfolio.map(port => {
             images.push(port.image)
             return null;
         })
+        console.log(update)
         return(
             <div className={`${styles.containerPortfolio} ${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.mb4} ${styles.flexNowrap}`}>
                 {portfolio.map((port, index) => (

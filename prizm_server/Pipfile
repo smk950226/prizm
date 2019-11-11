@@ -40,6 +40,7 @@ awsebcli = "*"
 requests = "*"
 djangorestframework-jwt = "*"
 django-rest-auth = "*"
+python-dateutil = "*"
 
 [requires]
 python_version = "3.7"

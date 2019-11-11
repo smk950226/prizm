@@ -2,43 +2,52 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PhotographerDetail from './presenter';
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 class Container extends Component{
     static propTypes = {
         getPhotographerDetail: PropTypes.func.isRequired,
+        createRequest: PropTypes.func.isRequired,
+        getRequest: PropTypes.func.isRequired,
+        request: PropTypes.object,
+        isLoggedIn: PropTypes.bool.isRequired,
+        goSignUp: PropTypes.func.isRequired,
+        removeRequest: PropTypes.func.isRequired,
+        goHome: PropTypes.func.isRequired
     }
 
     static contextTypes = {
         t: PropTypes.func
     }
 
-    state = {
-        loading: true,
-        photographer: {},
-        isTruncated: true,
-        selectedLocation: {},
-        dateOption: 0,
-        selectedOption: {},
-        comment: "",
-        isSubmitting: false,
-        show1: true,
-        show2: false,
-        show3: false,
-        show4: false,
-        showCalendar1: false,
-        showCalendar2: false,
-        selectedDate: "",
-        selectedStartDate: "",
-        selectedEndDate: "",
-        dateConfirm: false,
-        selectDateStep: 1,
-        selectedHour: "",
-        selectedMin: "",
-        showHourList: false,
-        showMinList: false
+    constructor(props){
+        super(props);
+        this.state = {
+            loading: true,
+            photographer: {},
+            isTruncated: true,
+            selectedLocation: {},
+            dateOption: 0,
+            selectedOption: {},
+            comment: "",
+            isSubmitting: false,
+            show1: true,
+            show2: false,
+            show3: false,
+            show4: false,
+            showCalendar1: false,
+            showCalendar2: false,
+            selectedDate: "",
+            selectedStartDate: "",
+            selectedEndDate: "",
+            dateConfirm: false,
+            selectDateStep: 1,
+            selectedHour: "",
+            selectedMin: "",
+            showHourList: false,
+            showMinList: false,
+            isConfirmPage: props.location.state ? props.location.state.isConfirmPage ? props.location.state.isConfirmPage : false : false,
+            fromAuth: props.location.state ? props.location.state.fromAuth ? props.location.state.fromAuth : false : false,
+            requestSubmitted: false
+        }
     }
 
     componentDidMount = async() => {
@@ -311,6 +320,103 @@ class Container extends Component{
         })
     }
 
+    _goConfirm = async() => {
+        const { selectedLocation, dateOption, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, selectedOption, photographer, comment } = this.state;
+        const { getRequest, isLoggedIn, goSignUp } = this.props;
+        if(dateOption === 1){
+            if(selectedLocation.id && selectedDate && selectedHour && selectedMin && selectedOption){
+                await getRequest({
+                    photographer: photographer,
+                    location: selectedLocation,
+                    option: selectedOption,
+                    comment,
+                    dateOption,
+                    date: selectedDate ?  String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : "",
+                    hour: selectedHour,
+                    min: selectedMin,
+                    startDate: selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : "",
+                    endDate: selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
+                })
+                if(isLoggedIn){
+                    this.setState({
+                        isConfirmPage: true
+                    })
+                }
+                else{
+                    goSignUp(photographer.id)
+                }
+            }
+            else{
+                this.setState({
+                    isConfirmPage: false
+                })
+                alert(this.context.t("요청 정보를 입력해주세요."))
+            }
+        }
+        else{
+            if(selectedLocation.id && selectedStartDate && selectedEndDate && selectedOption){
+                await getRequest({
+                    photographer: photographer,
+                    location: selectedLocation,
+                    option: selectedOption,
+                    comment,
+                    dateOption,
+                    date: selectedDate ? String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : "",
+                    hour: selectedHour,
+                    min: selectedMin,
+                    startDate: selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : "",
+                    endDate: selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
+                })
+                if(isLoggedIn){
+                    this.setState({
+                        isConfirmPage: true
+                    })
+                }
+                else{
+                    goSignUp(photographer.id)
+                }
+            }
+            else{
+                this.setState({
+                    isConfirmPage: false
+                })
+                alert(this.context.t("요청 정보를 입력해주세요."))
+            }
+        }
+    }
+
+    _submit = async() => {
+        const { isSubmitting } = this.state;
+        const { createRequest, request, removeRequest } = this.props;
+        if(!isSubmitting){
+            const result = await createRequest(request.photographer.id, request.location.id, request.option.id, request.comment, request.dateOption, request.date, request.hour, request.min, request.startDate, request.endDate)
+            if(result.status === 'ok'){
+                this.setState({
+                    isSubmitting: false,
+                    requestSubmitted: true
+                })
+                await removeRequest()
+            }
+            else if(result.error){
+                this.setState({
+                    isSubmitting: false,
+                    requestSubmitted: false
+                })
+                alert(result.error)
+            }
+            else{
+                this.setState({
+                    isSubmitting: false,
+                    requestSubmitted: false
+                })
+                alert('오류가 발생하였습니다.')
+            }
+            this.setState({
+                isSubmitting: false
+            })
+        }
+    }
+
     render(){
         return (
             <PhotographerDetail 
@@ -345,6 +451,8 @@ class Container extends Component{
             handleShowHourList={this._handleShowHourList}
             handleShowMinList={this._handleShowMinList}
             selectDateRange={this._selectDateRange}
+            goConfirm={this._goConfirm}
+            submit={this._submit}
             />
         )
     }

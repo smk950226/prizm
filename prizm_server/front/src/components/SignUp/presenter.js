@@ -503,7 +503,7 @@ const SignUp = (props, context) => (
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
             <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer}`}>{context.t("Sign Up")}</p>
             <p className={`${styles.fontBold} ${styles.font17} ${styles.mx2}`}>|</p>
-            <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer} ${styles.opacity4}`} onClick={props.goSignIn}>{context.t("Sign In")}</p>
+            <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer} ${styles.opacity4}`} onClick={() => props.goSignIn(props.goRequest, props.photographerId)}>{context.t("Sign In")}</p>
         </div>
         <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{context.t("Full name")}</p>
         <div className={`${styles.widthFull}`}>

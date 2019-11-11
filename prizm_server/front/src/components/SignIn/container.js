@@ -9,22 +9,29 @@ class Container extends Component{
         getProfileByToken: PropTypes.func.isRequired,
         getSaveToken: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
-        goSignUp: PropTypes.func.isRequired
+        goSignUp: PropTypes.func.isRequired,
+        goDetail: PropTypes.func.isRequired
     }
 
     static contextTypes = {
         t: PropTypes.func
     }
 
-    state = {
-        email: "",
-        password: "",
-        emailForm: false,
-        savePassword: true,
-        isSubmitting: false
+    constructor(props){
+        super(props)
+        this.state = {
+            email: "",
+            password: "",
+            emailForm: false,
+            savePassword: true,
+            isSubmitting: false,
+            goRequest: props.location.state ? props.location.state.goRequest ? props.location.state.goRequest : false : false,
+            photographerId: props.location.state ? props.location.state.photographerId ? props.location.state.photographerId : null : null
+        }
     }
 
     componentDidMount = () => {
+        window.scrollTo(0,0)
         if(this.props.isLoggedIn){
             this.props.goHome()
         }
@@ -55,8 +62,8 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, email,  password, emailForm } = this.state;
-        const { login, getProfileByToken, getSaveToken, goHome } = this.props;
+        const { isSubmitting, email,  password, emailForm, goRequest, photographerId } = this.state;
+        const { login, getProfileByToken, getSaveToken, goHome, goDetail } = this.props;
         if(!isSubmitting){
             if(email && password){
                 if(emailForm){
@@ -70,7 +77,12 @@ class Container extends Component{
                             isSubmitting: false
                         })
                         getSaveToken(result.token)
-                        goHome()
+                        if(goRequest){
+                            goDetail(photographerId)
+                        }
+                        else{
+                            goHome()
+                        }
                     }
                     else{
                         this.setState({

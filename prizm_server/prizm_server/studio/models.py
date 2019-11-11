@@ -98,3 +98,23 @@ class Review(models.Model):
         ordering = ['-id']
         verbose_name = _('Photographer Review')
         verbose_name_plural = _('Photographer Review')
+
+
+class Order(models.Model):
+    user = models.ForeignKey('users.User', on_delete = models.CASCADE)
+    photographer = models.ForeignKey(Photographer, on_delete = models.CASCADE)
+    location = models.ForeignKey(Location, on_delete = models.CASCADE)
+    option = models.ForeignKey(Option, on_delete = models.CASCADE)
+    comment = models.TextField(_('Comment'), blank = True, null = True)
+    date_option = models.CharField(_("Date Option"), choices = (('Specific', 'Specific Date'), ('Range', 'Not Specific Date')), max_length = 100)
+    specific_date = models.DateTimeField(_("Specific Date"), blank = True, null = True)
+    start_date = models.DateField(_("Range Start Date"), blank = True, null = True)
+    end_date = models.DateField(_("Range End Date"), blank = True, null = True)
+
+    def __str__(self):
+        return self.user.email + ' -> ' + self.photographer.nickname
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Customer Order')
+        verbose_name_plural = _('Customer Order')

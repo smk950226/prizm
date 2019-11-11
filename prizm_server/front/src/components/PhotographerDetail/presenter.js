@@ -74,8 +74,8 @@ const minList = [
 
 class PhotographerDetail extends Component{
     static propTypes = {
-        photographer: PropTypes.array,
-        loading: PropTypes.string.isRequired,
+        photographer: PropTypes.object,
+        loading: PropTypes.bool.isRequired,
         doTruncate: PropTypes.func.isRequired,
         undoTruncate: PropTypes.func.isRequired,
         isTruncated: PropTypes.bool.isRequired,
@@ -125,7 +125,14 @@ class PhotographerDetail extends Component{
         showMinList: PropTypes.bool.isRequired,
         selectDateRange: PropTypes.func.isRequired,
         selectedStartDate: PropTypes.any.isRequired,
-        selectedEndDate: PropTypes.any.isRequired
+        selectedEndDate: PropTypes.any.isRequired,
+        isConfirmPage: PropTypes.bool.isRequired,
+        goConfirm: PropTypes.func.isRequired,
+        fromAuth: PropTypes.func.isRequired,
+        request: PropTypes.object,
+        submit: PropTypes.func.isRequired,
+        requestSubmitted: PropTypes.bool.isRequired,
+        goHome: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -138,203 +145,310 @@ class PhotographerDetail extends Component{
     }
 
     render(){
-        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate } = this.props;
+        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted } = this.props;
         return(
-            <div className={`${styles.safeareaTop} ${styles.containerCustomer}`}>
+            <div className={`${!requestSubmitted ? styles.safearea : isConfirmPage ? styles.safearea : styles.safeareaTop} ${styles.containerCustomer} ${!requestSubmitted ? `${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : null}`}>
                 {loading ? (
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                         <Loader type="Oval" color="#d66c8b" height={20} width={20} />
                     </div>
                 ) : (
-                    <Fragment>
-                        {photographer.portfolio_set && photographer.portfolio_set.length > 0 ? (
-                            <PortfolioSlider portfolio={photographer.portfolio_set} />
-                        ) : (
-                            null
-                        )}
-                        <div className={`${styles.px3}`}>
-                            <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                <ProfileDivLg image={photographer.profile_image} />
-                                <div className={`${styles.ml3}`}>
-                                    <p className={`${styles.fontBold} ${styles.font14}`}>{photographer.nickname}</p>
-                                    <p className={`${styles.font12} ${styles.mt1}`}>{photographer.main_location}</p>
-                                </div>
-                            </div>
-                            <div className={`${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Education")}</p>
-                                <p className={`${styles.font10}`}>{photographer.education}</p>
-                            </div>
-                            <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Career")}</p>
-                                <p className={`${styles.font10}`}>{photographer.career}</p>
-                            </div>
-                            {photographer.portfolio_url ? (
-                                <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                    <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Portfolio")}</p>
-                                    <a href={photographer.portfolio_url} target={'_blank'} className={`${styles.font10} ${styles.black}`} style={{textDecoration: 'none'}}>{photographer.portfolio_url}</a>
-                                </div>
-                            ) : (
-                                null
-                            )}
-                            <div className={`${styles.mt3}`}>
-                                <p className={`${styles.font11}`} style={{lineHeight: 1.45}}>
-                                    <Truncate lines={isTruncated ? 4 : null} ellipsis={<span>...</span>}>
-                                        {photographer.description}
-                                    </Truncate>
-                                </p>
-                                <p className={`${styles.fontBold} ${styles.font13} ${styles.green} ${styles.mt2} ${styles.cursorPointer}`} onClick={isTruncated ? this.props.undoTruncate : this.props.doTruncate}>{isTruncated ? this.context.t("More ...") : this.context.t("Abbr")}</p>
-                            </div>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.my3}`}>
-                                <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Review")}</p>
-                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                    <p className={`${styles.fontBold} ${styles.font11} ${styles.mr1}`}>{photographer.total_rating}</p>
-                                    <Rating 
-                                    initialRating={photographer.total_rating} 
-                                    emptySymbol={<MdStar fontSize={"15px"} color={"#f4f4f4"} />}
-                                    fullSymbol={<MdStar fontSize={"15px"} color={"#fffb64"} />}
-                                    fractions={2}
-                                    readonly
-                                    />
-                                    <p className={`${styles.font9} ${styles.ml1}`}>({photographer.review_count})</p>
-                                    <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Go Review")} className={`${styles.ml2} ${styles.cursorPointer}`} style={{width: 15, height: 12}} />
-                                </div>
-                            </div>
-                        </div>
-                        <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
-                        <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Select Location")}</p>
-                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} onClick={show1 ? selectedLocation.id ? this.props.close1 : null : this.props.open1} />
-                            </div>
-                            <SlideDown closed={!show1} className={'my-dropdown-slidedown'}>
-                                {photographer.location_set && photographer.location_set.length > 0 ? (
-                                    <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
-                                        {photographer.location_set.map((location, index) => (
-                                            <div key={index} className={`${styles.containerLocation} ${selectedLocation.id === location.id ? styles.selected : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${index === photographer.location_set.length - 1 ? null : styles.mr3}`} onClick={selectedLocation.id === location.id ? this.props.blankLocation : () => this.props.selectLocation(location)}>
-                                                <div>
-                                                    <p className={`${styles.font10}`}>{this.context.t(`Location ${index + 1}`)}</p>
-                                                    <p className={`${styles.fontBold} ${styles.font11} ${styles.mt1}`}>{location.name}</p>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
+                    requestSubmitted ? (
+                        !isConfirmPage ? (
+                            <Fragment>
+                                {photographer.portfolio_set && photographer.portfolio_set.length > 0 ? (
+                                    <PortfolioSlider portfolio={photographer.portfolio_set} />
                                 ) : (
-                                    <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 지역이 없습니다.")}</p>
+                                    null
                                 )}
-                                {selectedLocation.lat ? (
+                                <div className={`${styles.px3}`}>
+                                    <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                        <ProfileDivLg image={photographer.profile_image} />
+                                        <div className={`${styles.ml3}`}>
+                                            <p className={`${styles.fontBold} ${styles.font14}`}>{photographer.nickname}</p>
+                                            <p className={`${styles.font12} ${styles.mt1}`}>{photographer.main_location}</p>
+                                        </div>
+                                    </div>
+                                    <div className={`${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                        <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Education")}</p>
+                                        <p className={`${styles.font10}`}>{photographer.education}</p>
+                                    </div>
+                                    <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                        <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Career")}</p>
+                                        <p className={`${styles.font10}`}>{photographer.career}</p>
+                                    </div>
+                                    {photographer.portfolio_url ? (
+                                        <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                            <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Portfolio")}</p>
+                                            <a href={photographer.portfolio_url} target={'_blank'} className={`${styles.font10} ${styles.black}`} style={{textDecoration: 'none'}}>{photographer.portfolio_url}</a>
+                                        </div>
+                                    ) : (
+                                        null
+                                    )}
                                     <div className={`${styles.mt3}`}>
-                                        <Map
-                                        isMarkerShown={true}
-                                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-                                        loadingElement={<div style={{ height: `100%` }} />}
-                                        containerElement={<div className={`${styles.containerMap}`} />}
-                                        mapElement={<div style={{ height: `100%` }} />}
-                                        lng={selectedLocation.lng}
-                                        lat={selectedLocation.lat}
-                                        />
+                                        <p className={`${styles.font11}`} style={{lineHeight: 1.45}}>
+                                            <Truncate lines={isTruncated ? 4 : null} ellipsis={<span>...</span>}>
+                                                {photographer.description}
+                                            </Truncate>
+                                        </p>
+                                        <p className={`${styles.fontBold} ${styles.font13} ${styles.green} ${styles.mt2} ${styles.cursorPointer}`} onClick={isTruncated ? this.props.undoTruncate : this.props.doTruncate}>{isTruncated ? this.context.t("More ...") : this.context.t("Abbr")}</p>
                                     </div>
-                                ) : null}
-                            </SlideDown>
-                        </div>
-                        <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
-                        <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Date&Time")}</p>
-                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`} onClick={(dateConfirm ) ? show2 ? this.props.close2 : this.props.open2 : null}/>
-                            </div>
-                            <SlideDown closed={!show2}>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 1 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(1)}>
-                                <div className={`${styles.checkBox} ${dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                    {dateOption === 1 && (
-                                        <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I have a specific date in mind")} className={`${styles.iconCheck}`} />
-                                    )}
-                                </div>
-                                <div className={`${styles.checkBoxText}`}>
-                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I have a specific date in mind")}</p>
-                                </div>
-                            </div>
-                            {dateConfirm && (dateOption === 1) && (
-                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
-                                    <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedDate.getFullYear()}/${selectedDate.getMonth() + 1}/${selectedDate.getDate()}`}</p>
-                                    </div>
-                                    <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedHour}:${selectedMin}`}</p>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.my3}`}>
+                                        <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Review")}</p>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.mr1}`}>{photographer.total_rating}</p>
+                                            <Rating 
+                                            initialRating={photographer.total_rating} 
+                                            emptySymbol={<MdStar fontSize={"15px"} color={"#f4f4f4"} />}
+                                            fullSymbol={<MdStar fontSize={"15px"} color={"#fffb64"} />}
+                                            fractions={2}
+                                            readonly
+                                            />
+                                            <p className={`${styles.font9} ${styles.ml1}`}>({photographer.review_count})</p>
+                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Go Review")} className={`${styles.ml2} ${styles.cursorPointer}`} style={{width: 15, height: 12}} />
+                                        </div>
                                     </div>
                                 </div>
-                            )}
-                            <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 2 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(2)}>
-                                <div className={`${styles.checkBox} ${dateOption !== 2 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                    {dateOption === 2 && (
-                                        <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")} className={`${styles.iconCheck}`} />
-                                    )}
-                                </div>
-                                <div className={`${styles.checkBoxText}`}>
-                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")}</p>
-                                </div>
-                            </div>
-                            {dateConfirm && (dateOption === 2) && (
-                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
-                                    <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedStartDate.getFullYear()}/${selectedStartDate.getMonth() + 1}/${selectedStartDate.getDate()}`}</p>
+                                <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
+                                <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Select Location")}</p>
+                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} onClick={show1 ? selectedLocation.id ? this.props.close1 : null : this.props.open1} />
                                     </div>
-                                    <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedEndDate.getFullYear()}/${selectedEndDate.getMonth() + 1}/${selectedEndDate.getDate()}`}</p>
-                                    </div>
-                                </div>
-                            )}
-                            </SlideDown>
-                        </div>
-                        <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
-                        <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. Service&Pricing")}</p>
-                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`} onClick={selectedOption.id ? show3 ?  this.props.close3 : this.props.open3 : null}/>
-                            </div>
-                            <SlideDown closed={!show3}>
-                            <div className={`${styles.my3}`}>
-                                {photographer.option_set && photographer.option_set.length > 0 ? (
-                                    photographer.option_set.map((option, index) => (
-                                        <div key={index} className={`${styles.py4} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.index === photographer.option_set.length - 1 ? null : styles.mb2} ${styles.cursorPointer} ${selectedOption.id === option.id ? styles.borderPink : styles.borderGrayD9} ${selectedOption.id === option.id ? styles.bgPink : styles.bgWhite}`} onClick={selectedOption.id === option.id ? this.props.blankOption : () => this.props.selectOption(option)}>
-                                            <div>
-                                                <p className={`${styles.fontBold} ${styles.font14} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{`${option.title} (${option.person > 1 ? `${option.person} people` : `${option.person} person`}, ${option.hour > 1 ? `${option.hour} hrs` : `${option.hour} hr`})`}</p>
-                                                <p className={`${styles.font10} ${styles.mt2} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{option.description}</p>
+                                    <SlideDown closed={!show1} className={'my-dropdown-slidedown'}>
+                                        {photographer.location_set && photographer.location_set.length > 0 ? (
+                                            <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
+                                                {photographer.location_set.map((location, index) => (
+                                                    <div key={index} className={`${styles.containerLocation} ${selectedLocation.id === location.id ? styles.selected : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${index === photographer.location_set.length - 1 ? null : styles.mr3}`} onClick={selectedLocation.id === location.id ? this.props.blankLocation : () => this.props.selectLocation(location)}>
+                                                        <div>
+                                                            <p className={`${styles.font10}`}>{this.context.t(`Location ${index + 1}`)}</p>
+                                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.mt1}`}>{location.name}</p>
+                                                        </div>
+                                                    </div>
+                                                ))}
                                             </div>
-                                            <div>
-                                                <p className={`${styles.font14} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{`$${numberWithCommas(option.price)}`}</p>
+                                        ) : (
+                                            <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 지역이 없습니다.")}</p>
+                                        )}
+                                        {selectedLocation.lat ? (
+                                            <div className={`${styles.mt3}`}>
+                                                <Map
+                                                isMarkerShown={true}
+                                                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                                                loadingElement={<div style={{ height: `100%` }} />}
+                                                containerElement={<div className={`${styles.containerMap}`} />}
+                                                mapElement={<div style={{ height: `100%` }} />}
+                                                lng={selectedLocation.lng}
+                                                lat={selectedLocation.lat}
+                                                />
+                                            </div>
+                                        ) : null}
+                                    </SlideDown>
+                                </div>
+                                <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
+                                <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Date&Time")}</p>
+                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`} onClick={(dateConfirm ) ? show2 ? this.props.close2 : this.props.open2 : null}/>
+                                    </div>
+                                    <SlideDown closed={!show2}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 1 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(1)}>
+                                        <div className={`${styles.checkBox} ${dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                            {dateOption === 1 && (
+                                                <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I have a specific date in mind")} className={`${styles.iconCheck}`} />
+                                            )}
+                                        </div>
+                                        <div className={`${styles.checkBoxText}`}>
+                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I have a specific date in mind")}</p>
+                                        </div>
+                                    </div>
+                                    {dateConfirm && (dateOption === 1) && (
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()}`}</p>
+                                            </div>
+                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedHour}:${selectedMin}`}</p>
                                             </div>
                                         </div>
-                                    ))
+                                    )}
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 2 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(2)}>
+                                        <div className={`${styles.checkBox} ${dateOption !== 2 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                            {dateOption === 2 && (
+                                                <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")} className={`${styles.iconCheck}`} />
+                                            )}
+                                        </div>
+                                        <div className={`${styles.checkBoxText}`}>
+                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")}</p>
+                                        </div>
+                                    </div>
+                                    {dateConfirm && (dateOption === 2) && (
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedStartDate.getFullYear()}/${String(selectedStartDate.getMonth() + 1).length === 2 ? (selectedStartDate.getMonth() + 1) : '0'.concat(String(selectedStartDate.getMonth() + 1))}/${selectedStartDate.getDate()}`}</p>
+                                            </div>
+                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`} style={{width: 'calc(50% - 8px)'}}>
+                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedEndDate.getFullYear()}/${String(selectedEndDate.getMonth() + 1).length === 2 ? (selectedEndDate.getMonth() + 1) : '0'.concat(String(selectedEndDate.getMonth() + 1))}/${selectedEndDate.getDate()}`}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    </SlideDown>
+                                </div>
+                                <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
+                                <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. Service&Pricing")}</p>
+                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`} onClick={selectedOption.id ? show3 ?  this.props.close3 : this.props.open3 : null}/>
+                                    </div>
+                                    <SlideDown closed={!show3}>
+                                    <div className={`${styles.my3}`}>
+                                        {photographer.option_set && photographer.option_set.length > 0 ? (
+                                            photographer.option_set.map((option, index) => (
+                                                <div key={index} className={`${styles.py4} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.index === photographer.option_set.length - 1 ? null : styles.mb2} ${styles.cursorPointer} ${selectedOption.id === option.id ? styles.borderPink : styles.borderGrayD9} ${selectedOption.id === option.id ? styles.bgPink : styles.bgWhite}`} onClick={selectedOption.id === option.id ? this.props.blankOption : () => this.props.selectOption(option)}>
+                                                    <div>
+                                                        <p className={`${styles.fontBold} ${styles.font14} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{`${option.title} (${option.person > 1 ? `${option.person} people` : `${option.person} person`}, ${option.hour > 1 ? `${option.hour} hrs` : `${option.hour} hr`})`}</p>
+                                                        <p className={`${styles.font10} ${styles.mt2} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{option.description}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className={`${styles.font14} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{`$${numberWithCommas(option.price)}`}</p>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 옵션이 없습니다.")}</p>
+                                        )}
+                                    </div>
+                                    </SlideDown>
+                                </div>
+                                <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
+                                <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments")}</p>
+                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show4 ? styles.rotate : null}`} />
+                                    </div>
+                                    <SlideDown closed={!show4}>
+                                    <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("comment")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
+                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goConfirm}>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("submit the request")}</p>
+                                    </div>
+                                    </SlideDown>
+                                </div>
+                                <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("Find other photogrpahes in New York")}</p>
+                                    <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Find More")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} />
+                                </div>
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                {fromAuth ? (
+                                    <div className={`${styles.px3}`}>
+                                        <p className={`${styles.mt5} ${styles.fontBold} ${styles.font17}`}>{this.context.t("Submit Request")}</p>
+                                        <p className={`${styles.mt3} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Location")}</p>
+                                        <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{request.location.name}</p>
+                                        <div className={`${styles.mt3}`}>
+                                            <Map
+                                            isMarkerShown={true}
+                                            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                                            loadingElement={<div style={{ height: `100%` }} />}
+                                            containerElement={<div className={`${styles.containerMap}`} />}
+                                            mapElement={<div style={{ height: `100%` }} />}
+                                            lng={request.location.lng}
+                                            lat={request.location.lat}
+                                            />
+                                        </div>
+                                        <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Date&Time")}</p>
+                                        {request.dateOption === 1 ? (
+                                            <Fragment>
+                                                <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{`${request.date.split('-')[0]}/${String(request.date.split('-')[1]).length === 2 ? (request.date.split('-')[1]) : '0'.concat(String(request.date.split('-')[1]))}/${request.date.split('-')[2]} ${request.hour}:${request.min}`}</p>
+                                                <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I have a specific date in mind")}</p>
+                                            </Fragment>
+                                        ) : (
+                                            <Fragment>
+                                                <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{`${request.startDate.split('-')[0]}/${String(request.startDate.split('-')[1]).length === 2 ? (request.startDate.split('-')[1]) : '0'.concat(String(request.startDate.split('-')[1]))}/${request.startDate.split('-')[2]} ~ ${request.endDate.split('-')[0]}/${String(request.endDate.split('-')[1]).length === 2 ? (request.endDate.split('-')[1]) : '0'.concat(String(request.endDate.split('-')[1]))}/${request.endDate.split('-')[2]}`}</p>
+                                                <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as above")}</p>
+                                            </Fragment>
+                                        )}
+                                        <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Service&Pricing")}</p>
+                                        <p className={`${styles.mt2} ${styles.fontBold} ${styles.font13}`}>{`${request.option.title} (${request.option.person > 1 ? `${request.option.person} people` : `${request.option.person} person`}, ${request.option.hour > 1 ? `${request.option.hour} hrs` : `${request.option.hour} hr`})`}</p>
+                                        <p className={`${styles.mt1} ${styles.font11}`}>{request.option.description}</p>
+                                        {request.comment ? (
+                                            <Fragment>
+                                                <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Comment")}</p>
+                                                <p className={`${styles.mt2} ${styles.font13}`}>{request.comment}</p>
+                                            </Fragment>
+                                        ) : (
+                                            null
+                                        )}
+                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.submit}>
+                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm and Submit Request")}</p>
+                                        </div>
+                                    </div>
                                 ) : (
-                                    <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 옵션이 없습니다.")}</p>
+                                    <div className={`${styles.px3}`}>
+                                        <p className={`${styles.mt5} ${styles.fontBold} ${styles.font17}`}>{this.context.t("Submit Request")}</p>
+                                        <p className={`${styles.mt3} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Location")}</p>
+                                        <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{selectedLocation.name}</p>
+                                        <div className={`${styles.mt3}`}>
+                                            <Map
+                                            isMarkerShown={true}
+                                            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                                            loadingElement={<div style={{ height: `100%` }} />}
+                                            containerElement={<div className={`${styles.containerMap}`} />}
+                                            mapElement={<div style={{ height: `100%` }} />}
+                                            lng={selectedLocation.lng}
+                                            lat={selectedLocation.lat}
+                                            />
+                                        </div>
+                                        <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Date&Time")}</p>
+                                        {dateOption === 1 ? (
+                                            <Fragment>
+                                                <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()} ${selectedHour}:${selectedMin}`}</p>
+                                                <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I have a specific date in mind")}</p>
+                                            </Fragment>
+                                        ) : (
+                                            <Fragment>
+                                                <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{`${selectedStartDate.getFullYear()}/${String(selectedStartDate.getMonth() + 1).length === 2 ? (selectedStartDate.getMonth() + 1) : '0'.concat(String(selectedStartDate.getMonth() + 1))}/${selectedStartDate.getDate()} ~ ${selectedEndDate.getFullYear()}/${String(selectedEndDate.getMonth() + 1).length === 2 ? (selectedEndDate.getMonth() + 1) : '0'.concat(String(selectedEndDate.getMonth() + 1))}/${selectedEndDate.getDate()}`}</p>
+                                                <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as above")}</p>
+                                            </Fragment>
+                                        )}
+                                        <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Service&Pricing")}</p>
+                                        <p className={`${styles.mt2} ${styles.fontBold} ${styles.font13}`}>{`${selectedOption.title} (${selectedOption.person > 1 ? `${selectedOption.person} people` : `${selectedOption.person} person`}, ${selectedOption.hour > 1 ? `${selectedOption.hour} hrs` : `${selectedOption.hour} hr`})`}</p>
+                                        <p className={`${styles.mt1} ${styles.font11}`}>{selectedOption.description}</p>
+                                        {comment ? (
+                                            <Fragment>
+                                                <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Comment")}</p>
+                                                <p className={`${styles.mt2} ${styles.font13}`}>{comment}</p>
+                                            </Fragment>
+                                        ) : (
+                                            null
+                                        )}
+                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.submit}>
+                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm and Submit Request")}</p>
+                                        </div>
+                                    </div>
                                 )}
+                            </Fragment>
+                        )
+                    ) : (
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.heightFullPercent} ${styles.px3}`} style={{position: 'relative'}}>
+                            <div className={`${styles.textCenter}`}>
+                                <img src={require('../../assets/images/dummy.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: 200, heihgt: 160}} />
+                                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>{this.context.t("Your request was submitted successfully")}</p>
+                                <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
+                                    {this.context.t(`${photographer.nickname} is now reviewing your request.`)}<br/>
+                                    {this.context.t(`We will soon send you a confirmation message to your email and mobile number `)}
+                                </p>
+                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
+                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go to the main page")}</p>
+                                </div>
                             </div>
-                            </SlideDown>
                         </div>
-                        <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
-                        <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments")}</p>
-                                <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show4 ? styles.rotate : null}`} />
-                            </div>
-                            <SlideDown closed={!show4}>
-                            <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("comment")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}}>
-                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("submit the request")}</p>
-                            </div>
-                            </SlideDown>
-                        </div>
-                        <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                            <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("Find other photogrpahes in New York")}</p>
-                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Find More")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} />
-                        </div>
-                    </Fragment>
+                    )
                 )}
                 <Modal
                 open={showCalendar1} 
                 onClose={this.props.closeCalendar1} 
                 center
-                classNames={`${styles.px0}`}
                 styles={{ overlay: { background: "rgba(0,0,0,0.2)", padding: 0 }, modal: { padding: 0 }}}
                 >
                     <div className={`${styles.containerModal}`}>
@@ -406,7 +520,6 @@ class PhotographerDetail extends Component{
                 open={showCalendar2} 
                 onClose={this.props.closeCalendar2} 
                 center
-                classNames={`${styles.px0}`}
                 styles={{ overlay: { background: "rgba(0,0,0,0.2)", padding: 0 }, modal: { padding: 0 }}}
                 >
                     <div className={`${styles.containerModal}`}>
