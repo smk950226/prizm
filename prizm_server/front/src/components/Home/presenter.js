@@ -55,7 +55,7 @@ class Home extends Component{
                 {/* <div className={`${styles.bgNewyork} ${styles.widthFull} ${styles.banner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                     <p className={`${styles.font16} ${styles.fontBold} ${styles.white}`}>{this.context.t("NEWYORK")}</p>
                 </div> */}
-                <div className={`${styles.widthFull} ${styles.banner}`} style={{position: 'relative'}}>
+                <div className={`${styles.widthFull} ${styles.banner}`} style={{position: 'relative', overflow: 'hidden'}}>
                     <video id="video_background" src={require('../../assets/videos/newyork.mp4')} className={`${styles.widthFull} ${styles.banner}`} style={{objectFit: 'cover'}} autoPlay={true} loop={true} muted={true} playsInline={true} />
                     <p className={`${styles.font16} ${styles.fontBold} ${styles.white} ${styles.absoluteCenter}`}>{this.context.t("NEWYORK")}</p>
                 </div>
@@ -65,7 +65,7 @@ class Home extends Component{
                             <Fragment key={photographer.id}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb4}`}>
                                     <div>
-                                        <Link to={`/photographer/${photographer.id}/`} style={{textDecoration: 'none', color: 'black'}}>
+                                        <Link to={`/${photographer.studio_id}/`} style={{textDecoration: 'none', color: 'black'}}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                             <ProfileDiv image={photographer.profile_image} />
                                             <p className={`${styles.fontBold} ${styles.font13} ${styles.ml3}`}>{photographer.nickname}</p>

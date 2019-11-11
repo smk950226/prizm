@@ -29,7 +29,7 @@ class PhotographerDetail(APIView):
         photographer_id = request.query_params.get('photographerId', None)
         if photographer_id:
             try:
-                photographer = models.Photographer.objects.get(id = photographer_id)
+                photographer = models.Photographer.objects.get(studio_id = photographer_id)
                 serializer = serializers.PhotographerSerializer(photographer, context = {'request': request})
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'photographer': serializer.data})
             except:

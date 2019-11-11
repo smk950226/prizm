@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 import PortfolioSlider from '../PortfolioSlider';
+import LocationComp from '../LocationComp';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
 import Rating from 'react-rating';
@@ -128,7 +129,7 @@ class PhotographerDetail extends Component{
         selectedEndDate: PropTypes.any.isRequired,
         isConfirmPage: PropTypes.bool.isRequired,
         goConfirm: PropTypes.func.isRequired,
-        fromAuth: PropTypes.func.isRequired,
+        fromAuth: PropTypes.bool.isRequired,
         request: PropTypes.object,
         submit: PropTypes.func.isRequired,
         requestSubmitted: PropTypes.bool.isRequired,
@@ -213,20 +214,15 @@ class PhotographerDetail extends Component{
                                 </div>
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={show1 ? selectedLocation.id ? this.props.close1 : null : this.props.open1}>
                                         <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Select Location")}</p>
-                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} onClick={show1 ? selectedLocation.id ? this.props.close1 : null : this.props.open1} />
+                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} />
                                     </div>
                                     <SlideDown closed={!show1} className={'my-dropdown-slidedown'}>
                                         {photographer.location_set && photographer.location_set.length > 0 ? (
                                             <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
                                                 {photographer.location_set.map((location, index) => (
-                                                    <div key={index} className={`${styles.containerLocation} ${selectedLocation.id === location.id ? styles.selected : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${index === photographer.location_set.length - 1 ? null : styles.mr3}`} onClick={selectedLocation.id === location.id ? this.props.blankLocation : () => this.props.selectLocation(location)}>
-                                                        <div>
-                                                            <p className={`${styles.font10}`}>{this.context.t(`Location ${index + 1}`)}</p>
-                                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.mt1}`}>{location.name}</p>
-                                                        </div>
-                                                    </div>
+                                                    <LocationComp key={index} location={location} selectedLocation={selectedLocation} index={index} total={photographer.location_set.length} blankLocation={this.props.blankLocation} selectLocation={this.props.selectLocation} />
                                                 ))}
                                             </div>
                                         ) : (
@@ -249,9 +245,9 @@ class PhotographerDetail extends Component{
                                 </div>
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={(dateConfirm ) ? show2 ? this.props.close2 : this.props.open2 : null}>
                                         <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Date&Time")}</p>
-                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`} onClick={(dateConfirm ) ? show2 ? this.props.close2 : this.props.open2 : null}/>
+                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`}/>
                                     </div>
                                     <SlideDown closed={!show2}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 1 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(1)}>
@@ -298,9 +294,9 @@ class PhotographerDetail extends Component{
                                 </div>
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={selectedOption.id ? show3 ?  this.props.close3 : this.props.open3 : null}>
                                         <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. Service&Pricing")}</p>
-                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`} onClick={selectedOption.id ? show3 ?  this.props.close3 : this.props.open3 : null}/>
+                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`}/>
                                     </div>
                                     <SlideDown closed={!show3}>
                                     <div className={`${styles.my3}`}>
@@ -324,7 +320,7 @@ class PhotographerDetail extends Component{
                                 </div>
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
                                         <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments")}</p>
                                         <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show4 ? styles.rotate : null}`} />
                                     </div>

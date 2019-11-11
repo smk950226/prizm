@@ -132,9 +132,9 @@ const GeneralRoute = props => (
         <Route exact path='/welcome/' component={Welcome} key={2} />
         <Route exact path='/signup/' component={SignUp} key={3} />
         <Route exact path='/signin/' component={SignIn} key={4} />
-        <Route exact path='/photographer/:photographerId/' component={PhotographerDetail} key={5} />
         <Route exact path='/my/schedule/' component={MySchedule} key={6} />
         <Route exact path='/my/schedule/:orderId' component={MyScheduleDetail} key={7} />
+        <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
     </Switch>
 )
 
