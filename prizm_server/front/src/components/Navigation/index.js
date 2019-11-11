@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Container from './container';
-import { actionCreators as userActions } from '../../redux/modules/user';
+import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
         logout: () => {
-            dispatch(userActions.getLogout())
+            dispatch(userAction.getLogout())
         },
         goHome: () => {
             dispatch(push('/'))
@@ -26,6 +26,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goSignUp: () => {
             dispatch(push('/signup/'))
+        },
+        goMySchedule: () => {
+            dispatch(push('/my/schedule/'))
         }
     }
 }

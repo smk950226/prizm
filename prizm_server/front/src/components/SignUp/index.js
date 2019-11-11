@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Container from './container';
-import { actionCreators as userActions } from '../../redux/modules/user';
+import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,16 +14,16 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
         checkDuplicate: (email, mobile, countryNumber) => {
-            return dispatch(userActions.checkDuplicate(email, mobile, countryNumber))
+            return dispatch(userAction.checkDuplicate(email, mobile, countryNumber))
         },
         signUp: (email, password, name, birth, countryNumber, countryCode, mobile) => {
-            return dispatch(userActions.signUp(email, password, name, birth, countryNumber, countryCode, mobile))
+            return dispatch(userAction.signUp(email, password, name, birth, countryNumber, countryCode, mobile))
         },
         getProfileByToken: (token) => {
-            dispatch(userActions.getProfileByToken(token))
+            dispatch(userAction.getProfileByToken(token))
         },
         getSaveToken: (token) => {
-            dispatch(userActions.getSaveToken(token))
+            dispatch(userAction.getSaveToken(token))
         },
         goHome: () => {
             dispatch(push('/'))
@@ -53,7 +53,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             }))
         },
         getNotificationByToken: (token) => {
-            dispatch(userActions.getNotificationByToken(token))
+            dispatch(userAction.getNotificationByToken(token))
+        },
+        getOrderListByToken: (token) => {
+            dispatch(userAction.getOrderListByToken(token))
         }
     }
 }

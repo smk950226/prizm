@@ -10,7 +10,8 @@ class Container extends Component{
         profile: PropTypes.object,
         notification: PropTypes.array,
         goSignIn: PropTypes.func.isRequired,
-        goSignUp: PropTypes.func.isRequired
+        goSignUp: PropTypes.func.isRequired,
+        goMySchedule: PropTypes.func.isRequired
     }
 
     constructor(props){
@@ -50,6 +51,7 @@ class Container extends Component{
 
     _logout = () => {
         this.props.logout()
+        this.props.goHome()
         this.setState({
             showMenu: false
         })

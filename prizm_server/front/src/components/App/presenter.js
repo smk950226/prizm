@@ -7,13 +7,14 @@ import Navigation from '../Navigation';
 import BottomNavigation from '../BottomNavigation';
 import SignUp from '../SignUp';
 import SignIn from '../SignIn';
+import MySchedule from '../MySchedule';
 import PhotographerDetail from '../PhotographerDetail';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 
 const App = (props) => {
     return(
-        <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} />
+        <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} orderList={props.orderList} />
     )
 }
 
@@ -24,7 +25,8 @@ App.propTypes = {
     initApp: PropTypes.func.isRequired,
     profile: PropTypes.object,
     isLoggedIn: PropTypes.bool.isRequired,
-    notification: PropTypes.array
+    notification: PropTypes.array,
+    orderList: PropTypes.array
 }
 
 class GeneralRouteContainer extends Component{
@@ -33,13 +35,15 @@ class GeneralRouteContainer extends Component{
         profile: PropTypes.object,
         isLoggedIn: PropTypes.bool.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
-        notification: PropTypes.array
+        notification: PropTypes.array,
+        orderList: PropTypes.array
     }
 
     state = {
         loading: true,
         fetchedProfile: false,
         fetchedNotification: false,
+        fetchedOrderList: false,
         fetchClear: false
     }
 
@@ -56,14 +60,17 @@ class GeneralRouteContainer extends Component{
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
-        const { fetchedProfile, fetchedNotification } = prevState;
-        if((!fetchedProfile) || (!fetchedNotification)){
+        const { fetchedProfile, fetchedNotification, fetchedOrderList } = prevState;
+        if((!fetchedProfile) || (!fetchedNotification || (!fetchedOrderList))){
             let update = {}
             if(nextProps.profile){
                 update.fetchedProfile = true
             }
             if(nextProps.notification){
                 update.fetchedNotification = true
+            }
+            if(nextProps.orderList){
+                update.fetchedOrderList = true
             }
 
             return update
@@ -74,7 +81,7 @@ class GeneralRouteContainer extends Component{
     }
 
     componentDidUpdate = () => {
-        if(this.state.fetchedProfile && this.state.fetchedNotification && !this.state.fetchClear){
+        if(this.state.fetchedProfile && this.state.fetchedNotification && this.state.fetchedOrderList && !this.state.fetchClear){
             this.setState({
                 loading: false,
                 fetchClear: true,
@@ -125,6 +132,7 @@ const GeneralRoute = props => (
         <Route exact path='/signup/' component={SignUp} key={3} />
         <Route exact path='/signin/' component={SignIn} key={4} />
         <Route exact path='/photographer/:photographerId/' component={PhotographerDetail} key={5} />
+        <Route exact path='/my/schedule/' component={MySchedule} key={6} />
     </Switch>
 )
 

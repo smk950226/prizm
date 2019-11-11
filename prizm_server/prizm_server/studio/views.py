@@ -40,6 +40,13 @@ class PhotographerDetail(APIView):
 
 class Order(APIView):
     permission_classes = [IsAuthenticated]
+    def get(self, request, format = None):
+        user = request.user
+        orders = models.Order.objects.filter(user = user).order_by('-id')
+        serializer = serializers.OrderSerializer(orders, many = True)
+
+        return Response(status = status.HTTP_200_OK, data = serializer.data)
+
     def post(self, request, format = None):
         user = request.user
         photographer_id = request.data.get('photographerId')
@@ -70,7 +77,7 @@ class Order(APIView):
                     specific_date = specific
                 )
                 order.save()
-                
+
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
 
             elif date_option == 2:

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Container from './container';
 import { actionCreators as customerAction } from '../../redux/modules/customer';
+import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -37,7 +38,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goHome: () => {
             dispatch(push('/'))
-        }
+        },
+        getOrderList: () => {
+            dispatch(userAction.getOrderList())
+        },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

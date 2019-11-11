@@ -11,7 +11,8 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         goSignUp: PropTypes.func.isRequired,
         removeRequest: PropTypes.func.isRequired,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        getOrderList: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -387,10 +388,11 @@ class Container extends Component{
 
     _submit = async() => {
         const { isSubmitting } = this.state;
-        const { createRequest, request, removeRequest } = this.props;
+        const { createRequest, request, removeRequest, getOrderList } = this.props;
         if(!isSubmitting){
             const result = await createRequest(request.photographer.id, request.location.id, request.option.id, request.comment, request.dateOption, request.date, request.hour, request.min, request.startDate, request.endDate)
             if(result.status === 'ok'){
+                await getOrderList()
                 this.setState({
                     isSubmitting: false,
                     requestSubmitted: true

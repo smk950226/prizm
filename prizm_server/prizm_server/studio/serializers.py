@@ -54,7 +54,7 @@ class OrderSerializer(serializers.ModelSerializer):
     photographer = PhotographerPortfolioSerializer()
     location = LocationSerializer()
     option = OptionSerializer()
-    
+
     class Meta:
         model = models.Order
-        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date']
+        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date', 'status']

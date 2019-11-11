@@ -6,6 +6,7 @@ const SAVE_TOKEN = 'SAVE_TOKEN';
 const LOGOUT = 'LOGOUT';
 const SET_PROFILE = 'SET_PROFILE';
 const SET_NOTIFICATION = 'SET_NOTIFICATION';
+const SET_ORDER_LIST = 'SET_ORDER_LIST';
 
 function saveToken(token) {
     return {
@@ -31,6 +32,13 @@ function setNotification(notification){
     return {
         type: SET_NOTIFICATION,
         notification
+    }
+}
+
+function setOrderList(orderList){
+    return {
+        type: SET_ORDER_LIST,
+        orderList
     }
 }
 
@@ -209,6 +217,49 @@ function getNotificationByToken(token){
     }
 }
 
+function getOrderList(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`${FETCH_URL}/api/studio/order/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setOrderList(json)))
+    }
+}
+
+function getOrderListByToken(token){
+    return (dispatch) => {
+        fetch(`${FETCH_URL}/api/studio/order/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setOrderList(json)))
+    }
+}
+
 const initialState = {
     isLoggedIn: localStorage.getItem('jwt') ? true : false,
     token: localStorage.getItem('jwt')
@@ -224,6 +275,8 @@ function reducer(state = initialState, action){
             return applySetProfile(state, action);
         case SET_NOTIFICATION:
             return applySetNotification(state, action);
+        case SET_ORDER_LIST:
+            return applySetOrderList(state, action);
         default:
            return state;
     }
@@ -263,6 +316,14 @@ function applySetNotification(state, action){
     }
 }
 
+function applySetOrderList(state, action){
+    const { orderList } = action;
+    return {
+        ...state,
+        orderList
+    }
+}
+
 const actionCreators = {
     checkDuplicate,
     signUp,
@@ -272,7 +333,9 @@ const actionCreators = {
     getLogout,
     getProfile,
     getNotification,
-    getNotificationByToken
+    getNotificationByToken,
+    getOrderList,
+    getOrderListByToken
 }
 
 export { actionCreators }

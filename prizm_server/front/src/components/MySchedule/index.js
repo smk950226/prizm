@@ -4,15 +4,19 @@ import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn }, router : { location } } = state;
+    const { user : { orderList, isLoggedIn }, router : { location } } = state;
     return {
-        isLoggedIn,
-        pathname: location.pathname
+        orderList,
+        pathname: location.pathname,
+        isLoggedIn
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
+        getOrderList: () => {
+            dispatch(userAction.getOrderList())
+        },
         goHome: () => {
             dispatch(push('/'))
         }

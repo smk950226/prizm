@@ -185,11 +185,17 @@ html{
 .gray-e7{
     color: $gray-e7;
 }
+.gray-dc{
+    color: $gray-dc;
+}
 .pink{
     color: $pink;
 }
 .green{
     color: $green;
+}
+.confirmed{
+    color: $confirmed;
 }
 
 .bg-black{
@@ -228,11 +234,21 @@ html{
 .bg-gray-e7{
     background-color: $gray-e7;
 }
+.bg-gray-dc{
+    background-color: $gray-dc;
+}
 .bg-pink{
     background-color: $pink;
 }
 .bg-green{
     background-color: $green;
+}
+.bg-confirmed{
+    background-color: $confirmed;
+}
+
+.mt-45{
+    margin-top: 2.25rem;
 }
 
 .font-60-120{
@@ -560,6 +576,16 @@ textarea {
     border: 1px solid $gray-97;
     border-top: none;
 }
+.border-gray-d9{
+    border: 1px solid $gray-d9;
+}
+
+.border-pink{
+    border: 1px solid $pink;
+}
+.border-btm-gray-dc{
+    border-bottom: 1px solid $gray-dc;
+}
 
 .btn{
     cursor: pointer;
@@ -592,14 +618,6 @@ textarea {
 .portfolio-image{
     border-radius: 1px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
-}
-
-.border-gray-d9{
-    border: 1px solid $gray-d9;
-}
-
-.border-pink{
-    border: 1px solid $pink;
 }
 
 .arrow-animated {

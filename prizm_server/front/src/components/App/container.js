@@ -7,7 +7,8 @@ class Container extends Component{
         profile: PropTypes.object,
         initApp: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
-        notification: PropTypes.array
+        notification: PropTypes.array,
+        orderList: PropTypes.array
     }
 
     state = {

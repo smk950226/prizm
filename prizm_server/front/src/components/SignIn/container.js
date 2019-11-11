@@ -11,7 +11,8 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
         goDetail: PropTypes.func.isRequired,
-        getNotificationByToken: PropTypes.func.isRequired
+        getNotificationByToken: PropTypes.func.isRequired,
+        getOrderListByToken: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -64,7 +65,7 @@ class Container extends Component{
 
     _submit = async() => {
         const { isSubmitting, email,  password, emailForm, goRequest, photographerId } = this.state;
-        const { login, getProfileByToken, getSaveToken, goHome, goDetail, getNotificationByToken } = this.props;
+        const { login, getProfileByToken, getSaveToken, goHome, goDetail, getNotificationByToken, getOrderListByToken } = this.props;
         if(!isSubmitting){
             if(email && password){
                 if(emailForm){
@@ -75,6 +76,7 @@ class Container extends Component{
                     if(result.token){
                         await getProfileByToken(result.token)
                         await getNotificationByToken(result.token)
+                        await getOrderListByToken(result.token)
                         this.setState({
                             isSubmitting: false
                         })

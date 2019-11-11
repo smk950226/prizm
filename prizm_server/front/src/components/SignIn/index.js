@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Container from './container';
-import { actionCreators as userActions } from '../../redux/modules/user';
+import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,13 +14,13 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
         login: (email, password) => {
-            return dispatch(userActions.login(email, password))
+            return dispatch(userAction.login(email, password))
         },
         getProfileByToken: (token) => {
-            dispatch(userActions.getProfileByToken(token))
+            dispatch(userAction.getProfileByToken(token))
         },
         getSaveToken: (token) => {
-            dispatch(userActions.getSaveToken(token))
+            dispatch(userAction.getSaveToken(token))
         },
         goHome: () => {
             dispatch(push('/'))
@@ -44,7 +44,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             }))
         },
         getNotificationByToken: (token) => {
-            dispatch(userActions.getNotificationByToken(token))
+            dispatch(userAction.getNotificationByToken(token))
+        },
+        getOrderListByToken: (token) => {
+            dispatch(userAction.getOrderListByToken(token))
         }
     }
 }

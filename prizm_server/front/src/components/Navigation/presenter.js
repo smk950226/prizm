@@ -2,18 +2,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import { slide as Slide } from 'react-burger-menu';
-import Slider from "react-slick";
-
-var sliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: false,
-    adaptiveHeight: true
-  };
 
 class Navigation extends Component{
     static propTypes = {
@@ -28,7 +16,8 @@ class Navigation extends Component{
         handleShowMenu: PropTypes.func.isRequired,
         notification: PropTypes.array,
         goSignIn: PropTypes.func.isRequired,
-        goSignUp: PropTypes.func.isRequired
+        goSignUp: PropTypes.func.isRequired,
+        goMySchedule: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -78,8 +67,8 @@ class Navigation extends Component{
                                         <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Profile")} className={`${styles.iconArrow} ${styles.cursorPointer}`} />
                                     </div>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt2}`}>
-                                        <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`}>{this.context.t("My schedule")}</p>
-                                        <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("My schedule")} className={`${styles.iconArrow} ${styles.cursorPointer}`} />
+                                        <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>{this.context.t("My schedule")}</p>
+                                        <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("My schedule")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goMySchedule} />
                                     </div>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt2}`}>
                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`}>{this.context.t("My Photos")}</p>

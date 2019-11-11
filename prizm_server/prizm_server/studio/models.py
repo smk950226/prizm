@@ -110,6 +110,12 @@ class Order(models.Model):
     specific_date = models.DateTimeField(_("Specific Date"), blank = True, null = True)
     start_date = models.DateField(_("Range Start Date"), blank = True, null = True)
     end_date = models.DateField(_("Range End Date"), blank = True, null = True)
+    status = models.CharField(_("Order Status"), max_length = 100, choices = (
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('rejected', 'Rejected')
+    ), default = 'pending')
+    is_ended = models.BooleanField(_("Schedule Ended"), default = False)
 
     def __str__(self):
         return self.user.email + ' -> ' + self.photographer.nickname
