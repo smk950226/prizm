@@ -48,15 +48,34 @@ class Profile(APIView):
         mobile = request.data.get('mobile', None)
         birth = request.data.get('birth', None)
         country_code = request.data.get('countryCode', None)
+        if name and country_number and mobile and birth and country_code:
+            if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+            else:
+                user.name = name
+                user.country_number = country_number
+                user.mobile = mobile
+                user.birth = birth
+                user.country_code = country_code
+                user.save()
 
-        if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            user.name = name
-            user.country_number = country_number
-            user.mobile = mobile
-            user.birth = birth
-            user.country_code = country_code
-            user.save()
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
 
-            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+
+class ProfilePassword(APIView):
+    permission_classes = [IsAuthenticated]
+    def put(self, request, format = None):
+        user = request.user
+        current_password = request.data.get('currentPassword', None)
+        password = request.data.get('password', None)
+        if current_password and password:
+            if user.check_password(current_password):
+                user.set_password(password)
+                user.save()
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            else:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('현재 비밀번호가 일치하지 않습니다.')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})

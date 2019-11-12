@@ -105,7 +105,7 @@ class Navigation extends Component{
                             <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`}>{this.context.t("Privacy Policy")}</p>
                             <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`} onClick={this.props.logout}>{this.context.t("Log Out")}</p>
                         </div>
-                        {isLoggedIn && notification && showNotification && (
+                        {(isLoggedIn && (notification.length > 0) && (showNotification.id > 0)) && (
                             <div className={`${styles.absoluteVerticalCenter} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                                 {showNotification.notification_type === 'request_confirm' && (
                                     <Fragment>

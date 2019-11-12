@@ -7,7 +7,6 @@ const mapStateToProps = (state, ownProps) => {
     const { user : { isLoggedIn, profile }, router : { location } } = state;
     return {
         isLoggedIn,
-        profile,
         pathname: location.pathname
     }
 }
@@ -17,14 +16,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
-        editProfile: (name, countryNumber, mobile, birth, countryCode) => {
-            return dispatch(userAction.editProfile(name, countryNumber, mobile, birth, countryCode))
+        editPassword: (currentPassword, password) => {
+            return dispatch(userAction.editPassword(currentPassword, password))
         },
         getProfile: () => {
             dispatch(userAction.getProfile())
         },
-        goPasswordChange: () => {
-            dispatch(push('/profile/password/'))
+        goProfile: () => {
+            dispatch(push('/profile/'))
         }
     }
 }

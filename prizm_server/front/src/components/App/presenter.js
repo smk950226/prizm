@@ -12,6 +12,7 @@ import MyScheduleDetail from '../MyScheduleDetail';
 import PhotographerDetail from '../PhotographerDetail';
 import ProfileMenu from '../ProfileMenu';
 import Profile from '../Profile';
+import ProfilePassword from '../ProfilePassword';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 
@@ -138,6 +139,7 @@ const GeneralRoute = props => (
         <Route exact path='/my/schedule/:orderId' component={MyScheduleDetail} key={7} />
         <Route exact path='/menu/profile/' component={ProfileMenu} key={8} />
         <Route exact path='/profile/' component={Profile} key={9} />
+        <Route exact path='/profile/password/' component={ProfilePassword} key={10} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
     </Switch>
 )

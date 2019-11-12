@@ -9,7 +9,8 @@ class Container extends Component{
         profile: PropTypes.object,
         goHome: PropTypes.func.isRequired,
         editProfile: PropTypes.func.isRequired,
-        getProfile: PropTypes.func.isRequired
+        getProfile: PropTypes.func.isRequired,
+        goPasswordChange: PropTypes.func.isRequired
     }
 
     static contextTypes = {

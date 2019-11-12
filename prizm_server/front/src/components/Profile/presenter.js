@@ -67,13 +67,13 @@ const Profile = (props, context) => (
         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("edit profile")}</p>
         </div>
+        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt3} ${styles.textCenter} ${styles.cursorPointer}`} onClick={props.goPasswordChange}>{context.t("Change Password?")}</p>
     </div>
 )
 
 Profile.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     handleCountryNumberChange: PropTypes.func.isRequired,
     handleShowCountryNumber: PropTypes.func.isRequired,
@@ -85,11 +85,11 @@ Profile.propTypes = {
     mobile: PropTypes.string.isRequired,
     birth: PropTypes.string.isRequired,
     emailForm: PropTypes.bool.isRequired,
-    passwordForm: PropTypes.bool.isRequired,
     birthForm: PropTypes.bool.isRequired,
     showCountryNumber: PropTypes.bool.isRequired,
     showCountryCode: PropTypes.bool.isRequired,
-    submit: PropTypes.func.isRequired
+    submit: PropTypes.func.isRequired,
+    goPasswordChange: PropTypes.func.isRequired
 }
 
 Profile.contextTypes = {
