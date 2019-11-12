@@ -103,9 +103,11 @@ class Navigation extends Component{
                         <div className={`${styles.col12} ${styles.px0}`}>
                             <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer}`}>{this.context.t("Terms of Use")}</p>
                             <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`}>{this.context.t("Privacy Policy")}</p>
-                            <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`} onClick={this.props.logout}>{this.context.t("Log Out")}</p>
+                            {isLoggedIn && (
+                                <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`} onClick={this.props.logout}>{this.context.t("Log Out")}</p>
+                            )}
                         </div>
-                        {(isLoggedIn && (notification.length > 0) && (showNotification.id > 0)) && (
+                        {(isLoggedIn && (notification) && (showNotification.id > 0)) && (
                             <div className={`${styles.absoluteVerticalCenter} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                                 {showNotification.notification_type === 'request_confirm' && (
                                     <Fragment>

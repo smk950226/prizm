@@ -35,7 +35,7 @@ class ProfileMenu extends Component{
         }
         return(
             <div className={`${styles.safearea} ${styles.containerCustomer}`}>
-                <p className={`${styles.fontBold} ${styles.font20} ${styles.px3}`} style={(isLoggedIn && (notification.length > 0) && (showNotification.id > 0)) ? {marginTop: 30} : {marginTop: 80}}>{isLoggedIn ? profile ? profile.name : this.context.t("Sign In to view your profile") : this.context.t("Sign In to view your profile")}</p>
+                <p className={`${styles.fontBold} ${styles.font20} ${styles.px3}`} style={(isLoggedIn && (notification) && (showNotification.id > 0)) ? {marginTop: 30} : {marginTop: 80}}>{isLoggedIn ? profile ? profile.name : this.context.t("Sign In to view your profile") : this.context.t("Sign In to view your profile")}</p>
                 {isLoggedIn ? (
                     <Fragment>
                         <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.mt5} ${styles.cursorPointer}`} onClick={this.props.goProfile}>
@@ -44,7 +44,7 @@ class ProfileMenu extends Component{
                         <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.px3}`}>{this.context.t("My Schedule")}</p>
                         </div>
-                        {(isLoggedIn && (notification.length > 0) && (showNotification.id > 0)) && (
+                        {(isLoggedIn && (notification) && (showNotification.id > 0)) && (
                             <div className={`${styles.py3} ${styles.px3} ${styles.bgPink} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                                 {showNotification.notification_type === 'request_confirm' && (
                                     <Fragment>
