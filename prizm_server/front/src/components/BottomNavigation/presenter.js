@@ -8,7 +8,8 @@ class Navigation extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         pageType: PropTypes.string.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
-        goMySchedule: PropTypes.func.isRequired
+        goMySchedule: PropTypes.func.isRequired,
+        goProfileMenu: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -34,8 +35,8 @@ class Navigation extends Component{
                             <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`}>{this.context.t("Messages")}</p>
                         </div>
                         <div className={`${styles.textCenter}`}>
-                            <img src={require('../../assets/images/icon_profile.png')} alt={this.context.t("PROFILE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} />
-                            <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`}>{this.context.t("Profile")}</p>
+                            <img src={require('../../assets/images/icon_profile.png')} alt={this.context.t("PROFILE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu} />
+                            <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu}>{this.context.t("Profile")}</p>
                         </div>
                     </div>
                 </div>

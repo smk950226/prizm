@@ -569,7 +569,7 @@ const SignUp = (props, context) => (
             ))}
         </div>
         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
-            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("submit the request")}</p>
+            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{props.goRequest ? context.t("sign up & submit the request") : context.t("sign up")}</p>
         </div>
     </div>
 )
@@ -591,7 +591,8 @@ SignUp.propTypes = {
     handleCountryCodeChange: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
-    goSignIn: PropTypes.func.isRequired
+    goSignIn: PropTypes.func.isRequired,
+    goRequest: PropTypes.bool.isRequired
 }
 
 SignUp.contextTypes = {

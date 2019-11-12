@@ -7,7 +7,8 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
-        goMySchedule: PropTypes.func.isRequired
+        goMySchedule: PropTypes.func.isRequired,
+        goProfileMenu: PropTypes.func.isRequired
     }
 
     constructor(props){

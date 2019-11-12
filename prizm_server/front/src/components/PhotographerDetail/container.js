@@ -354,7 +354,7 @@ class Container extends Component{
                     })
                 }
                 else{
-                    goSignUp(photographer.id)
+                    goSignUp(photographer.studio_id)
                 }
             }
             else{
@@ -384,7 +384,7 @@ class Container extends Component{
                     })
                 }
                 else{
-                    goSignUp(photographer.id)
+                    goSignUp(photographer.studio_id)
                 }
             }
             else{
