@@ -17,8 +17,11 @@ const MySchedule = (props, context) => (
                                 {order.status === 'confirmed' && (
                                     <p className={`${styles.fontBold} ${styles.font13} ${styles.confirmed}`} style={{width: 65}}>{context.t("Confirmed")}</p>
                                 )}
-                                {order.status === 'rejected' && (
-                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.pink}`} style={{width: 65}}>{context.t("Rejected")}</p>
+                                {order.status === 'cancelled' && (
+                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.pink}`} style={{width: 65}}>{context.t("Cancelled")}</p>
+                                )}
+                                {order.status === 'done' && (
+                                    <p className={`${styles.fontBold} ${styles.font13}`} style={{width: 65}}>{context.t("Done")}</p>
                                 )}
                                 <div className={`${styles.ml3}`}>
                                     {order.date_option === 'Specific' && (

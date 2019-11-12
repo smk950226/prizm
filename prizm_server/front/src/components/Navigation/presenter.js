@@ -26,8 +26,18 @@ class Navigation extends Component{
 
     render(){
         const { showMenu, openMenu, handleShowMenu, profile, isLoggedIn, notification } = this.props;
+        let totalNotification = 0
         let showNotification = {}
         if(notification && notification.length > 0){
+            notification.map(noti => {
+                if(!noti.is_checked){
+                    totalNotification += 1
+                    return null
+                }
+                else{
+                    return null
+                }
+            })
             showNotification = notification.find(noti => noti.is_checked === false)
         }
         return(
@@ -94,10 +104,10 @@ class Navigation extends Component{
                             <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`} onClick={this.props.logout}>{this.context.t("Log Out")}</p>
                         </div>
                         {isLoggedIn && notification && showNotification && (
-                            <div className={`${styles.absoluteVerticalCenter}`} >
+                            <div className={`${styles.absoluteVerticalCenter} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                                 {showNotification.notification_type === 'request_confirm' && (
                                     <Fragment>
-                                        <p className={`${styles.font12}`}>{`${showNotification.order.date_option === 'Specific' ? showNotification.order.specific_date.slice(2,4).concat(showNotification.order.specific_date.slice(5,7),showNotification.order.specific_date.slice(8,10)) : showNotification.order.start_date.slice(2,4).concat(showNotification.order.start_date.slice(5,7),showNotification.order.start_date.slice(8,10))} is confirmed`}</p>
+                                        <p className={`${styles.font12}`}>{`You have ${totalNotification} confirmed ${totalNotification > 1 ? `reservations!` : `reservation!`}`}</p>
                                         <p className={`${styles.fontBold} ${styles.font11} ${styles.pink} ${styles.mt2} ${styles.cursorPointer}`}>{this.context.t("Add Payment Details")}</p>
                                     </Fragment>
                                 )}

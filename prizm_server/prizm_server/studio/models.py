@@ -113,7 +113,8 @@ class Order(models.Model):
     status = models.CharField(_("Order Status"), max_length = 100, choices = (
         ('pending', 'Pending'),
         ('confirmed', 'Confirmed'),
-        ('rejected', 'Rejected')
+        ('cancelled', 'Cancelled'),
+        ('done', 'Done')
     ), default = 'pending')
     is_ended = models.BooleanField(_("Schedule Ended"), default = False)
 
