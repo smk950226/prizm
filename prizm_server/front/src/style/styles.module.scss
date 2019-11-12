@@ -106,6 +106,9 @@ html{
 .italic{
     font-style: italic;
 }
+.text-decoration-none{
+    text-decoration: none;
+}
 
 @for $i from 1 through 100 {
     .height-#{$i} { height: #{$i}vh; }
@@ -414,9 +417,17 @@ html{
 .check-box-text{
     width: calc(100% - 16px);
 }
+
+
+input{
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
 textarea {
     resize: none;
     outline: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
     &::placeholder{
         color: $gray-d5;
     }
@@ -657,4 +668,11 @@ textarea {
     &:focus{
         outline: none !important;
     }
+}
+
+.collapse{
+    -webkit-transition: height .4s;
+    -moz-transition: height .4s;
+    -o-transition: height .4s;
+    transition: height .4s;
 }

@@ -10,10 +10,9 @@ import Rating from 'react-rating';
 import MdStar from 'react-ionicons/lib/MdStar';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { GOOGLE_API_KEY } from '../../config/secrets';
-import { SlideDown } from 'react-slidedown';
-import 'react-slidedown/lib/slidedown.css';
 import Calendar from 'react-calendar';
 import Modal from 'react-responsive-modal';
+import { Collapse } from 'react-collapse';
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -215,10 +214,10 @@ class PhotographerDetail extends Component{
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={show1 ? selectedLocation.id ? this.props.close1 : null : this.props.open1}>
-                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Select Location")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Select Location")}<span className={`${styles.pink}`}>{`  (${photographer.location_set.length})`}</span></p>
                                         <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} />
                                     </div>
-                                    <SlideDown closed={!show1} className={'my-dropdown-slidedown'}>
+                                    <Collapse isOpened={show1} theme={{collapse: styles.collapse}}>
                                         {photographer.location_set && photographer.location_set.length > 0 ? (
                                             <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
                                                 {photographer.location_set.map((location, index) => (
@@ -241,7 +240,7 @@ class PhotographerDetail extends Component{
                                                 />
                                             </div>
                                         ) : null}
-                                    </SlideDown>
+                                    </Collapse>
                                 </div>
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
@@ -249,7 +248,7 @@ class PhotographerDetail extends Component{
                                         <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Date&Time")}</p>
                                         <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`}/>
                                     </div>
-                                    <SlideDown closed={!show2}>
+                                    <Collapse isOpened={show2} theme={{collapse: styles.collapse}}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 1 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(1)}>
                                         <div className={`${styles.checkBox} ${dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                             {dateOption === 1 && (
@@ -290,7 +289,7 @@ class PhotographerDetail extends Component{
                                             </div>
                                         </div>
                                     )}
-                                    </SlideDown>
+                                    </Collapse>
                                 </div>
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
@@ -298,7 +297,7 @@ class PhotographerDetail extends Component{
                                         <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. Service&Pricing")}</p>
                                         <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`}/>
                                     </div>
-                                    <SlideDown closed={!show3}>
+                                    <Collapse isOpened={show3} theme={{collapse: styles.collapse}}>
                                     <div className={`${styles.my3}`}>
                                         {photographer.option_set && photographer.option_set.length > 0 ? (
                                             photographer.option_set.map((option, index) => (
@@ -316,7 +315,7 @@ class PhotographerDetail extends Component{
                                             <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 옵션이 없습니다.")}</p>
                                         )}
                                     </div>
-                                    </SlideDown>
+                                    </Collapse>
                                 </div>
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
@@ -324,14 +323,14 @@ class PhotographerDetail extends Component{
                                         <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments")}</p>
                                         <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show4 ? styles.rotate : null}`} />
                                     </div>
-                                    <SlideDown closed={!show4}>
+                                    <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
                                     <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("comment")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goConfirm}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{isLoggedIn ? this.context.t("submit the request") : this.context.t("sign up & submit the request")}</p>
                                     </div>
-                                    </SlideDown>
+                                    </Collapse>
                                 </div>
-                                <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={this.props.goHome}>
                                     <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("Find other photogrpahes in New York")}</p>
                                     <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Find More")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} />
                                 </div>
