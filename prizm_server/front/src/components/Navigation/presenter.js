@@ -17,7 +17,8 @@ class Navigation extends Component{
         notification: PropTypes.array,
         goSignIn: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
-        goMySchedule: PropTypes.func.isRequired
+        goMySchedule: PropTypes.func.isRequired,
+        goProfile: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -62,6 +63,7 @@ class Navigation extends Component{
             width={258}
             onStateChange={handleShowMenu}
             disableAutoFocus={true}
+            className={`${styles.bgWhite}`}
             >
                 <div>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignContentBetween} ${styles.bgWhite} ${styles.minHeightFull} ${styles.px3} ${styles.outlineNone} ${styles.py5}`} style={{zIndex: 3, position: 'relative'}}>
@@ -73,8 +75,8 @@ class Navigation extends Component{
                             {isLoggedIn ? (
                                 <Fragment>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt5}`}>
-                                        <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`}>{this.context.t("Profile")}</p>
-                                        <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Profile")} className={`${styles.iconArrow} ${styles.cursorPointer}`} />
+                                        <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goProfile}>{this.context.t("Profile")}</p>
+                                        <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Profile")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goProfile} />
                                     </div>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt2}`}>
                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>{this.context.t("My schedule")}</p>

@@ -29,6 +29,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goMySchedule: () => {
             dispatch(push('/my/schedule/'))
+        },
+        goProfile: () => {
+            dispatch(push('/profile/'))
         }
     }
 }

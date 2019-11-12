@@ -5,22 +5,18 @@ import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
 import { COUNTRY_NUMBER, COUNTRY_CODE } from '../../utils/country';
 
-const SignUp = (props, context) => (
+const Profile = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
-        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
-            <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer}`}>{context.t("Sign Up")}</p>
-            <p className={`${styles.fontBold} ${styles.font17} ${styles.mx2}`}>|</p>
-            <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer} ${styles.opacity4}`} onClick={() => props.goSignIn(props.goRequest, props.photographerId)}>{context.t("Sign In")}</p>
-        </div>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{context.t("Full name")}</p>
+        <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{context.t("Profile")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("Full name")}</p>
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} />
         </div>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Email")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Email")}</p>
         <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"email"} value={props.email} onChange={props.handleInputChange} />
+            <input className={`${styles.textInput2}`} type={"text"} name={"email"} value={props.email} contentEditable={false} readOnly={true} />
         </div>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Mobile")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Mobile")}</p>
         <div className={`${styles.positionRelative}`}>
             <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                 <div className={`${styles.countryNumberInput} ${styles.cursorPointer}`} onClick={props.handleShowCountryNumber}>
@@ -46,18 +42,11 @@ const SignUp = (props, context) => (
                 ))}
             </div>
         </div>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Password")}</p>
-        <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} />
-        </div>
-        <p className={`${styles.my3} ${styles.font10}`}>
-            {context.t("Your reservation details and confirmation message from photographers will be sent to your email and mobile number.")}
-        </p>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Date of Birth(YY/MM/DD)")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Date of Birth(YY/MM/DD)")}</p>
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"text"} name={"birth"} value={props.birth} onChange={props.handleInputChange} maxLength={6} />
         </div>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Country/Region")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Country/Region")}</p>
         <div className={`${styles.widthFull}`}>
             <div className={`${styles.textInput2} ${styles.cursorPointer}`} onClick={props.handleShowCountryCode}>
                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
@@ -76,34 +65,35 @@ const SignUp = (props, context) => (
             ))}
         </div>
         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
-            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{props.goRequest ? context.t("sign up & submit the request") : context.t("sign up")}</p>
+            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("edit profile")}</p>
         </div>
     </div>
 )
 
-SignUp.propTypes = {
+Profile.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    countryNumber: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
-    birth: PropTypes.string.isRequired,
-    countryCode: PropTypes.object.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
     handleCountryNumberChange: PropTypes.func.isRequired,
-    showCountryNumber: PropTypes.bool.isRequired,
     handleShowCountryNumber: PropTypes.func.isRequired,
-    showCountryCode: PropTypes.bool.isRequired,
     handleShowCountryCode: PropTypes.func.isRequired,
     handleCountryCodeChange: PropTypes.func.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    submit: PropTypes.func.isRequired,
-    goSignIn: PropTypes.func.isRequired,
-    goRequest: PropTypes.bool.isRequired
+    name: PropTypes.string.isRequired,
+    countryNumber: PropTypes.string.isRequired,
+    countryCode: PropTypes.object.isRequired,
+    mobile: PropTypes.string.isRequired,
+    birth: PropTypes.string.isRequired,
+    emailForm: PropTypes.bool.isRequired,
+    passwordForm: PropTypes.bool.isRequired,
+    birthForm: PropTypes.bool.isRequired,
+    showCountryNumber: PropTypes.bool.isRequired,
+    showCountryCode: PropTypes.bool.isRequired,
+    submit: PropTypes.func.isRequired
 }
 
-SignUp.contextTypes = {
+Profile.contextTypes = {
     t: PropTypes.func
 }
 
-export default SignUp;
+export default Profile;

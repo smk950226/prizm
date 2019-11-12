@@ -25,7 +25,6 @@ class Container extends Component{
             email: "",
             password: "",
             emailForm: false,
-            savePassword: true,
             isSubmitting: false,
             goRequest: props.location.state ? props.location.state.goRequest ? props.location.state.goRequest : false : false,
             photographerId: props.location.state ? props.location.state.photographerId ? props.location.state.photographerId : null : null
@@ -105,12 +104,6 @@ class Container extends Component{
         }
     }
 
-    _handleSavePasswordChange = () => {
-        this.setState({
-            savePassword: !this.state.savePassword
-        })
-    }
-
     render(){
         return(
             <SignIn 
@@ -118,7 +111,6 @@ class Container extends Component{
             {...this.state} 
             handleInputChange={this._handleInputChange}
             submit={this._submit}
-            handleSavePasswordChange={this._handleSavePasswordChange}
             />
         )
     }

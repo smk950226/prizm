@@ -39,3 +39,24 @@ class Profile(APIView):
         serializer = serializers.ProfileSerializer(user, context = {'request': request})
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
+
+
+    def put(self, request, format = None):
+        user = request.user
+        name = request.data.get('name', None)
+        country_number = request.data.get('countryNumber', None)
+        mobile = request.data.get('mobile', None)
+        birth = request.data.get('birth', None)
+        country_code = request.data.get('countryCode', None)
+
+        if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+        else:
+            user.name = name
+            user.country_number = country_number
+            user.mobile = mobile
+            user.birth = birth
+            user.country_code = country_code
+            user.save()
+
+            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})

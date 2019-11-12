@@ -31,8 +31,6 @@ SignIn.propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
     goSignUp: PropTypes.func.isRequired,
-    savePassword: PropTypes.bool.isRequired,
-    handleSavePasswordChange :PropTypes.func.isRequired,
     goRequest: PropTypes.bool.isRequired
 }
 

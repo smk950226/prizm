@@ -156,6 +156,36 @@ function getProfile(){
     }
 }
 
+function editProfile(name, countryNumber, mobile, birth, countryCode){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/users/profile/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                name,
+                countryNumber,
+                mobile,
+                birth,
+                countryCode
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 function getProfileByToken(token){
     return (dispatch) => {
         fetch(`${FETCH_URL}/api/users/profile/`, {
@@ -358,7 +388,8 @@ const actionCreators = {
     getNotificationByToken,
     getOrderList,
     getOrderListByToken,
-    getOrderDetail
+    getOrderDetail,
+    editProfile
 }
 
 export { actionCreators }

@@ -11,7 +11,8 @@ class Container extends Component{
         notification: PropTypes.array,
         goSignIn: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
-        goMySchedule: PropTypes.func.isRequired
+        goMySchedule: PropTypes.func.isRequired,
+        goProfile: PropTypes.func.isRequired
     }
 
     constructor(props){
