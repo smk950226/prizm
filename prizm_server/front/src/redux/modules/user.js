@@ -152,6 +152,20 @@ function login(username, password){
     }
 }
 
+function checkPhotographer(token){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/check/photographer/`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
 function checkDuplicate(email, mobile, countryNumber){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/api/users/check/duplicate/`, {
@@ -453,7 +467,8 @@ const actionCreators = {
     getOrderDetail,
     editProfile,
     editPassword,
-    signUpAdmin
+    signUpAdmin,
+    checkPhotographer
 }
 
 export { actionCreators }

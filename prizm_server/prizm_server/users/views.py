@@ -79,3 +79,13 @@ class ProfilePassword(APIView):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('현재 비밀번호가 일치하지 않습니다.')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
+
+
+class CheckPhotographer(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format = None):
+        user = request.user
+        if user.user_type == 'photographer':
+            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('사진 작가 계정이 아닙니다.')})

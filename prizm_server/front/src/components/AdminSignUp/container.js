@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SignUp from './presenter';
+import AdminSignUp from './presenter';
 
 class Container extends Component{
     static propTypes = {
@@ -195,7 +195,7 @@ class Container extends Component{
 
     render(){
         return(
-            <SignUp 
+            <AdminSignUp 
             {...this.props} 
             {...this.state} 
             handleInputChange={this._handleInputChange}
