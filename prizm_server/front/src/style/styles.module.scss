@@ -123,8 +123,34 @@ html{
     .font-#{$i} { font-size: #{$i}px; }
 }
 
+
+.font-13-14-16{
+    font-size: 13px
+}
+.font-20-22{
+    font-size: 20px
+}
+
+@media (min-width: 1024px){
+    .font-13-14-16{
+        font-size: 14px
+    }
+}
+
+@media (min-width: 1440px){
+    .font-20-22{
+        font-size: 22px;
+    }
+    .font-13-14-16{
+        font-size: 16px
+    }
+}
+
 .height-full{
     height: 100vh;
+}
+.height-full-safearea{
+    height: calc(100vh - 72px);
 }
 .height-full-percent{
     height: 100%;
@@ -135,6 +161,16 @@ html{
 .width-full{
     width: 100%;
 }
+
+.width-half-btn{
+    width: calc(50% - 8px)
+}
+@media (min-width: 768px){
+    .width-half-btn{
+        width: 140px
+    }
+}
+
 
 .cursor-pointer{
     cursor: pointer !important;
@@ -255,6 +291,37 @@ html{
 }
 .mb-45{
     margin-bottom: 2.25rem;
+}
+.mt-r-45{
+    margin-top: 1.5rem;
+}
+
+@media (min-width: 768px){
+    .mt-r-45{
+        margin-top: 3rem;
+    }
+    
+}
+
+.px-admin{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media(min-width: 768px){
+    .px-admin{
+        padding-left: 42px;
+        padding-right: 42px;
+    }
+}
+@media(min-width: 1440px){
+    .px-admin{
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+    .mr-admin-main-image{
+        margin-right: 70px !important;
+    }
 }
 
 .font-60-120{
@@ -524,6 +591,9 @@ textarea {
 .container-modal+button{
     display: none !important;
 }
+.container-half-btn{
+    width: '100%';
+}
 
 @media (min-width: 768px){
     .container-portfolio-lg{
@@ -539,6 +609,9 @@ textarea {
     }
     .container-map{
         height: 400px;
+    }
+    .container-half-btn{
+        width: 300px;
     }
 }
 
@@ -576,6 +649,14 @@ textarea {
 }
 .safearea-btm{
     padding-bottom: 48px;
+}
+.safearea-admin{
+    padding-top: 72px;
+}
+@media (max-width: 767px){
+    .safearea-admin-mobile{
+        padding-top: 72px;
+    }
 }
 
 .pt-45{

@@ -8,17 +8,29 @@ class Container extends Component{
         initApp: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
         notification: PropTypes.array,
-        orderList: PropTypes.array
+        orderList: PropTypes.array,
+        initAdmin: PropTypes.func.isRequired
     }
 
     state = {
         lastScrollTop: 0,
         delta: 30,
-        showBtmNav: true
+        showBtmNav: true,
+        admin: false
     }
 
     componentDidMount(){
         window.addEventListener('scroll', this._handleScroll, false)
+        if((window.location.href.startsWith('http://admin.prizm.cloud/')) || (window.location.href.startsWith('https://admin.prizm.cloud/'))){
+            this.setState({
+                admin: true
+            })
+        }
+        else if((window.location.href.startsWith('http://prizm.cloud/')) || (window.location.href.startsWith('https://prizm.cloud/'))){
+            this.setState({
+                admin: false
+            })
+        }
     }
 
     componentWillUnmount(){

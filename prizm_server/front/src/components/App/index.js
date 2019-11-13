@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(userAction.getProfile())
             dispatch(userAction.getNotification())
             dispatch(userAction.getOrderList())
+        },
+        initAdmin: () => {
+            dispatch(userAction.getProfile())
         }
     }
 }

@@ -13,13 +13,24 @@ import PhotographerDetail from '../PhotographerDetail';
 import ProfileMenu from '../ProfileMenu';
 import Profile from '../Profile';
 import ProfilePassword from '../ProfilePassword';
+
+import AdminHome from '../AdminHome';
+import AdminNavigation from '../AdminNavigation';
+
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 
 const App = (props) => {
-    return(
-        <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} orderList={props.orderList} />
-    )
+    if(!props.admin){
+        return(
+            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} />
+        )
+    }
+    else{
+        return(
+            <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} orderList={props.orderList} />
+        )
+    }
 }
 
 export default App; 
@@ -30,7 +41,9 @@ App.propTypes = {
     profile: PropTypes.object,
     isLoggedIn: PropTypes.bool.isRequired,
     notification: PropTypes.array,
-    orderList: PropTypes.array
+    orderList: PropTypes.array,
+    admin: PropTypes.bool.isRequired,
+    initAdmin: PropTypes.func.isRequired
 }
 
 class GeneralRouteContainer extends Component{
@@ -103,29 +116,84 @@ class GeneralRouteContainer extends Component{
                 </div>
             )
         }
-        return(
-            <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
-                <Navigation />
-                <GeneralRoute />
-                <BottomNavigation showBtmNav={showBtmNav} />
-            </div>
-        )
+        else{
+            return(
+                <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
+                    <Navigation />
+                    <GeneralRoute />
+                    <BottomNavigation showBtmNav={showBtmNav} />
+                </div>
+            )
+        }
     }
 }
 
-class LoggedOutRouteContainer extends Component{
+class AdminRouteContainer extends Component{
     static propTypes = {
-
+        initAdmin :PropTypes.func.isRequired,
+        profile: PropTypes.object,
+        isLoggedIn: PropTypes.bool.isRequired
     }
 
     state = {
-        
+        loading: true,
+        fetchedProfile: false,
+        fetchClear: false
+    }
+
+    componentDidMount = async() => {
+        const { isLoggedIn, initAdmin } = this.props;
+        if(isLoggedIn){
+            await initAdmin()
+        }
+        else{
+            this.setState({
+                loading: false
+            })
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedProfile } = prevState;
+        if((!fetchedProfile)){
+            let update = {}
+            if(nextProps.profile){
+                update.fetchedProfile = true
+            }
+
+            return update
+        }
+        else{
+            return null
+        }
+    }
+
+    componentDidUpdate = () => {
+        if(this.state.fetchedProfile && !this.state.fetchClear){
+            this.setState({
+                loading: false,
+                fetchClear: true,
+            })
+        }
     }
 
     render(){
-        return(
-            <LoggedOutRoute />
-        )
+        const { loading } = this.state;
+        if(loading){
+            return(
+                <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                    <Loader type="Oval" color="#d66c8b" height={20} width={20} />
+                </div>
+            )
+        }
+        else{
+            return(
+                <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
+                    <AdminNavigation />
+                    <AdminRoute />
+                </div>
+            )
+        }
     }
 }
 
@@ -144,9 +212,8 @@ const GeneralRoute = props => (
     </Switch>
 )
 
-const LoggedOutRoute = props => (
+const AdminRoute = props => (
     <Switch>
-        <Route exact path='/' component={Home} key={1} />
-        <Route exact path='/welcome/' component={Welcome} key={2} />
+        <Route exact path='/' component={AdminHome} key={1} />
     </Switch>
 )
