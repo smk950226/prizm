@@ -88,6 +88,41 @@ function signUp(email, password, name, birth, countryNumber, countryCode, mobile
     }
 }
 
+function signUpAdmin(email, password, name, birth, countryNumber, mobile, instagram, userType){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/rest-auth/registration/`, {
+           method: 'POST',
+           headers: {
+               "Content-Type": "application/json"
+           },
+           body: JSON.stringify({
+               username: email,
+               password1: password,
+               password2: password,
+               name,
+               birth,
+               countryNumber,
+               email,
+               mobile,
+               instagram,
+               userType
+           })
+        })
+        .then(response => response.json())
+        .then(json => {
+            if(json.token){
+                return {
+                    token: json.token
+                }
+            }
+            else{
+                return false
+            }
+        })
+        .catch(err => console.log(err));
+    }
+}
+
 function login(username, password){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/rest-auth/login/`, {
@@ -417,7 +452,8 @@ const actionCreators = {
     getOrderListByToken,
     getOrderDetail,
     editProfile,
-    editPassword
+    editPassword,
+    signUpAdmin
 }
 
 export { actionCreators }

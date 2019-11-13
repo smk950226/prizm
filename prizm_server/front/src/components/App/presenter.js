@@ -16,6 +16,7 @@ import ProfilePassword from '../ProfilePassword';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
+import AdminSignUp from '../AdminSignUp';
 
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -215,5 +216,6 @@ const GeneralRoute = props => (
 const AdminRoute = props => (
     <Switch>
         <Route exact path='/' component={AdminHome} key={1} />
+        <Route exact path='/signup/' component={AdminSignUp} key={2} />
     </Switch>
 )

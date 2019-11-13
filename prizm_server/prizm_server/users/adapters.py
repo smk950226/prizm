@@ -17,12 +17,22 @@ class AccountAdapter(DefaultAccountAdapter):
         country_number = request.data.get('countryNumber', '')
         country_code = request.data.get('countryCode', '')
         mobile = request.data.get('mobile', '')
+        user_type = request.data.get('userType')
+        instagram = request.data.get('instagram')
 
-        user.name = name
-        user.birth = birth
-        user.country_number = country_number
-        user.country_code = country_code
-        user.mobile = mobile
+        if user_type == 'photographer':
+            user.name = name
+            user.birth = birth
+            user.country_number = country_number
+            user.mobile = mobile
+            user.instagram = instagram
+            user.user_type = 'photographer'
+        else:
+            user.name = name
+            user.birth = birth
+            user.country_number = country_number
+            user.country_code = country_code
+            user.mobile = mobile
 
         user.save()
         return user

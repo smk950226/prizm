@@ -16,8 +16,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         checkDuplicate: (email, mobile, countryNumber) => {
             return dispatch(userAction.checkDuplicate(email, mobile, countryNumber))
         },
-        signUp: (email, password, name, birth, countryNumber, countryCode, mobile) => {
-            return dispatch(userAction.signUp(email, password, name, birth, countryNumber, countryCode, mobile))
+        signUpAdmin: (email, password, name, birth, countryNumber, mobile, instagram, userType) => {
+            return dispatch(userAction.signUp(email, password, name, birth, countryNumber, mobile, instagram, userType))
         },
         getProfileByToken: (token) => {
             dispatch(userAction.getProfileByToken(token))
@@ -28,29 +28,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
-        goSignIn: (goRequest, photographerId) => {
-            dispatch(push({
-                pathname: `/signin/`,
-                state: { 
-                    goRequest,
-                    photographerId
-                }
-            }))
-        },
-        goDetail: (photographerId) => {
-            dispatch(push({
-                pathname: `/${photographerId}/`,
-                state: { 
-                    isConfirmPage: true,
-                    fromAuth: true
-                }
-            }))
-        },
-        getNotificationByToken: (token) => {
-            dispatch(userAction.getNotificationByToken(token))
-        },
-        getOrderListByToken: (token) => {
-            dispatch(userAction.getOrderListByToken(token))
+        goSignIn: () => {
+            dispatch(push('/signin/'))
         }
     }
 }

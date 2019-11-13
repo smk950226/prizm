@@ -12,8 +12,8 @@ class User(AbstractUser):
     # First Name and Last Name do not cover name patterns
     # around the globe.
     name = CharField(_("Name of User"), blank=True, max_length=255)
-    country_code = models.CharField(_("Country Code"), choices = COUNTRY_CODE, max_length=10)
-    country_number = models.CharField(_("Country NUMBER"), choices = COUNTRY_NUMBER, max_length=10)
+    country_code = models.CharField(_("Country Code"), choices = COUNTRY_CODE, max_length=10, blank = True, null = True)
+    country_number = models.CharField(_("Country NUMBER"), choices = COUNTRY_NUMBER, max_length=10, blank = True, null = True)
     mobile = models.CharField(_("Mobile"), max_length = 100)
     birth = models.CharField(_("Birth"), max_length = 100)
     user_type = models.CharField(_("Type"), choices = (('normal', _("Normal")), ('photographer', _("Photographer"))), max_length = 20, default = 'normal')

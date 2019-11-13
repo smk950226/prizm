@@ -122,12 +122,22 @@ html{
 @for $i from 8 through 60 {
     .font-#{$i} { font-size: #{$i}px; }
 }
-
-
+.font-10-12{
+    font-size: 10px
+}
+.font-11-13{
+    font-size: 11px
+}
 .font-13-14-16{
     font-size: 13px
 }
+.font-14-16{
+    font-size: 14px
+}
 .font-20-22{
+    font-size: 20px
+}
+.font-20-24{
     font-size: 20px
 }
 
@@ -143,6 +153,18 @@ html{
     }
     .font-13-14-16{
         font-size: 16px
+    }
+    .font-20-24{
+        font-size: 24px
+    }
+    .font-14-16{
+        font-size: 16px
+    }
+    .font-11-13{
+        font-size: 13px
+    }
+    .font-10-12{
+        font-size: 12px
     }
 }
 
@@ -454,6 +476,90 @@ html{
 
     &::placeholder {
         color: $gray-8e;
+    }
+}
+.text-input-6{
+    background-color: 'transparent';
+    font-size: 11px;
+    border: none;
+    border-bottom: 1px solid $gray-97;
+    outline: none;
+    width: 100%;
+    justify-content: center;
+    padding: 14px 0 8.5px;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
+.text-input-7{
+    background-color: 'transparent';
+    font-size: 11px;
+    border: none;
+    border-bottom: 1px solid $gray-97;
+    outline: none;
+    width: calc(100% - 81px);
+    justify-content: center;
+    padding: 14px 0 8.5px;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
+.text-input-8{
+    background-color: 'transparent';
+    font-size: 11px;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 16px;
+    justify-content: center;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
+@media (min-width: 1440px){
+    .text-input-6{
+        background-color: 'transparent';
+        font-size: 13px;
+        border: none;
+        border-bottom: 1px solid $gray-97;
+        outline: none;
+        width: 100%;
+        justify-content: center;
+        padding: 14px 0 8.5px;
+    
+        &::placeholder {
+            color: $gray-8e;
+        }
+    }
+    .text-input-7{
+        background-color: 'transparent';
+        font-size: 13px;
+        border: none;
+        border-bottom: 1px solid $gray-97;
+        outline: none;
+        width: calc(100% - 81px);
+        justify-content: center;
+        padding: 14px 0 8.5px;
+    
+        &::placeholder {
+            color: $gray-8e;
+        }
+    }
+    .text-input-8{
+        background-color: 'transparent';
+        font-size: 13px;
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 16px;
+        justify-content: center;
+    
+        &::placeholder {
+            color: $gray-8e;
+        }
     }
 }
 .country-number-input{
