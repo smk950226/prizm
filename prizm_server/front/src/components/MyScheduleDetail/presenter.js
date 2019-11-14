@@ -54,7 +54,7 @@ const MyScheduleDetail = (props, context) => (
         )}
         {props.order.date_option === 'Range' && (
             <Fragment>
-                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.start_date.slice(2,4).concat('/', props.order.start_date.slice(5,7), '/', props.order.start_date.slice(8,10), ' ', props.order.start_date.slice(11,13), ':', props.order.start_date.slice(14,16), ' ~ ',props.order.end_date.slice(2,4).concat('/', props.order.end_date.slice(5,7), '/', props.order.end_date.slice(8,10), ' ', props.order.end_date.slice(11,13), ':', props.order.end_date.slice(14,16)))}</p>
+                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.start_date.slice(2,4).concat('/', props.order.start_date.slice(5,7), '/', props.order.start_date.slice(8,10), ' ~ ',props.order.end_date.slice(2,4).concat('/', props.order.end_date.slice(5,7), '/', props.order.end_date.slice(8,10)))}</p>
                 <p className={`${styles.font11} ${styles.mt1}`}>{context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as above")}</p>
             </Fragment>
         )}

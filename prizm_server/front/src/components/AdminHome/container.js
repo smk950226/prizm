@@ -5,7 +5,9 @@ import AdminHome from './presenter';
 class Container extends Component{
     static propTypes = {
         goSignIn: PropTypes.func.isRequired,
-        goSignUp: PropTypes.func.isRequired
+        goSignUp: PropTypes.func.isRequired,
+        goReservation: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired
     }
     
     render(){

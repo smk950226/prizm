@@ -28,6 +28,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
+        goReservation: () => {
+            dispatch(push('/reservation/'))
+        },
         goSignIn: () => {
             dispatch(push('/signin/'))
         }

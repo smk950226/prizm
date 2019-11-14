@@ -18,6 +18,7 @@ import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
 import AdminSignUp from '../AdminSignUp';
 import AdminSignIn from '../AdminSignIn';
+import AdminOrderList from '../AdminOrderList';
 
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -219,5 +220,6 @@ const AdminRoute = props => (
         <Route exact path='/' component={AdminHome} key={1} />
         <Route exact path='/signup/' component={AdminSignUp} key={2} />
         <Route exact path='/signin/' component={AdminSignIn} key={3} />
+        <Route exact path='/reservation/' component={AdminOrderList} key={4} />
     </Switch>
 )

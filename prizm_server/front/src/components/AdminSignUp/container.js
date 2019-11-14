@@ -10,6 +10,7 @@ class Container extends Component{
         getProfileByToken: PropTypes.func.isRequired,
         getSaveToken: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
+        goReservation: PropTypes.func.isRequired,
         goSignIn: PropTypes.func.isRequired,
     }
 
@@ -122,7 +123,7 @@ class Container extends Component{
 
     _submit = async() => {
         const { isSubmitting, name, email, countryNumber, mobile, password, birth, instagram, emailForm, passwordForm, birthForm } = this.state;
-        const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, goHome } = this.props;
+        const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, goReservation } = this.props;
         if(!isSubmitting){
             if(name && email && countryNumber && mobile && password && birth && instagram){
                 if(emailForm){
@@ -140,7 +141,7 @@ class Container extends Component{
                                         isSubmitting: false
                                     })
                                     getSaveToken(result.token)
-                                    goHome()
+                                    goReservation()
                                 }
                                 else{
                                     this.setState({

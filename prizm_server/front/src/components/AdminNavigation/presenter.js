@@ -23,9 +23,9 @@ class AdminNavigation extends Component{
         const { showMenu, openMenu, handleShowMenu, profile, isLoggedIn } = this.props;
         return(
             <Fragment>
-            <div className={`${styles.positionNav} ${styles.widthFull} ${styles.py4} ${styles.bgWhite} ${styles.pxAdmin}`} style={{zIndex: 2}}>
+            <div className={`${styles.positionNav} ${styles.containerAdmin} ${styles.pxAdmin2}`} style={{zIndex: 2}}>
                 <div className={`${styles.mobileOnly}`}>
-                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.py4} ${styles.bgWhite}`}>
                         <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <img src={require('../../assets/images/icon_menu.png')} alt={this.context.t("MENU")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={openMenu} />
                         </div>
@@ -36,8 +36,10 @@ class AdminNavigation extends Component{
                 </div>
                 <div className={`${styles.mobileNone}`}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                        <div className={``}>
-                            <p className={`${styles.textCenter} ${styles.fontBold} ${styles.font171315} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
+                        <div className={`${styles.containerAdminToolboxSide} ${styles.py4}`}>
+                            <div className={``}>
+                                <p className={`${styles.fontBold} ${styles.font171315} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +49,7 @@ class AdminNavigation extends Component{
                 isOpen={showMenu} 
                 customBurgerIcon={false} 
                 customCrossIcon={false} 
-                width={258}
+                width={'100%'}
                 onStateChange={handleShowMenu}
                 disableAutoFocus={true}
                 className={`${styles.bgWhite}`}

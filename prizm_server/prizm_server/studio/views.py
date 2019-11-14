@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from . import serializers, models
 from prizm_server.common.pagination import MainPageNumberPagination
+from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.notification import models as notification_models
 from django.utils.translation import ugettext_lazy as _
 
@@ -119,3 +120,15 @@ class OrderDetail(APIView):
             return Response(status = status.HTTP_200_OK, data = serializer.data)
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+
+
+class AdminOrder(APIView):
+    permission_classes = [AdminAuthenticated]
+    def get(self, request, format = None):
+        user = request.user
+        photographer = user.photographer
+
+        orders = models.Order.objects.filter(photographer = photographer).order_by('-id')
+        serializer = serializers.OrderSerializer(orders, many = True)
+
+        return Response(status = status.HTTP_200_OK, data = serializer.data)
