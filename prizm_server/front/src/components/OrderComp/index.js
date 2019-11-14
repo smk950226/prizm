@@ -12,7 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
-        
+        responseToOrder: (orderId, option, availableTime) => {
+            return dispatch(adminAction.responseToOrder(orderId, option, availableTime))
+        }
     }
 }
 

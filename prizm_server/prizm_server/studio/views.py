@@ -10,7 +10,7 @@ from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.notification import models as notification_models
 from django.utils.translation import ugettext_lazy as _
 
-import datetime, pytz
+import datetime, pytz, json
 from dateutil.relativedelta import relativedelta
 
 User = get_user_model()
@@ -132,3 +132,40 @@ class AdminOrder(APIView):
         serializer = serializers.OrderSerializer(orders, many = True)
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
+    
+    def post(self, request, format = None):
+        order_id = request.data.get('orderId', None)
+        option = request.data.get('option', None)
+        if order_id and option:
+            order = models.Order.objects.get(id = order_id)
+            if option == 1:
+                order.status = 'confirmed'
+                order.save()
+                notification = notification_models.Notification.objects.create(
+                    user = order.user,
+                    notification_type = 'request_confirm',
+                    order = order
+                )
+                notification.save()
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            elif option == 2:
+                #create chat
+                available_time = request.data.get('availableTime', None)
+                if available_time:
+                    order.available_time = json.dumps(available_time)
+                    order.save()
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                else:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+            else:
+                order.status = 'cancelled'
+                order.save()
+                notification = notification_models.Notification.objects.create(
+                    user = order.user,
+                    notification_type = 'request_cancel',
+                    order = order
+                )
+                notification.save()
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})

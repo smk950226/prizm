@@ -67,12 +67,49 @@ class Container extends Component{
         })
     }
 
+    _refresh = async() => {
+        const { getAdminOrderList, isLoggedIn, profile, goHome } = this.props;
+        if(isLoggedIn){
+            if(profile && (profile.user_type === 'photographer')){
+                const orderList = await getAdminOrderList()
+                let pendingList = []
+                let confirmedList = []
+                let pastList = []
+                orderList.map(order => {
+                    if(order.status === 'pending'){
+                        pendingList.push(order)
+                    }
+                    else if(order.status === 'confirmed'){
+                        confirmedList.push(order)
+                    }
+                    else{
+                        pastList.push(order)
+                    }
+                })
+                this.setState({
+                    orderList,
+                    pendingList,
+                    confirmedList,
+                    pastList,
+                    loading: false
+                })
+            }
+            else{
+                goHome()
+            }
+        }
+        else{
+            goHome()
+        }
+    }
+
     render(){
         return(
             <AdminOrderList 
             {...this.props}
             {...this.state}
             handlePageChange={this._handlePageChange}
+            refresh={this._refresh}
             />
         )
     }

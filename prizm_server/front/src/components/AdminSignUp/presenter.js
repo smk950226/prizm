@@ -9,7 +9,7 @@ const AdminSignUp = (props, context) => (
     <div className={`${styles.safeareaAdminMobile} ${styles.containerAdmin} ${styles.pxAdmin}`}>
         <div className={`${styles.mobileOnly}`}>
             <p className={`${styles.fontBold} ${styles.font2024} ${styles.mt3}`}>{context.t("Welcome to PRIZM")}</p>
-            <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information beslow to continue")}</p>
+            <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information below to continue")}</p>
             <p className={`${styles.fontBold} ${styles.font1012}`} style={{marginTop: 50}}>{context.t("Name")}</p>
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} />

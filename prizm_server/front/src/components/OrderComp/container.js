@@ -6,7 +6,13 @@ class Container extends Component{
     static propTypes = {
         order: PropTypes.object.isRequired,
         index: PropTypes.number.isRequired,
-        total: PropTypes.number.isRequired
+        total: PropTypes.number.isRequired,
+        responseToOrder: PropTypes.func.isRequired,
+        refresh: PropTypes.func.isRequired
+    }
+
+    static contextTypes = {
+        t: PropTypes.func.isRequired
     }
 
     state = {
@@ -129,6 +135,79 @@ class Container extends Component{
         })
     }
 
+    _submit = async() => {
+        const { checkedOption, selectedTime, isSubmitting } = this.state;
+        const { order, responseToOrder, refresh } = this.props;
+        if(!isSubmitting){
+            if(checkedOption > 0){
+                this.setState({
+                    isSubmitting: true
+                })
+                if(checkedOption === 2){
+                    if(selectedTime.length > 0){
+                        const result = await responseToOrder(order.id, checkedOption, selectedTime)
+                        if(result.status === 'ok'){
+                            await refresh()
+                            this.setState({
+                                showResponse: false,
+                                checkedOption: 0,
+                                showDatePicker: false,
+                                selectedTime: [],
+                                isSubmitting: false
+                            })
+                        }
+                        else if(result.error){
+                            this.setState({
+                                isSubmitting: false
+                            })
+                            alert(result.error)
+                        }
+                        else{
+                            this.setState({
+                                isSubmitting: false
+                            })
+                            alert(this.context.t("오류가 발생하였습니다."))
+                        }
+                    }
+                    else{
+                        this.setState({
+                            isSubmitting: false
+                        })
+                        alert(this.context.t("가능한 날짜를 선택해주세요."))
+                    }
+                }
+                else{
+                    const result = await responseToOrder(order.id, checkedOption)
+                    if(result.status === 'ok'){
+                        await refresh()
+                        this.setState({
+                            showResponse: false,
+                            checkedOption: 0,
+                            showDatePicker: false,
+                            selectedTime: [],
+                            isSubmitting: false
+                        })
+                    }
+                    else if(result.error){
+                        this.setState({
+                            isSubmitting: false
+                        })
+                        alert(result.error)
+                    }
+                    else{
+                        this.setState({
+                            isSubmitting: false
+                        })
+                        alert(this.context.t("오류가 발생하였습니다."))
+                    }
+                }
+            }
+            else{
+                alert(this.context.t("응답을 선택해주세요."))
+            }
+        }
+    }
+
     render(){
         const { loading } = this.state;
         if(loading){
@@ -148,6 +227,7 @@ class Container extends Component{
                 closeDatePicker={this._closeDatePicker}
                 selectTime={this._selectTime}
                 removeTime={this._removeTime}
+                submit={this._submit}
                 />
             )
         }

@@ -127,6 +127,11 @@ const OrderComp = (props, context) => (
                         </p>
                     </div>
                 </div>
+                <div className={`${styles.row} ${styles.mx0}`}>
+                    <div className={`${styles.bgConfirmed} ${styles.py2} ${styles.px3} ${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} onClick={props.submit}>
+                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.white}`}>{context.t("Confirm")}</p>
+                    </div>
+                </div>
             </div>
         </Collapse>
         <Collapse isOpened={props.showDatePicker} theme={{collapse: styles.collapse}}>
@@ -157,11 +162,6 @@ const OrderComp = (props, context) => (
                         </div>
                     ))}
                 </DayContainer>
-                <div className={`${styles.row} ${styles.mx0}`}>
-                    <div className={`${styles.bgConfirmed} ${styles.py2} ${styles.px3} ${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} onClick={props.submit}>
-                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.white}`}>{context.t("Confirm")}</p>
-                    </div>
-                </div>
             </div>
         </Collapse>
     </Fragment>
@@ -184,7 +184,8 @@ OrderComp.propTypes = {
     selectedTime: PropTypes.array.isRequired,
     selectTime: PropTypes.func.isRequired,
     removeTime: PropTypes.func.isRequired,
-    isSubmitting: PropTypes.bool.isRequired
+    isSubmitting: PropTypes.bool.isRequired,
+    submit: PropTypes.func.isRequired
 }
 
 OrderComp.contextTypes = {

@@ -30,28 +30,29 @@ const AdminOrderList = (props, context) => (
                     </div>
                     {(props.page === 'all') && props.orderList && (props.orderList.length > 0)  && (
                         props.orderList.map((order, index) => (
-                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} />
+                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
                         ))
                     )}
                     {(props.page === 'pending') && props.pendingList && (props.pendingList.length > 0)  && (
                         props.pendingList.map((order, index) => (
-                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} />
+                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
                         ))
                     )}
                     {(props.page === 'confirmed') && props.confirmedList && (props.confirmedList.length > 0)  && (
                         props.confirmedList.map((order, index) => (
-                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} />
+                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
                         ))
                     )}
                     {(props.page === 'past') && props.pastList && (props.pastList.length > 0)  && (
                         props.pastList.map((order, index) => (
-                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} />
+                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
                         ))
                     )}
                 </div>
                 <div className={`${styles.containerAdminToolbox} ${styles.mobileNone} ${styles.bgGrayF8} ${styles.minHeightFull}`}>
-                    <div>
-                        hi
+                    <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter} ${styles.widthFull} ${styles.py4}`}>
+                        <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mr3}`}>{context.t("Profile Setting")}</p>
+                        <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.ml3}`}>{context.t("Account Setting")}</p>
                     </div>
                 </div>
             </div>
@@ -66,7 +67,8 @@ AdminOrderList.propTypes = {
     orderList: PropTypes.array,
     pendingList: PropTypes.array,
     confirmedList: PropTypes.array,
-    pastList: PropTypes.array
+    pastList: PropTypes.array,
+    refresh: PropTypes.func.isRequired
 }
 
 AdminOrderList.contextTypes = {

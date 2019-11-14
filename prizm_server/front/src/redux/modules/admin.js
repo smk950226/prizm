@@ -25,6 +25,34 @@ function getAdminOrderList(){
     }
 }
 
+function responseToOrder(orderId, option, availableTime){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/studio/admin/order/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                orderId,
+                option,
+                availableTime
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     
 };
@@ -38,6 +66,7 @@ function reducer(state = initialState, action){
 
 const actionCreators = {
     getAdminOrderList,
+    responseToOrder
 }
 
 export { actionCreators }
