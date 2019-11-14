@@ -6,7 +6,7 @@ import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
 import { COUNTRY_NUMBER } from '../../utils/country';
 
 const AdminSignUp = (props, context) => (
-    <div className={`${styles.safeareaAdminMobile} ${styles.pxAdmin}`}>
+    <div className={`${styles.safeareaAdminMobile} ${styles.containerAdmin} ${styles.pxAdmin}`}>
         <div className={`${styles.mobileOnly}`}>
             <p className={`${styles.fontBold} ${styles.font2024} ${styles.mt3}`}>{context.t("Welcome to PRIZM")}</p>
             <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information beslow to continue")}</p>

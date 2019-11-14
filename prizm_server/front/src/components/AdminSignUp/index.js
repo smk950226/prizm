@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             return dispatch(userAction.checkDuplicate(email, mobile, countryNumber))
         },
         signUpAdmin: (email, password, name, birth, countryNumber, mobile, instagram, userType) => {
-            return dispatch(userAction.signUp(email, password, name, birth, countryNumber, mobile, instagram, userType))
+            return dispatch(userAction.signUpAdmin(email, password, name, birth, countryNumber, mobile, instagram, userType))
         },
         getProfileByToken: (token) => {
             dispatch(userAction.getProfileByToken(token))

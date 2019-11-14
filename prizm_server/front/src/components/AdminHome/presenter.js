@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 
 const AdminHome = (props, context) => (
-    <div className={`${styles.safeareaAdminMobile} ${styles.minHeightFull}`}>
+    <div className={`${styles.safeareaAdminMobile} ${styles.containerAdmin} ${styles.minHeightFull}`}>
         <div className={`${styles.mobileOnly}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.pxAdmin} ${styles.heightFullSafearea}`} style={{position: 'relative'}}>
                 <div>
