@@ -57,4 +57,17 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Order
-        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date', 'status']
+        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date', 'confirmed_date', 'status']
+
+
+class OrderImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.OrderImage
+        fields = ['id', 'image']
+
+class OrderImageDetailSerializer(serializers.ModelSerializer):
+    orderimage_set = OrderImageSerializer(many = True)
+
+    class Meta:
+        model = models.Order
+        fields = ['id', 'orderimage_set']

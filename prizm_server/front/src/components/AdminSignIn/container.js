@@ -31,7 +31,7 @@ class Container extends Component{
     componentDidMount = () => {
         window.scrollTo(0,0)
         if(this.props.isLoggedIn){
-            this.props.goHome()
+            this.props.goReservation()
         }
     }
 

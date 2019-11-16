@@ -24,7 +24,7 @@ import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 
 const App = (props) => {
-    if(props.admin){
+    if(!props.admin){
         return(
             <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} />
         )

@@ -37,3 +37,9 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'photographer', 'status', 'date_option', 'specific_date', 'start_date', 'end_date']
     list_display_links = ['id', 'user', 'photographer']
     list_filter = ['status']
+
+
+@admin.register(models.OrderImage)
+class OrderImageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'order']
+    list_display_links = ['id', 'order']

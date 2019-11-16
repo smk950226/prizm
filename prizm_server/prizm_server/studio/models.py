@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from prizm_server.common.utils import get_image_filename
 
 class Photographer(models.Model):
     user = models.OneToOneField('users.User', on_delete = models.CASCADE)
@@ -118,6 +119,7 @@ class Order(models.Model):
     ), default = 'pending')
     is_ended = models.BooleanField(_("Schedule Ended"), default = False)
     available_time = models.TextField(_("Available Time"), blank = True, null = True)
+    confirmed_date = models.DateTimeField(_("Confirmed Date"), blank = True, null = True)
 
     def __str__(self):
         return self.user.email + ' -> ' + self.photographer.nickname
@@ -126,3 +128,16 @@ class Order(models.Model):
         ordering = ['-id']
         verbose_name = _('Customer Order')
         verbose_name_plural = _('Customer Order')
+
+
+class OrderImage(models.Model):
+    order = models.ForeignKey(Order, on_delete = models.CASCADE)
+    image = models.ImageField(_('Order Image'), upload_to = get_image_filename)
+
+    def __str__(self):
+        return self.order.photographer.nickname + ' -> ' + self.order.user.email
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Order Image')
+        verbose_name_plural = _('Order Image')

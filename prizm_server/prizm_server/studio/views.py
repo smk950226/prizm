@@ -140,6 +140,7 @@ class AdminOrder(APIView):
             order = models.Order.objects.get(id = order_id)
             if option == 1:
                 order.status = 'confirmed'
+                order.confirmed_date = order.specific_date
                 order.save()
                 notification = notification_models.Notification.objects.create(
                     user = order.user,
@@ -167,5 +168,22 @@ class AdminOrder(APIView):
                 )
                 notification.save()
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+
+
+class OrderImage(APIView):
+    permission_classes = [AdminAuthenticated]
+    def get(self, request, format = None):
+        order_id = request.query_params.get('orderId', None)
+
+        if order_id:
+            try:
+                order = models.Order.objects.get(id = order_id)
+                serializer = serializers.OrderImageDetailSerializer(order, context = {'request': request})
+
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'images': serializer.data})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('예약이 존재하지 않습니다.')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})

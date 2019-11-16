@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 import OrderComp from '../OrderComp';
+import AdminCustomerImage from '../AdminCustomerImage';
 
 const AdminOrderList = (props, context) => (
     <div className={`${styles.containerAdmin} ${styles.pxAdmin2}`}>
@@ -49,10 +50,20 @@ const AdminOrderList = (props, context) => (
                         ))
                     )}
                 </div>
-                <div className={`${styles.containerAdminToolbox} ${styles.mobileNone} ${styles.bgGrayF8} ${styles.minHeightFull}`}>
+                <div className={`${styles.containerAdminToolbox} ${styles.mobileNone} ${styles.bgGrayF8} ${styles.minHeightFull}`} style={{display: 'block'}}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter} ${styles.widthFull} ${styles.py4}`}>
                         <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mr3}`}>{context.t("Profile Setting")}</p>
                         <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.ml3}`}>{context.t("Account Setting")}</p>
+                    </div>
+                    <div className={`${styles.px3}`} style={{marginTop: 100}}>
+                        <p className={`${styles.fontBold} ${styles.font1620} ${styles.mb4}`}>{context.t("Tourist Photo")}</p>
+                        {props.orderList.map((order, index) => {
+                            if((order.status === 'confirmed') || (order.status === 'done')){
+                                return(
+                                    <AdminCustomerImage key={index} order={order} />
+                                )
+                            }
+                        })}
                     </div>
                 </div>
             </div>

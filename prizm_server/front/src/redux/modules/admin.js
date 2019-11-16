@@ -53,6 +53,28 @@ function responseToOrder(orderId, option, availableTime){
     }
 }
 
+function getOrderImage(orderId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/studio/order/image/?orderId=${orderId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     
 };
@@ -66,7 +88,8 @@ function reducer(state = initialState, action){
 
 const actionCreators = {
     getAdminOrderList,
-    responseToOrder
+    responseToOrder,
+    getOrderImage
 }
 
 export { actionCreators }

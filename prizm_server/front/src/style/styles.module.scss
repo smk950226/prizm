@@ -151,6 +151,9 @@ html{
 .font-14-16{
     font-size: 14px
 }
+.font-16-20{
+    font-size: 16px
+}
 .font-20-22{
     font-size: 20px
 }
@@ -204,6 +207,9 @@ html{
     }
     .font-13-16{
         font-size: 16px
+    }
+    .font-16-20{
+        font-size: 20px
     }
     
 }
@@ -799,6 +805,13 @@ textarea {
     border: 1px solid $gray-33;
     box-sizing: border-box;
 }
+.container-customer-image{
+    width: 80px;
+    height: 80px;
+}
+.container-customer-image-outside{
+    height: 80px;
+}
 @media (min-width: 768px){
     .container-portfolio-lg{
         height: 300px;
@@ -833,6 +846,13 @@ textarea {
     }
     .container-admin-toolbox-side{
         width: calc(100% - 445px);
+    }
+    .container-customer-image{
+        width: 100px;
+        height: 100px;
+    }
+    .container-customer-image-outside{
+        height: 100px;
     }
 }
 
