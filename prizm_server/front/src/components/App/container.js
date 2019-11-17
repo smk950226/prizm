@@ -9,7 +9,8 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         notification: PropTypes.array,
         orderList: PropTypes.array,
-        initAdmin: PropTypes.func.isRequired
+        initAdmin: PropTypes.func.isRequired,
+        photographer: PropTypes.object
     }
 
     state = {

@@ -7,7 +7,8 @@ class Container extends Component{
         getAdminOrderList: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
         profile: PropTypes.object.isRequired,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        photographer: PropTypes.object.isRequired
     }
 
     state = {

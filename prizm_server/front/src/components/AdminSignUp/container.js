@@ -12,6 +12,7 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         goReservation: PropTypes.func.isRequired,
         goSignIn: PropTypes.func.isRequired,
+        getPhotographerByToken: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -123,7 +124,7 @@ class Container extends Component{
 
     _submit = async() => {
         const { isSubmitting, name, email, countryNumber, mobile, password, birth, instagram, emailForm, passwordForm, birthForm } = this.state;
-        const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, goReservation } = this.props;
+        const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, goReservation, getPhotographerByToken } = this.props;
         if(!isSubmitting){
             if(name && email && countryNumber && mobile && password && birth && instagram){
                 if(emailForm){
@@ -137,10 +138,11 @@ class Container extends Component{
                                 const result = await signUpAdmin(email, password, name, birth, countryNumber, mobile, instagram, 'photographer')
                                 if(result.token){
                                     await getProfileByToken(result.token)
+                                    await getPhotographerByToken(result.token)
                                     this.setState({
                                         isSubmitting: false
                                     })
-                                    getSaveToken(result.token)
+                                    await getSaveToken(result.token)
                                     goReservation()
                                 }
                                 else{

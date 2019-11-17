@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Container from './container';
 import { actionCreators as userAction } from '../../redux/modules/user';
+import { actionCreators as adminAction } from '../../redux/modules/admin';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -33,6 +34,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goSignIn: () => {
             dispatch(push('/signin/'))
+        },
+        getPhotographerByToken: (token) => {
+            dispatch(adminAction.getPhotographerByToken(token))
         }
     }
 }

@@ -142,50 +142,6 @@ class Container extends Component{
                 }
             }
         }
-        // if(file){
-        //     if((file.type !== "video/avi") && (file.type !== "video/mpg") && (file.type !== "video/mpeg") && (file.type !== "video/mpe") && (file.type !== "video/wmv") && (file.type !== "video/flv") && (file.type !== "video/mov") && (file.type !== "video/mp4")){
-        //         alert('AVI, MPG, MPEG, MPE, WMV, FLV, MOV, MP4 파일만 사용하실 수 있습니다.')
-        //     }
-        //     else{
-        //         this.setState({
-        //             introVideo: file
-        //         })
-        //     }
-        // }
-        // const { isSubmittingIntro } = this.state;
-        // const { createCenterIntro, getCenterIntro } = this.props;
-        // if(!isSubmittingIntro){
-        //     this.setState({
-        //         isSubmittingIntro: true
-        //     })
-        //     const result = await createCenterIntro(file);
-        //     if(result.status === 'ok'){
-        //         const centerIntro = await getCenterIntro();
-        //         this.setState({
-        //             introVideo: "",
-        //             centerIntro,
-        //             loading: false,
-        //             isSubmittingIntro: false,
-        //             showCreate: false,
-        //             video: ""
-        //         })
-        //         alert("센터 소개를 추가하였습니다.")
-        //     }
-        //     else if(result.error){
-        //         this.setState({
-        //             isSubmittingIntro: false,
-        //             introVideo: ""
-        //         })
-        //         alert(result.error)
-        //     }
-        //     else{
-        //         this.setState({
-        //             isSubmittingIntro: false,
-        //             introVideo: ""
-        //         })
-        //         alert("오류가 발생하였습니다.")
-        //     }
-        // }
     }
 
     render(){

@@ -26,7 +26,7 @@ import Loader from 'react-loader-spinner';
 const App = (props) => {
     if(!props.admin){
         return(
-            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} />
+            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} photographer={props.photographer} />
         )
     }
     else{
@@ -46,7 +46,8 @@ App.propTypes = {
     notification: PropTypes.array,
     orderList: PropTypes.array,
     admin: PropTypes.bool.isRequired,
-    initAdmin: PropTypes.func.isRequired
+    initAdmin: PropTypes.func.isRequired,
+    photographer: PropTypes.object
 }
 
 class GeneralRouteContainer extends Component{
@@ -135,12 +136,14 @@ class AdminRouteContainer extends Component{
     static propTypes = {
         initAdmin :PropTypes.func.isRequired,
         profile: PropTypes.object,
-        isLoggedIn: PropTypes.bool.isRequired
+        isLoggedIn: PropTypes.bool.isRequired,
+        photographer: PropTypes.object
     }
 
     state = {
         loading: true,
         fetchedProfile: false,
+        fetchedPhotographer: false,
         fetchClear: false
     }
 
@@ -157,11 +160,14 @@ class AdminRouteContainer extends Component{
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
-        const { fetchedProfile } = prevState;
-        if((!fetchedProfile)){
+        const { fetchedProfile, fetchedPhotographer } = prevState;
+        if((!fetchedProfile) || (!fetchedPhotographer)){
             let update = {}
             if(nextProps.profile){
                 update.fetchedProfile = true
+            }
+            if(nextProps.photographer){
+                update.fetchedPhotographer = true
             }
 
             return update
@@ -172,7 +178,7 @@ class AdminRouteContainer extends Component{
     }
 
     componentDidUpdate = () => {
-        if(this.state.fetchedProfile && !this.state.fetchClear){
+        if(this.state.fetchedProfile && this.state.fetchedPhotographer && !this.state.fetchClear){
             this.setState({
                 loading: false,
                 fetchClear: true,

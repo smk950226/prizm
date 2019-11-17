@@ -4,6 +4,26 @@ import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 import OrderComp from '../OrderComp';
 import AdminCustomerImage from '../AdminCustomerImage';
+import styled from 'styled-components';
+
+const ProfileDiv = styled.div`
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
+    background-image: url(${props => props.image});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box;
+    background-position: center center;
+    background-attachment: scroll;
+
+    @media (min-width: 1440px){
+        width: 64px;
+        height: 64px;
+        border-radius: 32px;
+    }
+    
+`
 
 const AdminOrderList = (props, context) => (
     <div className={`${styles.containerAdmin} ${styles.pxAdmin2}`}>
@@ -14,6 +34,15 @@ const AdminOrderList = (props, context) => (
         ) : (
             <div className={`${styles.row} ${styles.mx0} ${styles.widthFull}`}>
                 <div className={`${styles.safearea} ${styles.containerAdminToolboxSide}`}>
+                    <div className={`${styles.mobileNone}`}>
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4}`}>
+                            <ProfileDiv image={props.photographer.profile_image} />
+                            <div className={`${styles.ml3}`}>
+                                <p className={`${styles.fontBold} ${styles.font2024}`}>{props.photographer.nickname}</p>
+                                <a href={`https://prizm.cloud/${props.photographer.studio_id}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${props.photographer.studio_id}`}</a>
+                            </div>
+                        </div>
+                    </div>
                     <p className={`${styles.mt4} ${styles.fontBold} ${styles.font201820}`}>{context.t("Manage Reservations")}</p>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.mb3}`}>
                         <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${props.page === 'all' ? styles.confirmed : styles.black} ${props.page === 'all' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => props.handlePageChange('all')}>
@@ -79,7 +108,8 @@ AdminOrderList.propTypes = {
     pendingList: PropTypes.array,
     confirmedList: PropTypes.array,
     pastList: PropTypes.array,
-    refresh: PropTypes.func.isRequired
+    refresh: PropTypes.func.isRequired,
+    photographer: PropTypes.object.isRequired
 }
 
 AdminOrderList.contextTypes = {

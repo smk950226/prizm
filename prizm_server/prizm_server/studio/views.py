@@ -40,6 +40,14 @@ class PhotographerDetail(APIView):
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
 
 
+class PhotographerDetailByToken(APIView):
+    permission_classes = [AdminAuthenticated]
+    def get(self, request, format = None):
+        photographer = request.user.photographer
+        serializer = serializers.PhotographerSerializer(photographer, context = {'request': request})
+        return Response(status = status.HTTP_200_OK, data = serializer.data)
+
+
 class Order(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, format = None):
