@@ -75,6 +75,34 @@ function getOrderImage(orderId){
     }
 }
 
+function uploadOrderImage(images, orderId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        let formData = new FormData();
+        formData.append('orderId', orderId)
+        for (var i = 0; i < images.length; i++) {
+            formData.append('images[]', images[i], images[i].name);
+        }
+        return fetch(`${FETCH_URL}/api/studio/order/image/upload/`, {
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`
+            },
+            body: formData
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     
 };
@@ -89,7 +117,8 @@ function reducer(state = initialState, action){
 const actionCreators = {
     getAdminOrderList,
     responseToOrder,
-    getOrderImage
+    getOrderImage,
+    uploadOrderImage
 }
 
 export { actionCreators }

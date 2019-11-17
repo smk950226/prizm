@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from . import serializers, models
 from prizm_server.common.pagination import MainPageNumberPagination
@@ -187,3 +188,23 @@ class OrderImage(APIView):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('예약이 존재하지 않습니다.')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+
+
+class OrderImageUpload(APIView):
+    permission_classes = [AdminAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request, format = None):
+        user = request.user
+        images = request.data.getlist('images[]', None)
+        order_id = request.data.get('orderId')
+        try:
+            order = models.Order.objects.get(id = order_id)
+            pre_image = models.OrderImage.objects.filter(order = order)
+            pre_image.delete()
+            for image in images:
+                order_image = models.OrderImage.objects.create(order = order, image = image)
+                order_image.save()
+            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('예약이 존재하지 않습니다.')})
