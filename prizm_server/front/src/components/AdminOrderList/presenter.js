@@ -38,7 +38,7 @@ const AdminOrderList = (props, context) => (
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4}`}>
                             <ProfileDiv image={props.photographer.profile_image} />
                             <div className={`${styles.ml3}`}>
-                                <p className={`${styles.fontBold} ${styles.font2024}`}>{props.photographer.nickname}</p>
+                                <p className={`${styles.fontBold} ${styles.font2024}`}>{props.photographer.nickname}<span className={`${styles.ml3} ${styles.fontBold} ${styles.font1113} ${styles.pink} ${styles.cursorPointer}`} onClick={props.goStudioSetting}>{context.t("Edit Your Studio")}</span></p>
                                 <a href={`https://prizm.cloud/${props.photographer.studio_id}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${props.photographer.studio_id}`}</a>
                             </div>
                         </div>
@@ -109,7 +109,8 @@ AdminOrderList.propTypes = {
     confirmedList: PropTypes.array,
     pastList: PropTypes.array,
     refresh: PropTypes.func.isRequired,
-    photographer: PropTypes.object.isRequired
+    photographer: PropTypes.object.isRequired,
+    goStudioSetting: PropTypes.func.isRequired
 }
 
 AdminOrderList.contextTypes = {

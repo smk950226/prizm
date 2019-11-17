@@ -8,7 +8,10 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
         profile: PropTypes.object,
-        goMenu: PropTypes.func.isRequired
+        goMenu: PropTypes.func.isRequired,
+        openMobile: PropTypes.func.isRequired,
+        showMobile: PropTypes.bool.isRequired,
+        showLocationModal: PropTypes.bool.isRequired
     }
 
     render(){

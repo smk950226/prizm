@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goHome: () => {
             dispatch(push('/'))
+        },
+        goStudioSetting: () => {
+            dispatch(push('/studio/edit/'))
         }
     }
 }

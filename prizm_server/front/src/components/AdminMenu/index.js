@@ -31,6 +31,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goTouristPhoto: () => {
             dispatch(push('/tourist/photo/'))
+        },
+        goStudioSetting: () => {
+            dispatch(push('/studio/edit/'))
         }
     }
 }

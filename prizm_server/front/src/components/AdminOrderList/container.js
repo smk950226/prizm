@@ -8,7 +8,8 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         profile: PropTypes.object.isRequired,
         goHome: PropTypes.func.isRequired,
-        photographer: PropTypes.object.isRequired
+        photographer: PropTypes.object.isRequired,
+        goStudioSetting: PropTypes.func.isRequired
     }
 
     state = {
@@ -18,31 +19,36 @@ class Container extends Component{
     }
 
     componentDidMount = async() => {
-        const { getAdminOrderList, isLoggedIn, profile, goHome } = this.props;
+        const { getAdminOrderList, isLoggedIn, profile, goHome, photographer, goStudioSetting } = this.props;
         if(isLoggedIn){
             if(profile && (profile.user_type === 'photographer')){
-                const orderList = await getAdminOrderList()
-                let pendingList = []
-                let confirmedList = []
-                let pastList = []
-                orderList.map(order => {
-                    if(order.status === 'pending'){
-                        pendingList.push(order)
-                    }
-                    else if(order.status === 'confirmed'){
-                        confirmedList.push(order)
-                    }
-                    else{
-                        pastList.push(order)
-                    }
-                })
-                this.setState({
-                    orderList,
-                    pendingList,
-                    confirmedList,
-                    pastList,
-                    loading: false
-                })
+                if(photographer.id){
+                    const orderList = await getAdminOrderList()
+                    let pendingList = []
+                    let confirmedList = []
+                    let pastList = []
+                    orderList.map(order => {
+                        if(order.status === 'pending'){
+                            pendingList.push(order)
+                        }
+                        else if(order.status === 'confirmed'){
+                            confirmedList.push(order)
+                        }
+                        else{
+                            pastList.push(order)
+                        }
+                    })
+                    this.setState({
+                        orderList,
+                        pendingList,
+                        confirmedList,
+                        pastList,
+                        loading: false
+                    })
+                }
+                else{
+                    goStudioSetting()
+                }
             }
             else{
                 goHome()

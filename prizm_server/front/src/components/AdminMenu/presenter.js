@@ -24,7 +24,7 @@ const ProfileDiv = styled.div`
 
 const AdminMenu = (props, context) => (
     <div className={`${styles.safeareaAdmin} ${styles.containerAdmin} ${styles.minHeightFull} ${styles.pxAdmin}`}>
-        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4}`}>
+        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4} ${props.photographer.id ? null : styles.hidden}`}>
             <ProfileDiv image={props.photographer.profile_image} />
             <div className={`${styles.ml3}`}>
                 <p className={`${styles.fontBold} ${styles.font2024}`}>{props.photographer.nickname}</p>
@@ -32,7 +32,7 @@ const AdminMenu = (props, context) => (
             </div>
         </div>
         <div>
-            <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}}>{context.t("Edit Your Studio")}</p>
+            <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}} onClick={props.goStudioSetting}>{context.t("Edit Your Studio")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt45}`} onClick={props.goReservation}>{context.t("Manage Reservations")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={props.goTouristPhoto}>{context.t("Tourist Photo")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`}>{context.t("Profile Setting")}</p>
@@ -48,7 +48,8 @@ AdminMenu.propTypes = {
     goReservation: PropTypes.func.isRequired,
     goTouristPhoto: PropTypes.func.isRequired,
     photographer: PropTypes.object,
-    logout: PropTypes.func.isRequired
+    logout: PropTypes.func.isRequired,
+    goStudioSetting: PropTypes.func.isRequired
 }
 
 AdminMenu.contextTypes = {

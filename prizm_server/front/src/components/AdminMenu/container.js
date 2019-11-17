@@ -11,7 +11,8 @@ class Container extends Component{
         photographer: PropTypes.object.isRequired,
         goHome: PropTypes.func.isRequired,
         logout: PropTypes.func.isRequired,
-        goTouristPhoto: PropTypes.func.isRequired
+        goTouristPhoto: PropTypes.func.isRequired,
+        goStudioSetting: PropTypes.func.isRequired
     }
 
     componentDidMount = () => {

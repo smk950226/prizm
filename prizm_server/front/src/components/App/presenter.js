@@ -21,12 +21,16 @@ import AdminSignIn from '../AdminSignIn';
 import AdminOrderList from '../AdminOrderList';
 import AdminMenu from '../AdminMenu';
 import AdminTouristPhoto from '../AdminTouristPhoto';
+import AdminStudioSetting from '../AdminStudioSetting';
 
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root')
 
 const App = (props) => {
-    if(!props.admin){
+    if(props.admin){
         return(
             <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} photographer={props.photographer} />
         )
@@ -146,7 +150,9 @@ class AdminRouteContainer extends Component{
         loading: true,
         fetchedProfile: false,
         fetchedPhotographer: false,
-        fetchClear: false
+        fetchClear: false,
+        showMobile: false,
+        showLocationModal: false
     }
 
     componentDidMount = async() => {
@@ -188,8 +194,32 @@ class AdminRouteContainer extends Component{
         }
     }
 
+    _openMobile = () => {
+        this.setState({
+            showMobile: true
+        })
+    }
+
+    _closeMobile = () => {
+        this.setState({
+            showMobile: false
+        })
+    }
+
+    _openLocationModal = () => {
+        this.setState({
+            showLocationModal: true
+        })
+    }
+
+    _closeLocationModal = () => {
+        this.setState({
+            showLocationModal: false
+        })
+    }
+
     render(){
-        const { loading } = this.state;
+        const { loading, showMobile, showLocationModal } = this.state;
         if(loading){
             return(
                 <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
@@ -200,8 +230,8 @@ class AdminRouteContainer extends Component{
         else{
             return(
                 <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
-                    <AdminNavigation />
-                    <AdminRoute />
+                    <AdminNavigation showMobile={showMobile} openMobile={this._openMobile} showLocationModal={showLocationModal} />
+                    <AdminRoute showMobile={showMobile} openMobile={this._openMobile} closeMobile={this._closeMobile} showLocationModal={showLocationModal} openLocationModal={this._openLocationModal} closeLocationModal={this._closeLocationModal} />
                 </div>
             )
         }
@@ -231,5 +261,6 @@ const AdminRoute = props => (
         <Route exact path='/reservation/' component={AdminOrderList} key={4} />
         <Route exact path='/menu/' component={AdminMenu} key={5} />
         <Route exact path='/tourist/photo/' component={AdminTouristPhoto} key={6} />
+        <Route exact path='/studio/edit/' render={() => <AdminStudioSetting {...props} />} key={7} />
     </Switch>
 )

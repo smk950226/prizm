@@ -43,9 +43,12 @@ class PhotographerDetail(APIView):
 class PhotographerDetailByToken(APIView):
     permission_classes = [AdminAuthenticated]
     def get(self, request, format = None):
-        photographer = request.user.photographer
-        serializer = serializers.PhotographerSerializer(photographer, context = {'request': request})
-        return Response(status = status.HTTP_200_OK, data = serializer.data)
+        try:
+            photographer = request.user.photographer
+            serializer = serializers.PhotographerSerializer(photographer, context = {'request': request})
+            return Response(status = status.HTTP_200_OK, data = serializer.data)
+        except:
+            return Response(status = status.HTTP_200_OK, data = {})
 
 
 class Order(APIView):

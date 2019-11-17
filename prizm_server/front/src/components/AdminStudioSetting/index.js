@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import Container from './container';
+import { actionCreators as userAction } from '../../redux/modules/user';
 import { actionCreators as adminAction } from '../../redux/modules/admin';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { router : { location }, user : { isLoggedIn, profile }, admin : { photographer } } = state;
-    return{
-        pathname: location.pathname,
+    const { user : { isLoggedIn, profile }, router : { location }, admin : { photographer } } = state;
+    return {
         isLoggedIn,
+        pathname: location.pathname,
         profile,
         photographer
     }
@@ -15,14 +16,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
-        getAdminOrderList: () => {
-            return dispatch(adminAction.getAdminOrderList())
-        },
         goHome: () => {
             dispatch(push('/'))
         },
-        goStudioSetting: () => {
-            dispatch(push('/studio/edit/'))
+        geocoding: (address) => {
+            return dispatch(adminAction.geocoding(address))
+        },
+        locationDetail: (placecId) => {
+            return dispatch(adminAction.locationDetail(placecId))
         }
     }
 }

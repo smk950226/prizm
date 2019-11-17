@@ -130,6 +130,9 @@ html{
 @for $i from 8 through 60 {
     .font-#{$i} { font-size: #{$i}px; }
 }
+.font-9-11{
+    font-size: 9px
+}
 .font-10-12{
     font-size: 10px
 }
@@ -210,6 +213,9 @@ html{
     }
     .font-16-20{
         font-size: 20px
+    }
+    .font-9-11{
+        font-size: 11px
     }
     
 }
@@ -298,6 +304,12 @@ html{
 .gray-f8{
     color: $gray-f8;
 }
+.gray-e8{
+    color: $gray-e8;
+}
+.gray-5c{
+    color: $gray-5c;
+}
 .pink{
     color: $pink;
 }
@@ -353,6 +365,12 @@ html{
 .bg-gray-f8{
     background-color: $gray-f8;
 }
+.bg-gray-e8{
+    background-color: $gray-e8;
+}
+.bg-gray-5c{
+    background-color: $gray-5c;
+}
 .bg-pink{
     background-color: $pink;
 }
@@ -375,12 +393,16 @@ html{
 .mt-r-45{
     margin-top: 1.5rem;
 }
-
+.mt-studio{
+    margin-top: 20px;
+}
 @media (min-width: 768px){
     .mt-r-45{
         margin-top: 3rem;
     }
-    
+    .mt-studio{
+        margin-top: 100px;
+    }
 }
 
 .px-admin{
@@ -589,6 +611,22 @@ html{
         color: $gray-8e;
     }
 }
+.text-input-9{
+    background-color: '#ffffff';
+    font-size: 13px;
+    font-weight: 600;
+    padding-left: 1rem;
+    border: none;
+    outline: none;
+    width: calc(100% - 40px);
+    height: 40px;
+    justify-content: center;
+
+    &::placeholder {
+        color: $gray-8e;
+        font-weight: 600;
+    }
+}
 @media (min-width: 1440px){
     .text-input-6{
         background-color: 'transparent';
@@ -693,6 +731,21 @@ textarea {
     width: 100%;
     border: 1px solid $gray-6d
 }
+.text-area-2{
+    height: 120px;
+    width: 100%;
+    border: 1px solid $gray-6d;
+    font-size: 11px;
+}
+
+@media (min-width: 1440px){
+    .text-area-2{
+        height: 120px;
+        width: 100%;
+        border: 1px solid $gray-6d;
+        font-size: 13px;
+    }
+}
 
 .circle-gray-8e-40{
     width: 40px;
@@ -706,6 +759,14 @@ textarea {
     height: 40px;
     border-radius: 20px;
     border: 1px solid $black;
+    overflow: hidden;
+}
+.circle-gray-5c-20{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid $gray-5c;
+    background-color: $gray-5c;
     overflow: hidden;
 }
 
@@ -799,6 +860,12 @@ textarea {
 .container-admin-toolbox-side{
     width: 100%;
 }
+.container-admin-studio{
+    width: 100%;
+}
+.container-admin-studio-side{
+    width: 100%;
+}
 .container-day{
     height: 111px;
     width: 100%;
@@ -817,6 +884,39 @@ textarea {
 }
 .container-customer-image-outside{
     height: 80px;
+}
+.container-mobile-card{
+    width: 320px;
+    height: 569px;
+    box-shadow: 2px 7px 12px 0 rgba(0, 0, 0, 0.2);
+    border: solid 0.5px $gray-e8;
+}
+.container-admin-portfolio{
+    height: 80px;
+    max-height: 80px;
+}
+.container-admin-portfolio-inner{
+    width: 80px;
+    height: 80px;
+    flex: 0 0 auto;
+}
+.container-studio-profile{
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+}
+.container-studio-input{
+    width: 100%;
+    max-width: 520px;
+}
+.container-searched-location{
+    width: 100%;
+    max-height: 250px;
+    overflow-y: scroll;
+    position: 'fixed';
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 @media (min-width: 768px){
     .container-portfolio-lg{
@@ -843,6 +943,18 @@ textarea {
     .container-admin-toolbox-side{
         width: calc(100% - 292px);
     }
+    .container-admin-studio{
+        width: 390px;
+    }
+    .container-admin-studio-side{
+        width: calc(100% - 390px);
+    }
+    .container-mobile-card{
+        width: 360px;
+        height: 640px;
+        box-shadow: 2px 7px 12px 0 rgba(0, 0, 0, 0.2);
+        border: solid 0.5px $gray-e8;
+    }
 }
 
 @media (min-width: 1440px){
@@ -859,6 +971,12 @@ textarea {
     }
     .container-customer-image-outside{
         height: 100px;
+    }
+    .container-admin-studio{
+        width: 550px;
+    }
+    .container-admin-studio-side{
+        width: calc(100% - 550px);
     }
 }
 
@@ -877,6 +995,10 @@ textarea {
 .icon-arrow-right{
     width: 5px;
     height: 10px;
+}
+.icon-arrow-right-lg{
+    width: 8px;
+    height: 12px;
 }
 .icon-check{
     width: 9px;

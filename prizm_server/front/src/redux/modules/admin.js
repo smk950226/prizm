@@ -1,4 +1,5 @@
 import { FETCH_URL } from '../../config/urls';
+import { GOOGLE_API_KEY_GEO_CODING, GOOGLE_API_KEY } from '../../config/secrets';
 import { actionCreators as userActions } from './user';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -155,6 +156,22 @@ function getPhotographerByToken(token){
     }
 }
 
+function geocoding(address){
+    return (dispatch) => {
+        return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_API_KEY_GEO_CODING}`)
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
+function locationDetail(placeId){
+    return (dispatch) => {
+        return fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,type&key=${GOOGLE_API_KEY}`)
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
 const initialState = {
     
 };
@@ -182,7 +199,9 @@ const actionCreators = {
     getOrderImage,
     uploadOrderImage,
     getPhotographer,
-    getPhotographerByToken
+    getPhotographerByToken,
+    geocoding,
+    locationDetail
 }
 
 export { actionCreators }
