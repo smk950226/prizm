@@ -81,8 +81,8 @@ const AdminOrderList = (props, context) => (
                 </div>
                 <div className={`${styles.containerAdminToolbox} ${styles.mobileNone} ${styles.bgGrayF8} ${styles.minHeightFull}`} style={{display: 'block'}}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter} ${styles.widthFull} ${styles.py4}`}>
-                        <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mr3}`}>{context.t("Profile Setting")}</p>
-                        <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.ml3}`}>{context.t("Account Setting")}</p>
+                        <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mr3} ${styles.mobileNone}`}>{context.t("Profile Setting")}</p>
+                        <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.ml3} ${styles.mobileNone}`}>{context.t("Account Setting")}</p>
                     </div>
                     <div className={`${styles.px3}`} style={{marginTop: 100}}>
                         <p className={`${styles.fontBold} ${styles.font1620} ${styles.mb4}`}>{context.t("Tourist Photo")}</p>
