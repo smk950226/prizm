@@ -326,7 +326,7 @@ class PhotographerDetail extends Component{
                                     <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
                                     <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("comment")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goConfirm}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{isLoggedIn ? this.context.t("submit the request") : this.context.t("sign up & submit the request")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{isLoggedIn ? this.context.t("Submit the request") : this.context.t("Sign up & Submit the request")}</p>
                                     </div>
                                     </Collapse>
                                 </div>

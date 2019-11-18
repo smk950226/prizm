@@ -166,6 +166,9 @@ html{
 .font-20-18-20{
     font-size: 20px
 }
+.font-32-40{
+    font-size: 32px;
+}
 
 @media (min-width: 1024px){
     .font-13-14-16{
@@ -177,7 +180,9 @@ html{
     .font-20-18-20{
         font-size: 18px
     }
-    
+    .font-32-40{
+        font-size: 40px;
+    }
 }
 
 @media (min-width: 1440px){
@@ -414,6 +419,10 @@ html{
     padding-right: 1rem;
 }
 
+.admin-main-image{
+    width: 100%;
+    max-width: 600px
+}
 @media(min-width: 768px){
     .px-admin{
         padding-left: 42px;
@@ -432,9 +441,6 @@ html{
     .px-admin-2{
         padding-left: 70px;
         padding-right: 0;
-    }
-    .mr-admin-main-image{
-        margin-right: 70px !important;
     }
 }
 
@@ -769,6 +775,11 @@ textarea {
     background-color: $gray-5c;
     overflow: hidden;
 }
+.circle-24{
+    width: 24px;
+    height: 24px;
+    border-radius: 120px;
+}
 
 .overflow-hidden{
     overflow: hidden !important;
@@ -891,6 +902,10 @@ textarea {
     box-shadow: 2px 7px 12px 0 rgba(0, 0, 0, 0.2);
     border: solid 0.5px $gray-e8;
 }
+.container-mobile-card-2{
+    width: 320px;
+    height: 497px;
+}
 .container-admin-portfolio{
     height: 80px;
     max-height: 80px;
@@ -907,7 +922,6 @@ textarea {
 }
 .container-studio-input{
     width: 100%;
-    max-width: 520px;
 }
 .container-searched-location{
     width: 100%;
@@ -918,11 +932,40 @@ textarea {
     left: 0;
     right: 0;
 }
+.container-searched-location-pc{
+    width: 100%;
+    max-height: 265px;
+    overflow-y: scroll;
+}
+.container-location-box{
+    opacity: 0.8;
+    border-radius: 1px;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.container-googlemap{
+    width: 100%;
+    max-width: 540px;
+    height: 335px;
+}
+.container-googlemap-search{
+    width: 40%;
+    max-width: 220px;
+    height: 335px;
+}
+.container-googlemap-map{
+    width: 60%;
+    min-width: calc(100% - 220px);
+    height: 335px;
+}
 @media (min-width: 768px){
     .container-portfolio-lg{
         height: 300px;
         width: 100%;
         overflow-x: scroll !important;
+    }
+    .container-studio-input{
+        width: 100%;
+        max-width: 520px;
     }
     .container-image{
         height: 100%;
@@ -955,6 +998,10 @@ textarea {
         box-shadow: 2px 7px 12px 0 rgba(0, 0, 0, 0.2);
         border: solid 0.5px $gray-e8;
     }
+    .container-mobile-card-2{
+        width: 360px;
+        height: 568px;
+    }
 }
 
 @media (min-width: 1440px){
@@ -977,6 +1024,25 @@ textarea {
     }
     .container-admin-studio-side{
         width: calc(100% - 550px);
+    }
+    .container-googlemap{
+        max-width: 740px;
+        height: 435px;
+    }
+    .container-googlemap-search{
+        width: 40%;
+        max-width: 300px;
+        height: 435px;
+    }
+    .container-googlemap-map{
+        width: 60%;
+        min-width: calc(100% - 300px);
+        height: 435px;
+    }
+    .container-searched-location-pc{
+        width: 100%;
+        max-height: 365px;
+        overflow-y: scroll;
     }
 }
 
@@ -1053,6 +1119,9 @@ textarea {
 
 .border-pink{
     border: 1px solid $pink;
+}
+.border-gray-97{
+    border: 1px solid $gray-97;
 }
 .border-btm-gray-dc{
     border-bottom: 1px solid $gray-dc;

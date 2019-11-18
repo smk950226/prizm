@@ -12,7 +12,8 @@ class AdminNavigation extends Component{
         pathname: PropTypes.string.isRequired,
         openMobile: PropTypes.func.isRequired,
         showMobile: PropTypes.bool.isRequired,
-        showLocationModal: PropTypes.bool.isRequired
+        showLocationModal: PropTypes.bool.isRequired,
+        showOptionModal: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
@@ -20,10 +21,10 @@ class AdminNavigation extends Component{
     }
 
     render(){
-        const { goMenu, isLoggedIn, pathname, openMobile, showMobile, showLocationModal } = this.props;
+        const { goMenu, isLoggedIn, pathname, openMobile, showMobile, showLocationModal, showOptionModal } = this.props;
         return(
             <Fragment>
-            {!showMobile && !showLocationModal && (
+            {!showMobile && !showLocationModal && !showOptionModal && (
                 <div className={`${styles.positionNav} ${styles.containerAdmin} ${styles.pxAdmin2}`} style={{zIndex: 2}}>
                     <div className={`${styles.mobileOnly}`}>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.py4} ${styles.bgWhite}`}>

@@ -11,7 +11,8 @@ class Container extends Component{
         goMenu: PropTypes.func.isRequired,
         openMobile: PropTypes.func.isRequired,
         showMobile: PropTypes.bool.isRequired,
-        showLocationModal: PropTypes.bool.isRequired
+        showLocationModal: PropTypes.bool.isRequired,
+        showOptionModal: PropTypes.bool.isRequired
     }
 
     render(){

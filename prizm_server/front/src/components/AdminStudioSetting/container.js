@@ -17,7 +17,10 @@ class Container extends Component{
         closeLocationModal: PropTypes.func.isRequired,
         showLocationModal: PropTypes.bool.isRequired,
         geocoding: PropTypes.func.isRequired,
-        locationDetail: PropTypes.func.isRequired
+        locationDetail: PropTypes.func.isRequired,
+        openOptionModal: PropTypes.func.isRequired,
+        closeOptionModal: PropTypes.func.isRequired,
+        showOptionModal: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
@@ -50,7 +53,34 @@ class Container extends Component{
             locationSearch: "",
             locationSearched: false,
             searchedLocations: [],
-            selectedLocation: {}
+            selectedLocation: {},
+            show1: false,
+            show2: false,
+            show3: false,
+            show4: false,
+            showCalendar1: false,
+            showCalendar2: false,
+            customerSelectedLocation: {},
+            optionTitle: "",
+            optionType: "",
+            optionDescription: "",
+            optionPerson: "",
+            optionHour: "",
+            optionPrice: "",
+            showOptionPlus: false,
+            dateConfirm: false,
+            selectDateStep: 1,
+            selectedHour: "",
+            selectedMin: "",
+            showHourList: false,
+            showMinList: false,
+            dateOption: 0,
+            selectedDate: "",
+            selectedStartDate: "",
+            selectedEndDate: "",
+            dateRange: [],
+            customerSelectedOption: {},
+            comment: ""
         }
     }
 
@@ -194,9 +224,19 @@ class Container extends Component{
 
     _handleInputChange = (event) => {
         const { target : { value, name } } = event;
-        this.setState({
-            [name]: value
-        })
+        if((name === 'optionPerson') || (name === 'optionHour') || (name === 'optionPrice')){
+            let numberReg = /^[0-9]*$/;
+            if(numberReg.test(value)){
+                this.setState({
+                    [name]: value
+                });
+            }
+        }
+        else{
+            this.setState({
+                [name]: value
+            })
+        }
     }
 
     _doTruncate = () => {
@@ -211,36 +251,433 @@ class Container extends Component{
         })
     }
 
-    _searchLocation = async() => {
-        const { locationSearch } = this.state;
-        const { geocoding, locationDetail } = this.props;
-        const q = locationSearch.replace(/ /gi, "+"); 
-        const result = await geocoding(q)
-        if(result.status === 'OK'){
-            let searchedLocations = []
-            result.results.map(async(location) => {
-                console.log(location.place_id)
-                const detail = await locationDetail(location.place_id)
-                console.log(detail)
-                searchedLocations.push({
-                    ...location,
-                    detail
-                })
-            })
-            this.setState({
-                locationSearched: true,
-                searchedLocations: result.results,
-                selectedLocation: {}
-            })
-        }
-        else{
-            alert(this.context.t("검색결과가 없습니다."))
-        }
+    _searchLocation = async(searchedLocations) => {
+        this.setState({
+            searchedLocations,
+            locationSearched: true,
+            selectedLocation: {}
+        })
     }
 
     _selectLocation = (selectedLocation) => {
+        const { locations } = this.state;
+        const find = locations.find(lo => (lo.lat === selectedLocation.geometry.location.lat()) && lo.lng === selectedLocation.geometry.location.lng())
+        if(find){
+            let newLocation = []
+            locations.map(location => {
+                if((location.lat === selectedLocation.geometry.location.lat()) && (location.lng === selectedLocation.geometry.location.lng())){
+                    return null
+                }
+                else{
+                    newLocation.push(location)
+                    return null
+                }
+            })
+            this.setState({
+                locations: newLocation
+            })
+        }
+        else{
+            this.setState({
+                locations: [...this.state.locations, {
+                    id: 0 - this.state.locations.length - 1,
+                    name: selectedLocation.name,
+                    lat: selectedLocation.geometry.location.lat(),
+                    lng: selectedLocation.geometry.location.lng()
+                }],
+                selectedLocation
+            })
+        }
+    }
+
+    _completeLocationSearch = () => {
+        const { closeLocationModal } = this.props;
         this.setState({
-            selectedLocation
+            searchedLocations: [],
+            locationSearch: "",
+            locationSearched: false,
+            selectedLocation: {}
+        })
+
+        closeLocationModal()
+    }
+
+    _removeLocation = (selected) => {
+        const { locations } = this.state;
+        let newLocation = []
+        locations.map(location => {
+            if((location.lat === selected.lat) && (location.lng === selected.lng)){
+                return null
+            }
+            else{
+                newLocation.push(location)
+                return null
+            }
+        })
+        this.setState({
+            locations: newLocation
+        })
+    }
+
+    _open1 = () => {
+        this.setState({
+            show1: true
+        })
+    }
+
+    _close1 = () => {
+        this.setState({
+            show1: false
+        })
+    }
+
+    _open2 = () => {
+        this.setState({
+            show2: true
+        })
+    }
+
+    _close2 = () => {
+        this.setState({
+            show2: false
+        })
+    }
+
+    _open3 = () => {
+        this.setState({
+            show3: true
+        })
+    }
+
+    _close3 = () => {
+        this.setState({
+            show3: false
+        })
+    }
+
+    _open4 = () => {
+        this.setState({
+            show4: true
+        })
+    }
+
+    _close4 = () => {
+        this.setState({
+            show4: false
+        })
+    }
+
+    _openCalendar1 = (selectDateStep) => {
+        if(selectDateStep === 1){
+            this.setState({
+                showCalendar1: true,
+                selectDateStep: 1
+            })
+        }
+        else{
+            this.setState({
+                showCalendar1: true
+            })
+        }
+    }
+
+    _closeCalendar1 = () => {
+        this.setState({
+            showCalendar1: false
+        })
+    }
+
+    _openCalendar2 = () => {
+        this.setState({
+            showCalendar2: true
+        })
+    }
+
+    _closeCalendar2 = () => {
+        this.setState({
+            showCalendar2: false
+        })
+    }
+
+    _selectCustomerLocation = (customerSelectedLocation) => {
+        this.setState({
+            customerSelectedLocation,
+            show2: true
+        })
+    }
+
+    _blankCustomerLocation = () => {
+        this.setState({
+            customerSelectedLocation: {}
+        })
+    }
+
+    _completeAddOption = () => {
+        const { closeOptionModal } = this.props;
+        const { optionTitle, optionType, optionDescription, optionPerson, optionHour, optionPrice } = this.state;
+
+        this.setState({
+            options: [...this.state.options, {
+                id: 0 - this.state.options.length - 1,
+                title: optionTitle,
+                photograpy_type: optionType,
+                description: optionDescription,
+                person: optionPerson,
+                hour: optionHour,
+                price: optionPrice
+            }],
+            optionTitle: "",
+            optionType: "",
+            optionDescription: "",
+            optionPerson: "",
+            optionHour: "",
+            optionPrice: ""
+        })
+
+        closeOptionModal()
+    }
+
+    _removeOption = (selected) => {
+        const { options } = this.state;
+        let newOption = []
+        options.map(option => {
+            if(option.id === selected.id){
+                return null
+            }
+            else{
+                newOption.push(option)
+                return null
+            }
+        })
+        this.setState({
+            options: newOption
+        })
+    }
+
+    _openOptionPlus = () => {
+        this.setState({
+            showOptionPlus: true
+        })
+    }
+
+    _closeOptionPlus = () => {
+        this.setState({
+            showOptionPlus: false
+        })
+    }
+
+    _changeDateStep = (selectDateStep) => {
+        if(selectDateStep === 2){
+            if(this.state.selectedDate){
+                this.setState({
+                    selectDateStep
+                })
+            }
+            else{
+                alert(this.context.t("날짜를 선택해주세요."))
+            }
+        }
+        else{
+            this.setState({
+                selectDateStep
+            })
+        }
+    }
+
+    _handleChangeDateOption = (dateOption) => {
+        if(dateOption === 1){
+            this.setState({
+                dateOption,
+                showCalendar1: true,
+                showCalendar2: false,
+                selectedDate: "",
+                dateConfirm: false,
+                selectedHour: "",
+                selectedMin: "",
+                selectDateStep: 1,
+                selectedStartDate: "",
+                selectedEndDate: "",
+                show3: false
+            })
+        }
+        else{
+            this.setState({
+                dateOption,
+                showCalendar1: false,
+                showCalendar2: true,
+                selectedDate: "",
+                dateConfirm: false,
+                selectedHour: "",
+                selectedMin: "",
+                selectDateStep: 1,
+                selectedStartDate: "",
+                selectedEndDate: "",
+                show3: false
+            })
+        }
+    }
+
+    _blankDateOption = () => {
+        this.setState({
+            dateOption: 0,
+            selectedDate: "",
+            dateConfirm: false,
+            selectedHour: "",
+            selectedMin: "",
+            selectDateStep: 1,
+            selectedStartDate: "",
+            selectedEndDate: "",
+            show3: false
+        })
+    }
+
+    _selectDate = (selectedDate) => {
+        this.setState({
+            selectedDate
+        })
+    }
+
+    _selectDateRange = (range) => {
+        this.setState({
+            selectedStartDate: range[0],
+            selectedEndDate: range[1],
+            dateRange: range
+        })
+    }
+
+    _confirmDate = () => {
+        const { selectedMin, selectedHour, dateOption, selectedStartDate, selectedEndDate } = this.state;
+        if(dateOption === 1){
+            if(selectedMin && selectedHour){
+                this.setState({
+                    dateConfirm: true,
+                    showCalendar1: false,
+                    show3: true
+                })
+            }
+            else{
+                this.setState({
+                    dateConfirm: false
+                })
+                alert(this.context.t("시간을 선택해주세요."))
+            }
+        }
+        else{
+            if(selectedStartDate && selectedEndDate){
+                this.setState({
+                    dateConfirm: true,
+                    showCalendar2: false,
+                    show3: true
+                })
+            }
+            else{
+                this.setState({
+                    dateConfirm: false
+                })
+                alert(this.context.t("날짜 범위를 선택해주세요."))
+            }
+        }
+    }
+
+    _selectHour = (selectedHour) => {
+        this.setState({
+            selectedHour
+        })
+    }
+
+    _selectMin = (selectedMin) => {
+        this.setState({
+            selectedMin
+        })
+    }
+
+    _handleShowHourList = () => {
+        this.setState({
+            showHourList: !this.state.showHourList
+        })
+    }
+
+    _handleShowMinList = () => {
+        this.setState({
+            showMinList: !this.state.showMinList
+        })
+    }
+
+    _goConfirm = async() => {
+        const { selectedLocation, dateOption, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, selectedOption, photographer, comment } = this.state;
+        const { getRequest, isLoggedIn, goSignUp } = this.props;
+        if(dateOption === 1){
+            if(selectedLocation.id && selectedDate && selectedHour && selectedMin && selectedOption){
+                await getRequest({
+                    photographer: photographer,
+                    location: selectedLocation,
+                    option: selectedOption,
+                    comment,
+                    dateOption,
+                    date: selectedDate ?  String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : "",
+                    hour: selectedHour,
+                    min: selectedMin,
+                    startDate: selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : "",
+                    endDate: selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
+                })
+                if(isLoggedIn){
+                    this.setState({
+                        isConfirmPage: true
+                    })
+                }
+                else{
+                    goSignUp(photographer.studio_id)
+                }
+            }
+            else{
+                this.setState({
+                    isConfirmPage: false
+                })
+                alert(this.context.t("요청 정보를 입력해주세요."))
+            }
+        }
+        else{
+            if(selectedLocation.id && selectedStartDate && selectedEndDate && selectedOption){
+                await getRequest({
+                    photographer: photographer,
+                    location: selectedLocation,
+                    option: selectedOption,
+                    comment,
+                    dateOption,
+                    date: selectedDate ? String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : "",
+                    hour: selectedHour,
+                    min: selectedMin,
+                    startDate: selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : "",
+                    endDate: selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
+                })
+                if(isLoggedIn){
+                    this.setState({
+                        isConfirmPage: true
+                    })
+                }
+                else{
+                    goSignUp(photographer.studio_id)
+                }
+            }
+            else{
+                this.setState({
+                    isConfirmPage: false
+                })
+                alert(this.context.t("요청 정보를 입력해주세요."))
+            }
+        }
+    }
+
+    _selectOption = (customerSelectedOption) => {
+        this.setState({
+            customerSelectedOption,
+            show4: true
+        })
+    }
+
+    _blankOption = () => {
+        this.setState({
+            customerSelectedOption: {}
         })
     }
 
@@ -257,6 +694,39 @@ class Container extends Component{
             undoTruncate={this._undoTruncate}
             searchLocation={this._searchLocation}
             selectLocation={this._selectLocation}
+            completeLocationSearch={this._completeLocationSearch}
+            removeLocation={this._removeLocation}
+            open1={this._open1}
+            close1={this._close1}
+            open2={this._open2}
+            close2={this._close2}
+            open3={this._open3}
+            close3={this._close3}
+            open4={this._open4}
+            close4={this._close4}
+            openCalendar1={this._openCalendar1}
+            closeCalendar1={this._closeCalendar1}
+            openCalendar2={this._openCalendar2}
+            closeCalendar2={this._closeCalendar2}
+            selectCustomerLocation={this._selectCustomerLocation}
+            blankCustomerLocation={this._blankCustomerLocation}
+            completeAddOption={this._completeAddOption}
+            removeOption={this._removeOption}
+            openOptionPlus={this._openOptionPlus}
+            closeOptionPlus={this._closeOptionPlus}
+            changeDateStep={this._changeDateStep}
+            handleChangeDateOption={this._handleChangeDateOption}
+            blankDateOption={this._blankDateOption}
+            selectDate={this._selectDate}
+            selectDateRange={this._selectDateRange}
+            confirmDate={this._confirmDate}
+            selectHour={this._selectHour}
+            selectMin={this._selectMin}
+            handleShowHourList={this._handleShowHourList}
+            handleShowMinList={this._handleShowMinList}
+            goConfirm={this._goConfirm}
+            selectOption={this._selectOption}
+            blankOption={this._blankOption}
             />
         )
     }
