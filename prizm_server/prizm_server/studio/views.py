@@ -219,3 +219,176 @@ class OrderImageUpload(APIView):
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('예약이 존재하지 않습니다.')})
+
+
+class Studio(APIView):
+    permission_classes = [AdminAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
+    
+    def post(self, request, format = None):
+        user = request.user
+        portfolio_images = request.data.getlist('portfolios[]', None)
+        nickname = request.data.get('nickname', None)
+        main_location = request.data.get('mainLocation', None)
+        education = request.data.get('education', None)
+        career = request.data.get('career', None)
+        portfolio_url = request.data.get('portfolioUrl', None)
+        description = request.data.get('description', None)
+        profile_image = request.data.get('profileImage', None)
+        locations = request.data.getlist('locations[]')
+        options = request.data.getlist('options[]')
+        studio_id = request.data.get('studioId')
+        update = request.data.get('update')
+
+        if (len(portfolio_images) > 0) and nickname and main_location and education and career and description and profile_image and (len(locations) > 0) and (len(options) > 0) and studio_id:
+            if (studio_id == 'admin') or (studio_id == 'djangoadmin') or (studio_id.find('/') > -1) or (studio_id == '') or (studio_id == 'welcome') or (studio_id == 'signup') or (studio_id == 'signin') or (studio_id == 'profile') or (studio_id == 'reservation') or (studio_id == 'menu'):
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('사용할 수 없는 Studio URL 입니다.')})
+            else:
+                new_portfolio_images = []
+                pre_portfolio_id = []
+                for port in portfolio_images:
+                    if type(port) == type('text'):
+                        pre_portfolio_id.append(int(json.loads(port)['id']))
+                    else:
+                        new_portfolio_images.append(port)
+                if len(pre_portfolio_id) > 0:
+                    pre_portfolio = models.Portfolio.objects.filter(photographer = user.photographer).exclude(id__in = pre_portfolio_id)
+                    pre_portfolio.delete()
+                
+                if update == 'true':
+                    photographer = user.photographer
+                    photographer.nickname = nickname
+                    if type(profile_image) == type('text'):
+                        pass
+                    else:
+                        photographer.profile_image = profile_image
+                    photographer.main_location = main_location
+                    photographer.education = education
+                    photographer.career = career
+                    photographer.studio_id = studio_id
+                    photographer.portfolio_url = portfolio_url
+                    photographer.description = description
+
+                    photographer.save()
+
+                    for image in new_portfolio_images:
+                        img = models.Portfolio.objects.create(
+                            photographer = photographer,
+                            image = image
+                        )
+                        img.save()
+
+                    new_locations = []
+                    pre_locations_id = []
+
+                    for location in locations:
+                        if int(json.loads(location)['id']) >= 0:
+                            pre_locations_id.append(int(json.loads(location)['id']))
+                        else:
+                            new_locations.append(json.loads(location))
+                    if len(pre_locations_id) > 0:
+                        pre_locations = models.Location.objects.filter(photographer = photographer).exclude(id__in = pre_locations_id)
+                        pre_locations.delete()
+                    
+                    for new in new_locations:
+                        loca = models.Location.objects.create(
+                            photographer = photographer,
+                            name = new['name'],
+                            lng = new['lng'],
+                            lat = new['lat']
+                        )
+                        loca.save()
+
+                    new_options = []
+                    pre_options_id = []
+
+                    for option in options:
+                        if int(json.loads(option)['id']) >= 0:
+                            pre_options_id.append(int(json.loads(option)['id']))
+                        else:
+                            new_options.append(json.loads(option))
+                    if len(pre_options_id) > 0:
+                        pre_options = models.Option.objects.filter(photographer = photographer).exclude(id__in = pre_options_id)
+                        pre_options.delete()
+                    
+                    for new in new_options:
+                        op = models.Option.objects.create(
+                            photographer = photographer,
+                            title = new['title'],
+                            photograpy_type = new['photograpy_type'],
+                            description = new['description'],
+                            person = int(new['person']),
+                            hour = int(new['hour']),
+                            price = int(new['price']),
+                        )
+                        op.save()
+
+                else:
+                    photographer = models.Photographer.objects.create(
+                        user = user,
+                        nickname = nickname,
+                        profile_image = profile_image,
+                        main_location = main_location,
+                        education = education,
+                        career = career,
+                        studio_id = studio_id,
+                        portfolio_url = portfolio_url,
+                        description = description
+                    )
+
+                    photographer.save()
+
+                    for image in new_portfolio_images:
+                        img = models.Portfolio.objects.create(
+                            photographer = photographer,
+                            image = image
+                        )
+                        img.save()
+
+                    new_locations = []
+                    pre_locations_id = []
+
+                    for location in locations:
+                        if int(json.loads(location)['id']) >= 0:
+                            pre_locations_id.append(int(json.loads(location)['id']))
+                        else:
+                            new_locations.append(json.loads(location))
+                    if len(pre_locations_id) > 0:
+                        pre_locations = models.Location.objects.filter(photographer = photographer).exclude(id__in = pre_locations_id)
+                        pre_locations.delete()
+                    
+                    for new in new_locations:
+                        loca = models.Location.objects.create(
+                            photographer = photographer,
+                            name = new['name'],
+                            lng = new['lng'],
+                            lat = new['lat']
+                        )
+                        loca.save()
+
+                    new_options = []
+                    pre_options_id = []
+
+                    for option in options:
+                        if int(json.loads(option)['id']) >= 0:
+                            pre_options_id.append(int(json.loads(option)['id']))
+                        else:
+                            new_options.append(json.loads(option))
+                    if len(pre_options_id) > 0:
+                        pre_options = models.Option.objects.filter(photographer = photographer).exclude(id__in = pre_options_id)
+                        pre_options.delete()
+                    
+                    for new in new_options:
+                        op = models.Option.objects.create(
+                            photographer = photographer,
+                            title = new['title'],
+                            photograpy_type = new['photograpy_type'],
+                            description = new['description'],
+                            person = int(new['person']),
+                            hour = int(new['hour']),
+                            price = int(new['price']),
+                        )
+                        op.save()
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('스튜디오 정보를 입력해주세요.')})

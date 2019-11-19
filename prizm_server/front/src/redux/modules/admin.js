@@ -156,6 +156,59 @@ function getPhotographerByToken(token){
     }
 }
 
+function updateStudio(portfolios, nickname, mainLocation, education, career, portfolioUrl, description, profileImage, locations, options, studioId, update){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        let formData = new FormData();
+        for (var i = 0; i < portfolios.length; i++) {
+            if(portfolios[i].type){
+                formData.append('portfolios[]', portfolios[i], portfolios[i].name);
+            }
+            else{
+                formData.append('portfolios[]', JSON.stringify(portfolios[i]));
+            }
+        }
+        formData.append('nickname', nickname)
+        formData.append('mainLocation', mainLocation)
+        formData.append('education', education)
+        formData.append('career', career)
+        formData.append('portfolioUrl', portfolioUrl)
+        formData.append('description', description)
+        if(profileImage.type){
+            formData.append('profileImage', profileImage, profileImage.name)
+        }
+        else{
+            formData.append('profileImage', JSON.stringify(profileImage))
+        }
+        for (var i = 0; i < locations.length; i++) {
+            formData.append('locations[]', JSON.stringify(locations[i]));
+        }
+        for (var i = 0; i < options.length; i++) {
+            formData.append('options[]', JSON.stringify(options[i]));
+        }
+        formData.append('studioId', studioId)
+        formData.append('update', update)
+
+        return fetch(`${FETCH_URL}/api/studio/edit/`, {
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`
+            },
+            body: formData
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 function geocoding(address){
     return (dispatch) => {
         return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_API_KEY_GEO_CODING}`)
@@ -201,7 +254,8 @@ const actionCreators = {
     getPhotographer,
     getPhotographerByToken,
     geocoding,
-    locationDetail
+    locationDetail,
+    updateStudio
 }
 
 export { actionCreators }

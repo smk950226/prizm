@@ -187,7 +187,7 @@ const AdminSignUp = (props, context) => (
         <div className={`${styles.row} ${styles.mx0} ${styles.widthFull}`}>
             {!props.showMobile ? (
                 <div className={`${styles.safearea} ${styles.containerAdminStudioSide} ${styles.heightFull} ${styles.overflowYScroll}`}>
-                    <p className={`${styles.mtStudio} ${styles.fontBold} ${styles.font2024}`}>{context.t("My Studio Setup")}</p>
+                    <p className={`${styles.mtStudio} ${styles.fontBold} ${styles.font2024}`}>{props.update ? context.t(`Hello, ${props.nickname}!`) : context.t("My Studio Setup")}</p>
                     <p className={`${styles.mt1} ${styles.mtMd2} ${styles.font1416}`}>{context.t("Please fill out information below to create your first ")}<span className={`${styles.fontBold}`}>{'PRIZM'}</span>{context.t(" Studio")}</p>
                     <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Your Portfolio")}</p>
@@ -222,13 +222,13 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Profile Picture")}</p>
-                        <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.profileImage.image ? null : styles.hidden}`} />
+                        <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.profileImage ? null : styles.hidden}`} />
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("프로필 사진으로 사용할 이미지 1장을 첨부해주세요.")}</p>
                     <div className={`${styles.mt3}`}>
                         <label htmlFor={'profile'}>
-                            {props.profileImage.image ? (
-                                <ProfileDivLg image={props.profileImage.image} />
+                            {props.profileImage ? (
+                                <ProfileDivLg image={props.profileImage.image ? props.profileImage.image : props.profileImage} />
                             ) : (
                                 <div className={`${styles.containerStudioProfile} ${styles.bgGray33} ${styles.cursorPointer} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                     <p className={`${styles.font40} ${styles.white}`}>+</p>
@@ -361,12 +361,12 @@ const AdminSignUp = (props, context) => (
                         <div className={`${styles.mt3} ${styles.row} ${styles.mx0}`}>
                             {props.locations.map((location, index) => (
                                 <div key={index} className={`${styles.col12} ${styles.colMd4} ${styles.px0}`}>
-                                    <div className={`${styles.col12} ${styles.colMd10} ${styles.px0} ${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
-                                        <div>
+                                    <div className={`${styles.col12} ${styles.colMd10} ${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
+                                        <div className={`${styles.col10} ${styles.px0}`}>
                                             <p className={`${styles.fontBold} ${styles.font1012} ${styles.white}`}>{context.t(`Location ${index + 1}`)}</p>
                                             <p className={`${styles.fontBold} ${styles.font1113} ${styles.white} ${styles.mt1}`}>{location.name}</p>
                                         </div>
-                                        <div className={`${styles.cursorPointer}`} onClick={() => props.removeLocation(location)}>
+                                        <div className={`${styles.cursorPointer} ${styles.col2} ${styles.px0} ${styles.textRight}`} onClick={() => props.removeLocation(location)}>
                                             <MdClose fontSize={'24px'} color={'#ffffff'}/>
                                         </div>
                                     </div>
@@ -458,6 +458,35 @@ const AdminSignUp = (props, context) => (
                             ))}
                         </div>
                     )}
+                    <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Your PRIZM Studio URL")}</p>
+                    </div>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("URL로 사용하고자 하는 주소를 입력해주세요.")}</p>
+                    <div className={`${styles.containerStudioInput}`}>
+                        <input className={`${styles.textInput6}`} type={"text"} name={"studioId"} value={props.studioId} onChange={props.handleInputChange} />
+                    </div>
+                    <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Confirm Your URL")}</p>
+                        <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.studioIdConfirm ? null : styles.hidden}`} />
+                    </div>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("다시 한 번 URL을 확인하고 입력해주세요.")}</p>
+                    <div className={`${styles.containerStudioInput}`}>
+                        <input className={`${styles.textInput6}`} type={"text"} name={"studioId2"} value={props.studioId2} onChange={props.handleInputChange} />
+                    </div>
+                    <div className={`${styles.mobileOnly} ${styles.mt45}`}>
+                        <p className={`${styles.fontBold} ${styles.font1214}`}>
+                            {context.t("Make sure to double check that all the information is correct. Scroll up/down the right screen to swipe and view your information on PRIZM Studio")}
+                        </p>
+                    </div>
+                    <div className={`${styles.mobileNone} ${styles.mt5}`}>
+                        <p className={`${styles.fontBold} ${styles.font1214}`}>
+                            {context.t("Make sure to double check that all the information is correct.")}<br/>
+                            {context.t("Scroll up/down the right screen to swipe and view your information on PRIZM Studio")}
+                        </p>
+                    </div>
+                    <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.confirm}>
+                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Confirm")}</p>
+                    </div>
                     <input id={`portfolio`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={props.submit} />
                     <input id={`profile`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={props.submitProfile} />
                 </div>
@@ -484,8 +513,8 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <div className={`${styles.px3}`}>
                         <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                            {props.profileImage.image ? (
-                                <ProfileDivLg image={props.profileImage.image} />
+                            {props.profileImage ? (
+                                <ProfileDivLg image={props.profileImage.image ? props.profileImage.image : props.profileImage} />
                             ) : (
                                 <EmptyProfileDivLg />
                             )}
@@ -648,7 +677,7 @@ const AdminSignUp = (props, context) => (
                         </div>
                         <Collapse isOpened={props.show4} theme={{collapse: styles.collapse}}>
                         <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={context.t("comment")} value={props.comment} name={"comment"} onChange={props.handleInputChange} />
-                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}}>
+                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit the request")}</p>
                         </div>
                         </Collapse>
@@ -678,8 +707,8 @@ const AdminSignUp = (props, context) => (
                     <PortfolioSlider portfolio={props.images} nickname={props.nickname} lg={false} />
                     <div className={`${styles.px3}`}>
                         <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                            {props.profileImage.image ? (
-                                <ProfileDivLg image={props.profileImage.image} />
+                            {props.profileImage ? (
+                                <ProfileDivLg image={props.profileImage.image ? props.profileImage.image : props.profileImage} />
                             ) : (
                                 <EmptyProfileDivLg />
                             )}
@@ -731,7 +760,7 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                     <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={props.show1 ? props.customerSelectedLocation.id ? props.close1 : null : props.open1}>
-                            <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("1. Select Location")}<span className={`${styles.pink}`}>{`  (${props.locations.length})`}</span></p>
+                            <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("1. Select Location")}<span className={`${styles.pink}`}>{`  (${props.locations ? props.locations.length : '0'})`}</span></p>
                             <img src={require('../../assets/images/icon_arrow_down.png')} alt={context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${props.show1 ? styles.rotate : null}`} />
                         </div>
                         <Collapse isOpened={props.show1} theme={{collapse: styles.collapse}}>
@@ -843,7 +872,7 @@ const AdminSignUp = (props, context) => (
                         </div>
                         <Collapse isOpened={props.show4} theme={{collapse: styles.collapse}}>
                         <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={context.t("comment")} value={props.comment} name={"comment"} onChange={props.handleInputChange} />
-                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}}>
+                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit the request")}</p>
                         </div>
                         </Collapse>
@@ -941,7 +970,7 @@ const AdminSignUp = (props, context) => (
                     </div>
                 </div>
                 <div className={`${styles.px3}`}>
-                    <p className={`${styles.mt3} ${styles.fontBold} ${styles.font20}`}>{context.t(`Option ${props.options.length + 1}`)}</p>
+                    <p className={`${styles.mt3} ${styles.fontBold} ${styles.font20}`}>{context.t(`Option ${props.options ? props.options.length + 1 : '0'}`)}</p>
                     <div className={`${styles.mt4} ${styles.mtMd3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Title")}</p>
                     </div>
@@ -1008,7 +1037,7 @@ const AdminSignUp = (props, context) => (
                         value={props.selectedDate}
                         onChange={props.selectDate}
                         />
-                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={() => props.changeDateStep(2)}>
+                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => props.changeDateStep(2)}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Next")}</p>
                         </div>
                     </Fragment>
@@ -1050,7 +1079,7 @@ const AdminSignUp = (props, context) => (
                                 </div>
                             </div>
                         </div>
-                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.confirmDate}>
+                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.confirmDate}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Done")}</p>
                         </div>
                     </Fragment>
@@ -1079,7 +1108,7 @@ const AdminSignUp = (props, context) => (
                     tileClassName={`${styles.font12}`}
                     onChange={props.selectDateRange}
                     />
-                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.confirmDate}>
+                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.confirmDate}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Done")}</p>
                     </div>
                 </Fragment>
@@ -1099,7 +1128,7 @@ AdminSignUp.propTypes = {
     openMobile: PropTypes.func.isRequired,
     closeMobile: PropTypes.func.isRequired,
     submitProfile: PropTypes.func.isRequired,
-    profileImage: PropTypes.object,
+    profileImage: PropTypes.any,
     handleInputChange: PropTypes.func.isRequired,
     education: PropTypes.string.isRequired,
     career: PropTypes.string.isRequired,
@@ -1181,7 +1210,13 @@ AdminSignUp.propTypes = {
     customerSelectedOption: PropTypes.object.isRequired,
     selectOption: PropTypes.func.isRequired,
     blankOption: PropTypes.func.isRequired,
-    comment: PropTypes.string.isRequired
+    comment: PropTypes.string.isRequired,
+    studioId: PropTypes.string.isRequired,
+    studioId2: PropTypes.string.isRequired,
+    studioIdConfirm: PropTypes.bool.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
+    confirm: PropTypes.func.isRequired,
+    update: PropTypes.bool.isRequired
 }
 
 AdminSignUp.contextTypes = {

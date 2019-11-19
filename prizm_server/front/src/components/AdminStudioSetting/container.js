@@ -20,7 +20,9 @@ class Container extends Component{
         locationDetail: PropTypes.func.isRequired,
         openOptionModal: PropTypes.func.isRequired,
         closeOptionModal: PropTypes.func.isRequired,
-        showOptionModal: PropTypes.bool.isRequired
+        showOptionModal: PropTypes.bool.isRequired,
+        updateStudio: PropTypes.func.isRequired,
+        getPhotographer: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -29,27 +31,30 @@ class Container extends Component{
 
     constructor(props){
         super(props)
+        const { photographer } = props;
         this.state = {
-            images: [],
-            submitImages: [],
+            update: photographer.nickname ? true : false,
+            images: photographer.nickname ? photographer.portfolio_set : [],
+            submitImages: photographer.nickname ? photographer.portfolio_set : [],
             opacityList,
-            nickname: "",
-            mainLocation: "",
-            education: "",
-            career: "",
-            portfolio: "",
-            description: "",
+            nickname: photographer.nickname ? photographer.nickname : "",
+            mainLocation: photographer.nickname ? photographer.main_location : "",
+            education: photographer.nickname ? photographer.education : "",
+            career: photographer.nickname ? photographer.career : "",
+            portfolio: photographer.nickname ? photographer.portfolio_url : "",
+            portfolioForm: photographer.nickname ? true : false,
+            description: photographer.nickname ? photographer.description : "",
             tempImage: "",
             tempHeight: 0,
             tempWidth: 0,
-            profileImage: {},
-            submitProfileImage: "",
+            profileImage: photographer.nickname ? photographer.profile_image : "",
+            submitProfileImage: photographer.nickname ? photographer.profile_image : "",
             tempProfileImage: "",
             tempProfileHeight: 0,
             tempProfileWidth: 0,
             isTruncated: true,
-            locations: [],
-            options: [],
+            locations: photographer.nickname ? photographer.location_set : [],
+            options: photographer.nickname ? photographer.option_set : [],
             locationSearch: "",
             locationSearched: false,
             searchedLocations: [],
@@ -80,7 +85,11 @@ class Container extends Component{
             selectedEndDate: "",
             dateRange: [],
             customerSelectedOption: {},
-            comment: ""
+            comment: "",
+            studioId: photographer.nickname ? photographer.studio_id : "",
+            studioId2: photographer.nickname ? photographer.studio_id : "",
+            studioIdConfirm: photographer.nickname ? true : false,
+            isSubmitting: false
         }
     }
 
@@ -232,6 +241,65 @@ class Container extends Component{
                 });
             }
         }
+        else if(name === 'portfolio'){
+            let reg = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+            if(reg.test(value)){
+                this.setState({
+                    [name]: value,
+                    portfolioForm: true
+                })
+            }
+            else{
+                this.setState({
+                    [name]: value,
+                    portfolioForm: false
+                })
+            }
+        }
+        else if(name === 'studioId'){
+            if(this.state.studioId2){
+                if(this.state.studioId2 === value){
+                    this.setState({
+                        [name]: value,
+                        studioIdConfirm: true
+                    })
+                }
+                else{
+                    this.setState({
+                        [name]: value,
+                        studioIdConfirm: false
+                    })
+                }
+            }
+            else{
+                this.setState({
+                    [name]: value,
+                    studioIdConfirm: false
+                })
+            }
+        }
+        else if(name === 'studioId2'){
+            if(this.state.studioId){
+                if(this.state.studioId === value){
+                    this.setState({
+                        [name]: value,
+                        studioIdConfirm: true
+                    })
+                }
+                else{
+                    this.setState({
+                        [name]: value,
+                        studioIdConfirm: false
+                    })
+                }
+            }
+            else{
+                this.setState({
+                    [name]: value,
+                    studioIdConfirm: false
+                })
+            }
+        }
         else{
             this.setState({
                 [name]: value
@@ -306,7 +374,7 @@ class Container extends Component{
         const { locations } = this.state;
         let newLocation = []
         locations.map(location => {
-            if((location.lat === selected.lat) && (location.lng === selected.lng)){
+            if(location.id === selected.id){
                 return null
             }
             else{
@@ -415,26 +483,28 @@ class Container extends Component{
     _completeAddOption = () => {
         const { closeOptionModal } = this.props;
         const { optionTitle, optionType, optionDescription, optionPerson, optionHour, optionPrice } = this.state;
-
-        this.setState({
-            options: [...this.state.options, {
-                id: 0 - this.state.options.length - 1,
-                title: optionTitle,
-                photograpy_type: optionType,
-                description: optionDescription,
-                person: optionPerson,
-                hour: optionHour,
-                price: optionPrice
-            }],
-            optionTitle: "",
-            optionType: "",
-            optionDescription: "",
-            optionPerson: "",
-            optionHour: "",
-            optionPrice: ""
-        })
-
-        closeOptionModal()
+        if(optionTitle && optionTitle && optionDescription && optionPerson && optionHour && optionPrice){
+            this.setState({
+                options: [...this.state.options, {
+                    id: 0 - this.state.options.length - 1,
+                    title: optionTitle,
+                    photograpy_type: optionType,
+                    description: optionDescription,
+                    person: optionPerson,
+                    hour: optionHour,
+                    price: optionPrice
+                }],
+                optionTitle: "",
+                optionType: "",
+                optionDescription: "",
+                optionPerson: "",
+                optionHour: "",
+                optionPrice: ""
+            })
+    
+            closeOptionModal()
+        }
+        
     }
 
     _removeOption = (selected) => {
@@ -681,6 +751,108 @@ class Container extends Component{
         })
     }
 
+    _confirm = async() => {
+        const { submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, studioId2, studioIdConfirm, portfolioForm, isSubmitting, update } = this.state;
+        const { updateStudio, getPhotographer } = this.props;
+        if(!isSubmitting){
+            if(submitImages.length > 0){
+                if(nickname && mainLocation && education && career && description && submitProfileImage && studioId && studioId2){
+                    if(portfolio){
+                        if(portfolioForm){
+                            if(locations.length > 0){
+                                if(options.length > 0){
+                                    if((studioId === studioId2) && studioIdConfirm){
+                                        this.setState({
+                                            isSubmitting: true
+                                        })
+                                        const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, update)
+                                        if(result.status === 'ok'){
+                                            await getPhotographer()
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            alert(this.context.t("Studio 정보를 수정하였습니다."))
+                                        }
+                                        else if(result.error){
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            alert(result.error)
+                                        }
+                                        else{
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            alert(this.context.t("오류가 발생하였습니다."))
+                                        }
+                                    }
+                                    else{
+                                        alert(this.context.t("Studio URL이 일치하지 않습니다."))
+                                    }
+                                }
+                                else{
+                                    alert(this.context.t("등록할 서비스를 1가지 이상 입력해주세요."))
+                                }
+                            }
+                            else{
+                                alert(this.context.t("촬영 가능한 장소를 1곳 이상 선택해주세요."))
+                            }
+                        }
+                        else{
+                            alert(this.context.t("Portfolio는 URL로 입력해주세요."))
+                        }
+                    }
+                    else{
+                        if(locations.length > 0){
+                            if(options.length > 0){
+                                if((studioId === studioId2) && studioIdConfirm){
+                                    this.setState({
+                                        isSubmitting: true
+                                    })
+                                    const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, update)
+                                    if(result.status === 'ok'){
+                                        await getPhotographer()
+                                        this.setState({
+                                            isSubmitting: false
+                                        })
+                                        alert(this.context.t("Studio 정보를 수정하였습니다."))
+                                    }
+                                    else if(result.error){
+                                        this.setState({
+                                            isSubmitting: false
+                                        })
+                                        alert(result.error)
+                                    }
+                                    else{
+                                        this.setState({
+                                            isSubmitting: false
+                                        })
+                                        alert(this.context.t("오류가 발생하였습니다."))
+                                    }
+                                }
+                                else{
+                                    alert(this.context.t("Studio URL이 일치하지 않습니다."))
+                                }
+                            }
+                            else{
+                                alert(this.context.t("등록할 서비스를 1가지 이상 입력해주세요."))
+                            }
+                        }
+                        else{
+                            alert(this.context.t("촬영 가능한 장소를 1곳 이상 선택해주세요."))
+                        }
+                    }
+                }
+                else{
+                    alert(this.context.t("스튜디오 정보를 입력해주세요."))
+                }
+            }
+            else{
+                alert(this.context.t("포트폴리오를 업로드해주세요."))
+            }
+        }
+    }
+
     render(){
         return(
             <AdminStudioSetting 
@@ -727,6 +899,7 @@ class Container extends Component{
             goConfirm={this._goConfirm}
             selectOption={this._selectOption}
             blankOption={this._blankOption}
+            confirm={this._confirm}
             />
         )
     }

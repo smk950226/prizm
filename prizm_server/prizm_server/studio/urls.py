@@ -11,4 +11,5 @@ urlpatterns = [
     path('order/image/', views.OrderImage.as_view()),
     path('order/image/upload/', views.OrderImageUpload.as_view()),
     path('admin/order/', views.AdminOrder.as_view()),
+    path('edit/', views.Studio.as_view()),
 ]
