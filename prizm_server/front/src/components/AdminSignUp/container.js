@@ -12,7 +12,8 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         goReservation: PropTypes.func.isRequired,
         goSignIn: PropTypes.func.isRequired,
-        getPhotographerByToken: PropTypes.func.isRequired
+        getPhotographerByToken: PropTypes.func.isRequired,
+        goStudioSetting: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -33,7 +34,10 @@ class Container extends Component{
             passwordForm: false,
             birthForm: false,
             isSubmitting: false,
-            showCountryNumber: false
+            showCountryNumber: false,
+            fetchedToken: false,
+            fetchedProfile: false,
+            fetchClear: false
         }
     }
 
@@ -41,6 +45,36 @@ class Container extends Component{
         window.scrollTo(0,0)
         if(this.props.isLoggedIn){
             this.props.goReservation()
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if(!prevProps.isLoggedIn && this.props.isLoggedIn){
+            this.setState({
+                fetchedToken: true
+            })
+        }
+        if(this.state.fetchedProfile && this.state.fetchedToken && !this.state.fetchClear){
+            console.log(111111)
+            this.setState({
+                fetchClear: true,
+            })
+            this.props.goStudioSetting()
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedProfile } = prevState;
+        if((!fetchedProfile)){
+            let update = {}
+            if(nextProps.profile){
+                update.fetchedProfile = true
+            }
+
+            return update
+        }
+        else{
+            return null
         }
     }
 
@@ -124,7 +158,7 @@ class Container extends Component{
 
     _submit = async() => {
         const { isSubmitting, name, email, countryNumber, mobile, password, birth, instagram, emailForm, passwordForm, birthForm } = this.state;
-        const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, goReservation, getPhotographerByToken } = this.props;
+        const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, goStudioSetting, getPhotographerByToken } = this.props;
         if(!isSubmitting){
             if(name && email && countryNumber && mobile && password && birth && instagram){
                 if(emailForm){
@@ -143,7 +177,6 @@ class Container extends Component{
                                         isSubmitting: false
                                     })
                                     await getSaveToken(result.token)
-                                    goReservation()
                                 }
                                 else{
                                     this.setState({

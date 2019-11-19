@@ -5,10 +5,11 @@ import { actionCreators as adminAction } from '../../redux/modules/admin';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn }, router : { location } } = state;
+    const { user : { isLoggedIn, profile }, router : { location } } = state;
     return {
         isLoggedIn,
-        pathname: location.pathname
+        pathname: location.pathname,
+        profile
     }
 }
 
@@ -34,6 +35,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goSignIn: () => {
             dispatch(push('/signin/'))
+        },
+        goStudioSetting: () => {
+            dispatch(push('/studio/edit/'))
         },
         getPhotographerByToken: (token) => {
             dispatch(adminAction.getPhotographerByToken(token))

@@ -22,7 +22,8 @@ class Container extends Component{
         closeOptionModal: PropTypes.func.isRequired,
         showOptionModal: PropTypes.bool.isRequired,
         updateStudio: PropTypes.func.isRequired,
-        getPhotographer: PropTypes.func.isRequired
+        getPhotographer: PropTypes.func.isRequired,
+        goClear: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -33,28 +34,28 @@ class Container extends Component{
         super(props)
         const { photographer } = props;
         this.state = {
-            update: photographer.nickname ? true : false,
-            images: photographer.nickname ? photographer.portfolio_set : [],
-            submitImages: photographer.nickname ? photographer.portfolio_set : [],
+            update: photographer ? photographer.nickname ? true : false : false,
+            images: photographer ? photographer.nickname ? photographer.portfolio_set : [] : [],
+            submitImages: photographer ? photographer.nickname ? photographer.portfolio_set : [] : [],
             opacityList,
-            nickname: photographer.nickname ? photographer.nickname : "",
-            mainLocation: photographer.nickname ? photographer.main_location : "",
-            education: photographer.nickname ? photographer.education : "",
-            career: photographer.nickname ? photographer.career : "",
-            portfolio: photographer.nickname ? photographer.portfolio_url : "",
-            portfolioForm: photographer.nickname ? true : false,
-            description: photographer.nickname ? photographer.description : "",
+            nickname: photographer ? photographer.nickname ? photographer.nickname : "" : "",
+            mainLocation: photographer ? photographer.nickname ? photographer.main_location : "" : "",
+            education: photographer ? photographer.nickname ? photographer.education : "" : "",
+            career: photographer ? photographer.nickname ? photographer.career : "" : "",
+            portfolio: photographer ? photographer.nickname ? photographer.portfolio_url : "" : "",
+            portfolioForm: photographer ? photographer.nickname ? true : false : false,
+            description: photographer ? photographer.nickname ? photographer.description : "" : "",
             tempImage: "",
             tempHeight: 0,
             tempWidth: 0,
-            profileImage: photographer.nickname ? photographer.profile_image : "",
-            submitProfileImage: photographer.nickname ? photographer.profile_image : "",
+            profileImage: photographer ? photographer.nickname ? photographer.profile_image : "" : "",
+            submitProfileImage: photographer ? photographer.nickname ? photographer.profile_image : "" : "",
             tempProfileImage: "",
             tempProfileHeight: 0,
             tempProfileWidth: 0,
             isTruncated: true,
-            locations: photographer.nickname ? photographer.location_set : [],
-            options: photographer.nickname ? photographer.option_set : [],
+            locations: photographer ? photographer.nickname ? photographer.location_set : [] : [],
+            options: photographer ? photographer.nickname ? photographer.option_set : [] : [],
             locationSearch: "",
             locationSearched: false,
             searchedLocations: [],
@@ -86,9 +87,9 @@ class Container extends Component{
             dateRange: [],
             customerSelectedOption: {},
             comment: "",
-            studioId: photographer.nickname ? photographer.studio_id : "",
-            studioId2: photographer.nickname ? photographer.studio_id : "",
-            studioIdConfirm: photographer.nickname ? true : false,
+            studioId: photographer ? photographer.nickname ? photographer.studio_id : "" : "",
+            studioId2: photographer ? photographer.nickname ? photographer.studio_id : "" : "",
+            studioIdConfirm: photographer ? photographer.nickname ? true : false : false,
             isSubmitting: false
         }
     }
@@ -753,7 +754,7 @@ class Container extends Component{
 
     _confirm = async() => {
         const { submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, studioId2, studioIdConfirm, portfolioForm, isSubmitting, update } = this.state;
-        const { updateStudio, getPhotographer } = this.props;
+        const { updateStudio, getPhotographer, goClear } = this.props;
         if(!isSubmitting){
             if(submitImages.length > 0){
                 if(nickname && mainLocation && education && career && description && submitProfileImage && studioId && studioId2){
@@ -768,10 +769,18 @@ class Container extends Component{
                                         const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, update)
                                         if(result.status === 'ok'){
                                             await getPhotographer()
-                                            this.setState({
-                                                isSubmitting: false
-                                            })
-                                            alert(this.context.t("Studio 정보를 수정하였습니다."))
+                                            if(update){
+                                                this.setState({
+                                                    isSubmitting: false
+                                                })
+                                                alert(this.context.t("Studio 정보를 수정하였습니다."))
+                                            }
+                                            else{
+                                                this.setState({
+                                                    isSubmitting: false
+                                                })
+                                                goClear(studioId)
+                                            }
                                         }
                                         else if(result.error){
                                             this.setState({
@@ -812,10 +821,18 @@ class Container extends Component{
                                     const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, update)
                                     if(result.status === 'ok'){
                                         await getPhotographer()
-                                        this.setState({
-                                            isSubmitting: false
-                                        })
-                                        alert(this.context.t("Studio 정보를 수정하였습니다."))
+                                        if(update){
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            alert(this.context.t("Studio 정보를 수정하였습니다."))
+                                        }
+                                        else{
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            goClear(studioId)
+                                        }
                                     }
                                     else if(result.error){
                                         this.setState({

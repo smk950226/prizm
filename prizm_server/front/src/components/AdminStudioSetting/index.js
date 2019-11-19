@@ -30,6 +30,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getPhotographer: () => {
             dispatch(adminAction.getPhotographer())
+        },
+        goClear: (studioId) => {
+            dispatch(push({
+                pathname: '/studio/edit/complete/',
+                state: {
+                    valid: true,
+                    studioId
+                }
+            }))
         }
     }
 }
