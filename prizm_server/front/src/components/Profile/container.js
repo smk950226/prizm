@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Profile from './presenter';
-import { COUNTRY_CODE } from '../../utils/country';
 
 class Container extends Component{
     static propTypes = {

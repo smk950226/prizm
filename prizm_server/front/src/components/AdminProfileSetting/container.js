@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Profile from './presenter';
-import { COUNTRY_CODE } from '../../utils/country';
+import AdminProfileSetting from './presenter';
 
 class Container extends Component{
     static propTypes = {
@@ -154,7 +153,7 @@ class Container extends Component{
 
     render(){
         return(
-            <Profile 
+            <AdminProfileSetting 
             {...this.props} 
             {...this.state} 
             handleInputChange={this._handleInputChange}

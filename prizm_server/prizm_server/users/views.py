@@ -117,6 +117,7 @@ class AdminProfile(APIView):
                     user.country_number = country_number
                     user.mobile = mobile
                     user.birth = birth
+                    user.instagram_account = instagram_account
                     user.save()
 
                     return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})

@@ -5,7 +5,7 @@ import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
 import { COUNTRY_NUMBER } from '../../utils/country';
 
-const Profile = (props, context) => (
+const AdminProfileSetting = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.justifyContentBetween}`}>
             <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{context.t("Profile")}</p>
@@ -74,7 +74,7 @@ const Profile = (props, context) => (
     </div>
 )
 
-Profile.propTypes = {
+AdminProfileSetting.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
@@ -93,8 +93,8 @@ Profile.propTypes = {
     editable: PropTypes.bool.isRequired
 }
 
-Profile.contextTypes = {
+AdminProfileSetting.contextTypes = {
     t: PropTypes.func
 }
 
-export default Profile;
+export default AdminProfileSetting;
