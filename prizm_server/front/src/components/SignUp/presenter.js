@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
-import { COUNTRY_NUMBER, COUNTRY_CODE } from '../../utils/country';
+import { COUNTRY_NUMBER } from '../../utils/country';
 
 const SignUp = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
@@ -46,34 +46,16 @@ const SignUp = (props, context) => (
                 ))}
             </div>
         </div>
+        <p className={`${styles.my3} ${styles.font10}`}>
+            {context.t("Your reservation details and confirmation message from photographers will be sent to your email and mobile number.")}
+        </p>
         <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Password")}</p>
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} />
         </div>
-        <p className={`${styles.my3} ${styles.font10}`}>
-            {context.t("Your reservation details and confirmation message from photographers will be sent to your email and mobile number.")}
-        </p>
         <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Date of Birth(YY/MM/DD)")}</p>
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"text"} name={"birth"} value={props.birth} onChange={props.handleInputChange} maxLength={6} />
-        </div>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Country/Region")}</p>
-        <div className={`${styles.widthFull}`}>
-            <div className={`${styles.textInput2} ${styles.cursorPointer}`} onClick={props.handleShowCountryCode}>
-                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
-                    <p className={`${styles.font13}`}>{props.countryCode ? props.countryCode.label : ``}</p>
-                    {props.showCountryCode ? (
-                        <MdArrowDropup fontSize="16px" color="#000000" />
-                    ) : (
-                        <MdArrowDropdown fontSize="16px" color="#000000" />
-                    )}
-                </div>
-            </div>
-        </div>
-        <div className={`${props.showCountryCode ? null : styles.none} ${styles.borderDropdown} ${styles.overflowYScroll} ${styles.bgWhite}`} style={{maxHeight: 200, width: '100%'}}>
-            {COUNTRY_CODE.map((country, index) => (
-                <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer}`} onClick={() => props.handleCountryCodeChange(country)}>{`${country.label}`}</p>
-            ))}
         </div>
         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{props.goRequest ? context.t("sign up & submit the request") : context.t("sign up")}</p>
@@ -89,13 +71,9 @@ SignUp.propTypes = {
     mobile: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     birth: PropTypes.string.isRequired,
-    countryCode: PropTypes.object.isRequired,
     handleCountryNumberChange: PropTypes.func.isRequired,
     showCountryNumber: PropTypes.bool.isRequired,
     handleShowCountryNumber: PropTypes.func.isRequired,
-    showCountryCode: PropTypes.bool.isRequired,
-    handleShowCountryCode: PropTypes.func.isRequired,
-    handleCountryCodeChange: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
     goSignIn: PropTypes.func.isRequired,

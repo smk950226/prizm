@@ -54,7 +54,7 @@ function getLogout(){
     }
 }
 
-function signUp(email, password, name, birth, countryNumber, countryCode, mobile){
+function signUp(email, password, name, birth, countryNumber, mobile){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/rest-auth/registration/`, {
            method: 'POST',
@@ -69,8 +69,7 @@ function signUp(email, password, name, birth, countryNumber, countryCode, mobile
                birth,
                countryNumber,
                email,
-               mobile,
-               countryCode
+               mobile
            })
         })
         .then(response => response.json())
@@ -166,7 +165,7 @@ function checkPhotographer(token){
     }
 }
 
-function checkDuplicate(email, mobile, countryNumber){
+function checkDuplicate(email, mobile, countryNumber, instagram){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/api/users/check/duplicate/`, {
             method: 'POST',
@@ -176,7 +175,8 @@ function checkDuplicate(email, mobile, countryNumber){
             body: JSON.stringify({
                 email,
                 mobile,
-                countryNumber
+                countryNumber,
+                instagram
             })
         })
         .then(response => response.json())
@@ -205,7 +205,7 @@ function getProfile(){
     }
 }
 
-function editProfile(name, countryNumber, mobile, birth, countryCode){
+function editProfile(name, countryNumber, mobile, birth){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
         return fetch(`${FETCH_URL}/api/users/profile/`, {
@@ -218,8 +218,37 @@ function editProfile(name, countryNumber, mobile, birth, countryCode){
                 name,
                 countryNumber,
                 mobile,
+                birth
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function adminEditProfile(name, countryNumber, mobile, birth, instagram){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/users/profile/admin/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                name,
+                countryNumber,
+                mobile,
                 birth,
-                countryCode
+                instagram
             })
         })
         .then(response => {
@@ -468,7 +497,8 @@ const actionCreators = {
     editProfile,
     editPassword,
     signUpAdmin,
-    checkPhotographer
+    checkPhotographer,
+    adminEditProfile
 }
 
 export { actionCreators }

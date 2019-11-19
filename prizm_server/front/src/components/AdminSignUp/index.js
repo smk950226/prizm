@@ -15,8 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
-        checkDuplicate: (email, mobile, countryNumber) => {
-            return dispatch(userAction.checkDuplicate(email, mobile, countryNumber))
+        checkDuplicate: (email, mobile, countryNumber, instagram) => {
+            return dispatch(userAction.checkDuplicate(email, mobile, countryNumber, instagram))
         },
         signUpAdmin: (email, password, name, birth, countryNumber, mobile, instagram, userType) => {
             return dispatch(userAction.signUpAdmin(email, password, name, birth, countryNumber, mobile, instagram, userType))

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
-import { COUNTRY_NUMBER, COUNTRY_CODE } from '../../utils/country';
+import { COUNTRY_NUMBER } from '../../utils/country';
 
 const Profile = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
@@ -46,24 +46,6 @@ const Profile = (props, context) => (
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"text"} name={"birth"} value={props.birth} onChange={props.handleInputChange} maxLength={6} />
         </div>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Country/Region")}</p>
-        <div className={`${styles.widthFull}`}>
-            <div className={`${styles.textInput2} ${styles.cursorPointer}`} onClick={props.handleShowCountryCode}>
-                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
-                    <p className={`${styles.font13}`}>{props.countryCode ? props.countryCode.label : ``}</p>
-                    {props.showCountryCode ? (
-                        <MdArrowDropup fontSize="16px" color="#000000" />
-                    ) : (
-                        <MdArrowDropdown fontSize="16px" color="#000000" />
-                    )}
-                </div>
-            </div>
-        </div>
-        <div className={`${props.showCountryCode ? null : styles.none} ${styles.borderDropdown} ${styles.overflowYScroll} ${styles.bgWhite}`} style={{maxHeight: 200, width: '100%'}}>
-            {COUNTRY_CODE.map((country, index) => (
-                <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer}`} onClick={() => props.handleCountryCodeChange(country)}>{`${country.label}`}</p>
-            ))}
-        </div>
         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("edit profile")}</p>
         </div>
@@ -77,17 +59,13 @@ Profile.propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
     handleCountryNumberChange: PropTypes.func.isRequired,
     handleShowCountryNumber: PropTypes.func.isRequired,
-    handleShowCountryCode: PropTypes.func.isRequired,
-    handleCountryCodeChange: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     countryNumber: PropTypes.string.isRequired,
-    countryCode: PropTypes.object.isRequired,
     mobile: PropTypes.string.isRequired,
     birth: PropTypes.string.isRequired,
     emailForm: PropTypes.bool.isRequired,
     birthForm: PropTypes.bool.isRequired,
     showCountryNumber: PropTypes.bool.isRequired,
-    showCountryCode: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
     goPasswordChange: PropTypes.func.isRequired
 }

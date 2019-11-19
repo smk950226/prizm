@@ -29,12 +29,10 @@ class Container extends Component{
             mobile: "",
             password: "",
             birth: "",
-            countryCode: {},
             emailForm: false,
             passwordForm: false,
             birthForm: false,
             showCountryNumber: false,
-            showCountryCode: false,
             isSubmitting: false,
             goRequest: props.location.state ? props.location.state.goRequest ? props.location.state.goRequest : false : false,
             photographerId: props.location.state ? props.location.state.photographerId ? props.location.state.photographerId : null : null
@@ -128,30 +126,17 @@ class Container extends Component{
         })
     }
 
-    _handleCountryCodeChange = (countryCode) => {
-        this.setState({
-            countryCode,
-            showCountryCode: false
-        })
-    }
-
     _handleShowCountryNumber = () => {
         this.setState({
             showCountryNumber: !this.state.showCountryNumber
         })
     }
 
-    _handleShowCountryCode = () => {
-        this.setState({
-            showCountryCode: !this.state.showCountryCode
-        })
-    }
-
     _submit = async() => {
-        const { isSubmitting, name, email, countryNumber, mobile, password, birth, countryCode, emailForm, passwordForm, birthForm, goRequest, photographerId } = this.state;
+        const { isSubmitting, name, email, countryNumber, mobile, password, birth, emailForm, passwordForm, birthForm, goRequest, photographerId } = this.state;
         const { checkDuplicate, signUp, getProfileByToken, getSaveToken, goHome, goDetail, getNotificationByToken, getOrderListByToken } = this.props;
         if(!isSubmitting){
-            if(name && email && countryNumber && mobile && password && birth && countryCode){
+            if(name && email && countryNumber && mobile && password && birth){
                 if(emailForm){
                     if(birthForm){
                         if(passwordForm){
@@ -160,7 +145,7 @@ class Container extends Component{
                             })
                             const check = await checkDuplicate(email, mobile, countryNumber);
                             if(check.status === 'ok'){
-                                const result = await signUp(email, password, name, birth, countryNumber, countryCode.value, mobile)
+                                const result = await signUp(email, password, name, birth, countryNumber, mobile)
                                 if(result.token){
                                     await getProfileByToken(result.token)
                                     await getNotificationByToken(result.token)
@@ -222,8 +207,6 @@ class Container extends Component{
             handleInputChange={this._handleInputChange}
             handleCountryNumberChange={this._handleCountryNumberChange}
             handleShowCountryNumber={this._handleShowCountryNumber}
-            handleShowCountryCode={this._handleShowCountryCode}
-            handleCountryCodeChange={this._handleCountryCodeChange}
             submit={this._submit}
             />
         )

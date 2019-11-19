@@ -9,7 +9,8 @@ class Container extends Component{
         profile: PropTypes.object.isRequired,
         goHome: PropTypes.func.isRequired,
         photographer: PropTypes.object.isRequired,
-        goStudioSetting: PropTypes.func.isRequired
+        goStudioSetting: PropTypes.func.isRequired,
+        goProfile: PropTypes.func.isRequired
     }
 
     state = {

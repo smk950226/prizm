@@ -15,7 +15,6 @@ class AccountAdapter(DefaultAccountAdapter):
         name = request.data.get('name', '')
         birth = request.data.get('birth', '')
         country_number = request.data.get('countryNumber', '')
-        country_code = request.data.get('countryCode', '')
         mobile = request.data.get('mobile', '')
         user_type = request.data.get('userType')
         instagram = request.data.get('instagram')
@@ -31,7 +30,6 @@ class AccountAdapter(DefaultAccountAdapter):
             user.name = name
             user.birth = birth
             user.country_number = country_number
-            user.country_code = country_code
             user.mobile = mobile
 
         user.save()

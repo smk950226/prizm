@@ -81,7 +81,7 @@ const AdminOrderList = (props, context) => (
                 </div>
                 <div className={`${styles.containerAdminToolbox} ${styles.mobileNone} ${styles.bgGrayF8} ${styles.minHeightFull}`} style={{display: 'block'}}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter} ${styles.widthFull} ${styles.py4}`}>
-                        <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mr3} ${styles.mobileNone}`}>{context.t("Profile Setting")}</p>
+                        <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mr3} ${styles.mobileNone}`} onClick={props.goProfile} style={{zIndex: 999}}>{context.t("Profile Setting")}</p>
                         <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.ml3} ${styles.mobileNone}`}>{context.t("Account Setting")}</p>
                     </div>
                     <div className={`${styles.px3}`} style={{marginTop: 100}}>
@@ -110,7 +110,8 @@ AdminOrderList.propTypes = {
     pastList: PropTypes.array,
     refresh: PropTypes.func.isRequired,
     photographer: PropTypes.object.isRequired,
-    goStudioSetting: PropTypes.func.isRequired
+    goStudioSetting: PropTypes.func.isRequired,
+    goProfile: PropTypes.func.isRequired
 }
 
 AdminOrderList.contextTypes = {

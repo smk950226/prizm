@@ -7,6 +7,7 @@ from django.core.validators import validate_email
 from django.utils.translation import ugettext_lazy as _
 
 from . import serializers
+from prizm_server.common.permissions import AdminAuthenticated
 
 User = get_user_model()
 
@@ -15,18 +16,35 @@ class CheckDuplicate(APIView):
         email = request.data.get('email', None)
         mobile = request.data.get('mobile', None)
         country_number = request.data.get('countryNumber', None)
+        instagram = request.data.get('instagram', None)
         if email and mobile and country_number:
-            try:
-                validate_email(email)
-                if len(User.objects.filter(email = email)) > 0:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 중복됩니다.')})
+            if instagram:
+                if len(User.objects.filter(instagram_account = instagram)) > 0:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('인스타그램 계정이 중복됩니다.')})
                 else:
-                    if len(User.objects.filter(mobile = mobile, country_number = country_number)) > 0:
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+                    try:
+                        validate_email(email)
+                        if len(User.objects.filter(email = email)) > 0:
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 중복됩니다.')})
+                        else:
+                            if len(User.objects.filter(mobile = mobile, country_number = country_number)) > 0:
+                                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+                            else:
+                                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    except:
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 올바르지 않습니다.')})
+            else:
+                try:
+                    validate_email(email)
+                    if len(User.objects.filter(email = email)) > 0:
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 중복됩니다.')})
                     else:
-                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
-            except:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 올바르지 않습니다.')})
+                        if len(User.objects.filter(mobile = mobile, country_number = country_number)) > 0:
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+                        else:
+                            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                except:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 올바르지 않습니다.')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
     
@@ -47,8 +65,7 @@ class Profile(APIView):
         country_number = request.data.get('countryNumber', None)
         mobile = request.data.get('mobile', None)
         birth = request.data.get('birth', None)
-        country_code = request.data.get('countryCode', None)
-        if name and country_number and mobile and birth and country_code:
+        if name and country_number and mobile and birth:
             if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
             else:
@@ -56,7 +73,6 @@ class Profile(APIView):
                 user.country_number = country_number
                 user.mobile = mobile
                 user.birth = birth
-                user.country_code = country_code
                 user.save()
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
@@ -77,6 +93,33 @@ class ProfilePassword(APIView):
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
             else:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('현재 비밀번호가 일치하지 않습니다.')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
+
+
+class AdminProfile(APIView):
+    permission_classes = [AdminAuthenticated]
+    def put(self, request, format = None):
+        user = request.user
+        name = request.data.get('name', None)
+        country_number = request.data.get('countryNumber', None)
+        mobile = request.data.get('mobile', None)
+        birth = request.data.get('birth', None)
+        instagram_account = request.data.get('instagram', None)
+        if name and country_number and mobile and birth and instagram_account:
+            if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+            else:
+                if len(User.objects.filter(instagram_account = instagram_account).exclude(id = user.id)) > 0:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('인스타그램 계정이 중복됩니다.')})
+                else:
+                    user.name = name
+                    user.country_number = country_number
+                    user.mobile = mobile
+                    user.birth = birth
+                    user.save()
+
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
 

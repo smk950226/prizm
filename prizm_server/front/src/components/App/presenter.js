@@ -23,6 +23,7 @@ import AdminMenu from '../AdminMenu';
 import AdminTouristPhoto from '../AdminTouristPhoto';
 import AdminStudioSetting from '../AdminStudioSetting';
 import AdminStudioSettingClear from '../AdminStudioSettingClear';
+import AdminProfileSetting from '../AdminProfileSetting';
 
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -277,5 +278,7 @@ const AdminRoute = props => (
         <Route exact path='/tourist/photo/' component={AdminTouristPhoto} key={6} />
         <Route exact path='/studio/edit/' render={() => <AdminStudioSetting {...props} />} key={7} />
         <Route exact path='/studio/edit/complete/' component={AdminStudioSettingClear} key={8} />
+        <Route exact path='/profile/' component={AdminProfileSetting} key={9} />
+
     </Switch>
 )

@@ -35,7 +35,7 @@ const AdminMenu = (props, context) => (
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}} onClick={props.goStudioSetting}>{context.t("Edit Your Studio")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt45}`} onClick={props.goReservation}>{context.t("Manage Reservations")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={props.goTouristPhoto}>{context.t("Tourist Photo")}</p>
-            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`}>{context.t("Profile Setting")}</p>
+            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`} onClick={props.goProfile}>{context.t("Profile Setting")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`}>{context.t("Account Setting")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={props.logout}>{context.t("Log out")}</p>
         </div>
@@ -49,7 +49,8 @@ AdminMenu.propTypes = {
     goTouristPhoto: PropTypes.func.isRequired,
     photographer: PropTypes.object,
     logout: PropTypes.func.isRequired,
-    goStudioSetting: PropTypes.func.isRequired
+    goStudioSetting: PropTypes.func.isRequired,
+    goProfile: PropTypes.func.isRequired
 }
 
 AdminMenu.contextTypes = {

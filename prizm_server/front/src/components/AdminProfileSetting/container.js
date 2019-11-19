@@ -8,7 +8,7 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         profile: PropTypes.object,
         goHome: PropTypes.func.isRequired,
-        editProfile: PropTypes.func.isRequired,
+        adminEditProfile: PropTypes.func.isRequired,
         getProfile: PropTypes.func.isRequired,
         goPasswordChange: PropTypes.func.isRequired
     }
@@ -26,17 +26,23 @@ class Container extends Component{
             countryNumber: profile ? profile.country_number : "",
             mobile: profile ? profile.mobile : "",
             birth: profile ? profile.birth : "",
-            emailForm: profile ? true : false,
+            instagram: profile ? profile.instagram_account :"",
             birthForm: profile ? true : false,
             showCountryNumber: false,
+            showCountryCode: false,
             isSubmitting: false,
-            edited: false
+            edited: false,
+            editable: false
         }
     }
 
     componentDidMount = () => {
-        if(!this.props.isLoggedIn){
-            this.props.goHome()
+        const { isLoggedIn, profile, goHome } = this.props;
+        if(!isLoggedIn){
+            goHome()
+        }
+        else if(profile.user_type !== 'photographer'){
+            goHome()
         }
     }
 
@@ -71,6 +77,12 @@ class Container extends Component{
                 }
             }
         }
+        else if(name === 'instagram'){
+            this.setState({
+                [name]: value.replace(/^@+/, ''),
+                edited: true
+            });
+        }
         else{
             this.setState({
                 [name]: value,
@@ -93,16 +105,16 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, countryNumber, mobile, birth, birthForm, edited } = this.state;
-        const { editProfile, getProfile } = this.props;
+        const { isSubmitting, name, countryNumber, mobile, birth, instagram, birthForm, edited } = this.state;
+        const { adminEditProfile, getProfile } = this.props;
         if(!isSubmitting){
             if(edited){
-                if(name && countryNumber && mobile && birth){
+                if(name && countryNumber && mobile && birth && instagram){
                     if(birthForm){
                         this.setState({
                             isSubmitting: true
                         })
-                        const result = await editProfile(name, countryNumber, mobile, birth)
+                        const result = await adminEditProfile(name, countryNumber, mobile, birth, instagram)
                         if(result.status === 'ok'){
                             await getProfile()
                             this.setState({
@@ -134,6 +146,12 @@ class Container extends Component{
         }
     }
 
+    _enableEdit = () => {
+        this.setState({
+            editable: true
+        })
+    }
+
     render(){
         return(
             <Profile 
@@ -143,6 +161,7 @@ class Container extends Component{
             handleCountryNumberChange={this._handleCountryNumberChange}
             handleShowCountryNumber={this._handleShowCountryNumber}
             submit={this._submit}
+            enableEdit={this._enableEdit}
             />
         )
     }

@@ -407,12 +407,18 @@ html{
 .mt-studio{
     margin-top: 20px;
 }
+.mt-profile{
+    margin-top: 2.25rem;
+}
 @media (min-width: 768px){
     .mt-r-45{
         margin-top: 3rem;
     }
     .mt-studio{
         margin-top: 100px;
+    }
+    .mt-profile{
+        margin-top: 80px;
     }
 }
 

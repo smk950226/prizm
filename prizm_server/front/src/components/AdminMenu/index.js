@@ -34,6 +34,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goStudioSetting: () => {
             dispatch(push('/studio/edit/'))
+        },
+        goProfile: () => {
+            dispatch(push('/profile/'))
         }
     }
 }
