@@ -25,6 +25,7 @@ import AdminStudioSetting from '../AdminStudioSetting';
 import AdminStudioSettingClear from '../AdminStudioSettingClear';
 import AdminProfileSetting from '../AdminProfileSetting';
 import AdminProfilePassword from '../AdminProfilePassword';
+import AdminAccountSetting from '../AdminAccountSetting';
 
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -281,5 +282,6 @@ const AdminRoute = props => (
         <Route exact path='/studio/edit/complete/' component={AdminStudioSettingClear} key={8} />
         <Route exact path='/profile/' component={AdminProfileSetting} key={9} />
         <Route exact path='/profile/password/' component={AdminProfilePassword} key={10} />
+        <Route exact path='/profile/account/' component={AdminAccountSetting} key={11} />
     </Switch>
 )

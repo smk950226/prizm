@@ -29,15 +29,22 @@ class OptionSerializer(serializers.ModelSerializer):
         fields = ['id', 'photographer', 'title', 'photograpy_type', 'description', 'person', 'hour', 'price']
 
 
+class PhotographerAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.PhotographerAccount
+        fields = ['id', 'photographer', 'legal_name', 'birth', 'account_type', 'number']
+
+
 class PhotographerSerializer(serializers.ModelSerializer):
     user = users_serializers.PhotographerProfileSerializer()
     portfolio_set = PortfolioSerializer(many = True)
     location_set = LocationSerializer(many = True)
     option_set = OptionSerializer(many = True)
+    photographeraccount = PhotographerAccountSerializer()
 
     class Meta:
         model = models.Photographer
-        fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'education', 'career', 'studio_id', 'portfolio_set', 'location_set', 'option_set', 'portfolio_url', 'description', 'total_rating', 'review_count']
+        fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'education', 'career', 'studio_id', 'portfolio_set', 'location_set', 'option_set', 'portfolio_url', 'description', 'total_rating', 'review_count', 'photographeraccount']
 
 
 class PhotographerPortfolioSerializer(serializers.ModelSerializer):

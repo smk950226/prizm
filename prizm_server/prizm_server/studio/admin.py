@@ -43,3 +43,10 @@ class OrderAdmin(admin.ModelAdmin):
 class OrderImageAdmin(admin.ModelAdmin):
     list_display = ['id', 'order']
     list_display_links = ['id', 'order']
+
+
+@admin.register(models.PhotographerAccount)
+class PhotographerAccountAdmin(admin.ModelAdmin):
+    list_display = ['id', 'photographer', 'account_type']
+    list_display_links = ['id', 'photographer']
+    list_filter = ['account_type']

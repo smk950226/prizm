@@ -225,6 +225,35 @@ function locationDetail(placeId){
     }
 }
 
+function editAccount(legalName, birth, accountType, number){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/photographer/account/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                legalName,
+                birth,
+                accountType,
+                number
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     
 };
@@ -255,7 +284,8 @@ const actionCreators = {
     getPhotographerByToken,
     geocoding,
     locationDetail,
-    updateStudio
+    updateStudio,
+    editAccount
 }
 
 export { actionCreators }

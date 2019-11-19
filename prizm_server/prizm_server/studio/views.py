@@ -397,3 +397,39 @@ class Studio(APIView):
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('스튜디오 정보를 입력해주세요.')})
+
+
+class PhotographerAccount(APIView):
+    permission_classes = [AdminAuthenticated]
+    def post(self, request, format = None):
+        user = request.user
+        photographer = user.photographer
+        legal_name = request.data.get('legalName', None)
+        birth = request.data.get('birth', None)
+        account_type = request.data.get('accountType', None)
+        number = request.data.get('number', None)
+
+        if legal_name and birth and account_type and number:
+            try:
+                photographer.photographeraccount
+                account = photographer.photographeraccount
+                account.legal_name = legal_name
+                account.birth = birth
+                account.account_type = account_type
+                account.number = number
+                account.save()
+
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            except:
+                account = models.PhotographerAccount.objects.create(
+                    photographer = photographer,
+                    legal_name = legal_name,
+                    birth = birth,
+                    account_type = account_type,
+                    number = number
+                )
+                account.save()
+
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Account 정보를 입력해주세요.')})
