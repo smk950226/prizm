@@ -53,7 +53,7 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 ROOT_URLCONF = "config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = "config.wsgi.application"
-
+ASGI_APPLICATION = "config.routing.application"
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
@@ -76,6 +76,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
+    'channels',
 ]
 
 LOCAL_APPS = [
@@ -83,6 +84,7 @@ LOCAL_APPS = [
     "prizm_server.common.apps.CommonConfig",
     "prizm_server.studio.apps.StudioConfig",
     "prizm_server.notification.apps.NotificationConfig",
+    "prizm_server.chat.apps.ChatConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

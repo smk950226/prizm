@@ -50,15 +50,3 @@ class PhotographerAccountAdmin(admin.ModelAdmin):
     list_display = ['id', 'photographer', 'account_type']
     list_display_links = ['id', 'photographer']
     list_filter = ['account_type']
-
-
-@admin.register(models.Chat)
-class ChatAdmin(admin.ModelAdmin):
-    list_display = ['id', 'order', 'created_at']
-    list_display_links = ['id', 'order']
-
-
-@admin.register(models.ChatMessage)
-class ChatMessageAdmin(admin.ModelAdmin):
-    list_display = ['id', 'chat', 'from_user', 'to_user', 'message_type', 'created_at']
-    list_display_links = ['id', 'chat']

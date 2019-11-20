@@ -41,6 +41,7 @@ requests = "*"
 djangorestframework-jwt = "*"
 django-rest-auth = "*"
 python-dateutil = "*"
+channels = "*"
 
 [requires]
 python_version = "3.7"
