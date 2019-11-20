@@ -6,25 +6,14 @@ import { push } from 'react-router-redux';
 const mapStateToProps = (state, ownProps) => {
     const { user : { isLoggedIn }, router : { location } } = state;
     return {
-        isLoggedIn,
-        pathname: location.pathname
+        pathname: location.pathname,
+        isLoggedIn
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
-        goHome: () => {
-            dispatch(push('/'))
-        },
-        goMySchedule: () => {
-            dispatch(push('/my/schedule/'))
-        },
-        goProfileMenu: () => {
-            dispatch(push('/menu/profile/'))
-        },
-        goMessage: () => {
-            dispatch(push('/message/'))
-        }
+        
     }
 }
 

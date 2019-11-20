@@ -9,7 +9,8 @@ class Navigation extends Component{
         pageType: PropTypes.string.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
         goMySchedule: PropTypes.func.isRequired,
-        goProfileMenu: PropTypes.func.isRequired
+        goProfileMenu: PropTypes.func.isRequired,
+        goMessage: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -31,7 +32,7 @@ class Navigation extends Component{
                             <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>{this.context.t("Reservations")}</p>
                         </div>
                         <div className={`${styles.textCenter}`}>
-                            <img src={require('../../assets/images/icon_message.png')} alt={this.context.t("MESSAGE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} />
+                            <img src={require('../../assets/images/icon_message.png')} alt={this.context.t("MESSAGE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goMessage} />
                             <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`}>{this.context.t("Messages")}</p>
                         </div>
                         <div className={`${styles.textCenter}`}>

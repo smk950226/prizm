@@ -149,7 +149,7 @@ class PhotographerDetail extends Component{
     render(){
         const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted, dateRange, isLoggedIn } = this.props;
         return(
-            <div className={`${requestSubmitted ? styles.safearea : isConfirmPage ? styles.safearea : styles.safeareaTop} ${styles.containerCustomer} ${requestSubmitted ? `${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : null}`}>
+            <div className={`${requestSubmitted ? styles.safearea : isConfirmPage ? styles.safearea : styles.safeareaTop} ${styles.containerCustomer} ${requestSubmitted ? `${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : null}`}>
                 {loading ? (
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                         <Loader type="Oval" color="#d66c8b" height={20} width={20} />

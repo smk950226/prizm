@@ -241,7 +241,7 @@ class Studio(APIView):
         update = request.data.get('update')
 
         if (len(portfolio_images) > 0) and nickname and main_location and education and career and description and profile_image and (len(locations) > 0) and (len(options) > 0) and studio_id:
-            if (studio_id == 'admin') or (studio_id == 'djangoadmin') or (studio_id.find('/') > -1) or (studio_id == '') or (studio_id == 'welcome') or (studio_id == 'signup') or (studio_id == 'signin') or (studio_id == 'profile') or (studio_id == 'reservation') or (studio_id == 'menu'):
+            if (studio_id == 'admin') or (studio_id == 'djangoadmin') or (studio_id.find('/') > -1) or (studio_id == '') or (studio_id == 'welcome') or (studio_id == 'message') or (studio_id == 'signup') or (studio_id == 'signin') or (studio_id == 'profile') or (studio_id == 'reservation') or (studio_id == 'menu'):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('사용할 수 없는 Studio URL 입니다.')})
             elif models.Photographer.objects.filter(studio_id = studio_id).exclude(user__id = user.id).count() > 0:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Studio URL이 중복됩니다.')})
