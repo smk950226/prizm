@@ -8,6 +8,8 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from . import serializers, models
 from prizm_server.common.pagination import MainPageNumberPagination
 from prizm_server.common.permissions import AdminAuthenticated
+from prizm_server.chat import models as chat_models
+from prizm_server.chat import serializers as chat_serializers
 from prizm_server.notification import models as notification_models
 from django.utils.translation import ugettext_lazy as _
 
@@ -433,3 +435,15 @@ class PhotographerAccount(APIView):
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Account 정보를 입력해주세요.')})
+
+
+class Chat(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format = None):
+        user = request.user
+        chats = chat_models.Chat.objects.filter(users__id = user.id).order_by('-created_at')
+        paginator = MainPageNumberPagination()
+        result_page = paginator.paginate_queryset(chats, request)
+        serializer = chat_serializers.ChatListSerializer(result_page, many = True, context = {'request': request})
+
+        return Response(status = status.HTTP_200_OK, data = serializer.data)

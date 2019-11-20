@@ -37,12 +37,12 @@ Modal.setAppElement('#root')
 const App = (props) => {
     if(props.admin){
         return(
-            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} photographer={props.photographer} />
+            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} photographer={props.photographer} chatList={props.chatList} />
         )
     }
     else{
         return(
-            <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} orderList={props.orderList} />
+            <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} orderList={props.orderList} chatList={props.chatList} />
         )
     }
 }
@@ -58,7 +58,8 @@ App.propTypes = {
     orderList: PropTypes.array,
     admin: PropTypes.bool.isRequired,
     initAdmin: PropTypes.func.isRequired,
-    photographer: PropTypes.object
+    photographer: PropTypes.object,
+    chatList: PropTypes.array
 }
 
 class GeneralRouteContainer extends Component{
@@ -68,7 +69,8 @@ class GeneralRouteContainer extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
         notification: PropTypes.array,
-        orderList: PropTypes.array
+        orderList: PropTypes.array,
+        chatList: PropTypes.array
     }
 
     state = {
@@ -76,6 +78,7 @@ class GeneralRouteContainer extends Component{
         fetchedProfile: false,
         fetchedNotification: false,
         fetchedOrderList: false,
+        fetchedChatList: false,
         fetchClear: false
     }
 
@@ -92,8 +95,8 @@ class GeneralRouteContainer extends Component{
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
-        const { fetchedProfile, fetchedNotification, fetchedOrderList } = prevState;
-        if((!fetchedProfile) || (!fetchedNotification || (!fetchedOrderList))){
+        const { fetchedProfile, fetchedNotification, fetchedOrderList, fetchedChatList } = prevState;
+        if((!fetchedProfile) || (!fetchedNotification) || (!fetchedOrderList) || (!fetchedChatList)){
             let update = {}
             if(nextProps.profile){
                 update.fetchedProfile = true
@@ -104,6 +107,9 @@ class GeneralRouteContainer extends Component{
             if(nextProps.orderList){
                 update.fetchedOrderList = true
             }
+            if(nextProps.chatList){
+                update.fetchedChatList = true
+            }
 
             return update
         }
@@ -113,7 +119,7 @@ class GeneralRouteContainer extends Component{
     }
 
     componentDidUpdate = () => {
-        if(this.state.fetchedProfile && this.state.fetchedNotification && this.state.fetchedOrderList && !this.state.fetchClear){
+        if(this.state.fetchedProfile && this.state.fetchedNotification && this.state.fetchedOrderList && this.state.fetchedChatList && !this.state.fetchClear){
             this.setState({
                 loading: false,
                 fetchClear: true,
@@ -148,13 +154,15 @@ class AdminRouteContainer extends Component{
         initAdmin :PropTypes.func.isRequired,
         profile: PropTypes.object,
         isLoggedIn: PropTypes.bool.isRequired,
-        photographer: PropTypes.object
+        photographer: PropTypes.object,
+        chatList: PropTypes.array
     }
 
     state = {
         loading: true,
         fetchedProfile: false,
         fetchedPhotographer: false,
+        fetchedChatList: false,
         fetchClear: false,
         showMobile: false,
         showLocationModal: false,
@@ -174,14 +182,17 @@ class AdminRouteContainer extends Component{
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
-        const { fetchedProfile, fetchedPhotographer } = prevState;
-        if((!fetchedProfile) || (!fetchedPhotographer)){
+        const { fetchedProfile, fetchedPhotographer, fetchedChatList } = prevState;
+        if((!fetchedProfile) || (!fetchedPhotographer) || (!fetchedChatList)){
             let update = {}
             if(nextProps.profile){
                 update.fetchedProfile = true
             }
             if(nextProps.photographer){
                 update.fetchedPhotographer = true
+            }
+            if(nextProps.chatList){
+                update.fetchedChatList = true
             }
 
             return update
@@ -192,7 +203,7 @@ class AdminRouteContainer extends Component{
     }
 
     componentDidUpdate = () => {
-        if(this.state.fetchedProfile && this.state.fetchedPhotographer && !this.state.fetchClear){
+        if(this.state.fetchedProfile && this.state.fetchedPhotographer && this.state.fetchedChatList && !this.state.fetchClear){
             this.setState({
                 loading: false,
                 fetchClear: true,

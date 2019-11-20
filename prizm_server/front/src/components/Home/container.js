@@ -14,19 +14,31 @@ class Container extends Component{
         getPhotographerListMore: PropTypes.func.isRequired
     }
 
-    state = {
-        loading: true,
-        page: 1,
-        hasNextPage: true,
-        isLoadingMore: false,
-        fetchedPhotographerList: false,
-        fetchClear: false,
-        photographerList: []
+    constructor(props){
+        super(props)
+        const { photographerList } = props;
+        this.state = {
+            photographerList,
+            loading: true,
+            page: 1,
+            hasNextPage: true,
+            isLoadingMore: false,
+            fetchedPhotographerList: false,
+            fetchClear: false
+        }
     }
 
     componentDidMount = async() => {
-        const { getPhotographerList } = this.props;
-        await getPhotographerList()
+        const { getPhotographerList, photographerList } = this.props;
+        if(photographerList){
+            this.setState({
+                loading: false,
+                fetchClear: true
+            })
+        }
+        else{
+            await getPhotographerList()
+        }
     }
 
     static getDerivedStateFromProps(nextProps, prevState){

@@ -13,4 +13,5 @@ urlpatterns = [
     path('order/image/upload/', views.OrderImageUpload.as_view()),
     path('admin/order/', views.AdminOrder.as_view()),
     path('edit/', views.Studio.as_view()),
+    path('chat/', views.Chat.as_view()),
 ]

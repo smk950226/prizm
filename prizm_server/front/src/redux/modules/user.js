@@ -7,6 +7,7 @@ const LOGOUT = 'LOGOUT';
 const SET_PROFILE = 'SET_PROFILE';
 const SET_NOTIFICATION = 'SET_NOTIFICATION';
 const SET_ORDER_LIST = 'SET_ORDER_LIST';
+const SET_CHAT_LIST = 'SET_CHAT_LIST';
 
 function saveToken(token) {
     return {
@@ -39,6 +40,13 @@ function setOrderList(orderList){
     return {
         type: SET_ORDER_LIST,
         orderList
+    }
+}
+
+function setChatList(chatList){
+    return {
+        type: SET_CHAT_LIST,
+        chatList
     }
 }
 
@@ -417,6 +425,53 @@ function getOrderListByToken(token){
     }
 }
 
+function getChatList(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/chat/?page=1`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setChatList(json)))
+    }
+}
+
+function getChatListMore(page){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/chat/?page=${page}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(getLogout())
+                return false
+            }
+            else if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     isLoggedIn: localStorage.getItem('jwt') ? true : false,
     token: localStorage.getItem('jwt')
@@ -434,6 +489,8 @@ function reducer(state = initialState, action){
             return applySetNotification(state, action);
         case SET_ORDER_LIST:
             return applySetOrderList(state, action);
+        case SET_CHAT_LIST:
+            return applySetChatList(state, action);
         default:
            return state;
     }
@@ -481,6 +538,14 @@ function applySetOrderList(state, action){
     }
 }
 
+function applySetChatList(state, action){
+    const { chatList } = action;
+    return {
+        ...state,
+        chatList
+    }
+}
+
 const actionCreators = {
     checkDuplicate,
     signUp,
@@ -498,7 +563,9 @@ const actionCreators = {
     editPassword,
     signUpAdmin,
     checkPhotographer,
-    adminEditProfile
+    adminEditProfile,
+    getChatList,
+    getChatListMore
 }
 
 export { actionCreators }
