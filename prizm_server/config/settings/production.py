@@ -36,6 +36,20 @@ DATABASES = {
     }
 }
 
+
+#Web Socket
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [
+                ('prizm.cloud', 6379),
+                ('admin.prizm.cloud', 6379)
+            ],
+        },
+    },
+}
+
 # CACHES
 # ------------------------------------------------------------------------------
 # CACHES = {
