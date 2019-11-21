@@ -12,7 +12,8 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         getChatList: PropTypes.func.isRequired,
         getChatListMore: PropTypes.func.isRequired,
-        chatList: PropTypes.array
+        chatList: PropTypes.array,
+        goMessageDetail: PropTypes.func.isRequired
     }
 
     constructor(props){

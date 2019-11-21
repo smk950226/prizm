@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from . import serializers, models
-from prizm_server.common.pagination import MainPageNumberPagination
+from prizm_server.common.pagination import MainPageNumberPagination, MesssageNumberPagination
 from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.chat import models as chat_models
 from prizm_server.chat import serializers as chat_serializers
@@ -447,3 +447,22 @@ class Chat(APIView):
         serializer = chat_serializers.ChatListSerializer(result_page, many = True, context = {'request': request})
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
+
+
+class Message(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format = None):
+        user = request.user
+        chat_id = request.query_params.get('chatId', None)
+        if chat_id:
+            chat = chat_models.Chat.objects.get(id = chat_id)
+            if user.chat_set.filter(id = chat.id).count() > 0:
+                messages = chat.messages.order_by('created_at')
+                paginator = MesssageNumberPagination()
+                result_page = paginator.paginate_queryset(messages, request)
+                serializer = chat_serializers.ChatMessageSerializer(result_page, many = True, context = {'request': request})
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'messages': serializer.data})
+            else:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})

@@ -17,11 +17,24 @@ const ProfileDiv = styled.div`
     background-attachment: scroll;
 `
 
+const EmptyProfileDivLg = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #333333;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box;
+    background-position: center center;
+    background-attachment: scroll;
+`
+
 class MessageList extends Component{
     static propTypes = {
         chatList: PropTypes.array,
         chatListMore: PropTypes.func.isRequired,
-        loading: PropTypes.bool.isRequired
+        loading: PropTypes.bool.isRequired,
+        goMessageDetail: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -51,7 +64,6 @@ class MessageList extends Component{
 
     render(){
         const { loading, chatList } = this.props;
-        console.log(chatList)
         return(
             <div ref={"messageListContainer"} className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.mb3}`}>{this.context.t("Messages")}</p>
@@ -63,9 +75,13 @@ class MessageList extends Component{
                     <div>
                         {chatList && chatList.length > 0 ? (
                             chatList.map((chat, index) => (
-                                <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
+                                <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={() => this.props.goMessageDetail(chat.id, chat.order.photographer.nickname, chat.order.photographer.profile_image, chat.order.photographer.user.id)}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.col11} ${styles.px0}`}>
-                                        <ProfileDiv image={chat.order.photographer.profile_image} />
+                                        {chat.order.photographer.profile_image ? (
+                                            <ProfileDiv image={chat.order.photographer.profile_image} />
+                                        ) : (
+                                            <EmptyProfileDivLg />
+                                        )}
                                         <div className={`${styles.ml3}`}>
                                             <p className={`${styles.fontBold} ${styles.font1416}`}>{chat.order.photographer.nickname}</p>
                                             {chat.order.status === 'pending' && (

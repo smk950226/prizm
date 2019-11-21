@@ -20,15 +20,33 @@ class Container extends Component{
         const { pathname } = props;
         this.state = {
             pageType: pathname,
-            showMenu: false
+            showMenu: false,
+            showNav: true
+        }
+    }
+
+    componentDidMount = () => {
+        if(this.props.pathname.indexOf('/message/detail/') > -1){
+            this.setState({
+                showNav: false
+            })
         }
     }
 
     componentDidUpdate = (prevProps, prevState) => {
         if(prevProps.pathname !== this.props.pathname){
-            this.setState({
-                showMenu: false
-            })
+            if(this.props.pathname.indexOf('/message/detail/') > -1){
+                this.setState({
+                    showNav: false,
+                    showMenu: false
+                })
+            }
+            else{
+                this.setState({
+                    showNav: true,
+                    showMenu: false
+                })
+            }
         }
     }
 

@@ -111,7 +111,7 @@ function createRequest(photographerId, locationId, optionId, comment, dateOption
             })
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }

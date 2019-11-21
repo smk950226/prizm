@@ -202,7 +202,7 @@ function getProfile(){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
             }
             else{
@@ -230,7 +230,7 @@ function editProfile(name, countryNumber, mobile, birth){
             })
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -260,7 +260,7 @@ function adminEditProfile(name, countryNumber, mobile, birth, instagram){
             })
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -287,7 +287,7 @@ function editPassword(currentPassword, password){
             })
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -308,7 +308,7 @@ function getProfileByToken(token){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
             }
             else{
@@ -329,7 +329,7 @@ function getNotification(){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
             }
             else{
@@ -349,7 +349,7 @@ function getNotificationByToken(token){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
             }
             else{
@@ -370,7 +370,7 @@ function getOrderList(){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -392,7 +392,7 @@ function getOrderDetail(orderId){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -413,7 +413,7 @@ function getOrderListByToken(token){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -435,7 +435,7 @@ function getChatList(){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -457,7 +457,54 @@ function getChatListMore(page){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getMessages(chatId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/message/?chatId=${chatId}&page=1`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getMessagesMore(chatId, page){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/message/?chatId=${chatId}&page=${page}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -565,7 +612,9 @@ const actionCreators = {
     checkPhotographer,
     adminEditProfile,
     getChatList,
-    getChatListMore
+    getChatListMore,
+    getMessages,
+    getMessagesMore
 }
 
 export { actionCreators }

@@ -8,7 +8,9 @@ User = get_user_model()
 
 class ChatConsumer(WebsocketConsumer):
     def fetch_messages(self, data):
-        messages = models.ChatMessage.recent_messages()
+        chat_id = data['chatId']
+
+        messages = models.ChatMessage.objects.filter(chat__id = chat_id).order_by('-created_at')[:30]
         content = {
             'command': 'messages',
             'messages': self.messages_to_json(messages)
@@ -41,6 +43,27 @@ class ChatConsumer(WebsocketConsumer):
         return self.send_chat_message(content)
 
 
+    def more_messages(self, data):
+        page = int(data['page'])
+        chat_id = data['chatId']
+        total = models.ChatMessage.objects.filter(chat__id = chat_id).order_by('-created_at')
+        count = total.count()
+        if page*30 > count:
+            messages = total[(page-1)*30:]
+            content = {
+                'command': 'more_messages',
+                'messages': self.messages_to_json(messages),
+                'has_next_page': False
+            }
+            self.send_message(content)
+        else:
+            messages = total[(page-1)*30:page*30]
+            content = {
+                'command': 'more_messages',
+                'messages': self.messages_to_json(messages),
+                'has_next_page': True
+            }
+            self.send_message(content)
 
     def messages_to_json(self, messages):
         result = []
@@ -56,21 +79,24 @@ class ChatConsumer(WebsocketConsumer):
                 'to_user': message.to_user.name,
                 'text': message.text,
                 'message_type': message.message_type,
-                'created_at': str(message.created_at)
+                'created_at': str(message.created_at),
+                'from_user_id': message.from_user.id
             }
         else:
             return {
                 'chat': message.chat.id,
                 'from_user': message.from_user.name,
-                'to_user': messsage.to_user.photographer.nickname,
+                'to_user': message.to_user.photographer.nickname,
                 'text': message.text,
                 'message_type': message.message_type,
-                'created_at': str(message.created_at)
+                'created_at': str(message.created_at),
+                'from_user_id': message.from_user.id
             }
     
     commands = {
         'fetch_messages': fetch_messages,
-        'new_message': new_message
+        'new_message': new_message,
+        'more_messages': more_messages
     }
 
     def connect(self):

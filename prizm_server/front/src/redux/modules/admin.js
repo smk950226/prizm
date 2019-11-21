@@ -23,7 +23,7 @@ function getAdminOrderList(){
            }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }
@@ -51,7 +51,7 @@ function responseToOrder(orderId, option, availableTime){
             })
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }
@@ -73,7 +73,7 @@ function getOrderImage(orderId){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }
@@ -101,7 +101,7 @@ function uploadOrderImage(images, orderId){
             body: formData
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }
@@ -123,7 +123,7 @@ function getPhotographer(){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }
@@ -144,7 +144,7 @@ function getPhotographerByToken(token){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }
@@ -197,7 +197,7 @@ function updateStudio(portfolios, nickname, mainLocation, education, career, por
             body: formData
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }
@@ -242,7 +242,7 @@ function editAccount(legalName, birth, accountType, number){
             })
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
                 return false
             }

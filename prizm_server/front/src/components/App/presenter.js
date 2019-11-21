@@ -14,6 +14,7 @@ import ProfileMenu from '../ProfileMenu';
 import Profile from '../Profile';
 import ProfilePassword from '../ProfilePassword';
 import MessageList from '../MessageList';
+import MessageDetail from '../MessageDetail';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -279,6 +280,7 @@ const GeneralRoute = props => (
         <Route exact path='/profile/' component={Profile} key={9} />
         <Route exact path='/profile/password/' component={ProfilePassword} key={10} />
         <Route exact path='/message/' component={MessageList} key={11} />
+        <Route exact path='/message/detail/:chatId/' component={MessageDetail} key={12} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
     </Switch>
 )

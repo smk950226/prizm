@@ -22,6 +22,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getChatListMore: (page) => {
             return dispatch(userAction.getChatListMore(page))
+        },
+        goMessageDetail: (chatId, nickname, profileImage, toUser) => {
+            dispatch(push({
+                pathname: `/message/detail/${chatId}/`,
+                state: {
+                    nickname,
+                    profileImage,
+                    toUser
+                }
+            }))
         }
     }
 }

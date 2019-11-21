@@ -36,6 +36,3 @@ class ChatMessage(models.Model):
         ordering = ['-id']
         verbose_name = _('Chat Message')
         verbose_name_plural = _('Chat Message')
-    
-    def recent_messages():
-        return ChatMessage.objects.all().order_by('created_at')[:30]
