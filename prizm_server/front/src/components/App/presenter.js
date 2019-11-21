@@ -59,7 +59,7 @@ App.propTypes = {
     orderList: PropTypes.array,
     admin: PropTypes.bool.isRequired,
     initAdmin: PropTypes.func.isRequired,
-    photographer: PropTypes.object,
+    photographer: PropTypes.any,
     chatList: PropTypes.array
 }
 

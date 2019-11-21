@@ -10,7 +10,7 @@ class Container extends Component{
         notification: PropTypes.array,
         orderList: PropTypes.array,
         initAdmin: PropTypes.func.isRequired,
-        photographer: PropTypes.object,
+        photographer: PropTypes.any,
         chatList: PropTypes.array
     }
 

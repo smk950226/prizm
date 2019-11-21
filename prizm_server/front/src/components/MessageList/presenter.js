@@ -75,7 +75,7 @@ class MessageList extends Component{
                     <div>
                         {chatList && chatList.length > 0 ? (
                             chatList.map((chat, index) => (
-                                <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={() => this.props.goMessageDetail(chat.id, chat.order.photographer.nickname, chat.order.photographer.profile_image, chat.order.photographer.user.id)}>
+                                <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={() => this.props.goMessageDetail(chat.id, chat.order)}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.col11} ${styles.px0}`}>
                                         {chat.order.photographer.profile_image ? (
                                             <ProfileDiv image={chat.order.photographer.profile_image} />

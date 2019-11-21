@@ -28,6 +28,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         initAdmin: () => {
             dispatch(userAction.getProfile())
             dispatch(adminAction.getPhotographer())
+            dispatch(userAction.getChatList())
         }
     }
 }

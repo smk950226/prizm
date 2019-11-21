@@ -19,7 +19,7 @@ class ChatMessage(models.Model):
     chat = models.ForeignKey(Chat, on_delete = models.CASCADE, related_name = 'messages')
     from_user = models.ForeignKey('users.User', on_delete = models.CASCADE, related_name = 'message_from')
     to_user = models.ForeignKey('users.User', on_delete = models.CASCADE, related_name = 'message_to')
-    text = models.TextField(_('Text'))
+    text = models.TextField(_('Text'), blank = True, null = True)
     message_type = models.CharField(_("Message Type"), max_length = 200, choices = (
         ('order_confirm', 'Order Confirm'),
         ('order_confirm_response', 'Order Confirm Response'),

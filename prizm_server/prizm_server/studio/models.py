@@ -120,6 +120,7 @@ class Order(models.Model):
     is_ended = models.BooleanField(_("Schedule Ended"), default = False)
     available_time = models.TextField(_("Available Time"), blank = True, null = True)
     confirmed_date = models.DateTimeField(_("Confirmed Date"), blank = True, null = True)
+    confirmed_at = models.DateTimeField(_("Confirmed At"), blank = True, null = True)
 
     def __str__(self):
         return self.user.email + ' -> ' + self.photographer.nickname

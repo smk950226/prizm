@@ -36,12 +36,15 @@ class Container extends Component{
             isLoadingMore: false,
             chatId,
             messages: [],
-            nickname: props.location.state ? props.location.state.nickname ? props.location.state.nickname : null : null,
-            profileImage: props.location.state ? props.location.state.profileImage ? props.location.state.profileImage : null : null,
-            toUser: props.location.state ? props.location.state.toUser ? props.location.state.toUser : null : null,
+            nickname: props.location.state ? props.location.state.order ? props.location.state.order.photographer.nickname : null : null,
+            profileImage: props.location.state ? props.location.state.order ? props.location.state.order.photographer.profile_image : null : null,
+            toUser: props.location.state ? props.location.state.order ? props.location.state.order.photographer.user.id : null : null,
+            photographer: props.location.state ? props.location.state.order ? props.location.state.order.photographer : null : null,
+            order: props.location.state ? props.location.state.order ? props.location.state.order : null : null,
             text: "",
             messageType: 'normal',
-            added: false
+            added: false,
+            showMap: false
         }
 
         this.initialize(chatId)
@@ -197,6 +200,18 @@ class Container extends Component{
         }
     }
 
+    _openMap = () => {
+        this.setState({
+            showMap: true
+        })
+    }
+
+    _closeMap = () => {
+        this.setState({
+            showMap: false
+        })
+    }
+
     render(){
         const { messages } = this.state;
         return(
@@ -211,6 +226,8 @@ class Container extends Component{
             send={this._send}
             handleKeyPress={this._handleKeyPress}
             handleAdded={this._handleAdded}
+            openMap={this._openMap}
+            closeMap={this._closeMap}
             />
         )
     }

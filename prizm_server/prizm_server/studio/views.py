@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from . import serializers, models
 from prizm_server.common.pagination import MainPageNumberPagination, MesssageNumberPagination
@@ -11,7 +13,6 @@ from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.chat import models as chat_models
 from prizm_server.chat import serializers as chat_serializers
 from prizm_server.notification import models as notification_models
-from django.utils.translation import ugettext_lazy as _
 
 import datetime, pytz, json
 from dateutil.relativedelta import relativedelta
@@ -150,11 +151,13 @@ class AdminOrder(APIView):
     def post(self, request, format = None):
         order_id = request.data.get('orderId', None)
         option = request.data.get('option', None)
+        user = request.user
         if order_id and option:
             order = models.Order.objects.get(id = order_id)
             if option == 1:
                 order.status = 'confirmed'
                 order.confirmed_date = order.specific_date
+                order.confirmed_at = timezone.now()
                 order.save()
                 notification = notification_models.Notification.objects.create(
                     user = order.user,
@@ -162,6 +165,20 @@ class AdminOrder(APIView):
                     order = order
                 )
                 notification.save()
+
+                chat = chat_models.Chat.objects.create(
+                    order = order
+                )
+                chat.save()
+                chat.users.add(user, order.user)
+                message = chat_models.ChatMessage.objects.create(
+                    chat = chat,
+                    from_user = user,
+                    to_user = order.user,
+                    message_type = 'order_confirm'
+                )
+                message.save()
+
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
             elif option == 2:
                 #create chat
