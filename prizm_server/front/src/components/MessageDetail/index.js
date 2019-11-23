@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Container from './container';
 import { actionCreators as userAction } from '../../redux/modules/user';
+import { actionCreators as customerAction } from '../../redux/modules/customer';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getMessagesMore: (chatId, page) => {
             return dispatch(userAction.getMessagesMore(chatId, page))
+        },
+        responseToOrder: (orderId, responseType, selectedTime, messageId) => {
+            return dispatch(customerAction.responseToOrder(orderId, responseType, selectedTime, messageId))
         }
     }
 }

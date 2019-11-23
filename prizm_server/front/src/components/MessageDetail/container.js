@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 import MessageList from './presenter';
 import WebSocketInstance from '../../utils/WebSocket';
 
-
 class Container extends Component{
     static propTypes = {
         isLoggedIn: PropTypes.bool.isRequired,
         goHome: PropTypes.func.isRequired,
         getMessages: PropTypes.func.isRequired,
         getMessagesMore: PropTypes.func.isRequired,
-        profile: PropTypes.object.isRequired
+        profile: PropTypes.object.isRequired,
+        responseToOrder: PropTypes.func.isRequired
     }
 
     static contextTypes = {
         t: PropTypes.func
     }
 
-    initialize = (chatId) => {
+    initialize = (chatId, fromUser) => {
         this.waitForSocketConnection(() => {
             WebSocketInstance.addCallbacks(this.setMessages.bind(this), this.addMessage.bind(this), this.moreMessage.bind(this));
-            WebSocketInstance.fetchMessages(chatId)
+            WebSocketInstance.fetchMessages(chatId, fromUser)
         })
 
         WebSocketInstance.connect(chatId)
@@ -28,7 +28,7 @@ class Container extends Component{
 
     constructor(props){
         super(props)
-        const { match : { params : { chatId } } } = props;
+        const { match : { params : { chatId } }, profile : { id } } = props;
         this.state = {
             loading: true,
             page: 1,
@@ -44,10 +44,13 @@ class Container extends Component{
             text: "",
             messageType: 'normal',
             added: false,
-            showMap: false
+            showMap: false,
+            redating: false,
+            isSubmitting: false,
+            redatingMsgId: -1
         }
 
-        this.initialize(chatId)
+        this.initialize(chatId,id)
     }
 
     waitForSocketConnection(callback){
@@ -67,10 +70,12 @@ class Container extends Component{
         )
     }
 
-    setMessages(messages){
+    setMessages(messages, redating, redatingMsgId){
         this.setState({
             messages: messages.reverse(),
-            loading: false
+            loading: false,
+            redating,
+            redatingMsgId
         })
     }
 
@@ -81,20 +86,23 @@ class Container extends Component{
         })
     }
 
-    moreMessage(messages, hasNextPage){
+    moreMessage(messages, hasNextPage, redating, redatingMsgId){
         if(hasNextPage){
             this.setState({
                 messages: [...messages.reverse(), ...this.state.messages],
                 isLoadingMore: false,
                 page: this.state.page + 1,
-                hasNextPage
+                hasNextPage,
+                redating,
+                redatingMsgId
             })
         }
         else{
             this.setState({
                 messages: [...messages.reverse(), ...this.state.messages],
                 isLoadingMore: false,
-                hasNextPage
+                hasNextPage,
+                redatingMsgId
             })
         }
         
@@ -123,7 +131,7 @@ class Container extends Component{
     componentDidUpdate = (prevProps, prevState) => {
         if(prevProps.match.params.chatId !== this.props.match.params.chatId){
             WebSocketInstance.disconnect()
-            this.initialize(this.props.match.params.chatId)
+            this.initialize(this.props.match.params.chatId, this.props.profile.id)
         }
     }
 
@@ -212,6 +220,97 @@ class Container extends Component{
         })
     }
 
+    _cancel = async() => {
+        const { responseToOrder, profile } = this.props;
+        const { order, isSubmitting, chatId, messageType, toUser, redatingMsgId } = this.state;
+        if(!isSubmitting){
+            this.setState({
+                isSubmitting: true
+            })
+            const result = await responseToOrder(order.id, 'cancel', [], redatingMsgId)
+            if(result.status === 'ok'){
+                const messageObj = {
+                    fromUser: profile.id,
+                    toUser: toUser,
+                    chatId: chatId,
+                    text: "Sorry, I couldn't find the time available. I'd like to cancel the reservation.",
+                    messageeType: messageType
+                }
+                WebSocketInstance.newChatMessage(messageObj);
+                this.setState({
+                    text: '',
+                    isSubmitting: false,
+                    redating: false
+                })
+            }
+            else if(result.error){
+                this.setState({
+                    isSubmitting: false
+                })
+                alert(result.error)
+            }
+            else{
+                this.setState({
+                    isSubmitting: false
+                })
+                alert(this.context.t("오류가 발생하였습니다."))
+            }
+        }
+    }
+
+    _save = async(selectedTime) => {
+        const { responseToOrder, profile } = this.props;
+        const { order, isSubmitting, redatingMsgId, toUser, chatId, messageType } = this.state;
+        if(!isSubmitting){
+            if(selectedTime.length === order.option.hour){
+                this.setState({
+                    isSubmitting: true
+                })
+                selectedTime.sort((a,b) => {
+                    const aDate = new Date(Number(a.time.slice(0,4)), Number(a.time.slice(5,7)) - 1, Number(a.time.slice(8,10)), Number(a.time.slice(11,13)), Number(a.time.slice(14,16)))
+                    const bDate = new Date(Number(b.time.slice(0,4)), Number(b.time.slice(5,7)) - 1, Number(b.time.slice(8,10)), Number(b.time.slice(11,13)), Number(b.time.slice(14,16)))
+                    if(aDate < bDate){
+                        return -1
+                    }
+                    else{
+                        return 1
+                    }
+                })
+                const result = await responseToOrder(order.id, 'confirm', selectedTime[0].time, redatingMsgId)
+                if(result.status === 'ok'){
+                    const messageObj = {
+                        fromUser: profile.id,
+                        toUser: toUser,
+                        chatId: chatId,
+                        text: `No worries, I’d take photos at ${selectedTime[0].time.slice(0,4)}/${selectedTime[0].time.slice(5,7)}/${selectedTime[0].time.slice(8,10)} ${selectedTime[0].time.slice(11,13)}:00 instead. Thank you!`,
+                        messageeType: messageType
+                    }
+                    WebSocketInstance.newChatMessage(messageObj);
+                    this.setState({
+                        text: '',
+                        isSubmitting: false,
+                        redating: false
+                    })
+                }
+                else if(result.error){
+                    this.setState({
+                        isSubmitting: false
+                    })
+                    alert(result.error)
+                }
+                else{
+                    this.setState({
+                        isSubmitting: false
+                    })
+                    alert(this.context.t("오류가 발생하였습니다."))
+                }
+            }
+            else{
+                alert(this.context.t(`${order.option.hour}시간을 선택해주세요.`))
+            }
+        }
+    }
+
     render(){
         const { messages } = this.state;
         return(
@@ -228,6 +327,8 @@ class Container extends Component{
             handleAdded={this._handleAdded}
             openMap={this._openMap}
             closeMap={this._closeMap}
+            cancel={this._cancel}
+            save={this._save}
             />
         )
     }

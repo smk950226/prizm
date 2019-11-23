@@ -121,6 +121,57 @@ class Order(APIView):
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('요청 정보를 입력해주세요.')})
+    
+    def put(self, request, format = None):
+        user = request.user
+        response_type = request.data.get('responseType', None)
+        order_id = request.data.get('orderId')
+        selected_time = request.data.get('selectedTime')
+        message_id = request.data.get('messageId')
+
+        if response_type and order_id and message_id:
+            if response_type == 'cancel':
+                order = models.Order.objects.get(id = order_id)
+                try:
+                    message = chat_models.ChatMessage.objects.get(id = message_id)
+                    if order.status == 'confirmed':
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('확정된 예약입니다.')})
+                    else:
+                        order.status = 'cancelled'
+                        order.save()
+                        message.responded = True
+                        message.save()
+                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+
+                except:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+            else:
+                order = models.Order.objects.get(id = order_id)
+                if selected_time:
+                    selected = datetime.datetime(int(selected_time[:4]), int(selected_time[5:7]), int(selected_time[8:10]), int(selected_time[11:13]), 00)
+                    try:
+                        message = chat_models.ChatMessage.objects.get(id = message_id)
+                        order.confirmed_date = selected
+                        order.confirmed_at = timezone.now()
+                        order.status = 'confirmed'
+                        order.save()
+                        message.responded = True
+                        message.save()
+                        notification = notification_models.Notification.objects.create(
+                            user = order.user,
+                            notification_type = 'request_confirm',
+                            order = order
+                        )
+                        notification.save()
+
+                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    except:
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+                else:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('가능한 시간을 선택해주세요.')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
 
 
 class OrderDetail(APIView):
@@ -181,24 +232,44 @@ class AdminOrder(APIView):
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
             elif option == 2:
-                #create chat
                 available_time = request.data.get('availableTime', None)
                 if available_time:
-                    order.available_time = json.dumps(available_time)
-                    order.save()
-                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    if order.available_time:
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이미 시간을 지정하였습니다.')})
+                    else:
+                        order.available_time = json.dumps(available_time)
+                        order.save()
+
+                        chat = chat_models.Chat.objects.create(
+                            order = order
+                        )
+                        chat.save()
+                        chat.users.add(user, order.user)
+                        message = chat_models.ChatMessage.objects.create(
+                            chat = chat,
+                            from_user = user,
+                            to_user = order.user,
+                            message_type = 'order_redating',
+                            text = json.dumps(available_time)
+                        )
+                        message.save()
+
+                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                 else:
                     return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
             else:
-                order.status = 'cancelled'
-                order.save()
-                notification = notification_models.Notification.objects.create(
-                    user = order.user,
-                    notification_type = 'request_cancel',
-                    order = order
-                )
-                notification.save()
-                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                if order.status == 'confirmed':
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('확정된 예약입니다.')})
+                else:
+                    order.status = 'cancelled'
+                    order.save()
+                    notification = notification_models.Notification.objects.create(
+                        user = order.user,
+                        notification_type = 'request_cancel',
+                        order = order
+                    )
+                    notification.save()
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
 

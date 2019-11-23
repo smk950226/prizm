@@ -123,6 +123,35 @@ function createRequest(photographerId, locationId, optionId, comment, dateOption
     }
 }
 
+function responseToOrder(orderId, responseType, selectedTime, messageId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/order/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                orderId, 
+                responseType, 
+                selectedTime,
+                messageId
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -172,7 +201,8 @@ const actionCreators = {
     getPhotographerDetail,
     createRequest,
     getRequest,
-    removeRequest
+    removeRequest,
+    responseToOrder
 }
 
 export { actionCreators }

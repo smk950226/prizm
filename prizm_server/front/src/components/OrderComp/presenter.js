@@ -74,9 +74,15 @@ const OrderComp = (props, context) => (
                     </div>
                     <div className={`${styles.col4} ${styles.colLg3} ${styles.pr3} ${styles.pl0}`}>
                         <p className={`${styles.fontBold} ${styles.font1214}`}>
-                            {props.order.date_option === 'Specific' && `${props.order.specific_date.slice(2,4).concat('/',props.order.specific_date.slice(5,7), '/', props.order.specific_date.slice(8,10), ' ', props.order.specific_date.slice(11,13), ':', props.order.specific_date.slice(14,16))}`}
-                            {props.order.date_option === 'Range' && (
-                                `${props.order.start_date.slice(2,4).concat('/',props.order.start_date.slice(5,7), '/', props.order.start_date.slice(8,10), ' ~ ', props.order.end_date.slice(2,4), '/',props.order.end_date.slice(5,7), '/', props.order.end_date.slice(8,10))}`
+                            {props.order.status === 'confirmed' ? (
+                                `${props.order.confirmed_date.slice(2,4).concat('/',props.order.confirmed_date.slice(5,7), '/', props.order.confirmed_date.slice(8,10), ' ', props.order.confirmed_date.slice(11,13), ':', props.order.confirmed_date.slice(14,16))}`
+                            ) : (
+                                <Fragment>
+                                    {props.order.date_option === 'Specific' && `${props.order.specific_date.slice(2,4).concat('/',props.order.specific_date.slice(5,7), '/', props.order.specific_date.slice(8,10), ' ', props.order.specific_date.slice(11,13), ':', props.order.specific_date.slice(14,16))}`}
+                                    {props.order.date_option === 'Range' && (
+                                        `${props.order.start_date.slice(2,4).concat('/',props.order.start_date.slice(5,7), '/', props.order.start_date.slice(8,10), ' ~ ', props.order.end_date.slice(2,4), '/',props.order.end_date.slice(5,7), '/', props.order.end_date.slice(8,10))}`
+                                    )}
+                                </Fragment>
                             )}
                         </p>
                     </div>
@@ -89,32 +95,36 @@ const OrderComp = (props, context) => (
         <Collapse isOpened={props.showResponse} theme={{collapse: styles.collapse}}>
             <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
                 <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("How would you like to respond?")}</p>
-                {props.order.date_option === 'Specific' && (
-                    <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`} onClick={props.checkedOption === 1 ? () => props.selectOption(0) : () => props.selectOption(1)}>
-                        <div className={`${styles.checkBoxSm} ${props.checkedOption === 1 ? styles.checked : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                            {props.checkedOption === 1 && (
-                                <img src={require('../../assets/images/icon_checked.png')} className={`${styles.iconChecked}`} />
-                            )}
-                        </div>
-                        <div className={`${styles.checkBoxSmText}`}>
-                            <p className={`${props.checkedOption === 1 ? styles.fontBold : null} ${styles.font1113} ${styles.white} ${styles.ml2}`}>
-                                {context.t("Yes, I’m available at the date&time. I’d like to confirm the reservation.")}
-                            </p>
-                        </div>
-                    </div>
-                )}
-                <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`} onClick={props.checkedOption === 2 ? () => props.selectOption(0) : () => props.selectOption(2)}>
-                    <div className={`${styles.checkBoxSm} ${props.checkedOption === 2 ? styles.checked : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                        {props.checkedOption === 2 && (
-                            <img src={require('../../assets/images/icon_checked.png')} className={`${styles.iconChecked}`} />
+                {props.order.available_time ? (null) : (
+                    <Fragment>
+                        {props.order.date_option === 'Specific' && (
+                            <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`} onClick={props.checkedOption === 1 ? () => props.selectOption(0) : () => props.selectOption(1)}>
+                                <div className={`${styles.checkBoxSm} ${props.checkedOption === 1 ? styles.checked : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                    {props.checkedOption === 1 && (
+                                        <img src={require('../../assets/images/icon_checked.png')} className={`${styles.iconChecked}`} />
+                                    )}
+                                </div>
+                                <div className={`${styles.checkBoxSmText}`}>
+                                    <p className={`${props.checkedOption === 1 ? styles.fontBold : null} ${styles.font1113} ${styles.white} ${styles.ml2}`}>
+                                        {context.t("Yes, I’m available at the date&time. I’d like to confirm the reservation.")}
+                                    </p>
+                                </div>
+                            </div>
                         )}
-                    </div>
-                    <div className={`${styles.checkBoxSmText}`}>
-                        <p className={`${props.checkedOption === 2 ? styles.fontBold : null} ${styles.font1113} ${styles.white} ${styles.ml2}`}>
-                            {props.order.date_option === 'Specific' ? context.t("No, I’d not be available at the date&time, but I’d like to suggest other date&time options to my client.") : context.t("Yes, I'm available at the selected period. I'd like to suggest timeslot options to the client.")}
-                        </p>
-                    </div>
-                </div>
+                        <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`} onClick={props.checkedOption === 2 ? () => props.selectOption(0) : () => props.selectOption(2)}>
+                            <div className={`${styles.checkBoxSm} ${props.checkedOption === 2 ? styles.checked : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                {props.checkedOption === 2 && (
+                                    <img src={require('../../assets/images/icon_checked.png')} className={`${styles.iconChecked}`} />
+                                )}
+                            </div>
+                            <div className={`${styles.checkBoxSmText}`}>
+                                <p className={`${props.checkedOption === 2 ? styles.fontBold : null} ${styles.font1113} ${styles.white} ${styles.ml2}`}>
+                                    {props.order.date_option === 'Specific' ? context.t("No, I’d not be available at the date&time, but I’d like to suggest other date&time options to my client.") : context.t("Yes, I'm available at the selected period. I'd like to suggest timeslot options to the client.")}
+                                </p>
+                            </div>
+                        </div>
+                    </Fragment>
+                )}
                 <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`} onClick={props.checkedOption === 3 ? () => props.selectOption(0) : () => props.selectOption(3)}>
                     <div className={`${styles.checkBoxSm} ${props.checkedOption === 3 ? styles.checked : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                         {props.checkedOption === 3 && (
@@ -153,9 +163,9 @@ const OrderComp = (props, context) => (
                         <div key={index} className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.flexNowrap}`} style={{height: 32}}>
                             <p className={`${styles.fontBold} ${styles.font1113} ${styles.white} ${styles.nowrapInner}`} style={{width: 70}}>{`${String(day.getFullYear()).slice(2,4)}/${String(day.getMonth() + 1).length === 1 ? '0'.concat(String(day.getMonth() + 1)) : String(day.getMonth() + 1)}/${String(day.getDate()).length === 1 ? '0'.concat(String(day.getDate())) : String(day.getDate())}`}</p>
                             {props.timeList.map((time, index) => {
-                                const isSelected = props.selectedTime.find(se => se === `${String(day.getFullYear()).slice(2,4)}/${String(day.getMonth() + 1).length === 1 ? '0'.concat(String(day.getMonth() + 1)) : String(day.getMonth() + 1)}/${String(day.getDate()).length === 1 ? '0'.concat(String(day.getDate())) : String(day.getDate())}T${time}`) ? true : false
+                                const isSelected = props.selectedTime.find(se => se === `${String(day.getFullYear())}/${String(day.getMonth() + 1).length === 1 ? '0'.concat(String(day.getMonth() + 1)) : String(day.getMonth() + 1)}/${String(day.getDate()).length === 1 ? '0'.concat(String(day.getDate())) : String(day.getDate())}T${time}`) ? true : false
                                 return(
-                                    <div key={index} className={`${isSelected ? styles.bgConfirmed :styles.bgWhite} ${styles.containerDayBox} ${styles.cursorPointer}`} onClick={isSelected ? () => props.removeTime(`${String(day.getFullYear()).slice(2,4)}/${String(day.getMonth() + 1).length === 1 ? '0'.concat(String(day.getMonth() + 1)) : String(day.getMonth() + 1)}/${String(day.getDate()).length === 1 ? '0'.concat(String(day.getDate())) : String(day.getDate())}T${time}`) :() => props.selectTime(`${String(day.getFullYear()).slice(2,4)}/${String(day.getMonth() + 1).length === 1 ? '0'.concat(String(day.getMonth() + 1)) : String(day.getMonth() + 1)}/${String(day.getDate()).length === 1 ? '0'.concat(String(day.getDate())) : String(day.getDate())}T${time}`)}>
+                                    <div key={index} className={`${isSelected ? styles.bgConfirmed :styles.bgWhite} ${styles.containerDayBox} ${styles.cursorPointer}`} onClick={isSelected ? () => props.removeTime(`${String(day.getFullYear())}/${String(day.getMonth() + 1).length === 1 ? '0'.concat(String(day.getMonth() + 1)) : String(day.getMonth() + 1)}/${String(day.getDate()).length === 1 ? '0'.concat(String(day.getDate())) : String(day.getDate())}T${time}`) :() => props.selectTime(`${String(day.getFullYear())}/${String(day.getMonth() + 1).length === 1 ? '0'.concat(String(day.getMonth() + 1)) : String(day.getMonth() + 1)}/${String(day.getDate()).length === 1 ? '0'.concat(String(day.getDate())) : String(day.getDate())}T${time}`)}>
                                     </div>
                                 )
                             })}

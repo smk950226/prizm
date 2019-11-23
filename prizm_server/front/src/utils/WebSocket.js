@@ -52,20 +52,21 @@ class WebSocketService{
             return;
         }
         if (command === 'messages'){
-            this.callbacks[command](parsedData.messages)
+            this.callbacks[command](parsedData.messages, parsedData.redating, parsedData.redating_msg_id)
         }
         if (command === 'new_message'){
             this.callbacks[command](parsedData.message)
         }
         if (command === 'more_messages'){
-            this.callbacks[command](parsedData.messages, parsedData.has_next_page)
+            this.callbacks[command](parsedData.messages, parsedData.has_next_page, parsedData.redating, parsedData.redating_msg_id)
         }
     }
 
-    fetchMessages(chatId){
+    fetchMessages(chatId, fromUser){
         this.sendMessage({
             command: 'fetch_messages',
-            chatId
+            chatId,
+            fromUser
         })
     }
 

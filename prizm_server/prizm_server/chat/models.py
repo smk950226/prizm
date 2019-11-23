@@ -28,6 +28,7 @@ class ChatMessage(models.Model):
         ('normal', 'Normal')
     ))
     created_at = models.DateTimeField(auto_now_add = True)
+    responded = models.BooleanField(_("Re Dating Responded"), default = False)
 
     def __str__(self):
         return 'message: ' + self.from_user.name + ' -> ' + self.to_user.name
