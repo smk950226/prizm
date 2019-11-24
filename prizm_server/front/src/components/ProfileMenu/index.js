@@ -32,6 +32,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goProfile: () => {
             dispatch(push('/profile/'))
+        },
+        goMyPhotos: () => {
+            dispatch(push('/my/photos/'))
         }
     }
 }

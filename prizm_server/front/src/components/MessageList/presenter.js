@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const ProfileDiv = styled.div`
     width: 40px;

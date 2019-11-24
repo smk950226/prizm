@@ -10,7 +10,8 @@ class ProfileMenu extends Component{
         goMySchedule: PropTypes.func.isRequired,
         goSignIn: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
-        goProfile: PropTypes.func.isRequired
+        goProfile: PropTypes.func.isRequired,
+        goMyPhotos:  PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -54,7 +55,7 @@ class ProfileMenu extends Component{
                                 )}
                             </div>
                         )}
-                        <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`}>
+                        <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={this.props.goMyPhotos}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.px3}`}>{this.context.t("My Photos")}</p>
                         </div>
                         <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`}>

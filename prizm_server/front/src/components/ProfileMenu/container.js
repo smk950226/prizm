@@ -12,7 +12,8 @@ class Container extends Component{
         goSignUp: PropTypes.func.isRequired,
         goMySchedule: PropTypes.func.isRequired,
         profile: PropTypes.object,
-        goProfile: PropTypes.func.isRequired
+        goProfile: PropTypes.func.isRequired,
+        goMyPhotos: PropTypes.func.isRequired
     }
 
     _logout = () => {

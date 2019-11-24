@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MySchedule from './presenter';
+import MyPhotos from './presenter';
 
 class Container extends Component{
     static propTypes = {
@@ -8,7 +8,7 @@ class Container extends Component{
         getOrderList: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
-        goMyScheduleDetail: PropTypes.func.isRequired
+        goMyPhotoDetail: PropTypes.func.isRequired
     }
 
     state = {
@@ -59,7 +59,7 @@ class Container extends Component{
 
     render(){
         return(
-            <MySchedule {...this.props} {...this.state} />
+            <MyPhotos {...this.props} {...this.state} />
         )
     }
 }
