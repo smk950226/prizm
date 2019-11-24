@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AdminSignUp from './presenter';
+import { COUNTRY_CODE } from '../../utils/country';
 
 class Container extends Component{
     static propTypes = {
@@ -28,8 +29,10 @@ class Container extends Component{
             mobile: "",
             password: "",
             countryNumber: "",
+            countryCode: "",
             birth: "",
             instagram: "",
+            q: "",
             emailForm: false,
             passwordForm: false,
             birthForm: false,
@@ -37,7 +40,8 @@ class Container extends Component{
             showCountryNumber: false,
             fetchedToken: false,
             fetchedProfile: false,
-            fetchClear: false
+            fetchClear: false,
+            countryList: []
         }
     }
 
@@ -148,6 +152,24 @@ class Container extends Component{
                 [name]: value.replace(/^@+/, '')
             });
         }
+        else if(name === 'q'){
+            this.setState({
+                [name]: value
+            });
+            let countryList = [];
+            COUNTRY_CODE.map(country => {
+                if(country.label.toLowerCase().indexOf(value.toLowerCase()) > -1){
+                    countryList.push(country)
+                    return null;
+                }
+                else{
+                    return null
+                }
+            })
+            this.setState({
+                countryList
+            })
+        }
         else{
             this.setState({
                 [name]: value
@@ -156,10 +178,10 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, email, countryNumber, mobile, password, birth, instagram, emailForm, passwordForm, birthForm } = this.state;
+        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, birth, instagram, emailForm, passwordForm, birthForm } = this.state;
         const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, getPhotographerByToken } = this.props;
         if(!isSubmitting){
-            if(name && email && countryNumber && mobile && password && birth && instagram){
+            if(name && email && countryNumber && countryCode && mobile && password && birth && instagram){
                 if(emailForm){
                     if(birthForm){
                         if(passwordForm){
@@ -168,7 +190,7 @@ class Container extends Component{
                             })
                             const check = await checkDuplicate(email, mobile, countryNumber, instagram);
                             if(check.status === 'ok'){
-                                const result = await signUpAdmin(email, password, name, birth, countryNumber, mobile, instagram, 'photographer')
+                                const result = await signUpAdmin(email, password, name, birth, countryNumber, countryCode, mobile, instagram, 'photographer')
                                 if(result.token){
                                     await getProfileByToken(result.token)
                                     await getPhotographerByToken(result.token)
@@ -215,9 +237,10 @@ class Container extends Component{
         }
     }
 
-    _handleCountryNumberChange = (countryNumber) => {
+    _handleCountryNumberChange = (countryNumber, countryCode) => {
         this.setState({
             countryNumber,
+            countryCode,
             showCountryNumber: false
         })
     }
@@ -225,6 +248,18 @@ class Container extends Component{
     _handleShowCountryNumber = () => {
         this.setState({
             showCountryNumber: !this.state.showCountryNumber
+        })
+    }
+
+    _openShowCountryNumber = () => {
+        this.setState({
+            showCountryNumber: true
+        })
+    }
+
+    _closeShowCountryNumber = () => {
+        this.setState({
+            showCountryNumber: false
         })
     }
 
@@ -237,7 +272,8 @@ class Container extends Component{
             submit={this._submit}
             handleCountryNumberChange={this._handleCountryNumberChange}
             handleShowCountryNumber={this._handleShowCountryNumber}
-
+            openShowCountryNumber={this._openShowCountryNumber}
+            closeShowCountryNumber={this._closeShowCountryNumber}
             />
         )
     }

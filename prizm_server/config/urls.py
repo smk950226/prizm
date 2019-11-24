@@ -19,8 +19,8 @@ urlpatterns = [
     path("api/chat/", include("prizm_server.chat.urls", namespace="chat")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    re_path(r'^$', views.ReactAppView.as_view()),
-    re_path(r'^(?:.*)/?$', views.ReactAppView.as_view()),
+    # re_path(r'^$', views.ReactAppView.as_view()),
+    # re_path(r'^(?:.*)/?$', views.ReactAppView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

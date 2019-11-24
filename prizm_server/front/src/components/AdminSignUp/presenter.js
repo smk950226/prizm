@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
-import { COUNTRY_NUMBER } from '../../utils/country';
+import ReactCountryFlag from "react-country-flag";
+import Modal from 'react-responsive-modal';
 
 const AdminSignUp = (props, context) => (
     <div className={`${styles.safeareaAdminMobile} ${styles.containerAdmin} ${styles.pxAdmin}`}>
@@ -20,11 +21,7 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.countryNumberInput} ${styles.cursorPointer}`} onClick={props.handleShowCountryNumber}>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
                             <p className={`${styles.font1113}`}>{props.countryNumber ? `+${props.countryNumber}` : `${props.countryNumber}`}</p>
-                            {props.showCountryNumber ? (
-                                <MdArrowDropup fontSize="13px" color="#000000" />
-                            ) : (
-                                <MdArrowDropdown fontSize="13px" color="#000000" />
-                            )}
+                            <MdArrowDropdown fontSize="13px" color="#000000" />
                         </div>
                     </div>
                     <div className={`${styles.textInput7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
@@ -33,11 +30,6 @@ const AdminSignUp = (props, context) => (
                         </div>
                         <p className={`${styles.font1113} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer}`}>{context.t("Verify")}</p>
                     </div>
-                </div>
-                <div className={`${props.showCountryNumber ? null : styles.none} ${styles.positionDropdown} ${styles.overflowYScroll} ${styles.bgWhite}`} style={{maxHeight: 200, width: 65}}>
-                    {COUNTRY_NUMBER.map((country, index) => (
-                        <p key={index} className={`${styles.font1113} ${styles.py2} ${styles.cursorPointer}`} onClick={() => props.handleCountryNumberChange(country.value)}>{`+${country.value}`}</p>
-                    ))}
                 </div>
             </div>
             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Instagram")}</p>
@@ -77,11 +69,7 @@ const AdminSignUp = (props, context) => (
                             <div className={`${styles.countryNumberInput} ${styles.cursorPointer}`} onClick={props.handleShowCountryNumber}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
                                     <p className={`${styles.font1113}`}>{props.countryNumber ? `+${props.countryNumber}` : `${props.countryNumber}`}</p>
-                                    {props.showCountryNumber ? (
-                                        <MdArrowDropup fontSize="13px" color="#000000" />
-                                    ) : (
-                                        <MdArrowDropdown fontSize="13px" color="#000000" />
-                                    )}
+                                    <MdArrowDropdown fontSize="13px" color="#000000" />
                                 </div>
                             </div>
                             <div className={`${styles.textInput7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
@@ -90,11 +78,6 @@ const AdminSignUp = (props, context) => (
                                 </div>
                                 <p className={`${styles.font1113} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer}`}>{context.t("Verify")}</p>
                             </div>
-                        </div>
-                        <div className={`${props.showCountryNumber ? null : styles.none} ${styles.positionDropdown} ${styles.overflowYScroll} ${styles.bgWhite}`} style={{maxHeight: 200, width: 65}}>
-                            {COUNTRY_NUMBER.map((country, index) => (
-                                <p key={index} className={`${styles.font1113} ${styles.py2} ${styles.cursorPointer}`} onClick={() => props.handleCountryNumberChange(country.value)}>{`+${country.value}`}</p>
-                            ))}
                         </div>
                     </div>
                     <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Instagram")}</p>
@@ -121,6 +104,37 @@ const AdminSignUp = (props, context) => (
                 </div>
             </div>
         </div>
+        <Modal
+        open={props.showCountryNumber} 
+        onClose={props.closeShowCountryNumber} 
+        center
+        styles={{ overlay: { background: "rgba(0,0,0,0.2)", padding: 0 }, modal: { padding: 0 }}}
+        >
+            <div className={`${styles.containerModal}`}>
+                <p className={`${styles.textCenter} ${styles.my3} ${styles.fontBold} ${styles.font1214}`}>{context.t("Nationality")}</p>
+                <div className={`${styles.px5}`}>
+                    <div className={`${styles.widthFull}`}>
+                        <input className={`${styles.textInput2}`} type={"text"} name={"q"} value={props.q} onChange={props.handleInputChange} />
+                    </div>
+                </div>
+                <div className={`${styles.overflowYScroll} ${styles.px3} ${styles.pt2}`} style={{maxHeight: 300}}>
+                    {props.q !== "" && props.countryList.map((country, index) => (
+                        <div key={index} className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => props.handleCountryNumberChange(country.number, country.value)}>
+                            <ReactCountryFlag 
+                                styleProps={{
+                                    width: '15px',
+                                    height: '15px'
+                                }}
+                                code={country.value}
+                                svg
+                            />
+                            <p className={`${styles.font1214} ${styles.ml2}`}>{country.label}</p>
+                            <p className={`${styles.font1214} ${styles.ml2}`}>{`+${country.number}`}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </Modal>
     </div>
 )
 
@@ -138,7 +152,11 @@ AdminSignUp.propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
     goSignIn: PropTypes.func.isRequired,
-    instagram: PropTypes.string.isRequired
+    instagram: PropTypes.string.isRequired,
+    openShowCountryNumber: PropTypes.func.isRequired,
+    closeShowCountryNumber: PropTypes.func.isRequired,
+    q: PropTypes.string.isRequired,
+    countryList: PropTypes.array
 }
 
 AdminSignUp.contextTypes = {
