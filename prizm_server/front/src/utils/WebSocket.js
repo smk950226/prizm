@@ -32,7 +32,7 @@ class WebSocketService{
         }
 
         this.socketRef.onerror = e => {
-            console.log('Error: ',e.message)
+            console.log('Error: ',e)
         }
 
         this.socketRef.onclose = () => {
@@ -100,7 +100,7 @@ class WebSocketService{
             this.socketRef.send(JSON.stringify({...data}))
         }
         catch (err){
-            console.log('Error: ', err.message)
+            console.log('Error: ', err)
         }
     }
 

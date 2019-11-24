@@ -19,6 +19,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     'prizm.ap-northeast-2.elasticbeanstalk.com',
+    'prizm2.ixucespnxh.ap-northeast-2.elasticbeanstalk.com',
     'prizm.cloud',
     '.prizm.cloud',
 ]
@@ -43,8 +44,7 @@ CHANNEL_LAYERS = {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             "hosts": [
-                ('prizm.cloud', 6379),
-                ('admin.prizm.cloud', 6379)
+                ('ec2-13-125-217-213.ap-northeast-2.compute.amazonaws.com', 6379),
             ],
         },
     },
