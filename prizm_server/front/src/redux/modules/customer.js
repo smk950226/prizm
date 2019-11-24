@@ -152,6 +152,28 @@ function responseToOrder(orderId, responseType, selectedTime, messageId){
     }
 }
 
+function getOrderImage(orderId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/studio/order/image/?orderId=${orderId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -202,7 +224,8 @@ const actionCreators = {
     createRequest,
     getRequest,
     removeRequest,
-    responseToOrder
+    responseToOrder,
+    getOrderImage
 }
 
 export { actionCreators }

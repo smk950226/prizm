@@ -16,6 +16,7 @@ import ProfilePassword from '../ProfilePassword';
 import MessageList from '../MessageList';
 import MessageDetail from '../MessageDetail';
 import MyPhotos from '../MyPhotos';
+import MyPhotoDetail from '../MyPhotoDetail';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -282,7 +283,8 @@ const GeneralRoute = props => (
         <Route exact path='/profile/password/' component={ProfilePassword} key={10} />
         <Route exact path='/message/' component={MessageList} key={11} />
         <Route exact path='/message/detail/:chatId/' component={MessageDetail} key={12} />
-        <Route exact path='/my/photos//' component={MyPhotos} key={13} />
+        <Route exact path='/my/photos/' component={MyPhotos} key={13} />
+        <Route exact path='/my/photo/:orderId/' component={MyPhotoDetail} key={14} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
     </Switch>
 )

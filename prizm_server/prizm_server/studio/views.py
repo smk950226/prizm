@@ -6,6 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
+from django.http import HttpResponse, Http404
+from PIL import Image
 
 from . import serializers, models
 from prizm_server.common.pagination import MainPageNumberPagination, MesssageNumberPagination
@@ -14,7 +17,7 @@ from prizm_server.chat import models as chat_models
 from prizm_server.chat import serializers as chat_serializers
 from prizm_server.notification import models as notification_models
 
-import datetime, pytz, json
+import datetime, pytz, json, os, mimetypes
 from dateutil.relativedelta import relativedelta
 
 User = get_user_model()
@@ -275,7 +278,7 @@ class AdminOrder(APIView):
 
 
 class OrderImage(APIView):
-    permission_classes = [AdminAuthenticated]
+    permission_classes = [IsAuthenticated]
     def get(self, request, format = None):
         order_id = request.query_params.get('orderId', None)
 
@@ -554,3 +557,12 @@ class Message(APIView):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+
+
+def download(request, image_id):
+    image = models.OrderImage.objects.get(id = image_id)
+    img = Image.open(image.processed_image)
+    filename = image.order.user.name + '-' + str(image.id)
+    response = HttpResponse(image.processed_image, content_type='image/'+img.format.lower())
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response

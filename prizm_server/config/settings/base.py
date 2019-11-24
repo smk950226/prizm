@@ -86,6 +86,7 @@ THIRD_PARTY_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'channels',
+    'imagekit',
 ]
 
 LOCAL_APPS = [

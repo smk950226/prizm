@@ -1076,6 +1076,9 @@ textarea {
 .container-msg-list{
     height: calc(100vh - 50px)
 }
+.container-my-photo{
+    width: calc((100% - 2rem) / 3);
+}
 @media (min-width: 768px){
     .container-portfolio-lg{
         height: 300px;

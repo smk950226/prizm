@@ -43,6 +43,7 @@ django-rest-auth = "*"
 python-dateutil = "*"
 channels = "*"
 channels-redis = "*"
+django-imagekit = "*"
 
 [requires]
 python_version = "3.7"

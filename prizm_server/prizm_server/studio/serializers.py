@@ -68,9 +68,15 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class OrderImageSerializer(serializers.ModelSerializer):
+    processed_image_url = serializers.SerializerMethodField()
     class Meta:
         model = models.OrderImage
-        fields = ['id', 'image']
+        fields = ['id', 'image', 'processed_image_url']
+    
+    def get_processed_image_url(self, obj):
+        request = self.context.get('request')
+        photo_url = obj.processed_image.url
+        return request.build_absolute_uri(photo_url)
 
 class OrderImageDetailSerializer(serializers.ModelSerializer):
     orderimage_set = OrderImageSerializer(many = True)
