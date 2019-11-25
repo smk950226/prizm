@@ -71,7 +71,7 @@ class OrderImageSerializer(serializers.ModelSerializer):
     processed_image_url = serializers.SerializerMethodField()
     class Meta:
         model = models.OrderImage
-        fields = ['id', 'image', 'processed_image_url']
+        fields = ['id', 'order', 'image', 'processed_image_url']
     
     def get_processed_image_url(self, obj):
         request = self.context.get('request')

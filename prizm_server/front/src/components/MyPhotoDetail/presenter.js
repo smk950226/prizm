@@ -19,7 +19,13 @@ const MyPhotos = (props, context) => (
             {props.error && props.errorMsg ? (
                 <p className={`${styles.mt3} ${styles.font1416}`}>{props.errorMsg}</p>
             ) : (
-                <p className={`${styles.mt3} ${styles.font1316} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer}`}>{context.t("Download Original File")}</p>
+                props.images && props.images.length > 0 ? (
+                    <a target={'_blank'} href={`${FETCH_URL}/api/studio/zip/${props.images[0].order}/`} className={`${styles.pink} ${styles.textDecorationNone} ${styles.font1316}`}>
+                        <p className={`${styles.mt3} ${styles.font1316} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer} ${props.images && props.images.length > 0 ? null : styles.hidden}`}>{context.t("Download Original File")}</p>
+                    </a>
+                ) : (
+                    <p className={`${styles.mt3} ${styles.font1316} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer} ${props.images && props.images.length > 0 ? null : styles.hidden}`}>{context.t("Download Original File")}</p>
+                )
             )}
             {props.images && props.images.length > 0 && (
                 <div className={`${styles.mt3} ${styles.row} ${styles.mx0}`}>

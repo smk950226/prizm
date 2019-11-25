@@ -82,6 +82,7 @@ class Container extends Component{
     }
 
     render(){
+        console.log(this.state.images)
         return(
             <MyPhotoDetail 
             {...this.props} 

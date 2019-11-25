@@ -684,3 +684,6 @@ LANGUAGES = (
 
 def get_image_filename(instance, filename):
     return '/'.join([instance.order.photographer.nickname, instance.order.user.name, filename])
+
+def get_processed_image_filename(instance, filename):
+    return '/'.join([instance.order.photographer.nickname, instance.order.user.name, 'processed', filename])

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from prizm_server.common.utils import get_image_filename
-from imagekit.models import ImageSpecField
+from prizm_server.common.utils import get_image_filename, get_processed_image_filename
+from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import Thumbnail
 
 class Photographer(models.Model):
@@ -136,10 +136,7 @@ class Order(models.Model):
 class OrderImage(models.Model):
     order = models.ForeignKey(Order, on_delete = models.CASCADE)
     image = models.ImageField(_('Order Image'), upload_to = get_image_filename)
-    processed_image = ImageSpecField(
-        source = 'image',
-		options = {'quality': 70}
-    )
+    processed_image = ProcessedImageField(upload_to = get_processed_image_filename, options = {'quality': 70}, blank = True, null = True)
 
     def __str__(self):
         return self.order.photographer.nickname + ' -> ' + self.order.user.email
