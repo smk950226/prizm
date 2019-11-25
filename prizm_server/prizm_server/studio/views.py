@@ -9,6 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from PIL import Image
+from django.core.mail import send_mail, EmailMessage
+from django.template.loader import render_to_string
 
 from . import serializers, models
 from prizm_server.common.pagination import MainPageNumberPagination, MesssageNumberPagination
@@ -579,4 +581,8 @@ def create_zip(request, order_id):
     zf.close()
     response = HttpResponse(f.getvalue(), content_type="application/zip")
     response['Content-Disposition'] = 'attachment; filename={}.zip'.format(order.user.name)
+
+    mail = EmailMessage('test', 'text', ['sm95226@gmail.com'], ['smk950226@naver.com'])
+    mail.attach('{}.zip'.format(order.user.name), f.getvalue(), "application/zip")
+    mail.send()
     return response

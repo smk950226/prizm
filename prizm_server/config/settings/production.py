@@ -116,7 +116,7 @@ class MediaRootS3Boto3Storage(S3Boto3Storage):
 class CustomS3Boto3Storage(S3Boto3Storage):
     location = "media"
     file_overwrite = False
-    
+
     def _save_content(self, obj, content, parameters):
         """
         We create a clone of the content file as when this is passed to boto3 it wrongly closes
@@ -158,6 +158,8 @@ TEMPLATES[0]["OPTIONS"]["loaders"] = [  # noqa F405
 
 # EMAIL
 # ------------------------------------------------------------------------------
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 # ADMIN
 # ------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 Base settings to build other settings files upon.
 """
 
-import environ
+import environ, os, json
 
 ROOT_DIR = (
     environ.Path(__file__) - 3
@@ -220,6 +220,24 @@ FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 
 # EMAIL
 # ------------------------------------------------------------------------------
+secret_file = os.path.join(ROOT_DIR, 'config', 'settings', 'secrets.json')
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # ADMIN
 # ------------------------------------------------------------------------------
