@@ -17,6 +17,7 @@ urlpatterns = [
     path("api/studio/", include("prizm_server.studio.urls", namespace="studio")),
     path("api/notification/", include("prizm_server.notification.urls", namespace="notification")),
     path("api/chat/", include("prizm_server.chat.urls", namespace="chat")),
+    path("api/payment/", include("prizm_server.payment.urls", namespace="payment")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     re_path(r'^$', views.ReactAppView.as_view()),
