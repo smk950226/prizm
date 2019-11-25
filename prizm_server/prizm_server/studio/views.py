@@ -19,6 +19,7 @@ from prizm_server.notification import models as notification_models
 
 import datetime, pytz, json, os, mimetypes, zipfile, io
 from dateutil.relativedelta import relativedelta
+from urllib.request import urlopen
 
 User = get_user_model()
 
@@ -302,16 +303,16 @@ class OrderImageUpload(APIView):
         user = request.user
         images = request.data.getlist('images[]', None)
         order_id = request.data.get('orderId')
-        # try:
-        order = models.Order.objects.get(id = order_id)
-        pre_image = models.OrderImage.objects.filter(order = order)
-        pre_image.delete()
-        for image in images:
-            order_image = models.OrderImage.objects.create(order = order, image = image, processed_image = image)
-            order_image.save()
-        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
-        # except:
-        #     return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('예약이 존재하지 않습니다.')})
+        try:
+            order = models.Order.objects.get(id = order_id)
+            pre_image = models.OrderImage.objects.filter(order = order)
+            pre_image.delete()
+            for image in images:
+                order_image = models.OrderImage.objects.create(order = order, image = image, processed_image = image)
+                order_image.save()
+            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        except:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('예약이 존재하지 않습니다.')})
 
 
 class Studio(APIView):
@@ -563,7 +564,6 @@ def download(request, image_id):
     image = models.OrderImage.objects.get(id = image_id)
     img = Image.open(image.processed_image)
     filename = image.order.user.name + '-' + str(image.id) + '.' + img.format.lower()
-    print('image/'+img.format.lower())
     response = HttpResponse(image.processed_image, content_type='image/'+img.format.lower())
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
     return response
@@ -571,30 +571,12 @@ def download(request, image_id):
 def create_zip(request, order_id):
     order = models.Order.objects.get(id = order_id)
     images = order.orderimage_set.all()
-
-    filenames = []
+    f = io.BytesIO()
+    zf = zipfile.ZipFile(f, 'w')
     for image in images:
-        path = request.build_absolute_uri(image.image.url)
-        filenames.append(path)
-
-    zip_subdir = order.user.name
-    zip_filename = "%s.zip" % zip_subdir
-
-    s = io.StringIO()
-
-    zf = zipfile.ZipFile(s, "w")
-
-    for fpath in filenames:
-        fdir, fname = os.path.split(fpath)
-        print(fpath, fdir, fname)
-        zip_path = os.path.join(zip_subdir, fname)
-        print(11, zip_path)
-
-        zf.write(fpath, zip_path)
-
+        url = urlopen(request.build_absolute_uri(image.image.url))
+        zf.writestr(image.image.name, url.read())
     zf.close()
-
-    resp = HttpResponse(s.getvalue(), mimetype = "application/x-zip-compressed")
-    resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
-
-    return resp
+    response = HttpResponse(f.getvalue(), content_type="application/zip")
+    response['Content-Disposition'] = 'attachment; filename={}.zip'.format(order.user.name)
+    return response
