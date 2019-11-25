@@ -228,7 +228,7 @@ function locationDetail(placeId){
 function editAccount(legalName, birth, accountType, number){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/studio/photographer/account/`, {
+        return fetch(`${FETCH_URL}/api/payment/photographer/account/`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
