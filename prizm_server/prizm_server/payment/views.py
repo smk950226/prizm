@@ -42,4 +42,4 @@ class PhotographerAccount(APIView):
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Account 정보를 입력해주세요.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in the payout information to complete the account setup.')})

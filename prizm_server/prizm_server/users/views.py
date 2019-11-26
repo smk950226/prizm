@@ -20,33 +20,33 @@ class CheckDuplicate(APIView):
         if email and mobile and country_number:
             if instagram:
                 if len(User.objects.filter(instagram_account = instagram)) > 0:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('인스타그램 계정이 중복됩니다.')})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This Instagram account has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
                 else:
                     try:
                         validate_email(email)
                         if len(User.objects.filter(email = email)) > 0:
-                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 중복됩니다.')})
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This email address has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
                         else:
                             if len(User.objects.filter(mobile = mobile, country_number = country_number)) > 0:
-                                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+                                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
                             else:
                                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                     except:
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 올바르지 않습니다.')})
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Wrong email address. Please check your email address again.')})
             else:
                 try:
                     validate_email(email)
                     if len(User.objects.filter(email = email)) > 0:
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 중복됩니다.')})
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This email address has already been take. Please contact us at contact@prizm.cloud if you have any inquiries.')})
                     else:
                         if len(User.objects.filter(mobile = mobile, country_number = country_number)) > 0:
-                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been t')})
                         else:
                             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                 except:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이메일이 올바르지 않습니다.')})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Wrong email address. Please check your email address again.')})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in all the information to complete the registration.')})
     
 
 class Profile(APIView):
@@ -67,7 +67,7 @@ class Profile(APIView):
         birth = request.data.get('birth', None)
         if name and country_number and mobile and birth:
             if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
             else:
                 user.name = name
                 user.country_number = country_number
@@ -77,7 +77,7 @@ class Profile(APIView):
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in all the information to complete the registration.')})
 
 
 class ProfilePassword(APIView):
@@ -92,9 +92,9 @@ class ProfilePassword(APIView):
                 user.save()
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
             else:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('현재 비밀번호가 일치하지 않습니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Your current password is not valid. Please check the password again.')})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in all the information to complete the registration.')})
 
 
 class AdminProfile(APIView):
@@ -108,10 +108,10 @@ class AdminProfile(APIView):
         instagram_account = request.data.get('instagram', None)
         if name and country_number and mobile and birth and instagram_account:
             if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('휴대전화 번호가 중복됩니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
             else:
                 if len(User.objects.filter(instagram_account = instagram_account).exclude(id = user.id)) > 0:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('인스타그램 계정이 중복됩니다.')})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This Instagram account has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
                 else:
                     user.name = name
                     user.country_number = country_number
@@ -122,7 +122,7 @@ class AdminProfile(APIView):
 
                     return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('정보를 입력해주세요.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in all the information to complete the registration.')})
 
 
 class CheckPhotographer(APIView):
@@ -132,4 +132,4 @@ class CheckPhotographer(APIView):
         if user.user_type == 'photographer':
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('사진 작가 계정이 아닙니다.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This page is only available for registered photographers.')})

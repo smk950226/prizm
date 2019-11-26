@@ -44,9 +44,9 @@ class PhotographerDetail(APIView):
                 serializer = serializers.PhotographerSerializer(photographer, context = {'request': request})
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'photographer': serializer.data})
             except:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('사진 작가가 존재하지 않습니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please check the url again. No photographer has registered the url.')})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
 class PhotographerDetailByToken(APIView):
@@ -126,7 +126,7 @@ class Order(APIView):
 
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('요청 정보를 입력해주세요.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please select all of the options above to make a reservation.')})
     
     def put(self, request, format = None):
         user = request.user
@@ -141,7 +141,7 @@ class Order(APIView):
                 try:
                     message = chat_models.ChatMessage.objects.get(id = message_id)
                     if order.status == 'confirmed':
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('확정된 예약입니다.')})
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('You have already confirmed your date and time. Please contact as at contact@prizm.cloud if you have any inquiries.')})
                     else:
                         order.status = 'cancelled'
                         order.save()
@@ -151,7 +151,7 @@ class Order(APIView):
                     return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
 
                 except:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
             else:
                 order = models.Order.objects.get(id = order_id)
                 if selected_time:
@@ -173,11 +173,11 @@ class Order(APIView):
 
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                     except:
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
                 else:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('가능한 시간을 선택해주세요.')})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please select your desired time to complete the reservation.')})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
 class OrderDetail(APIView):
@@ -191,7 +191,7 @@ class OrderDetail(APIView):
 
             return Response(status = status.HTTP_200_OK, data = serializer.data)
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
 class AdminOrder(APIView):
@@ -241,7 +241,7 @@ class AdminOrder(APIView):
                 available_time = request.data.get('availableTime', None)
                 if available_time:
                     if order.available_time:
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이미 시간을 지정하였습니다.')})
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('You have already sent available date and time to your client.')})
                     else:
                         order.available_time = json.dumps(available_time)
                         order.save()
@@ -262,10 +262,10 @@ class AdminOrder(APIView):
 
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                 else:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
             else:
                 if order.status == 'confirmed':
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('확정된 예약입니다.')})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Your client has already made payment and confirmed the reservation. Please contact us at contact@prizm.cloud if you want to cancel the reservation.')})
                 else:
                     order.status = 'cancelled'
                     order.save()
@@ -277,7 +277,7 @@ class AdminOrder(APIView):
                     notification.save()
                     return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
 class OrderImage(APIView):
@@ -292,9 +292,9 @@ class OrderImage(APIView):
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'images': serializer.data})
             except:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('예약이 존재하지 않습니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Error : failed to load the data. Please try again later.')})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
 class OrderImageUpload(APIView):
@@ -314,7 +314,7 @@ class OrderImageUpload(APIView):
                 order_image.save()
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         except:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('예약이 존재하지 않습니다.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Error : failed to load the data. Please try again later.')})
 
 
 class Studio(APIView):
@@ -338,11 +338,11 @@ class Studio(APIView):
 
         if (len(portfolio_images) > 0) and nickname and main_location and education and career and description and profile_image and (len(locations) > 0) and (len(options) > 0) and studio_id:
             if (studio_id == 'admin') or (studio_id == 'djangoadmin') or (studio_id.find('/') > -1) or (studio_id == '') or (studio_id == 'welcome') or (studio_id == 'message') or (studio_id == 'signup') or (studio_id == 'signin') or (studio_id == 'profile') or (studio_id == 'reservation') or (studio_id == 'menu'):
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('사용할 수 없는 Studio URL 입니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This URL is not available. Please try another url for your online studio.')})
             elif models.Photographer.objects.filter(studio_id = studio_id).exclude(user__id = user.id).count() > 0:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Studio URL이 중복됩니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This URL is not available. Please try another url for your online studio.')})
             elif models.Photographer.objects.filter(nickname = nickname).exclude(user__id = user.id).count() > 0:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('이름이 중복됩니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This studio name is not available. Please try another studio name.')})
             else:
                 new_portfolio_images = []
                 pre_portfolio_id = []
@@ -492,43 +492,7 @@ class Studio(APIView):
                         op.save()
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('스튜디오 정보를 입력해주세요.')})
-
-
-class PhotographerAccount(APIView):
-    permission_classes = [AdminAuthenticated]
-    def post(self, request, format = None):
-        user = request.user
-        photographer = user.photographer
-        legal_name = request.data.get('legalName', None)
-        birth = request.data.get('birth', None)
-        account_type = request.data.get('accountType', None)
-        number = request.data.get('number', None)
-
-        if legal_name and birth and account_type and number:
-            try:
-                photographer.photographeraccount
-                account = photographer.photographeraccount
-                account.legal_name = legal_name
-                account.birth = birth
-                account.account_type = account_type
-                account.number = number
-                account.save()
-
-                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
-            except:
-                account = models.PhotographerAccount.objects.create(
-                    photographer = photographer,
-                    legal_name = legal_name,
-                    birth = birth,
-                    account_type = account_type,
-                    number = number
-                )
-                account.save()
-
-                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
-        else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Account 정보를 입력해주세요.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in all the information to complete your registration.')})
 
 
 class Chat(APIView):
@@ -557,9 +521,9 @@ class Message(APIView):
                 serializer = chat_serializers.ChatMessageSerializer(result_page, many = True, context = {'request': request})
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'messages': serializer.data})
             else:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('잘못된 요청입니다.')})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
 def download(request, image_id):
