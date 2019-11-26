@@ -44,6 +44,7 @@ python-dateutil = "*"
 channels = "*"
 channels-redis = "*"
 django-imagekit = "*"
+daphne = "*"
 
 [requires]
 python_version = "3.7"
