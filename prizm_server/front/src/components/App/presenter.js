@@ -38,7 +38,7 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root')
 
 const App = (props) => {
-    if(props.admin){
+    if(!props.admin){
         return(
             <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} photographer={props.photographer} chatList={props.chatList} />
         )
@@ -191,7 +191,7 @@ class AdminRouteContainer extends Component{
             if(nextProps.profile){
                 update.fetchedProfile = true
             }
-            if(nextProps.photographer){
+            if(nextProps.photographer || (nextProps.photographer === false)){
                 update.fetchedPhotographer = true
             }
             if(nextProps.chatList){

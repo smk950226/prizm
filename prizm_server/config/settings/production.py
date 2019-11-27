@@ -43,7 +43,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('ec2-13-125-217-213.ap-northeast-2.compute.amazonaws.com', 6379)],
+            "hosts": [('prizm.nq6hhp.0001.apn2.cache.amazonaws.com', 6379)],
         },
     },
 }
