@@ -1052,12 +1052,14 @@ textarea {
     height: 335px;
 }
 .container-from-msg{
-    width: 90%;
     background-color: $pink;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     padding: 1rem 0.5rem;
+}
+.container-from-msg-outside{
+    width: 90%;
 }
 .container-to-msg{
     width: 100%;

@@ -253,6 +253,7 @@ class MessageList extends Component{
                                     return (
                                         <Fragment key={index}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd} ${styles.px3}`}>
+                                            <div className={`${styles.containerFromMsgOutside}`}>
                                             <div className={`${styles.containerFromMsg}`}>
                                                 {message.message_type === 'normal' && (
                                                     <p className={`${styles.font1214} ${styles.white}`} style={{lineHeight: 1.42}}>{message.text}</p>
@@ -276,8 +277,9 @@ class MessageList extends Component{
                                                     </p>
                                                 )}
                                             </div>
+                                            <p className={`${styles.font9} ${styles.gray6d} ${styles.mt1} ${index === messages.length -1 ? null : styles.mb3} ${styles.textRight}`}>{`${message.created_at.slice(0,4)}/${message.created_at.slice(5,7)}/${message.created_at.slice(8,10)} ${message.created_at.slice(11,13)}:${message.created_at.slice(14,16)}`}</p>
+                                            </div>
                                         </div>
-                                        <p className={`${styles.font9} ${styles.gray6d} ${styles.mt1} ${index === messages.length -1 ? null : styles.mb3} ${styles.textRight}`}>{`${message.created_at.slice(0,4)}/${message.created_at.slice(5,7)}/${message.created_at.slice(8,10)} ${message.created_at.slice(11,13)}:${message.created_at.slice(14,16)}`}</p>
                                         </Fragment>
                                     )
                                 }
@@ -368,7 +370,7 @@ class MessageList extends Component{
                     )
                 )}
             </div>
-            {order.status === 'confirmed' && (
+            {order.status === 'confirmed' && (order.photographer.user.id !== profile.id) && (
                 <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`} style={{position: 'fixed', bottom: 70, marginLeft: 'auto', marginRight: 'auto'}}>
                     <div className={`${styles.px3} ${styles.containerCustomer} ${styles.widthFull}`}>
                         <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} style={{height: 48}}>

@@ -17,6 +17,7 @@ import MessageList from '../MessageList';
 import MessageDetail from '../MessageDetail';
 import MyPhotos from '../MyPhotos';
 import MyPhotoDetail from '../MyPhotoDetail';
+import PaymentDetail from '../PaymentDetail';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -38,7 +39,7 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root')
 
 const App = (props) => {
-    if(!props.admin){
+    if(props.admin){
         return(
             <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} photographer={props.photographer} chatList={props.chatList} />
         )
@@ -285,6 +286,7 @@ const GeneralRoute = props => (
         <Route exact path='/message/detail/:chatId/' component={MessageDetail} key={12} />
         <Route exact path='/my/photos/' component={MyPhotos} key={13} />
         <Route exact path='/my/photo/:orderId/' component={MyPhotoDetail} key={14} />
+        <Route exact path='/payment/' component={PaymentDetail} key={15} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
     </Switch>
 )
