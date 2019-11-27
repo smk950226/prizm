@@ -22,8 +22,8 @@ class Container extends Component{
         this.state = {
             legalName: photographeraccount ? photographeraccount.legal_name : "",
             birth: photographeraccount ? photographeraccount.birth : "",
-            accountType: photographeraccount ? photographeraccount.account_type : "bank_account",
-            number: photographeraccount ? photographeraccount.number : "",
+            accountType: photographeraccount ? photographeraccount.account_type : "paypal_account",
+            content: photographeraccount ? photographeraccount.content : "",
             birthForm: photographeraccount ? true : false,
             edited: false,
             editable: false
@@ -62,10 +62,18 @@ class Container extends Component{
             }
         }
         else if(name === 'number'){
-            let numberReg = /^[0-9]*$/;
-            if(numberReg.test(value)){
+            if(this.state.accountType === 'bank_account'){
+                let numberReg = /^[0-9]*$/;
+                if(numberReg.test(value)){
+                    this.setState({
+                        [name]: value.replace(/^0+/, ''),
+                        edited: true
+                    });
+                }
+            }
+            else{
                 this.setState({
-                    [name]: value.replace(/^0+/, ''),
+                    [name]: value,
                     edited: true
                 });
             }
@@ -79,16 +87,16 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, legalName, birth, accountType, number, edited, birthForm } = this.state;
+        const { isSubmitting, legalName, birth, accountType, content, edited, birthForm } = this.state;
         const { editAccount, getPhotographer } = this.props;
         if(!isSubmitting){
             if(edited){
-                if(legalName && birth && accountType && number){
+                if(legalName && birth && accountType && content){
                     if(birthForm){
                         this.setState({
                             isSubmitting: true
                         })
-                        const result = await editAccount(legalName, birth, accountType, number)
+                        const result = await editAccount(legalName, birth, accountType, content)
                         if(result.status === 'ok'){
                             await getPhotographer()
                             this.setState({
@@ -132,8 +140,6 @@ class Container extends Component{
             {...this.props} 
             {...this.state} 
             handleInputChange={this._handleInputChange}
-            handleCountryNumberChange={this._handleCountryNumberChange}
-            handleShowCountryNumber={this._handleShowCountryNumber}
             submit={this._submit}
             enableEdit={this._enableEdit}
             />

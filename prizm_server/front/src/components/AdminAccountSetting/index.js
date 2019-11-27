@@ -19,8 +19,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
-        editAccount: (legalName, birth, accountType, number) => {
-            return dispatch(adminAction.editAccount(legalName, birth, accountType, number))
+        editAccount: (legalName, birth, accountType, content) => {
+            return dispatch(adminAction.editAccount(legalName, birth, accountType, content))
         },
         getPhotographer: () => {
             dispatch(adminAction.getPhotographer())

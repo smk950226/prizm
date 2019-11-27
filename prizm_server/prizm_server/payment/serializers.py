@@ -6,4 +6,4 @@ from prizm_server.users import serializers as users_serializers
 class PhotographerAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PhotographerAccount
-        fields = ['id', 'photographer', 'legal_name', 'birth', 'account_type', 'number']
+        fields = ['id', 'photographer', 'legal_name', 'birth', 'account_type', 'content']

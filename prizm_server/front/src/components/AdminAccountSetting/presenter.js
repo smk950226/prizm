@@ -29,17 +29,26 @@ const AdminProfileSetting = (props, context) => (
         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt45}`}>{context.t("Payout Options")}</p>
         <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`}>
-                <div className={`${styles.checkBox} ${props.accountType === 'bank_account' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                    {props.accountType === 'bank_account' && (
-                        <img src={require('../../assets/images/icon_check.png')} alt={context.t("Bank Account")} style={{width: 10, height: 10}} />
-                    )}
-                </div>
-                <p className={`${props.accountType === 'bank_account' ? styles.fontBold : null} ${styles.font1314} ${styles.ml2}`}>{context.t("Bank Account")}</p>
+                {props.accountType === 'paypal_account' && (
+                    <Fragment>
+                        <div className={`${styles.checkBox} ${props.accountType === 'paypal_account' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                            {props.accountType === 'paypal_account' && (
+                                <img src={require('../../assets/images/icon_check.png')} alt={context.t("Paypal Account")} style={{width: 10, height: 10}} />
+                            )}
+                        </div>
+                        <p className={`${props.accountType === 'bank_account' ? styles.fontBold : null} ${styles.font1314} ${styles.ml2}`}>{context.t("Paypal Account")}</p>
+                    </Fragment>
+                )}
             </div>
         </div>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Number")}</p>
+        {props.accountType === 'bank_account' && (
+            <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Number")}</p>
+        )}
+        {props.accountType === 'paypal_account' && (
+            <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Account")}</p>
+        )}
         <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"number"} value={props.number} onChange={props.handleInputChange} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
+            <input className={`${styles.textInput2}`} type={"text"} name={"content"} value={props.content} onChange={props.handleInputChange} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
         </div>
         {props.editable && (
             <Fragment>
@@ -66,7 +75,7 @@ AdminProfileSetting.propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
     birth: PropTypes.string.isRequired,
     accountType: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
     submit: PropTypes.func.isRequired,
     enableEdit: PropTypes.func.isRequired,
     editable: PropTypes.bool.isRequired

@@ -17,16 +17,16 @@ class PhotographerAccount(APIView):
         legal_name = request.data.get('legalName', None)
         birth = request.data.get('birth', None)
         account_type = request.data.get('accountType', None)
-        number = request.data.get('number', None)
+        content = request.data.get('content', None)
 
-        if legal_name and birth and account_type and number:
+        if legal_name and birth and account_type and content:
             try:
                 photographer.photographeraccount
                 account = photographer.photographeraccount
                 account.legal_name = legal_name
                 account.birth = birth
                 account.account_type = account_type
-                account.number = number
+                account.content = content
                 account.save()
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
@@ -36,7 +36,7 @@ class PhotographerAccount(APIView):
                     legal_name = legal_name,
                     birth = birth,
                     account_type = account_type,
-                    number = number
+                    content = content
                 )
                 account.save()
 
