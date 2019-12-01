@@ -477,7 +477,7 @@ class PhotographerDetail extends Component{
                                             <img src={require('../../assets/images/icon_arrow_left.png')} alt={this.context.t("Before")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} onClick={() => this.props.changeDateStep(1)} />
                                         </div>
                                         <div className={`${styles.col10} ${styles.px0}`}>
-                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.textCenter}`}>{`${selectedDate.getFullYear()}.${selectedDate.getMonth() + 1}.${selectedDate.getDay()}`}</p>
+                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.textCenter}`}>{`${selectedDate.getFullYear()}.${selectedDate.getMonth() + 1}.${selectedDate.getDate()}`}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.py5}`}>
