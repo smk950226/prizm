@@ -361,7 +361,7 @@ const AdminSignUp = (props, context) => (
                         <div className={`${styles.mt3} ${styles.row} ${styles.mx0}`}>
                             {props.locations.map((location, index) => (
                                 <div key={index} className={`${styles.col12} ${styles.colMd4} ${styles.px0}`}>
-                                    <div className={`${styles.col12} ${styles.colMd10} ${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
+                                    <div className={`${styles.col12} ${styles.colMd10} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
                                         <div className={`${styles.col10} ${styles.px0}`}>
                                             <p className={`${styles.fontBold} ${styles.font1012} ${styles.white}`}>{context.t(`Location ${index + 1}`)}</p>
                                             <p className={`${styles.fontBold} ${styles.font1113} ${styles.white} ${styles.mt1}`}>{location.name}</p>
@@ -445,13 +445,13 @@ const AdminSignUp = (props, context) => (
                         <div className={`${styles.mt3} ${styles.row} ${styles.mx0}`}>
                             {props.options.map((option, index) => (
                                 <div key={index} className={`${styles.containerStudioInput}`}>
-                                    <div className={`${styles.px3} ${styles.py3} ${styles.borderGray97} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgWhite}`}>
+                                    <div className={`${styles.px3} ${styles.py3} ${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2}`} style={{opacity: 0.8}}>
                                         <div>
-                                            <p className={`${styles.fontBold} ${styles.font1214}`}>{context.t(`${option.title}`)}</p>
-                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mt1}`}>{context.t(`${option.photograpy_type} / ${numberWithCommas(option.person)} person(s) ${numberWithCommas(option.hour)} hour(s) $${numberWithCommas(option.price)}`)}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t(`${option.title}`)}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.white} ${styles.mt1}`}>{context.t(`${option.photograpy_type} / ${numberWithCommas(option.person)} person(s) ${numberWithCommas(option.hour)} hour(s) $${numberWithCommas(option.price)}`)}</p>
                                         </div>
                                         <div className={`${styles.cursorPointer}`} onClick={() => props.removeOption(option)}>
-                                            <MdClose fontSize={'24px'} color={'#d66c8b'}/>
+                                            <MdClose fontSize={'24px'} color={'#ffffff'}/>
                                         </div>
                                     </div>
                                 </div>
