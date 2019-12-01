@@ -9,6 +9,8 @@ from . import serializers, models
 from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.studio import models as studio_models
 
+import math
+
 User = get_user_model()
 
 class PhotographerAccount(APIView):
@@ -96,3 +98,79 @@ class PaymentExpired(APIView):
             
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
+class CheckPrice(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format = None):
+        order_id = request.data.get('orderId', None)
+        price = int(request.data.get('price', None))
+
+        if order_id and price:
+            try:
+                order = studio_models.Order.objects.get(id = order_id)
+                confirm_price = order.option.price + math.ceil(order.option.price*0.1)
+                if price == confirm_price:
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                else:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+            
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
+class Payment(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format = None):
+        user = request.user
+        meta = request.data.get('meta', None)
+        order_id = request.data.get('orderId', None)
+
+        imp_uid = meta['imp_uid']
+        pay_method = meta['pay_method']
+        pay_type = meta['pg_provider']
+
+        merchant_uid = meta['merchant_uid']
+        success = meta['success']
+        pay_status = meta['status']
+        paid_at = meta['paid_at']
+        price = int(meta['paid_amount'])
+        confirm_price = order.option.price + math.ceil(order.option.price*0.1)
+        if confirm_price == price:
+            try:
+                order = studio_models.Order.objects.get(id = order_id)
+                if success:
+                    payment = models.Payment.objects.create(
+                        user = user,
+                        order = order,
+                        price = price,
+                        merchant_uid = merchant_uid,
+                        imp_uid = imp_uid,
+                        status = 'paid',
+                        meta = meta,
+                        alert_status = 'confirmed'
+                    )
+                    payment.save()
+                    order.status = 'paid'
+                    order.save()
+                else:
+                    payment = models.Payment.objects.create(
+                        user = user,
+                        order = order,
+                        price = price,
+                        merchant_uid = merchant_uid,
+                        imp_uid = imp_uid,
+                        status = 'failed',
+                        meta = meta,
+                        alert_status = 'required'
+                    )
+                    payment.save()
+
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request! Please contact to contact@prizm.cloud')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request! Please contact to contact@prizm.cloud')})

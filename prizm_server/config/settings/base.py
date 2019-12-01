@@ -3,7 +3,7 @@ Base settings to build other settings files upon.
 """
 
 import environ, os, json
-
+from django.core.exceptions import ImproperlyConfigured
 ROOT_DIR = (
     environ.Path(__file__) - 3
 )  # (prizm_server/config/settings/base.py - 3 = prizm_server/)
@@ -304,3 +304,6 @@ ACCOUNT_LOGOUT_ON_GET = True
 JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': False
 } 
+
+IAMPORT_API_KEY = get_secret("IAMPORT_API_KEY")
+IAMPORT_API_SECRET = get_secret("IAMPORT_API_SECRET")

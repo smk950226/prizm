@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PaymentDetail from './presenter';
-
+import uuidv4 from 'uuid/v4';
 class Container extends Component{
 
     static propTypes = {
@@ -11,7 +11,11 @@ class Container extends Component{
         createDeposit: PropTypes.func.isRequired,
         paymentExpire: PropTypes.func.isRequired,
         refresh: PropTypes.func.isRequired,
-        goPaymentSuccess: PropTypes.func.isRequired
+        goPaymentSuccess: PropTypes.func.isRequired,
+        getPrice: PropTypes.func.isRequired,
+        price: PropTypes.number,
+        checkPrice: PropTypes.func.isRequired,
+        pay: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -24,12 +28,16 @@ class Container extends Component{
             order: props.location.state ? props.location.state.order ? props.location.state.order : null : null,
             name: "",
             isSubmitting: false,
-            isDeposit: false
+            isDeposit: false,
+            price: null,
+            fetchedPrice: false,
+            fetchClear: false,
+            loading: true
         }
     }
 
     componentDidMount = async() => {
-        const { isLoggedIn, goHome, profile, paymentExpire, refresh } = this.props;
+        const { isLoggedIn, goHome, profile, paymentExpire, refresh, getPrice } = this.props;
         const { order } = this.state;
         if(isLoggedIn){
             if(order){
@@ -47,6 +55,7 @@ class Container extends Component{
                             goHome()
                         }
                         else{
+                            await getPrice(order.option.price +  Math.ceil(order.option.price*0.1))
                             if(profile.country_number === '82' || profile.country_code === 'KR'){
                                 this.setState({
                                     isDeposit: true
@@ -74,6 +83,30 @@ class Container extends Component{
         }
     }
 
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedPrice } = prevState;
+        if((!fetchedPrice)){
+            let update = {}
+            if(nextProps.price){
+                update.fetchedPrice = true
+            }
+
+            return update
+        }
+        else{
+            return null
+        }
+    }
+
+    componentDidUpdate = () => {
+        if(this.state.fetchedPrice && !this.state.fetchClear){
+            this.setState({
+                loading: false,
+                fetchClear: true,
+            })
+        }
+    }
+
     _handleInputChange = (event) => {
         const { target : { value, name } } = event;
         this.setState({
@@ -82,14 +115,117 @@ class Container extends Component{
         });
     }
 
-    _payDeposit = async(price) => {
+    _payDeposit = async(amount) => {
         const { name, isSubmitting, order, isDeposit } = this.state;
-        const { createDeposit, profile, paymentExpire, goHome, refresh, goPaymentSuccess } = this.props;
+        const { createDeposit, profile, paymentExpire, goHome, refresh, goPaymentSuccess, getPrice, price, checkPrice } = this.props;
         if(!isSubmitting){
             if(order.status === 'confirmed'){
-                if(name){
+                if(price === amount){
+                    if(name){
+                        if(order.user.id === profile.id){
+                            if(profile.country_number === '82' || profile.country_code === 'KR'){
+                                this.setState({
+                                    isSubmitting: true
+                                })
+                                const deadline =  new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3);
+                                const now = new Date()
+                                if(now > deadline){
+                                    await paymentExpire(order.id)
+                                    await refresh()
+                                    this.setState({
+                                        isSubmitting: false
+                                    })
+                                    alert(this.context.t("결제 기한이 만료되었습니다."))
+                                    goHome()
+                                }
+                                else{
+                                    const check = await checkPrice(order.id, price)
+                                    if(check.status === 'ok'){
+                                        const result = await createDeposit(name, price, order.id)
+                                        if(result.status === 'ok'){
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            await getPrice(null)
+                                            goPaymentSuccess(isDeposit)
+                                        }
+                                        else if(result.error){
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            alert(result.error)
+                                        }
+                                        else{
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            alert(this.context.t("오류가 발생하였습니다."))
+                                        }
+                                    }
+                                    else{
+                                        alert(this.context.t("가격이 올바르지 않습니다."))
+                                    }
+                                }
+                            }
+                            else{
+                                alert(this.context.t("한국 사용자만 입금 가능합니다."))
+                            }
+                        }
+                        else{
+                            alert(this.context.t("요청자와 로그인한 유저가 일치하지 않습니다."))
+                        }
+                    }
+                    else{
+                        alert(this.context.t("이름을 입력해주세요."))
+                    }
+                }
+                else{
+                    alert(this.context.t("잘못된 요청입니다."))
+                    goHome()
+                }
+            }
+            else{
+                alert(this.context.t("잘못된 요청입니다."))
+                goHome()
+            }
+        }
+    }
+
+    _updateMeta = async(meta) => {
+        const { pay, getPrice, goPaymentSuccess } = this.props;
+        const { order, isDeposit } = this.state;
+        this.setState({
+            isSubmitting: true
+        })
+        const result = await pay(meta, order.id);
+        if(result.status === 'ok'){
+            await getPrice(null)
+            this.setState({
+                isSubmitting: false
+            })
+            goPaymentSuccess(isDeposit)
+
+        }
+        else{
+            this.setState({
+                isSubmitting: false
+            })
+            alert('오류가 발생하였습니다.\n 고객센터에 반드시 문의해주세요.')
+        }
+    }
+
+    _payPaypal = async(amount) => {
+        const { isSubmitting, order, isDeposit } = this.state;
+        const { profile, paymentExpire, goHome, refresh, price, checkPrice } = this.props;
+        const successFunc = this._updateMeta;
+        if(!isSubmitting){
+            if(order.status === 'confirmed'){
+                if(price === amount){
                     if(order.user.id === profile.id){
                         if(profile.country_number === '82' || profile.country_code === 'KR'){
+                            alert(this.context.t("한국 사용자는 사용하실 수 없습니다."))
+                        }
+                        else{
                             this.setState({
                                 isSubmitting: true
                             })
@@ -105,32 +241,37 @@ class Container extends Component{
                                 goHome()
                             }
                             else{
-                                this.setState({
-                                    isSubmitting: true
-                                })
-                                const result = await createDeposit(name, price, order.id)
-                                if(result.status === 'ok'){
-                                    this.setState({
-                                        isSubmitting: false
-                                    })
-                                    goPaymentSuccess(isDeposit)
-                                }
-                                else if(result.error){
-                                    this.setState({
-                                        isSubmitting: false
-                                    })
-                                    alert(result.error)
+                                const check = await checkPrice(order.id, price)
+                                if(check.status === 'ok'){
+                                    const merchant_uid = uuidv4()
+                                    const IMP = window.IMP;
+                                    IMP.init('imp34272099');
+                                    IMP.request_pay({
+                                        pg : 'paypal',
+                                        pay_method : 'card',
+                                        merchant_uid : merchant_uid,
+                                        name : `PRIZM order to ${order.photographer.nickname}`,
+                                        amount : price,
+                                        buyer_email : profile.email,
+                                        buyer_name : profile.name,
+                                        buyer_tel : `+${profile.country_number} ${profile.mobile}`,
+                                        m_redirect_url: 'https://prizm.cloud/payment/success/'
+                                    }, async(rsp) => {
+                                        if ( rsp.success ) {
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                            successFunc()
+                                        } else {
+                                            alert('결제에 실패하였습니다.')
+                                        }
+                                    });
                                 }
                                 else{
-                                    this.setState({
-                                        isSubmitting: false
-                                    })
-                                    alert(this.context.t("오류가 발생하였습니다."))
+                                    alert(this.context.t("가격이 올바르지 않습니다."))
                                 }
                             }
-                        }
-                        else{
-                            alert(this.context.t("한국 사용자만 입금 가능합니다."))
+                            
                         }
                     }
                     else{
@@ -138,13 +279,16 @@ class Container extends Component{
                     }
                 }
                 else{
-                    alert(this.context.t("이름을 입력해주세요."))
+                    alert(this.context.t("잘못된 요청입니다."))
+                    goHome()
                 }
             }
             else{
                 alert(this.context.t("잘못된 요청입니다."))
+                goHome()
             }
         }
+        
     }
 
     render(){
@@ -154,6 +298,7 @@ class Container extends Component{
             {...this.state}
             handleInputChange={this._handleInputChange}
             payDeposit={this._payDeposit}
+            payPaypal={this._payPaypal}
             />
         )
     }

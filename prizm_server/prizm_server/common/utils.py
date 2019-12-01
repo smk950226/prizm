@@ -687,3 +687,15 @@ def get_image_filename(instance, filename):
 
 def get_processed_image_filename(instance, filename):
     return '/'.join([instance.order.photographer.nickname, instance.order.user.name, 'processed', filename])
+
+def named_property(name):
+    def wrap(fn):
+        fn.short_description = name
+        return property(fn)
+    return wrap
+
+def timestamp_to_datetime(timestamp):
+    if timestamp:
+        tz = pytz.timezone(settings.TIME_ZONE)
+        return datetime.fromtimestamp(timestamp, tz = tz)
+    return None

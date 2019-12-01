@@ -219,3 +219,5 @@ LOGGING = {
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+IAMPORT_API_KEY = env("IAMPORT_API_KEY")
+IAMPORT_API_SECRET = env("IAMPORT_API_SECRET")

@@ -6,6 +6,7 @@ require('isomorphic-fetch');
 const SET_PHOTOGRAPHER_LIST = 'SET_PHOTOGRAPHER_LIST';
 const SET_REQUEST = 'SET_REQUEST';
 const RESET_REQUEST = 'RESET_REQUEST';
+const SET_PRICE = 'SET_PRICE';
 
 function setPhotographerList(photographerList) {
     return {
@@ -27,6 +28,13 @@ function resetRequest(){
     }
 }
 
+function setPrice(price){
+    return {
+        type: SET_PRICE,
+        price
+    }
+}
+
 function getRequest(request){
     return (dispatch) => {
         dispatch(setRequest(request))
@@ -36,6 +44,12 @@ function getRequest(request){
 function removeRequest(){
     return (dispatch) => {
         dispatch(resetRequest())
+    }
+}
+
+function getPrice(price){
+    return (dispatch) => {
+        dispatch(setPrice(price))
     }
 }
 
@@ -228,6 +242,60 @@ function paymentExpire(orderId){
     }
 }
 
+function checkPrice(orderId, price){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/payment/check/price/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                orderId,
+                price
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function pay(meta, orderId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/payment/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                orderId,
+                meta
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -240,6 +308,8 @@ function reducer(state = initialState, action){
             return applySetRequest(state, action);
         case RESET_REQUEST:
             return applyResetRequest(state, action);
+        case SET_PRICE:
+            return applySetPrice(state, action);
         default:
            return state;
     }
@@ -271,6 +341,14 @@ function applyResetRequest(state, action){
     }
 }
 
+function applySetPrice(state, action){
+    const { price } = action;
+    return {
+        ...state,
+        price
+    }
+}
+
 const actionCreators = {
     getPhotographerList,
     getPhotographerListMore,
@@ -281,7 +359,10 @@ const actionCreators = {
     responseToOrder,
     getOrderImage,
     createDeposit,
-    paymentExpire
+    paymentExpire,
+    getPrice,
+    checkPrice,
+    pay
 }
 
 export { actionCreators }

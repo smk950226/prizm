@@ -5,11 +5,12 @@ import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn, profile }, router : { location } } = state;
+    const { user : { isLoggedIn, profile }, router : { location }, customer : { price } } = state;
     return {
         pathname: location.pathname,
         isLoggedIn,
-        profile
+        profile,
+        price
     }
 }
 
@@ -36,6 +37,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     isDeposit
                 }
             }))
+        },
+        getPrice: (price) => {
+            dispatch(customerAction.getPrice(price))
+        },
+        checkPrice: (orderId, price) => {
+            return dispatch(customerAction.checkPrice(orderId, price))
+        },
+        pay: (meta, orderId) => {
+            return dispatch(customerAction.pay(meta, orderId))
         }
     }
 }
