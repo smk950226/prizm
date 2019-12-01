@@ -111,6 +111,14 @@ class Container extends Component{
         }
     }
 
+    _handleKeyPress = async(event) => {
+        const { key } = event;
+        if (key === "Enter") {
+            event.preventDefault();
+            this._submit()
+        }
+    }
+
     render(){
         return(
             <AdminSignIn 
@@ -118,6 +126,7 @@ class Container extends Component{
             {...this.state} 
             handleInputChange={this._handleInputChange}
             submit={this._submit}
+            handleKeyPress={this._handleKeyPress}
             />
         )
     }

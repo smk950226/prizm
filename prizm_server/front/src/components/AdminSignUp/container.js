@@ -237,6 +237,14 @@ class Container extends Component{
         }
     }
 
+    _handleKeyPress = async(event) => {
+        const { key } = event;
+        if (key === "Enter") {
+            event.preventDefault();
+            this._submit()
+        }
+    }
+
     _handleCountryNumberChange = (countryNumber, countryCode) => {
         this.setState({
             countryNumber,
@@ -274,6 +282,7 @@ class Container extends Component{
             handleShowCountryNumber={this._handleShowCountryNumber}
             openShowCountryNumber={this._openShowCountryNumber}
             closeShowCountryNumber={this._closeShowCountryNumber}
+            handleKeyPress={this._handleKeyPress}
             />
         )
     }

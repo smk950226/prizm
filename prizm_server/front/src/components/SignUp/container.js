@@ -234,6 +234,14 @@ class Container extends Component{
         }
     }
 
+    _handleKeyPress = async(event) => {
+        const { key } = event;
+        if (key === "Enter") {
+            event.preventDefault();
+            this._submit()
+        }
+    }
+
     render(){
         return(
             <SignUp 
@@ -245,6 +253,7 @@ class Container extends Component{
             submit={this._submit}
             openShowCountryNumber={this._openShowCountryNumber}
             closeShowCountryNumber={this._closeShowCountryNumber}
+            handleKeyPress={this._handleKeyPress}
             />
         )
     }
