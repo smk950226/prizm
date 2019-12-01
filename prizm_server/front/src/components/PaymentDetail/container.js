@@ -15,7 +15,8 @@ class Container extends Component{
         getPrice: PropTypes.func.isRequired,
         price: PropTypes.number,
         checkPrice: PropTypes.func.isRequired,
-        pay: PropTypes.func.isRequired
+        pay: PropTypes.func.isRequired,
+        getExchangeRate: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -32,7 +33,8 @@ class Container extends Component{
             price: null,
             fetchedPrice: false,
             fetchClear: false,
-            loading: true
+            loading: true,
+            exchangeRate: 1250
         }
     }
 
@@ -98,12 +100,35 @@ class Container extends Component{
         }
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate = async() => {
         if(this.state.fetchedPrice && !this.state.fetchClear){
-            this.setState({
-                loading: false,
-                fetchClear: true,
-            })
+            console.log(1111)
+            const { getExchangeRate, profile, getPrice } = this.props;
+            const { order, exchangeRate } = this.state;
+            if(profile.country_number === '82' || profile.country_code === 'KR'){
+                const result = await getExchangeRate('KR')
+                if(result.status === 'ok'){
+                    await getPrice((order.option.price +  Math.ceil(order.option.price*0.1))*Number(result.data.rate))
+                    this.setState({
+                        loading: false,
+                        fetchClear: true,
+                        exchangeRate: Number(result.data.rate)
+                    })
+                }
+                else{
+                    await getPrice((order.option.price +  Math.ceil(order.option.price*0.1))*exchangeRate)
+                    this.setState({
+                        loading: false,
+                        fetchClear: true,
+                    })
+                }
+            }
+            else{
+                this.setState({
+                    loading: false,
+                    fetchClear: true,
+                })
+            }
         }
     }
 
@@ -215,7 +240,7 @@ class Container extends Component{
     }
 
     _payPaypal = async(amount) => {
-        const { isSubmitting, order, isDeposit } = this.state;
+        const { isSubmitting, order } = this.state;
         const { profile, paymentExpire, goHome, refresh, price, checkPrice } = this.props;
         const successFunc = this._updateMeta;
         if(!isSubmitting){
@@ -292,6 +317,7 @@ class Container extends Component{
     }
 
     render(){
+        console.log(this.state.order)
         return(
             <PaymentDetail 
             {...this.props}

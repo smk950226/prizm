@@ -22,7 +22,6 @@ class UserAdmin(auth_admin.UserAdmin):
             'country_code',
             'country_number',
             'mobile',
-            'birth',
             'user_type',
             'instagram_account',
 

@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from . import serializers, models
 from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.studio import models as studio_models
+from prizm_server.common import models as common_models
 
 import math
 
@@ -105,17 +106,32 @@ class PaymentExpired(APIView):
 class CheckPrice(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, format = None):
+        user = request.user
         order_id = request.data.get('orderId', None)
         price = int(request.data.get('price', None))
 
         if order_id and price:
             try:
                 order = studio_models.Order.objects.get(id = order_id)
-                confirm_price = order.option.price + math.ceil(order.option.price*0.1)
-                if price == confirm_price:
-                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                if user.country_number == '82' or user.country_code == 'KR':
+                    try:
+                        exchange_rate = common_models.ExchangeRate.objects.get(country = 'KR')
+                        confirm_price = (order.option.price + math.ceil(order.option.price*0.1))*exchange_rate.rate
+                        if price == confirm_price:
+                            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                        else:
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
+                    except:
+                        confirm_price = (order.option.price + math.ceil(order.option.price*0.1))*1250
+                        if price == confirm_price:
+                            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                        else:
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
                 else:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
+                    if price == confirm_price:
+                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    else:
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
             except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
             
@@ -139,7 +155,15 @@ class Payment(APIView):
         pay_status = meta['status']
         paid_at = meta['paid_at']
         price = int(meta['paid_amount'])
-        confirm_price = order.option.price + math.ceil(order.option.price*0.1)
+        confirm_price = 0
+        if user.country_number == '82' or user.country_code == 'KR':
+            try:
+                exchange_rate = common_models.ExchangeRate.objects.get(country = 'KR')
+                confirm_price = (order.option.price + math.ceil(order.option.price*0.1))*exchange_rate.rate
+            except:
+                confirm_price = (order.option.price + math.ceil(order.option.price*0.1))*1250
+        else:
+            confirm_price = order.option.price + math.ceil(order.option.price*0.1)
         if confirm_price == price:
             try:
                 order = studio_models.Order.objects.get(id = order_id)

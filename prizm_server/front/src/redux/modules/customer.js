@@ -296,6 +296,29 @@ function pay(meta, orderId){
     }
 }
 
+function getExchangeRate(country){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/common/exchange/rate/?country=${country}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -362,7 +385,8 @@ const actionCreators = {
     paymentExpire,
     getPrice,
     checkPrice,
-    pay
+    pay,
+    getExchangeRate
 }
 
 export { actionCreators }

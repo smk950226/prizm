@@ -46,6 +46,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         pay: (meta, orderId) => {
             return dispatch(customerAction.pay(meta, orderId))
+        },
+        getExchangeRate: (country) => {
+            return dispatch(customerAction.getExchangeRate(country))
         }
     }
 }
