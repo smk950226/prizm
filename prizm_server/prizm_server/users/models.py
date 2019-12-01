@@ -3,6 +3,7 @@ from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.utils import timezone
 
 from prizm_server.common.utils import COUNTRY_CODE, COUNTRY_NUMBER
 

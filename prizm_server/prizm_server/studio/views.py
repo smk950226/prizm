@@ -65,6 +65,12 @@ class Order(APIView):
     def get(self, request, format = None):
         user = request.user
         orders = models.Order.objects.filter(user = user).order_by('-id')
+        for order in orders:
+            if order.status == 'confirmed':
+                if (order.confirmed_at.timestamp() + 60*60*24*3) < (timezone.now().timestamp()):
+                    order.status = 'cancelled'
+                    order.save()
+        orders = models.Order.objects.filter(user = user).order_by('-id')
         serializer = serializers.OrderSerializer(orders, many = True)
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
