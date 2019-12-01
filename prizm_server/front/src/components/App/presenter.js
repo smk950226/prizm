@@ -18,6 +18,7 @@ import MessageDetail from '../MessageDetail';
 import MyPhotos from '../MyPhotos';
 import MyPhotoDetail from '../MyPhotoDetail';
 import PaymentDetail from '../PaymentDetail';
+import PaymentSuccess from '../PaymentSuccess';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -287,6 +288,7 @@ const GeneralRoute = props => (
         <Route exact path='/my/photos/' component={MyPhotos} key={13} />
         <Route exact path='/my/photo/:orderId/' component={MyPhotoDetail} key={14} />
         <Route exact path='/payment/' component={PaymentDetail} key={15} />
+        <Route exact path='/payment/success/' component={PaymentSuccess} key={16} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
     </Switch>
 )

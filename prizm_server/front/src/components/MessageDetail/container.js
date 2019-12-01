@@ -10,7 +10,8 @@ class Container extends Component{
         getMessages: PropTypes.func.isRequired,
         getMessagesMore: PropTypes.func.isRequired,
         profile: PropTypes.object.isRequired,
-        responseToOrder: PropTypes.func.isRequired
+        responseToOrder: PropTypes.func.isRequired,
+        goPayment: PropTypes.func.isRequired
     }
 
     static contextTypes = {

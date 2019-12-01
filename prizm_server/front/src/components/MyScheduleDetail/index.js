@@ -18,6 +18,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goHome: () => {
             dispatch(push('/'))
+        },
+        goPayment: (order) => {
+            dispatch(push({
+                pathname: '/payment/',
+                state: {
+                    order
+                }
+            }))
         }
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 
@@ -6,48 +6,55 @@ const PaymentDetail = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
             <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{props.order.photographer.nickname}</p>
-            {props.order.status === 'pending' && (
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{context.t("Pending")}</p>
-            )}
-            {props.order.status === 'confirmed' && (
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.confirmed}`}>{context.t("confirmed")}</p>
-            )}
-            {props.order.status === 'cancelled' && (
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.pink}`}>{context.t("Cancelled")}</p>
-            )}
-            {props.order.status === 'done' && (
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{context.t("Done")}</p>
-            )}
         </div>
         <p className={`${styles.font11} ${styles.mt2}`}>{props.order.photographer.main_location}</p>
-        <p className={`${styles.fontBold} ${styles.font13} ${styles.mt2}`}>{context.t("Location")}</p>
-        <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.location.name}</p>
-        <p className={`${styles.fontBold} ${styles.font13} ${styles.mt45}`}>{context.t("Date&Time")}</p>
-        {props.order.date_option === "Specific" && (
+        <p className={`${styles.fontBold} ${styles.font13} ${styles.mt4}`}>{context.t("Service&Pricing")}</p>
+        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+            <div className={`${styles.col10} ${styles.colSm11} ${styles.px0}`}>
+                <p className={`${styles.font14}`}>{`${props.order.option.title} (${props.order.option.person > 1 ? `${props.order.option.person} people` : `${props.order.option.person} person`}, ${props.order.option.hour > 1 ? `${props.order.option.hour} hrs` : `${props.order.option.hour} hr`})`}</p> 
+            </div>
+            <div className={`${styles.col2} ${styles.colSm1} ${styles.px0} ${styles.textRight}`}>
+                <p className={`${styles.font14} ${styles.fontBold}`}>{`$${props.order.option.price}`}</p>
+            </div>
+        </div>
+        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3} ${styles.borderBtmGrayDc} ${styles.pb3}`}>
+            <div className={`${styles.col10} ${styles.colSm11} ${styles.px0}`}>
+                <p className={`${styles.font14}`}>{`Service Fees (10%)`}</p> 
+            </div>
+            <div className={`${styles.col2} ${styles.colSm1} ${styles.px0} ${styles.textRight}`}>
+                <p className={`${styles.font14} ${styles.fontBold}`}>{`$${Math.ceil(props.order.option.price*0.1)}`}</p>
+            </div>
+        </div>
+        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+            <div className={`${styles.col10} ${styles.colSm11} ${styles.px0}`}>
+                <p className={`${styles.font14}`}>{`Total`}</p> 
+            </div>
+            <div className={`${styles.col2} ${styles.colSm1} ${styles.px0} ${styles.textRight}`}>
+                <p className={`${styles.font14} ${styles.fontBold}`}>{`$${props.order.option.price +  Math.ceil(props.order.option.price*0.1)}`}</p>
+            </div>
+        </div>
+        {(props.order.user.country_number === '82') || (props.order.user.country_code === 'KR') && (
             <Fragment>
-                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.specific_date.slice(2,4).concat('/', props.order.specific_date.slice(5,7), '/', props.order.specific_date.slice(8,10), ' ', props.order.specific_date.slice(11,13), ':', props.order.specific_date.slice(14,16))}</p>
-                <p className={`${styles.font11} ${styles.mt1}`}>{context.t("I have a specific date in mind")}</p>
+                <p className={`${styles.fontBold} ${styles.font10} ${styles.mt45}`}>{context.t("입금자명")}</p>
+                <div className={`${styles.widthFull}`}>
+                    <input className={`${styles.textInput2}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} />
+                </div>
             </Fragment>
         )}
-        {props.order.date_option === 'Range' && (
-            <Fragment>
-                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.start_date.slice(2,4).concat('/', props.order.start_date.slice(5,7), '/', props.order.start_date.slice(8,10), ' ~ ',props.order.end_date.slice(2,4).concat('/', props.order.end_date.slice(5,7), '/', props.order.end_date.slice(8,10)))}</p>
-                <p className={`${styles.font11} ${styles.mt1}`}>{context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as above")}</p>
-            </Fragment>
-        )}
-        <p className={`${styles.fontBold} ${styles.font13} ${styles.mt45}`}>{context.t("Service&Pricing")}</p>
-        <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{`${props.order.option.title} (${props.order.option.person > 1 ? `${props.order.option.person} people` : `${props.order.option.person} person`}, ${props.order.option.hour > 1 ? `${props.order.option.hour} hrs` : `${props.order.option.hour} hr`})`}</p>
-        <p className={`${styles.font11} ${styles.mt1} ${styles.mb45}`}>{props.order.option.description}</p>
         {props.order.status === 'confirmed' && (
-            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} style={{height: 48}}>
-                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Add Payment Details")}</p>
+            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={props.isDeposit ? () => props.payDeposit(props.order.option.price +  Math.ceil(props.order.option.price*0.1)) : null} style={{height: 48}}>
+                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Process Payment")}</p>
             </div>
         )}
     </div>
 )
 
 PaymentDetail.propTypes = {
-
+    handleInputChange: PropTypes.func.isRequired,
+    order: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
+    payDeposit: PropTypes.func.isRequired,
+    isDeposit: PropTypes.func.isRequired
 }
 
 PaymentDetail.contextTypes = {

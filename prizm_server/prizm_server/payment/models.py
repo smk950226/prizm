@@ -15,3 +15,20 @@ class PhotographerAccount(models.Model):
         ordering = ['-id']
         verbose_name = _('Photographer Account')
         verbose_name_plural = _('Photographer Account')
+
+
+class Deposit(models.Model):
+    order = models.ForeignKey('studio.Order', on_delete = models.CASCADE)
+    price = models.FloatField(_('How much in dollars'))
+    name = models.CharField(_('Deposant'), max_length = 255)
+    created_at = models.DateTimeField(_('Deposit Created At'), auto_now_add = True)
+    paid_at = models.DateTimeField(_('Deposit Completed At'), blank = True, null = True)
+    is_paid = models.BooleanField(_('Is Paid'), default = False)
+
+    def __str__(self):
+        return self.order.photographer.nickname + '-' + self.price
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Deposit')
+        verbose_name_plural = _('Deposit')

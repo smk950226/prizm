@@ -8,7 +8,8 @@ class Container extends Component{
         getOrderList: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
-        goMyScheduleDetail: PropTypes.func.isRequired
+        goMyScheduleDetail: PropTypes.func.isRequired,
+        goPayment: PropTypes.func.isRequired
     }
 
     state = {

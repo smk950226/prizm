@@ -62,15 +62,19 @@ const MyScheduleDetail = (props, context) => (
         <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{`${props.order.option.title} (${props.order.option.person > 1 ? `${props.order.option.person} people` : `${props.order.option.person} person`}, ${props.order.option.hour > 1 ? `${props.order.option.hour} hrs` : `${props.order.option.hour} hr`})`}</p>
         <p className={`${styles.font11} ${styles.mt1} ${styles.mb45}`}>{props.order.option.description}</p>
         {props.order.status === 'confirmed' && (
-            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} style={{height: 48}}>
+            <Fragment>
+            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => props.goPayment(props.order)} style={{height: 48}}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Add Payment Details")}</p>
             </div>
+            <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please add payment details by : ${new Date(new Date(props.order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+            </Fragment>
         )}
     </div>
 )
 
 MyScheduleDetail.propTypes = {
-    order: PropTypes.object.isRequired
+    order: PropTypes.object.isRequired,
+    goPayment: PropTypes.func.isRequired
 }
 
 MyScheduleDetail.contextTypes = {

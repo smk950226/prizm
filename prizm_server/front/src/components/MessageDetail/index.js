@@ -26,6 +26,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         responseToOrder: (orderId, responseType, selectedTime, messageId) => {
             return dispatch(customerAction.responseToOrder(orderId, responseType, selectedTime, messageId))
+        },
+        goPayment: (order) => {
+            dispatch(push({
+                pathname: '/payment/',
+                state: {
+                    order
+                }
+            }))
         }
     }
 }

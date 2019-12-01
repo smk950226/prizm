@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment} from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -44,9 +44,12 @@ const MySchedule = (props, context) => (
                                 </div>
                             </div>
                             {order.status === 'confirmed' && (
-                                <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} style={{height: 48}}>
+                                <Fragment>
+                                <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => props.goPayment(order)} style={{height: 48}}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Add Payment Details")}</p>
                                 </div>
+                                <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please add payment details by : ${new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+                                </Fragment>
                             )}
                         </div>
                     ))}
@@ -59,7 +62,8 @@ const MySchedule = (props, context) => (
 MySchedule.propTypes = {
     orderList: PropTypes.array,
     goMyScheduleDetail: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    goPayment: PropTypes.func.isRequired
 }
 
 MySchedule.contextTypes = {

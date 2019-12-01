@@ -27,6 +27,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     order
                 }
             }))
+        },
+        goPayment: (order) => {
+            dispatch(push({
+                pathname: '/payment/',
+                state: {
+                    order
+                }
+            }))
         }
     }
 }
