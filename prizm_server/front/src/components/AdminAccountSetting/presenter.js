@@ -8,7 +8,7 @@ import { COUNTRY_NUMBER } from '../../utils/country';
 const AdminProfileSetting = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.justifyContentBetween}`}>
-            <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{context.t("Account")}</p>
+            <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{context.t("Payout Setting")}</p>
             <p className={`${styles.fontBold} ${styles.font13} ${styles.pink} ${styles.cursorPointer} ${props.editable ? styles.hidden : null}`} onClick={props.enableEdit}>{context.t("Edit")}</p>
         </div>
         <p className={`${styles.mt1} ${styles.font1012}`}>{context.t("사진촬영 대금을 전달받으실 정보를 입력해주세요.")}</p>

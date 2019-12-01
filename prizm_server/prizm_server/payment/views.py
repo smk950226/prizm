@@ -92,6 +92,8 @@ class PaymentExpired(APIView):
                 order.save()
                 notifications = order.notification_set.all()
                 notifications.delete()
+                chats = order.chat_set.all()
+                chats.delete()
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
             except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})

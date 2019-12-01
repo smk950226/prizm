@@ -70,6 +70,8 @@ class Order(APIView):
                 if (order.confirmed_at.timestamp() + 60*60*24*3) < (timezone.now().timestamp()):
                     order.status = 'cancelled'
                     order.save()
+                    chats = order.chat_set.all()
+                    chats.delete()
         orders = models.Order.objects.filter(user = user).order_by('-id')
         serializer = serializers.OrderSerializer(orders, many = True)
 
@@ -151,6 +153,8 @@ class Order(APIView):
                     else:
                         order.status = 'cancelled'
                         order.save()
+                        chats = order.chat_set.all()
+                        chats.delete()
                         message.responded = True
                         message.save()
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
@@ -275,6 +279,8 @@ class AdminOrder(APIView):
                 else:
                     order.status = 'cancelled'
                     order.save()
+                    chats = order.chat_set.all()
+                    chats.delete()
                     notification = notification_models.Notification.objects.create(
                         user = order.user,
                         notification_type = 'request_cancel',
