@@ -44,9 +44,9 @@ const SignUp = (props, context) => (
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
         </div>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Date of Birth(YY/MM/DD)")}</p>
+        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Password confirm")}</p>
         <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"birth"} value={props.birth} onChange={props.handleInputChange} maxLength={6} onKeyPress={props.handleKeyPress} />
+            <input className={`${styles.textInput2}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
         </div>
         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{props.goRequest ? context.t("sign up & submit the request") : context.t("sign up")}</p>
@@ -92,7 +92,7 @@ SignUp.propTypes = {
     countryNumber: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
-    birth: PropTypes.string.isRequired,
+    password2: PropTypes.string.isRequired,
     handleCountryNumberChange: PropTypes.func.isRequired,
     showCountryNumber: PropTypes.bool.isRequired,
     handleShowCountryNumber: PropTypes.func.isRequired,

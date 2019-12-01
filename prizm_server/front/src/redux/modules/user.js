@@ -62,7 +62,7 @@ function getLogout(){
     }
 }
 
-function signUp(email, password, name, birth, countryNumber, countryCode, mobile){
+function signUp(email, password, name, countryNumber, countryCode, mobile){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/rest-auth/registration/`, {
            method: 'POST',
@@ -74,7 +74,6 @@ function signUp(email, password, name, birth, countryNumber, countryCode, mobile
                password1: password,
                password2: password,
                name,
-               birth,
                countryNumber,
                countryCode,
                email,
@@ -96,7 +95,7 @@ function signUp(email, password, name, birth, countryNumber, countryCode, mobile
     }
 }
 
-function signUpAdmin(email, password, name, birth, countryNumber, countryCode, mobile, instagram, userType){
+function signUpAdmin(email, password, name, countryNumber, countryCode, mobile, instagram, userType){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/rest-auth/registration/`, {
            method: 'POST',
@@ -108,7 +107,6 @@ function signUpAdmin(email, password, name, birth, countryNumber, countryCode, m
                password1: password,
                password2: password,
                name,
-               birth,
                countryNumber, 
                countryCode,
                email,

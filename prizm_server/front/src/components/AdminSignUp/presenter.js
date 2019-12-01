@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
-import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
 import ReactCountryFlag from "react-country-flag";
 import Modal from 'react-responsive-modal';
+import InputMask from 'react-input-mask';
 
 const AdminSignUp = (props, context) => (
     <div className={`${styles.safeareaAdminMobile} ${styles.containerAdmin} ${styles.pxAdmin}`}>
         <div className={`${styles.mobileOnly}`}>
             <p className={`${styles.fontBold} ${styles.font2024} ${styles.mt3}`}>{context.t("Welcome to PRIZM")}</p>
             <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information below to continue")}</p>
-            <p className={`${styles.fontBold} ${styles.font1012}`} style={{marginTop: 50}}>{context.t("Name")}</p>
+            <p className={`${styles.fontBold} ${styles.font1012}`} style={{marginTop: 50}}>{context.t("Full name")}</p>
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
@@ -34,7 +34,9 @@ const AdminSignUp = (props, context) => (
             </div>
             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Instagram")}</p>
             <div className={`${styles.widthFull}`}>
-                <input className={`${styles.textInput6}`} type={"text"} name={"instagram"} value={props.instagram} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
+                <InputMask mask={'inst\\agr\\am/********************'} maskChar={''} alwaysShowMask={true} value={props.instagram} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress}>
+                    {(inputProps) => <input {...inputProps} type={"text"} name={"instagram"} className={`${styles.textInput6}`} />}
+                </InputMask>
             </div>
             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Email")}</p>
             <div className={`${styles.widthFull}`}>
@@ -44,9 +46,9 @@ const AdminSignUp = (props, context) => (
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
-            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Date of Birth(YY/MM/DD)")}</p>
+            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Password confirm")}</p>
             <div className={`${styles.widthFull}`}>
-                <input className={`${styles.textInput6}`} type={"text"} name={"birth"} value={props.birth} onChange={props.handleInputChange} maxLength={6} onKeyPress={props.handleKeyPress} />
+                <input className={`${styles.textInput6}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, marginTop: 65}} onClick={props.submit}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("sign up")}</p>
@@ -59,7 +61,7 @@ const AdminSignUp = (props, context) => (
                     <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information beslow to continue")}</p>
                 </div>
                 <div className={`${styles.colMd6} ${styles.colXl5} ${styles.px0}`} style={{maxWidth: 420}}>
-                    <p className={`${styles.fontBold} ${styles.font1012}`}>{context.t("Name")}</p>
+                    <p className={`${styles.fontBold} ${styles.font1012}`}>{context.t("Full name")}</p>
                     <div className={`${styles.widthFull}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
@@ -82,7 +84,9 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Instagram")}</p>
                     <div className={`${styles.widthFull}`}>
-                        <input className={`${styles.textInput6}`} type={"text"} name={"instagram"} value={props.instagram} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
+                        <InputMask mask={'inst\\agr\\am/********************'} maskChar={''} alwaysShowMask={true} value={props.instagram} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress}>
+                            {(inputProps) => <input {...inputProps} type={"text"} name={"instagram"} className={`${styles.textInput6}`} />}
+                        </InputMask>
                     </div>
                     <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Email")}</p>
                     <div className={`${styles.widthFull}`}>
@@ -92,9 +96,9 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.widthFull}`}>
                         <input className={`${styles.textInput6}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
-                    <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Date of Birth(YY/MM/DD)")}</p>
+                    <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Password confirm")}</p>
                     <div className={`${styles.widthFull}`}>
-                        <input className={`${styles.textInput6}`} type={"text"} name={"birth"} value={props.birth} onChange={props.handleInputChange} maxLength={6} onKeyPress={props.handleKeyPress} />
+                        <input className={`${styles.textInput6}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`}>
                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, marginTop: 65, maxWidth: 140}} onClick={props.submit}>
@@ -145,7 +149,7 @@ AdminSignUp.propTypes = {
     countryNumber: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
-    birth: PropTypes.string.isRequired,
+    password2: PropTypes.string.isRequired,
     handleCountryNumberChange: PropTypes.func.isRequired,
     showCountryNumber: PropTypes.bool.isRequired,
     handleShowCountryNumber: PropTypes.func.isRequired,

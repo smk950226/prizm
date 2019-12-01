@@ -30,11 +30,11 @@ class Container extends Component{
             countryCode: "",
             mobile: "",
             password: "",
-            birth: "",
+            password2: "",
             q: "",
             emailForm: false,
             passwordForm: false,
-            birthForm: false,
+            password2Form: false,
             showCountryNumber: false,
             isSubmitting: false,
             goRequest: props.location.state ? props.location.state.goRequest ? props.location.state.goRequest : false : false,
@@ -75,44 +75,105 @@ class Container extends Component{
                 })
             }
         }
-        else if(name === 'birth'){
-            let numberReg = /^[0-9]*$/;
-            if(numberReg.test(value)){
-                let reg = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))$/;
-                if(reg.test(value)){
-                    this.setState({
-                        [name]: value,
-                        birthForm: true
-                    });
-                }
-                else{
-                    this.setState({
-                        [name]: value,
-                        birthForm: false
-                    });
-                }
-            }
-        }
         else if(name === 'password'){
             let reg = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{2,}$/ ;
             if(reg.test(value)){
                 if(value.length >= 8){
+                    if(this.state.password2){
+                        if(this.state.password2 === value){
+                            this.setState({
+                                [name]: value,
+                                passwordForm: true,
+                                password2Form: true
+                            });
+                        }
+                        else{
+                            this.setState({
+                                [name]: value,
+                                passwordForm: true,
+                                password2Form: false
+                            });
+                        }
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: true,
+                            password2Form: false
+                        });
+                    }
+                }
+                else{
+                    if(this.state.password2){
+                        if(this.state.password2 === value){
+                            this.setState({
+                                [name]: value,
+                                passwordForm: false,
+                                password2Form: true
+                            });
+                        }
+                        else{
+                            this.setState({
+                                [name]: value,
+                                passwordForm: false,
+                                password2Form: false
+                            });
+                        }
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: false
+                        });
+                    }
+                }
+            }
+            else{
+                if(this.state.password2){
+                    if(this.state.password2 === value){
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: true
+                        });
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: false
+                        });
+                    }
+                }
+                else{
                     this.setState({
                         [name]: value,
-                        passwordForm: true
+                        passwordForm: false,
+                        password2Form: false
+                    });
+                }
+            }
+        }
+        else if(name === 'password2'){
+            if(this.state.password){
+                if(this.state.password === value){
+                    this.setState({
+                        [name]: value,
+                        password2Form: true
                     });
                 }
                 else{
                     this.setState({
                         [name]: value,
-                        passwordForm: false
+                        password2Form: false
                     });
                 }
             }
             else{
                 this.setState({
                     [name]: value,
-                    passwordForm: false
+                    password2Form: false
                 });
             }
         }
@@ -168,33 +229,47 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, birth, emailForm, passwordForm, birthForm, goRequest, photographerId } = this.state;
+        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form, goRequest, photographerId } = this.state;
         const { checkDuplicate, signUp, getProfileByToken, getSaveToken, goHome, goDetail, getNotificationByToken, getOrderListByToken } = this.props;
         if(!isSubmitting){
-            if(name && email && countryNumber && countryCode && mobile && password && birth){
+            if(name && email && countryNumber && countryCode && mobile && password && password2){
                 if(emailForm){
-                    if(birthForm){
-                        if(passwordForm){
-                            this.setState({
-                                isSubmitting: true
-                            })
-                            const check = await checkDuplicate(email, mobile, countryNumber);
-                            if(check.status === 'ok'){
-                                const result = await signUp(email, password, name, birth, countryNumber, countryCode, mobile)
-                                if(result.token){
-                                    await getProfileByToken(result.token)
-                                    await getNotificationByToken(result.token)
-                                    await getOrderListByToken(result.token)
+                    if(passwordForm){
+                        if(password === password2){
+                            if(password2Form){
+                                this.setState({
+                                    isSubmitting: true
+                                })
+                                const check = await checkDuplicate(email, mobile, countryNumber);
+                                if(check.status === 'ok'){
+                                    const result = await signUp(email, password, name, countryNumber, countryCode, mobile)
+                                    if(result.token){
+                                        await getProfileByToken(result.token)
+                                        await getNotificationByToken(result.token)
+                                        await getOrderListByToken(result.token)
+                                        this.setState({
+                                            isSubmitting: false
+                                        })
+                                        getSaveToken(result.token)
+                                        if(goRequest){
+                                            goDetail(photographerId)
+                                        }
+                                        else{
+                                            goHome()
+                                        }
+                                    }
+                                    else{
+                                        this.setState({
+                                            isSubmitting: false
+                                        })
+                                        alert(this.context.t("오류가 발생하였습니다."))
+                                    }
+                                }
+                                else if(check.error){
                                     this.setState({
                                         isSubmitting: false
                                     })
-                                    getSaveToken(result.token)
-                                    if(goRequest){
-                                        goDetail(photographerId)
-                                    }
-                                    else{
-                                        goHome()
-                                    }
+                                    alert(this.context.t(check.error))
                                 }
                                 else{
                                     this.setState({
@@ -203,25 +278,16 @@ class Container extends Component{
                                     alert(this.context.t("오류가 발생하였습니다."))
                                 }
                             }
-                            else if(check.error){
-                                this.setState({
-                                    isSubmitting: false
-                                })
-                                alert(this.context.t(check.error))
-                            }
                             else{
-                                this.setState({
-                                    isSubmitting: false
-                                })
-                                alert(this.context.t("오류가 발생하였습니다."))
+                                alert(this.context.t("비밀번호가 일치하지 않습니다."))
                             }
                         }
                         else{
-                            alert(this.context.t("비밀번호는 최소 8자, 영문자와 숫자를 각 1개 이상 포함해야 합니다."))
+                            alert(this.context.t("비밀번호가 일치하지 않습니다."))
                         }
                     }
                     else{
-                        alert(this.context.t("올바른 생년월일을 입력해주세요."))
+                        alert(this.context.t("비밀번호는 최소 8자, 영문자와 숫자를 각 1개 이상 포함해야 합니다."))
                     }
                 }
                 else{

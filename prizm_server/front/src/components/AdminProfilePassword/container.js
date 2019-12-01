@@ -19,8 +19,10 @@ class Container extends Component{
         super(props)
         this.state = {
             password: "",
+            password2: "",
             currentPassword: "",
             passwordForm:false,
+            password2Form:false,
             isSubmitting: false,
         }
     }
@@ -41,22 +43,101 @@ class Container extends Component{
             let reg = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{2,}$/ ;
             if(reg.test(value)){
                 if(value.length >= 8){
+                    if(this.state.password2){
+                        if(this.state.password2 === value){
+                            this.setState({
+                                [name]: value,
+                                passwordForm: true,
+                                password2Form: true
+                            });
+                        }
+                        else{
+                            this.setState({
+                                [name]: value,
+                                passwordForm: true,
+                                password2Form: false
+                            });
+                        }
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: true,
+                            password2Form: false
+                        });
+                    }
+                }
+                else{
+                    if(this.state.password2){
+                        if(this.state.password2 === value){
+                            this.setState({
+                                [name]: value,
+                                passwordForm: false,
+                                password2Form: true
+                            });
+                        }
+                        else{
+                            this.setState({
+                                [name]: value,
+                                passwordForm: false,
+                                password2Form: false
+                            });
+                        }
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: false
+                        });
+                    }
+                }
+            }
+            else{
+                if(this.state.password2){
+                    if(this.state.password2 === value){
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: true
+                        });
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: false
+                        });
+                    }
+                }
+                else{
                     this.setState({
                         [name]: value,
-                        passwordForm: true
+                        passwordForm: false,
+                        password2Form: false
+                    });
+                }
+            }
+        }
+        else if(name === 'password2'){
+            if(this.state.password){
+                if(this.state.password === value){
+                    this.setState({
+                        [name]: value,
+                        password2Form: true
                     });
                 }
                 else{
                     this.setState({
                         [name]: value,
-                        passwordForm: false
+                        password2Form: false
                     });
                 }
             }
             else{
                 this.setState({
                     [name]: value,
-                    passwordForm: false
+                    password2Form: false
                 });
             }
         }
@@ -68,36 +149,48 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, password, currentPassword, passwordForm } = this.state;
+        const { isSubmitting, password, password2, currentPassword, passwordForm, password2Form } = this.state;
         const { editPassword, getProfile } = this.props;
         if(!isSubmitting){
-            if(password && currentPassword){
+            if(password && password2 && currentPassword){
                 if(passwordForm){
-                    this.setState({
-                        isSubmitting: true
-                    })
-                    const result = await editPassword(currentPassword, password)
-                    if(result.status === 'ok'){
-                        await getProfile()
-                        this.setState({
-                            isSubmitting: false,
-                            currentPassword: "",
-                            password: "",
-                            passwordForm: false
-                        })
-                        alert(this.context.t("비밀번호를 수정하였습니다."))
-                    }
-                    else if(result.error){
-                        this.setState({
-                            isSubmitting: false
-                        })
-                        alert(result.error)
+                    if(password === password2){
+                        if(password2Form){
+                            this.setState({
+                                isSubmitting: true
+                            })
+                            const result = await editPassword(currentPassword, password)
+                            if(result.status === 'ok'){
+                                await getProfile()
+                                this.setState({
+                                    isSubmitting: false,
+                                    currentPassword: "",
+                                    password: "",
+                                    password2: "",
+                                    passwordForm: false,
+                                    password2Form: false
+                                })
+                                alert(this.context.t("비밀번호를 수정하였습니다."))
+                            }
+                            else if(result.error){
+                                this.setState({
+                                    isSubmitting: false
+                                })
+                                alert(result.error)
+                            }
+                            else{
+                                this.setState({
+                                    isSubmitting: false
+                                })
+                                alert(this.context.t("오류가 발생하였습니다."))
+                            }
+                        }
+                        else{
+                            alert(this.context.t("비밀번호가 일치하지 않습니다."))
+                        }
                     }
                     else{
-                        this.setState({
-                            isSubmitting: false
-                        })
-                        alert(this.context.t("오류가 발생하였습니다."))
+                        alert(this.context.t("비밀번호가 일치하지 않습니다."))
                     }
                 }
                 else{

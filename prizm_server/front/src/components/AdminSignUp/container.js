@@ -28,14 +28,14 @@ class Container extends Component{
             email: "",
             mobile: "",
             password: "",
+            password2: "",
             countryNumber: "",
             countryCode: "",
-            birth: "",
             instagram: "",
             q: "",
             emailForm: false,
             passwordForm: false,
-            birthForm: false,
+            password2Form: false,
             isSubmitting: false,
             showCountryNumber: false,
             fetchedToken: false,
@@ -106,51 +106,107 @@ class Container extends Component{
                 })
             }
         }
-        else if(name === 'birth'){
-            let numberReg = /^[0-9]*$/;
-            if(numberReg.test(value)){
-                let reg = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))$/;
-                if(reg.test(value)){
-                    this.setState({
-                        [name]: value,
-                        birthForm: true
-                    });
-                }
-                else{
-                    this.setState({
-                        [name]: value,
-                        birthForm: false
-                    });
-                }
-            }
-        }
         else if(name === 'password'){
             let reg = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{2,}$/ ;
             if(reg.test(value)){
                 if(value.length >= 8){
+                    if(this.state.password2){
+                        if(this.state.password2 === value){
+                            this.setState({
+                                [name]: value,
+                                passwordForm: true,
+                                password2Form: true
+                            });
+                        }
+                        else{
+                            this.setState({
+                                [name]: value,
+                                passwordForm: true,
+                                password2Form: false
+                            });
+                        }
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: true,
+                            password2Form: false
+                        });
+                    }
+                }
+                else{
+                    if(this.state.password2){
+                        if(this.state.password2 === value){
+                            this.setState({
+                                [name]: value,
+                                passwordForm: false,
+                                password2Form: true
+                            });
+                        }
+                        else{
+                            this.setState({
+                                [name]: value,
+                                passwordForm: false,
+                                password2Form: false
+                            });
+                        }
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: false
+                        });
+                    }
+                }
+            }
+            else{
+                if(this.state.password2){
+                    if(this.state.password2 === value){
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: true
+                        });
+                    }
+                    else{
+                        this.setState({
+                            [name]: value,
+                            passwordForm: false,
+                            password2Form: false
+                        });
+                    }
+                }
+                else{
                     this.setState({
                         [name]: value,
-                        passwordForm: true
+                        passwordForm: false,
+                        password2Form: false
+                    });
+                }
+            }
+        }
+        else if(name === 'password2'){
+            if(this.state.password){
+                if(this.state.password === value){
+                    this.setState({
+                        [name]: value,
+                        password2Form: true
                     });
                 }
                 else{
                     this.setState({
                         [name]: value,
-                        passwordForm: false
+                        password2Form: false
                     });
                 }
             }
             else{
                 this.setState({
                     [name]: value,
-                    passwordForm: false
+                    password2Form: false
                 });
             }
-        }
-        else if(name === 'instagram'){
-            this.setState({
-                [name]: value.replace(/^@+/, '')
-            });
         }
         else if(name === 'q'){
             this.setState({
@@ -178,26 +234,41 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, birth, instagram, emailForm, passwordForm, birthForm } = this.state;
+        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, password2, instagram, emailForm, passwordForm, password2Form } = this.state;
         const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, getPhotographerByToken } = this.props;
         if(!isSubmitting){
-            if(name && email && countryNumber && countryCode && mobile && password && birth && instagram){
+            if(name && email && countryNumber && countryCode && mobile && password && password2 && instagram){
                 if(emailForm){
-                    if(birthForm){
-                        if(passwordForm){
-                            this.setState({
-                                isSubmitting: true
-                            })
-                            const check = await checkDuplicate(email, mobile, countryNumber, instagram);
-                            if(check.status === 'ok'){
-                                const result = await signUpAdmin(email, password, name, birth, countryNumber, countryCode, mobile, instagram, 'photographer')
-                                if(result.token){
-                                    await getProfileByToken(result.token)
-                                    await getPhotographerByToken(result.token)
+                    if(passwordForm){
+                        if(password === password2){
+                            if(password2Form){
+                                this.setState({
+                                    isSubmitting: true
+                                })
+                                const check = await checkDuplicate(email, mobile, countryNumber, instagram);
+                                if(check.status === 'ok'){
+                                    const replacedInstagram = instagram.replace('instagram/', '')
+                                    const result = await signUpAdmin(email, password, name, countryNumber, countryCode, mobile, replacedInstagram, 'photographer')
+                                    if(result.token){
+                                        await getProfileByToken(result.token)
+                                        await getPhotographerByToken(result.token)
+                                        this.setState({
+                                            isSubmitting: false
+                                        })
+                                        await getSaveToken(result.token)
+                                    }
+                                    else{
+                                        this.setState({
+                                            isSubmitting: false
+                                        })
+                                        alert(this.context.t("오류가 발생하였습니다."))
+                                    }
+                                }
+                                else if(check.error){
                                     this.setState({
                                         isSubmitting: false
                                     })
-                                    await getSaveToken(result.token)
+                                    alert(this.context.t(check.error))
                                 }
                                 else{
                                     this.setState({
@@ -206,25 +277,16 @@ class Container extends Component{
                                     alert(this.context.t("오류가 발생하였습니다."))
                                 }
                             }
-                            else if(check.error){
-                                this.setState({
-                                    isSubmitting: false
-                                })
-                                alert(this.context.t(check.error))
-                            }
                             else{
-                                this.setState({
-                                    isSubmitting: false
-                                })
-                                alert(this.context.t("오류가 발생하였습니다."))
+                                alert(this.context.t("비밀번호가 일치하지 않습니다."))
                             }
                         }
                         else{
-                            alert(this.context.t("비밀번호는 최소 8자, 영문자와 숫자를 각 1개 이상 포함해야 합니다."))
+                            alert(this.context.t("비밀번호가 일치하지 않습니다."))
                         }
                     }
                     else{
-                        alert(this.context.t("올바른 생년월일을 입력해주세요."))
+                        alert(this.context.t("비밀번호는 최소 8자, 영문자와 숫자를 각 1개 이상 포함해야 합니다."))
                     }
                 }
                 else{

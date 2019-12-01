@@ -13,6 +13,10 @@ const AdminProfilePassword = (props, context) => (
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} />
         </div>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("New password confirm")}</p>
+        <div className={`${styles.widthFull}`}>
+            <input className={`${styles.textInput2}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} />
+        </div>
         <div className={`${styles.mobileOnly}`}>
             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Edit")}</p>
@@ -33,6 +37,7 @@ const AdminProfilePassword = (props, context) => (
 AdminProfilePassword.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
     password: PropTypes.string.isRequired,
+    password2: PropTypes.string.isRequired,
     currentPassword: PropTypes.string.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     passwordForm: PropTypes.bool.isRequired,

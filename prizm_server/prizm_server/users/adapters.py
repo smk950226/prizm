@@ -13,7 +13,6 @@ class AccountAdapter(DefaultAccountAdapter):
     def save_user(self, request, user, form, commit=True):
         user = super().save_user(request, user, form, False)
         name = request.data.get('name', '')
-        birth = request.data.get('birth', '')
         country_number = request.data.get('countryNumber', '')
         country_code = request.data.get('countryCode', '')
         mobile = request.data.get('mobile', '')
@@ -22,7 +21,6 @@ class AccountAdapter(DefaultAccountAdapter):
 
         if user_type == 'photographer':
             user.name = name
-            user.birth = birth
             user.country_number = country_number
             user.country_code = country_code
             user.mobile = mobile
@@ -30,7 +28,6 @@ class AccountAdapter(DefaultAccountAdapter):
             user.user_type = 'photographer'
         else:
             user.name = name
-            user.birth = birth
             user.country_number = country_number
             user.country_code = country_code
             user.mobile = mobile
