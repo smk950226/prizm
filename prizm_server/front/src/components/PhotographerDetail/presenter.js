@@ -429,7 +429,7 @@ class PhotographerDetail extends Component{
                     ) : (
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.heightFullPercent} ${styles.px3}`} style={{position: 'relative'}}>
                             <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/dummy.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: 200, heihgt: 160}} />
+                                <img src={require('../../assets/images/prizm_admin_main.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: 200, heihgt: 160}} />
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>{this.context.t("Your request was submitted successfully")}</p>
                                 <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
                                     {this.context.t(`${photographer.nickname} is now reviewing your request.`)}<br/>

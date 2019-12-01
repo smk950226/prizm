@@ -13,7 +13,7 @@ const AdminStudioSettingClear = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1418} ${styles.mt3} ${styles.urlBlue}`}>{`prizm.cloud/${props.studioId}/`}</p>
                     </a>
                     <div className={`${styles.col12} ${styles.px0} ${styles.textCenter} ${styles.mobileOnly}`}>
-                        <img src={require('../../assets/images/dummy.png')} alt={context.t("Complete")} className={`${styles.mt4} ${styles.mb4}`} style={{width: '100%'}} />
+                        <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Complete")} className={`${styles.mt4} ${styles.mb4}`} style={{width: '100%'}} />
                     </div>
                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, marginTop: 70}} onClick={props.goHome}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Home")}</p>
@@ -34,7 +34,7 @@ const AdminStudioSettingClear = (props, context) => (
                     </div>
                 </div>
                 <div className={`${styles.colMd4} ${styles.colLg6} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd} ${styles.px0} ${styles.textCenter}`}>
-                    <img src={require('../../assets/images/dummy.png')} alt={context.t("Complete")} className={`${styles.adminMainImage}`} />
+                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Complete")} className={`${styles.adminMainImage}`} />
                 </div>
             </div>
         </div>
