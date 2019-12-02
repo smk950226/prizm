@@ -102,7 +102,6 @@ class Container extends Component{
 
     componentDidUpdate = async() => {
         if(this.state.fetchedPrice && !this.state.fetchClear){
-            console.log(1111)
             const { getExchangeRate, profile, getPrice } = this.props;
             const { order, exchangeRate } = this.state;
             if(profile.country_number === '82' || profile.country_code === 'KR'){
@@ -317,7 +316,6 @@ class Container extends Component{
     }
 
     render(){
-        console.log(this.state.order)
         return(
             <PaymentDetail 
             {...this.props}

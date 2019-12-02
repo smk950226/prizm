@@ -128,13 +128,13 @@ class CheckPrice(APIView):
                         else:
                             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
                 else:
+                    confirm_price = (order.option.price + math.ceil(order.option.price*0.1))
                     if price == confirm_price:
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                     else:
                         return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
             except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
-            
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 

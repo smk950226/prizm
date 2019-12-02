@@ -87,6 +87,7 @@ THIRD_PARTY_APPS = [
     'rest_auth.registration',
     'channels',
     'imagekit',
+    'ckeditor',
 ]
 
 LOCAL_APPS = [
@@ -307,3 +308,9 @@ JWT_AUTH = {
 
 IAMPORT_API_KEY = get_secret("IAMPORT_API_KEY")
 IAMPORT_API_SECRET = get_secret("IAMPORT_API_SECRET")
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}

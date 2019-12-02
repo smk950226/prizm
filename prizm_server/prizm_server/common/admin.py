@@ -6,3 +6,9 @@ class ExchangeRateAdmin(admin.ModelAdmin):
     list_display = ['id', 'country', 'rate']
     list_display_links = ['id', 'country']
     search_fields = ['country']
+
+
+@admin.register(models.Terms)
+class TermsAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+    list_display_links = ['id', 'name']

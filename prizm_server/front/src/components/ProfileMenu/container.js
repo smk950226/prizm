@@ -13,7 +13,8 @@ class Container extends Component{
         goMySchedule: PropTypes.func.isRequired,
         profile: PropTypes.object,
         goProfile: PropTypes.func.isRequired,
-        goMyPhotos: PropTypes.func.isRequired
+        goMyPhotos: PropTypes.func.isRequired,
+        goTerms: PropTypes.func.isRequired
     }
 
     _logout = () => {

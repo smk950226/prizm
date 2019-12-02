@@ -11,7 +11,8 @@ class ProfileMenu extends Component{
         goSignIn: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
         goProfile: PropTypes.func.isRequired,
-        goMyPhotos:  PropTypes.func.isRequired
+        goMyPhotos:  PropTypes.func.isRequired,
+        goTerms: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -58,10 +59,10 @@ class ProfileMenu extends Component{
                         <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={this.props.goMyPhotos}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.px3}`}>{this.context.t("My Photos")}</p>
                         </div>
-                        <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`}>
+                        <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={() => this.props.goTerms("Terms of Use")}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.px3}`}>{this.context.t("Terms of Use")}</p>
                         </div>
-                        <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`}>
+                        <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={() => this.props.goTerms("Privacy Policy")}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.px3}`}>{this.context.t("Privacy Policy")}</p>
                         </div>
                         <div className={`${styles.py3} ${styles.cursorPointer}`} onClick={this.props.logout}>

@@ -27,3 +27,4 @@ channels-redis==2.4.1
 django-imagekit==4.0.2
 daphne==2.4.0
 jsonfield==2.0.2
+django-ckeditor==5.8.0

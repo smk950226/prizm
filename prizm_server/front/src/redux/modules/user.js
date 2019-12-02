@@ -519,6 +519,18 @@ function getMessagesMore(chatId, page){
     }
 }
 
+function getTerm(name){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/common/terms/?name=${name}`, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
 const initialState = {
     isLoggedIn: localStorage.getItem('jwt') ? true : false,
     token: localStorage.getItem('jwt')
@@ -614,7 +626,8 @@ const actionCreators = {
     getChatList,
     getChatListMore,
     getMessages,
-    getMessagesMore
+    getMessagesMore,
+    getTerm
 }
 
 export { actionCreators }

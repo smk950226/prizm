@@ -21,3 +21,20 @@ class ExchangeRate(APIView):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
+class Terms(APIView):
+    def get(self, request, format = None):
+        name = request.query_params.get('name', None)
+        if name:
+            try:
+                term = models.Terms.objects.get(name = name)
+                serializer = serializers.TermsSerializer(term)
+                return Response(status = status.HTTP_200_OK, data = {
+                    'status': 'ok',
+                    'data': serializer.data
+                })
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})

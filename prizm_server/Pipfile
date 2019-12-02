@@ -46,6 +46,7 @@ channels-redis = "*"
 django-imagekit = "*"
 daphne = "*"
 jsonfield = "*"
+django-ckeditor = "*"
 
 [requires]
 python_version = "3.7"

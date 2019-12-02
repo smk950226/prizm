@@ -19,7 +19,8 @@ class Navigation extends Component{
         goSignUp: PropTypes.func.isRequired,
         goMySchedule: PropTypes.func.isRequired,
         goProfile: PropTypes.func.isRequired,
-        showNav: PropTypes.bool.isRequired
+        showNav: PropTypes.bool.isRequired,
+        goTerms: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -103,8 +104,8 @@ class Navigation extends Component{
                                 )}
                             </div>
                             <div className={`${styles.col12} ${styles.px0}`}>
-                                <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer}`}>{this.context.t("Terms of Use")}</p>
-                                <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`}>{this.context.t("Privacy Policy")}</p>
+                                <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer}`} onClick={() => this.props.goTerms("Terms of Use")}>{this.context.t("Terms of Use")}</p>
+                                <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`} onClick={() => this.props.goTerms("Privacy Policy")}>{this.context.t("Privacy Policy")}</p>
                                 {isLoggedIn && (
                                     <p className={`${styles.fontBold} ${styles.font12} ${styles.cursorPointer} ${styles.mt2}`} onClick={this.props.logout}>{this.context.t("Log Out")}</p>
                                 )}

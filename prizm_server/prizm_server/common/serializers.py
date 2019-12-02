@@ -8,3 +8,9 @@ class ExchangeRateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ExchangeRate
         fields = ['id', 'country', 'rate']
+
+
+class TermsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Terms
+        fields = ['id', 'name', 'content']
