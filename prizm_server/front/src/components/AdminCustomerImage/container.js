@@ -61,7 +61,7 @@ class Container extends Component{
             this.setState({
                 loading: false,
                 error: true,
-                errorMsg: this.context.t("오류가 발생하였습니다.")
+                errorMsg: this.context.t("An error has occurred..")
             })
         }
     }
@@ -77,7 +77,7 @@ class Container extends Component{
             }
         }
         if(error){
-            alert(this.context.t('jpg, jpeg, png 파일만 업로드하실 수 있습니다.'))
+            alert(this.context.t('File formates are limited to jpg, jpeg, and png.'))
         }
         else{
             const { isSubmitting } = this.state;
@@ -123,7 +123,7 @@ class Container extends Component{
                     else{
                         this.setState({
                             error: true,
-                            errorMsg: this.context.t("오류가 발생하였습니다."),
+                            errorMsg: this.context.t("An error has occurred.."),
                             isSubmitting: false
                         })
                     }
@@ -138,7 +138,7 @@ class Container extends Component{
                     this.setState({
                         isSubmitting: false
                     })
-                    alert(this.context.t("오류가 발생하였습니다."))
+                    alert(this.context.t("An error has occurred.."))
                 }
             }
         }

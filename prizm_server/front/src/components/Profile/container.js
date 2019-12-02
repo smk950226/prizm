@@ -24,9 +24,7 @@ class Container extends Component{
             name: profile ? profile.name : "",
             countryNumber: profile ? profile.country_number : "",
             mobile: profile ? profile.mobile : "",
-            birth: profile ? profile.birth : "",
             emailForm: profile ? true : false,
-            birthForm: profile ? true : false,
             showCountryNumber: false,
             isSubmitting: false,
             edited: false
@@ -48,26 +46,6 @@ class Container extends Component{
                     [name]: value.replace(/^0+/, ''),
                     edited: true
                 });
-            }
-        }
-        else if(name === 'birth'){
-            let numberReg = /^[0-9]*$/;
-            if(numberReg.test(value)){
-                let reg = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))$/;
-                if(reg.test(value)){
-                    this.setState({
-                        [name]: value,
-                        birthForm: true,
-                        edited: true
-                    });
-                }
-                else{
-                    this.setState({
-                        [name]: value,
-                        birthForm: false,
-                        edited: true
-                    });
-                }
             }
         }
         else{
@@ -92,42 +70,37 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, countryNumber, mobile, birth, birthForm, edited } = this.state;
+        const { isSubmitting, name, countryNumber, mobile, edited } = this.state;
         const { editProfile, getProfile } = this.props;
         if(!isSubmitting){
             if(edited){
-                if(name && countryNumber && mobile && birth){
-                    if(birthForm){
+                if(name && countryNumber && mobile){
+                    this.setState({
+                        isSubmitting: true
+                    })
+                    const result = await editProfile(name, countryNumber, mobile)
+                    if(result.status === 'ok'){
+                        await getProfile()
                         this.setState({
-                            isSubmitting: true
+                            isSubmitting: false
                         })
-                        const result = await editProfile(name, countryNumber, mobile, birth)
-                        if(result.status === 'ok'){
-                            await getProfile()
-                            this.setState({
-                                isSubmitting: false
-                            })
-                            alert(this.context.t("회원 정보를 수정하였습니다."))
-                        }
-                        else if(result.error){
-                            this.setState({
-                                isSubmitting: false
-                            })
-                            alert(result.error)
-                        }
-                        else{
-                            this.setState({
-                                isSubmitting: false
-                            })
-                            alert(this.context.t("오류가 발생하였습니다."))
-                        }
+                        alert(this.context.t("Your account information has been changed successfully."))
+                    }
+                    else if(result.error){
+                        this.setState({
+                            isSubmitting: false
+                        })
+                        alert(result.error)
                     }
                     else{
-                        alert(this.context.t("올바른 생년월일을 입력해주세요."))
+                        this.setState({
+                            isSubmitting: false
+                        })
+                        alert(this.context.t("An error has occurred.."))
                     }
                 }
                 else{
-                    alert(this.context.t("정보를 입력해주세요."))
+                    alert(this.context.t("Please fill in the information."))
                 }
             }
         }

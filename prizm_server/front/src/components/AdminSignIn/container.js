@@ -85,28 +85,28 @@ class Container extends Component{
                             this.setState({
                                 isSubmitting: false
                             })
-                            alert(this.context.t("사진 작가 계정이 아닙니다."))
+                            alert(this.context.t("This is not a valid photographer account."))
                         }
                         else{
                             this.setState({
                                 isSubmitting: false
                             })
-                            alert(this.context.t("이메일과 비밀번호를 확인해주세요."))
+                            alert(this.context.t("Please check your email and password again."))
                         }
                     }
                     else{
                         this.setState({
                             isSubmitting: false
                         })
-                        alert(this.context.t("이메일과 비밀번호를 확인해주세요."))
+                        alert(this.context.t("Please check your email and password again."))
                     }
                 }
                 else{
-                    alert(this.context.t("올바른 이메일을 입력해주세요."))
+                    alert(this.context.t("Please enter a valid email address."))
                 }
             }
             else{
-                alert(this.context.t("정보를 입력해주세요."))
+                alert(this.context.t("Please fill in the information."))
             }
         }
     }

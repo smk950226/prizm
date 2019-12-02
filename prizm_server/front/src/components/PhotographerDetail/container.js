@@ -157,7 +157,7 @@ class Container extends Component{
                 })
             }
             else{
-                alert(this.context.t("날짜를 선택해주세요."))
+                alert(this.context.t("Please select date."))
             }
         }
         else{
@@ -287,7 +287,7 @@ class Container extends Component{
                 this.setState({
                     dateConfirm: false
                 })
-                alert(this.context.t("시간을 선택해주세요."))
+                alert(this.context.t("Please select time."))
             }
         }
         else{
@@ -302,7 +302,7 @@ class Container extends Component{
                 this.setState({
                     dateConfirm: false
                 })
-                alert(this.context.t("날짜 범위를 선택해주세요."))
+                alert(this.context.t("Please select your date range."))
             }
         }
     }
@@ -361,7 +361,7 @@ class Container extends Component{
                 this.setState({
                     isConfirmPage: false
                 })
-                alert(this.context.t("요청 정보를 입력해주세요."))
+                alert(this.context.t("Please select all of the options above."))
             }
         }
         else{
@@ -391,7 +391,7 @@ class Container extends Component{
                 this.setState({
                     isConfirmPage: false
                 })
-                alert(this.context.t("요청 정보를 입력해주세요."))
+                alert(this.context.t("Please select all of the options above."))
             }
         }
     }

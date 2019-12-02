@@ -42,10 +42,6 @@ const Profile = (props, context) => (
                 ))}
             </div>
         </div>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Date of Birth(YY/MM/DD)")}</p>
-        <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"birth"} value={props.birth} onChange={props.handleInputChange} maxLength={6} />
-        </div>
         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("edit profile")}</p>
         </div>
@@ -62,9 +58,7 @@ Profile.propTypes = {
     name: PropTypes.string.isRequired,
     countryNumber: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
-    birth: PropTypes.string.isRequired,
     emailForm: PropTypes.bool.isRequired,
-    birthForm: PropTypes.bool.isRequired,
     showCountryNumber: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
     goPasswordChange: PropTypes.func.isRequired

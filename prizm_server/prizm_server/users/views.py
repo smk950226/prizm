@@ -40,7 +40,7 @@ class CheckDuplicate(APIView):
                         return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This email address has already been take. Please contact us at contact@prizm.cloud if you have any inquiries.')})
                     else:
                         if len(User.objects.filter(mobile = mobile, country_number = country_number)) > 0:
-                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been t')})
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
                         else:
                             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                 except:
@@ -64,15 +64,13 @@ class Profile(APIView):
         name = request.data.get('name', None)
         country_number = request.data.get('countryNumber', None)
         mobile = request.data.get('mobile', None)
-        birth = request.data.get('birth', None)
-        if name and country_number and mobile and birth:
+        if name and country_number and mobile:
             if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
             else:
                 user.name = name
                 user.country_number = country_number
                 user.mobile = mobile
-                user.birth = birth
                 user.save()
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
@@ -104,9 +102,9 @@ class AdminProfile(APIView):
         name = request.data.get('name', None)
         country_number = request.data.get('countryNumber', None)
         mobile = request.data.get('mobile', None)
-        birth = request.data.get('birth', None)
         instagram_account = request.data.get('instagram', None)
-        if name and country_number and mobile and birth and instagram_account:
+        print(name, country_number, mobile, instagram_account)
+        if name and country_number and mobile and instagram_account:
             if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
             else:
@@ -116,7 +114,6 @@ class AdminProfile(APIView):
                     user.name = name
                     user.country_number = country_number
                     user.mobile = mobile
-                    user.birth = birth
                     user.instagram_account = instagram_account
                     user.save()
 

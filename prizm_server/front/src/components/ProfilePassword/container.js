@@ -166,7 +166,7 @@ class Container extends Component{
                                     passwordForm: false,
                                     password2Form: false
                                 })
-                                alert(this.context.t("비밀번호를 수정하였습니다."))
+                                alert(this.context.t("Your password has been changed successfully."))
                             }
                             else if(result.error){
                                 this.setState({
@@ -178,7 +178,7 @@ class Container extends Component{
                                 this.setState({
                                     isSubmitting: false
                                 })
-                                alert(this.context.t("오류가 발생하였습니다."))
+                                alert(this.context.t("An error has occurred.."))
                             }
                         }
                         else{
@@ -190,11 +190,11 @@ class Container extends Component{
                     }
                 }
                 else{
-                    alert(this.context.t("비밀번호는 최소 8자, 영문자와 숫자를 각 1개 이상 포함해야 합니다."))
+                    alert(this.context.t("Your password should be at least 8 characters long and should include a mix of alphabets and numbers."))
                 }
             }
             else{
-                alert(this.context.t("정보를 입력해주세요."))
+                alert(this.context.t("Please fill in the information."))
             }
         }
     }

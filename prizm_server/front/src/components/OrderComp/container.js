@@ -166,14 +166,14 @@ class Container extends Component{
                             this.setState({
                                 isSubmitting: false
                             })
-                            alert(this.context.t("오류가 발생하였습니다."))
+                            alert(this.context.t("An error has occurred.."))
                         }
                     }
                     else{
                         this.setState({
                             isSubmitting: false
                         })
-                        alert(this.context.t("가능한 날짜를 선택해주세요."))
+                        alert(this.context.t("Please select available dates."))
                     }
                 }
                 else{
@@ -198,12 +198,12 @@ class Container extends Component{
                         this.setState({
                             isSubmitting: false
                         })
-                        alert(this.context.t("오류가 발생하였습니다."))
+                        alert(this.context.t("An error has occurred.."))
                     }
                 }
             }
             else{
-                alert(this.context.t("응답을 선택해주세요."))
+                alert(this.context.t("Please select your response."))
             }
         }
     }

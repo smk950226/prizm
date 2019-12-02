@@ -49,10 +49,6 @@ const AdminProfileSetting = (props, context) => (
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"text"} name={"email"} value={props.email} contentEditable={false} readOnly={true} />
         </div>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Date of Birth(YY/MM/DD)")}</p>
-        <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"birth"} value={props.birth} onChange={props.handleInputChange} maxLength={6} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
-        </div>
         {props.editable && (
             <Fragment>
                 <div className={`${styles.mobileOnly}`}>
@@ -83,9 +79,7 @@ AdminProfileSetting.propTypes = {
     name: PropTypes.string.isRequired,
     countryNumber: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
-    birth: PropTypes.string.isRequired,
     emailForm: PropTypes.bool.isRequired,
-    birthForm: PropTypes.bool.isRequired,
     showCountryNumber: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
     goPasswordChange: PropTypes.func.isRequired,

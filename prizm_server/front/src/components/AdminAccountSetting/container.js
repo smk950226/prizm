@@ -102,7 +102,7 @@ class Container extends Component{
                             this.setState({
                                 isSubmitting: false
                             })
-                            alert(this.context.t("Account 정보를 수정하였습니다."))
+                            alert(this.context.t("Your account information has been changed."))
                         }
                         else if(result.error){
                             this.setState({
@@ -114,15 +114,15 @@ class Container extends Component{
                             this.setState({
                                 isSubmitting: false
                             })
-                            alert(this.context.t("오류가 발생하였습니다."))
+                            alert(this.context.t("An error has occurred.."))
                         }
                     }
                     else{
-                        alert(this.context.t("올바른 생년월일을 입력해주세요."))
+                        alert(this.context.t("Please check your date of birth again."))
                     }
                 }
                 else{
-                    alert(this.context.t("정보를 입력해주세요."))
+                    alert(this.context.t("Please fill in the information."))
                 }
             }
         }

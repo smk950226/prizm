@@ -193,7 +193,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Your Portfolio")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.images && props.images.length > 0 ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("화면 상단에 게시될 대표적인 사진들을 첨부해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please upload sample photographs to be shown at the top of your PRIZM studio.")}</p>
                     <div className={`${styles.containerAdminPortfolio} ${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.mt3} ${styles.flexNowrap} ${styles.overflowXScroll}`}>
                         {props.images && props.images.length > 0 ? (
                             <Fragment>
@@ -224,7 +224,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Profile Picture")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.profileImage ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("프로필 사진으로 사용할 이미지 1장을 첨부해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please upload a profile picture.")}</p>
                     <div className={`${styles.mt3}`}>
                         <label htmlFor={'profile'}>
                             {props.profileImage ? (
@@ -240,7 +240,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Name")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.nickname ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("작가소개 화면에 표기될 이름을 입력해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please enter your (studio) name.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"nickname"} value={props.nickname} onChange={props.handleInputChange} />
                     </div>
@@ -248,7 +248,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Location")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.mainLocation ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("현재 어느지역에서 사진활동을 하고 있는지 기재해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in your main photography (business) areas.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"mainLocation"} value={props.mainLocation} onChange={props.handleInputChange} />
                     </div>
@@ -256,7 +256,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Education")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.education ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("최종 학력을 기재해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in the most recent educational background.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"education"} value={props.education} onChange={props.handleInputChange} />
                     </div>
@@ -265,7 +265,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Career")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.career ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("대표적인 커리어를 입력해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in your career information.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"career"} value={props.career} onChange={props.handleInputChange} />
                     </div>
@@ -273,7 +273,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Portfolio")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.portfolio ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("포트폴리오 사이트가 있다면 입력해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("If you have a website where potential clients can view your portfolio, please enter the URL. If not, you are fine to leave this area blank.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"portfolio"} value={props.portfolio} onChange={props.handleInputChange} />
                     </div>
@@ -281,7 +281,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Description")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.description ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("자신을 표현해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please briefly introduce yourself.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <textarea className={`${styles.textArea2} ${styles.mt3} ${styles.py3} ${styles.px2}`} value={props.description} name={"description"} onChange={props.handleInputChange} />
                     </div>
@@ -378,7 +378,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Service and Pricing")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.options && props.options.length > 0 ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("작가 페이지에 등록하고자 하는 사진 서비스에 대한 정보 입력")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please enter the service & pricing options.")}</p>
                     <div className={`${styles.mobileOnly} ${styles.mt3}`}>
                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionModal}>
                             <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
@@ -461,7 +461,7 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Your PRIZM Studio URL")}</p>
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("URL로 사용하고자 하는 주소를 입력해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in a desired URL for your PRIZM studio.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"studioId"} value={props.studioId} onChange={props.handleInputChange} />
                     </div>
@@ -469,7 +469,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Confirm Your URL")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.studioIdConfirm ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("다시 한 번 URL을 확인하고 입력해주세요.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please confirm the studio URL.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"studioId2"} value={props.studioId2} onChange={props.handleInputChange} />
                     </div>
@@ -577,7 +577,7 @@ const AdminSignUp = (props, context) => (
                                     ))}
                                 </div>
                             ) : (
-                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{context.t("선택가능한 지역이 없습니다.")}</p>
+                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{context.t("There is no available location.")}</p>
                             )}
                             {props.customerSelectedLocation.lat ? (
                                 <div className={`${styles.mt3}`}>
@@ -664,7 +664,7 @@ const AdminSignUp = (props, context) => (
                                     </div>
                                 ))
                             ) : (
-                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{context.t("선택가능한 옵션이 없습니다.")}</p>
+                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{context.t("There is no available service & pricing option.")}</p>
                             )}
                         </div>
                         </Collapse>
@@ -771,7 +771,7 @@ const AdminSignUp = (props, context) => (
                                     ))}
                                 </div>
                             ) : (
-                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{context.t("선택가능한 지역이 없습니다.")}</p>
+                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{context.t("There is no available location.")}</p>
                             )}
                             {props.customerSelectedLocation.lat ? (
                                 <div className={`${styles.mt3}`}>
@@ -859,7 +859,7 @@ const AdminSignUp = (props, context) => (
                                     </div>
                                 ))
                             ) : (
-                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{context.t("선택가능한 옵션이 없습니다.")}</p>
+                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{context.t("There is no available service & pricing option.")}</p>
                             )}
                         </div>
                         </Collapse>
@@ -899,7 +899,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{context.t("Search Location")}</p>
                     </div>
                     <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`} onClick={props.completeLocationSearch}>
-                        <p className={`${styles.fontBold} ${styles.font13} ${styles.textRight}`}>{context.t("완료")}</p>
+                        <p className={`${styles.fontBold} ${styles.font13} ${styles.textRight}`}>{context.t("Completed")}</p>
                     </div>
                 </div>
                 <div className={`${styles.px3} ${styles.py2} ${styles.bgGray5c}`}>

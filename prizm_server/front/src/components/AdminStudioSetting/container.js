@@ -152,7 +152,7 @@ class Container extends Component{
             }
         }
         if(error){
-            alert(this.context.t('jpg, jpeg, png 파일만 업로드하실 수 있습니다.'))
+            alert(this.context.t('File formates are limited to jpg, jpeg, and png.'))
         }
         else{
             var reader = new FileReader();
@@ -208,7 +208,7 @@ class Container extends Component{
             error = true
         }
         if(error){
-            alert(this.context.t('jpg, jpeg, png 파일만 업로드하실 수 있습니다.'))
+            alert(this.context.t('File formates are limited to jpg, jpeg, and png.'))
         }
         else{
             var reader = new FileReader();
@@ -545,7 +545,7 @@ class Container extends Component{
                 })
             }
             else{
-                alert(this.context.t("날짜를 선택해주세요."))
+                alert(this.context.t("Please select date."))
             }
         }
         else{
@@ -630,7 +630,7 @@ class Container extends Component{
                 this.setState({
                     dateConfirm: false
                 })
-                alert(this.context.t("시간을 선택해주세요."))
+                alert(this.context.t("Please select time."))
             }
         }
         else{
@@ -645,7 +645,7 @@ class Container extends Component{
                 this.setState({
                     dateConfirm: false
                 })
-                alert(this.context.t("날짜 범위를 선택해주세요."))
+                alert(this.context.t("Please select your date range."))
             }
         }
     }
@@ -704,7 +704,7 @@ class Container extends Component{
                 this.setState({
                     isConfirmPage: false
                 })
-                alert(this.context.t("요청 정보를 입력해주세요."))
+                alert(this.context.t("Please select all of the options above."))
             }
         }
         else{
@@ -734,7 +734,7 @@ class Container extends Component{
                 this.setState({
                     isConfirmPage: false
                 })
-                alert(this.context.t("요청 정보를 입력해주세요."))
+                alert(this.context.t("Please select all of the options above."))
             }
         }
     }
@@ -773,7 +773,7 @@ class Container extends Component{
                                                 this.setState({
                                                     isSubmitting: false
                                                 })
-                                                alert(this.context.t("Studio 정보를 수정하였습니다."))
+                                                alert(this.context.t("Your studio information has been changed successfully."))
                                             }
                                             else{
                                                 this.setState({
@@ -792,23 +792,23 @@ class Container extends Component{
                                             this.setState({
                                                 isSubmitting: false
                                             })
-                                            alert(this.context.t("오류가 발생하였습니다."))
+                                            alert(this.context.t("An error has occurred.."))
                                         }
                                     }
                                     else{
-                                        alert(this.context.t("Studio URL이 일치하지 않습니다."))
+                                        alert(this.context.t("Please check the studio URL again."))
                                     }
                                 }
                                 else{
-                                    alert(this.context.t("등록할 서비스를 1가지 이상 입력해주세요."))
+                                    alert(this.context.t("Please enter at least one service & pricing option."))
                                 }
                             }
                             else{
-                                alert(this.context.t("촬영 가능한 장소를 1곳 이상 선택해주세요."))
+                                alert(this.context.t("Please enter at least one photography location."))
                             }
                         }
                         else{
-                            alert(this.context.t("Portfolio는 URL로 입력해주세요."))
+                            alert(this.context.t("Please enter a valid URL for the portfolio."))
                         }
                     }
                     else{
@@ -825,7 +825,7 @@ class Container extends Component{
                                             this.setState({
                                                 isSubmitting: false
                                             })
-                                            alert(this.context.t("Studio 정보를 수정하였습니다."))
+                                            alert(this.context.t("Your studio information has been changed successfully."))
                                         }
                                         else{
                                             this.setState({
@@ -844,28 +844,28 @@ class Container extends Component{
                                         this.setState({
                                             isSubmitting: false
                                         })
-                                        alert(this.context.t("오류가 발생하였습니다."))
+                                        alert(this.context.t("An error has occurred.."))
                                     }
                                 }
                                 else{
-                                    alert(this.context.t("Studio URL이 일치하지 않습니다."))
+                                    alert(this.context.t("Please check the studio URL again."))
                                 }
                             }
                             else{
-                                alert(this.context.t("등록할 서비스를 1가지 이상 입력해주세요."))
+                                alert(this.context.t("Please enter at least one service & pricing option."))
                             }
                         }
                         else{
-                            alert(this.context.t("촬영 가능한 장소를 1곳 이상 선택해주세요."))
+                            alert(this.context.t("Please enter at least one photography location."))
                         }
                     }
                 }
                 else{
-                    alert(this.context.t("스튜디오 정보를 입력해주세요."))
+                    alert(this.context.t("Please fill in all the information above."))
                 }
             }
             else{
-                alert(this.context.t("포트폴리오를 업로드해주세요."))
+                alert(this.context.t("Please upload at least one photograph."))
             }
         }
     }

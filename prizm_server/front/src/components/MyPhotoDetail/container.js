@@ -49,7 +49,7 @@ class Container extends Component{
                 this.setState({
                     loading: false,
                     error: true,
-                    errorMsg: this.context.t("오류가 발생하였습니다.")
+                    errorMsg: this.context.t("An error has occurred..")
                 })
             }
         }

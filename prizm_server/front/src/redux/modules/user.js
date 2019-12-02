@@ -213,7 +213,7 @@ function getProfile(){
     }
 }
 
-function editProfile(name, countryNumber, mobile, birth){
+function editProfile(name, countryNumber, mobile){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
         return fetch(`${FETCH_URL}/api/users/profile/`, {
@@ -226,7 +226,6 @@ function editProfile(name, countryNumber, mobile, birth){
                 name,
                 countryNumber,
                 mobile,
-                birth
             })
         })
         .then(response => {
@@ -242,7 +241,7 @@ function editProfile(name, countryNumber, mobile, birth){
     }
 }
 
-function adminEditProfile(name, countryNumber, mobile, birth, instagram){
+function adminEditProfile(name, countryNumber, mobile, instagram){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
         return fetch(`${FETCH_URL}/api/users/profile/admin/`, {
@@ -255,7 +254,6 @@ function adminEditProfile(name, countryNumber, mobile, birth, instagram){
                 name,
                 countryNumber,
                 mobile,
-                birth,
                 instagram
             })
         })

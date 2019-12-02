@@ -254,7 +254,7 @@ class Container extends Component{
                 this.setState({
                     isSubmitting: false
                 })
-                alert(this.context.t("오류가 발생하였습니다."))
+                alert(this.context.t("An error has occurred.."))
             }
         }
     }

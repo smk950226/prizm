@@ -11,7 +11,7 @@ const AdminProfileSetting = (props, context) => (
             <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{context.t("Payout Setting")}</p>
             <p className={`${styles.fontBold} ${styles.font13} ${styles.pink} ${styles.cursorPointer} ${props.editable ? styles.hidden : null}`} onClick={props.enableEdit}>{context.t("Edit")}</p>
         </div>
-        <p className={`${styles.mt1} ${styles.font1012}`}>{context.t("사진촬영 대금을 전달받으실 정보를 입력해주세요.")}</p>
+        <p className={`${styles.mt1} ${styles.font1012}`}>{context.t("Please enter the payout information.")}</p>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
             <div className={`${styles.col12} ${styles.colMd6} ${styles.px0} ${styles.prMd2}`}>
                 <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("Legal Name")}</p>
