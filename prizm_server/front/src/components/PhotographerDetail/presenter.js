@@ -225,7 +225,7 @@ class PhotographerDetail extends Component{
                                                 ))}
                                             </div>
                                         ) : (
-                                            <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 지역이 없습니다.")}</p>
+                                            <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("There is no available location.")}</p>
                                         )}
                                         {selectedLocation.lat ? (
                                             <div className={`${styles.mt3}`}>
@@ -312,7 +312,7 @@ class PhotographerDetail extends Component{
                                                 </div>
                                             ))
                                         ) : (
-                                            <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("선택가능한 옵션이 없습니다.")}</p>
+                                            <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("There is no available service & pricing option.")}</p>
                                         )}
                                     </div>
                                     </Collapse>

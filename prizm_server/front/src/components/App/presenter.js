@@ -20,6 +20,7 @@ import MyPhotoDetail from '../MyPhotoDetail';
 import PaymentDetail from '../PaymentDetail';
 import PaymentSuccess from '../PaymentSuccess';
 import Terms from '../Terms';
+import NotFound from '../NotFound';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -292,6 +293,7 @@ const GeneralRoute = props => (
         <Route exact path='/payment/success/' component={PaymentSuccess} key={16} />
         <Route exact path='/terms/:name/' component={Terms} key={17} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
+        <Route component={NotFound} key={101} />
     </Switch>
 )
 
@@ -309,5 +311,6 @@ const AdminRoute = props => (
         <Route exact path='/profile/password/' component={AdminProfilePassword} key={10} />
         <Route exact path='/terms/:name/' component={Terms} key={11} />
         <Route exact path='/profile/account/' component={AdminAccountSetting} key={11} />
+        <Route component={NotFound} key={101} />
     </Switch>
 )

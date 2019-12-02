@@ -65,7 +65,7 @@ class Container extends Component{
             alert(result.error)
         }
         else{
-            alert('오류가 발생하였습니다.')
+            alert('An error has occurred..')
         }
     }
 
@@ -421,7 +421,7 @@ class Container extends Component{
                     isSubmitting: false,
                     requestSubmitted: false
                 })
-                alert('오류가 발생하였습니다.')
+                alert('An error has occurred..')
             }
             this.setState({
                 isSubmitting: false
