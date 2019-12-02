@@ -27,7 +27,7 @@ class Container extends Component{
     }
 
     componentDidMount = () => {
-        if(this.props.pathname.indexOf('/message/detail/') > -1){
+        if((this.props.pathname.indexOf('/message/detail/') > -1) || (this.props.pathname.indexOf('/review/list/') > -1)){
             this.setState({
                 showNav: false
             })
@@ -36,7 +36,7 @@ class Container extends Component{
 
     componentDidUpdate = (prevProps, prevState) => {
         if(prevProps.pathname !== this.props.pathname){
-            if(this.props.pathname.indexOf('/message/detail/') > -1){
+            if((this.props.pathname.indexOf('/message/detail/') > -1) || (this.props.pathname.indexOf('/review/list/') > -1)){
                 this.setState({
                     showNav: false,
                     showMenu: false

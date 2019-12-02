@@ -42,6 +42,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         getOrderList: () => {
             dispatch(userAction.getOrderList())
         },
+        goReviewList: (photographerId) => {
+            dispatch(push({
+                pathname: '/review/list/',
+                state: {
+                    photographerId
+                }
+            }))
+        }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

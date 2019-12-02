@@ -21,6 +21,7 @@ import PaymentDetail from '../PaymentDetail';
 import PaymentSuccess from '../PaymentSuccess';
 import Terms from '../Terms';
 import NotFound from '../NotFound';
+import ReviewList from '../ReviewList';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -292,6 +293,7 @@ const GeneralRoute = props => (
         <Route exact path='/payment/' component={PaymentDetail} key={15} />
         <Route exact path='/payment/success/' component={PaymentSuccess} key={16} />
         <Route exact path='/terms/:name/' component={Terms} key={17} />
+        <Route exact path='/review/list/' component={ReviewList} key={18} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
         <Route component={NotFound} key={101} />
     </Switch>

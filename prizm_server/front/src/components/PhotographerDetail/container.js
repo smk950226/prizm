@@ -12,7 +12,8 @@ class Container extends Component{
         goSignUp: PropTypes.func.isRequired,
         removeRequest: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
-        getOrderList: PropTypes.func.isRequired
+        getOrderList: PropTypes.func.isRequired,
+        goReviewList: PropTypes.func.isRequired
     }
 
     static contextTypes = {

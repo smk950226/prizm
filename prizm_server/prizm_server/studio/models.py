@@ -88,6 +88,7 @@ class Option(models.Model):
 
 class Review(models.Model):
     photographer = models.ForeignKey(Photographer, on_delete = models.CASCADE)
+    order = models.ForeignKey('studio.Order', on_delete = models.CASCADE, blank = True, null = True)
     user  = models.ForeignKey('users.User', on_delete = models.CASCADE)
     rate = models.FloatField(_("Rating"))
     comment = models.TextField(_("Comment"))

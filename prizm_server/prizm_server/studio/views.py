@@ -538,6 +538,23 @@ class Message(APIView):
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
+class Review(APIView):
+    def get(self, request, format = None):
+        photographer_id = request.query_params.get('photographerId', None)
+        if photographer_id:
+            try:
+                photographer = models.Photographer.objects.get(id = photographer_id)
+                reviews = photographer.review_set.all().order_by('-created_at')
+                paginator = MainPageNumberPagination()
+                result_page = paginator.paginate_queryset(reviews, request)
+                serializer = serializers.ReviewSerializer(result_page, many = True, context = {'request': request})
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'total_rating': photographer.total_rating, 'review_count': photographer.review_count, 'reviews': serializer.data})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
 def download(request, image_id):
     image = models.OrderImage.objects.get(id = image_id)
     img = Image.open(image.processed_image)

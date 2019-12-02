@@ -16,4 +16,5 @@ urlpatterns = [
     path('message/', views.Message.as_view()),
     path('download/<str:image_id>/', views.download),
     path('zip/<str:order_id>/', views.create_zip),
+    path('review/', views.Review.as_view()),
 ]

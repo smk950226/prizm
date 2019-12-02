@@ -51,6 +51,14 @@ class PhotographerPortfolioSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'education', 'career', 'studio_id', 'portfolio_set', 'portfolio_url', 'description', 'total_rating', 'review_count']
 
 
+class PhotographerShortSerializer(serializers.ModelSerializer):
+    user = users_serializers.PhotographerProfileSerializer()
+
+    class Meta:
+        model = models.Photographer
+        fields = ['id', 'user', 'nickname', 'profile_image', 'studio_id', 'total_rating', 'review_count']
+
+
 class OrderSerializer(serializers.ModelSerializer):
     user = users_serializers.ProfileSerializer()
     photographer = PhotographerPortfolioSerializer()
@@ -60,6 +68,14 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
         fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date', 'confirmed_date', 'status', 'confirmed_at', 'available_time']
+
+
+class OrderShortSerializer(serializers.ModelSerializer):
+    location = LocationSerializer()
+    option = OptionSerializer()
+    class Meta:
+        model = models.Order
+        fields = ['id', 'location', 'option', 'confirmed_date']
 
 
 class OrderImageSerializer(serializers.ModelSerializer):
@@ -73,9 +89,19 @@ class OrderImageSerializer(serializers.ModelSerializer):
         photo_url = obj.processed_image.url
         return request.build_absolute_uri(photo_url)
 
+
 class OrderImageDetailSerializer(serializers.ModelSerializer):
     orderimage_set = OrderImageSerializer(many = True)
 
     class Meta:
         model = models.Order
         fields = ['id', 'orderimage_set']
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    photographer = PhotographerShortSerializer()
+    user = users_serializers.ProfileSerializer()
+    order = OrderShortSerializer()
+    class Meta:
+        model = models.Review
+        fields = ['id', 'photographer', 'order', 'user', 'rate', 'comment', 'created_at', 'updated_at']

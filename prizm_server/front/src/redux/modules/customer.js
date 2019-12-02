@@ -319,6 +319,39 @@ function getExchangeRate(country){
     }
 }
 
+function getReviewList(photographerId){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/studio/review/?photographerId=${photographerId}&page=1`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
+function getReviewListMore(photographerId, page){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/studio/review/?photographerId=${photographerId}&page=${page}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -386,7 +419,9 @@ const actionCreators = {
     getPrice,
     checkPrice,
     pay,
-    getExchangeRate
+    getExchangeRate,
+    getReviewList,
+    getReviewListMore
 }
 
 export { actionCreators }

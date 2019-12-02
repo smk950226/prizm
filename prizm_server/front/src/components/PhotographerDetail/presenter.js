@@ -134,7 +134,8 @@ class PhotographerDetail extends Component{
         requestSubmitted: PropTypes.bool.isRequired,
         goHome: PropTypes.func.isRequired,
         dateRange: PropTypes.array.isRequired,
-        isLoggedIn: PropTypes.bool.isRequired
+        isLoggedIn: PropTypes.bool.isRequired,
+        goReviewList: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -198,7 +199,7 @@ class PhotographerDetail extends Component{
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.my3}`}>
                                         <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Review")}</p>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.mr1}`}>{photographer.total_rating}</p>
+                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.mr1}`}>{photographer.total_rating.toFixed(1)}</p>
                                             <Rating 
                                             initialRating={photographer.total_rating} 
                                             emptySymbol={<MdStar fontSize={"15px"} color={"#f4f4f4"} />}
@@ -207,7 +208,7 @@ class PhotographerDetail extends Component{
                                             readonly
                                             />
                                             <p className={`${styles.font9} ${styles.ml1}`}>({photographer.review_count})</p>
-                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Go Review")} className={`${styles.ml2} ${styles.cursorPointer}`} style={{width: 15, height: 12}} />
+                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Go Review")} className={`${styles.ml2} ${styles.cursorPointer}`} style={{width: 15, height: 12}} onClick={() => this.props.goReviewList(photographer.id)} />
                                         </div>
                                     </div>
                                 </div>
