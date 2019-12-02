@@ -4,10 +4,9 @@ import { actionCreators as customerAction } from '../../redux/modules/customer';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn }, router : { location } } = state;
+    const { user : { isLoggedIn, profile }, router : { location } } = state;
     return {
-        pathname: location.pathname,
-        isLoggedIn
+        pathname: location.pathname
     }
 }
 
@@ -16,16 +15,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
-        getOrderPhotoList: (orderId) => {
-            return dispatch(customerAction.getOrderImage(orderId))
+        createReview: (photographerId, orderId, rate, comment) => {
+            return dispatch(customerAction.createReview(photographerId, orderId, rate, comment))
         },
-        goReveiwCreate: (order) => {
-            dispatch(push({
-                pathname: '/review/create/',
-                state: {
-                    order
-                }
-            }))
+        goReviewCreateComplete: () => {
+            dispatch(push('/review/complete/'))
         }
     }
 }

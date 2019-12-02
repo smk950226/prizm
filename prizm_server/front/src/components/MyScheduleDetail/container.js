@@ -10,7 +10,8 @@ class Container extends Component{
         getOrderDetail: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
-        goPayment: PropTypes.func.isRequired
+        goPayment: PropTypes.func.isRequired,
+        goReveiwCreate: PropTypes.func.isRequired
     }
 
     constructor(props){

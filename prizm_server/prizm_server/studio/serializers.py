@@ -64,18 +64,43 @@ class OrderSerializer(serializers.ModelSerializer):
     photographer = PhotographerPortfolioSerializer()
     location = LocationSerializer()
     option = OptionSerializer()
+    is_reviewed = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Order
-        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date', 'confirmed_date', 'status', 'confirmed_at', 'available_time']
+        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date', 'confirmed_date', 'status', 'confirmed_at', 'available_time', 'is_reviewed']
+    
+    def get_is_reviewed(self, obj):
+        try:
+            request = self.context.get('request')
+            review = models.Review.objects.filter(user = request.user, order = obj)
+            if review.count() > 0:
+                return True
+            else:
+                return False
+        except:
+            return False
 
 
 class OrderShortSerializer(serializers.ModelSerializer):
     location = LocationSerializer()
     option = OptionSerializer()
+    is_reviewed = serializers.SerializerMethodField()
+
     class Meta:
         model = models.Order
-        fields = ['id', 'location', 'option', 'confirmed_date']
+        fields = ['id', 'location', 'option', 'confirmed_date', 'is_reviewed']
+    
+    def get_is_reviewed(self, obj):
+        try:
+            request = self.context.get('request')
+            review = models.Review.objects.filter(user = request.user, order = obj)
+            if review.count() > 0:
+                return True
+            else:
+                return False
+        except:
+            return False
 
 
 class OrderImageSerializer(serializers.ModelSerializer):

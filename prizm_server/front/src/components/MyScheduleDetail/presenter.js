@@ -69,12 +69,18 @@ const MyScheduleDetail = (props, context) => (
             <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please add payment details by : ${new Date(new Date(props.order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
             </Fragment>
         )}
+        {props.order.status === 'completed' && !props.order.is_reviewed && (
+            <div className={`${styles.widthFull} ${styles.bgCompleted} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => props.goReveiwCreate(props.order)} style={{height: 48}}>
+                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Leave a Review")}</p>
+            </div>
+        )}
     </div>
 )
 
 MyScheduleDetail.propTypes = {
     order: PropTypes.object.isRequired,
-    goPayment: PropTypes.func.isRequired
+    goPayment: PropTypes.func.isRequired,
+    goReveiwCreate: PropTypes.func.isRequired
 }
 
 MyScheduleDetail.contextTypes = {

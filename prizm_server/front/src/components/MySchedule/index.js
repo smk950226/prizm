@@ -35,6 +35,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     order
                 }
             }))
+        },
+        goReveiwCreate: (order) => {
+            dispatch(push({
+                pathname: '/review/create/',
+                state: {
+                    order
+                }
+            }))
         }
     }
 }

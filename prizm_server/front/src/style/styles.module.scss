@@ -850,7 +850,11 @@ textarea {
     border: 1px solid $gray-6d;
     font-size: 11px;
 }
-
+.text-area-3{
+    width: 100%;
+    border: 1px solid $gray-6d;
+    min-height: 120px;
+}
 @media (min-width: 1440px){
     .text-area-2{
         height: 120px;

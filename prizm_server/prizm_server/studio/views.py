@@ -73,7 +73,7 @@ class Order(APIView):
                     chats = order.chat_set.all()
                     chats.delete()
         orders = models.Order.objects.filter(user = user).order_by('-id')
-        serializer = serializers.OrderSerializer(orders, many = True)
+        serializer = serializers.OrderSerializer(orders, many = True, context = {'request': request})
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
 
@@ -197,7 +197,7 @@ class OrderDetail(APIView):
         if order_id:
             user = request.user
             order = models.Order.objects.get(id = order_id)
-            serializer = serializers.OrderSerializer(order)
+            serializer = serializers.OrderSerializer(order, context = {'request': request})
 
             return Response(status = status.HTTP_200_OK, data = serializer.data)
         else:
@@ -211,7 +211,7 @@ class AdminOrder(APIView):
         photographer = user.photographer
 
         orders = models.Order.objects.filter(photographer = photographer).order_by('-id')
-        serializer = serializers.OrderSerializer(orders, many = True)
+        serializer = serializers.OrderSerializer(orders, many = True, context = {'request': request})
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
     
@@ -549,6 +549,35 @@ class Review(APIView):
                 result_page = paginator.paginate_queryset(reviews, request)
                 serializer = serializers.ReviewSerializer(result_page, many = True, context = {'request': request})
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'total_rating': photographer.total_rating, 'review_count': photographer.review_count, 'reviews': serializer.data})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
+class ReviewCreate(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format = None):
+        user = request.user
+        photographer_id = request.data.get('photographerId', None)
+        order_id = request.data.get('orderId', None)
+        rate = request.data.get('rate', None)
+        comment = request.data.get('comment', None)
+
+        if photographer_id and order_id and rate and comment:
+            try:
+                photographer = models.Photographer.objects.get(id = photographer_id)
+                order = models.Order.objects.get(id = order_id)
+                review = models.Review.objects.create(
+                    photographer = photographer,
+                    order = order,
+                    user = user,
+                    rate = rate,
+                    comment = comment
+                )
+                review.save()
+
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
             except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
         else:

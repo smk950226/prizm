@@ -352,6 +352,35 @@ function getReviewListMore(photographerId, page){
     }
 }
 
+function createReview(photographerId, orderId, rate, comment){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/studio/review/create/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                photographerId,
+                orderId,
+                rate,
+                comment
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -421,7 +450,8 @@ const actionCreators = {
     pay,
     getExchangeRate,
     getReviewList,
-    getReviewListMore
+    getReviewListMore,
+    createReview
 }
 
 export { actionCreators }

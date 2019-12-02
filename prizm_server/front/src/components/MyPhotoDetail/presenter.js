@@ -58,6 +58,11 @@ const MyPhotos = (props, context) => (
                     }
                 />
             )}
+            {props.order.status === 'completed' && !props.order.is_reviewed && (
+                <div className={`${styles.widthFull} ${styles.bgCompleted} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => props.goReveiwCreate(props.order)} style={{height: 48}}>
+                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Leave a Review")}</p>
+                </div>
+            )}
             </Fragment>
         )}
     </div>
@@ -75,6 +80,7 @@ MyPhotos.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     goPrev: PropTypes.func.isRequired,
     goNext: PropTypes.func.isRequired,
+    goReveiwCreate: PropTypes.func.isRequired
 }
 
 MyPhotos.contextTypes = {

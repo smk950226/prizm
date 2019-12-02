@@ -6,7 +6,8 @@ class Container extends Component{
     static propTypes = {
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
-        getOrderPhotoList: PropTypes.func.isRequired
+        getOrderPhotoList: PropTypes.func.isRequired,
+        goReveiwCreate: PropTypes.func.isRequired
     }
 
     constructor(props){
@@ -82,7 +83,6 @@ class Container extends Component{
     }
 
     render(){
-        console.log(this.state.images)
         return(
             <MyPhotoDetail 
             {...this.props} 
