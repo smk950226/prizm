@@ -74,7 +74,7 @@ class MessageList extends Component{
                     <div>
                         {chatList && chatList.length > 0 ? (
                             chatList.map((chat, index) => (
-                                <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={(chat.order.status !== 'cancelled') && (chat.order.status !== 'done') ? () => this.props.goMessageDetail(chat.id, chat.order) : null}>
+                                <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={(chat.order.status !== 'cancelled') && (chat.order.status !== 'completed') ? () => this.props.goMessageDetail(chat.id, chat.order) : null}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.col11} ${styles.px0}`}>
                                         {chat.order.photographer.profile_image ? (
                                             <ProfileDiv image={chat.order.photographer.profile_image} />
@@ -92,8 +92,8 @@ class MessageList extends Component{
                                             {chat.order.status === 'cancelled' && (
                                                 <p className={`${styles.fontBold} ${styles.font1416} ${styles.pink} ${styles.mt2}`}>{this.context.t(`Cancelled (${chat.order.date_option === 'Specific' ? `${chat.order.specific_date.slice(2,4)}/${chat.order.specific_date.slice(5,7)}/${chat.order.specific_date.slice(8,10)}` : `${chat.order.start_date.slice(2,4)}/${chat.order.start_date.slice(5,7)}/${chat.order.start_date.slice(8,10)}`})`)}</p>
                                             )}
-                                            {chat.order.status === 'done' && (
-                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{this.context.t(`Done (${chat.order.confirmed_date.slice(2,4)}/${chat.order.confirmed_date.slice(5,7)}/${chat.order.confirmed_date.slice(8,10)})`)}</p>
+                                            {chat.order.status === 'completed' && (
+                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt2} ${styles.completed}`}>{this.context.t(`Completed (${chat.order.confirmed_date.slice(2,4)}/${chat.order.confirmed_date.slice(5,7)}/${chat.order.confirmed_date.slice(8,10)})`)}</p>
                                             )}
                                         </div>
                                     </div>

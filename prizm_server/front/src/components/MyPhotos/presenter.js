@@ -14,7 +14,7 @@ const MyPhotos = (props, context) => (
             props.orderList && props.orderList.length > 0 && (
                 <div className={`${styles.mt45}`}>
                     {props.orderList.map((order, index) => {
-                        if((order.status === 'confirmed') || (order.status === 'done')){
+                        if((order.status === 'confirmed') || (order.status === 'completed')){
                             return(
                                 <div key={order.id} className={`${styles.py3} ${(index === props.orderList.length - 1) ? null : styles.borderBtmGrayDc}`}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={() => props.goMyPhotoDetail(order.id, order)}>
@@ -22,8 +22,8 @@ const MyPhotos = (props, context) => (
                                             {order.status === 'confirmed' && (
                                                 <p className={`${styles.fontBold} ${styles.font13} ${styles.confirmed} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`} style={{width: 65}}>{context.t("Confirmed")}</p>
                                             )}
-                                            {order.status === 'done' && (
-                                                <p className={`${styles.fontBold} ${styles.font13} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`} style={{width: 65}}>{context.t("Done")}</p>
+                                            {order.status === 'completed' && (
+                                                <p className={`${styles.fontBold} ${styles.font13} ${styles.completed} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`} style={{width: 65}}>{context.t("Completed")}</p>
                                             )}
                                             <div className={`${styles.col9} ${styles.colSm10} ${styles.colMd11} ${styles.px0}`}>
                                                 {order.date_option === 'Specific' && (

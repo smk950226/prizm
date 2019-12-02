@@ -361,6 +361,9 @@ p{
 .confirmed{
     color: $confirmed;
 }
+.completed{
+    color: $completed;
+}
 .url-blue{
     color: $url-blue;
 }
@@ -427,6 +430,9 @@ p{
 }
 .bg-confirmed{
     background-color: $confirmed;
+}
+.bg-completed{
+    background-color: $completed;
 }
 .bg-url-blue{
     background-color: $url-blue;

@@ -36,7 +36,7 @@ const AdminOrderList = (props, context) => (
                 <div className={`${styles.safeareaAdmin}`}>
                     <p className={`${styles.fontBold} ${styles.font20} ${styles.mt3} ${styles.mb45}`}>{context.t("Tourist Photo")}</p>
                     {props.orderList.map((order, index) => {
-                        if((order.status === 'confirmed') || (order.status === 'done')){
+                        if((order.status === 'confirmed') || (order.status === 'completed')){
                             return(
                                 <AdminCustomerImage key={index} order={order} />
                             )

@@ -27,8 +27,8 @@ const MyScheduleDetail = (props, context) => (
             {props.order.status === 'cancelled' && (
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.pink}`}>{context.t("Cancelled")}</p>
             )}
-            {props.order.status === 'done' && (
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{context.t("Done")}</p>
+            {props.order.status === 'completed' && (
+                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.completed}`}>{context.t("Completed")}</p>
             )}
         </div>
         <p className={`${styles.font11} ${styles.mt2}`}>{props.order.photographer.main_location}</p>

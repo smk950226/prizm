@@ -22,7 +22,7 @@ const OrderComp = (props, context) => (
                     {props.order.status === 'pending' && context.t('Pending')}
                     {props.order.status === 'confirmed' && context.t('Confirmed')}
                     {props.order.status === 'cancelled' && context.t('Cancelled')}
-                    {props.order.status === 'done' && context.t('Done')}
+                    {props.order.status === 'completed' && context.t('Completed')}
                 </p>
             </div>
             <div className={`${styles.mobileOnly}`}>

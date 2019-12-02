@@ -87,7 +87,7 @@ const AdminOrderList = (props, context) => (
                     <div className={`${styles.px3} ${styles.mobileNone}`} style={{marginTop: 100}}>
                         <p className={`${styles.fontBold} ${styles.font1620} ${styles.mb4}`}>{context.t("Tourist Photo")}</p>
                         {props.orderList.map((order, index) => {
-                            if((order.status === 'confirmed') || (order.status === 'done')){
+                            if((order.status === 'confirmed') || (order.status === 'completed')){
                                 return(
                                     <AdminCustomerImage key={index} order={order} />
                                 )
