@@ -46,7 +46,8 @@ class AdminNavigation extends Component{
         goTouristPhoto: PropTypes.func.isRequired,
         goStudioSetting: PropTypes.func.isRequired,
         goProfile: PropTypes.func.isRequired,
-        goAccount: PropTypes.func.isRequired
+        goAccount: PropTypes.func.isRequired,
+        showNav: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
@@ -54,10 +55,10 @@ class AdminNavigation extends Component{
     }
 
     render(){
-        const { goMenu, isLoggedIn, pathname, openMobile, showMobile, showLocationModal, showOptionModal, showMenu, handleShowMenu, photographer } = this.props;
+        const { showNav, isLoggedIn, pathname, openMobile, showMobile, showLocationModal, showOptionModal, showMenu, handleShowMenu, photographer } = this.props;
         return(
             <Fragment>
-            {!showMobile && !showLocationModal && !showOptionModal && (
+            {!showMobile && !showLocationModal && !showOptionModal && showNav && (
                 <div className={`${styles.positionNav} ${styles.containerAdmin} ${styles.pxAdmin2}`} style={{zIndex: 2}}>
                     <div className={`${styles.mobileOnly}`}>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.py4} ${styles.bgWhite}`}>
@@ -87,7 +88,8 @@ class AdminNavigation extends Component{
                     </div>
                 </div>
             )}
-            <Slide 
+            {isLoggedIn && (
+                <Slide 
                 isOpen={showMenu} 
                 customBurgerIcon={false} 
                 customCrossIcon={false} 
@@ -109,11 +111,15 @@ class AdminNavigation extends Component{
                         </div>
                     </div>
                     <div className={`${styles.containerAdmin} ${styles.minHeightFull} ${styles.pxAdmin}`}>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4} ${photographer.id ? null : styles.hidden}`}>
-                            <ProfileDiv image={photographer.profile_image} />
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4} ${photographer ? photographer.id ? null : styles.hidden : styles.hidden}`}>
+                            <ProfileDiv image={photographer ? photographer.profile_image : null} />
                             <div className={`${styles.ml3}`}>
-                                <p className={`${styles.fontBold} ${styles.font2024}`}>{photographer.nickname}</p>
-                                <a href={`https://prizm.cloud/${photographer.studio_id}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${photographer.studio_id}`}</a>
+                                <p className={`${styles.fontBold} ${styles.font2024}`}>{photographer ? photographer.nickname : ""}</p>
+                                {photographer ? (
+                                <   a href={`https://prizm.cloud/${photographer.studio_id}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${photographer.studio_id}`}</a>
+                                ) : (
+                                    <a href={`https://prizm.cloud/`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${photographer.studio_id}`}</a>
+                                )}
                             </div>
                         </div>
                         <div>
@@ -127,6 +133,7 @@ class AdminNavigation extends Component{
                     </div>
                     </Fragment>
                 </Slide>
+            )}
             </Fragment>
         )
     }

@@ -4,30 +4,6 @@ import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
-const ProfileDiv = styled.div`
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    background-image: url(${props => props.image});
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-origin: content-box;
-    background-position: center center;
-    background-attachment: scroll;
-`
-
-const EmptyProfileDivLg = styled.div`
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: #333333;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-origin: content-box;
-    background-position: center center;
-    background-attachment: scroll;
-`
-
 class AdminMessageList extends Component{
     static propTypes = {
         chatList: PropTypes.array,
@@ -74,15 +50,10 @@ class AdminMessageList extends Component{
                     <div>
                         {chatList && chatList.length > 0 ? (
                             chatList.map((chat, index) => (
-                                <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={(chat.order.status !== 'cancelled') && (chat.order.status !== 'completed') ? () => this.props.goMessageDetail(chat.id, chat.order) : null}>
+                                <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={(chat.order.status !== 'cancelled') ? () => this.props.goMessageDetail(chat.id, chat.order) : null}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.col11} ${styles.px0}`}>
-                                        {chat.order.photographer.profile_image ? (
-                                            <ProfileDiv image={chat.order.photographer.profile_image} />
-                                        ) : (
-                                            <EmptyProfileDivLg />
-                                        )}
-                                        <div className={`${styles.ml3}`}>
-                                            <p className={`${styles.fontBold} ${styles.font1416}`}>{chat.order.photographer.nickname}</p>
+                                        <div className={``}>
+                                            <p className={`${styles.fontBold} ${styles.font1416}`}>{chat.order.user.name}</p>
                                             {chat.order.status === 'pending' && (
                                                 <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{this.context.t(`Pending  (${chat.order.date_option === 'Specific' ? `${chat.order.specific_date.slice(2,4)}/${chat.order.specific_date.slice(5,7)}/${chat.order.specific_date.slice(8,10)}` : `${chat.order.start_date.slice(2,4)}/${chat.order.start_date.slice(5,7)}/${chat.order.start_date.slice(8,10)}`})`)}</p>
                                             )}
@@ -103,7 +74,13 @@ class AdminMessageList extends Component{
                                 </div>
                             ))
                         ) : (
-                            null
+                            <div className={`${styles.textCenter}`}>
+                                <img src={require('../../assets/images/prizm_admin_main.png')} alt={this.context.t("Request not exist")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%'}} />
+                                <p className={`${styles.font1214} ${styles.mt3}`}>
+                                    {this.context.t("You haven't received any messages.")}<br/>
+                                    {this.context.t("Messages will appear when you confirm the schedule at the 'Manage Reservations' menu")}
+                                </p>
+                            </div>
                         )}
                     </div>
                 )}

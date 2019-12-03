@@ -53,7 +53,7 @@ const DayContainer = styled.div`
     margin-top: 15px;
 `
 
-class MessageList extends Component{
+class AdminMessageDetail extends Component{
     static propTypes = {
         messages: PropTypes.array,
         messagesMore: PropTypes.func.isRequired,
@@ -98,7 +98,6 @@ class MessageList extends Component{
         let availableTo = null
         let dayList = []
         const timeList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
-
         if(order.date_option === 'Specific'){
             availableFrom = new Date(new Date(order.specific_date).getTime() - 1000*60*60*24)
             availableTo = new Date(new Date(order.specific_date).getTime() + 1000*60*60*24)
@@ -235,7 +234,7 @@ class MessageList extends Component{
                             <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Detail")} className={`${styles.iconArrowRight} ${styles.cursorPointer}`} onClick={this.props.goBack} />
                         </div>
                         <div className={`${styles.col10} ${styles.px0} ${styles.textCenter}`}>
-                            <p className={`${styles.fontBold} ${styles.font1618}`}>{nickname}</p>
+                            <p className={`${styles.fontBold} ${styles.font1618}`}>{order.user.name}</p>
                         </div>
                         <div className={`${styles.col1} ${styles.px0}`}></div>
                     </div>
@@ -410,4 +409,4 @@ class MessageList extends Component{
     }
 }
 
-export default MessageList
+export default AdminMessageDetail

@@ -172,14 +172,18 @@ class PhotographerDetail extends Component{
                                             <p className={`${styles.font12} ${styles.mt1}`}>{photographer.main_location}</p>
                                         </div>
                                     </div>
-                                    <div className={`${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                        <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Education")}</p>
-                                        <p className={`${styles.font10}`}>{photographer.education}</p>
-                                    </div>
                                     <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                         <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Career")}</p>
                                         <p className={`${styles.font10}`}>{photographer.career}</p>
                                     </div>
+                                    {photographer.education ? (
+                                        <div className={`${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                            <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Education")}</p>
+                                            <p className={`${styles.font10}`}>{photographer.education}</p>
+                                        </div>
+                                    ) : (
+                                        null
+                                    )}
                                     {photographer.portfolio_url ? (
                                         <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                             <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Portfolio")}</p>

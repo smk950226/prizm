@@ -38,6 +38,8 @@ import AdminProfileSetting from '../AdminProfileSetting';
 import AdminProfilePassword from '../AdminProfilePassword';
 import AdminAccountSetting from '../AdminAccountSetting';
 import AdminBottomNavigation from '../AdminBottomNavigation';
+import AdminMessageList from '../AdminMessageList';
+import AdminMessageDetail from '../AdminMessageDetail';
 
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -46,7 +48,7 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root')
 
 const App = (props) => {
-    if(props.admin){
+    if(!props.admin){
         return(
             <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} chatList={props.chatList} />
         )
@@ -320,7 +322,9 @@ const AdminRoute = props => (
         <Route exact path='/profile/' component={AdminProfileSetting} key={9} />
         <Route exact path='/profile/password/' component={AdminProfilePassword} key={10} />
         <Route exact path='/terms/:name/' component={Terms} key={11} />
-        <Route exact path='/profile/account/' component={AdminAccountSetting} key={11} />
+        <Route exact path='/profile/account/' component={AdminAccountSetting} key={12} />
+        <Route exact path='/message/' component={AdminMessageList} key={13} />
+        <Route exact path='/message/detail/:chatId/' component={AdminMessageDetail} key={14} />
         <Route component={NotFound} key={101} />
     </Switch>
 )

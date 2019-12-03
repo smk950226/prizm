@@ -24,14 +24,32 @@ class Container extends Component{
     }
 
     state = {
-        showMenu: false
+        showMenu: false,
+        showNav: true
+    }
+
+    componentDidMount = () => {
+        if((this.props.pathname.indexOf('/message/detail/') > -1) || (this.props.pathname.indexOf('/review/list/') > -1) || (this.props.pathname.indexOf('/review/create/') > -1)){
+            this.setState({
+                showNav: false
+            })
+        }
     }
 
     componentDidUpdate = (prevProps, prevState) => {
         if(prevProps.pathname !== this.props.pathname){
-            this.setState({
-                showMenu: false
-            })
+            if(this.props.pathname.indexOf('/message/detail/') > -1){
+                this.setState({
+                    showNav: false,
+                    showMenu: false
+                })
+            }
+            else{
+                this.setState({
+                    showNav: true,
+                    showMenu: false
+                })
+            }
         }
     }
 
