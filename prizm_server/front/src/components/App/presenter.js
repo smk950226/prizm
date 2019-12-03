@@ -46,7 +46,7 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root')
 
 const App = (props) => {
-    if(!props.admin){
+    if(props.admin){
         return(
             <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} chatList={props.chatList} />
         )

@@ -28,7 +28,7 @@ const EmptyProfileDivLg = styled.div`
     background-attachment: scroll;
 `
 
-class MessageList extends Component{
+class AdminMessageList extends Component{
     static propTypes = {
         chatList: PropTypes.array,
         chatListMore: PropTypes.func.isRequired,
@@ -103,13 +103,7 @@ class MessageList extends Component{
                                 </div>
                             ))
                         ) : (
-                            <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/prizm_admin_main.png')} alt={this.context.t("Request not exist")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%'}} />
-                                <p className={`${styles.font1214} ${styles.mt3}`}>
-                                    {this.context.t("You haven't received any messages yet.")}<br/>
-                                    {this.context.t("A new chatroom will appear when you submit a request to a photographer.")}
-                                </p>
-                            </div>
+                            null
                         )}
                     </div>
                 )}
@@ -118,4 +112,4 @@ class MessageList extends Component{
     }
 }
 
-export default MessageList
+export default AdminMessageList

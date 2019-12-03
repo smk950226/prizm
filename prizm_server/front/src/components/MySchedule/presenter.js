@@ -11,7 +11,7 @@ const MySchedule = (props, context) => (
                 <Loader type="Oval" color="#d66c8b" height={20} width={20} />
             </div>
         ) : (
-            props.orderList && props.orderList.length > 0 && (
+            (props.orderList && props.orderList.length > 0) ? (
                 <div className={`${styles.mt45}`}>
                     {props.orderList.map((order, index) => (
                         <div key={order.id} className={`${styles.py3} ${(index === props.orderList.length - 1) ? null : styles.borderBtmGrayDc}`}>
@@ -58,6 +58,14 @@ const MySchedule = (props, context) => (
                             )}
                         </div>
                     ))}
+                </div>
+            ) : (
+                <div className={`${styles.textCenter}`}>
+                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%'}} />
+                    <p className={`${styles.font1214} ${styles.mt3}`}>
+                        {context.t("You haven't made any reservations yet.")}<br/>
+                        {context.t("A new schedule will appear when you submit a request to a photographer.")}
+                    </p>
                 </div>
             )
         )}
