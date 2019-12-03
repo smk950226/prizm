@@ -269,7 +269,7 @@ class Container extends Component{
                                 if(check.status === 'ok'){
                                     const merchant_uid = uuidv4()
                                     const IMP = window.IMP;
-                                    IMP.init('imp34272099');
+                                    IMP.init('imp03236970');
                                     IMP.request_pay({
                                         pg : 'paypal',
                                         pay_method : 'card',
