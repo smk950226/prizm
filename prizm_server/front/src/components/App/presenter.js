@@ -40,6 +40,7 @@ import AdminAccountSetting from '../AdminAccountSetting';
 import AdminBottomNavigation from '../AdminBottomNavigation';
 import AdminMessageList from '../AdminMessageList';
 import AdminMessageDetail from '../AdminMessageDetail';
+import AdminSettings from '../AdminSettings';
 
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -325,6 +326,7 @@ const AdminRoute = props => (
         <Route exact path='/profile/account/' component={AdminAccountSetting} key={12} />
         <Route exact path='/message/' component={AdminMessageList} key={13} />
         <Route exact path='/message/detail/:chatId/' component={AdminMessageDetail} key={14} />
+        <Route exact path='/my/settings/' component={AdminSettings} key={15} />
         <Route component={NotFound} key={101} />
     </Switch>
 )

@@ -4,26 +4,23 @@ import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn }, router : { location } } = state;
-    return {
+    const { router : { location }, user : { isLoggedIn } } = state;
+    return{
+        pathname: location.pathname,
         isLoggedIn,
-        pathname: location.pathname
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
-        goReservation: () => {
-            dispatch(push('/reservation/'))
+        goProfile: () => {
+            dispatch(push('/profile/'))
         },
-        goStudioSetting: () => {
-            dispatch(push('/studio/edit/'))
+        goAccount: () => {
+            dispatch(push('/profile/account/'))
         },
-        goSettings: () => {
-            dispatch(push('/my/settings/'))
-        },
-        goMessage: () => {
-            dispatch(push('/message/'))
+        logout: () => {
+            dispatch(userAction.getLogout())
         }
     }
 }

@@ -9,7 +9,7 @@ class AdminBottomNavigation extends Component{
         pageType: PropTypes.string.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
         goStudioSetting: PropTypes.func.isRequired,
-        goProfileMenu: PropTypes.func.isRequired,
+        goSettings: PropTypes.func.isRequired,
         goMessage: PropTypes.func.isRequired,
         showNav: PropTypes.bool.isRequired
     }
@@ -38,8 +38,8 @@ class AdminBottomNavigation extends Component{
                                 <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`}>{this.context.t("Messages")}</p>
                             </div>
                             <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/icon_profile.png')} alt={this.context.t("PROFILE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu} />
-                                <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu}>{this.context.t("Settings")}</p>
+                                <img src={require('../../assets/images/icon_profile.png')} alt={this.context.t("PROFILE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goSettings} />
+                                <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goSettings}>{this.context.t("Settings")}</p>
                             </div>
                         </div>
                     </div>

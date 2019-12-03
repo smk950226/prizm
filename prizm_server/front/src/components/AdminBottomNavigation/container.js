@@ -8,7 +8,7 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
         goStudioSetting: PropTypes.func.isRequired,
-        goProfileMenu: PropTypes.func.isRequired,
+        goSettings: PropTypes.func.isRequired,
         goMessage: PropTypes.func.isRequired
     }
 

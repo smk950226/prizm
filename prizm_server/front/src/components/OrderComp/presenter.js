@@ -18,7 +18,7 @@ const OrderComp = (props, context) => (
                 <p className={`${styles.fontBold} ${styles.font1316}`}>
                     {props.order.user.name}
                 </p>
-                <p className={`${styles.fontBold} ${styles.font13} ${props.order.status === 'confirmed' ? styles.confirmed : null} ${props.order.status === 'cancelled' ? styles.pink : null}`}>
+                <p className={`${styles.fontBold} ${styles.font13} ${props.order.status === 'confirmed' ? styles.confirmed : null} ${props.order.status === 'cancelled' ? styles.pink : null} ${props.order.status === 'completed' ? styles.completed : null}`}>
                     {props.order.status === 'pending' && context.t('Pending')}
                     {props.order.status === 'confirmed' && context.t('Confirmed')}
                     {props.order.status === 'cancelled' && context.t('Cancelled')}

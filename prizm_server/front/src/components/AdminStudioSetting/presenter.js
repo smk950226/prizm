@@ -536,13 +536,17 @@ const AdminSignUp = (props, context) => (
                             </div>
                         </div>
                         <div className={`${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                            <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Education")}</p>
-                            <p className={`${styles.font10}`}>{props.education}</p>
-                        </div>
-                        <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                             <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Career")}</p>
                             <p className={`${styles.font10}`}>{props.career}</p>
                         </div>
+                        {props.education ? (
+                            <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Education")}</p>
+                                <p className={`${styles.font10}`}>{props.education}</p>
+                            </div>
+                        ) : (
+                            null
+                        )}
                         {props.portfolio ? (
                             <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                 <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Portfolio")}</p>
@@ -730,13 +734,17 @@ const AdminSignUp = (props, context) => (
                             </div>
                         </div>
                         <div className={`${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                            <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Education")}</p>
-                            <p className={`${styles.font10}`}>{props.education}</p>
-                        </div>
-                        <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                             <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Career")}</p>
                             <p className={`${styles.font10}`}>{props.career}</p>
                         </div>
+                        {props.education ? (
+                        <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                            <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Education")}</p>
+                            <p className={`${styles.font10}`}>{props.education}</p>
+                        </div>
+                        ) : (
+                            null
+                        )}
                         {props.portfolio ? (
                             <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                 <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Portfolio")}</p>
