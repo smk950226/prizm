@@ -26,7 +26,8 @@ class Container extends Component{
             content: photographeraccount ? photographeraccount.content : "",
             birthForm: photographeraccount ? true : false,
             edited: false,
-            editable: false
+            editable: false,
+            isSubmitting: false
         }
     }
 
@@ -37,6 +38,13 @@ class Container extends Component{
         }
         else if(profile.user_type !== 'photographer'){
             goHome()
+        }
+        else{
+            if((profile.country_code === 'KR') || (profile.country_number === '82')){
+                this.setState({
+                    accountType: 'bank_account'
+                })
+            }
         }
     }
 
@@ -66,7 +74,25 @@ class Container extends Component{
                 let numberReg = /^[0-9]*$/;
                 if(numberReg.test(value)){
                     this.setState({
-                        [name]: value.replace(/^0+/, ''),
+                        [name]: value,
+                        edited: true
+                    });
+                }
+            }
+            else{
+                this.setState({
+                    [name]: value,
+                    edited: true
+                });
+            }
+        }
+        else if(name === 'content'){
+            if(this.state.accountType === 'bank_account'){
+                let numberReg = /^[0-9]*$/;
+                if(numberReg.test(value)){
+                    console.log(5)
+                    this.setState({
+                        [name]: value,
                         edited: true
                     });
                 }

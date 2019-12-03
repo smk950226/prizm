@@ -16,7 +16,7 @@ class Container extends Component{
         super(props)
         this.state = {
             isDeposit: props.location.state ? props.location.state.isDeposit ? props.location.state.isDeposit : false : false,
-            price: props.location.state ? props.location.state.price ? props.location.state.price : 12000 : 12000,
+            price: props.location.state ? props.location.state.price ? props.location.state.price : 0 : 0,
             now: props.location.state ? props.location.state.now ? props.location.state.now : new Date().getTime() : new Date().getTime(),
         }
     }

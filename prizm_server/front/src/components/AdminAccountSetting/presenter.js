@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
-import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
-import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
-import { COUNTRY_NUMBER } from '../../utils/country';
 
 const AdminProfileSetting = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
@@ -29,7 +26,16 @@ const AdminProfileSetting = (props, context) => (
         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt45}`}>{context.t("Payout Options")}</p>
         <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`}>
-                {props.accountType === 'paypal_account' && (
+                {((props.profile.country_code === 'KR') || (props.profile.country_number === '82')) ? (
+                    <Fragment>
+                        <div className={`${styles.checkBox} ${props.accountType === 'bank_account' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                            {props.accountType === 'bank_account' && (
+                                <img src={require('../../assets/images/icon_check.png')} alt={context.t("Bank Account")} style={{width: 10, height: 10}} />
+                            )}
+                        </div>
+                        <p className={`${props.accountType === 'bank_account' ? styles.fontBold : null} ${styles.font1314} ${styles.ml2}`}>{context.t("Bank Account")}</p>
+                    </Fragment>
+                ) : (
                     <Fragment>
                         <div className={`${styles.checkBox} ${props.accountType === 'paypal_account' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                             {props.accountType === 'paypal_account' && (
@@ -42,13 +48,13 @@ const AdminProfileSetting = (props, context) => (
             </div>
         </div>
         {props.accountType === 'bank_account' && (
-            <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Number")}</p>
+            <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Bank Account")}</p>
         )}
         {props.accountType === 'paypal_account' && (
-            <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Account")}</p>
+            <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Paypal Account")}</p>
         )}
         <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"content"} value={props.content} onChange={props.handleInputChange} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
+            <input className={`${styles.textInput2}`} type={"text"} name={"content"} value={props.content} onChange={props.handleInputChange} readOnly={props.editable ? null : true} />
         </div>
         {props.editable && (
             <Fragment>

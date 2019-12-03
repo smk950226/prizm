@@ -11,9 +11,9 @@ function numberWithCommas(x) {
 
 const PaymentSuccess = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}`}>
-        <div className={`${styles.row} ${styles.mx0} ${!props.isDeposit ? null : styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.heightFullPercent} ${styles.px3}`} style={{position: 'relative'}}>
-            <div className={`${!props.isDeposit ? null : styles.textCenter}`}>
-                {!props.isDeposit ? (
+        <div className={`${styles.row} ${styles.mx0} ${props.isDeposit ? null : styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.heightFullPercent} ${styles.px3}`} style={{position: 'relative'}}>
+            <div className={`${props.isDeposit ? null : styles.textCenter}`}>
+                {props.isDeposit ? (
                     <Fragment>
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt3}`}>{context.t("예약 신청이 완료되었습니다!")}</p>
                         <p className={`${styles.font1416} ${styles.mt3}`}>{context.t(`다음의 계좌번호로 ${numberWithCommas(props.price)}원을 송금해주세요.`)}</p>
