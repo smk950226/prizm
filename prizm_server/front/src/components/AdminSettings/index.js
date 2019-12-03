@@ -13,6 +13,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
+        goHome: () => {
+            dispatch(push('/'))
+        },
         goProfile: () => {
             dispatch(push('/profile/'))
         },

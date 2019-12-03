@@ -7,7 +7,13 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         goProfile: PropTypes.func.isRequired,
         goAccount: PropTypes.func.isRequired,
+        goHome: PropTypes.func.isRequired,
         logout: PropTypes.func.isRequired,
+    }
+
+    _logout = () => {
+        this.props.goHome()
+        this.props.logout()
     }
 
     render(){
@@ -15,6 +21,7 @@ class Container extends Component{
             <AdminSettings 
             {...this.props}
             {...this.state}
+            logout={this._logout}
             />
         )
     }

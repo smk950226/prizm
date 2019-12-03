@@ -30,11 +30,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(userAction.getOrderList())
             dispatch(userAction.getChatList())
         },
-        goPaymentSuccess: (isDeposit) => {
+        goPaymentSuccess: (isDeposit, price, now) => {
             dispatch(push({
                 pathname: '/payment/success/',
                 state: {
-                    isDeposit
+                    isDeposit,
+                    price,
+                    now
                 }
             }))
         },

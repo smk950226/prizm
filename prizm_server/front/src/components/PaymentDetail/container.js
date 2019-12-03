@@ -171,7 +171,8 @@ class Container extends Component{
                                                 isSubmitting: false
                                             })
                                             await getPrice(null)
-                                            goPaymentSuccess(isDeposit)
+                                            const now = new Date().getTime()
+                                            goPaymentSuccess(isDeposit, price, now)
                                         }
                                         else if(result.error){
                                             this.setState({
@@ -216,7 +217,7 @@ class Container extends Component{
     }
 
     _updateMeta = async(meta) => {
-        const { pay, getPrice, goPaymentSuccess } = this.props;
+        const { pay, getPrice, goPaymentSuccess, price } = this.props;
         const { order, isDeposit } = this.state;
         this.setState({
             isSubmitting: true
@@ -227,7 +228,8 @@ class Container extends Component{
             this.setState({
                 isSubmitting: false
             })
-            goPaymentSuccess(isDeposit)
+            const now = new Date().getTime()
+            goPaymentSuccess(isDeposit, price, now)
 
         }
         else{

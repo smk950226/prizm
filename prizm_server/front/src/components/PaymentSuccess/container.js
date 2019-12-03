@@ -15,15 +15,27 @@ class Container extends Component{
     constructor(props){
         super(props)
         this.state = {
-            isDeposit: props.location.state ? props.location.state.isDeposit ? props.location.state.isDeposit : false : false
+            isDeposit: props.location.state ? props.location.state.isDeposit ? props.location.state.isDeposit : false : false,
+            price: props.location.state ? props.location.state.price ? props.location.state.price : 12000 : 12000,
+            now: props.location.state ? props.location.state.now ? props.location.state.now : new Date().getTime() : new Date().getTime(),
+        }
+    }
+
+    componentDidMount = () => {
+        const { price } = this.state;
+        const { goHome } = this.props;
+        if(price === 0) {
+            goHome()
         }
     }
 
     render(){
+        const deadline = new Date(this.state.now + 1000*60*60*24)
         return(
             <PaymentSuccess 
             {...this.props}
             {...this.state}
+            deadline={deadline}
             />
         )
     }

@@ -60,6 +60,7 @@
     "react-burger-menu": "^2.6.11",
     "react-calendar": "^2.19.2",
     "react-collapse": "^5.0.0",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-country-flag": "^1.1.0",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",

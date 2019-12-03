@@ -35,6 +35,10 @@ const AdminOrderList = (props, context) => (
             <p className={`${styles.fontBold} ${styles.font1416}`}>{context.t("Payout Settings")}</p>
             <img src={require('../../assets/images/icon_right.png')} alt={context.t("Payout Settings")} className={`${styles.iconArrowRight}`} />
         </div>
+        <div className={`${styles.row} ${styles.mx0} ${styles.alignItmesCenter} ${styles.justifyContentBetween} ${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={props.logout}>
+            <p className={`${styles.fontBold} ${styles.font1416}`}>{context.t("Log Out")}</p>
+            <img src={require('../../assets/images/icon_right.png')} alt={context.t("Log Out")} className={`${styles.iconArrowRight}`} />
+        </div>
     </div>
 )
 
