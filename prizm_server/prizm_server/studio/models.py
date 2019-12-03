@@ -9,7 +9,7 @@ class Photographer(models.Model):
     nickname = models.CharField(_('Nickname'), max_length = 255)
     profile_image = models.ImageField(_('Profile Image'), upload_to = 'studio/photographer/profile/', blank = True, null = True)
     main_location = models.CharField(_('Location'), max_length = 255)
-    education = models.CharField(_('Education'), max_length = 255)
+    education = models.CharField(_('Education'), max_length = 255, blank = True, null = True)
     career = models.CharField(_('Career'), max_length = 255)
     studio_id = models.CharField(_('Studio ID'), max_length = 255)
     portfolio_url = models.CharField(_('Portfolio URL'), max_length = 500, blank = True, null = True)

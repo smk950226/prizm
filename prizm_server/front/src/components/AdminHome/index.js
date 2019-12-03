@@ -3,10 +3,12 @@ import Container from './container';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn }, router : { location } } = state;
+    const { user : { isLoggedIn }, router : { location }, user : { profile }, admin : { photographer } } = state;
     return {
         isLoggedIn,
-        pathname: location.pathname
+        pathname: location.pathname,
+        profile,
+        photographer
     }
 }
 

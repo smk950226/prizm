@@ -757,7 +757,7 @@ class Container extends Component{
         const { updateStudio, getPhotographer, goClear } = this.props;
         if(!isSubmitting){
             if(submitImages.length > 0){
-                if(nickname && mainLocation && education && career && description && submitProfileImage && studioId && studioId2){
+                if(nickname && mainLocation && career && description && submitProfileImage && studioId && studioId2){
                     if(portfolio){
                         if(portfolioForm){
                             if(locations.length > 0){
@@ -861,7 +861,7 @@ class Container extends Component{
                     }
                 }
                 else{
-                    alert(this.context.t("Please fill in all the information above."))
+                    alert(this.context.t("Please fill in all the information above to create and save this option"))
                 }
             }
             else{

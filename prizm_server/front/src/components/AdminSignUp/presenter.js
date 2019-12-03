@@ -34,7 +34,7 @@ const AdminSignUp = (props, context) => (
             </div>
             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Instagram")}</p>
             <div className={`${styles.widthFull}`}>
-                <InputMask mask={'inst\\agr\\am/********************'} maskChar={''} alwaysShowMask={true} value={props.instagram} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress}>
+                <InputMask mask={'inst\\agr\\am.com/********************'} maskChar={''} alwaysShowMask={true} value={props.instagram} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress}>
                     {(inputProps) => <input {...inputProps} type={"text"} name={"instagram"} className={`${styles.textInput6}`} />}
                 </InputMask>
             </div>
@@ -84,7 +84,7 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Instagram")}</p>
                     <div className={`${styles.widthFull}`}>
-                        <InputMask mask={'inst\\agr\\am/********************'} maskChar={''} alwaysShowMask={true} value={props.instagram} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress}>
+                        <InputMask mask={'inst\\agr\\am.com/********************'} maskChar={''} alwaysShowMask={true} value={props.instagram} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress}>
                             {(inputProps) => <input {...inputProps} type={"text"} name={"instagram"} className={`${styles.textInput6}`} />}
                         </InputMask>
                     </div>

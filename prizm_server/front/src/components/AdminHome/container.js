@@ -7,7 +7,23 @@ class Container extends Component{
         goSignIn: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
         goReservation: PropTypes.func.isRequired,
-        isLoggedIn: PropTypes.bool.isRequired
+        isLoggedIn: PropTypes.bool.isRequired,
+        profile: PropTypes.object,
+        photographer: PropTypes.object
+    }
+
+    componentDidMount = () => {
+        const { isLoggedIn, goReservation, profile, photographer } = this.props;
+        if(isLoggedIn && profile && (profile.user_type === 'photographer') && photographer){
+            goReservation()
+        }
+    }
+
+    componentDidUpdate = () => {
+        const { isLoggedIn, goReservation, profile, photographer } = this.props;
+        if(isLoggedIn && profile && (profile.user_type === 'photographer') && photographer){
+            goReservation()
+        }
     }
     
     render(){

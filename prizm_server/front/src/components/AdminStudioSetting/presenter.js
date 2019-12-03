@@ -21,6 +21,7 @@ import Rating from 'react-rating';
 import MdStar from 'react-ionicons/lib/MdStar';
 import Calendar from 'react-calendar';
 import RModal from 'react-responsive-modal';
+import InputMask from 'react-input-mask';
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -193,7 +194,7 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Your Portfolio")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.images && props.images.length > 0 ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please upload sample photographs to be shown at the top of your PRIZM studio.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please upload sample images to be shown at the top of your PRIZM studio.")}<br/>{context.t("If you want to remove an uploaded image, click the image.")}</p>
                     <div className={`${styles.containerAdminPortfolio} ${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.mt3} ${styles.flexNowrap} ${styles.overflowXScroll}`}>
                         {props.images && props.images.length > 0 ? (
                             <Fragment>
@@ -245,22 +246,13 @@ const AdminSignUp = (props, context) => (
                         <input className={`${styles.textInput6}`} type={"text"} name={"nickname"} value={props.nickname} onChange={props.handleInputChange} />
                     </div>
                     <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Location")}</p>
+                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Main Photography Location")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.mainLocation ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in your main photography (business) areas.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in your main photography (business) location.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"mainLocation"} value={props.mainLocation} onChange={props.handleInputChange} />
                     </div>
-                    <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Education")}</p>
-                        <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.education ? null : styles.hidden}`} />
-                    </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in the most recent educational background.")}</p>
-                    <div className={`${styles.containerStudioInput}`}>
-                        <input className={`${styles.textInput6}`} type={"text"} name={"education"} value={props.education} onChange={props.handleInputChange} />
-                    </div>
-                    <p className={`${styles.mt1} ${styles.font911}`}>{context.t("ex) Hannam High School, College of Havana, Nakseong University")}</p>
                     <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Career")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.career ? null : styles.hidden}`} />
@@ -269,8 +261,18 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.containerStudioInput}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"career"} value={props.career} onChange={props.handleInputChange} />
                     </div>
+                    <p className={`${styles.mt1} ${styles.font911}`}>{context.t("ex) your work experiences, exhibitions, awards, etc")}</p>
                     <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Portfolio")}</p>
+                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Education (Optional)")}</p>
+                        <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.education ? null : styles.hidden}`} />
+                    </div>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in the most recent educational background.")}</p>
+                    <div className={`${styles.containerStudioInput}`}>
+                        <input className={`${styles.textInput6}`} type={"text"} name={"education"} value={props.education} onChange={props.handleInputChange} />
+                    </div>
+                    <p className={`${styles.mt1} ${styles.font911}`}>{context.t("ex) Hannam High School, College of Havana, Nakseong University")}</p>
+                    <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Portfolio (Optional)")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.portfolio ? null : styles.hidden}`} />
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("If you have a website where potential clients can view your portfolio, please enter the URL. If not, you are fine to leave this area blank.")}</p>
@@ -283,15 +285,15 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please briefly introduce yourself.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <textarea className={`${styles.textArea2} ${styles.mt3} ${styles.py3} ${styles.px2}`} value={props.description} name={"description"} onChange={props.handleInputChange} />
+                        <textarea placeholder={context.t("Introduce yourself to potential PRIZM clients here.")} className={`${styles.textArea2} ${styles.mt3} ${styles.py3} ${styles.px2}`} value={props.description} name={"description"} onChange={props.handleInputChange} />
                     </div>
                     <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Select Location")}</p>
+                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Select Photography Spots")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.locations && props.locations.length > 0 ? null : styles.hidden}`} />
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>
                         {context.t("Detailed location where you would like to meet tourists")}<br/>
-                        {context.t("Search on the map to add your first location")}
+                        {context.t("Search on the map to add your first photography spot")}
                     </p>
                     <div className={`${styles.mobileOnly} ${styles.mt3}`}>
                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openLocationModal}>
@@ -378,11 +380,11 @@ const AdminSignUp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Service and Pricing")}</p>
                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.options && props.options.length > 0 ? null : styles.hidden}`} />
                     </div>
-                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please enter the service & pricing options.")}</p>
+                    <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Click the button below to create a new service & pricing option.")}</p>
                     <div className={`${styles.mobileOnly} ${styles.mt3}`}>
                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionModal}>
                             <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
-                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Add to option")}</p>
+                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Create a new option")}</p>
                             <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
                         </div>
                     </div>
@@ -435,11 +437,17 @@ const AdminSignUp = (props, context) => (
                                 </div>
                             </Fragment>
                         )}
-                        <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.showOptionPlus ? props.closeOptionPlus : props.openOptionPlus}>
-                            <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
-                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Add to option")}</p>
-                            <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
-                        </div>
+                        {props.showOptionPlus ? (
+                            <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.closeOptionPlus}>
+                                <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Cancel")}</p>
+                            </div>
+                        ) : (
+                            <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionPlus}>
+                                <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
+                                <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Add to option")}</p>
+                                <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
+                            </div>
+                        )}
                     </div>
                     {props.options && props.options.length > 0 && (
                         <div className={`${styles.mt3} ${styles.row} ${styles.mx0}`}>
@@ -463,7 +471,9 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in a desired URL for your PRIZM studio.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <input className={`${styles.textInput6}`} type={"text"} name={"studioId"} value={props.studioId} onChange={props.handleInputChange} />
+                        <InputMask mask={'prizm.com/********************'} maskChar={''} alwaysShowMask={false} value={props.studioId} onChange={props.handleInputChange}>
+                            {(inputProps) => <input {...inputProps} type={"text"} name={"studioId"} className={`${styles.textInput6}`} />}
+                        </InputMask>
                     </div>
                     <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Confirm Your URL")}</p>
@@ -471,7 +481,9 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please confirm the studio URL.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <input className={`${styles.textInput6}`} type={"text"} name={"studioId2"} value={props.studioId2} onChange={props.handleInputChange} />
+                        <InputMask mask={'prizm.com/********************'} maskChar={''} alwaysShowMask={false} value={props.studioId2} onChange={props.handleInputChange}>
+                            {(inputProps) => <input {...inputProps} type={"text"} name={"studioId2"} className={`${styles.textInput6}`} />}
+                        </InputMask>
                     </div>
                     <div className={`${styles.mobileOnly} ${styles.mt45}`}>
                         <p className={`${styles.fontBold} ${styles.font1214}`}>
@@ -485,7 +497,7 @@ const AdminSignUp = (props, context) => (
                         </p>
                     </div>
                     <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.confirm}>
-                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Confirm")}</p>
+                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save")}</p>
                     </div>
                     <input id={`portfolio`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={props.submit} />
                     <input id={`profile`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={props.submitProfile} />
