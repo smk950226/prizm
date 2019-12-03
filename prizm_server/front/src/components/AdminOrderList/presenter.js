@@ -58,25 +58,65 @@ const AdminOrderList = (props, context) => (
                             {context.t("Past")}
                         </p>
                     </div>
-                    {(props.page === 'all') && props.orderList && (props.orderList.length > 0)  && (
-                        props.orderList.map((order, index) => (
-                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
-                        ))
+                    {(props.page === 'all') && (
+                        props.orderList && (props.orderList.length > 0)  ? (
+                            props.orderList.map((order, index) => (
+                                <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
+                            ))
+                        ) : (
+                            <div className={`${styles.textCenter}`}>
+                                <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
+                            </div>
+                        )
                     )}
-                    {(props.page === 'pending') && props.pendingList && (props.pendingList.length > 0)  && (
-                        props.pendingList.map((order, index) => (
-                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
-                        ))
+                    {(props.page === 'pending') && (
+                        props.pendingList && (props.pendingList.length > 0) ? (
+                            props.pendingList.map((order, index) => (
+                                <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
+                            ))
+                        ) : (
+                            props.orderList && props.orderList.length > 0 ? (
+                                null
+                            ) : (
+                                <div className={`${styles.textCenter}`}>
+                                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                    <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
+                                </div>
+                            )
+                        )
                     )}
-                    {(props.page === 'confirmed') && props.confirmedList && (props.confirmedList.length > 0)  && (
-                        props.confirmedList.map((order, index) => (
-                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
-                        ))
+                    {(props.page === 'confirmed') && (
+                        props.confirmedList && (props.confirmedList.length > 0) ? (
+                            props.confirmedList.map((order, index) => (
+                                <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
+                            ))
+                        ) : (
+                            props.orderList && props.orderList.length > 0 ? (
+                                null
+                            ) : (
+                                <div className={`${styles.textCenter}`}>
+                                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                    <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
+                                </div>
+                            )
+                        )
                     )}
-                    {(props.page === 'past') && props.pastList && (props.pastList.length > 0)  && (
-                        props.pastList.map((order, index) => (
-                            <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
-                        ))
+                    {(props.page === 'past') && (
+                        props.pastList && (props.pastList.length > 0) ? (
+                            props.pastList.map((order, index) => (
+                                <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
+                            ))
+                        ) : (
+                            props.orderList && props.orderList.length > 0 ? (
+                                null
+                            ) : (
+                                <div className={`${styles.textCenter}`}>
+                                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                    <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
+                                </div>
+                            )
+                        )
                     )}
                 </div>
                 <div className={`${styles.containerAdminToolbox} ${styles.mobileNone} ${styles.bgGrayF8} ${styles.minHeightFull}`} style={{display: 'block'}}>

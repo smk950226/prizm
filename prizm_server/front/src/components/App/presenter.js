@@ -37,6 +37,7 @@ import AdminStudioSettingClear from '../AdminStudioSettingClear';
 import AdminProfileSetting from '../AdminProfileSetting';
 import AdminProfilePassword from '../AdminProfilePassword';
 import AdminAccountSetting from '../AdminAccountSetting';
+import AdminBottomNavigation from '../AdminBottomNavigation';
 
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -45,9 +46,9 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root')
 
 const App = (props) => {
-    if(props.admin){
+    if(!props.admin){
         return(
-            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} photographer={props.photographer} chatList={props.chatList} />
+            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} chatList={props.chatList} />
         )
     }
     else{
@@ -165,7 +166,8 @@ class AdminRouteContainer extends Component{
         profile: PropTypes.object,
         isLoggedIn: PropTypes.bool.isRequired,
         photographer: PropTypes.object,
-        chatList: PropTypes.array
+        chatList: PropTypes.array,
+        showBtmNav: PropTypes.bool.isRequired,
     }
 
     state = {
@@ -259,6 +261,7 @@ class AdminRouteContainer extends Component{
 
     render(){
         const { loading, showMobile, showLocationModal, showOptionModal } = this.state;
+        const { showBtmNav } = this.props;
         if(loading){
             return(
                 <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
@@ -271,6 +274,7 @@ class AdminRouteContainer extends Component{
                 <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
                     <AdminNavigation showMobile={showMobile} openMobile={this._openMobile} showLocationModal={showLocationModal} showOptionModal={showOptionModal} />
                     <AdminRoute showMobile={showMobile} openMobile={this._openMobile} closeMobile={this._closeMobile} showLocationModal={showLocationModal} openLocationModal={this._openLocationModal} closeLocationModal={this._closeLocationModal} showOptionModal={showOptionModal} openOptionModal={this._openOptionModal} closeOptionModal={this._closeOptionModal} />
+                    <AdminBottomNavigation showBtmNav={showBtmNav} />
                 </div>
             )
         }

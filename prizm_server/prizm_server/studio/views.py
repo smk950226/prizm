@@ -604,7 +604,7 @@ def create_zip(request, order_id):
     response = HttpResponse(f.getvalue(), content_type="application/zip")
     response['Content-Disposition'] = 'attachment; filename={}.zip'.format(order.user.name)
 
-    mail = EmailMessage('[PRIZM] Your photos have arrived!', render_to_string('studio/photos.html', context={'user': order.user.name, 'photographer': order.photographer.nickname, 'location': order.location.name}), '<PRIZM> contact@prizm.cloud', [order.user.email])
+    mail = EmailMessage('[PRIZM] Your photos have arrived!', render_to_string('studio/photos.html', context={'user': order.user.name, 'photographer': order.photographer.nickname, 'location': order.location.name}), 'PRIZM<contact@prizm.cloud>', [order.user.email])
     mail.content_subtype = "html"
     mail.attach('{}.zip'.format(order.user.name), f.getvalue(), "application/zip")
     mail.send()
