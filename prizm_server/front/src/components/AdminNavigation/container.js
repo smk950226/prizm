@@ -12,7 +12,45 @@ class Container extends Component{
         openMobile: PropTypes.func.isRequired,
         showMobile: PropTypes.bool.isRequired,
         showLocationModal: PropTypes.bool.isRequired,
-        showOptionModal: PropTypes.bool.isRequired
+        showOptionModal: PropTypes.bool.isRequired,
+        photographer: PropTypes.object,
+        goSignIn: PropTypes.func.isRequired,
+        goSignUp: PropTypes.func.isRequired,
+        goReservation: PropTypes.func.isRequired,
+        goTouristPhoto: PropTypes.func.isRequired,
+        goStudioSetting: PropTypes.func.isRequired,
+        goProfile: PropTypes.func.isRequired,
+        goAccount: PropTypes.func.isRequired
+    }
+
+    state = {
+        showMenu: false
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if(prevProps.pathname !== this.props.pathname){
+            this.setState({
+                showMenu: false
+            })
+        }
+    }
+
+    _openMenu = () => {
+        this.setState({
+            showMenu: true
+        })
+    }
+
+    _closeMenu = () => {
+        this.setState({
+            showMenu: false
+        })
+    }
+
+    _handleShowMenu = (state) => {
+        this.setState({
+            showMenu: state.isOpen
+        })
     }
 
     render(){
@@ -20,6 +58,9 @@ class Container extends Component{
             <AdminNavigation 
             {...this.props} 
             {...this.state} 
+            openMenu={this._openMenu}
+            closeMenu={this._closeMenu}
+            handleShowMenu={this._handleShowMenu}
             />
         )
     }

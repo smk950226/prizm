@@ -22,7 +22,7 @@ class AdminBottomNavigation extends Component{
         const { showNav, showBtmNav } = this.props;
         if(showNav){
             return(
-                <Fragment>
+                <div className={`${styles.mobileOnly}`}>
                     <div className={`${styles.positionBtmNav} ${styles.widthFull} ${styles.bgWhite} ${showBtmNav ? null : styles.hide} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{zIndex: 2}}>
                         <div className={`${styles.containerCustomer} ${styles.widthFull} ${styles.px4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 48}}>
                             <div className={`${styles.textCenter}`}>
@@ -43,7 +43,7 @@ class AdminBottomNavigation extends Component{
                             </div>
                         </div>
                     </div>
-                </Fragment>
+                </div>
             )
         }
         else{
