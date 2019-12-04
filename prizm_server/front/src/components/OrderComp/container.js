@@ -173,7 +173,7 @@ class Container extends Component{
                         this.setState({
                             isSubmitting: false
                         })
-                        alert(this.context.t("Please select available dates."))
+                        alert(this.context.t("Please select available date & time."))
                     }
                 }
                 else{

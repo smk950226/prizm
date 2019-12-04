@@ -15,7 +15,7 @@ const PaymentSuccess = (props, context) => (
             <div className={`${props.isDeposit ? null : styles.textCenter}`}>
                 {props.isDeposit ? (
                     <Fragment>
-                        <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt3}`}>{context.t("예약 신청이 완료되었습니다!")}</p>
+                        <p className={`${styles.font1416} ${styles.mt3}`}>{context.t("예약 신청이 완료되었습니다!")}</p>
                         <p className={`${styles.font1416} ${styles.mt3}`}>{context.t(`다음의 계좌번호로 ${numberWithCommas(props.price)}원을 송금해주세요.`)}</p>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`}>
                             <p className={`${styles.font1416} ${styles.mr2}`}>{context.t('계좌번호 : 농협 302-0533-7278-11')}</p>
@@ -40,17 +40,12 @@ const PaymentSuccess = (props, context) => (
                     </Fragment>
                 ) : (
                     <Fragment>
-                        <p className={`${styles.fontBold} ${styles.font1416}`}>{context.t("Your payment has been successfully submitted!")}</p>
+                        <p className={`${styles.font1416}`}>{context.t("Your payment has been successfully submitted!")}</p>
                         <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Paid")} className={`${styles.mt3}`} style={{width: 200, heihgt: 160}} />
                         <p className={`${styles.font1416} ${styles.mt3}`}>{context.t("Payment will be transferred to your photographer only after you have completed the photo session and received photographs. Until then, your payment will be safely kept as a deposit.")}</p>
                         <p className={`${styles.font1416} ${styles.mt3}`}>{context.t("For information regarding cancellation and refund policies, please refer to our Terms of Service.")}</p>
-                        {props.isDeposit && (
-                            <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
-                                {context.t(`계좌번호`)}<br/>
-                            </p>
-                        )}
                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
-                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Go back to the main page")}</p>
+                            <p className={`${styles.font14} ${styles.white}`}>{context.t("Go back to the main page")}</p>
                         </div>
                     </Fragment>
                 )}

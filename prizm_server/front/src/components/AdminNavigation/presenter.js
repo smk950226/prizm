@@ -88,52 +88,54 @@ class AdminNavigation extends Component{
                     </div>
                 </div>
             )}
-            {isLoggedIn && (
-                <Slide 
-                isOpen={showMenu} 
-                customBurgerIcon={false} 
-                customCrossIcon={false} 
-                width={'100%'}
-                onStateChange={handleShowMenu}
-                disableAutoFocus={true}
-                className={`${styles.bgWhite}`}
-                >
-                    <Fragment>
-                    <div className={`${styles.containerAdmin} ${styles.pxAdmin2}`} style={{zIndex: 2}}>
-                        <div className={`${styles.mobileOnly}`}>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.py4} ${styles.bgWhite}`}>
-                                <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                    {isLoggedIn && (
-                                        <img src={require('../../assets/images/icon_arrow_left.png')} alt={this.context.t("MENU")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={showMenu ? this.props.closeMenu : this.props.openMenu} />
-                                    )}
+            <div className={`${styles.mobileOnly}`}>
+                {isLoggedIn && (
+                    <Slide 
+                    isOpen={showMenu} 
+                    customBurgerIcon={false} 
+                    customCrossIcon={false} 
+                    width={'100%'}
+                    onStateChange={handleShowMenu}
+                    disableAutoFocus={true}
+                    className={`${styles.bgWhite}`}
+                    >
+                        <Fragment>
+                        <div className={`${styles.containerAdmin} ${styles.pxAdmin2}`} style={{zIndex: 2}}>
+                            <div className={`${styles.mobileOnly}`}>
+                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.py4} ${styles.bgWhite}`}>
+                                    <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                        {isLoggedIn && (
+                                            <img src={require('../../assets/images/icon_arrow_left.png')} alt={this.context.t("MENU")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={showMenu ? this.props.closeMenu : this.props.openMenu} />
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className={`${styles.containerAdmin} ${styles.minHeightFull} ${styles.pxAdmin}`}>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4} ${photographer ? photographer.id ? null : styles.hidden : styles.hidden}`}>
-                            <ProfileDiv image={photographer ? photographer.profile_image : null} />
-                            <div className={`${styles.ml3}`}>
-                                <p className={`${styles.fontBold} ${styles.font2024}`}>{photographer ? photographer.nickname : ""}</p>
-                                {photographer ? (
-                                <   a href={`https://prizm.cloud/${photographer.studio_id}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${photographer.studio_id}`}</a>
-                                ) : (
-                                    <a href={`https://prizm.cloud/`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${photographer.studio_id}`}</a>
-                                )}
+                        <div className={`${styles.containerAdmin} ${styles.minHeightFull} ${styles.pxAdmin}`}>
+                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4} ${photographer ? photographer.id ? null : styles.hidden : styles.hidden}`}>
+                                <ProfileDiv image={photographer ? photographer.profile_image : null} />
+                                <div className={`${styles.ml3}`}>
+                                    <p className={`${styles.fontBold} ${styles.font2024}`}>{photographer ? photographer.nickname : ""}</p>
+                                    {photographer ? (
+                                        <a href={`https://prizm.cloud/${photographer.studio_id}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${photographer.studio_id}`}</a>
+                                    ) : (
+                                        <a href={`https://prizm.cloud/`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/<Your studio URL>`}</a>
+                                    )}
+                                </div>
+                            </div>
+                            <div>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}} onClick={this.props.goStudioSetting}>{this.context.t("Edit Your Studio")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt45}`} onClick={this.props.goReservation}>{this.context.t("Manage Reservations")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.goTouristPhoto}>{this.context.t("Tourist Photo")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`} onClick={this.props.goProfile}>{this.context.t("Profile Setting")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.goAccount}>{this.context.t("Account Setting")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.logout}>{this.context.t("Log out")}</p>
                             </div>
                         </div>
-                        <div>
-                            <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}} onClick={this.props.goStudioSetting}>{this.context.t("Edit Your Studio")}</p>
-                            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt45}`} onClick={this.props.goReservation}>{this.context.t("Manage Reservations")}</p>
-                            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.goTouristPhoto}>{this.context.t("Tourist Photo")}</p>
-                            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`} onClick={this.props.goProfile}>{this.context.t("Profile Setting")}</p>
-                            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.goAccount}>{this.context.t("Account Setting")}</p>
-                            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.logout}>{this.context.t("Log out")}</p>
-                        </div>
-                    </div>
-                    </Fragment>
-                </Slide>
-            )}
+                        </Fragment>
+                    </Slide>
+                )}
+            </div>
             </Fragment>
         )
     }

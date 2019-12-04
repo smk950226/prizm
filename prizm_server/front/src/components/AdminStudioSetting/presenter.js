@@ -444,7 +444,7 @@ const AdminSignUp = (props, context) => (
                         ) : (
                             <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionPlus}>
                                 <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
-                                <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Add to option")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Create a new option")}</p>
                                 <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
                             </div>
                         )}
