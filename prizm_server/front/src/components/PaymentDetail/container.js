@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PaymentDetail from './presenter';
 import uuidv4 from 'uuid/v4';
+import { FETCH_URL } from '../../config/urls';
+
 class Container extends Component{
 
     static propTypes = {
@@ -281,7 +283,7 @@ class Container extends Component{
                                         buyer_email : profile.email,
                                         buyer_name : profile.name,
                                         buyer_tel : `+${profile.country_number} ${profile.mobile}`,
-                                        m_redirect_url: 'https://prizm.cloud/payment/success/'
+                                        m_redirect_url: `${FETCH_URL}/payment/success/`
                                     }, async(rsp) => {
                                         if ( rsp.success ) {
                                             this.setState({

@@ -17,7 +17,7 @@ class Container extends Component{
 
     state = {
         loading: true,
-        showResponse: false,
+        showResponse: true,
         checkedOption: 0,
         showDatePicker: false,
         selectedTime: [],
@@ -65,37 +65,29 @@ class Container extends Component{
     }
 
     _openResponse = () => {
-        if(this.props.order.status === 'pending'){
-            this.setState({
-                showResponse: true
-            })
-        }
+        this.setState({
+            showResponse: true
+        })
     }
 
     _closeResponse = () => {
-        if(this.props.order.status === 'pending'){
-            this.setState({
-                showResponse: false,
-                showDatePicker: false,
-                checkedOption: 0
-            })
-        }
+        this.setState({
+            showResponse: false,
+            showDatePicker: false,
+            checkedOption: 0
+        })
     }
 
     _openDatePicker = () => {
-        if(this.props.order.status === 'pending'){
-            this.setState({
-                showDatePicker: true
-            })
-        }
+        this.setState({
+            showDatePicker: true
+        })
     }
 
     _closeDatePicker = () => {
-        if(this.props.order.status === 'pending'){
-            this.setState({
-                showDatePicker: false
-            })
-        }
+        this.setState({
+            showDatePicker: false
+        })
     }
 
     _selectOption = (checkedOption) => {

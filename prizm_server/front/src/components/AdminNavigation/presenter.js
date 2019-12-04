@@ -89,7 +89,9 @@ class AdminNavigation extends Component{
                                     <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname.indexOf('/message/') > -1 ? styles.pink : null}`} onClick={this.props.goMessage}>{this.context.t("Messages")}</p>
                                     <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname === '/profile/' ? styles.pink : null}`} onClick={this.props.goProfile}>{this.context.t("Profile")}</p>
                                     <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname === '/profile/account/' ? styles.pink : null}`} onClick={this.props.goAccount}>{this.context.t("Payout")}</p>
-                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3}`} onClick={this.props.logout}>{this.context.t("Logout")}</p>
+                                    {isLoggedIn && (
+                                        <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3}`} onClick={this.props.logout}>{this.context.t("Logout")}</p>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -132,11 +134,11 @@ class AdminNavigation extends Component{
                                 </div>
                             </div>
                             <div>
-                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}} onClick={this.props.goStudioSetting}>{this.context.t("Edit Your Studio")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}} onClick={this.props.goStudioSetting}>{this.context.t("Edit Studio")}</p>
                                 <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt45}`} onClick={this.props.goReservation}>{this.context.t("Manage Reservations")}</p>
-                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.goTouristPhoto}>{this.context.t("Tourist Photo")}</p>
-                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`} onClick={this.props.goProfile}>{this.context.t("Profile Setting")}</p>
-                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.goAccount}>{this.context.t("Account Setting")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.goTouristPhoto}>{this.context.t("Tourist Photos")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`} onClick={this.props.goProfile}>{this.context.t("Profile Settings")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.goAccount}>{this.context.t("Account Settings")}</p>
                                 <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={this.props.logout}>{this.context.t("Log out")}</p>
                             </div>
                         </div>

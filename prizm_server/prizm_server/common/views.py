@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import HttpResponse
 
 from . import serializers, models
 
@@ -34,6 +35,23 @@ class Terms(APIView):
                     'status': 'ok',
                     'data': serializer.data
                 })
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
+class Proposal(APIView):
+    def get(self, request, format = None):
+        name = request.query_params.get('name', None)
+        if name:
+            try:
+                proposal = models.Proposal.objects.get(name = name)
+                filename = proposal.file.name.split('/')[-1]
+                response = HttpResponse(proposal.file, content_type='application/pdf')
+                response['Content-Disposition'] = 'attachment; filename=%s' % filename
+
+                return response
             except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
         else:

@@ -268,7 +268,7 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in the most recent educational background.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <input className={`${styles.textInput6}`} type={"text"} name={"education"} value={props.education} onChange={props.handleInputChange} />
+                        <input className={`${styles.textInput6}`} type={"text"} name={"education"} value={props.education} onChange={props.handleInputChange} maxLength={30} />
                     </div>
                     <p className={`${styles.mt1} ${styles.font911}`}>{context.t("ex) Hannam High School, College of Havana, Nakseong University")}</p>
                     <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
@@ -277,7 +277,7 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("If you have a website where potential clients can view your portfolio, please enter the URL. If not, you are fine to leave this area blank.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <input className={`${styles.textInput6}`} type={"text"} name={"portfolio"} value={props.portfolio} onChange={props.handleInputChange} />
+                        <input className={`${styles.textInput6}`} type={"text"} name={"portfolio"} value={props.portfolio} onChange={props.handleInputChange} maxLength={30} />
                     </div>
                     <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Description")}</p>
@@ -983,7 +983,7 @@ const AdminSignUp = (props, context) => (
                         <img src={require('../../assets/images/icon_left.png')} alt={context.t("go back")} className={`${styles.iconArrowRightLg} ${styles.cursorPointer}`} onClick={props.closeOptionModal} />
                     </div>
                     <div className={`${styles.col8} ${styles.coLSm10} ${styles.px0}`}>
-                        <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{context.t("Add to option")}</p>
+                        <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{context.t("Create a new option")}</p>
                     </div>
                     <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`}>
                        

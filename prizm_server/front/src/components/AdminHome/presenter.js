@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
+import { FETCH_URL } from '../../config/urls';
 
 const AdminHome = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerAdmin} ${styles.minHeightFull}`}>
+    <div className={`${styles.safeareaAdmin} ${styles.containerAdmin} ${styles.minHeightFull}`}>
         <div className={`${styles.mobileOnly}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter} ${styles.pxAdmin} ${styles.heightFullSafearea}`} style={{position: 'relative'}}>
                 <div>
                     <div className={`${styles.col12} ${styles.px0} ${styles.textCenter} ${styles.mobileOnly}`}>
-                        <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.mb3}`} style={{width: '100%'}} />
+                        <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.mb3}`} style={{width: '80%'}} />
                     </div>
                     <p className={`${styles.font2022} ${styles.fontBold}`} style={{lineHeight: 1.5}}>
                         {context.t(`The easiest way to create your mobile studio`)}
@@ -20,13 +21,18 @@ const AdminHome = (props, context) => (
                         {context.t("Connect with your instagram")}
                     </p>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.containerHalfBtn}`}>
-                        <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.my4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignUp}>
+                        <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignUp}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Get started")}</p>
                         </div>
-                        <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.my4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignIn}>
+                        <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignIn}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Login")}</p>
                         </div>
                     </div>
+                    <a href={`${FETCH_URL}/api/common/proposal/?name=NewYork`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.white}`}>
+                        <div className={`${styles.widthFull} ${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}}>
+                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Download Partnership Proposal")}</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -50,6 +56,11 @@ const AdminHome = (props, context) => (
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Login")}</p>
                         </div>
                     </div>
+                    <a href={`${FETCH_URL}/api/common/proposal/?name=NewYork`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.white}`}>
+                        <div className={`${styles.containerHalfBtn} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgPink} ${styles.btn} ${styles.mt3}`} style={{height: 48}}>
+                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Download Partnership Proposal")}</p>
+                        </div>
+                    </a>
                 </div>
                 <div className={`${styles.colMd4} ${styles.colLg6} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd} ${styles.px0} ${styles.textCenter}`}>
                     <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.adminMainImage}`} />

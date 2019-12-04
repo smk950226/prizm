@@ -5,4 +5,5 @@ app_name = "common"
 urlpatterns = [
     path('exchange/rate/', views.ExchangeRate.as_view()),
     path('terms/', views.Terms.as_view()),
+    path('proposal/', views.Proposal.as_view()),
 ]

@@ -78,10 +78,14 @@ class ReviewList extends Component{
                                 {`${reviewCount} ${this.context.t("client reviews")}`}
                             </p>
                         </div>
-                        {reviews && reviews.length > 0 && (
+                        {reviews && reviews.length > 0 ? (
                             reviews.map((review, index) => (
                                 <Review key={index} review={review} index={index} totalLength={reviews.length} />
                             ))
+                        ) : (
+                            <div className={`${styles.pt5}`}>
+                                <p className={`${styles.font1214} ${styles.textCenter}`}>{this.context.t("There aren't any reviews for the photographer yet!")}</p>
+                            </div>
                         )}
                     </div>
                 )}

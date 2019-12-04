@@ -12,3 +12,9 @@ class ExchangeRateAdmin(admin.ModelAdmin):
 class TermsAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
     list_display_links = ['id', 'name']
+
+
+@admin.register(models.Proposal)
+class ProposalAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+    list_display_links = ['id', 'name']

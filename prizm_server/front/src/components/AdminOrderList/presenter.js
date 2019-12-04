@@ -38,7 +38,7 @@ const AdminOrderList = (props, context) => (
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4}`}>
                             <ProfileDiv image={props.photographer.profile_image} />
                             <div className={`${styles.ml3}`}>
-                                <p className={`${styles.fontBold} ${styles.font2024}`}>{props.photographer.nickname}<span className={`${styles.ml3} ${styles.fontBold} ${styles.font1113} ${styles.pink} ${styles.cursorPointer}`} onClick={props.goStudioSetting}>{context.t("Edit Your Studio")}</span></p>
+                                <p className={`${styles.fontBold} ${styles.font2024}`}>{props.photographer.nickname}<span className={`${styles.ml3} ${styles.fontBold} ${styles.font1113} ${styles.pink} ${styles.cursorPointer}`} onClick={props.goStudioSetting}>{context.t("Edit Studio")}</span></p>
                                 <a href={`https://prizm.cloud/${props.photographer.studio_id}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${props.photographer.studio_id}`}</a>
                             </div>
                         </div>
@@ -121,7 +121,7 @@ const AdminOrderList = (props, context) => (
                 </div>
                 <div className={`${styles.containerAdminToolbox} ${styles.mobileNone} ${styles.bgGrayF8} ${styles.minHeightFull}`} style={{display: 'block'}}>
                     <div className={`${styles.px3} ${styles.mobileNone}`} style={{marginTop: 100}}>
-                        <p className={`${styles.fontBold} ${styles.font1620} ${styles.mb4}`}>{context.t("Tourist Photo")}</p>
+                        <p className={`${styles.fontBold} ${styles.font1620} ${styles.mb4}`}>{context.t("Tourist Photos")}</p>
                         {props.orderList.map((order, index) => {
                             if((order.status === 'confirmed') || (order.status === 'completed')){
                                 return(

@@ -37,10 +37,10 @@ class ProfileMenu extends Component{
         }
         return(
             <div className={`${styles.safearea} ${styles.containerCustomer}`}>
-                <p className={`${styles.fontBold} ${styles.font20} ${styles.px3}`} style={(isLoggedIn && (notification) && (showNotification.id > 0)) ? {marginTop: 30} : {marginTop: 80}}>{isLoggedIn ? profile ? profile.name : this.context.t("Sign In to view your profile") : this.context.t("Sign In to view your profile")}</p>
+                <p className={`${styles.fontBold} ${styles.font20} ${styles.px3} ${styles.mt45}`}>{isLoggedIn ? profile ? profile.name : this.context.t("Sign In to view your profile") : this.context.t("Sign In to view your profile")}</p>
                 {isLoggedIn ? (
                     <Fragment>
-                        <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.mt5} ${styles.cursorPointer}`} onClick={this.props.goProfile}>
+                        <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.mt45} ${styles.cursorPointer}`} onClick={this.props.goProfile}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.px3}`}>{this.context.t("Profile")}</p>
                         </div>
                         <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>

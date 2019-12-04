@@ -32,11 +32,11 @@ const AdminMenu = (props, context) => (
             </div>
         </div>
         <div>
-            <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}} onClick={props.goStudioSetting}>{context.t("Edit Your Studio")}</p>
+            <p className={`${styles.fontBold} ${styles.font1620} ${styles.pink} ${styles.cursorPointer}`} style={{marginTop: 100}} onClick={props.goStudioSetting}>{context.t("Edit Studio")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt45}`} onClick={props.goReservation}>{context.t("Manage Reservations")}</p>
-            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={props.goTouristPhoto}>{context.t("Tourist Photo")}</p>
-            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`} onClick={props.goProfile}>{context.t("Profile Setting")}</p>
-            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={props.goAccount}>{context.t("Account Setting")}</p>
+            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={props.goTouristPhoto}>{context.t("Tourist Photos")}</p>
+            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt5}`} onClick={props.goProfile}>{context.t("Profile Settings")}</p>
+            <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={props.goAccount}>{context.t("Account Settings")}</p>
             <p className={`${styles.fontBold} ${styles.font1620} ${styles.cursorPointer} ${styles.mt3}`} onClick={props.logout}>{context.t("Log out")}</p>
         </div>
     </div>

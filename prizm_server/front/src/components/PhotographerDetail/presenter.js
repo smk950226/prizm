@@ -335,10 +335,10 @@ class PhotographerDetail extends Component{
                                     </div>
                                     </Collapse>
                                 </div>
-                                <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={this.props.goHome}>
-                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("Find other photogrpahes in New York")}</p>
+                                {/* <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={this.props.goHome}>
+                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("Find other photographers in New York")}</p>
                                     <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Find More")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} />
-                                </div>
+                                </div> */}
                             </Fragment>
                         ) : (
                             <Fragment>
@@ -438,7 +438,8 @@ class PhotographerDetail extends Component{
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>{this.context.t("Your request was submitted successfully")}</p>
                                 <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
                                     {this.context.t(`${photographer.nickname} is now reviewing your request.`)}<br/>
-                                    {this.context.t(`We will soon send you a confirmation message to your email and mobile number `)}
+                                    {this.context.t(`We will soon send you a confirmation message`)}<br/>
+                                    {this.context.t(`to your email and mobile number.`)}
                                 </p>
                                 <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go to the main page")}</p>

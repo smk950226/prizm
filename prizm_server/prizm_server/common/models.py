@@ -27,3 +27,16 @@ class Terms(models.Model):
         ordering = ['-id']
         verbose_name = _('Terms')
         verbose_name_plural = _('Terms')
+
+
+class Proposal(models.Model):
+    name = models.CharField(_('Proposal Name'), max_length = 255)
+    file = models.FileField(_('File'), upload_to = 'proposal/')
+
+    def __str__(self):
+        return 'Proposal-'+ self.name
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Proposal')
+        verbose_name_plural = _('Proposal')

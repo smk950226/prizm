@@ -21,10 +21,10 @@ const MyPhotos = (props, context) => (
             ) : (
                 props.images && props.images.length > 0 ? (
                     <a target={'_blank'} href={`${FETCH_URL}/api/studio/zip/${props.images[0].order}/`} className={`${styles.pink} ${styles.textDecorationNone} ${styles.font1316}`}>
-                        <p className={`${styles.mt3} ${styles.font1316} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer} ${props.images && props.images.length > 0 ? null : styles.hidden}`}>{context.t("Download Original File")}</p>
+                        <p className={`${styles.mt3} ${styles.font1316} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer} ${props.images && props.images.length > 0 ? null : styles.hidden}`}>{context.t("Files below are optimized for mobile uses. Original files have been sent to your email.")}</p>
                     </a>
                 ) : (
-                    <p className={`${styles.mt3} ${styles.font1316} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer} ${props.images && props.images.length > 0 ? null : styles.hidden}`}>{context.t("Download Original File")}</p>
+                    <p className={`${styles.mt3} ${styles.font1316} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer} ${props.images && props.images.length > 0 ? null : styles.hidden}`}>{context.t("Files below are optimized for mobile uses. Original files have been sent to your email.")}</p>
                 )
             )}
             {props.images && props.images.length > 0 && (
