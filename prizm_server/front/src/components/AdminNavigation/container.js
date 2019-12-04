@@ -20,7 +20,8 @@ class Container extends Component{
         goTouristPhoto: PropTypes.func.isRequired,
         goStudioSetting: PropTypes.func.isRequired,
         goProfile: PropTypes.func.isRequired,
-        goAccount: PropTypes.func.isRequired
+        goAccount: PropTypes.func.isRequired,
+        goMessage: PropTypes.func.isRequired
     }
 
     state = {
@@ -70,6 +71,10 @@ class Container extends Component{
             showMenu: state.isOpen
         })
     }
+    _logout = () => {
+        this.props.logout()
+        this.props.goHome()
+    }
 
     render(){
         return(
@@ -79,6 +84,7 @@ class Container extends Component{
             openMenu={this._openMenu}
             closeMenu={this._closeMenu}
             handleShowMenu={this._handleShowMenu}
+            logout={this._logout}
             />
         )
     }

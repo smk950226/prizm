@@ -47,7 +47,9 @@ class AdminNavigation extends Component{
         goStudioSetting: PropTypes.func.isRequired,
         goProfile: PropTypes.func.isRequired,
         goAccount: PropTypes.func.isRequired,
-        showNav: PropTypes.bool.isRequired
+        showNav: PropTypes.bool.isRequired,
+        logout: PropTypes.func.isRequired,
+        goMessage: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -59,7 +61,7 @@ class AdminNavigation extends Component{
         return(
             <Fragment>
             {!showMobile && !showLocationModal && !showOptionModal && showNav && (
-                <div className={`${styles.positionNav} ${styles.containerAdmin} ${styles.pxAdmin2}`} style={{zIndex: 2}}>
+                <div className={`${styles.positionNav} ${styles.containerAdmin} ${styles.pxAdmin2} ${styles.bgWhite}`} style={{zIndex: 2}}>
                     <div className={`${styles.mobileOnly}`}>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.py4} ${styles.bgWhite}`}>
                             <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
@@ -78,10 +80,16 @@ class AdminNavigation extends Component{
                         </div>
                     </div>
                     <div className={`${styles.mobileNone}`}>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.containerAdminStudioSide} ${styles.bgWhite}`}>
-                            <div className={`${styles.containerAdminToolboxSide} ${styles.py4}`}>
-                                <div className={``}>
-                                    <p className={`${styles.fontBold} ${styles.font171315} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.bgWhite}`}>
+                            <div className={`${styles.py4}`}>
+                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.widthFull}`}>
+                                    <p className={`${styles.fontBold} ${styles.font171315} ${styles.cursorPointer} ${styles.mr3} ${styles.mrLg5}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${styles.mlLg5} ${pathname === '/studio/edit/' ? styles.pink : null}`} onClick={this.props.goStudioSetting}>{this.context.t("Edit Studio")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname === '/reservation/' ? styles.pink : null}`} onClick={this.props.goReservation}>{this.context.t("Manage Reservations")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname.indexOf('/message/') > -1 ? styles.pink : null}`} onClick={this.props.goMessage}>{this.context.t("Messages")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname === '/profile/' ? styles.pink : null}`} onClick={this.props.goProfile}>{this.context.t("Profile")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname === '/profile/account/' ? styles.pink : null}`} onClick={this.props.goAccount}>{this.context.t("Payout")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3}`} onClick={this.props.logout}>{this.context.t("Logout")}</p>
                                 </div>
                             </div>
                         </div>

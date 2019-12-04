@@ -1101,6 +1101,12 @@ textarea {
 .container-my-photo{
     width: calc((100% - 2rem) / 3);
 }
+.container-msg-room-list{
+    width: 300px;
+}
+.container-msg{
+    width: calc(100% - 300px);
+}
 @media (min-width: 768px){
     .container-portfolio-lg{
         height: 300px;
