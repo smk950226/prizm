@@ -22,7 +22,6 @@ const NotFound = (props, context) => (
 )
 
 NotFound.propTypes = {
-    studioId: PropTypes.string.isRequired,
     goHome: PropTypes.func.isRequired
 }
 

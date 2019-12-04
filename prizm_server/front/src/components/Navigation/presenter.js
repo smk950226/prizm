@@ -46,7 +46,7 @@ class Navigation extends Component{
         if(showNav){
             return(
                 <Fragment>
-                <div className={`${styles.positionNav} ${styles.widthFull} ${styles.py4} ${styles.bgWhite} ${styles.px3}`} style={{zIndex: 2}}>
+                <div className={`${styles.positionNav} ${styles.widthFull} ${styles.py45} ${styles.bgWhite} ${styles.px3}`} style={{zIndex: 2}}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <img src={require('../../assets/images/icon_menu.png')} alt={this.context.t("MENU")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={openMenu} />
@@ -56,7 +56,10 @@ class Navigation extends Component{
                         </div>
                     </div>
                     <div className={`${styles.widthFull} ${styles.positionNavDescription}`}>
-                        <p className={`${styles.textCenter} ${styles.font10}`}>{this.context.t("a whole new photography experience")}</p>
+                        <p className={`${styles.textCenter} ${styles.font10}`}>
+                            {this.context.t("Meet the best photographers in New York")}<br/>
+                            {this.context.t("Enrich your trip with photography")}
+                        </p>
                     </div>
                 </div>
                 <Slide 

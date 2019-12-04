@@ -50,7 +50,7 @@ class Container extends Component{
             isSubmitting: false,
             redatingMsgId: -1
         }
-
+        console.log(111)
         this.initialize(chatId,id)
     }
 

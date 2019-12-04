@@ -223,13 +223,13 @@ class AdminMessageDetail extends Component{
     }
 
     render(){
-        const { loading, messages, nickname, profileImage, text, profile, showMap, order, redating } = this.props;
+        const { loading, messages, profileImage, text, profile, showMap, order, redating } = this.props;
         const { availableFrom, availableTo, loadingDay, availableTime, timeList, dayList, selectedTime } = this.state;
         return(
             <Fragment>
-            <div className={`${styles.widthFull} ${styles.containerCustomer} ${styles.bgGrayF2} ${styles.minHeightFull}`}>
+            <div className={`${styles.widthFull} ${styles.containerAdmin} ${styles.bgGrayF2} ${styles.minHeightFull}`}>
                 <div className={`${styles.bgWhite} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.px3}`} style={{zIndex: 2, position: 'fixed', top: 0, left: 0, right: 0}}>
-                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py4} ${styles.px3} ${styles.bgWhite} ${styles.widthFull} ${styles.containerCustomer}`}>
+                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py4} ${styles.px3} ${styles.bgWhite} ${styles.widthFull} ${styles.containerAdmin}`}>
                         <div className={`${styles.col1} ${styles.px0}`}>
                             <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Detail")} className={`${styles.iconArrowRight} ${styles.cursorPointer}`} onClick={this.props.goBack} />
                         </div>
@@ -381,7 +381,7 @@ class AdminMessageDetail extends Component{
                 </div>
             )}
             <div className={`${styles.bgWhite} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`} style={{position: 'fixed', bottom: 0, height: 50, marginLeft: 'auto', marginRight: 'auto'}}>
-                <div className={`${styles.bgWhite} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.px3} ${styles.containerCustomer} ${styles.widthFull}`}>
+                <div className={`${styles.bgWhite} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.px3} ${styles.containerAdmin} ${styles.widthFull}`}>
                     <TextareaAutosize readOnly={((order.status === 'cancelled') || (order.status === 'pending') || (order.status === 'completed')) ? true : redating} maxRows={3} className={`${styles.textInput10}`} type={"text"} name={"text"} value={text} placeholder={this.context.t("message")} onChange={this.props.handleInputChange} onKeyPress={this.props.handleKeyPress} />
                     <img src={require('../../assets/images/icon_send.png')} alt={this.context.t("Send")} style={{width: 40, height: 40}} onClick={this.props.send} />
                 </div>
