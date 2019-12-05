@@ -53,7 +53,12 @@ class AdminMessageList extends Component{
                                 <div key={index} className={`${index === chatList.length - 1 ? null : styles.borderBtmGrayDc} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={(chat.order.status !== 'cancelled') ? () => this.props.goMessageDetail(chat.id, chat.order) : null}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.col11} ${styles.px0}`}>
                                         <div className={``}>
-                                            <p className={`${styles.fontBold} ${styles.font1416}`}>{chat.order.user.name}</p>
+                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                                <p className={`${styles.fontBold} ${styles.font1416}`}>{chat.order.user.name}</p>
+                                                {chat.exist_new_message && (
+                                                    <div className={`${styles.circle8} ${styles.bgRed} ${styles.ml2} ${styles.mb1}`} />
+                                                )}
+                                            </div>
                                             {chat.order.status === 'pending' && (
                                                 <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt2} ${styles.pending}`}>{this.context.t(`Pending  (${chat.order.date_option === 'Specific' ? `${chat.order.specific_date.slice(2,4)}/${chat.order.specific_date.slice(5,7)}/${chat.order.specific_date.slice(8,10)}` : `${chat.order.start_date.slice(2,4)}/${chat.order.start_date.slice(5,7)}/${chat.order.start_date.slice(8,10)}`})`)}</p>
                                             )}

@@ -13,7 +13,8 @@ class Container extends Component{
         getChatList: PropTypes.func.isRequired,
         getChatListMore: PropTypes.func.isRequired,
         chatList: PropTypes.array,
-        goMessageDetail: PropTypes.func.isRequired
+        goMessageDetail: PropTypes.func.isRequired,
+        getCheckNewMessage: PropTypes.func.isRequired
     }
 
     constructor(props){
@@ -105,6 +106,34 @@ class Container extends Component{
             }
         }
     }
+
+    // _refreshChat = (chatId, exist_new_message) => {
+    //     const { chatList } = this.state;
+    //     const { getCheckNewMessage } = this.props;
+    //     let newChatList = []
+    //     let newChatroomCount = false
+    //     chatList.map(chat => {
+    //         if(chat.id === chatId){
+    //             newChatList.push({
+    //                 ...chat,
+    //                 exist_new_message
+    //             })
+    //             if(exist_new_message){
+    //                 newChatroomCount = true
+    //             }
+    //         }
+    //         else{
+    //             newChatList.push(chat)
+    //             if(chat.exist_new_message){
+    //                 newChatroomCount = true
+    //             }
+    //         }
+    //     })
+    //     this.setState({
+    //         chatList: newChatList
+    //     })
+    //     getCheckNewMessage(newChatroomCount)
+    // }
 
     render(){
         const { chatList } = this.state;

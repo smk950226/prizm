@@ -11,7 +11,8 @@ class Container extends Component{
         orderList: PropTypes.array,
         initAdmin: PropTypes.func.isRequired,
         photographer: PropTypes.any,
-        chatList: PropTypes.array
+        chatList: PropTypes.array,
+        newMessage: PropTypes.bool
     }
 
     state = {
@@ -41,7 +42,6 @@ class Container extends Component{
 
     _handleScroll = async() => {
         const { lastScrollTop, delta, showBtmNav } = this.state;
-        const { show_nav_btm, handleNavBtm, bottom, bottomReached, bottomReachedCancel } = this.props;
         var st = window.pageYOffset;
         if (Math.abs(lastScrollTop - st) <= delta) return;
         if ((st > lastScrollTop) && (lastScrollTop > 0)) {

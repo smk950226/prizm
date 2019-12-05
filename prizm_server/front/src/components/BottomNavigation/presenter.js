@@ -11,7 +11,8 @@ class Navigation extends Component{
         goMySchedule: PropTypes.func.isRequired,
         goProfileMenu: PropTypes.func.isRequired,
         goMessage: PropTypes.func.isRequired,
-        showNav: PropTypes.bool.isRequired
+        showNav: PropTypes.bool.isRequired,
+        newMessage: PropTypes.bool
     }
 
     static contextTypes = {
@@ -19,7 +20,7 @@ class Navigation extends Component{
     }
 
     render(){
-        const { showNav, showBtmNav } = this.props;
+        const { showNav, showBtmNav, newMessage } = this.props;
         if(showNav){
             return(
                 <Fragment>
@@ -33,9 +34,12 @@ class Navigation extends Component{
                                 <img src={require('../../assets/images/icon_reservation.png')} alt={this.context.t("RESERVATION")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goMySchedule} />
                                 <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>{this.context.t("Reservations")}</p>
                             </div>
-                            <div className={`${styles.textCenter}`}>
+                            <div className={`${styles.textCenter}`} style={{position: 'relative'}}>
                                 <img src={require('../../assets/images/icon_message.png')} alt={this.context.t("MESSAGE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goMessage} />
                                 <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`}>{this.context.t("Messages")}</p>
+                                {newMessage && (
+                                    <div className={`${styles.circle8} ${styles.bgRed}`} style={{position: 'absolute', top: 2, right: 8}} />
+                                )}
                             </div>
                             <div className={`${styles.textCenter}`}>
                                 <img src={require('../../assets/images/icon_profile.png')} alt={this.context.t("PROFILE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu} />

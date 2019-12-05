@@ -9,7 +9,8 @@ class Container extends Component{
         showBtmNav: PropTypes.bool.isRequired,
         goMySchedule: PropTypes.func.isRequired,
         goProfileMenu: PropTypes.func.isRequired,
-        goMessage: PropTypes.func.isRequired
+        goMessage: PropTypes.func.isRequired,
+        newMessage: PropTypes.bool
     }
 
     constructor(props){

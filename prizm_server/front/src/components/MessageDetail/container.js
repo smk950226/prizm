@@ -48,7 +48,8 @@ class Container extends Component{
             showMap: false,
             redating: false,
             isSubmitting: false,
-            redatingMsgId: -1
+            redatingMsgId: -1,
+            refreshChat: props.location.state ? props.location.state.refreshChat ? props.location.state.refreshChat : null : null
         }
 
         this.initialize(chatId,id)
@@ -71,13 +72,17 @@ class Container extends Component{
         )
     }
 
-    setMessages(messages, redating, redatingMsgId){
+    setMessages(messages, redating, redatingMsgId, existNewMessage){
         this.setState({
             messages: messages.reverse(),
             loading: false,
             redating,
-            redatingMsgId
+            redatingMsgId,
+            existNewMessage
         })
+        if(this.state.refreshChat){
+            this.state.refreshChat(existNewMessage)
+        }
     }
 
     addMessage(message){
@@ -87,7 +92,7 @@ class Container extends Component{
         })
     }
 
-    moreMessage(messages, hasNextPage, redating, redatingMsgId){
+    moreMessage(messages, hasNextPage, redating, redatingMsgId, existNewMessage){
         if(hasNextPage){
             this.setState({
                 messages: [...messages.reverse(), ...this.state.messages],
@@ -95,7 +100,8 @@ class Container extends Component{
                 page: this.state.page + 1,
                 hasNextPage,
                 redating,
-                redatingMsgId
+                redatingMsgId,
+                existNewMessage
             })
         }
         else{
@@ -103,10 +109,13 @@ class Container extends Component{
                 messages: [...messages.reverse(), ...this.state.messages],
                 isLoadingMore: false,
                 hasNextPage,
-                redatingMsgId
+                redatingMsgId,
+                existNewMessage
             })
         }
-        
+        if(this.state.refreshChat){
+            this.state.refreshChat(existNewMessage)
+        }
     }
 
     _handleAdded = () => {
@@ -151,7 +160,7 @@ class Container extends Component{
                 this.setState({
                     isLoadingMore: true
                 })
-                WebSocketInstance.moreMessages(chatId, page);
+                WebSocketInstance.moreMessages(chatId, this.props.profile.id, page);
             }
         }
     }

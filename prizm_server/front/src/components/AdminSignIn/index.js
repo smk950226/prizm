@@ -37,6 +37,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getPhotographerByToken: (token) => {
             dispatch(adminAction.getPhotographerByToken(token))
+        },
+        checkMessageByToken: (token) => {
+            dispatch(userAction.checkMessageByToken(token))
         }
     }
 }

@@ -151,7 +151,7 @@ class Container extends Component{
                 this.setState({
                     isLoadingMore: true
                 })
-                WebSocketInstance.moreMessages(chatId, page);
+                WebSocketInstance.moreMessages(chatId, this.props.profile.id, page);
             }
         }
     }

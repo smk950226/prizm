@@ -52,7 +52,7 @@ class ProfileMenu extends Component{
                         <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.px3}`}>{this.context.t("My Schedule")}</p>
                         </div>
-                        {(isLoggedIn && (notification) && (showNotification.id > 0)) && (
+                        {(isLoggedIn && (notification) && (showNotification) && (showNotification.id > 0)) && (
                             <div className={`${styles.bgPink} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                                 {confirmNotification > 0 && (
                                     <div className={`${styles.py3} ${styles.px3}`}>

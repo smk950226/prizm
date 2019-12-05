@@ -10,7 +10,7 @@ class ChatBasicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Chat
-        fields = ['id', 'users', 'order', 'created_at']
+        fields = ['id', 'users', 'order', 'created_at', 'exist_new_message']
 
 
 class ChatMessageSerializer(serializers.ModelSerializer):
@@ -35,4 +35,4 @@ class ChatListSerializer(serializers.ModelSerializer):
     order = studio_serializers.OrderSerializer()
     class Meta:
         model = models.Chat
-        fields = ['id', 'users', 'order', 'created_at']
+        fields = ['id', 'users', 'order', 'created_at', 'exist_new_message']

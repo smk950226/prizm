@@ -48,6 +48,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getOrderListByToken: (token) => {
             dispatch(userAction.getOrderListByToken(token))
+        },
+        checkMessageByToken: (token) => {
+            dispatch(userAction.checkMessageByToken(token))
         }
     }
 }

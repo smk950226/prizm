@@ -14,6 +14,14 @@ class Chat(models.Model):
         verbose_name = _('Chat')
         verbose_name_plural = _('Chat')
 
+    @property
+    def exist_new_message(self):
+        check = self.messages.filter(is_viewed = False)
+        if check.count() > 0:
+            return True
+        else:
+            return False
+
 
 class ChatMessage(models.Model):
     chat = models.ForeignKey(Chat, on_delete = models.CASCADE, related_name = 'messages')
@@ -29,6 +37,7 @@ class ChatMessage(models.Model):
     ))
     created_at = models.DateTimeField(auto_now_add = True)
     responded = models.BooleanField(_("Re Dating Responded"), default = False)
+    is_viewed = models.BooleanField(_("Is Viewed"), default = False)
 
     def __str__(self):
         return 'message: ' + self.from_user.name + ' -> ' + self.to_user.name

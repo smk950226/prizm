@@ -8,6 +8,7 @@ const SET_PROFILE = 'SET_PROFILE';
 const SET_NOTIFICATION = 'SET_NOTIFICATION';
 const SET_ORDER_LIST = 'SET_ORDER_LIST';
 const SET_CHAT_LIST = 'SET_CHAT_LIST';
+const SET_CHECK_NEW_MESSAGE = 'SET_CHECK_NEW_MESSAGE';
 
 function saveToken(token) {
     return {
@@ -50,6 +51,13 @@ function setChatList(chatList){
     }
 }
 
+function setCheckNewMessage(newMessage){
+    return {
+        type: SET_CHECK_NEW_MESSAGE,
+        newMessage
+    }
+}
+
 function getSaveToken(token){
     return (dispatch) => {
         dispatch(saveToken(token))
@@ -59,6 +67,12 @@ function getSaveToken(token){
 function getLogout(){
     return (dispatch) => {
         dispatch(logout());
+    }
+}
+
+function getCheckNewMessage(newMessage){
+    return (dispatch) => {
+        dispatch(getCheckNewMessage(newMessage))
     }
 }
 
@@ -550,6 +564,49 @@ function checkNotification(){
     }
 }
 
+function checkMessage(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`${FETCH_URL}/api/chat/check/message/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setCheckNewMessage(json)))
+    }
+}
+
+function checkMessageByToken(token){
+    return (dispatch) => {
+        fetch(`${FETCH_URL}/api/chat/check/message/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setCheckNewMessage(json)))
+    }
+}
+
 const initialState = {
     isLoggedIn: localStorage.getItem('jwt') ? true : false,
     token: localStorage.getItem('jwt')
@@ -569,6 +626,8 @@ function reducer(state = initialState, action){
             return applySetOrderList(state, action);
         case SET_CHAT_LIST:
             return applySetChatList(state, action);
+        case SET_CHECK_NEW_MESSAGE:
+            return applySetCheckNewMessage(state, action);
         default:
            return state;
     }
@@ -624,6 +683,14 @@ function applySetChatList(state, action){
     }
 }
 
+function applySetCheckNewMessage(state, action){
+    const { newMessage } = action;
+    return {
+        ...state,
+        newMessage
+    }
+}
+
 const actionCreators = {
     checkDuplicate,
     signUp,
@@ -647,7 +714,10 @@ const actionCreators = {
     getMessages,
     getMessagesMore,
     getTerm,
-    checkNotification
+    checkNotification,
+    checkMessage,
+    checkMessageByToken,
+    getCheckNewMessage
 }
 
 export { actionCreators }

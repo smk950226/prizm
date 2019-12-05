@@ -12,22 +12,34 @@ class ChatConsumer(WebsocketConsumer):
         from_user = data['fromUser']
 
         messages = models.ChatMessage.objects.filter(chat__id = chat_id).order_by('-created_at')[:30]
-
         redating = False
         redating_msg_id = -1
         for msg in messages:
+            msg.is_viewed = True
+            msg.save()
             if (msg.message_type == 'order_redating') and msg.responded == False:
                 if msg.chat.order.photographer.user.id != from_user:
                     redating = True
                     redating_msg_id = msg.id
-        
-        content = {
-            'command': 'messages',
-            'messages': self.messages_to_json(messages),
-            'redating': redating,
-            'redating_msg_id': redating_msg_id,
-        }
-        self.send_message(content)
+        check = models.ChatMessage.objects.filter(to_user__id = from_user, chat__id = chat_id, is_viewed = False)
+        if check.count() > 0:
+            content = {
+                'command': 'messages',
+                'messages': self.messages_to_json(messages),
+                'exist_new_message': True,
+                'redating': redating,
+                'redating_msg_id': redating_msg_id,
+            }
+            self.send_message(content)
+        else:
+            content = {
+                'command': 'messages',
+                'messages': self.messages_to_json(messages),
+                'exist_new_message': False,
+                'redating': redating,
+                'redating_msg_id': redating_msg_id,
+            }
+            self.send_message(content)
     
     def new_message(self, data):
         author = data['from_user']
@@ -58,6 +70,7 @@ class ChatConsumer(WebsocketConsumer):
     def more_messages(self, data):
         page = int(data['page'])
         chat_id = data['chatId']
+        from_user = data['fromUser']
         total = models.ChatMessage.objects.filter(chat__id = chat_id).order_by('-created_at')
         count = total.count()
         if page*30 > count:
@@ -65,33 +78,64 @@ class ChatConsumer(WebsocketConsumer):
             redating = False
             redating_msg_id = -1
             for msg in messages:
+                msg.is_viewed = True
+                msg.save()
                 if (msg.message_type == 'order_redating') and msg.responded == False:
                     redating = True
                     redating_msg_id = msg.id
-            content = {
-                'command': 'more_messages',
-                'messages': self.messages_to_json(messages),
-                'has_next_page': False,
-                'redating': redating,
-                'redating_msg_id': redating_msg_id,
-            }
-            self.send_message(content)
+            check = models.ChatMessage.objects.filter(to_user__id = from_user, chat__id = chat_id, is_viewed = False)
+            if check.count() > 0:
+                content = {
+                    'command': 'more_messages',
+                    'messages': self.messages_to_json(messages),
+                    'exist_new_message': True,
+                    'has_next_page': False,
+                    'redating': redating,
+                    'redating_msg_id': redating_msg_id,
+                }
+                self.send_message(content)
+            else:
+                content = {
+                    'command': 'more_messages',
+                    'messages': self.messages_to_json(messages),
+                    'exist_new_message': False,
+                    'has_next_page': False,
+                    'redating': redating,
+                    'redating_msg_id': redating_msg_id,
+                }
+                self.send_message(content)
+
         else:
             messages = total[(page-1)*30:page*30]
             redating = False
             redating_msg_id = -1
             for msg in messages:
+                msg.is_viewed = True
+                msg.save()
                 if (msg.message_type == 'order_redating') and msg.responded == False:
                     redating = True
                     redating_msg_id = msg.id
-            content = {
-                'command': 'more_messages',
-                'messages': self.messages_to_json(messages),
-                'has_next_page': True,
-                'redating': redating,
-                'redating_msg_id': redating_msg_id,
-            }
-            self.send_message(content)
+            check = models.ChatMessage.objects.filter(to_user__id = from_user, chat__id = chat_id, is_viewed = False)
+            if check.count() > 0:
+                content = {
+                    'command': 'more_messages',
+                    'messages': self.messages_to_json(messages),
+                    'exist_new_message': True,
+                    'has_next_page': True,
+                    'redating': redating,
+                    'redating_msg_id': redating_msg_id,
+                }
+                self.send_message(content)
+            else:
+                content = {
+                    'command': 'more_messages',
+                    'messages': self.messages_to_json(messages),
+                    'exist_new_message': False,
+                    'has_next_page': True,
+                    'redating': redating,
+                    'redating_msg_id': redating_msg_id,
+                }
+                self.send_message(content)
 
     def messages_to_json(self, messages):
         result = []

@@ -30,6 +30,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     order
                 }
             }))
+        },
+        getCheckNewMessage: (newMessage) => {
+            dispatch(userAction.getCheckNewMessage(newMessage))
         }
     }
 }
