@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils import timezone
 from . import models
+from django.utils.safestring import mark_safe
 
 @admin.register(models.PhotographerAccount)
 class PhotographerAccountAdmin(admin.ModelAdmin):

@@ -296,6 +296,34 @@ function pay(meta, orderId){
     }
 }
 
+function paymentSuccess(impUid, merchantUid, impSuccess){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/payment/success/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                impUid,
+                merchantUid,
+                impSuccess
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.getLogout());
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 function getExchangeRate(country){
     return (dispatch, getState) => {
         const { user : { token } } = getState()
@@ -451,7 +479,8 @@ const actionCreators = {
     getExchangeRate,
     getReviewList,
     getReviewListMore,
-    createReview
+    createReview,
+    paymentSuccess
 }
 
 export { actionCreators }

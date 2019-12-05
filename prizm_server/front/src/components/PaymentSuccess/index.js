@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Container from './container';
+import { actionCreators as customerAction } from '../../redux/modules/customer';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,6 +14,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return{
         goHome: () => {
             dispatch(push('/'))
+        },
+        paymentSuccess: (impUid, merchantUid, impSuccess) => {
+            return dispatch(customerAction.paymentSuccess(impUid, merchantUid, impSuccess))
         }
     }
 }

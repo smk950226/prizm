@@ -47,6 +47,7 @@ django-imagekit = "*"
 daphne = "*"
 jsonfield = "*"
 django-ckeditor = "*"
+iamport-rest-client = "*"
 
 [requires]
 python_version = "3.7"

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PaymentDetail from './presenter';
-import uuidv4 from 'uuid/v4';
 import { FETCH_URL } from '../../config/urls';
 
 class Container extends Component{
@@ -271,7 +270,7 @@ class Container extends Component{
                             else{
                                 const check = await checkPrice(order.id, price)
                                 if(check.status === 'ok'){
-                                    const merchant_uid = uuidv4()
+                                    const merchant_uid = check.merchant_uid.merchant_uid
                                     const IMP = window.IMP;
                                     IMP.init('imp03236970');
                                     IMP.request_pay({

@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.utils.translation import ugettext_lazy as _
+from iamport import Iamport
+from django.conf import settings
+from uuid import uuid4
 
 from . import serializers, models
 from prizm_server.common.permissions import AdminAuthenticated
@@ -76,7 +79,6 @@ class Deposit(APIView):
                     return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('요청자와 로그인한 유저가 일치하지 않습니다.')})
             except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
-            
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in the payout information to complete the payment')})
 
@@ -118,19 +120,46 @@ class CheckPrice(APIView):
                         exchange_rate = common_models.ExchangeRate.objects.get(country = 'KR')
                         confirm_price = (order.option.price + math.ceil(order.option.price*0.1))*exchange_rate.rate
                         if price == confirm_price:
-                            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                            payment = models.Payment.objects.create(
+                                user = user,
+                                order = order,
+                                price = price,
+                                merchant_uid = uuid4(),
+                                alert_status = 'required'
+                            )
+                            payment.save()
+                            serializer = serializers.MerchantUIDSerializer(payment)
+                            return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'merchant_uid': serializer.data})
                         else:
                             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
                     except:
                         confirm_price = (order.option.price + math.ceil(order.option.price*0.1))*1250
                         if price == confirm_price:
-                            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                            payment = models.Payment.objects.create(
+                                user = user,
+                                order = order,
+                                price = price,
+                                merchant_uid = uuid4(),
+                                alert_status = 'required'
+                            )
+                            payment.save()
+                            serializer = serializers.MerchantUIDSerializer(payment)
+                            return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'merchant_uid': serializer.data})
                         else:
                             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
                 else:
                     confirm_price = (order.option.price + math.ceil(order.option.price*0.1))
                     if price == confirm_price:
-                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                        payment = models.Payment.objects.create(
+                            user = user,
+                            order = order,
+                            price = price,
+                            merchant_uid = uuid4(),
+                            alert_status = 'required'
+                        )
+                        payment.save()
+                        serializer = serializers.MerchantUIDSerializer(payment)
+                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'merchant_uid': serializer.data})
                     else:
                         return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
             except:
@@ -147,13 +176,10 @@ class Payment(APIView):
         order_id = request.data.get('orderId', None)
 
         imp_uid = meta['imp_uid']
-        pay_method = meta['pay_method']
-        pay_type = meta['pg_provider']
 
         merchant_uid = meta['merchant_uid']
         success = meta['success']
         pay_status = meta['status']
-        paid_at = meta['paid_at']
         price = int(meta['paid_amount'])
         confirm_price = 0
         if user.country_number == '82' or user.country_code == 'KR':
@@ -200,3 +226,34 @@ class Payment(APIView):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request! Please contact to contact@prizm.cloud')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request! Please contact to contact@prizm.cloud')})
+
+
+class PaymentSucccessCallback(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format = None):
+        merchant_uid = request.data.get('merchantUid', None)
+        imp_uid = request.data.get('impUid', None)
+        imp_success = request.data.get('impSuccess', None)
+        if merchant_uid and imp_uid:
+            iamport = Iamport(settings.IAMPORT_API_KEY, settings.IAMPORT_API_SECRET)
+            meta = iamport.find(merchant_uid=merchant_uid)
+            payment = models.Payment.objects.get(merchant_uid = merchant_uid)
+            payment.meta = meta
+            payment.imp_uid = imp_uid
+
+            pay_status = meta['status']
+            if imp_success == 'true':
+                payment.status = 'paid'
+                payment.alert_status = 'confirmed'
+                payment.save()
+                order = payment.order
+                order.status = 'paid'
+                order.save()
+            else:
+                payment.status = pay_status
+                payment.alert_status = 'required'
+                payment.save()
+
+            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'Payment failed! Please contact to contact@prizm.cloud'})

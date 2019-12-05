@@ -7,3 +7,9 @@ class PhotographerAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PhotographerAccount
         fields = ['id', 'photographer', 'legal_name', 'birth', 'account_type', 'content']
+
+
+class MerchantUIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Payment
+        fields = ['merchant_uid']

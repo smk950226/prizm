@@ -766,7 +766,7 @@ class Container extends Component{
                                         this.setState({
                                             isSubmitting: true
                                         })
-                                        const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, update)
+                                        const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId.slice(10), update)
                                         if(result.status === 'ok'){
                                             await getPhotographer()
                                             if(update){
@@ -818,7 +818,7 @@ class Container extends Component{
                                     this.setState({
                                         isSubmitting: true
                                     })
-                                    const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, update)
+                                    const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId.slice(10), update)
                                     if(result.status === 'ok'){
                                         await getPhotographer()
                                         if(update){
