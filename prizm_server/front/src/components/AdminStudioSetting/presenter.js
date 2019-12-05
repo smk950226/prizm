@@ -425,7 +425,7 @@ const AdminSignUp = (props, context) => (
                                             </div>
                                         </div>
                                         <div className={`${styles.col3} ${styles.px0}`}>
-                                            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Price")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Price (USD, $)")}</p>
                                             <div className={`${styles.containerStudioInput}`}>
                                                 <input className={`${styles.textInput6}`} type={"text"} name={"optionPrice"} value={props.optionPrice} onChange={props.handleInputChange} />
                                             </div>
@@ -433,15 +433,16 @@ const AdminSignUp = (props, context) => (
                                         <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.completeAddOption}>
                                             <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Save")}</p>
                                         </div>
+                                        {props.showOptionPlus && (
+                                            <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.closeOptionPlus}>
+                                                <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Cancel")}</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </Fragment>
                         )}
-                        {props.showOptionPlus ? (
-                            <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.closeOptionPlus}>
-                                <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Cancel")}</p>
-                            </div>
-                        ) : (
+                        {!props.showOptionPlus && (
                             <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionPlus}>
                                 <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
                                 <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Create a new option")}</p>
@@ -471,7 +472,11 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in a desired URL for your PRIZM studio.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <InputMask mask={'prizm.com/********************'} maskChar={''} alwaysShowMask={false} value={props.studioId} onChange={props.handleInputChange}>
+                        <InputMask mask={'prizm.com/********************'} 
+                        formatChars={{
+                            '*': '[A-Za-z0-9!@#$()-_+=.,]'
+                        }}
+                        maskChar={''} alwaysShowMask={false} value={props.studioId} onChange={props.handleInputChange}>
                             {(inputProps) => <input {...inputProps} type={"text"} name={"studioId"} className={`${styles.textInput6}`} />}
                         </InputMask>
                     </div>
@@ -481,7 +486,11 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please confirm the studio URL.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <InputMask mask={'prizm.com/********************'} maskChar={''} alwaysShowMask={false} value={props.studioId2} onChange={props.handleInputChange}>
+                        <InputMask mask={'prizm.com/********************'} 
+                        formatChars={{
+                            '*': '[A-Za-z0-9!@#$()-_+=.,]'
+                        }}
+                        maskChar={''} alwaysShowMask={false} value={props.studioId2} onChange={props.handleInputChange}>
                             {(inputProps) => <input {...inputProps} type={"text"} name={"studioId2"} className={`${styles.textInput6}`} />}
                         </InputMask>
                     </div>
@@ -1023,7 +1032,7 @@ const AdminSignUp = (props, context) => (
                             </div>
                         </div>
                         <div className={`${styles.col3} ${styles.px0}`}>
-                            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Price")}</p>
+                            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Price (USD, $)")}</p>
                             <div className={`${styles.containerStudioInput}`}>
                                 <input className={`${styles.textInput6}`} type={"text"} name={"optionPrice"} value={props.optionPrice} onChange={props.handleInputChange} />
                             </div>

@@ -42,7 +42,7 @@ const AdminProfileSetting = (props, context) => (
                                 <img src={require('../../assets/images/icon_check.png')} alt={context.t("Paypal Account")} style={{width: 10, height: 10}} />
                             )}
                         </div>
-                        <p className={`${props.accountType === 'bank_account' ? styles.fontBold : null} ${styles.font1314} ${styles.ml2}`}>{context.t("Paypal Account")}</p>
+                        <p className={`${props.accountType === 'paypal_account' ? styles.fontBold : null} ${styles.font1314} ${styles.ml2}`}>{context.t("Paypal Account")}</p>
                     </Fragment>
                 )}
             </div>

@@ -10,7 +10,8 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         goMyScheduleDetail: PropTypes.func.isRequired,
         goPayment: PropTypes.func.isRequired,
-        goReveiwCreate: PropTypes.func.isRequired
+        goReveiwCreate: PropTypes.func.isRequired,
+        checkNotification: PropTypes.func.isRequired
     }
 
     state = {
@@ -24,6 +25,7 @@ class Container extends Component{
             this.props.goHome()
         }
         if(this.props.orderList){
+            await this.props.checkNotification()
             this.setState({
                 loading: false,
                 fetchedOrderList: true,
@@ -50,8 +52,9 @@ class Container extends Component{
         }
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate = async() => {
         if(this.state.fetchedOrderList && !this.state.fetchClear){
+            await this.props.checkNotification()
             this.setState({
                 loading: false,
                 fetchClear: true,

@@ -364,6 +364,15 @@ p{
 .completed{
     color: $completed;
 }
+.pending{
+    color: $pending;
+}
+.paid{
+    color: $paid;
+}
+.cancelled{
+    color: $cancelled;
+}
 .url-blue{
     color: $url-blue;
 }
@@ -433,6 +442,15 @@ p{
 }
 .bg-completed{
     background-color: $completed;
+}
+.bg-paid{
+    background-color: $paid;
+}
+.bg-pending{
+    background-color: $pending;
+}
+.bg-cancelled{
+    background-color: $cancelled;
 }
 .bg-url-blue{
     background-color: $url-blue;

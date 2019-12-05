@@ -28,6 +28,7 @@ class Container extends Component{
                     const orderList = await getAdminOrderList()
                     let pendingList = []
                     let confirmedList = []
+                    let paidList = []
                     let pastList = []
                     orderList.map(order => {
                         if(order.status === 'pending'){
@@ -35,6 +36,9 @@ class Container extends Component{
                         }
                         else if(order.status === 'confirmed'){
                             confirmedList.push(order)
+                        }
+                        else if(order.status === 'paid'){
+                            paidList.push(order)
                         }
                         else{
                             pastList.push(order)
@@ -44,6 +48,7 @@ class Container extends Component{
                         orderList,
                         pendingList,
                         confirmedList,
+                        paidList,
                         pastList,
                         loading: false
                     })
@@ -83,6 +88,7 @@ class Container extends Component{
                 const orderList = await getAdminOrderList()
                 let pendingList = []
                 let confirmedList = []
+                let paidList = []
                 let pastList = []
                 orderList.map(order => {
                     if(order.status === 'pending'){
@@ -90,6 +96,9 @@ class Container extends Component{
                     }
                     else if(order.status === 'confirmed'){
                         confirmedList.push(order)
+                    }
+                    else if(order.status === 'paid'){
+                        paidList.push(order)
                     }
                     else{
                         pastList.push(order)
@@ -99,6 +108,7 @@ class Container extends Component{
                     orderList,
                     pendingList,
                     confirmedList,
+                    paidList,
                     pastList,
                     loading: false
                 })

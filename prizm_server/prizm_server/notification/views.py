@@ -17,3 +17,9 @@ class Notification(APIView):
         serializer = serializers.NotificationSerializer(notifications, many = True, context = {'request': request})
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
+    
+    def put(self, request, format = None):
+        user = request.user
+        user.notification_set.all().update(is_checked = True)
+
+        return Response(status = status.HTTP_200_OK)

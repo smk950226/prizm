@@ -21,7 +21,8 @@ class Container extends Component{
         checkedOption: 0,
         showDatePicker: false,
         selectedTime: [],
-        isSubmitting: false
+        isSubmitting: false,
+        showDecline: false
     }
 
     componentDidMount = () => {
@@ -87,6 +88,18 @@ class Container extends Component{
     _closeDatePicker = () => {
         this.setState({
             showDatePicker: false
+        })
+    }
+
+    _openDecline = () => {
+        this.setState({
+            showDecline: true
+        })
+    }
+
+    _closeDecline = () => {
+        this.setState({
+            showDecline: false,
         })
     }
 
@@ -200,6 +213,42 @@ class Container extends Component{
         }
     }
 
+    _decline = async() => {
+        this.setState({
+            checkedOption: 3
+        })
+        const { isSubmitting } = this.state;
+        const { order, responseToOrder, refresh } = this.props;
+        if(!isSubmitting){
+            this.setState({
+                isSubmitting: true
+            })
+            const result = await responseToOrder(order.id, 3)
+            if(result.status === 'ok'){
+                await refresh()
+                this.setState({
+                    showResponse: false,
+                    checkedOption: 0,
+                    showDatePicker: false,
+                    selectedTime: [],
+                    isSubmitting: false
+                })
+            }
+            else if(result.error){
+                this.setState({
+                    isSubmitting: false
+                })
+                alert(result.error)
+            }
+            else{
+                this.setState({
+                    isSubmitting: false
+                })
+                alert(this.context.t("An error has occurred.."))
+            }
+        }
+    }
+
     render(){
         const { loading } = this.state;
         if(loading){
@@ -216,10 +265,13 @@ class Container extends Component{
                 closeResponse={this._closeResponse}
                 selectOption={this._selectOption}
                 openDatePicker={this._openDatePicker}
+                openDecline={this._openDecline}
+                closeDecline={this._closeDecline}
                 closeDatePicker={this._closeDatePicker}
                 selectTime={this._selectTime}
                 removeTime={this._removeTime}
                 submit={this._submit}
+                decline={this._decline}
                 />
             )
         }

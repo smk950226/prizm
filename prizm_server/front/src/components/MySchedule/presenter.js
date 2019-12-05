@@ -18,13 +18,16 @@ const MySchedule = (props, context) => (
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={() => props.goMyScheduleDetail(order.id, order)}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.col11} ${styles.px0}`}>
                                     {order.status === 'pending' && (
-                                        <p className={`${styles.fontBold} ${styles.font13} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Pending")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font13} ${styles.pending} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Pending")}</p>
                                     )}
                                     {order.status === 'confirmed' && (
                                         <p className={`${styles.fontBold} ${styles.font13} ${styles.confirmed} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Confirmed")}</p>
                                     )}
+                                    {order.status === 'paid' && (
+                                        <p className={`${styles.fontBold} ${styles.font13} ${styles.paid} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Paid")}</p>
+                                    )}
                                     {order.status === 'cancelled' && (
-                                        <p className={`${styles.fontBold} ${styles.font13} ${styles.pink} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Cancelled")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font13} ${styles.cancelled} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Cancelled")}</p>
                                     )}
                                     {order.status === 'completed' && (
                                         <p className={`${styles.fontBold} ${styles.font13} ${styles.completed} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Completed")}</p>

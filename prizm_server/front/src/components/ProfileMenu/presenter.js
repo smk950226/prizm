@@ -21,12 +21,18 @@ class ProfileMenu extends Component{
 
     render(){
         const { notification, isLoggedIn, profile } = this.props;
-        let totalNotification = 0
+        let confirmNotification = 0
+        let cancelNotification = 0
         let showNotification = {}
         if(notification && notification.length > 0){
             notification.map(noti => {
                 if(!noti.is_checked){
-                    totalNotification += 1
+                    if(noti.notification_type === 'request_confirm'){
+                        confirmNotification += 1
+                    }
+                    else if(noti.notification_type === 'request_cancel'){
+                        cancelNotification += 1
+                    }
                     return null
                 }
                 else{
@@ -47,11 +53,22 @@ class ProfileMenu extends Component{
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.px3}`}>{this.context.t("My Schedule")}</p>
                         </div>
                         {(isLoggedIn && (notification) && (showNotification.id > 0)) && (
-                            <div className={`${styles.py3} ${styles.px3} ${styles.bgPink} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
-                                {showNotification.notification_type === 'request_confirm' && (
-                                    <Fragment>
-                                        <p className={`${styles.font12} ${styles.white}`}>{`You have ${totalNotification} confirmed ${totalNotification > 1 ? `reservations!` : `reservation!`}`}</p>
+                            <div className={`${styles.bgPink} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
+                                {confirmNotification > 0 && (
+                                    <div className={`${styles.py3} ${styles.px3}`}>
+                                        <p className={`${styles.font12} ${styles.white}`}>{`You have ${confirmNotification} confirmed ${confirmNotification > 1 ? `reservations!` : `reservation!`}`}</p>
                                         <p className={`${styles.fontBold} ${styles.font11} ${styles.white} ${styles.mt2} ${styles.cursorPointer}`}>{this.context.t("Add Payment Details")}</p>
+                                    </div>
+                                )}
+                                {cancelNotification > 0 && (
+                                    <Fragment>
+                                        {confirmNotification > 0 && (
+                                            <div className={`${styles.bgWhite} ${styles.widthFull}`} style={{height: 1}} />
+                                        )}
+                                        <div className={`${styles.py3} ${styles.px3}`}>
+                                            <p className={`${styles.font12} ${styles.white}`}>{`You have ${cancelNotification} declined ${cancelNotification > 1 ? `reservations!` : `reservation!`}`}</p>
+                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.white} ${styles.mt2} ${styles.cursorPointer}`}>{this.context.t("Please make another reservation.")}</p>
+                                        </div>
                                     </Fragment>
                                 )}
                             </div>

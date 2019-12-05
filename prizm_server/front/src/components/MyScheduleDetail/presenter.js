@@ -19,13 +19,16 @@ const MyScheduleDetail = (props, context) => (
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
             <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{props.order.photographer.nickname}</p>
             {props.order.status === 'pending' && (
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{context.t("Pending")}</p>
+                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.pending}`}>{context.t("Pending")}</p>
             )}
             {props.order.status === 'confirmed' && (
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.confirmed}`}>{context.t("confirmed")}</p>
+                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.confirmed}`}>{context.t("Confirmed")}</p>
+            )}
+            {props.order.status === 'paid' && (
+                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.paid}`}>{context.t("Paid")}</p>
             )}
             {props.order.status === 'cancelled' && (
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.pink}`}>{context.t("Cancelled")}</p>
+                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.cancelled}`}>{context.t("Cancelled")}</p>
             )}
             {props.order.status === 'completed' && (
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.completed}`}>{context.t("Completed")}</p>

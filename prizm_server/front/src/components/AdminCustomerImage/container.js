@@ -8,7 +8,9 @@ class Container extends Component{
     static propTypes = {
         getOrderImage: PropTypes.func.isRequired,
         order: PropTypes.object.isRequired,
-        uploadOrderImage: PropTypes.func.isRequired
+        uploadOrderImage: PropTypes.func.isRequired,
+        orderComplete: PropTypes.func.isRequired,
+        refresh: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -20,7 +22,8 @@ class Container extends Component{
         error: false,
         errorMsg: "",
         images: [],
-        isSubmitting: false
+        isSubmitting: false,
+        showCancel: false
     }
 
     componentDidMount = async() => {
@@ -144,12 +147,57 @@ class Container extends Component{
         }
     }
 
+    _openCancel = () => {
+        this.setState({
+            showCancel: true
+        })
+    }
+
+    _closeCancel = () => {
+        this.setState({
+            showCancel: false,
+        })
+    }
+
+    _complete = async() => {
+        const { order, orderComplete, refresh } = this.props;
+        const { isSubmitting } = this.state;
+        if(!isSubmitting){
+            this.setState({
+                isSubmitting: true
+            })
+            const result = await orderComplete(order.id)
+            if(result.status === 'ok'){
+                await refresh()
+                this.setState({
+                    isSubmitting: false,
+                    showCancel: false
+                })
+            }
+            else if(result.error){
+                this.setState({
+                    isSubmitting: false
+                })
+                alert(result.error)
+            }
+            else{
+                this.setState({
+                    isSubmitting: false
+                })
+                alert(this.context.t("An error has occurred.."))
+            }
+        }
+    }
+
     render(){
         return(
             <AdminCustomerImage 
             {...this.props}
             {...this.state}
             submit={this._submit}
+            openCancel={this._openCancel}
+            closeCancel={this._closeCancel}
+            complete={this._complete}
             />
         )
     }

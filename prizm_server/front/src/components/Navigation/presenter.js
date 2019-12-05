@@ -29,13 +29,20 @@ class Navigation extends Component{
 
     render(){
         const { showMenu, openMenu, handleShowMenu, profile, isLoggedIn, notification, showNav } = this.props;
-        let totalNotification = 0
+        let confirmNotification = 0
+        let cancelNotification = 0
         let showNotification = {}
         if(notification && notification.length > 0){
             notification.map(noti => {
                 if(!noti.is_checked){
-                    totalNotification += 1
-                    return null
+                    if(noti.notification_type === 'request_confirm'){
+                        confirmNotification += 1
+                        return null
+                    }
+                    if(noti.notification_type === 'request_cancel'){
+                        cancelNotification += 1
+                        return null
+                    }
                 }
                 else{
                     return null
@@ -115,11 +122,17 @@ class Navigation extends Component{
                             </div>
                             {(isLoggedIn && (notification) && (showNotification.id > 0)) && (
                                 <div className={`${styles.absoluteVerticalCenter} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
-                                    {showNotification.notification_type === 'request_confirm' && (
+                                    {confirmNotification > 0 && (
                                         <Fragment>
-                                            <p className={`${styles.font12}`}>{`You have ${totalNotification} confirmed ${totalNotification > 1 ? `reservations!` : `reservation!`}`}</p>
+                                            <p className={`${styles.font12}`}>{`You have ${confirmNotification} confirmed ${confirmNotification > 1 ? `reservations!` : `reservation!`}`}</p>
                                             <p className={`${styles.fontBold} ${styles.font11} ${styles.pink} ${styles.mt2} ${styles.cursorPointer}`}>{this.context.t("Add Payment Details")}</p>
                                         </Fragment>
+                                    )}
+                                    {cancelNotification > 0 && (
+                                        <div className={`${confirmNotification > 0 ? styles.mt2 : null}`}>
+                                            <p className={`${styles.font12}`}>{`You have ${cancelNotification} declined ${cancelNotification > 1 ? `reservations!` : `reservation!`}`}</p>
+                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.pink} ${styles.mt2} ${styles.cursorPointer}`}>{this.context.t("Please make another reservation.")}</p>
+                                        </div>
                                     )}
                                 </div>
                             )}

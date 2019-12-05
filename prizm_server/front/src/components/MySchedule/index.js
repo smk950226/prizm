@@ -43,6 +43,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     order
                 }
             }))
+        },
+        checkNotification: () => {
+            dispatch(userAction.checkNotification())
         }
     }
 }

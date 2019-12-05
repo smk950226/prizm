@@ -54,6 +54,9 @@ const AdminOrderList = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${props.page === 'confirmed' ? styles.confirmed : styles.black} ${props.page === 'confirmed' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => props.handlePageChange('confirmed')}>
                             {context.t("Confirmed")}
                         </p>
+                        <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${props.page === 'paid' ? styles.confirmed : styles.black} ${props.page === 'paid' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => props.handlePageChange('paid')}>
+                            {context.t("Paid")}
+                        </p>
                         <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${props.page === 'past' ? styles.confirmed : styles.black} ${props.page === 'past' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => props.handlePageChange('past')}>
                             {context.t("Past")}
                         </p>
@@ -102,6 +105,22 @@ const AdminOrderList = (props, context) => (
                             )
                         )
                     )}
+                    {(props.page === 'paid') && (
+                        props.paidList && (props.paidList.length > 0) ? (
+                            props.paidList.map((order, index) => (
+                                <OrderComp key={index} order={order} index={index} total={props.orderList.length} refresh={props.refresh} />
+                            ))
+                        ) : (
+                            props.orderList && props.orderList.length > 0 ? (
+                                null
+                            ) : (
+                                <div className={`${styles.textCenter}`}>
+                                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                    <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
+                                </div>
+                            )
+                        )
+                    )}
                     {(props.page === 'past') && (
                         props.pastList && (props.pastList.length > 0) ? (
                             props.pastList.map((order, index) => (
@@ -123,9 +142,9 @@ const AdminOrderList = (props, context) => (
                     <div className={`${styles.px3} ${styles.mobileNone}`} style={{marginTop: 100}}>
                         <p className={`${styles.fontBold} ${styles.font1620} ${styles.mb4}`}>{context.t("Tourist Photos")}</p>
                         {props.orderList.map((order, index) => {
-                            if((order.status === 'confirmed') || (order.status === 'completed')){
+                            if((order.status === 'confirmed') || (order.status === 'paid') || (order.status === 'completed')){
                                 return(
-                                    <AdminCustomerImage key={index} order={order} />
+                                    <AdminCustomerImage key={index} order={order} refresh={props.refresh} />
                                 )
                             }
                         })}

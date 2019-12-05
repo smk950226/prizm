@@ -254,6 +254,32 @@ function editAccount(legalName, birth, accountType, content){
     }
 }
 
+function orderComplete(orderId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/order/complete/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                orderId
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     
 };
@@ -285,7 +311,8 @@ const actionCreators = {
     geocoding,
     locationDetail,
     updateStudio,
-    editAccount
+    editAccount,
+    orderComplete
 }
 
 export { actionCreators }

@@ -529,6 +529,27 @@ function getTerm(name){
     }
 }
 
+function checkNotification(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`${FETCH_URL}/api/notification/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+            }
+            else{
+                dispatch(setNotification([]))
+            }
+        })
+    }
+}
+
 const initialState = {
     isLoggedIn: localStorage.getItem('jwt') ? true : false,
     token: localStorage.getItem('jwt')
@@ -625,7 +646,8 @@ const actionCreators = {
     getChatListMore,
     getMessages,
     getMessagesMore,
-    getTerm
+    getTerm,
+    checkNotification
 }
 
 export { actionCreators }

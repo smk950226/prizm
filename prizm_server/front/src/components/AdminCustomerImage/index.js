@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         uploadOrderImage: (images, orderId) => {
             return dispatch(adminAction.uploadOrderImage(images, orderId))
+        },
+        orderComplete: (orderId) => {
+            return dispatch(adminAction.orderComplete(orderId))
         }
     }
 }

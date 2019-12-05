@@ -147,20 +147,25 @@ class Order(APIView):
             if response_type == 'cancel':
                 order = models.Order.objects.get(id = order_id)
                 try:
+                    print(1)
                     message = chat_models.ChatMessage.objects.get(id = message_id)
+                    print(2)
                     if order.status == 'confirmed':
+                        print(7)
                         return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('You have already confirmed your date and time. Please contact as at contact@prizm.cloud if you have any inquiries.')})
                     else:
+                        print(3)
                         order.status = 'cancelled'
                         order.save()
-                        chats = order.chat_set.all()
-                        chats.delete()
                         message.responded = True
                         message.save()
+                        print(4)
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                        print(6)
                     return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
 
                 except:
+                    print(5)
                     return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
             else:
                 order = models.Order.objects.get(id = order_id)
@@ -186,6 +191,22 @@ class Order(APIView):
                         return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
                 else:
                     return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please select your desired time to complete the reservation.')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
+class CompleteOrder(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format = None):
+        order_id = request.data.get('orderId', None)
+        if order_id:
+            try:
+                order = models.Order.objects.get(id = order_id)
+                order.status = 'completed'
+                order.save()
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 

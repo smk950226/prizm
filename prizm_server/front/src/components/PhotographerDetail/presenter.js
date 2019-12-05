@@ -344,7 +344,7 @@ class PhotographerDetail extends Component{
                             <Fragment>
                                 {fromAuth ? (
                                     <div className={`${styles.px3}`}>
-                                        <p className={`${styles.mt5} ${styles.fontBold} ${styles.font17}`}>{this.context.t("Submit Request")}</p>
+                                        <p className={`${styles.mt5} ${styles.fontBold} ${styles.font17}`}>{this.context.t("Please review your reservation deatils : ")}</p>
                                         <p className={`${styles.mt3} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Location")}</p>
                                         <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{request.location.name}</p>
                                         <div className={`${styles.mt3}`}>
