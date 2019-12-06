@@ -1,6 +1,7 @@
 from .base import *  # noqa
 from .base import env
 import requests
+from django.core.exceptions import ImproperlyConfigured
 
 def get_ec2_hostname():
     try:
@@ -42,7 +43,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('ec2-3-218-150-46.compute-1.amazonaws.com', 6379)],
+            "hosts": [('ec2-3-94-150-64.compute-1.amazonaws.com', 6379)],
         },
     },
 }
