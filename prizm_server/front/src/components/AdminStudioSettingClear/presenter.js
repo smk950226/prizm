@@ -13,7 +13,7 @@ const AdminStudioSettingClear = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1418} ${styles.mt3} ${styles.urlBlue}`}>{`prizm.cloud/${props.studioId.slice(10)}/`}</p>
                     </a>
                     <div className={`${styles.col12} ${styles.px0} ${styles.textCenter} ${styles.mobileOnly}`}>
-                        <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Complete")} className={`${styles.mt4} ${styles.mb4}`} style={{width: '100%'}} />
+                        <img src={require('../../assets/images/signup_complete.png')} alt={context.t("Complete")} className={`${styles.mt4} ${styles.mb4}`} style={{width: '100%'}} />
                     </div>
                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, marginTop: 70}} onClick={props.goHome}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Home")}</p>
@@ -23,7 +23,7 @@ const AdminStudioSettingClear = (props, context) => (
         </div>
         <div className={`${styles.mobileNone}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.pxAdmin} ${styles.heightFullSafearea}`} style={{position: 'relative'}}>
-                <div className={`${styles.colMd8} ${styles.colLg6} ${styles.px0}`}>
+                <div className={`${styles.colMd6} ${styles.colLg6} ${styles.px0}`}>
                     <p className={`${styles.fontBold} ${styles.font2024}`}>{context.t("Registration Completed !")}</p>
                     <p className={`${styles.font1416} ${styles.mt1} ${styles.mtMd2}`}>{context.t("Check your PRIZM Studio at :")}</p>
                     <a href={`https://prizm.cloud/${props.studioId}/`} target={'_blank'} className={`${styles.textDecorationNone}`}>
@@ -33,8 +33,8 @@ const AdminStudioSettingClear = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Home")}</p>
                     </div>
                 </div>
-                <div className={`${styles.colMd4} ${styles.colLg6} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd} ${styles.px0} ${styles.textCenter}`}>
-                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Complete")} className={`${styles.adminMainImage}`} />
+                <div className={`${styles.colMd6} ${styles.colLg6} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd} ${styles.px0} ${styles.textCenter}`}>
+                    <img src={require('../../assets/images/signup_complete.png')} alt={context.t("Complete")} className={`${styles.adminMainImage}`} />
                 </div>
             </div>
         </div>

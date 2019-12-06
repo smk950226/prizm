@@ -31,7 +31,6 @@ class Container extends Component{
             const { getOrderPhotoList, match : { params : { orderId } } } = this.props;
             const result = await getOrderPhotoList(orderId)
             if(result.status === 'ok'){
-                console.log(result.images.orderimage_set)
                 this.setState({
                     loading: false,
                     error: false,

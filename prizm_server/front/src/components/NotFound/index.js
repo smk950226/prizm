@@ -6,8 +6,8 @@ import styles from '../../style/styles.module.scss';
 const NotFound = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull} ${styles.px3}`}>
         <div className={`${styles.textCenter}`}>
-            <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={``} style={{width: '100%', heihgt: 200}} />
-            <p className={`${styles.fontBold} ${styles.mt2}`} style={{fontSize: 100}}>{context.t("404")}</p>
+            <img src={require('../../assets/images/email_verifing.png')} alt={context.t("Submitted")} className={``} style={{width: '100%', maxWidth: 500}} />
+            <p className={`${styles.fontBold} ${styles.mt2}`} style={{fontSize: 70}}>{context.t("404")}</p>
             <p className={`${styles.font1214} ${styles.mt1}`}>{context.t("Page not found")}</p>
             <p className={`${styles.font1214} ${styles.mt2} ${styles.textCenter}`}>
                 {context.t(`The page you are looking for doesn't exist or another error has occured.`)}<br/>

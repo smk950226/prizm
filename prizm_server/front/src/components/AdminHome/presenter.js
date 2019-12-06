@@ -9,7 +9,7 @@ const AdminHome = (props, context) => (
             <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter} ${styles.pxAdmin} ${styles.heightFullSafearea}`} style={{position: 'relative'}}>
                 <div>
                     <div className={`${styles.col12} ${styles.px0} ${styles.textCenter} ${styles.mobileOnly}`}>
-                        <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.mb3}`} style={{width: '80%'}} />
+                        <img src={require('../../assets/images/main.png')} alt={context.t("Submitted")} className={`${styles.mb3}`} style={{width: '80%'}} />
                     </div>
                     <p className={`${styles.font2022} ${styles.fontBold}`} style={{lineHeight: 1.5}}>
                         {context.t(`The easiest way to create your mobile studio`)}
@@ -38,7 +38,7 @@ const AdminHome = (props, context) => (
         </div>
         <div className={`${styles.mobileNone}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.pxAdmin} ${styles.heightFullSafearea}`} style={{position: 'relative'}}>
-                <div className={`${styles.colMd8} ${styles.colLg6} ${styles.px0}`}>
+                <div className={`${styles.colMd7} ${styles.colLg6} ${styles.px0}`}>
                     <p className={`${styles.font2022} ${styles.fontBold}`} style={{lineHeight: 1.5}}>
                         {context.t(`The easiest way to create your mobile studio`)}
                     </p>
@@ -62,8 +62,8 @@ const AdminHome = (props, context) => (
                         </div>
                     </a>
                 </div>
-                <div className={`${styles.colMd4} ${styles.colLg6} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd} ${styles.px0} ${styles.textCenter}`}>
-                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.adminMainImage}`} />
+                <div className={`${styles.colMd5} ${styles.colLg6} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd} ${styles.px0} ${styles.textCenter}`}>
+                    <img src={require('../../assets/images/main.png')} alt={context.t("Submitted")} className={`${styles.adminMainImage}`} />
                 </div>
             </div>
         </div>

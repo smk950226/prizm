@@ -68,7 +68,7 @@ const AdminOrderList = (props, context) => (
                             ))
                         ) : (
                             <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                <img src={require('../../assets/images/main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
                                 <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
                             </div>
                         )
@@ -83,7 +83,7 @@ const AdminOrderList = (props, context) => (
                                 null
                             ) : (
                                 <div className={`${styles.textCenter}`}>
-                                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                    <img src={require('../../assets/images/main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
                                     <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
                                 </div>
                             )
@@ -99,7 +99,7 @@ const AdminOrderList = (props, context) => (
                                 null
                             ) : (
                                 <div className={`${styles.textCenter}`}>
-                                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                    <img src={require('../../assets/images/main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
                                     <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
                                 </div>
                             )
@@ -115,7 +115,7 @@ const AdminOrderList = (props, context) => (
                                 null
                             ) : (
                                 <div className={`${styles.textCenter}`}>
-                                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                    <img src={require('../../assets/images/main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
                                     <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
                                 </div>
                             )
@@ -131,7 +131,7 @@ const AdminOrderList = (props, context) => (
                                 null
                             ) : (
                                 <div className={`${styles.textCenter}`}>
-                                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%'}} />
+                                    <img src={require('../../assets/images/main.png')} alt={context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
                                     <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("You haven't received reservation requests yet.")}</p>
                                 </div>
                             )

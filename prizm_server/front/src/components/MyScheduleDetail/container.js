@@ -14,6 +14,10 @@ class Container extends Component{
         goReveiwCreate: PropTypes.func.isRequired
     }
 
+    static contextTypes = {
+        t: PropTypes.func
+    }
+
     constructor(props){
         super(props)
         const { match : { params : { orderId } } } = props;
@@ -38,10 +42,16 @@ class Container extends Component{
             }
             else{
                 const order = await getOrderDetail(orderId)
-                this.setState({
-                    order,
-                    loading: false
-                })
+                if(!order){
+                    alert(this.context.t("Invalid request!"))
+                    goHome()
+                }
+                else{
+                    this.setState({
+                        order,
+                        loading: false
+                    })
+                }
             }
         }
     }

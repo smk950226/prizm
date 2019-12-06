@@ -64,7 +64,7 @@ const MySchedule = (props, context) => (
                 </div>
             ) : (
                 <div className={`${styles.textCenter}`}>
-                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Request not exist")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%'}} />
+                    <img src={require('../../assets/images/main.png')} alt={context.t("Request not exist")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%', maxWidth: 400}} />
                     <p className={`${styles.font1214} ${styles.mt3}`}>
                         {context.t("You haven't made any reservations yet.")}<br/>
                         {context.t("A new schedule will appear when you submit a request to a photographer.")}

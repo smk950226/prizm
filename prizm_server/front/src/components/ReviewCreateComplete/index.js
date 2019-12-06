@@ -9,7 +9,9 @@ const ReviewCreateComplete = (props, context) => (
             <p className={`${styles.fontBold} ${styles.font1620}`}>{context.t("Your review has been submitted!")}</p>
             <p className={`${styles.font1416} ${styles.mt3}`}>{context.t("Thank you very much for the review. We hope you had a great experience with PRIZM.")}</p>
             <p className={`${styles.font1416} ${styles.mt2}`}>{context.t("If you have any questions or suggestions, feel free to reach us at contact@prizm.cloud")}</p>
-            <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.mt3}`} style={{width: '100%', heihgt: 200}} />
+            <div className={`${styles.textCenter}`}>
+                <img src={require('../../assets/images/request_complete.png')} alt={context.t("Submitted")} className={`${styles.mt3}`} style={{width: '80%', maxWidth: 400}} />
+            </div>
             <p className={`${styles.font1416} ${styles.mt3}`}>{context.t("Hope to see you again at your next trip!")}</p>
         </div>
         <Link to='/' style={{textDecoration: 'none', color: 'white', width: '100%'}}>
