@@ -65,10 +65,11 @@ class OrderSerializer(serializers.ModelSerializer):
     location = LocationSerializer()
     option = OptionSerializer()
     is_reviewed = serializers.SerializerMethodField()
+    deposit = payment_serializers.DepositSerializer()
 
     class Meta:
         model = models.Order
-        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date', 'confirmed_date', 'status', 'confirmed_at', 'available_time', 'is_reviewed']
+        fields = ['id', 'user', 'photographer', 'location', 'option', 'comment', 'date_option', 'specific_date', 'start_date', 'end_date', 'confirmed_date', 'status', 'confirmed_at', 'available_time', 'is_reviewed', 'deposit']
     
     def get_is_reviewed(self, obj):
         try:
@@ -86,10 +87,11 @@ class OrderShortSerializer(serializers.ModelSerializer):
     location = LocationSerializer()
     option = OptionSerializer()
     is_reviewed = serializers.SerializerMethodField()
+    deposit = payment_serializers.DepositSerializer()
 
     class Meta:
         model = models.Order
-        fields = ['id', 'location', 'option', 'confirmed_date', 'is_reviewed']
+        fields = ['id', 'location', 'option', 'confirmed_date', 'is_reviewed', 'deposit']
     
     def get_is_reviewed(self, obj):
         try:

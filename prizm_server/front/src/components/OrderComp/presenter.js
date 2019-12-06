@@ -18,9 +18,9 @@ const OrderComp = (props, context) => (
                 <p className={`${styles.fontBold} ${styles.font1316}`}>
                     {props.order.user.name}
                 </p>
-                <p className={`${styles.fontBold} ${styles.font13} ${props.order.status === 'confirmed' ? styles.confirmed : null} ${props.order.status === 'cancelled' ? styles.cancelled : null} ${props.order.status === 'pending' ? styles.pending : null} ${props.order.status === 'paid' ? styles.paid : null} ${props.order.status === 'completed' ? styles.completed : null}`}>
+                <p className={`${styles.fontBold} ${styles.font13} ${((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) ? styles.confirmed : null} ${props.order.status === 'cancelled' ? styles.cancelled : null} ${props.order.status === 'pending' ? styles.pending : null} ${props.order.status === 'paid' ? styles.paid : null} ${props.order.status === 'completed' ? styles.completed : null}`}>
                     {props.order.status === 'pending' && context.t('Pending')}
-                    {props.order.status === 'confirmed' && context.t('Confirmed')}
+                    {((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) && context.t('Confirmed')}
                     {props.order.status === 'cancelled' && context.t('Cancelled')}
                     {props.order.status === 'paid' && context.t('Paid')}
                     {props.order.status === 'completed' && context.t('Completed')}
@@ -40,8 +40,8 @@ const OrderComp = (props, context) => (
                         <p className={`${styles.fontRBold} ${styles.font1214}`}>{context.t("Date&Time")}</p>
                     </div>
                     <div className={`${styles.col9} ${styles.colSM10} ${styles.px0}`}>
-                        <p className={`${styles.fontBold} ${styles.font1214} ${styles.textRight} ${props.order.status === 'confirmed' ? styles.confirmed : null} ${props.order.status === 'completed' ? styles.completed : null} ${props.order.status === 'cancelled' ? styles.cancelled : null} ${((props.order.status === 'pending') && (props.order.available_time)) ? styles.pending : null}`}>
-                            {props.order.status === 'confirmed' ? (
+                        <p className={`${styles.fontBold} ${styles.font1214} ${styles.textRight} ${((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) ? styles.confirmed : null} ${props.order.status === 'completed' ? styles.completed : null} ${props.order.status === 'cancelled' ? styles.cancelled : null} ${((props.order.status === 'pending') && (props.order.available_time)) ? styles.pending : null}`}>
+                            {((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) ? (
                                 `${props.order.confirmed_date.slice(2,4).concat('/',props.order.confirmed_date.slice(5,7), '/', props.order.confirmed_date.slice(8,10), ' ', props.order.confirmed_date.slice(11,13), ':', props.order.confirmed_date.slice(14,16))}`
                             ) : (
                                 ((props.order.status === 'pending') && (props.order.available_time)) ? (
@@ -88,8 +88,8 @@ const OrderComp = (props, context) => (
                         <p className={`${styles.fontBold} ${styles.font1214}`}>{props.order.location.name}</p>
                     </div>
                     <div className={`${styles.col4} ${styles.colLg3} ${styles.pr3} ${styles.pl0}`}>
-                        <p className={`${styles.fontBold} ${styles.font1214} ${props.order.status === 'confirmed' ? styles.confirmed : null} ${props.order.status === 'completed' ? styles.completed : null} ${props.order.status === 'cancelled' ? styles.cancelled : null} ${((props.order.status === 'pending') && (props.order.available_time)) ? styles.pending : null}`}>
-                            {props.order.status === 'confirmed' ? (
+                        <p className={`${styles.fontBold} ${styles.font1214} ${((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) ? styles.confirmed : null} ${props.order.status === 'completed' ? styles.completed : null} ${props.order.status === 'cancelled' ? styles.cancelled : null} ${((props.order.status === 'pending') && (props.order.available_time)) ? styles.pending : null}`}>
+                            {((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) ? (
                                 `${props.order.confirmed_date.slice(2,4).concat('/',props.order.confirmed_date.slice(5,7), '/', props.order.confirmed_date.slice(8,10), ' ', props.order.confirmed_date.slice(11,13), ':', props.order.confirmed_date.slice(14,16))}`
                             ) : (
                                 ((props.order.status === 'pending') && (props.order.available_time)) ? (
@@ -117,7 +117,7 @@ const OrderComp = (props, context) => (
         </div>
         {(props.order.status !== 'completed') && (
             <Collapse isOpened={props.showResponse} theme={{collapse: styles.collapse}}>
-                {props.order.status === 'confirmed' && (
+                {((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) && (
                     <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
                         <p className={`${styles.font1113} ${styles.white} ${styles.ml2}`}>
                             {context.t("This reservation has been confirmed. We are waiting for payment from your client. If payment is not made within 72 hours, the reservation will be canceled automatically.")}

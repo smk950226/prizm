@@ -13,3 +13,9 @@ class MerchantUIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Payment
         fields = ['merchant_uid']
+
+
+class DepositSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Deposit
+        fields = ['id', 'price', 'name', 'created_at', 'is_paid']

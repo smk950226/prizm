@@ -34,7 +34,7 @@ class Container extends Component{
                         if(order.status === 'pending'){
                             pendingList.push(order)
                         }
-                        else if(order.status === 'confirmed'){
+                        else if(((order.status === 'confirmed') || (order.status === 'waiting_payment'))){
                             confirmedList.push(order)
                         }
                         else if(order.status === 'paid'){
@@ -94,7 +94,7 @@ class Container extends Component{
                     if(order.status === 'pending'){
                         pendingList.push(order)
                     }
-                    else if(order.status === 'confirmed'){
+                    else if(((order.status === 'confirmed') || (order.status === 'waiting_payment'))){
                         confirmedList.push(order)
                     }
                     else if(order.status === 'paid'){

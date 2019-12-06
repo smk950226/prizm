@@ -370,16 +370,6 @@ class AdminMessageDetail extends Component{
                     )
                 )}
             </div>
-            {order.status === 'confirmed' && (order.photographer.user.id !== profile.id) && (
-                <div className={`${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`} style={{position: 'fixed', bottom: 70, marginLeft: 'auto', marginRight: 'auto'}}>
-                    <div className={`${styles.px3} ${styles.containerCustomer} ${styles.widthFull}`}>
-                        <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.props.goPayment(order)} style={{height: 48}}>
-                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add Payment Details")}</p>
-                        </div>
-                        <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{this.context.t(`Please add payment details by : ${new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
-                    </div>
-                </div>
-            )}
             <div className={`${styles.bgWhite} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`} style={{position: 'fixed', bottom: 0, height: 50, marginLeft: 'auto', marginRight: 'auto'}}>
                 <div className={`${styles.bgWhite} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.px3} ${styles.containerAdmin} ${styles.widthFull}`}>
                     <TextareaAutosize readOnly={((order.status === 'cancelled') || (order.status === 'pending') || (order.status === 'completed')) ? true : redating} maxRows={3} className={`${styles.textInput10}`} type={"text"} name={"text"} value={text} placeholder={this.context.t("message")} onChange={this.props.handleInputChange} onKeyPress={this.props.handleKeyPress} />

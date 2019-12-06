@@ -72,6 +72,8 @@ class Deposit(APIView):
                             name = name
                         )
                         deposit.save()
+                        order.status = 'waiting_payment'
+                        order.save()
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                     else:
                         return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('한국 사용자만 입금 가능합니다.')})

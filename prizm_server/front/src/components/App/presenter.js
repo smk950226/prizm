@@ -127,7 +127,7 @@ class GeneralRouteContainer extends Component{
             if(nextProps.chatList){
                 update.fetchedChatList = true
             }
-            if(nextProps.newMessage){
+            if((nextProps.newMessage) || (nextProps.newMessage === false)){
                 update.fetchedNewMessage = true
             }
 
@@ -217,7 +217,7 @@ class AdminRouteContainer extends Component{
             if(nextProps.chatList){
                 update.fetchedChatList = true
             }
-            if(nextProps.newMessage){
+            if((nextProps.newMessage) || (nextProps.newMessage === false)){
                 update.fetchedNewMessage = true
             }
 

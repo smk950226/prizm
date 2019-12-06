@@ -72,7 +72,7 @@ function getLogout(){
 
 function getCheckNewMessage(newMessage){
     return (dispatch) => {
-        dispatch(getCheckNewMessage(newMessage))
+        dispatch(setCheckNewMessage(newMessage))
     }
 }
 
@@ -582,7 +582,7 @@ function checkMessage(){
                 return response.json()
             }
         })
-        .then(json => dispatch(setCheckNewMessage(json)))
+        .then(json => dispatch(setCheckNewMessage(json.new_message)))
     }
 }
 
@@ -603,7 +603,7 @@ function checkMessageByToken(token){
                 return response.json()
             }
         })
-        .then(json => dispatch(setCheckNewMessage(json)))
+        .then(json => dispatch(setCheckNewMessage(json.new_message)))
     }
 }
 

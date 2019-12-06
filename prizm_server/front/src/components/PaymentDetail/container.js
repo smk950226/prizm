@@ -40,11 +40,14 @@ class Container extends Component{
     }
 
     componentDidMount = async() => {
-        const { isLoggedIn, goHome, profile, paymentExpire, refresh, getPrice } = this.props;
+        const { isLoggedIn, goHome, profile, paymentExpire, refresh, getPrice, goPaymentSuccess } = this.props;
         const { order } = this.state;
         if(isLoggedIn){
             if(order){
-                if(order.status !== 'confirmed'){
+                if(order.status === 'waiting_payment'){
+                    goPaymentSuccess(true, order.deposit.price, new Date(order.deposit.created_at))
+                }
+                else if(order.status !== 'confirmed'){
                     goHome()
                 }
                 else{
@@ -172,6 +175,7 @@ class Container extends Component{
                                                 isSubmitting: false
                                             })
                                             await getPrice(null)
+                                            await refresh()
                                             const now = new Date().getTime()
                                             goPaymentSuccess(isDeposit, price, now)
                                         }
@@ -285,6 +289,7 @@ class Container extends Component{
                                         m_redirect_url: `${FETCH_URL}/payment/success/`
                                     }, async(rsp) => {
                                         if ( rsp.success ) {
+                                            await refresh()
                                             this.setState({
                                                 isSubmitting: false
                                             })

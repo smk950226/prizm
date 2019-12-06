@@ -14,12 +14,12 @@ const MyPhotos = (props, context) => (
             props.orderList && props.orderList.length > 0 && (
                 <div className={`${styles.mt45}`}>
                     {props.orderList.map((order, index) => {
-                        if((order.status === 'confirmed') || (order.status === 'completed')){
+                        if((order.status === 'confirmed') || (order.status === 'waiting_payment') || (order.status === 'completed')){
                             return(
                                 <div key={order.id} className={`${styles.py3} ${(index === props.orderList.length - 1) ? null : styles.borderBtmGrayDc}`}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={() => props.goMyPhotoDetail(order.id, order)}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.col11} ${styles.px0}`}>
-                                            {order.status === 'confirmed' && (
+                                            {((order.status === 'confirmed') || (order.status === 'waiting_payment')) && (
                                                 <p className={`${styles.fontBold} ${styles.font13} ${styles.confirmed} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`} style={{width: 65}}>{context.t("Confirmed")}</p>
                                             )}
                                             {order.status === 'completed' && (

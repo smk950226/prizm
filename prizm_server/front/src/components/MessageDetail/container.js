@@ -49,7 +49,6 @@ class Container extends Component{
             redating: false,
             isSubmitting: false,
             redatingMsgId: -1,
-            refreshChat: props.location.state ? props.location.state.refreshChat ? props.location.state.refreshChat : null : null
         }
 
         this.initialize(chatId,id)
@@ -80,9 +79,6 @@ class Container extends Component{
             redatingMsgId,
             existNewMessage
         })
-        if(this.state.refreshChat){
-            this.state.refreshChat(existNewMessage)
-        }
     }
 
     addMessage(message){

@@ -20,7 +20,7 @@ const MySchedule = (props, context) => (
                                     {order.status === 'pending' && (
                                         <p className={`${styles.fontBold} ${styles.font13} ${styles.pending} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Pending")}</p>
                                     )}
-                                    {order.status === 'confirmed' && (
+                                    {((order.status === 'confirmed') || (order.status === 'waiting_payment')) && (
                                         <p className={`${styles.fontBold} ${styles.font13} ${styles.confirmed} ${styles.col3} ${styles.colSm2} ${styles.colMd1} ${styles.px0}`}>{context.t("Confirmed")}</p>
                                     )}
                                     {order.status === 'paid' && (
@@ -52,6 +52,14 @@ const MySchedule = (props, context) => (
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Add Payment Details")}</p>
                                 </div>
                                 <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please add payment details by : ${new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+                                </Fragment>
+                            )}
+                            {order.status === 'waiting_payment' && (
+                                <Fragment>
+                                <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => props.goPayment(order)} style={{height: 48}}>
+                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("View Payment Information")}</p>
+                                </div>
+                                <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please make payment by : ${new Date(new Date(order.deposit.created_at).getTime() + 1000*60*60*24*1)}`)}</p>
                                 </Fragment>
                             )}
                             {order.status === 'completed' && !order.is_reviewed && (

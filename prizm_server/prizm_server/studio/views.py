@@ -70,8 +70,14 @@ class Order(APIView):
                 if (order.confirmed_at.timestamp() + 60*60*24*3) < (timezone.now().timestamp()):
                     order.status = 'cancelled'
                     order.save()
-                    chats = order.chat_set.all()
-                    chats.delete()
+                try:
+                    deposit = order.deposit
+                    if deposit.is_paid == False:
+                        if (deposit.created_at.timestamp() + 60*60*24*1) < (timezone.now().timestamp()):
+                            order.status = 'cancelled'
+                            order.save()
+                except:
+                    pass
         orders = models.Order.objects.filter(user = user).order_by('-id')
         serializer = serializers.OrderSerializer(orders, many = True, context = {'request': request})
 

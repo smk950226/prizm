@@ -21,7 +21,7 @@ const MyScheduleDetail = (props, context) => (
             {props.order.status === 'pending' && (
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.pending}`}>{context.t("Pending")}</p>
             )}
-            {props.order.status === 'confirmed' && (
+            {((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) && (
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.confirmed}`}>{context.t("Confirmed")}</p>
             )}
             {props.order.status === 'paid' && (
@@ -70,6 +70,14 @@ const MyScheduleDetail = (props, context) => (
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Add Payment Details")}</p>
             </div>
             <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please add payment details by : ${new Date(new Date(props.order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+            </Fragment>
+        )}
+        {props.order.status === 'waiting_payment' && (
+            <Fragment>
+            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => props.goPayment(props.order)} style={{height: 48}}>
+                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("View Payment Information")}</p>
+            </div>
+            <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please make payment by : ${new Date(new Date(props.order.deposit.created_at).getTime() + 1000*60*60*24*1)}`)}</p>
             </Fragment>
         )}
         {props.order.status === 'completed' && !props.order.is_reviewed && (

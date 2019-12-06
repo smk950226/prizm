@@ -117,6 +117,7 @@ class Order(models.Model):
     status = models.CharField(_("Order Status"), max_length = 100, choices = (
         ('pending', 'Pending'),
         ('confirmed', 'Confirmed'),
+        ('waiting_payment', 'Wait Payment'),
         ('paid', 'Paid'),
         ('cancelled', 'Cancelled'),
         ('completed', 'Completed')
