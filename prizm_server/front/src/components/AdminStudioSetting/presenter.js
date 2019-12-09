@@ -472,7 +472,7 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in a desired URL for your PRIZM studio.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <InputMask mask={'prizm.com/********************'} 
+                        <InputMask mask={'prizm.cloud/********************'} 
                         formatChars={{
                             '*': '[A-Za-z0-9!@#$()-_+=.,]'
                         }}
@@ -486,7 +486,7 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please confirm the studio URL.")}</p>
                     <div className={`${styles.containerStudioInput}`}>
-                        <InputMask mask={'prizm.com/********************'} 
+                        <InputMask mask={'prizm.cloud/********************'} 
                         formatChars={{
                             '*': '[A-Za-z0-9!@#$()-_+=.,]'
                         }}

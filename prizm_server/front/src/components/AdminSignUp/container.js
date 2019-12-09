@@ -14,7 +14,9 @@ class Container extends Component{
         goReservation: PropTypes.func.isRequired,
         goSignIn: PropTypes.func.isRequired,
         getPhotographerByToken: PropTypes.func.isRequired,
-        goStudioSetting: PropTypes.func.isRequired
+        goStudioSetting: PropTypes.func.isRequired,
+        photographer: PropTypes.object,
+        profile: PropTypes.object
     }
 
     static contextTypes = {
@@ -38,10 +40,10 @@ class Container extends Component{
             password2Form: false,
             isSubmitting: false,
             showCountryNumber: false,
-            fetchedToken: false,
+            countryList: [],
+            fetchedPhotographer: false,
             fetchedProfile: false,
             fetchClear: false,
-            countryList: []
         }
     }
 
@@ -52,32 +54,32 @@ class Container extends Component{
         }
     }
 
-    componentDidUpdate = (prevProps, prevState) => {
-        if(!prevProps.isLoggedIn && this.props.isLoggedIn){
-            this.setState({
-                fetchedToken: true
-            })
-        }
-        if(this.state.fetchedProfile && this.state.fetchedToken && !this.state.fetchClear){
-            this.setState({
-                fetchClear: true,
-            })
-            this.props.goStudioSetting()
-        }
-    }
-
     static getDerivedStateFromProps(nextProps, prevState){
-        const { fetchedProfile } = prevState;
-        if((!fetchedProfile)){
+        const { fetchedProfile, fetchedPhotographer } = prevState;
+        if((!fetchedProfile) || (!fetchedPhotographer)){
             let update = {}
             if(nextProps.profile){
                 update.fetchedProfile = true
+            }
+            if(nextProps.photographer){
+                update.fetchedPhotographer = true
             }
 
             return update
         }
         else{
             return null
+        }
+    }
+
+    componentDidUpdate = async(prevProps, prevState) => {
+        if(this.state.fetchedProfile && this.state.fetchedPhotographer && !this.state.fetchClear){
+            this.setState({
+                fetchClear: true,
+                isSubmitting: false
+            })
+            await this.props.getSaveToken(this.state.token)
+            this.props.goStudioSetting()
         }
     }
 
@@ -250,12 +252,11 @@ class Container extends Component{
                                     const replacedInstagram = instagram.replace('instagram/', '')
                                     const result = await signUpAdmin(email, password, name, countryNumber, countryCode, mobile, replacedInstagram, 'photographer')
                                     if(result.token){
+                                        await this.setState({
+                                            token: result.token
+                                        })
                                         await getProfileByToken(result.token)
                                         await getPhotographerByToken(result.token)
-                                        this.setState({
-                                            isSubmitting: false
-                                        })
-                                        await getSaveToken(result.token)
                                     }
                                     else{
                                         this.setState({

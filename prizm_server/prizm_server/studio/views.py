@@ -461,7 +461,7 @@ class Studio(APIView):
                             price = int(new['price']),
                         )
                         op.save()
-                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
 
                 else:
                     photographer = models.Photographer.objects.create(
@@ -529,7 +529,7 @@ class Studio(APIView):
                             price = int(new['price']),
                         )
                         op.save()
-                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in all the information to complete your registration.')})
 

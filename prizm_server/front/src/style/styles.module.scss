@@ -143,6 +143,12 @@ p{
 @for $i from 8 through 60 {
     .font-#{$i} { font-size: #{$i}px; }
 }
+.font-admin-home{
+    font-size: 13.5px;
+}
+.font-admin-home-2{
+    font-size: 12.5px;
+}
 .font-9-11{
     font-size: 9px
 }
@@ -191,7 +197,22 @@ p{
 .font-32-40{
     font-size: 32px;
 }
-
+@media (min-width: 450px){
+    .font-admin-home{
+        font-size: 16px;
+    }
+    .font-admin-home-2{
+        font-size: 13px;
+    }
+}
+@media (min-width: 600px){
+    .font-admin-home{
+        font-size: 20px;
+    }
+    .font-admin-home-2{
+        font-size: 16px;
+    }
+}
 @media (min-width: 1024px){
     .font-13-14-16{
         font-size: 14px
@@ -590,6 +611,12 @@ p{
     z-index: 10;
     border: 1px solid $gray-97;
     border-top: none;
+}
+.position-term-logo{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .text-input-1{

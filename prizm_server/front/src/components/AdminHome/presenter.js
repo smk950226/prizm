@@ -9,12 +9,12 @@ const AdminHome = (props, context) => (
             <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter} ${styles.pxAdmin} ${styles.heightFullSafearea}`} style={{position: 'relative'}}>
                 <div>
                     <div className={`${styles.col12} ${styles.px0} ${styles.textCenter} ${styles.mobileOnly}`}>
-                        <img src={require('../../assets/images/main.png')} alt={context.t("Submitted")} className={`${styles.mb3}`} style={{width: '80%'}} />
+                        <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.mb3}`} style={{width: '100%'}} />
                     </div>
-                    <p className={`${styles.font2022} ${styles.fontBold}`} style={{lineHeight: 1.5}}>
+                    <p className={`${styles.fontBold} ${styles.fontAdminHome}`} style={{lineHeight: 1.5}}>
                         {context.t(`The easiest way to create your mobile studio`)}
                     </p>
-                    <p className={`${styles.font131416} ${styles.mtR45}`} style={{lineHeight: 1.3}}>
+                    <p className={`${styles.mtR45} ${styles.fontAdminHome2}`} style={{lineHeight: 1.3}}>
                         {context.t("Meet tourists from all over the world")}<br/>
                         {context.t("Receive payment worldwide")}<br/>
                         {context.t("Manage your reservations conveniently")}<br/>
@@ -63,7 +63,7 @@ const AdminHome = (props, context) => (
                     </a>
                 </div>
                 <div className={`${styles.colMd5} ${styles.colLg6} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd} ${styles.px0} ${styles.textCenter}`}>
-                    <img src={require('../../assets/images/main.png')} alt={context.t("Submitted")} className={`${styles.adminMainImage}`} />
+                    <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.adminMainImage}`} />
                 </div>
             </div>
         </div>

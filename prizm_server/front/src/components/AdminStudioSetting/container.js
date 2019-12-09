@@ -766,7 +766,14 @@ class Container extends Component{
                                         this.setState({
                                             isSubmitting: true
                                         })
-                                        const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId.slice(10), update)
+                                        let replacedStudioId = ""
+                                        if(studioId.startsWith('prizm.cloud/')){
+                                            replacedStudioId = studioId.slice(12)
+                                        }
+                                        else{
+                                            replacedStudioId = studioId
+                                        }
+                                        const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
                                         if(result.status === 'ok'){
                                             await getPhotographer()
                                             if(update){
@@ -818,7 +825,14 @@ class Container extends Component{
                                     this.setState({
                                         isSubmitting: true
                                     })
-                                    const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId.slice(10), update)
+                                    let replacedStudioId = ""
+                                    if(studioId.startsWith('prizm.cloud/')){
+                                        replacedStudioId = studioId.slice(12)
+                                    }
+                                    else{
+                                        replacedStudioId = studioId
+                                    }
+                                    const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
                                     if(result.status === 'ok'){
                                         await getPhotographer()
                                         if(update){

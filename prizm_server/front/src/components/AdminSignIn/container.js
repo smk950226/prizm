@@ -13,7 +13,9 @@ class Container extends Component{
         goSignUp: PropTypes.func.isRequired,
         checkPhotographer: PropTypes.func.isRequired,
         getPhotographerByToken: PropTypes.func.isRequired,
-        checkMessageByToken: PropTypes.func.isRequired
+        checkMessageByToken: PropTypes.func.isRequired,
+        photographer: PropTypes.object,
+        profile: PropTypes.object
     }
 
     static contextTypes = {
@@ -26,13 +28,45 @@ class Container extends Component{
             email: "",
             password: "",
             emailForm: false,
-            isSubmitting: false
+            isSubmitting: false,
+            fetchedPhotographer: false,
+            fetchedProfile: false,
+            fetchClear: false
         }
     }
 
     componentDidMount = () => {
         window.scrollTo(0,0)
         if(this.props.isLoggedIn){
+            this.props.goReservation()
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedProfile, fetchedPhotographer } = prevState;
+        if((!fetchedProfile) || (!fetchedPhotographer)){
+            let update = {}
+            if(nextProps.profile){
+                update.fetchedProfile = true
+            }
+            if(nextProps.photographer){
+                update.fetchedPhotographer = true
+            }
+
+            return update
+        }
+        else{
+            return null
+        }
+    }
+
+    componentDidUpdate = async() => {
+        if(this.state.fetchedProfile && this.state.fetchedPhotographer && !this.state.fetchClear){
+            this.setState({
+                fetchClear: true,
+                isSubmitting: false
+            })
+            await this.props.getSaveToken(this.state.token)
             this.props.goReservation()
         }
     }
@@ -74,14 +108,12 @@ class Container extends Component{
                     if(result.token){
                         const check = await checkPhotographer(result.token)
                         if(check.status === 'ok'){
+                            await this.setState({
+                                token: result.token
+                            })
                             await getProfileByToken(result.token)
                             await getPhotographerByToken(result.token)
                             await checkMessageByToken(result.token)
-                            this.setState({
-                                isSubmitting: false
-                            })
-                            await getSaveToken(result.token)
-                            goReservation()
                         }
                         else if(check.error){
                             this.setState({

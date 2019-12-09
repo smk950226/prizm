@@ -5,11 +5,12 @@ import { actionCreators as adminAction } from '../../redux/modules/admin';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn, profile }, router : { location } } = state;
+    const { user : { isLoggedIn, profile }, router : { location }, admin : { photographer } } = state;
     return {
         isLoggedIn,
         pathname: location.pathname,
-        profile
+        profile,
+        photographer
     }
 }
 

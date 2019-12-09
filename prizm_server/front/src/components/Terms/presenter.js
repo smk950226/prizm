@@ -18,9 +18,9 @@ const Terms = (props, context) => (
                 </Fragment>
             ) : (
                 <Fragment>
-                    <p className={`${styles.font1214} ${styles.px3}`} dangerouslySetInnerHTML={{__html: props.term.content}}></p>
-                    <div className={`${styles.textCenter} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{position: 'fixed', top: 0, left: 0, bottom: 0, right: 0, zIndex: -1, opacity: 0.3}}>
-                        <img src={require('../../assets/images/logo_bg.png')} resizeMode={'contain'} style={{opacity: 0.3, width: '100%'}} />
+                    <p className={`${styles.font1214} ${styles.px3}`} style={{lineHeight: 1.1}} dangerouslySetInnerHTML={{__html: props.term.content}}></p>
+                    <div className={`${styles.textCenter} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.positionTermLogo}`} style={{zIndex: -1, opacity: 0.3}}>
+                        <img src={require('../../assets/images/logo_bg.png')} resizeMode={'cover'} style={{opacity: 0.3, width: '100%'}} />
                     </div>
                 </Fragment>
             )

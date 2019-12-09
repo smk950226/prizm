@@ -18,13 +18,6 @@ class Container extends Component{
             goReservation()
         }
     }
-
-    componentDidUpdate = () => {
-        const { isLoggedIn, goReservation, profile, photographer } = this.props;
-        if(isLoggedIn && profile && (profile.user_type === 'photographer') && photographer){
-            goReservation()
-        }
-    }
     
     render(){
         return(
