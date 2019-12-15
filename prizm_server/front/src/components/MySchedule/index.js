@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         getOrderList: () => {
             dispatch(userAction.getOrderList())
         },
+        getOrderListMore: (page) => {
+            return dispatch(userAction.getOrderListMore(page))
+        },
         goHome: () => {
             dispatch(push('/'))
         },

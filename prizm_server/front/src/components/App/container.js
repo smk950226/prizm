@@ -8,10 +8,8 @@ class Container extends Component{
         initApp: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
         notification: PropTypes.array,
-        orderList: PropTypes.array,
         initAdmin: PropTypes.func.isRequired,
         photographer: PropTypes.any,
-        chatList: PropTypes.array,
         newMessage: PropTypes.bool
     }
 

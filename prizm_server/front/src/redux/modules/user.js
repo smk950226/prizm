@@ -375,7 +375,7 @@ function getNotificationByToken(token){
 function getOrderList(){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
-        fetch(`${FETCH_URL}/api/studio/order/`, {
+        fetch(`${FETCH_URL}/api/studio/order/?page=1`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `JWT ${token}`
@@ -391,6 +391,31 @@ function getOrderList(){
             }
         })
         .then(json => dispatch(setOrderList(json)))
+    }
+}
+
+function getOrderListMore(page){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/order/?page=${page}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
     }
 }
 
@@ -418,7 +443,7 @@ function getOrderDetail(orderId){
 
 function getOrderListByToken(token){
     return (dispatch) => {
-        fetch(`${FETCH_URL}/api/studio/order/`, {
+        fetch(`${FETCH_URL}/api/studio/order/?page=1`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `JWT ${token}`
@@ -702,6 +727,7 @@ const actionCreators = {
     getNotification,
     getNotificationByToken,
     getOrderList,
+    getOrderListMore,
     getOrderListByToken,
     getOrderDetail,
     editProfile,

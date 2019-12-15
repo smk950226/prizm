@@ -80,7 +80,9 @@ class Order(APIView):
                 except:
                     pass
         orders = models.Order.objects.filter(user = user).order_by('-id')
-        serializer = serializers.OrderSerializer(orders, many = True, context = {'request': request})
+        paginator = OrderNumberPagination()
+        result_page = paginator.paginate_queryset(orders, request)
+        serializer = serializers.OrderSerializer(result_page, many = True, context = {'request': request})
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
 

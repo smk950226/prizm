@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MySchedule from './presenter';
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 class Container extends Component{
     static propTypes = {
         orderList: PropTypes.array,
         getOrderList: PropTypes.func.isRequired,
+        getOrderListMore: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
         goMyScheduleDetail: PropTypes.func.isRequired,
@@ -14,10 +19,18 @@ class Container extends Component{
         checkNotification: PropTypes.func.isRequired
     }
 
-    state = {
-        loading: true,
-        fetchedOrderList: false,
-        fetchClear: false
+    constructor(props){
+        super(props)
+        const { orderList } = props;
+        this.state = {
+            orderList: orderList ? orderList : [],
+            loading: true,
+            fetchedOrderList: false,
+            fetchClear: false,
+            page: 1,
+            hasNextPage: true,
+            isLoadingMore: false
+        }
     }
 
     componentDidMount = async() => {
@@ -43,6 +56,7 @@ class Container extends Component{
             let update = {}
             if(nextProps.orderList){
                 update.fetchedOrderList = true
+                update.orderList = nextProps.orderList
             }
 
             return update
@@ -62,9 +76,45 @@ class Container extends Component{
         }
     }
 
+    _orderListMore = async() => {
+        const { page, isLoadingMore, hasNextPage } = this.state;
+        const { getOrderListMore } = this.props;
+        if(!isLoadingMore){
+            if(hasNextPage){
+                this.setState({
+                    isLoadingMore: true
+                })
+                const result = await getOrderListMore(page+1)
+                if(result){
+                    this.setState({
+                        page: page+1,
+                        orderList: [...this.state.orderList, ...result]
+                    })
+                    await sleep(500)
+                    this.setState({
+                        isLoadingMore: false
+                    })
+                }
+                else{
+                    this.setState({
+                        hasNextPage: false
+                    })
+                    await sleep(500)
+                    this.setState({
+                        isLoadingMore: false
+                    })
+                }
+            }
+        }
+    }
+
     render(){
         return(
-            <MySchedule {...this.props} {...this.state} />
+            <MySchedule 
+            {...this.props} 
+            {...this.state} 
+            orderListMore={this._orderListMore}
+            />
         )
     }
 }
