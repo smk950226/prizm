@@ -15,8 +15,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
-        getAdminOrderList: () => {
-            return dispatch(adminAction.getAdminOrderList())
+        getAdminOrderList: (status) => {
+            return dispatch(adminAction.getAdminOrderList(status))
+        },
+        getAdminOrderListMore: (page, status) => {
+            return dispatch(adminAction.getAdminOrderListMore(page, status))
         },
         goHome: () => {
             dispatch(push('/'))

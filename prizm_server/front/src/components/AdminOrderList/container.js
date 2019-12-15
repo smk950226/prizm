@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AdminOrderList from './presenter';
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 class Container extends Component{
     static propTypes = {
         getAdminOrderList: PropTypes.func.isRequired,
+        getAdminOrderListMore: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
         profile: PropTypes.object.isRequired,
         goHome: PropTypes.func.isRequired,
@@ -16,41 +21,25 @@ class Container extends Component{
 
     state = {
         loading: true,
-        page: 'all',
-        orderList: []
+        status: 'all',
+        orderList: [],
+        page: 1,
+        hasNextPage: true,
+        isLoadingMore: false
     }
 
     componentDidMount = async() => {
-        const { getAdminOrderList, isLoggedIn, profile, goHome, photographer, goStudioSetting } = this.props;
+        const { getAdminOrderList, isLoggedIn, profile, goHome, photographer, goStudioSetting, status } = this.props;
         if(isLoggedIn){
             if(profile && (profile.user_type === 'photographer')){
                 if(photographer.id){
-                    const orderList = await getAdminOrderList()
-                    let pendingList = []
-                    let confirmedList = []
-                    let paidList = []
-                    let pastList = []
-                    orderList.map(order => {
-                        if(order.status === 'pending'){
-                            pendingList.push(order)
-                        }
-                        else if(((order.status === 'confirmed') || (order.status === 'waiting_payment'))){
-                            confirmedList.push(order)
-                        }
-                        else if(order.status === 'paid'){
-                            paidList.push(order)
-                        }
-                        else{
-                            pastList.push(order)
-                        }
-                    })
+                    const orderList = await getAdminOrderList(status)
                     this.setState({
                         orderList,
-                        pendingList,
-                        confirmedList,
-                        paidList,
-                        pastList,
-                        loading: false
+                        loading: false,
+                        page: 1,
+                        hasNextPage: true,
+                        isLoadingMore: false
                     })
                 }
                 else{
@@ -66,51 +55,77 @@ class Container extends Component{
         }
     }
 
-    componentDidUpdate = (prevProps, prevState) => {
+    componentDidUpdate = async(prevProps, prevState) => {
         if(prevProps.isLoggedIn && !this.props.isLoggedIn){
             this.props.goHome()
         }
         if(this.props.profile && (this.props.profile.user_type !== 'photographer')){
             this.props.goHome()
         }
+        if(prevState.status !== this.state.status){
+            this.setState({
+                loading: true,
+                page: 1,
+                hasNextPage: true,
+                isLoadingMore: false
+            })
+            const orderList = await this.props.getAdminOrderList(this.state.status)
+            this.setState({
+                orderList,
+                loading: false
+            })
+        }
     }
 
-    _handlePageChange = (page) => {
+    _orderListMore = async() => {
+        const { page, isLoadingMore, hasNextPage, status } = this.state;
+        const { getAdminOrderListMore } = this.props;
+        if(!isLoadingMore){
+            if(hasNextPage){
+                this.setState({
+                    isLoadingMore: true
+                })
+                const result = await getAdminOrderListMore(page+1, status)
+                if(result){
+                    this.setState({
+                        page: page+1,
+                        orderList: [...this.state.orderList, ...result]
+                    })
+                    await sleep(500)
+                    this.setState({
+                        isLoadingMore: false
+                    })
+                }
+                else{
+                    this.setState({
+                        hasNextPage: false
+                    })
+                    await sleep(500)
+                    this.setState({
+                        isLoadingMore: false
+                    })
+                }
+            }
+        }
+    }
+
+    _handleStatusChange = (status) => {
         this.setState({
-            page
+            status
         })
     }
 
     _refresh = async() => {
-        const { getAdminOrderList, isLoggedIn, profile, goHome } = this.props;
+        const { getAdminOrderList, isLoggedIn, profile, goHome, status } = this.props;
         if(isLoggedIn){
             if(profile && (profile.user_type === 'photographer')){
-                const orderList = await getAdminOrderList()
-                let pendingList = []
-                let confirmedList = []
-                let paidList = []
-                let pastList = []
-                orderList.map(order => {
-                    if(order.status === 'pending'){
-                        pendingList.push(order)
-                    }
-                    else if(((order.status === 'confirmed') || (order.status === 'waiting_payment'))){
-                        confirmedList.push(order)
-                    }
-                    else if(order.status === 'paid'){
-                        paidList.push(order)
-                    }
-                    else{
-                        pastList.push(order)
-                    }
-                })
+                const orderList = await getAdminOrderList(status)
                 this.setState({
                     orderList,
-                    pendingList,
-                    confirmedList,
-                    paidList,
-                    pastList,
-                    loading: false
+                    loading: false,
+                    page: 1,
+                    hasNextPage: true,
+                    isLoadingMore: false
                 })
             }
             else{
@@ -127,7 +142,8 @@ class Container extends Component{
             <AdminOrderList 
             {...this.props}
             {...this.state}
-            handlePageChange={this._handlePageChange}
+            orderListMore={this._orderListMore}
+            handleStatusChange={this._handleStatusChange}
             refresh={this._refresh}
             />
         )

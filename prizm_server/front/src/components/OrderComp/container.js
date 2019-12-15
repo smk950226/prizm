@@ -154,7 +154,6 @@ class Container extends Component{
                         if(result.status === 'ok'){
                             await refresh()
                             this.setState({
-                                showResponse: false,
                                 checkedOption: 0,
                                 showDatePicker: false,
                                 selectedTime: [],
@@ -186,7 +185,6 @@ class Container extends Component{
                     if(result.status === 'ok'){
                         await refresh()
                         this.setState({
-                            showResponse: false,
                             checkedOption: 0,
                             showDatePicker: false,
                             selectedTime: [],
@@ -227,7 +225,6 @@ class Container extends Component{
             if(result.status === 'ok'){
                 await refresh()
                 this.setState({
-                    showResponse: false,
                     checkedOption: 0,
                     showDatePicker: false,
                     selectedTime: [],

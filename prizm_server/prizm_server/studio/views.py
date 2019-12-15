@@ -11,9 +11,10 @@ from django.http import HttpResponse, Http404
 from PIL import Image
 from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
+from django.db.models import Q
 
 from . import serializers, models
-from prizm_server.common.pagination import MainPageNumberPagination, MesssageNumberPagination
+from prizm_server.common.pagination import MainPageNumberPagination, MesssageNumberPagination, OrderNumberPagination
 from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.chat import models as chat_models
 from prizm_server.chat import serializers as chat_serializers
@@ -236,9 +237,23 @@ class AdminOrder(APIView):
     def get(self, request, format = None):
         user = request.user
         photographer = user.photographer
+        order_status = request.query_params.get('status', None)
 
         orders = models.Order.objects.filter(photographer = photographer).order_by('-id')
-        serializer = serializers.OrderSerializer(orders, many = True, context = {'request': request})
+
+        if order_status:
+            if order_status == 'pending':
+                orders = orders.filter(status = 'pending')
+            elif order_status == 'confirmed':
+                orders = orders.filter(Q(status = 'confirmed') | Q(status = 'waiting_payment'))
+            elif order_status == 'paid':
+                orders = orders.filter(status = 'paid')
+            elif order_status == 'past':
+                orders = orders.filter(Q(status = 'cancelled') | Q(status = 'completed'))
+
+        paginator = OrderNumberPagination()
+        result_page = paginator.paginate_queryset(orders, request)
+        serializer = serializers.OrderSerializer(result_page, many = True, context = {'request': request})
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
     

@@ -13,10 +13,10 @@ function setPhotographer(photographer) {
     }
 }
 
-function getAdminOrderList(){
+function getAdminOrderList(status){
     return (dispatch, getState) => {
         const { user : { token } } = getState()
-        return fetch(`${FETCH_URL}/api/studio/admin/order/`, {
+        return fetch(`${FETCH_URL}/api/studio/admin/order/?page=1${status ? `&status=${status}` : ``}`, {
            headers: {
                "Content-Type": "application/json",
                "Authorization": `JWT ${token}`
@@ -25,6 +25,31 @@ function getAdminOrderList(){
         .then(response => {
             if((response.status === 401) || (response.status === 403)){
                 dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getAdminOrderListMore(page, status){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/studio/admin/order/?page=${page}${status ? `&status=${status}` : ``}`, {
+           headers: {
+               "Content-Type": "application/json",
+               "Authorization": `JWT ${token}`
+           }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else if(response.status === 404){
                 return false
             }
             else{
@@ -303,6 +328,7 @@ function applySetPhotographer(state, action){
 
 const actionCreators = {
     getAdminOrderList,
+    getAdminOrderListMore,
     responseToOrder,
     getOrderImage,
     uploadOrderImage,
