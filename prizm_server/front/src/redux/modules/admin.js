@@ -186,11 +186,11 @@ function updateStudio(portfolios, nickname, mainLocation, education, career, por
         const { user : { token } } = getState()
         let formData = new FormData();
         for (var i = 0; i < portfolios.length; i++) {
-            if(portfolios[i].type){
-                formData.append('portfolios[]', portfolios[i], portfolios[i].name);
+            if(portfolios[i].image.type){
+                formData.append('portfolios[]', portfolios[i].image, portfolios[i].image.name);
             }
             else{
-                formData.append('portfolios[]', JSON.stringify(portfolios[i]));
+                formData.append('portfolios[]', JSON.stringify(portfolios[i].image));
             }
         }
         formData.append('nickname', nickname)

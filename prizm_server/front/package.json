@@ -65,6 +65,7 @@
     "react-country-flag": "^1.1.0",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
+    "react-drag-sortable": "^1.0.6",
     "react-dropdown": "^1.6.4",
     "react-google-maps": "^9.4.5",
     "react-image-lightbox": "^5.1.0",

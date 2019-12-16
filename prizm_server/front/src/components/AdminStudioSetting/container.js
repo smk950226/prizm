@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AdminStudioSetting from './presenter';
+import styles from '../../style/styles.module.scss';
 
 const opacityList = [0.8, 0.6, 0.4, 0.2]
 
@@ -33,10 +34,26 @@ class Container extends Component{
     constructor(props){
         super(props)
         const { photographer } = props;
+        let submitImages = []
+        let images = []
+        if(photographer){
+            if(photographer.nickname){
+                photographer.portfolio_set.map((image, index) => {
+                    submitImages.push({
+                        idx: index,
+                        image: image
+                    })
+                    images.push({
+                        idx: index,
+                        image: image
+                    })
+                })
+            }
+        }
         this.state = {
             update: photographer ? photographer.nickname ? true : false : false,
-            images: photographer ? photographer.nickname ? photographer.portfolio_set : [] : [],
-            submitImages: photographer ? photographer.nickname ? photographer.portfolio_set : [] : [],
+            images: photographer ? photographer.nickname ? images : [] : [],
+            submitImages: photographer ? photographer.nickname ? submitImages : [] : [],
             opacityList,
             nickname: photographer ? photographer.nickname ? photographer.nickname : "" : "",
             mainLocation: photographer ? photographer.nickname ? photographer.main_location : "" : "",
@@ -115,10 +132,13 @@ class Container extends Component{
         if((this.state.tempImage !== "") && (this.state.tempHeight > 0) && (this.state.tempWidth > 0)){
             this.setState({
                 images: [...this.state.images, {
-                    image: this.state.tempImage,
-                    width: this.state.tempWidth,
-                    height: this.state.tempHeight,
-                    new: true
+                    idx: this.state.images.length,
+                    image: {
+                        image: this.state.tempImage,
+                        width: this.state.tempWidth,
+                        height: this.state.tempHeight,
+                        new: true
+                    }
                 }],
                 tempImage: "",
                 tempHeight: 0,
@@ -173,7 +193,10 @@ class Container extends Component{
                 img.src = _URL.createObjectURL(file);
                 await reader.readAsDataURL(file)
                 this.setState({
-                    submitImages: [...this.state.submitImages, file]
+                    submitImages: [...this.state.submitImages, {
+                        idx: this.state.submitImages.length,
+                        image: file
+                    }]
                 })
             }
         }
@@ -773,7 +796,7 @@ class Container extends Component{
                                         else{
                                             replacedStudioId = studioId
                                         }
-                                        const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
+                                        const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
                                         if(result.status === 'ok'){
                                             await getPhotographer()
                                             if(update){
@@ -832,7 +855,7 @@ class Container extends Component{
                                     else{
                                         replacedStudioId = studioId
                                     }
-                                    const result = await updateStudio(submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
+                                    const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
                                     if(result.status === 'ok'){
                                         await getPhotographer()
                                         if(update){
@@ -884,6 +907,23 @@ class Container extends Component{
         }
     }
 
+    _onSort = (sortedList) => {
+        let newImages = []
+        let newSubmitImages = []
+        sortedList.map(image => {
+            newImages.push(image.image)
+            this.state.submitImages.map((sub) => {
+                if(sub.idx === image.image.idx){
+                    newSubmitImages.push(sub)
+                }
+            })
+        })
+        this.setState({
+            images: newImages,
+            submitImages: newSubmitImages
+        })
+    }
+
     render(){
         return(
             <AdminStudioSetting 
@@ -931,6 +971,7 @@ class Container extends Component{
             selectOption={this._selectOption}
             blankOption={this._blankOption}
             confirm={this._confirm}
+            onSort={this._onSort}
             />
         )
     }

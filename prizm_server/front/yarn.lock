@@ -1072,6 +1072,87 @@
   dependencies:
     "@hapi/hoek" "8.x.x"
 
+"@interactjs/actions@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/actions/-/actions-1.7.2.tgz#e1ef3275a001458d980b7ff46df7a922fd58254a"
+  integrity sha512-xvRZbndPMiB/jMiFRcCNAViczlOheKo+KCBqob0QBh80VRPPGV2Dh5I5KXo8mXlrYz6deDfiKiUbF0gcSoJFQQ==
+
+"@interactjs/auto-scroll@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/auto-scroll/-/auto-scroll-1.7.2.tgz#a9ac6e34987bce7275ef6e4736bb1f2f3a576a1d"
+  integrity sha512-jYv5/M2j73wH9L7ewTi/yqEfLmGUa1VNi3l1jW1Wnrc90dD+b8tBMGK3IQxOp16DbW1V9cbK7CR7ceXLX2xKpQ==
+
+"@interactjs/auto-start@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/auto-start/-/auto-start-1.7.2.tgz#647bdb70f558bea5f3e1bd4118b2531f3c42d4e3"
+  integrity sha512-WfEUOWS3Qk1p9de5dBBSSHlKiFkjdTFf/BpS+8WVtaYIVPkJ1E8ZQY/8W16/YyOS9veMDi48/xDPu/FAa32RDQ==
+
+"@interactjs/core@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/core/-/core-1.7.2.tgz#bd0156e90e3e3c6ddd42e18ad295b82ea1572403"
+  integrity sha512-C2vS5J1AtIc6ly66d6AI+wyMkDtZ87W7sJJgbJYnkCqkZk7A5HjAT8qCYBXKH/U1Zs/umJlidMdvCGl56s1HAg==
+
+"@interactjs/dev-tools@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/dev-tools/-/dev-tools-1.7.2.tgz#eb2db9d6b66ab969ae921750f68d15df6a87b87a"
+  integrity sha512-fK4nq+WBzRMeqMGOJu+RiTV8xlD/C/AqPaF/B9VhlD5cMiGIW0zIMfJxrk+I62VpRCodVmDNgQaF9depTko/YQ==
+  dependencies:
+    "@interactjs/utils" "1.7.2"
+
+"@interactjs/inertia@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/inertia/-/inertia-1.7.2.tgz#c5f7b6ea0a9a5308ec4c0f9bb8f096912dc26b1b"
+  integrity sha512-wFAtq2/eeIxZ8BqCqgVUEhZlCiJ/Td2ZmxdG63BaR5vqsnBH/PaSFjjHJAtbaAguGwlCgEtHM65gR7BXdTCILA==
+
+"@interactjs/interact@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/interact/-/interact-1.7.2.tgz#1f5dadabf114867f6c44c136d335caa30d77f993"
+  integrity sha512-U47d6iApfSlllR9A6NbYCz8Nm/xUKt2d7+X8pcx7sqTVbrQ3Q7AlaKZZj+7yLydnWg0fkdaJRTOmBCmkohihhw==
+
+"@interactjs/interactjs@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/interactjs/-/interactjs-1.7.2.tgz#c7a02e7f250fe2768a7ad8365a176b10bde42dcf"
+  integrity sha512-0qwkam9SxEM0tNKhVDXCl8j7ksLgyvxElMl+GUFHr08rdd1PFaL+ERB22I1T3gtVrtUHgNOUGA4LXzxwrzJIaQ==
+  dependencies:
+    "@interactjs/types" "1.7.2"
+
+"@interactjs/modifiers@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/modifiers/-/modifiers-1.7.2.tgz#861583607cfe600372ee61e7480772097a3cde94"
+  integrity sha512-lM07A74dcpvNty5BMyFlYHPT0WLNnSYNzOmEXljxrR4QNX8T7vYGH6/zoQSZy/lw0PWTlE0et4W6oCjVqPKF0A==
+
+"@interactjs/pointer-events@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/pointer-events/-/pointer-events-1.7.2.tgz#9212750f8f93b8d382367e4974d36af870db0d1c"
+  integrity sha512-TEe/fp11kF8WYRNaWyegh8fNRN/SZCMQr4K+qTWE2UvWYRno8mFjBCQkcnMTgelAjBVsp34QaIG88skWRFcqwA==
+
+"@interactjs/reflow@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/reflow/-/reflow-1.7.2.tgz#041ddb2a3b9ddc38ba7ff675ab44ea39707e6f06"
+  integrity sha512-zNVBkct8asH1XBMRjZ53/knNPBUtvyKXRld7034VwFmyngVZ7R4yaWHIhL/r8KBOOGSB0TrqU1i/j/trN93J6Q==
+
+"@interactjs/types@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/types/-/types-1.7.2.tgz#cc49b4098546e1066ff1bb6337510860c030b59f"
+  integrity sha512-3HdAmB7Q0COrB0Eoh5DfTxB+Me+7LX1EQuHtKX92ukDfOpEIi9wwBoHkDOW+VWDG2ui2LlEwB/phjrAgVWrJSA==
+  dependencies:
+    "@interactjs/actions" "1.7.2"
+    "@interactjs/auto-scroll" "1.7.2"
+    "@interactjs/auto-start" "1.7.2"
+    "@interactjs/core" "1.7.2"
+    "@interactjs/dev-tools" "1.7.2"
+    "@interactjs/inertia" "1.7.2"
+    "@interactjs/interact" "1.7.2"
+    "@interactjs/modifiers" "1.7.2"
+    "@interactjs/pointer-events" "1.7.2"
+    "@interactjs/reflow" "1.7.2"
+    "@interactjs/utils" "1.7.2"
+
+"@interactjs/utils@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@interactjs/utils/-/utils-1.7.2.tgz#439bdb8caf626a9160b3bde32d72cdda5b15b1be"
+  integrity sha512-lbk8AjmJVbI4lJoIHbKGexxg9MjJ1lVj6JtjWJkJKXZ6S2968GEMYuINcaMc3heZLiQYdYlZ07/69lrmbWCYMA==
+
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.9.0.tgz#79b1bc06fb74a8cfb01cbdedf945584b1b9707f0"
@@ -5402,6 +5483,14 @@ inquirer@^6.4.1:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
+interactjs@^1.2.8:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/interactjs/-/interactjs-1.7.2.tgz#bee3133cf0b5757f1f1426ba45f8ac7138cae0e1"
+  integrity sha512-VE9j6EDDYoavmElL5+EtxpcIzzwsPjl7S6XPNMByZpief4NGuh+awZNJhqibFUcHFdHY0c/DJI8paV0DnPV8+Q==
+  dependencies:
+    "@interactjs/interactjs" "1.7.2"
+    "@interactjs/types" "1.7.2"
+
 internal-ip@^4.2.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-4.3.0.tgz#845452baad9d2ca3b69c635a137acb9a0dad0907"
@@ -6598,7 +6687,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.16.2, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.5, lodash@~4.17.10:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.16.2, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@~4.17.10:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -8924,6 +9013,14 @@ react-dom@^16.11.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.17.0"
+
+react-drag-sortable@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-drag-sortable/-/react-drag-sortable-1.0.6.tgz#8e979772b2a759b3ed3cb0afcc5cd677457b010c"
+  integrity sha512-EO0pYDMbI9vPT8TXJ3D7fZ58BYQ2F9WPzNkoE+IuKExzZ8Ab0RfoenpZAk55i15XeD/K7+dI7JRPnxvXI7DCIQ==
+  dependencies:
+    interactjs "^1.2.8"
+    lodash "^4.17.4"
 
 react-dropdown@^1.6.4:
   version "1.6.4"

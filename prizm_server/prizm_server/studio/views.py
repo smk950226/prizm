@@ -405,11 +405,12 @@ class Studio(APIView):
                 for port in portfolio_images:
                     if type(port) == type('text'):
                         pre_portfolio_id.append(int(json.loads(port)['id']))
+                        new_portfolio_images.append(int(json.loads(port)['id']))
                     else:
                         new_portfolio_images.append(port)
-                if len(pre_portfolio_id) > 0:
-                    pre_portfolio = models.Portfolio.objects.filter(photographer = user.photographer).exclude(id__in = pre_portfolio_id)
-                    pre_portfolio.delete()
+                print(new_portfolio_images)
+                pre_portfolio = models.Portfolio.objects.filter(photographer = user.photographer).exclude(id__in = pre_portfolio_id)
+                pre_portfolio.delete()
                 
                 if update == 'true':
                     photographer = user.photographer
@@ -428,12 +429,23 @@ class Studio(APIView):
                     photographer.save()
 
                     for image in new_portfolio_images:
-                        img = models.Portfolio.objects.create(
-                            photographer = photographer,
-                            image = image
-                        )
-                        img.save()
-
+                        if type(image) == type(1):
+                            try:
+                                portfolio = models.Portfolio.objects.get(id = image)
+                                new_port = models.Portfolio.objects.create(
+                                    photographer = photographer,
+                                    image = portfolio.image
+                                )
+                                new_port.save()
+                                portfolio.delete()
+                            except:
+                                pass
+                        else:
+                            img = models.Portfolio.objects.create(
+                                photographer = photographer,
+                                image = image
+                            )
+                            img.save()
                     new_locations = []
                     pre_locations_id = []
 
@@ -496,12 +508,23 @@ class Studio(APIView):
                     photographer.save()
 
                     for image in new_portfolio_images:
-                        img = models.Portfolio.objects.create(
-                            photographer = photographer,
-                            image = image
-                        )
-                        img.save()
-
+                        if type(image) == type(1):
+                            try:
+                                portfolio = models.Portfolio.objects.get(id = image)
+                                new_port = models.Portfolio.objects.create(
+                                    photographer = photographer,
+                                    image = portfolio.image
+                                )
+                                new_port.save()
+                                portfolio.delete()
+                            except:
+                                pass
+                        else:
+                            img = models.Portfolio.objects.create(
+                                photographer = photographer,
+                                image = image
+                            )
+                            img.save()
                     new_locations = []
                     pre_locations_id = []
 
