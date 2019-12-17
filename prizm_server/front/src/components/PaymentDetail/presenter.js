@@ -48,7 +48,7 @@ const PaymentDetail = (props, context) => (
                 </div>
                 {((props.order.user.country_number === '82') || (props.order.user.country_code === 'KR')) && (
                     <Fragment>
-                        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt45}`}>{context.t("입금자명")}</p>
+                        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt45}`}>{context.t("Remitter's Name")}</p>
                         <div className={`${styles.widthFull}`}>
                             <input className={`${styles.textInput2}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} />
                         </div>

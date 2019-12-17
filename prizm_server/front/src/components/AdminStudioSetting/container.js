@@ -24,7 +24,9 @@ class Container extends Component{
         showOptionModal: PropTypes.bool.isRequired,
         updateStudio: PropTypes.func.isRequired,
         getPhotographer: PropTypes.func.isRequired,
-        goClear: PropTypes.func.isRequired
+        goClear: PropTypes.func.isRequired,
+        displayBtmNav: PropTypes.func.isRequired,
+        hideBtmNav: PropTypes.func.isRequired
     }
 
     static contextTypes = {

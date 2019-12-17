@@ -310,7 +310,7 @@ const AdminSignUp = (props, context) => {
                         <div className={`${styles.mobileOnly} ${styles.mt3}`}>
                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openLocationModal}>
                                 <p className={`${styles.font32} ${styles.white}`}>{`+`}</p>
-                                <p className={`${styles.fontBold} ${styles.font12} ${styles.white}`}>{context.t("Add to location")}</p>
+                                <p className={`${styles.fontBold} ${styles.font12} ${styles.white}`}>{context.t("Add a new location")}</p>
                                 <p className={`${styles.font32} ${styles.white} ${styles.hidden}`}>{`+`}</p>
                             </div>
                         </div>
@@ -939,7 +939,7 @@ const AdminSignUp = (props, context) => {
                         <div className={`${styles.col8} ${styles.coLSm10} ${styles.px0}`}>
                             <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{context.t("Search Location")}</p>
                         </div>
-                        <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`} onClick={props.completeLocationSearch}>
+                        <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0} ${styles.cursorPointer}`} onClick={props.completeLocationSearch}>
                             <p className={`${styles.fontBold} ${styles.font13} ${styles.textRight}`}>{context.t("Completed")}</p>
                         </div>
                     </div>

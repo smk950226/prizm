@@ -13,7 +13,7 @@ const Terms = (props, context) => (
             props.error ? (
                 <Fragment>
                     <p className={`${styles.fontBold} ${styles.font14} ${styles.textCenter} ${styles.mt2} ${styles.mb3}`}>
-                        {context.t("약관이 존재하지 않습니다.")}
+                        {context.t("Terms of Use is temporarily unavailable.")}
                     </p>
                 </Fragment>
             ) : (

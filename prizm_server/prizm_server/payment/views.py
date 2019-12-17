@@ -76,9 +76,9 @@ class Deposit(APIView):
                         order.save()
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                     else:
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('한국 사용자만 입금 가능합니다.')})
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This payment option is only available for Korean customers.')})
                 else:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('요청자와 로그인한 유저가 일치하지 않습니다.')})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid user - Pleae login again.')})
             except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
         else:

@@ -57,7 +57,7 @@ class Container extends Component{
                         if(now > deadline){
                             await paymentExpire(order.id)
                             await refresh()
-                            alert(this.context.t("결제 기한이 만료되었습니다."))
+                            alert(this.context.t("Payment period has expired."))
                             goHome()
                         }
                         else{
@@ -75,7 +75,7 @@ class Container extends Component{
                         }
                     }
                     else{
-                        alert(this.context.t("요청자와 로그인한 유저가 일치하지 않습니다."))
+                        alert(this.context.t("Invalid user information. Please login again."))
                         goHome()
                     }
                 }
@@ -163,7 +163,7 @@ class Container extends Component{
                                     this.setState({
                                         isSubmitting: false
                                     })
-                                    alert(this.context.t("결제 기한이 만료되었습니다."))
+                                    alert(this.context.t("Payment period has expired."))
                                     goHome()
                                 }
                                 else{
@@ -189,33 +189,33 @@ class Container extends Component{
                                             this.setState({
                                                 isSubmitting: false
                                             })
-                                            alert(this.context.t("오류가 발생하였습니다."))
+                                            alert(this.context.t("An error has occurred.."))
                                         }
                                     }
                                     else{
-                                        alert(this.context.t("가격이 올바르지 않습니다."))
+                                        alert(this.context.t("Incorrect Price."))
                                     }
                                 }
                             }
                             else{
-                                alert(this.context.t("한국 사용자만 입금 가능합니다."))
+                                alert(this.context.t("This payment option is only available for Korean customers."))
                             }
                         }
                         else{
-                            alert(this.context.t("요청자와 로그인한 유저가 일치하지 않습니다."))
+                            alert(this.context.t("Invalid user information. Please login again."))
                         }
                     }
                     else{
-                        alert(this.context.t("이름을 입력해주세요."))
+                        alert(this.context.t("Type the remitter's name."))
                     }
                 }
                 else{
-                    alert(this.context.t("잘못된 요청입니다."))
+                    alert(this.context.t("Invalid request."))
                     goHome()
                 }
             }
             else{
-                alert(this.context.t("잘못된 요청입니다."))
+                alert(this.context.t("Invalid request."))
                 goHome()
             }
         }
@@ -241,7 +241,7 @@ class Container extends Component{
             this.setState({
                 isSubmitting: false
             })
-            alert('오류가 발생하였습니다.\n 고객센터에 반드시 문의해주세요.')
+            alert('An error has occurred..\n 고객센터에 반드시 문의해주세요.')
         }
     }
 
@@ -254,7 +254,7 @@ class Container extends Component{
                 if(price === amount){
                     if(order.user.id === profile.id){
                         if(profile.country_number === '82' || profile.country_code === 'KR'){
-                            alert(this.context.t("한국 사용자는 사용하실 수 없습니다."))
+                            alert(this.context.t("This option is not available for Korean customers."))
                         }
                         else{
                             this.setState({
@@ -268,7 +268,7 @@ class Container extends Component{
                                 this.setState({
                                     isSubmitting: false
                                 })
-                                alert(this.context.t("결제 기한이 만료되었습니다."))
+                                alert(this.context.t("Payment period has expired."))
                                 goHome()
                             }
                             else{
@@ -300,23 +300,23 @@ class Container extends Component{
                                     });
                                 }
                                 else{
-                                    alert(this.context.t("가격이 올바르지 않습니다."))
+                                    alert(this.context.t("Incorrect Price."))
                                 }
                             }
                             
                         }
                     }
                     else{
-                        alert(this.context.t("요청자와 로그인한 유저가 일치하지 않습니다."))
+                        alert(this.context.t("Invalid user information. Please login again."))
                     }
                 }
                 else{
-                    alert(this.context.t("잘못된 요청입니다."))
+                    alert(this.context.t("Invalid request."))
                     goHome()
                 }
             }
             else{
-                alert(this.context.t("잘못된 요청입니다."))
+                alert(this.context.t("Invalid request."))
                 goHome()
             }
         }

@@ -279,11 +279,11 @@ class Container extends Component{
                                 }
                             }
                             else{
-                                alert(this.context.t("비밀번호가 일치하지 않습니다."))
+                                alert(this.context.t("Invalid Password."))
                             }
                         }
                         else{
-                            alert(this.context.t("비밀번호가 일치하지 않습니다."))
+                            alert(this.context.t("Invalid Password."))
                         }
                     }
                     else{

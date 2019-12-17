@@ -175,7 +175,8 @@ class AdminRouteContainer extends Component{
         fetchClear: false,
         showMobile: false,
         showLocationModal: false,
-        showOptionModal: false
+        showOptionModal: false,
+        hideBtmNav: false
     }
 
     componentDidMount = async() => {
@@ -234,12 +235,14 @@ class AdminRouteContainer extends Component{
 
     _openLocationModal = () => {
         this.setState({
+            hideBtmNav: true,
             showLocationModal: true
         })
     }
 
     _closeLocationModal = () => {
         this.setState({
+            hideBtmNav: false,
             showLocationModal: false
         })
     }
@@ -256,8 +259,20 @@ class AdminRouteContainer extends Component{
         })
     }
 
+    _displayBtmNav = () => {
+        this.setState({
+            hideBtmNav: false
+        })
+    }
+
+    _hideBtmNav = () => {
+        this.setState({
+            hideBtmNav: true
+        })
+    }
+
     render(){
-        const { loading, showMobile, showLocationModal, showOptionModal } = this.state;
+        const { loading, showMobile, showLocationModal, showOptionModal, hideBtmNav } = this.state;
         const { showBtmNav } = this.props;
         if(loading){
             return(
@@ -270,8 +285,10 @@ class AdminRouteContainer extends Component{
             return(
                 <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
                     <AdminNavigation showMobile={showMobile} openMobile={this._openMobile} showLocationModal={showLocationModal} showOptionModal={showOptionModal} />
-                    <AdminRoute showMobile={showMobile} openMobile={this._openMobile} closeMobile={this._closeMobile} showLocationModal={showLocationModal} openLocationModal={this._openLocationModal} closeLocationModal={this._closeLocationModal} showOptionModal={showOptionModal} openOptionModal={this._openOptionModal} closeOptionModal={this._closeOptionModal} />
-                    <AdminBottomNavigation showBtmNav={showBtmNav} />
+                    <AdminRoute displayBtmNav={this._displayBtmNav} hideBtmNav={this._hideBtmNav} showMobile={showMobile} openMobile={this._openMobile} closeMobile={this._closeMobile} showLocationModal={showLocationModal} openLocationModal={this._openLocationModal} closeLocationModal={this._closeLocationModal} showOptionModal={showOptionModal} openOptionModal={this._openOptionModal} closeOptionModal={this._closeOptionModal} />
+                    {!hideBtmNav && (
+                        <AdminBottomNavigation showBtmNav={showBtmNav} />
+                    )}
                 </div>
             )
         }

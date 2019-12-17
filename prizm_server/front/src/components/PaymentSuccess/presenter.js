@@ -21,24 +21,24 @@ const PaymentSuccess = (props, context) => (
                 <div className={`${props.isDeposit ? null : styles.textCenter}`}>
                     {props.isDeposit ? (
                         <Fragment>
-                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("예약 신청이 완료되었습니다!")}</p>
-                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t(`다음의 계좌번호로 ${numberWithCommas(props.price)}원을 송금해주세요.`)}</p>
+                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("Your reservation has been successfully submitted!")}</p>
+                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t(`Please send ${numberWithCommas(props.price)} KRW to the following bank account :`)}</p>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`}>
-                                <p className={`${styles.font1214} ${styles.mr2}`}>{context.t('계좌번호 : IBK기업은행 054-146700-04-018')}</p>
+                                <p className={`${styles.font1214} ${styles.mr2}`}>{context.t('Account Number : IBK (Industrial Bank of Korea) 054-146700-04-018')}</p>
                                 <CopyToClipboard text={'054-146700-04-018'}>
                                 <div className={`${styles.borderRadiusRound} ${styles.bgCompleted} ${styles.px2} ${styles.py1} ${styles.textCenter} ${styles.cursorPointer}`}>
-                                    <p className={`${styles.font10} ${styles.white}`}>{context.t("복사")}</p>
+                                    <p className={`${styles.font10} ${styles.white}`}>{context.t("Copy")}</p>
                                 </div>
                                 </CopyToClipboard>
                             </div>
-                            <p className={`${styles.font1214}`}>{context.t('예금주명 : 이엑스피랩스')}</p>
-                            <p className={`${styles.font1214} ${styles.completed}`}>{context.t(`입금기한 : ${props.deadline.getFullYear()}년 ${props.deadline.getMonth() + 1}월 ${props.deadline.getDate()}일 ${props.deadline.getHours()}:${props.deadline.getMinutes()} 까지`)}</p>
-                            <p className={`${styles.font1012} ${styles.completed}`}>{context.t(`(입금기한 내 금액이 입금되지 않으면 예약이 자동으로 취소됩니다.)`)}</p>
+                            <p className={`${styles.font1214}`}>{context.t('Account holder : EXPLABS')}</p>
+                            <p className={`${styles.font1214} ${styles.completed}`}>{context.t(`Payment Due : ${props.deadline.getFullYear()}/${props.deadline.getMonth() + 1}/${props.deadline.getDate()} ${props.deadline.getHours()}:${props.deadline.getMinutes()}`)}</p>
+                            <p className={`${styles.font1012} ${styles.completed}`}>{context.t(`(Your reservation will be cancelled if you do not make payment by the payment due.)`)}</p>
                             <div className={`${styles.textCenter}`}>
                                 <img src={require('../../assets/images/signup_complete.png')} alt={context.t("Paid")} className={`${styles.mt3}`} style={{width: '80%', maxWidth: 400}} />
                             </div>
-                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("결제 금액은 사진촬영이 완료되고 사진을 수령하신 이후에만 사진작가에게 전달되며, 그 전까지는 PRIZM 팀이 안전하게 보관합니다.")}</p>
-                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("취소 및 환불정책은 이용약관을 참고해주세요.")}</p>
+                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("Your payment will be transferred to the photographer only after you have completed the photo session. PRIZM will safely hold your payment until then.")}</p>
+                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("Please refer to the Terms of Use for cancellation and refund polices.")}</p>
                             
                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Go back to the main page")}</p>
