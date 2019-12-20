@@ -409,6 +409,83 @@ function createReview(photographerId, orderId, rate, comment){
     }
 }
 
+function createCustomRequestByToken(token, photograpyType, person, hour, dateOption, selectedDate, selectedHour, selectedMin, startDate, endDate, locationOption, locations){
+    return (dispatch, getState) => {
+        let formData = new FormData();
+        formData.append('photograpyType', photograpyType)
+        formData.append('person', person)
+        formData.append('hour', hour)
+        formData.append('dateOption', dateOption)
+        formData.append('selectedDate', selectedDate)
+        formData.append('selectedHour', selectedHour)
+        formData.append('selectedMin', selectedMin)
+        formData.append('startDate', startDate)
+        formData.append('endDate', endDate)
+        formData.append('locationOption', locationOption)
+
+        for (var i = 0; i < locations.length; i++) {
+            formData.append('locations[]', JSON.stringify(locations[i]));
+        }
+
+        return fetch(`${FETCH_URL}/api/studio/custom/request/`, {
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`
+            },
+            body: formData
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function createCustomRequest(photograpyType, person, hour, dateOption, selectedDate, selectedHour, selectedMin, startDate, endDate, locationOption, locations){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        let formData = new FormData();
+        formData.append('photograpyType', photograpyType)
+        formData.append('person', person)
+        formData.append('hour', hour)
+        formData.append('dateOption', dateOption)
+        formData.append('selectedDate', selectedDate)
+        formData.append('selectedHour', selectedHour)
+        formData.append('selectedMin', selectedMin)
+        formData.append('startDate', startDate)
+        formData.append('endDate', endDate)
+        formData.append('locationOption', locationOption)
+
+        for (var i = 0; i < locations.length; i++) {
+            formData.append('locations[]', JSON.stringify(locations[i]));
+        }
+
+        return fetch(`${FETCH_URL}/api/studio/custom/request/`, {
+            method: 'POST',
+            headers: {
+                "Authorization": `JWT ${token}`
+            },
+            body: formData
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -480,7 +557,9 @@ const actionCreators = {
     getReviewList,
     getReviewListMore,
     createReview,
-    paymentSuccess
+    paymentSuccess,
+    createCustomRequest,
+    createCustomRequestByToken
 }
 
 export { actionCreators }

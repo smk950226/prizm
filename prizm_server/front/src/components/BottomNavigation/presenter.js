@@ -9,7 +9,7 @@ class Navigation extends Component{
         pageType: PropTypes.string.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
         goMySchedule: PropTypes.func.isRequired,
-        goProfileMenu: PropTypes.func.isRequired,
+        goCustomRequest: PropTypes.func.isRequired,
         goMessage: PropTypes.func.isRequired,
         showNav: PropTypes.bool.isRequired,
         newMessage: PropTypes.bool
@@ -27,6 +27,10 @@ class Navigation extends Component{
                     <div className={`${styles.positionBtmNav} ${styles.widthFull} ${styles.bgWhite} ${showBtmNav ? null : styles.hide} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{zIndex: 2}}>
                         <div className={`${styles.containerCustomer} ${styles.widthFull} ${styles.px4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 48}}>
                             <div className={`${styles.textCenter}`}>
+                                <img src={require('../../assets/images/icon_request.png')} alt={this.context.t("Custom")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goCustomRequest} />
+                                <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goCustomRequest}>{this.context.t("Custom")}</p>
+                            </div>
+                            <div className={`${styles.textCenter}`}>
                                 <img src={require('../../assets/images/icon_artist.png')} alt={this.context.t("ARTIST")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goHome} />
                                 <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("Artist")}</p>
                             </div>
@@ -40,10 +44,6 @@ class Navigation extends Component{
                                 {newMessage && (
                                     <div className={`${styles.circle8} ${styles.bgRed}`} style={{position: 'absolute', top: 2, right: 8}} />
                                 )}
-                            </div>
-                            <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/icon_profile.png')} alt={this.context.t("PROFILE")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu} />
-                                <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu}>{this.context.t("Profile")}</p>
                             </div>
                         </div>
                     </div>

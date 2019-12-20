@@ -30,8 +30,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goMySchedule: () => {
             dispatch(push('/my/schedule/'))
         },
-        goProfile: () => {
-            dispatch(push('/profile/'))
+        goProfileMenu: () => {
+            dispatch(push('/menu/profile/'))
         },
         goTerms: (name) => {
             dispatch(push(`/terms/${name}/`))

@@ -18,7 +18,7 @@ class Navigation extends Component{
         goSignIn: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
         goMySchedule: PropTypes.func.isRequired,
-        goProfile: PropTypes.func.isRequired,
+        goProfileMenu: PropTypes.func.isRequired,
         showNav: PropTypes.bool.isRequired,
         goTerms: PropTypes.func.isRequired
     }
@@ -88,8 +88,8 @@ class Navigation extends Component{
                                 {isLoggedIn ? (
                                     <Fragment>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt5}`}>
-                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goProfile}>{this.context.t("Profile")}</p>
-                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Profile")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goProfile} />
+                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu}>{this.context.t("Profile")}</p>
+                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Profile")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goProfileMenu} />
                                         </div>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt2}`}>
                                             <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>{this.context.t("My schedule")}</p>

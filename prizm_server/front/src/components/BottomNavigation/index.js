@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goMySchedule: () => {
             dispatch(push('/my/schedule/'))
         },
-        goProfileMenu: () => {
-            dispatch(push('/menu/profile/'))
+        goCustomRequest: () => {
+            dispatch(push('/custom/request/'))
         },
         goMessage: () => {
             dispatch(push('/message/'))

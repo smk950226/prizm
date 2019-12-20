@@ -12,7 +12,7 @@ class Container extends Component{
         goSignIn: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
         goMySchedule: PropTypes.func.isRequired,
-        goProfile: PropTypes.func.isRequired,
+        goProfileMenu: PropTypes.func.isRequired,
         goTerms: PropTypes.func.isRequired
     }
 

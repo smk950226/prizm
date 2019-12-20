@@ -19,4 +19,5 @@ urlpatterns = [
     path('zip/<str:order_id>/', views.create_zip),
     path('review/', views.Review.as_view()),
     path('review/create/', views.ReviewCreate.as_view()),
+    path('custom/request/', views.CustomRequest.as_view()),
 ]

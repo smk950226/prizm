@@ -148,3 +148,39 @@ class OrderImage(models.Model):
         ordering = ['-id']
         verbose_name = _('Order Image')
         verbose_name_plural = _('Order Image')
+
+
+class CustomRequest(models.Model):
+    user = models.ForeignKey('users.User', on_delete = models.CASCADE)
+    photograpy_type = models.CharField(_('Photography Type'), max_length = 500)
+    person = models.PositiveIntegerField(_('How many people'))
+    hour = models.FloatField(_('How many hours'))
+    date_option = models.CharField(_("Date Option"), choices = (('Specific', 'Specific Date'), ('Range', 'Not Specific Date')), max_length = 100)
+    specific_date = models.DateTimeField(_("Specific Date"), blank = True, null = True)
+    start_date = models.DateField(_("Range Start Date"), blank = True, null = True)
+    end_date = models.DateField(_("Range End Date"), blank = True, null = True)
+    location_option = models.CharField(_("Location Option"), choices = (('Specific', 'Specific Location'), ('Range', 'Not Specific Date')), max_length = 100)
+    created_at = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return self.user.email + ' - custom request - ' + str(self.id)
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Custom Request')
+        verbose_name_plural = _('Custom Request')
+
+
+class RequestLocation(models.Model):
+    custom_request = models.ForeignKey(CustomRequest, on_delete = models.CASCADE, related_name="locations")
+    name = models.CharField(_('Name'), max_length = 300)
+    lng = models.FloatField(_('Longitude'))
+    lat = models.FloatField(_('Latitude'))
+
+    def __str__(self):
+        return self.name + '-location-' + str(self.lng) + ', ' + str(self.lat)
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Request Location')
+        verbose_name_plural = _('Request Location')

@@ -43,3 +43,14 @@ class OrderAdmin(admin.ModelAdmin):
 class OrderImageAdmin(admin.ModelAdmin):
     list_display = ['id', 'order']
     list_display_links = ['id', 'order']
+
+
+@admin.register(models.CustomRequest)
+class CustomRequestAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'photograpy_type', 'person', 'hour', 'date_option', 'specific_date', 'start_date', 'end_date', 'created_at']
+    list_display_links = ['id', 'user']
+
+
+@admin.register(models.RequestLocation)
+class RequestLocationAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'custom_request']

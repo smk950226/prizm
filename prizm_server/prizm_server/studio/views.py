@@ -651,6 +651,111 @@ class ReviewCreate(APIView):
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
+class CustomRequest(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format = None):
+        user = request.user
+        photograpy_type = request.data.get('photograpyType', None)
+        person = request.data.get('person', None)
+        hour = request.data.get('hour', None)
+        date_option = int(request.data.get('dateOption', None))
+        specific_date = request.data.get("selectedDate")
+        specific_hour = request.data.get("selectedHour")
+        specific_min = request.data.get("selectedMin")
+        start_date = request.data.get('startDate', None)
+        end_date = request.data.get('endDate', None)
+        location_option = int(request.data.get('locationOption', None))
+        locations = request.data.getlist('locations[]')
+        if date_option == 1:
+            specific = datetime.datetime(int(specific_date.split('-')[0]), int(specific_date.split('-')[1]), int(specific_date.split('-')[2]), int(specific_hour), int(specific_min))
+            if location_option == 1:
+                custom_request = models.CustomRequest.objects.create(
+                    user = user,
+                    photograpy_type = photograpy_type,
+                    person = person,
+                    hour = hour,
+                    date_option = 'Specific',
+                    specific_date = specific,
+                    location_option = 'Specific'
+                )
+                custom_request.save()
+                for location in locations:
+                    location = json.loads(location)
+                    loc = models.RequestLocation.objects.create(
+                        custom_request = custom_request,
+                        name = location['name'],
+                        lng = location['lng'],
+                        lat = location['lat']
+                    )
+                    loc.save()
+                
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            elif location_option == 2:
+                custom_request = models.CustomRequest.objects.create(
+                    user = user,
+                    photograpy_type = photograpy_type,
+                    person = person,
+                    hour = hour,
+                    date_option = 'Specific',
+                    specific_date = specific,
+                    location_option = 'Range'
+                )
+                custom_request.save()
+
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            else:
+                print(1111)
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+        elif date_option == 2:
+            start = datetime.date(int(start_date.split('-')[0]), int(start_date.split('-')[1]), int(start_date.split('-')[2]))
+            end = datetime.date(int(end_date.split('-')[0]), int(end_date.split('-')[1]), int(end_date.split('-')[2]))
+
+            if location_option == 1:
+                custom_request = models.CustomRequest.objects.create(
+                    user = user,
+                    photograpy_type = photograpy_type,
+                    person = person,
+                    hour = hour,
+                    date_option = 'Range',
+                    start_date = start,
+                    end_date = end,
+                    location_option = 'Specific'
+                )
+                custom_request.save()
+                for location in locations:
+                    location = json.loads(location)
+                    loc = models.RequestLocation.objects.create(
+                        custom_request = custom_request,
+                        name = location['name'],
+                        lng = location['lng'],
+                        lat = location['lat']
+                    )
+                    loc.save()
+                
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            elif location_option == 2:
+                custom_request = models.CustomRequest.objects.create(
+                    user = user,
+                    photograpy_type = photograpy_type,
+                    person = person,
+                    hour = hour,
+                    date_option = 'Range',
+                    location_option = 'Range'
+                )
+                custom_request.save()
+
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            else:
+                print(22222)
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+        else:
+            print(333333)
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
 def download(request, image_id):
     image = models.OrderImage.objects.get(id = image_id)
     img = Image.open(image.processed_image)
