@@ -62,7 +62,7 @@ const OrderComp = (props, context) => (
                         </p>
                     </div>
                 </div>
-                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt2}`}>
                     <div className={`${styles.col3} ${styles.colSm2} ${styles.px0}`}>
                         <p className={`${styles.fontRBold} ${styles.font1214}`}>{context.t("Service&Pricing")}</p>
                     </div>

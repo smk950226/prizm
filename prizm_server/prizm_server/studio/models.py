@@ -159,8 +159,11 @@ class CustomRequest(models.Model):
     specific_date = models.DateTimeField(_("Specific Date"), blank = True, null = True)
     start_date = models.DateField(_("Range Start Date"), blank = True, null = True)
     end_date = models.DateField(_("Range End Date"), blank = True, null = True)
-    location_option = models.CharField(_("Location Option"), choices = (('Specific', 'Specific Location'), ('Range', 'Not Specific Date')), max_length = 100)
+    location_option = models.CharField(_("Location Option"), choices = (('Specific', 'Specific Location'), ('Range', 'Not Specific Location')), max_length = 100)
     created_at = models.DateTimeField(auto_now_add = True)
+    photographer = models.ForeignKey(Photographer, on_delete = models.CASCADE, blank = True, null = True)
+    is_closed = models.BooleanField(_("Is Closed"), default = False)
+    order = models.OneToOneField(Order, on_delete = models.CASCADE, blank = True, null = True)
 
     def __str__(self):
         return self.user.email + ' - custom request - ' + str(self.id)
@@ -171,8 +174,25 @@ class CustomRequest(models.Model):
         verbose_name_plural = _('Custom Request')
 
 
+class RequestOrder(models.Model):
+    photographer = models.ForeignKey(Photographer, on_delete = models.CASCADE)
+    custom_request = models.ForeignKey(CustomRequest, on_delete = models.CASCADE) 
+    available_time = models.TextField(_("Available Time"), blank = True, null = True)
+    price = models.FloatField(_("How much in dollars"))
+    location = models.CharField(_("Selected Location"), max_length = 500, blank = True, null = True)
+
+    def __str__(self):
+        return self.custom_request.user.email + ' - custom request order - ' + self.photographer.nickname
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Custom Request Order')
+        verbose_name_plural = _('Custom Request Order')
+
+
 class RequestLocation(models.Model):
-    custom_request = models.ForeignKey(CustomRequest, on_delete = models.CASCADE, related_name="locations")
+    custom_request = models.ForeignKey(CustomRequest, on_delete = models.CASCADE, related_name="locations", blank = True, null = True)
+    request_order = models.ForeignKey(RequestOrder, on_delete = models.CASCADE, related_name="locations", blank = True, null = True)
     name = models.CharField(_('Name'), max_length = 300)
     lng = models.FloatField(_('Longitude'))
     lat = models.FloatField(_('Latitude'))

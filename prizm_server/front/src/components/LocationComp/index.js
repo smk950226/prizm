@@ -10,7 +10,8 @@ class LocationComp extends Component{
         iondex: PropTypes.number,
         total: PropTypes.number,
         blankLocation: PropTypes.func.isRequired,
-        selectLocation: PropTypes.func.isRequired
+        selectLocation: PropTypes.func.isRequired,
+        readOnly: PropTypes.bool
     }
 
     static contextTypes = {
@@ -50,10 +51,10 @@ class LocationComp extends Component{
     }
 
     render(){
-        const { location, selectedLocation, index, total } = this.props;
+        const { location, selectedLocation, index, total, readOnly } = this.props;
         const { isTruncated } = this.state;
         return(
-            <div className={`${styles.containerLocation} ${selectedLocation.id === location.id ? styles.selected : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${index === total - 1 ? null : styles.mr3}`} onClick={selectedLocation.id === location.id ? this._blankLocation : () => this._selectLocation(location)} style={isTruncated ? {width: 120, minWidth: 120} : { width: null, minWidth: null }}>
+            <div className={`${styles.containerLocation} ${selectedLocation.id === location.id ? styles.selected : null} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${index === total - 1 ? null : styles.mr3}`} onClick={readOnly ? null : selectedLocation.id === location.id ? this._blankLocation : () => this._selectLocation(location)} style={isTruncated ? {width: 120, minWidth: 120} : { width: null, minWidth: null }}>
                 <div className={`${styles.px3} ${styles.col12}`}>
                     <p className={`${styles.font10}`}>{this.context.t(`Location ${index + 1}`)}</p>
                     <p className={`${styles.fontBold} ${styles.font11} ${styles.mt1} ${styles.cursorPointer}`} style={isTruncated ? null : {whiteSpace: 'nowrap'}}>

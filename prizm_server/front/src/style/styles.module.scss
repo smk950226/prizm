@@ -475,6 +475,9 @@ p{
 .bg-gray-93{
     background-color: $gray-93;
 }
+.bg-gray-97{
+    background-color: $gray-97;
+}
 .bg-pink{
     background-color: $pink;
 }
@@ -913,7 +916,21 @@ p{
 .check-box-sm-pink-text{
     width: calc(100% - 12px);
 }
+.check-box-dark{
+    cursor: pointer;
+    border: 2px solid $gray-33;
+    width: 16px;
+    height: 16px;
+    background-color: $white;
 
+    &.checked{
+        border: 2px solid $confirmed;
+        background-color: $confirmed;
+    }
+}
+.check-box-dark-text{
+    width: calc(100% - 16px);
+}
 
 input{
     -webkit-appearance: none;

@@ -32,6 +32,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goAccount: () => {
             dispatch(push('/profile/account/'))
+        },
+        getRequestList: () => {
+            return dispatch(adminAction.getRequestList())
+        },
+        getRequestListMore: (page) => {
+            return dispatch(adminAction.getRequestListMore(page))
         }
     }
 }

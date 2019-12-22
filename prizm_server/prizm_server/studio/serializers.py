@@ -132,3 +132,61 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Review
         fields = ['id', 'photographer', 'order', 'user', 'rate', 'comment', 'created_at', 'updated_at']
+
+
+class RequestLocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.RequestLocation
+        fields = ['id', 'name', 'lng', 'lat']
+
+class RequestOrderSerializer(serializers.ModelSerializer):
+    photographer = PhotographerShortSerializer()
+
+    class Meta:
+        model = models.RequestOrder
+        fields = ['id', 'photographer', 'available_time', 'price', 'location']
+
+
+class CustomRequestSerializer(serializers.ModelSerializer):
+    user = users_serializers.ProfileSerializer()
+    status = serializers.SerializerMethodField()
+    locations = RequestLocationSerializer(many = True)
+    request_order = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.CustomRequest
+        fields = ['id', 'user', 'photograpy_type', 'person', 'hour', 'date_option', 'specific_date', 'start_date', 'end_date', 'location_option', 'status', 'created_at', 'is_closed', 'locations', 'request_order']
+    
+    def get_status(self, obj):
+        try:
+            request = self.context.get('request')
+            user = request.user
+            if user.user_type == 'photographer':
+                if obj.photographer:
+                    if obj.photographer == user.photographer:
+                        return 'selected'
+                    else:
+                        return 'closed'
+                elif obj.requestorder_set.filter(photographer = user.photographer).count() > 0:
+                    return 'submitted'
+                elif obj.is_closed:
+                    return 'closed'
+                else:
+                    return 'none'
+            else:
+                return 'none'
+        except:
+            return 'none'
+    
+    def get_request_order(self, obj):
+        try:
+            request = self.context.get('request')
+            user = request.user
+            request_order = obj.requestorder_set.filter(photographer = user.photographer).first()
+            if request_order:
+                serializer = RequestOrderSerializer(request_order, context = {'request': request})
+                return serializer.data
+            else:
+                return {}
+        except:
+            return {}

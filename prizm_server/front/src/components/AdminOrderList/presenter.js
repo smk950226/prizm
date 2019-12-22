@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 import OrderComp from '../OrderComp';
+import RequestComp from '../RequestComp';
 import AdminCustomerImage from '../AdminCustomerImage';
 import styled from 'styled-components';
 
@@ -37,7 +38,8 @@ class AdminOrderList extends Component{
         goProfile: PropTypes.func.isRequired,
         goAccount: PropTypes.func.isRequired,
         orderListMore: PropTypes.func.isRequired,
-        isLoadingMore: PropTypes.bool.isRequired
+        isLoadingMore: PropTypes.bool.isRequired,
+        requestList: PropTypes.array,
     }
 
     static contextTypes = {
@@ -66,7 +68,7 @@ class AdminOrderList extends Component{
     }
 
     render(){
-        const { photographer, status, loading, orderList, isLoadingMore } = this.props;
+        const { photographer, status, loading, orderList, isLoadingMore, requestList } = this.props;
         return(
             <div className={`${styles.containerAdmin} ${styles.pxAdmin2}`}>
                 <div className={`${styles.row} ${styles.mx0} ${styles.widthFull}`}>
@@ -81,7 +83,11 @@ class AdminOrderList extends Component{
                             </div>
                         </div>
                         <p className={`${styles.mt4} ${styles.fontBold} ${styles.font201820}`}>{this.context.t("Manage Reservations")}</p>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.mb3}`}>
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.mb3} ${styles.flexNowrap}`} style={{overflowX: 'scroll'}}>
+                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${status === 'custom' ? styles.confirmed : styles.black} ${status === 'custom' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box', minWidth: 98.5}} onClick={() => this.props.handleStatusChange('custom')}>
+                                {this.context.t("Custom Requests")}
+                            </p>
+                            <div className={`${styles.bgBlack} ${styles.mr4}`} style={{width: 2, minWidth: 2, height: 14}} />
                             <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${status === 'all' ? styles.confirmed : styles.black} ${status === 'all' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('all')}>
                                 {this.context.t("All")}
                             </p>
@@ -104,15 +110,35 @@ class AdminOrderList extends Component{
                                 <Loader type="Oval" color="#d66c8b" height={20} width={20} />
                             </div>
                         ) : (
-                            orderList && (orderList.length > 0)  ? (
-                                orderList.map((order, index) => (
-                                    <OrderComp key={index} order={order} index={index} total={orderList.length} refresh={this.props.refresh} />
-                                ))
+                            (status === 'custom') ? (
+                                requestList && (requestList.length > 0)  ? (
+                                    <Fragment>
+                                        <p className={`${styles.font1416}`} style={{lineHeight: 1.5}}>
+                                            {this.context.t("When your proposal gets")}<span className={`${styles.fontBold} ${styles.white} ${styles.px2} ${styles.py1} ${styles.bgConfirmed} ${styles.mx1}`}>{this.context.t("Selected")}</span>
+                                            {this.context.t("by the client, the request will be shown as a confirmed reservation at the")}<span className={`${styles.fontBold}`}>{this.context.t(" Confirmed ")}</span>
+                                            {this.context.t("section above.")}
+                                        </p>
+                                        {requestList.map((request, index) => (
+                                            <RequestComp key={index} request={request} index={index} total={requestList.length} refresh={this.props.refresh} photographer={photographer} />
+                                        ))}
+                                    </Fragment>
+                                ) : (
+                                    <div className={`${styles.textCenter}`}>
+                                        <img src={require('../../assets/images/main.png')} alt={this.context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
+                                        <p className={`${styles.font1214} ${styles.mt3}`}>{this.context.t("You haven't received reservation requests yet.")}</p>
+                                    </div>
+                                )
                             ) : (
-                                <div className={`${styles.textCenter}`}>
-                                    <img src={require('../../assets/images/main.png')} alt={this.context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
-                                    <p className={`${styles.font1214} ${styles.mt3}`}>{this.context.t("You haven't received reservation requests yet.")}</p>
-                                </div>
+                                orderList && (orderList.length > 0)  ? (
+                                    orderList.map((order, index) => (
+                                        <OrderComp key={index} order={order} index={index} total={orderList.length} refresh={this.props.refresh} />
+                                    ))
+                                ) : (
+                                    <div className={`${styles.textCenter}`}>
+                                        <img src={require('../../assets/images/main.png')} alt={this.context.t("Request not exist")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
+                                        <p className={`${styles.font1214} ${styles.mt3}`}>{this.context.t("You haven't received reservation requests yet.")}</p>
+                                    </div>
+                                )
                             )
                         )}
                         {isLoadingMore && (

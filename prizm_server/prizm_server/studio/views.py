@@ -289,8 +289,10 @@ class AdminOrder(APIView):
                     message_type = 'order_confirm'
                 )
                 message.save()
+                order = models.Order.objects.get(id = order_id)
+                serializer = serializers.OrderSerializer(order, context = {'request': request})
 
-                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'order': serializer.data})
             elif option == 2:
                 available_time = request.data.get('availableTime', None)
                 if available_time:
@@ -313,8 +315,10 @@ class AdminOrder(APIView):
                             text = json.dumps(available_time)
                         )
                         message.save()
+                        order = models.Order.objects.get(id = order_id)
+                        serializer = serializers.OrderSerializer(order, context = {'request': request})
 
-                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'order': serializer.data})
                 else:
                     return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
             else:
@@ -331,7 +335,10 @@ class AdminOrder(APIView):
                         order = order
                     )
                     notification.save()
-                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    order = models.Order.objects.get(id = order_id)
+                    serializer = serializers.OrderSerializer(order, context = {'request': request})
+
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'order': serializer.data})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
@@ -653,6 +660,15 @@ class ReviewCreate(APIView):
 
 class CustomRequest(APIView):
     permission_classes = [IsAuthenticated]
+    def get(self, request, format = None):
+        custom_request = models.CustomRequest.objects.all()
+
+        paginator = OrderNumberPagination()
+        result_page = paginator.paginate_queryset(custom_request, request)
+        serializer = serializers.CustomRequestSerializer(result_page, many = True, context = {'request': request})
+
+        return Response(status = status.HTTP_200_OK, data = serializer.data)
+
     def post(self, request, format = None):
         user = request.user
         photograpy_type = request.data.get('photograpyType', None)
@@ -704,7 +720,6 @@ class CustomRequest(APIView):
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
             else:
-                print(1111)
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
         elif date_option == 2:
@@ -741,18 +756,60 @@ class CustomRequest(APIView):
                     person = person,
                     hour = hour,
                     date_option = 'Range',
+                    start_date = start,
+                    end_date = end,
                     location_option = 'Range'
                 )
                 custom_request.save()
 
                 return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
             else:
-                print(22222)
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
-            print(333333)
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
+
+class RequestOrder(APIView):
+    permission_classes = [AdminAuthenticated]
+    def post(self, request, format = None):
+        user = request.user
+        photographer = user.photographer
+        request_id = request.data.get('requestId', None)
+        location = request.data.get('location', None)
+        available_time = request.data.get('availableTime', None)
+        price = request.data.get('price', None)
+
+        if request_id and location and price:
+            try:
+                custom_request = models.CustomRequest.objects.get(id = request_id)
+                if custom_request.date_option == 'Specific':
+                    request_order = models.RequestOrder.objects.create(
+                        photographer = photographer,
+                        custom_request = custom_request,
+                        price = float(price),
+                        location = location
+                    )
+                    request_order.save()
+                    custom_request = models.CustomRequest.objects.get(id = request_id)
+                    serializer = serializers.CustomRequestSerializer(custom_request, context = {'request': request})
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'custom_request': serializer.data})
+                else:
+                    request_order = models.RequestOrder.objects.create(
+                        photographer = photographer,
+                        custom_request = custom_request,
+                        available_time = available_time,
+                        price = float(price),
+                        location = location
+                    )
+                    request_order.save()
+                    custom_request = models.CustomRequest.objects.get(id = request_id)
+                    serializer = serializers.CustomRequestSerializer(custom_request, context = {'request': request})
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'custom_request': serializer.data})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 

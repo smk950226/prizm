@@ -16,31 +16,49 @@ class Container extends Component{
         photographer: PropTypes.object.isRequired,
         goStudioSetting: PropTypes.func.isRequired,
         goProfile: PropTypes.func.isRequired,
-        goAccount: PropTypes.func.isRequired
+        goAccount: PropTypes.func.isRequired,
+        getRequestList: PropTypes.func.isRequired,
+        getRequestListMore: PropTypes.func.isRequired
     }
 
     state = {
         loading: true,
         status: 'all',
         orderList: [],
+        requestList: [],
         page: 1,
         hasNextPage: true,
-        isLoadingMore: false
+        isLoadingMore: false,
+        showRequestDetail: false
     }
 
     componentDidMount = async() => {
-        const { getAdminOrderList, isLoggedIn, profile, goHome, photographer, goStudioSetting, status } = this.props;
+        const { getAdminOrderList, getRequestList, isLoggedIn, profile, goHome, photographer, goStudioSetting } = this.props;
+        const { status } = this.state;
         if(isLoggedIn){
             if(profile && (profile.user_type === 'photographer')){
                 if(photographer.id){
-                    const orderList = await getAdminOrderList(status)
-                    this.setState({
-                        orderList,
-                        loading: false,
-                        page: 1,
-                        hasNextPage: true,
-                        isLoadingMore: false
-                    })
+                    if(status === 'custom'){
+                        const requestList = await getRequestList()
+                        this.setState({
+                            requestList,
+                            loading: false,
+                            page: 1,
+                            hasNextPage: true,
+                            isLoadingMore: false
+                        })
+                    }
+                    else{
+                        const orderList = await getAdminOrderList(status)
+                        this.setState({
+                            orderList,
+                            loading: false,
+                            page: 1,
+                            hasNextPage: true,
+                            isLoadingMore: false
+                        })
+                    }
+                    
                 }
                 else{
                     goStudioSetting()
@@ -69,41 +87,74 @@ class Container extends Component{
                 hasNextPage: true,
                 isLoadingMore: false
             })
-            const orderList = await this.props.getAdminOrderList(this.state.status)
-            this.setState({
-                orderList,
-                loading: false
-            })
+            if(this.state.status === 'custom'){
+                const requestList = await this.props.getRequestList()
+                this.setState({
+                    requestList,
+                    loading: false
+                })
+            }
+            else{
+                const orderList = await this.props.getAdminOrderList(this.state.status)
+                this.setState({
+                    orderList,
+                    loading: false
+                })
+            }
         }
     }
 
     _orderListMore = async() => {
         const { page, isLoadingMore, hasNextPage, status } = this.state;
-        const { getAdminOrderListMore } = this.props;
+        const { getAdminOrderListMore, getRequestListMore } = this.props;
         if(!isLoadingMore){
             if(hasNextPage){
                 this.setState({
                     isLoadingMore: true
                 })
-                const result = await getAdminOrderListMore(page+1, status)
-                if(result){
-                    this.setState({
-                        page: page+1,
-                        orderList: [...this.state.orderList, ...result]
-                    })
-                    await sleep(500)
-                    this.setState({
-                        isLoadingMore: false
-                    })
+                if(status === 'custom'){
+                    const result = await getRequestListMore(page+1)
+                    if(result){
+                        this.setState({
+                            page: page+1,
+                            requestList: [...this.state.requestList, ...result]
+                        })
+                        await sleep(500)
+                        this.setState({
+                            isLoadingMore: false
+                        })
+                    }
+                    else{
+                        this.setState({
+                            hasNextPage: false
+                        })
+                        await sleep(500)
+                        this.setState({
+                            isLoadingMore: false
+                        })
+                    }
                 }
                 else{
-                    this.setState({
-                        hasNextPage: false
-                    })
-                    await sleep(500)
-                    this.setState({
-                        isLoadingMore: false
-                    })
+                    const result = await getAdminOrderListMore(page+1, status)
+                    if(result){
+                        this.setState({
+                            page: page+1,
+                            orderList: [...this.state.orderList, ...result]
+                        })
+                        await sleep(500)
+                        this.setState({
+                            isLoadingMore: false
+                        })
+                    }
+                    else{
+                        this.setState({
+                            hasNextPage: false
+                        })
+                        await sleep(500)
+                        this.setState({
+                            isLoadingMore: false
+                        })
+                    }
                 }
             }
         }
@@ -115,18 +166,43 @@ class Container extends Component{
         })
     }
 
-    _refresh = async() => {
-        const { getAdminOrderList, isLoggedIn, profile, goHome, status } = this.props;
+    _refresh = async(obj) => {
+        const { getAdminOrderList, getRequestList, isLoggedIn, profile, goHome } = this.props;
+        const { status } = this.state;
         if(isLoggedIn){
             if(profile && (profile.user_type === 'photographer')){
-                const orderList = await getAdminOrderList(status)
-                this.setState({
-                    orderList,
-                    loading: false,
-                    page: 1,
-                    hasNextPage: true,
-                    isLoadingMore: false
-                })
+                if(status === 'custom'){
+                    let newRequestList = []
+                    this.state.requestList.map(request => {
+                        if(request.id === obj.id){
+                            newRequestList.push(obj)
+                            return null
+                        }
+                        else{
+                            newRequestList.push(request)
+                        }
+                        this.setState({
+                            requestList: newRequestList,
+                            loading: false
+                        })
+                    })
+                }
+                else{
+                    let newOrderList = []
+                    this.state.orderList.map(order => {
+                        if(order.id === obj.id){
+                            newOrderList.push(obj)
+                            return null
+                        }
+                        else{
+                            newOrderList.push(order)
+                        }
+                        this.setState({
+                            orderList: newOrderList,
+                            loading: false
+                        })
+                    })
+                }
             }
             else{
                 goHome()

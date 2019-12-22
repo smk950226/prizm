@@ -20,4 +20,5 @@ urlpatterns = [
     path('review/', views.Review.as_view()),
     path('review/create/', views.ReviewCreate.as_view()),
     path('custom/request/', views.CustomRequest.as_view()),
+    path('custom/request/order/', views.RequestOrder.as_view()),
 ]

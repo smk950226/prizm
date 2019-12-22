@@ -152,7 +152,7 @@ class Container extends Component{
                     if(selectedTime.length > 0){
                         const result = await responseToOrder(order.id, checkedOption, selectedTime)
                         if(result.status === 'ok'){
-                            await refresh()
+                            await refresh(result.order)
                             this.setState({
                                 checkedOption: 0,
                                 showDatePicker: false,
@@ -183,7 +183,7 @@ class Container extends Component{
                 else{
                     const result = await responseToOrder(order.id, checkedOption)
                     if(result.status === 'ok'){
-                        await refresh()
+                        await refresh(result.order)
                         this.setState({
                             checkedOption: 0,
                             showDatePicker: false,
