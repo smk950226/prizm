@@ -25,6 +25,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getProfile: () => {
             dispatch(userAction.getProfile())
+        },
+        goRequestOrderList: (requestId) => {
+            dispatch(push({
+                pathname: '/custom/request/order/list/',
+                state: {
+                    requestId
+                }
+            }))
         }
     }
 }

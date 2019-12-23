@@ -512,6 +512,53 @@ function cancelCustomRequest(requestId){
     }
 }
 
+function getRequestOrderList(requestId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/custom/request/order/?requestId=${requestId}&page=1`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getRequestOrderListMore(requestId, page){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/custom/request/order/?requestId=${requestId}&page=${page}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -586,7 +633,9 @@ const actionCreators = {
     paymentSuccess,
     createCustomRequest,
     createCustomRequestByToken,
-    cancelCustomRequest
+    cancelCustomRequest,
+    getRequestOrderList,
+    getRequestOrderListMore
 }
 
 export { actionCreators }

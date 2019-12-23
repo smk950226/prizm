@@ -26,6 +26,7 @@ import ReviewCreate from '../ReviewCreate';
 import ReviewCreateComplete from '../ReviewCreateComplete';
 import CustomRequest from '../CustomRequest';
 import CustomRequestCreate from '../CustomRequestCreate';
+import RequestOrderList from '../RequestOrderList';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -320,6 +321,7 @@ const GeneralRoute = props => (
         <Route exact path='/review/complete/' component={ReviewCreateComplete} key={20} />
         <Route exact path='/custom/request/' component={CustomRequest} key={21} />
         <Route exact path='/custom/request/create/' component={CustomRequestCreate} key={22} />
+        <Route exact path='/custom/request/order/list/' component={RequestOrderList} key={23} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
         <Route component={NotFound} key={101} />
     </Switch>

@@ -8,7 +8,8 @@ class Container extends Component{
         profile: PropTypes.object,
         cancelCustomRequest: PropTypes.func.isRequired,
         goSignin: PropTypes.func.isRequired,
-        getProfile: PropTypes.func.isRequired
+        getProfile: PropTypes.func.isRequired,
+        goRequestOrderList: PropTypes.func.isRequired
     }
 
     static contextTypes = {

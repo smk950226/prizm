@@ -139,7 +139,7 @@ class RequestLocationSerializer(serializers.ModelSerializer):
         model = models.RequestLocation
         fields = ['id', 'name', 'lng', 'lat']
 
-class RequestOrderSerializer(serializers.ModelSerializer):
+class RequestOrderShortSerializer(serializers.ModelSerializer):
     photographer = PhotographerShortSerializer()
 
     class Meta:
@@ -184,9 +184,18 @@ class CustomRequestSerializer(serializers.ModelSerializer):
             user = request.user
             request_order = obj.requestorder_set.filter(photographer = user.photographer).first()
             if request_order:
-                serializer = RequestOrderSerializer(request_order, context = {'request': request})
+                serializer = RequestOrderShortSerializer(request_order, context = {'request': request})
                 return serializer.data
             else:
                 return {}
         except:
             return {}
+
+
+class RequestOrderSerializer(serializers.ModelSerializer):
+    photographer = PhotographerSerializer()
+    custom_request =  CustomRequestSerializer()
+
+    class Meta:
+        model = models.RequestOrder
+        fields = ['id', 'photographer', 'custom_request', 'available_time', 'price', 'location']

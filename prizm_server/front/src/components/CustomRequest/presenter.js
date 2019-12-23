@@ -7,7 +7,8 @@ class CustomRequest extends Component{
         goCustomRequestCreate: PropTypes.func.isRequired,
         profile: PropTypes.object,
         cancel: PropTypes.func.isRequired,
-        goSignin: PropTypes.func.isRequired
+        goSignin: PropTypes.func.isRequired,
+        goRequestOrderList: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -63,7 +64,7 @@ class CustomRequest extends Component{
                                         {this.context.t("뉴욕 현지 최고의 사진작가와 함께")}<br/>
                                         {this.context.t("당신의 뉴욕 여행을 더욱 특별하게 만들어보세요.")}
                                     </p>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt6} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt6} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{profile.name}{this.context.t(" 님을 위한 제안들")}</p>
                                     </div>
                                     <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`}>

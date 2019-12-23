@@ -786,7 +786,18 @@ class CustomRequest(APIView):
 
 
 class RequestOrder(APIView):
-    permission_classes = [AdminAuthenticated]
+    def get(self, request, format = None):
+        request_id = request.query_params.get('requestId', None)
+        if request_id:
+            custom_request = models.CustomRequest.objects.get(id = request_id)
+            orders = custom_request.requestorder_set.all()
+            paginator = MainPageNumberPagination()
+            result_page = paginator.paginate_queryset(orders, request)
+            serializer = serializers.RequestOrderSerializer(result_page, many = True, context = {'request': request})
+            return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'orders': serializer.data})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+
     def post(self, request, format = None):
         user = request.user
         photographer = user.photographer
