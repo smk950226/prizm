@@ -486,6 +486,32 @@ function createCustomRequest(photograpyType, person, hour, dateOption, selectedD
     }
 }
 
+function cancelCustomRequest(requestId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/custom/request/`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                requestId
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -559,7 +585,8 @@ const actionCreators = {
     createReview,
     paymentSuccess,
     createCustomRequest,
-    createCustomRequestByToken
+    createCustomRequestByToken,
+    cancelCustomRequest
 }
 
 export { actionCreators }

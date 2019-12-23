@@ -769,6 +769,20 @@ class CustomRequest(APIView):
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+    
+    def delete(self, request, format = None):
+        user = request.user
+        request_id = request.data.get('requestId')
+        if request_id:
+            try:
+                custom_request = models.CustomRequest.objects.get(id = request_id)
+                custom_request.is_closed = True
+                custom_request.save()
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
 class RequestOrder(APIView):

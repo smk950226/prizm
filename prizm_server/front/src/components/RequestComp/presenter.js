@@ -80,7 +80,9 @@ class RequestComp extends Component{
                     </div>
                     <div className={`${styles.mobileOnly}`}>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`}>
-                            <p className={`${styles.font1214} ${styles.fontBold}`}>{request.photograpy_type}</p>
+                            <p className={`${styles.font1214} ${styles.fontBold}`}>
+                                {`${request.photograpy_type.split(',')[0]}, etc`}
+                            </p>
                             <div className={`${styles.bgBlack} ${styles.mx2}`} style={{width: 2, height: 14}} />
                             <p className={`${styles.font1214} ${styles.fontBold}`}>{`${request.person} ${request.person > 1 ? 'people' : 'person'}`}</p>
                             <div className={`${styles.bgBlack} ${styles.mx2}`} style={{width: 2, height: 14}} />
@@ -129,7 +131,9 @@ class RequestComp extends Component{
                         </div>
                         <div className={`${styles.row} ${styles.mx0} ${styles.mt2}`}>
                             <div className={`${styles.col3} ${styles.pr3} ${styles.pl0}`}>
-                                <p className={`${styles.fontBold} ${styles.font1214}`}>{request.photograpy_type}</p>
+                                <p className={`${styles.fontBold} ${styles.font1214}`}>
+                                    {`${request.photograpy_type.split(',')[0]}, etc`}
+                                </p>
                             </div>
                             <div className={`${styles.col3} ${styles.pr3} ${styles.pl0}`}>
                                 <p className={`${styles.fontBold} ${styles.font1214}`}>{`${request.person} ${request.person > 1 ? 'people' : 'person'}/${request.hour} ${request.hour > 1 ? 'hours' : 'hour'}`}</p>

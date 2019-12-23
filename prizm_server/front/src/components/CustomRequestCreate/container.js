@@ -16,7 +16,15 @@ class Container extends Component{
         checkMessageByToken: PropTypes.func.isRequired,
         createCustomRequest: PropTypes.func.isRequired,
         createCustomRequestByToken: PropTypes.func.isRequired,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        goCustomRequest: PropTypes.func.isRequired
+    }
+
+    componentDidMount = () => {
+        const { goCustomRequest, profile } = this.props;
+        if(profile.custom_request_status.status !== 'none'){
+            goCustomRequest()
+        }
     }
 
     render(){

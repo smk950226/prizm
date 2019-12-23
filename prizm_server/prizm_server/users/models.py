@@ -23,9 +23,37 @@ class User(AbstractUser):
         return reverse("users:detail", kwargs={"username": self.username})
 
     def __str__(self):
-        return self.email
+        return self.username
     
 
     class Meta:
         verbose_name = _('User')
         verbose_name_plural = _('User')
+
+    @property
+    def custom_request_status(self):
+        custom_request = self.customrequest_set.all()
+        if custom_request.count() > 0:
+            last_request = custom_request.order_by('-id').first()
+            if last_request.is_closed:
+                return {
+                    'id': -1,
+                    'status': 'none'
+                }
+            else:
+                orders = last_request.requestorder_set.all()
+                if orders.count() >= 3:
+                    return {
+                        'id': last_request.id,
+                        'status': 'open'
+                    }
+                else:
+                    return {
+                        'id': last_request.id,
+                        'status': 'close'
+                    }
+        else:
+            return {
+                'id': -1,
+                'status': 'none'
+            }

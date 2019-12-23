@@ -47,6 +47,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goHome: () => {
             dispatch(push('/'))
+        },
+        goCustomRequest: () => {
+            dispatch(push('/custom/request/'))
         }
     }
 }

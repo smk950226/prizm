@@ -179,7 +179,7 @@ class CustomRequestCreate extends Component{
         isLoggedIn: this.props.isLoggedIn,
         totalStep: this.props.isLoggedIn ? 3 : 4,
         step: 1,
-        option: '',
+        option: [],
         extraOption: '',
         people: 0,
         extraPeople: '',
@@ -225,17 +225,38 @@ class CustomRequestCreate extends Component{
         confirmed: false
     }
 
-    _handleChangeOption = (option) => {
-        if(this.state.option === option){
-            this.setState({
-                option: '',
-                extraOption: ''
-            })
+    _handleChangeOption = (selectedOption) => {
+        const { option } = this.state;
+        if(option.length > 0){
+            const find = option.indexOf(selectedOption)
+            if(find > -1){
+                let newOption = [];
+                option.map(op => {
+                    if(op === selectedOption){
+                        return null
+                    }
+                    else{
+                        newOption.push(op)
+                        return null
+                    }
+                })
+                this.setState({
+                    option: newOption
+                })
+            }
+            else{
+                let newOption = option;
+                newOption.push(selectedOption)
+                this.setState({
+                    option: newOption
+                })
+            }
         }
         else{
+            let newOption = option;
+            newOption.push(selectedOption)
             this.setState({
-                option,
-                extraOption: ''
+                option: newOption
             })
         }
     }
@@ -742,10 +763,25 @@ class CustomRequestCreate extends Component{
                         await getOrderListByToken(result.token)
                         await checkMessageByToken(result.token)
                         
-                        let photograpyType = option;
-                        if(option === 'extra'){
-                            photograpyType = extraOption
+                        let photograpyTypeTemp = option;
+                        const find = option.indexOf('extra');
+                        if(find > -1){
+                            photograpyTypeTemp.push(extraOption)
                         }
+                        let photograpyType = []
+                        photograpyTypeTemp.map((pho) => {
+                            if(pho === 'extra'){
+                                photograpyType.push(extraOption)
+                                return null;
+                            }
+                            else if(pho === extraOption){
+                                return null;
+                            }
+                            else{
+                                photograpyType.push(pho)
+                                return null
+                            }
+                        })
                         let person = people
                         if(people === -1){
                             person = Number(extraPeople)
@@ -827,10 +863,25 @@ class CustomRequestCreate extends Component{
                                         await getNotificationByToken(result.token)
                                         await getOrderListByToken(result.token)
 
-                                        let photograpyType = option;
-                                        if(option === 'extra'){
-                                            photograpyType = extraOption
+                                        let photograpyTypeTemp = option;
+                                        const find = option.indexOf('extra');
+                                        if(find > -1){
+                                            photograpyTypeTemp.push(extraOption)
                                         }
+                                        let photograpyType = []
+                                        photograpyTypeTemp.map((pho) => {
+                                            if(pho === 'extra'){
+                                                photograpyType.push(extraOption)
+                                                return null;
+                                            }
+                                            else if(pho === extraOption){
+                                                return null;
+                                            }
+                                            else{
+                                                photograpyType.push(pho)
+                                                return null
+                                            }
+                                        })
                                         let person = people
                                         if(people === -1){
                                             person = Number(extraPeople)
@@ -921,7 +972,7 @@ class CustomRequestCreate extends Component{
         const { step, isLoggedIn, option, extraOption, people, extraPeople, dateOption, dateConfirm, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, hour, extraHour, locationOption, locations, isSubmitting } = this.state;
         const { createCustomRequest } = this.props;
         if(step === 1){
-            if((((option !== '') && ((option !== 'extra'))) || (extraOption !== '')) && (((people !==0) && (people !==-1)) || (extraPeople !== ''))){
+            if((((option.length > 0) && ((option.indexOf('extra') < 0))) || (extraOption !== '')) && (((people !==0) && (people !==-1)) || (extraPeople !== ''))){
                 this.setState({
                     step: 2
                 })
@@ -958,10 +1009,25 @@ class CustomRequestCreate extends Component{
                     this.setState({
                         isSubmitting: true
                     })
-                    let photograpyType = option;
-                    if(option === 'extra'){
-                        photograpyType = extraOption
+                    let photograpyTypeTemp = option;
+                    const find = option.indexOf('extra');
+                    if(find > -1){
+                        photograpyTypeTemp.push(extraOption)
                     }
+                    let photograpyType = []
+                    photograpyTypeTemp.map((pho) => {
+                        if(pho === 'extra'){
+                            photograpyType.push(extraOption)
+                            return null;
+                        }
+                        else if(pho === extraOption){
+                            return null;
+                        }
+                        else{
+                            photograpyType.push(pho)
+                            return null
+                        }
+                    })
                     let person = people
                     if(people === -1){
                         person = Number(extraPeople)
@@ -1136,8 +1202,8 @@ class CustomRequestCreate extends Component{
                                 <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`}>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'alone' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('alone')}>
-                                                {option === 'alone' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('alone') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('alone')}>
+                                                {option.indexOf('alone') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Alone")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1146,8 +1212,8 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'street' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('street')}>
-                                                {option === 'street' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('street') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('street')}>
+                                                {option.indexOf('street') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Street")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1156,8 +1222,8 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'couple' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('couple')}>
-                                                {option === 'couple' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('couple') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('couple')}>
+                                                {option.indexOf('couple') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Couple")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1166,8 +1232,8 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'indoor' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('indoor')}>
-                                                {option === 'indoor' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('indoor') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('indoor')}>
+                                                {option.indexOf('indoor') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Indoor")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1176,18 +1242,18 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'wedding' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('wedding')}>
-                                                {option === 'wedding' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('wedding') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('wedding')}>
+                                                {option.indexOf('wedding') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Wedding")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('wedding')}>{this.context.t("위딩 사진")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('wedding')}>{this.context.t("웨딩 사진")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'propose' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('propose')}>
-                                                {option === 'propose' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('propose') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('propose')}>
+                                                {option.indexOf('propose') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Propose")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1196,8 +1262,8 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'friend' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('friend')}>
-                                                {option === 'friend' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('friend') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('friend')}>
+                                                {option.indexOf('friend') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Friend")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1206,8 +1272,8 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'daily' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('daily')}>
-                                                {option === 'daily' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('daily') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('daily')}>
+                                                {option.indexOf('daily') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Daily")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1216,8 +1282,8 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'family' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('family')}>
-                                                {option === 'family' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('family') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('family')}>
+                                                {option.indexOf('family') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Family")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1226,8 +1292,8 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'travel' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('travel')}>
-                                                {option === 'travel' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('travel') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('travel')}>
+                                                {option.indexOf('travel') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Travel")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
@@ -1236,13 +1302,13 @@ class CustomRequestCreate extends Component{
                                     </div>
                                     <div className={`${styles.col12} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <div className={`${styles.checkBox} ${option === 'extra' ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('extra')}>
-                                                {option === 'extra' && (
+                                            <div className={`${styles.checkBox} ${option.indexOf('extra') > -1 ? null : styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} onClick={() => this._handleChangeOption('extra')}>
+                                                {option.indexOf('extra') > -1 && (
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Extra")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
                                             <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('extra')}>{this.context.t("기타 : ")}</p>
-                                            <input className={`${styles.textInput11} ${styles.ml2}`} readOnly={option === 'extra' ? false : true} type={"text"} value={extraOption} name={'extraOption'} onChange={this._handleInputChange} />
+                                            <input className={`${styles.textInput11} ${styles.ml2}`} readOnly={option.indexOf('extra') > -1 ? false : true} type={"text"} value={extraOption} name={'extraOption'} onChange={this._handleInputChange} />
                                         </div>
                                     </div>
                                 </div>
