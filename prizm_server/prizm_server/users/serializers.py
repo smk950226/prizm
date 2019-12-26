@@ -6,10 +6,10 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = ['id', 'username', 'email', 'name', 'mobile', 'country_number', 'country_code', 'user_type', 'instagram_account', 'custom_request_status']
+        fields = ['id', 'username', 'email', 'name', 'mobile', 'country_number', 'country_code', 'user_type', 'instagram_account', 'custom_request_status', 'is_verified']
 
 
 class PhotographerProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
-        fields = ['id', 'email', 'name', 'mobile', 'country_number', 'country_code', 'instagram_account']
+        fields = ['id', 'email', 'name', 'mobile', 'country_number', 'country_code', 'instagram_account', 'is_verified']

@@ -28,6 +28,8 @@ import CustomRequest from '../CustomRequest';
 import CustomRequestCreate from '../CustomRequestCreate';
 import RequestOrderList from '../RequestOrderList';
 import RequestOrderDetail from '../RequestOrderDetail';
+import SignUpClear from '../SignUpClear';
+import EmailVerification from '../EmailVerification';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -326,7 +328,9 @@ const GeneralRoute = props => (
         <Route exact path='/custom/request/' component={CustomRequest} key={21} />
         <Route exact path='/custom/request/create/' component={CustomRequestCreate} key={22} />
         <Route exact path='/custom/request/order/list/' component={RequestOrderList} key={23} />
-        <Route exact path='/custom/request/order/detail/' component={RequestOrderDetail} key={23} />
+        <Route exact path='/custom/request/order/detail/' component={RequestOrderDetail} key={24} />
+        <Route exact path='/signup/clear/' component={SignUpClear} key={25} />
+        <Route exact path='/email/verify/:uuid/' component={EmailVerification} key={26} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
         <Route render={(props) => <NotFound {...props} goHome={props.goHome} />} key={101} />
     </Switch>

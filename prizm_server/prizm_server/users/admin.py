@@ -12,7 +12,7 @@ class UserAdmin(auth_admin.UserAdmin):
 
     form = UserChangeForm
     add_form = UserCreationForm
-    list_display = ["username", "name", "is_superuser", 'user_type', 'country_code']
+    list_display = ["username", "name", "is_superuser", 'user_type', 'country_code', 'is_verified']
     search_fields = ["name", 'email']
     fieldsets = [
         ('개인정보', {'fields': [
@@ -24,7 +24,7 @@ class UserAdmin(auth_admin.UserAdmin):
             'mobile',
             'user_type',
             'instagram_account',
-
+            'is_verified',
         ]}),
         ('권한', {'fields': (
             'is_active',

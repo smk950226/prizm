@@ -1597,7 +1597,7 @@ class CustomRequestCreate extends Component{
                                     <div className={`${styles.positionRelative}`}>
                                         <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                             <div className={`${styles.countryNumberInput} ${styles.cursorPointer}`} onClick={this._handleShowCountryNumber}>
-                                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
+                                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 17}}>
                                                     <p className={`${styles.font13}`}>{countryNumber ? `+${countryNumber}` : `${countryNumber}`}</p>
                                                     <MdArrowDropdown fontSize="16px" color="#000000" />
                                                 </div>
@@ -1606,7 +1606,6 @@ class CustomRequestCreate extends Component{
                                                 <div className={`${styles.col10} ${styles.px0}`}>
                                                     <input className={`${styles.textInput4}`} type={"text"} name={"mobile"} value={mobile} onChange={this._handleInputChange} />
                                                 </div>
-                                                <p className={`${styles.font11} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer}`}>{this.context.t("Verify")}</p>
                                             </div>
                                         </div>
                                     </div>

@@ -18,6 +18,7 @@ class User(AbstractUser):
     mobile = models.CharField(_("Mobile"), max_length = 100)
     user_type = models.CharField(_("Type"), choices = (('normal', _("Normal")), ('photographer', _("Photographer"))), max_length = 20, default = 'normal')
     instagram_account = models.CharField(_("Instagram Account"), max_length = 255, blank = True, null = True)
+    is_verified = models.BooleanField(_("Is Verified"), default = False)
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
@@ -38,11 +39,11 @@ class User(AbstractUser):
             if last_request.is_closed:
                 return {
                     'id': -1,
-                    'status': 'none'
+                    'status': 'close'
                 }
             else:
                 orders = last_request.requestorder_set.all()
-                if orders.count() >= 1:
+                if orders.count() >= 3:
                     return {
                         'id': last_request.id,
                         'status': 'open'
@@ -55,5 +56,21 @@ class User(AbstractUser):
         else:
             return {
                 'id': -1,
-                'status': 'none'
+                'status': 'close'
             }
+
+
+class EmailVerification(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    uuid = models.UUIDField(_("Verification ID"))
+    created_at = models.DateTimeField(auto_now_add = True)
+    is_verified = models.BooleanField(_("Is Verified"), default = False)
+    is_expired = models.BooleanField(_("Is Expired"), default = False)
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = _('Email Verification')
+        verbose_name_plural = _('Email Verification')

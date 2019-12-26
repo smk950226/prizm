@@ -4,6 +4,11 @@ from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.conf import settings
 from django.http import HttpRequest
+from uuid import uuid4
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+
+from . import models
 
 
 class AccountAdapter(DefaultAccountAdapter):
@@ -33,6 +38,20 @@ class AccountAdapter(DefaultAccountAdapter):
             user.mobile = mobile
 
         user.save()
+
+        uuid = uuid4()
+
+        verification = models.EmailVerification.objects.create(
+            user = user,
+            uuid = uuid
+        )
+
+        verification.save()
+
+        mail = EmailMessage('[PRIZM] Email Verification', render_to_string('users/email_verification.html', context={'user': user.name, 'url': 'http://localhost:3000/email/verify/'+ str(uuid) +'/'}), 'PRIZM<contact@prizm.cloud>', [user.email])
+        mail.content_subtype = "html"
+
+        mail.send()
         return user
 
 

@@ -19,7 +19,7 @@ const AdminProfileSetting = (props, context) => (
         <div className={`${styles.positionRelative}`}>
             <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                 <div className={`${styles.countryNumberInput} ${styles.cursorPointer}`} onClick={props.editable ? props.handleShowCountryNumber : null}>
-                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
+                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 17}}>
                         <p className={`${styles.font13}`}>{props.countryNumber ? `+${props.countryNumber}` : `${props.countryNumber}`}</p>
                         {props.showCountryNumber ? (
                             <MdArrowDropup fontSize="16px" color="#000000" />
@@ -32,7 +32,6 @@ const AdminProfileSetting = (props, context) => (
                     <div className={`${styles.col10} ${styles.px0}`}>
                         <input className={`${styles.textInput4}`} type={"text"} name={"mobile"} value={props.mobile} onChange={props.handleInputChange} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
                     </div>
-                    <p className={`${styles.font11} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer}`}>{context.t("Verify")}</p>
                 </div>
             </div>
             <div className={`${props.showCountryNumber ? null : styles.none} ${styles.positionDropdown} ${styles.overflowYScroll} ${styles.bgWhite}`} style={{maxHeight: 200, width: 65}}>

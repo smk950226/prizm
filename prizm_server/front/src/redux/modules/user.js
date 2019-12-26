@@ -632,6 +632,41 @@ function checkMessageByToken(token){
     }
 }
 
+function emailVerification(uuid){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/email/verification/?uuid=${uuid}`, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
+function sendVerificationEmail(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/users/email/verification/send/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     isLoggedIn: localStorage.getItem('jwt') ? true : false,
     token: localStorage.getItem('jwt')
@@ -743,7 +778,9 @@ const actionCreators = {
     checkNotification,
     checkMessage,
     checkMessageByToken,
-    getCheckNewMessage
+    getCheckNewMessage,
+    emailVerification,
+    sendVerificationEmail
 }
 
 export { actionCreators }

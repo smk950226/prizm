@@ -19,7 +19,7 @@ const AdminSignUp = (props, context) => (
             <div className={`${styles.positionRelative}`}>
                 <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                     <div className={`${styles.countryNumberInput} ${styles.cursorPointer}`} onClick={props.handleShowCountryNumber}>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 17}}>
                             <p className={`${styles.font1113}`}>{props.countryNumber ? `+${props.countryNumber}` : `${props.countryNumber}`}</p>
                             <MdArrowDropdown fontSize="13px" color="#000000" />
                         </div>
@@ -28,7 +28,6 @@ const AdminSignUp = (props, context) => (
                         <div className={`${styles.col10} ${styles.px0}`}>
                             <input className={`${styles.textInput8}`} type={"text"} name={"mobile"} value={props.mobile} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                         </div>
-                        <p className={`${styles.font1113} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer}`}>{context.t("Verify")}</p>
                     </div>
                 </div>
             </div>
@@ -73,7 +72,7 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.positionRelative}`}>
                         <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                             <div className={`${styles.countryNumberInput} ${styles.cursorPointer}`} onClick={props.handleShowCountryNumber}>
-                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 16}}>
+                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{height: 17}}>
                                     <p className={`${styles.font1113}`}>{props.countryNumber ? `+${props.countryNumber}` : `${props.countryNumber}`}</p>
                                     <MdArrowDropdown fontSize="13px" color="#000000" />
                                 </div>
@@ -82,7 +81,6 @@ const AdminSignUp = (props, context) => (
                                 <div className={`${styles.col10} ${styles.px0}`}>
                                     <input className={`${styles.textInput8}`} type={"text"} name={"mobile"} value={props.mobile} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                                 </div>
-                                <p className={`${styles.font1113} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer}`}>{context.t("Verify")}</p>
                             </div>
                         </div>
                     </div>

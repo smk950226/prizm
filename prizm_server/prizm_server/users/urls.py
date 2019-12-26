@@ -8,4 +8,6 @@ urlpatterns = [
     path('profile/', views.Profile.as_view()),
     path('profile/admin/', views.AdminProfile.as_view()),
     path('profile/password/', views.ProfilePassword.as_view()),
+    path('email/verification/', views.EmailVerification.as_view()),
+    path('email/verification/send/', views.SendVerificationEmail.as_view()),
 ]

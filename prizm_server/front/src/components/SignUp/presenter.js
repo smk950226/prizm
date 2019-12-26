@@ -33,7 +33,6 @@ const SignUp = (props, context) => (
                     <div className={`${styles.col10} ${styles.px0}`}>
                         <input className={`${styles.textInput4}`} type={"text"} name={"mobile"} value={props.mobile} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
-                    <p className={`${styles.font11} ${styles.fontBold} ${styles.pink} ${styles.cursorPointer}`}>{context.t("Verify")}</p>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ const PaymentSuccess = (props, context) => (
                         <Fragment>
                             <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("Your reservation has been successfully submitted!")}</p>
                             <p className={`${styles.font1214} ${styles.mt3}`}>{context.t(`Please send ${numberWithCommas(props.price)} KRW to the following bank account :`)}</p>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`}>
+                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`} style={{lineHeight: 1.5}}>
                                 <p className={`${styles.font1214} ${styles.mr2}`}>{context.t('Account Number : IBK (Industrial Bank of Korea) 054-146700-04-018')}</p>
                                 <CopyToClipboard text={'054-146700-04-018'}>
                                 <div className={`${styles.borderRadiusRound} ${styles.bgCompleted} ${styles.px2} ${styles.py1} ${styles.textCenter} ${styles.cursorPointer}`}>
@@ -31,9 +31,9 @@ const PaymentSuccess = (props, context) => (
                                 </div>
                                 </CopyToClipboard>
                             </div>
-                            <p className={`${styles.font1214}`}>{context.t('Account holder : EXPLABS')}</p>
-                            <p className={`${styles.font1214} ${styles.completed}`}>{context.t(`Payment Due : ${props.deadline.getFullYear()}/${props.deadline.getMonth() + 1}/${props.deadline.getDate()} ${props.deadline.getHours()}:${props.deadline.getMinutes()}`)}</p>
-                            <p className={`${styles.font1012} ${styles.completed}`}>{context.t(`(Your reservation will be cancelled if you do not make payment by the payment due.)`)}</p>
+                            <p className={`${styles.font1214}`} style={{lineHeight: 1.5}}>{context.t('Account holder : EXPLABS')}</p>
+                            <p className={`${styles.font1214} ${styles.completed}`} style={{lineHeight: 1.5}}>{context.t(`Payment Due : ${props.deadline.getFullYear()}/${props.deadline.getMonth() + 1}/${props.deadline.getDate()} ${props.deadline.getHours()}:${props.deadline.getMinutes()}`)}</p>
+                            <p className={`${styles.font1012} ${styles.completed}`} style={{lineHeight: 1.5}}>{context.t(`(Your reservation will be cancelled if you do not make payment by the payment due.)`)}</p>
                             <div className={`${styles.textCenter}`}>
                                 <img src={require('../../assets/images/signup_complete.png')} alt={context.t("Paid")} className={`${styles.mt3}`} style={{width: '80%', maxWidth: 400}} />
                             </div>

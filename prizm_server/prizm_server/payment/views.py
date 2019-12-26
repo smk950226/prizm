@@ -13,7 +13,7 @@ from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.studio import models as studio_models
 from prizm_server.common import models as common_models
 
-import math
+import math, json
 
 User = get_user_model()
 
@@ -117,10 +117,11 @@ class CheckPrice(APIView):
         if order_id and price:
             try:
                 order = studio_models.Order.objects.get(id = order_id)
+                option = json.loads(order.option)
                 if user.country_number == '82' or user.country_code == 'KR':
                     try:
                         exchange_rate = common_models.ExchangeRate.objects.get(country = 'KR')
-                        confirm_price = (order.option.price + math.ceil(order.option.price*0.1))*exchange_rate.rate
+                        confirm_price = (option['price'] + math.ceil(option['price']*0.1))*exchange_rate.rate
                         if price == confirm_price:
                             payment = models.Payment.objects.create(
                                 user = user,
@@ -135,7 +136,7 @@ class CheckPrice(APIView):
                         else:
                             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
                     except:
-                        confirm_price = (order.option.price + math.ceil(order.option.price*0.1))*1250
+                        confirm_price = (option['price'] + math.ceil(option['price']*0.1))*1250
                         if price == confirm_price:
                             payment = models.Payment.objects.create(
                                 user = user,
@@ -150,7 +151,7 @@ class CheckPrice(APIView):
                         else:
                             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid price!')})
                 else:
-                    confirm_price = (order.option.price + math.ceil(order.option.price*0.1))
+                    confirm_price = (option['price'] + math.ceil(option['price']*0.1))
                     if price == confirm_price:
                         payment = models.Payment.objects.create(
                             user = user,

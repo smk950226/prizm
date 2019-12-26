@@ -5,8 +5,12 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.core.validators import validate_email
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
+from uuid import uuid4
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
-from . import serializers
+from . import serializers, models
 from prizm_server.common.permissions import AdminAuthenticated
 
 User = get_user_model()
@@ -130,3 +134,54 @@ class CheckPhotographer(APIView):
             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This page is only available for registered photographers.')})
+
+
+class EmailVerification(APIView):
+    def get(self, request, format = None):
+        uuid = request.query_params.get('uuid', None)
+        if uuid:
+            try:
+                email_verification = models.EmailVerification.objects.get(uuid = uuid)
+                now = timezone.now().timestamp()
+                created = email_verification.created_at.timestamp()
+
+                if now - created >= 1*60*60*2:
+                    email_verification.is_expired = True
+                    email_verification.save()
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Verification URL is valid for 2 hours. This URL has been expired.')})
+                else:
+                    email_verification.is_verified = True
+                    email_verification.is_expired = True
+                    email_verification.save()
+                    user = email_verification.user
+                    user.is_verified = True
+                    user.save()
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid URL!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid URL!')})
+
+
+class SendVerificationEmail(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format = None):
+        user = request.user
+        email_verifications = models.EmailVerification.objects.filter(user = user)
+        email_verifications.update(is_expired = True)
+
+        uuid = uuid4()
+
+        verification = models.EmailVerification.objects.create(
+            user = user,
+            uuid = uuid
+        )
+
+        verification.save()
+
+        mail = EmailMessage('[PRIZM] Email Verification', render_to_string('users/email_verification.html', context={'user': user.name, 'url': 'http://localhost:3000/email/verify/'+ str(uuid) +'/'}), 'PRIZM<contact@prizm.cloud>', [user.email])
+        mail.content_subtype = "html"
+
+        mail.send()
+
+        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})

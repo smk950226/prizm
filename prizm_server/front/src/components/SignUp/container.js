@@ -14,7 +14,8 @@ class Container extends Component{
         goSignIn: PropTypes.func.isRequired,
         goDetail: PropTypes.func.isRequired,
         getNotificationByToken: PropTypes.func.isRequired,
-        getOrderListByToken: PropTypes.func.isRequired
+        getOrderListByToken: PropTypes.func.isRequired,
+        goSignUpClear: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -39,7 +40,9 @@ class Container extends Component{
             isSubmitting: false,
             goRequest: props.location.state ? props.location.state.goRequest ? props.location.state.goRequest : false : false,
             photographerId: props.location.state ? props.location.state.photographerId ? props.location.state.photographerId : null : null,
-            countryList: []
+            countryList: [],
+            fetchedProfile: false,
+            fetchClear: false
         }
     }
 
@@ -47,6 +50,38 @@ class Container extends Component{
         window.scrollTo(0,0)
         if(this.props.isLoggedIn){
             this.props.goHome()
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedProfile } = prevState;
+        if(!fetchedProfile){
+            let update = {}
+            if(nextProps.profile){
+                update.fetchedProfile = true
+            }
+
+            return update
+        }
+        else{
+            return null
+        }
+    }
+
+    componentDidUpdate = () => {
+        if(this.state.fetchedProfile && !this.state.fetchClear){
+            this.setState({
+                loading: false,
+                fetchClear: true,
+                isSubmitting: false
+            })
+            this.props.getSaveToken(this.state.token)
+            if(this.state.goRequest){
+                this.props.goDetail(this.state.photographerId)
+            }
+            else{
+                this.props.goSignUpClear()
+            }
         }
     }
 
@@ -229,8 +264,8 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form, goRequest, photographerId } = this.state;
-        const { checkDuplicate, signUp, getProfileByToken, getSaveToken, goHome, goDetail, getNotificationByToken, getOrderListByToken } = this.props;
+        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form } = this.state;
+        const { checkDuplicate, signUp, getProfileByToken, getNotificationByToken, getOrderListByToken } = this.props;
         if(!isSubmitting){
             if(name && email && countryNumber && countryCode && mobile && password && password2){
                 if(emailForm){
@@ -244,19 +279,12 @@ class Container extends Component{
                                 if(check.status === 'ok'){
                                     const result = await signUp(email, password, name, countryNumber, countryCode, mobile)
                                     if(result.token){
+                                        await this.setState({
+                                            token: result.token
+                                        })
                                         await getProfileByToken(result.token)
                                         await getNotificationByToken(result.token)
                                         await getOrderListByToken(result.token)
-                                        this.setState({
-                                            isSubmitting: false
-                                        })
-                                        getSaveToken(result.token)
-                                        if(goRequest){
-                                            goDetail(photographerId)
-                                        }
-                                        else{
-                                            goHome()
-                                        }
                                     }
                                     else{
                                         this.setState({
