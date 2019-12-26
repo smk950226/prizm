@@ -169,7 +169,8 @@ class CustomRequestCreate extends Component{
         createCustomRequest: PropTypes.func.isRequired,
         createCustomRequestByToken: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
-        getProfile: PropTypes.func.isRequired
+        getProfile: PropTypes.func.isRequired,
+        sendVerificationEmail: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -223,12 +224,38 @@ class CustomRequestCreate extends Component{
         showCountryNumber: false,
         isSubmitting: false,
         countryList: [],
-        confirmed: false
+        confirmed: false,
+        fetchedProfile: false,
+        fetchClear: this.props.isLoggedIn ? true : false,
+        isSendingEmail: false
     }
 
-    componentDidUpdate = (prevProps, prevState) => {
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedProfile } = prevState;
+        if(!fetchedProfile){
+            let update = {}
+            if(nextProps.profile){
+                update.fetchedProfile = true
+            }
+
+            return update
+        }
+        else{
+            return null
+        }
+    }
+
+    componentDidUpdate = async(prevProps, prevState) => {
         if(!prevState.confirmed && this.state.confirmed){
             this.props.getProfile()
+        }
+        if(this.state.fetchedProfile && !this.state.fetchClear){
+            if(!this.props.profile.is_verified){
+                const result =  await this.props.sendVerificationEmail()
+            }
+            this.setState({
+                fetchClear: true
+            })
         }
     }
 
@@ -977,7 +1004,7 @@ class CustomRequestCreate extends Component{
 
     _nextSlide = async() => {
         const { step, isLoggedIn, option, extraOption, people, extraPeople, dateOption, dateConfirm, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, hour, extraHour, locationOption, locations, isSubmitting } = this.state;
-        const { createCustomRequest } = this.props;
+        const { createCustomRequest, profile, sendVerificationEmail } = this.props;
         if(step === 1){
             if((((option.length > 0) && ((option.indexOf('extra') < 0))) || (extraOption !== '')) && (((people !==0) && (people !==-1)) || (extraPeople !== ''))){
                 this.setState({
@@ -1056,6 +1083,9 @@ class CustomRequestCreate extends Component{
 
                     const submit = await createCustomRequest(photograpyType, person, time, dateOption, date, selectedHour, selectedMin, startDate, endDate, locationOption, locations)
                     if(submit.status === 'ok'){
+                        if(!profile.is_verified){
+                            const result = await sendVerificationEmail()
+                        }
                         this.setState({
                             isSubmitting: false,
                             confirmed: true
@@ -1107,6 +1137,27 @@ class CustomRequestCreate extends Component{
         this.slider.slickPrev()
     }
 
+    _send = async() => {
+        const { isSendingEmail } = this.state;
+        const { sendVerificationEmail, isLoggedIn } = this.props;
+        if(!isSendingEmail){
+            if(isLoggedIn){
+                const result = await sendVerificationEmail()
+                if(result.status === 'ok'){
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                }
+                else{
+                    alert(this.context.t("An error has occurred.."))
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                }
+            }
+        }
+    }
+
     render(){
         const { 
             totalStep, 
@@ -1151,28 +1202,60 @@ class CustomRequestCreate extends Component{
             isSubmitting,
             countryList,
             isLoggedIn,
-            confirmed
+            confirmed,
+            fetchClear,
+            isSendingEmail
         } = this.state;
+        const { profile } = this.props;
         return(
             <div className={`${styles.containerCustomer} ${styles.safearea} ${styles.minHeightFull}`}>
-                {confirmed ? (
-                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.heightFullSafeareaLg} ${styles.px3}`} style={{position: 'relative'}}>
-                        <div className={`${styles.textCenter}`}>
-                            <img src={require('../../assets/images/request_complete.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: '100%', maxWidth: 400}} />
-                            <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>
-                                {this.context.t("맞춤예약 신청이 완료되었습니다!")}<br/>
-                                {this.context.t("추후 SMS와 이메일로 안내해드리겠습니다.")}
-                            </p>
+                {(confirmed && fetchClear && profile) ? (
+                    profile.is_verified ? (
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.heightFullSafeareaLg} ${styles.px3}`} style={{position: 'relative'}}>
+                            <div className={`${styles.textCenter}`}>
+                                <img src={require('../../assets/images/request_complete.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: '100%', maxWidth: 400}} />
+                                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>
+                                    {this.context.t("맞춤예약 신청이 완료되었습니다!")}<br/>
+                                    {this.context.t("추후 SMS와 이메일로 안내해드리겠습니다.")}
+                                </p>
 
-                            <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
-                                {this.context.t(`회원님의 예약 내역이 사진작가들에게 전달되었으며,`)}<br/>
-                                {this.context.t(`곧 다양한 작가들의 촬영 견적을 받아보실 수 있습니다.`)}<br/>
-                            </p>
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
-                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("메인화면으로 이동하기")}</p>
+                                <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
+                                    {this.context.t(`회원님의 예약 내역이 사진작가들에게 전달되었으며,`)}<br/>
+                                    {this.context.t(`곧 다양한 작가들의 촬영 견적을 받아보실 수 있습니다.`)}<br/>
+                                </p>
+                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
+                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("메인화면으로 이동하기")}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className={`${styles.mt3} ${styles.mtMd5} ${styles.px3}`}>
+                            <p className={`${styles.fontExtraBold} ${styles.font1416} ${styles.textCenter}`}>{this.context.t("Your Custom Request has been submitted!")}</p>
+                            <div className={`${styles.mt2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                <img src={require('../../assets/images/email_verifing.png')} width={'60%'} className={`${styles.imgVerifing}`} />
+                            </div>
+                            <p className={`${styles.font1416} ${styles.mt3} ${styles.textCenter}`}>
+                                {this.context.t("We sent a ")}
+                                <span className={`${styles.pink}`}>{this.context.t("verification email ")}</span>
+                                {this.context.t("to the following address :")}
+                            </p>
+                            <p className={`${styles.font1416} ${styles.mt3} ${styles.textCenter}`}>
+                                {profile.email}
+                            </p>
+                            <p className={`${styles.font1416} ${styles.mt3} ${styles.textCenter}`}>
+                                <span className={`${styles.pink}`}>{this.context.t("Please verify yourself by clicking the link attached in the email.")}</span>
+                                {this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")}
+                            </p>
+                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.justifyContentMdCenter} ${styles.mt5}`}>
+                                <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48}} onClick={this._send}>
+                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Resend")}</p>
+                                </div>
+                                <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
+                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Main")}</p>
+                                </div>
+                            </div>
+                        </div>
+                    )
                 ) : (
                     <Fragment>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>

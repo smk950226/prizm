@@ -53,6 +53,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getProfile: () => {
             dispatch(userAction.getProfile())
+        },
+        sendVerificationEmail: () => {
+            return dispatch(userAction.sendVerificationEmail())
         }
     }
 }

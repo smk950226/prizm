@@ -9,7 +9,7 @@ const SignUpClear = (props, context) => (
             <div className={`${styles.mt2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                 <img src={require('../../assets/images/email_verifing.png')} width={'60%'} className={`${styles.imgVerifing}`} />
             </div>
-            <p className={`${styles.font1416} ${styles.mt3}`}>
+            <p className={`${styles.font1416} ${styles.mt3} ${styles.textCenter}`}>
                 {context.t("We sent a ")}
                 <span className={`${styles.pink}`}>{context.t("verification email ")}</span>
                 {context.t("to the following address :")}

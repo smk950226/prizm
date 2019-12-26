@@ -18,7 +18,8 @@ class Container extends Component{
         createCustomRequestByToken: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
         goCustomRequest: PropTypes.func.isRequired,
-        getProfile: PropTypes.func.isRequired
+        getProfile: PropTypes.func.isRequired,
+        sendVerificationEmail: PropTypes.func.isRequired
     }
 
     componentDidMount = () => {

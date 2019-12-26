@@ -39,7 +39,7 @@ class User(AbstractUser):
             if last_request.is_closed:
                 return {
                     'id': -1,
-                    'status': 'close'
+                    'status': 'none'
                 }
             else:
                 orders = last_request.requestorder_set.all()
@@ -56,7 +56,7 @@ class User(AbstractUser):
         else:
             return {
                 'id': -1,
-                'status': 'close'
+                'status': 'none'
             }
 
 
