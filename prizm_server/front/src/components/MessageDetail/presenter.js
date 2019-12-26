@@ -140,7 +140,7 @@ class MessageList extends Component{
                 availableFrom,
                 availableTo,
                 loadingDay: false,
-                availableTime: order.available_time ? JSON.parse(order.available_time) : []
+                availableTime: order.available_time ? JSON.parse(order.available_time.replace(/'/gi, '"')) : []
             })
         }
     }

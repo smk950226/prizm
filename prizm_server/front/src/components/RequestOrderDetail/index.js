@@ -1,37 +1,32 @@
 import { connect } from 'react-redux';
 import Container from './container';
 import { actionCreators as customerAction } from '../../redux/modules/customer';
+import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { router : { location }, user : { profile } } = state;
+    const { router : { location }, user : { isLoggedIn } } = state;
     return {
         pathname: location.pathname,
-        profile
+        isLoggedIn
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
-        getRequestOrderList: (requestId) => {
-            return dispatch(customerAction.getRequestOrderList(requestId))
-        },
-        getRequestOrderListMore: (requestId, page) => {
-            return dispatch(customerAction.getRequestOrderListMore(requestId, page))
-        },
         goHome: () => {
             dispatch(push('/'))
         },
-        goRequestOrderDetail: (order) => {
+        goRequestOrderList: (requestId) => {
             dispatch(push({
-                pathname: '/custom/request/order/detail/',
+                pathname: '/custom/request/order/list/',
                 state: {
-                    order
+                    requestId
                 }
             }))
         },
-        goCustomRequest: () => {
-            dispatch(push('/custom/request/'))
+        responsetToRequsetOrder: (orderId, selectedTime) => {
+            return dispatch(customerAction.responsetToRequsetOrder(orderId, selectedTime))
         }
     }
 }

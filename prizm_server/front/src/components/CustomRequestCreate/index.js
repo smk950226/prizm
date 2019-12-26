@@ -50,6 +50,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goCustomRequest: () => {
             dispatch(push('/custom/request/'))
+        },
+        getProfile: () => {
+            dispatch(userAction.getProfile())
         }
     }
 }

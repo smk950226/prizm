@@ -85,7 +85,7 @@ class MySchedule extends Component{
                                     </div>
                                     {order.status === 'confirmed' && (
                                         <Fragment>
-                                        <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.ƒcontprops.goPayment(order)} style={{height: 48}}>
+                                        <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.props.goPayment(order)} style={{height: 48}}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add Payment Details")}</p>
                                         </div>
                                         <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{this.context.t(`Please add payment details by : ${new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
@@ -93,14 +93,14 @@ class MySchedule extends Component{
                                     )}
                                     {order.status === 'waiting_payment' && (
                                         <Fragment>
-                                        <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.ƒcontprops.goPayment(order)} style={{height: 48}}>
+                                        <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.props.goPayment(order)} style={{height: 48}}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("View Payment Information")}</p>
                                         </div>
                                         <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{this.context.t(`Please make payment by : ${new Date(new Date(order.deposit.created_at).getTime() + 1000*60*60*24*1)}`)}</p>
                                         </Fragment>
                                     )}
                                     {order.status === 'completed' && !order.is_reviewed && (
-                                        <div className={`${styles.widthFull} ${styles.bgCompleted} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.ƒcontprops.goReveiwCreate(order)} style={{height: 48}}>
+                                        <div className={`${styles.widthFull} ${styles.bgCompleted} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.props.goReveiwCreate(order)} style={{height: 48}}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Leave a Review")}</p>
                                         </div>
                                     )}

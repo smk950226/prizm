@@ -42,7 +42,7 @@ class User(AbstractUser):
                 }
             else:
                 orders = last_request.requestorder_set.all()
-                if orders.count() >= 3:
+                if orders.count() >= 1:
                     return {
                         'id': last_request.id,
                         'status': 'open'

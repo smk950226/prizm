@@ -559,6 +559,33 @@ function getRequestOrderListMore(requestId, page){
     }
 }
 
+function responsetToRequsetOrder(orderId, selectedTime){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/custom/request/order/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                orderId,
+                selectedTime
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 const initialState = {
     request: localStorage.getItem('request') ? JSON.parse(localStorage.getItem('request')) : {}
 };
@@ -635,7 +662,8 @@ const actionCreators = {
     createCustomRequestByToken,
     cancelCustomRequest,
     getRequestOrderList,
-    getRequestOrderListMore
+    getRequestOrderListMore,
+    responsetToRequsetOrder
 }
 
 export { actionCreators }

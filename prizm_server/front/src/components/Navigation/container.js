@@ -13,7 +13,8 @@ class Container extends Component{
         goSignUp: PropTypes.func.isRequired,
         goMySchedule: PropTypes.func.isRequired,
         goProfileMenu: PropTypes.func.isRequired,
-        goTerms: PropTypes.func.isRequired
+        goTerms: PropTypes.func.isRequired,
+        goMyPhotos: PropTypes.func.isRequired
     }
 
     constructor(props){

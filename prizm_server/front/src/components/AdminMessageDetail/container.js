@@ -41,7 +41,11 @@ class Container extends Component{
             profileImage: props.location.state ? props.location.state.order ? props.location.state.order.photographer.profile_image : null : null,
             toUser: props.location.state ? props.location.state.order ? props.location.state.order.photographer.user.id : null : null,
             photographer: props.location.state ? props.location.state.order ? props.location.state.order.photographer : null : null,
-            order: props.location.state ? props.location.state.order ? props.location.state.order : null : null,
+            order: props.location.state ? props.location.state.order ? {
+                ...props.location.state.order,
+                location: JSON.parse(props.location.state.order.location),
+                option: JSON.parse(props.location.state.order.option)
+            } : null : null,
             text: "",
             messageType: 'normal',
             added: false,
@@ -50,7 +54,6 @@ class Container extends Component{
             isSubmitting: false,
             redatingMsgId: -1
         }
-        console.log(111)
         this.initialize(chatId,id)
     }
 

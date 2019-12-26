@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Container from './container';
 import { actionCreators as userAction } from '../../redux/modules/user';
 import { actionCreators as adminAction } from '../../redux/modules/admin';
+import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
     const { user : { profile, isLoggedIn, notification, newMessage }, router : { location }, admin: { photographer } } = state;
@@ -27,6 +28,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(userAction.getProfile())
             dispatch(adminAction.getPhotographer())
             dispatch(userAction.checkMessage())
+        },
+        goHome: () => {
+            dispatch(push('/'))
         }
     }
 }

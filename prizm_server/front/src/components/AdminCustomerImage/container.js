@@ -168,7 +168,7 @@ class Container extends Component{
             })
             const result = await orderComplete(order.id)
             if(result.status === 'ok'){
-                await refresh()
+                await refresh(result.order)
                 this.setState({
                     isSubmitting: false,
                     showCancel: false

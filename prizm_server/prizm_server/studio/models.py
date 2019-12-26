@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from prizm_server.common.utils import get_image_filename, get_processed_image_filename
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import Thumbnail
+from jsonfield import JSONField
+
 
 class Photographer(models.Model):
     user = models.OneToOneField('users.User', on_delete = models.CASCADE)
@@ -107,8 +109,8 @@ class Review(models.Model):
 class Order(models.Model):
     user = models.ForeignKey('users.User', on_delete = models.CASCADE)
     photographer = models.ForeignKey(Photographer, on_delete = models.CASCADE)
-    location = models.ForeignKey(Location, on_delete = models.CASCADE)
-    option = models.ForeignKey(Option, on_delete = models.CASCADE)
+    location = JSONField(_('Location'))
+    option = JSONField(_('Option'))
     comment = models.TextField(_('Comment'), blank = True, null = True)
     date_option = models.CharField(_("Date Option"), choices = (('Specific', 'Specific Date'), ('Range', 'Not Specific Date')), max_length = 100)
     specific_date = models.DateTimeField(_("Specific Date"), blank = True, null = True)

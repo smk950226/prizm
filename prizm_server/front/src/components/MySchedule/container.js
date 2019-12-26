@@ -38,6 +38,7 @@ class Container extends Component{
             this.props.goHome()
         }
         if(this.props.orderList){
+            this.props.getOrderList()
             await this.props.checkNotification()
             this.setState({
                 loading: false,

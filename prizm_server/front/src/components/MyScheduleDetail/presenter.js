@@ -49,18 +49,25 @@ const MyScheduleDetail = (props, context) => (
             />
         </div>
         <p className={`${styles.fontBold} ${styles.font13} ${styles.mt45}`}>{context.t("Date&Time")}</p>
-        {props.order.date_option === "Specific" && (
+        {props.order.status === 'pending' ? (
             <Fragment>
-                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.specific_date.slice(2,4).concat('/', props.order.specific_date.slice(5,7), '/', props.order.specific_date.slice(8,10), ' ', props.order.specific_date.slice(11,13), ':', props.order.specific_date.slice(14,16))}</p>
-                <p className={`${styles.font11} ${styles.mt1}`}>{context.t("I have a specific date in mind")}</p>
+                {props.order.date_option === "Specific" && (
+                    <Fragment>
+                        <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.specific_date.slice(2,4).concat('/', props.order.specific_date.slice(5,7), '/', props.order.specific_date.slice(8,10), ' ', props.order.specific_date.slice(11,13), ':', props.order.specific_date.slice(14,16))}</p>
+                    </Fragment>
+                )}
+                {props.order.date_option === 'Range' && (
+                    <Fragment>
+                        <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.start_date.slice(2,4).concat('/', props.order.start_date.slice(5,7), '/', props.order.start_date.slice(8,10), ' ~ ',props.order.end_date.slice(2,4).concat('/', props.order.end_date.slice(5,7), '/', props.order.end_date.slice(8,10)))}</p>
+                    </Fragment>
+                )}
+            </Fragment>
+        ) : (
+            <Fragment>
+                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.confirmed_date.slice(2,4).concat('/', props.order.confirmed_date.slice(5,7), '/', props.order.confirmed_date.slice(8,10), ' ', props.order.confirmed_date.slice(11,13), ':', props.order.confirmed_date.slice(14,16))}</p>
             </Fragment>
         )}
-        {props.order.date_option === 'Range' && (
-            <Fragment>
-                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{props.order.start_date.slice(2,4).concat('/', props.order.start_date.slice(5,7), '/', props.order.start_date.slice(8,10), ' ~ ',props.order.end_date.slice(2,4).concat('/', props.order.end_date.slice(5,7), '/', props.order.end_date.slice(8,10)))}</p>
-                <p className={`${styles.font11} ${styles.mt1}`}>{context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as above")}</p>
-            </Fragment>
-        )}
+        
         <p className={`${styles.fontBold} ${styles.font13} ${styles.mt45}`}>{context.t("Service&Pricing")}</p>
         <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>{`${props.order.option.title} (${props.order.option.person > 1 ? `${props.order.option.person} people` : `${props.order.option.person} person`}, ${props.order.option.hour > 1 ? `${props.order.option.hour} hrs` : `${props.order.option.hour} hr`})`}</p>
         <p className={`${styles.font11} ${styles.mt1} ${styles.mb45}`}>{props.order.option.description}</p>

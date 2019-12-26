@@ -22,7 +22,7 @@ const NotFound = (props, context) => (
 )
 
 NotFound.propTypes = {
-    goHome: PropTypes.func.isRequired
+    goHome: PropTypes.func
 }
 
 NotFound.contextTypes = {

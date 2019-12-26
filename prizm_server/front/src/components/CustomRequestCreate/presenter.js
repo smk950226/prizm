@@ -168,7 +168,8 @@ class CustomRequestCreate extends Component{
         checkMessageByToken: PropTypes.func.isRequired,
         createCustomRequest: PropTypes.func.isRequired,
         createCustomRequestByToken: PropTypes.func.isRequired,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        getProfile: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -223,6 +224,12 @@ class CustomRequestCreate extends Component{
         isSubmitting: false,
         countryList: [],
         confirmed: false
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if(!prevState.confirmed && this.state.confirmed){
+            this.props.getProfile()
+        }
     }
 
     _handleChangeOption = (selectedOption) => {

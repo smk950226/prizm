@@ -62,7 +62,7 @@ class Payment(models.Model):
 
     is_ready = property(lambda self: self.status == 'ready')
     is_paid = property(lambda self: self.status == 'paid')
-    is_paid_ok = property(lambda self: self.status == 'paid' and self.amount == self.meta.get('amount'))
+    is_paid_ok = property(lambda self: self.status == 'paid' and self.price == self.meta.get('amount'))
     is_cancelled = property(lambda self: self.status == 'cancelled')
     is_failed = property(lambda self: self.status == 'failed')
 
@@ -96,7 +96,7 @@ class Payment(models.Model):
                 subscription.last_pay_status = self.meta['status']
                 subscription.save()
             if self.status == 'paid':
-                assert self.amount == self.meta['amount']
+                assert self.price == self.meta['amount']
         if commit:
             self.save()
     

@@ -34,7 +34,9 @@ class RequestOrderList extends Component{
         orders: PropTypes.array,
         isLoadingMore: PropTypes.bool.isRequired,
         hasNextPage: PropTypes.bool.isRequired,
-        loading: PropTypes.bool.isRequired
+        loading: PropTypes.bool.isRequired,
+        goRequestOrderDetail: PropTypes.func.isRequired,
+        goCustomRequest: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -55,9 +57,11 @@ class RequestOrderList extends Component{
 
     _handleScroll = async() => {
         const wrappedElement = this.refs.orderContainer
-        if (this._isBottom(wrappedElement)) {
-            if(!this.props.isLoadingMore){
-                this.props.orderListMore()
+        if(wrappedElement){
+            if (this._isBottom(wrappedElement)) {
+                if(!this.props.isLoadingMore){
+                    this.props.orderListMore()
+                }
             }
         }
     }
@@ -67,7 +71,7 @@ class RequestOrderList extends Component{
         return(
             <div className={`${styles.safearea} ${styles.containerCustomer}`}>
                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.px3} ${styles.py2} ${styles.bgGrayF8}`}>
-                    <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Go Back")} className={`${styles.iconArrowRight} ${styles.cursorPointer}`} onClick={() => this.props.history.goBack()} />
+                    <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Go Back")} className={`${styles.iconArrowRight} ${styles.cursorPointer}`} onClick={this.props.goCustomRequest} />
                     <p className={`${styles.font1012}`}>{this.context.t("다음 중 마음에 드는 사진작가의 제안을 자유롭게 선택하세요.")}</p>
                     <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Go Back")} className={`${styles.iconArrowRight} ${styles.hidden}`} />
                 </div>
@@ -95,7 +99,7 @@ class RequestOrderList extends Component{
                                             </div>
                                         </div>
                                         <div>
-                                            <p className={`${styles.font1214} ${styles.pink} ${styles.cursorPointer}`}>
+                                            <p className={`${styles.font1214} ${styles.pink} ${styles.cursorPointer}`} onClick={() => this.props.goRequestOrderDetail(order)}>
                                                 {this.context.t("자세히 보기 >")}
                                             </p>
                                         </div>

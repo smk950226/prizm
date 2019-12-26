@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
         getOrderDetail: (orderId) => {
-            dispatch(userAction.getOrderDetail(orderId))
+            return dispatch(userAction.getOrderDetail(orderId))
         },
         goHome: () => {
             dispatch(push('/'))

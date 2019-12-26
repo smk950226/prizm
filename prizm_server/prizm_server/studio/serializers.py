@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from . import models
 from prizm_server.users import serializers as users_serializers
 from prizm_server.payment import serializers as payment_serializers
+import json
 
 class PortfolioSerializer(serializers.ModelSerializer):
     width = serializers.SerializerMethodField()
@@ -62,10 +63,10 @@ class PhotographerShortSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     user = users_serializers.ProfileSerializer()
     photographer = PhotographerPortfolioSerializer()
-    location = LocationSerializer()
-    option = OptionSerializer()
     is_reviewed = serializers.SerializerMethodField()
     deposit = payment_serializers.DepositSerializer()
+    location = serializers.SerializerMethodField()
+    option = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Order
@@ -81,13 +82,20 @@ class OrderSerializer(serializers.ModelSerializer):
                 return False
         except:
             return False
+    
+    def get_location(self, obj):
+        return json.loads(obj.location)
+    
+    def get_option(self, obj):
+        return json.loads(obj.option)
+        
 
 
 class OrderShortSerializer(serializers.ModelSerializer):
-    location = LocationSerializer()
-    option = OptionSerializer()
     is_reviewed = serializers.SerializerMethodField()
     deposit = payment_serializers.DepositSerializer()
+    location = serializers.SerializerMethodField()
+    option = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Order
@@ -103,6 +111,12 @@ class OrderShortSerializer(serializers.ModelSerializer):
                 return False
         except:
             return False
+    
+    def get_location(self, obj):
+        return json.loads(obj.location)
+    
+    def get_option(self, obj):
+        return json.loads(obj.option)
 
 
 class OrderImageSerializer(serializers.ModelSerializer):

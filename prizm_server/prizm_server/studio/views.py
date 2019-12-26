@@ -12,6 +12,7 @@ from PIL import Image
 from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
 from django.db.models import Q
+from uuid import uuid4
 
 from . import serializers, models
 from prizm_server.common.pagination import MainPageNumberPagination, MesssageNumberPagination, OrderNumberPagination
@@ -106,11 +107,30 @@ class Order(APIView):
                 location = models.Location.objects.get(id = location_id)
                 option = models.Option.objects.get(id = option_id)
 
+                location_json = json.dumps({
+                    'id': location.id,
+                    'photographer': location.photographer.id,
+                    'name': location.name,
+                    'lng': location.lng,
+                    'lat': location.lat
+                }, sort_keys=True, indent=4)
+
+                option_json = json.dumps({
+                    'id': option.id,
+                    'photographer': option.photographer.id,
+                    'title': option.title,
+                    'photograpy_type': option.photograpy_type,
+                    'description': option.description,
+                    'person': option.person,
+                    'hour': option.hour,
+                    'price': option.price
+                }, sort_keys=True, indent=4)
+
                 order = models.Order.objects.create(
                     user = user,
                     photographer = photographer,
-                    location = location,
-                    option = option,
+                    location = location_json,
+                    option = option_json,
                     comment = comment,
                     date_option = 'Specific',
                     specific_date = specific
@@ -127,11 +147,31 @@ class Order(APIView):
                 location = models.Location.objects.get(id = location_id)
                 option = models.Option.objects.get(id = option_id)
 
+                location_json = json.dumps({
+                    'id': location.id,
+                    'photographer': location.photographer.id,
+                    'name': location.name,
+                    'lng': location.lng,
+                    'lat': location.lat
+                }, sort_keys=True, indent=4)
+
+                option_json = json.dumps({
+                    'id': option.id,
+                    'photographer': option.photographer.id,
+                    'title': option.title,
+                    'photograpy_type': option.photograpy_type,
+                    'description': option.description,
+                    'person': option.person,
+                    'hour': option.hour,
+                    'price': option.price
+                }, sort_keys=True, indent=4)
+
+
                 order = models.Order.objects.create(
                     user = user,
                     photographer = photographer,
-                    location = location,
-                    option = option,
+                    location = location_json,
+                    option = option_json,
                     comment = comment,
                     date_option = 'Range',
                     start_date = start,
@@ -156,25 +196,18 @@ class Order(APIView):
             if response_type == 'cancel':
                 order = models.Order.objects.get(id = order_id)
                 try:
-                    print(1)
                     message = chat_models.ChatMessage.objects.get(id = message_id)
-                    print(2)
                     if order.status == 'confirmed':
-                        print(7)
                         return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('You have already confirmed your date and time. Please contact as at contact@prizm.cloud if you have any inquiries.')})
                     else:
-                        print(3)
                         order.status = 'cancelled'
                         order.save()
                         message.responded = True
                         message.save()
-                        print(4)
                         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
-                        print(6)
                     return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
 
                 except:
-                    print(5)
                     return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
             else:
                 order = models.Order.objects.get(id = order_id)
@@ -212,8 +245,11 @@ class CompleteOrder(APIView):
             try:
                 order = models.Order.objects.get(id = order_id)
                 order.status = 'completed'
+                order.is_ended = True
                 order.save()
-                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                order = models.Order.objects.get(id = order_id)
+                serializer = serializers.OrderSerializer(order, context = {'request': request})
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'order': serializer.data})
             except:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
         else:
@@ -836,7 +872,134 @@ class RequestOrder(APIView):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+    
+    def put(self, request, format = None):
+        user = request.user
+        order_id = request.data.get('orderId', None)
+        selected_time = request.data.get('selectedTime', None)
+        now = timezone.now()
 
+        if order_id:
+            try:
+                request_order = models.RequestOrder.objects.get(id = order_id)
+                custom_request = request_order.custom_request
+                photographer = request_order.photographer
+                location = json.loads(request_order.location.replace("'", '"'))
+                location_json = json.dumps({
+                    'id': str(uuid4()),
+                    'photographer': photographer.id,
+                    'name': location['name'],
+                    'lng': location['lng'],
+                    'lat': location['lat']
+                }, sort_keys=True, indent=4)
+
+                option_json = json.dumps({
+                    'id': str(uuid4()),
+                    'photographer': photographer.id,
+                    'title': 'Custom Request',
+                    'photograpy_type': custom_request.photograpy_type,
+                    'description': 'Custom Request',
+                    'person': custom_request.person,
+                    'hour': custom_request.hour,
+                    'price': request_order.price
+                }, sort_keys=True, indent=4)
+
+                if custom_request.date_option == 'Specific':
+                    order = models.Order.objects.create(
+                        user = user,
+                        photographer = request_order.photographer,
+                        location = location_json,
+                        option = option_json,
+                        date_option = custom_request.date_option,
+                        specific_date = custom_request.specific_date,
+                        start_date = custom_request.start_date,
+                        end_date = custom_request.end_date,
+                        status = 'confirmed',
+                        available_time = request_order.available_time,
+                        confirmed_date = custom_request.specific_date,
+                        confirmed_at = now
+                    )
+
+                    order.save()
+
+                    custom_request.photographer = request_order.photographer
+                    custom_request.is_closed = True
+                    custom_request.order = order
+                    custom_request.save()
+
+                    notification = notification_models.Notification.objects.create(
+                        user = user,
+                        notification_type = 'request_confirm',
+                        order = order
+                    )
+                    notification.save()
+
+                    chat = chat_models.Chat.objects.create(
+                        order = order
+                    )
+                    chat.save()
+                    chat.users.add(user, photographer.user)
+                    message = chat_models.ChatMessage.objects.create(
+                        chat = chat,
+                        from_user = photographer.user,
+                        to_user = user,
+                        message_type = 'order_confirm'
+                    )
+                    message.save()
+                    serializer = serializers.OrderSerializer(order, context = {'request': request})
+
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'order': serializer.data})
+
+                else:
+                    selected = datetime.datetime(int(selected_time[:4]), int(selected_time[5:7]), int(selected_time[8:10]), int(selected_time[11:13]), 00)
+                    order = models.Order.objects.create(
+                        user = user,
+                        photographer = request_order.photographer,
+                        location = location_json,
+                        option = option_json,
+                        date_option = custom_request.date_option,
+                        specific_date = custom_request.specific_date,
+                        start_date = custom_request.start_date,
+                        end_date = custom_request.end_date,
+                        status = 'confirmed',
+                        available_time = request_order.available_time,
+                        confirmed_date = selected,
+                        confirmed_at = now
+                    )
+
+                    order.save()
+
+                    custom_request.photographer = request_order.photographer
+                    custom_request.is_closed = True
+                    custom_request.order = order
+                    custom_request.save()
+
+                    notification = notification_models.Notification.objects.create(
+                        user = user,
+                        notification_type = 'request_confirm',
+                        order = order
+                    )
+                    notification.save()
+
+                    chat = chat_models.Chat.objects.create(
+                        order = order
+                    )
+                    chat.save()
+                    chat.users.add(user, photographer.user)
+                    message = chat_models.ChatMessage.objects.create(
+                        chat = chat,
+                        from_user = photographer.user,
+                        to_user = user,
+                        message_type = 'order_confirm'
+                    )
+                    message.save()
+                    serializer = serializers.OrderSerializer(order, context = {'request': request})
+
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'order': serializer.data})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 def download(request, image_id):
     image = models.OrderImage.objects.get(id = image_id)

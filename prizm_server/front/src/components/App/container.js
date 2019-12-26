@@ -10,7 +10,8 @@ class Container extends Component{
         notification: PropTypes.array,
         initAdmin: PropTypes.func.isRequired,
         photographer: PropTypes.any,
-        newMessage: PropTypes.bool
+        newMessage: PropTypes.bool,
+        goHome: PropTypes.func.isRequired
     }
 
     state = {

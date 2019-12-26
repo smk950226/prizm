@@ -20,7 +20,8 @@ class Navigation extends Component{
         goMySchedule: PropTypes.func.isRequired,
         goProfileMenu: PropTypes.func.isRequired,
         showNav: PropTypes.bool.isRequired,
-        goTerms: PropTypes.func.isRequired
+        goTerms: PropTypes.func.isRequired,
+        goMyPhotos: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -96,7 +97,7 @@ class Navigation extends Component{
                                             <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("My schedule")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goMySchedule} />
                                         </div>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt2}`}>
-                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`}>{this.context.t("My Photos")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goMyPhotos}>{this.context.t("My Photos")}</p>
                                             <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("My Photos")} className={`${styles.iconArrow} ${styles.cursorPointer}`} />
                                         </div>
                                     </Fragment>

@@ -27,6 +27,7 @@ import ReviewCreateComplete from '../ReviewCreateComplete';
 import CustomRequest from '../CustomRequest';
 import CustomRequestCreate from '../CustomRequestCreate';
 import RequestOrderList from '../RequestOrderList';
+import RequestOrderDetail from '../RequestOrderDetail';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -54,12 +55,12 @@ Modal.setAppElement('#root')
 const App = (props) => {
     if(props.admin){
         return(
-            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} newMessage={props.newMessage} />
+            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} newMessage={props.newMessage} goHome={props.goHome} />
         )
     }
     else{
         return(
-            <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} newMessage={props.newMessage} />
+            <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} newMessage={props.newMessage} goHome={props.goHome} />
         )
     }
 }
@@ -75,7 +76,8 @@ App.propTypes = {
     admin: PropTypes.bool.isRequired,
     initAdmin: PropTypes.func.isRequired,
     photographer: PropTypes.any,
-    newMessage: PropTypes.bool
+    newMessage: PropTypes.bool,
+    goHome: PropTypes.func.isRequired
 }
 
 class GeneralRouteContainer extends Component{
@@ -85,7 +87,8 @@ class GeneralRouteContainer extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         showBtmNav: PropTypes.bool.isRequired,
         notification: PropTypes.array,
-        newMessage: PropTypes.bool
+        newMessage: PropTypes.bool,
+        goHome: PropTypes.func.isRequired
     }
 
     state = {
@@ -140,7 +143,7 @@ class GeneralRouteContainer extends Component{
 
     render(){
         const { loading } = this.state;
-        const { showBtmNav } = this.props;
+        const { showBtmNav, goHome } = this.props;
         if(loading){
             return(
                 <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
@@ -152,7 +155,7 @@ class GeneralRouteContainer extends Component{
             return(
                 <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
                     <Navigation />
-                    <GeneralRoute />
+                    <GeneralRoute goHome={goHome} />
                     <BottomNavigation showBtmNav={showBtmNav} />
                 </div>
             )
@@ -167,7 +170,8 @@ class AdminRouteContainer extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         photographer: PropTypes.object,
         showBtmNav: PropTypes.bool.isRequired,
-        newMessage: PropTypes.bool
+        newMessage: PropTypes.bool,
+        goHome: PropTypes.func.isRequired
     }
 
     state = {
@@ -276,7 +280,7 @@ class AdminRouteContainer extends Component{
 
     render(){
         const { loading, showMobile, showLocationModal, showOptionModal, hideBtmNav } = this.state;
-        const { showBtmNav } = this.props;
+        const { showBtmNav, goHome } = this.props;
         if(loading){
             return(
                 <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
@@ -288,7 +292,7 @@ class AdminRouteContainer extends Component{
             return(
                 <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
                     <AdminNavigation showMobile={showMobile} openMobile={this._openMobile} showLocationModal={showLocationModal} showOptionModal={showOptionModal} />
-                    <AdminRoute displayBtmNav={this._displayBtmNav} hideBtmNav={this._hideBtmNav} showMobile={showMobile} openMobile={this._openMobile} closeMobile={this._closeMobile} showLocationModal={showLocationModal} openLocationModal={this._openLocationModal} closeLocationModal={this._closeLocationModal} showOptionModal={showOptionModal} openOptionModal={this._openOptionModal} closeOptionModal={this._closeOptionModal} />
+                    <AdminRoute goHome={goHome} displayBtmNav={this._displayBtmNav} hideBtmNav={this._hideBtmNav} showMobile={showMobile} openMobile={this._openMobile} closeMobile={this._closeMobile} showLocationModal={showLocationModal} openLocationModal={this._openLocationModal} closeLocationModal={this._closeLocationModal} showOptionModal={showOptionModal} openOptionModal={this._openOptionModal} closeOptionModal={this._closeOptionModal} />
                     {!hideBtmNav && (
                         <AdminBottomNavigation showBtmNav={showBtmNav} />
                     )}
@@ -322,8 +326,9 @@ const GeneralRoute = props => (
         <Route exact path='/custom/request/' component={CustomRequest} key={21} />
         <Route exact path='/custom/request/create/' component={CustomRequestCreate} key={22} />
         <Route exact path='/custom/request/order/list/' component={RequestOrderList} key={23} />
+        <Route exact path='/custom/request/order/detail/' component={RequestOrderDetail} key={23} />
         <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
-        <Route component={NotFound} key={101} />
+        <Route render={(props) => <NotFound {...props} goHome={props.goHome} />} key={101} />
     </Switch>
 )
 
@@ -344,6 +349,6 @@ const AdminRoute = props => (
         <Route exact path='/message/' component={AdminMessageList} key={13} />
         <Route exact path='/message/detail/:chatId/' component={AdminMessageDetail} key={14} />
         <Route exact path='/my/settings/' component={AdminSettings} key={15} />
-        <Route component={NotFound} key={101} />
+        <Route render={(props) => <NotFound {...props} goHome={props.goHome} />} key={101} />
     </Switch>
 )

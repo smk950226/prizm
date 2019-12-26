@@ -11,7 +11,9 @@ class Container extends Component{
         profile: PropTypes.object.isRequired,
         getRequestOrderList: PropTypes.func.isRequired,
         getRequestOrderListMore: PropTypes.func.isRequired,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        goRequestOrderDetail: PropTypes.func.isRequired,
+        goCustomRequest: PropTypes.func.isRequired
     }
 
     static contextTypes = {
