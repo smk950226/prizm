@@ -13,7 +13,8 @@ class Container extends Component{
         goDetail: PropTypes.func.isRequired,
         getNotificationByToken: PropTypes.func.isRequired,
         getOrderListByToken: PropTypes.func.isRequired,
-        checkMessageByToken: PropTypes.func.isRequired
+        checkMessageByToken: PropTypes.func.isRequired,
+        profile: PropTypes.object
     }
 
     static contextTypes = {
@@ -28,7 +29,9 @@ class Container extends Component{
             emailForm: false,
             isSubmitting: false,
             goRequest: props.location.state ? props.location.state.goRequest ? props.location.state.goRequest : false : false,
-            photographerId: props.location.state ? props.location.state.photographerId ? props.location.state.photographerId : null : null
+            photographerId: props.location.state ? props.location.state.photographerId ? props.location.state.photographerId : null : null,
+            fetchedProfile: false,
+            fetchClear: false
         }
     }
 
@@ -36,6 +39,38 @@ class Container extends Component{
         window.scrollTo(0,0)
         if(this.props.isLoggedIn){
             this.props.goHome()
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedProfile } = prevState;
+        if(!fetchedProfile){
+            let update = {}
+            if(nextProps.profile){
+                update.fetchedProfile = true
+            }
+
+            return update
+        }
+        else{
+            return null
+        }
+    }
+
+    componentDidUpdate = () => {
+        if(this.state.fetchedProfile && !this.state.fetchClear){
+            this.setState({
+                loading: false,
+                fetchClear: true,
+                isSubmitting: false
+            })
+            this.props.getSaveToken(this.state.token)
+            if(this.state.goRequest){
+                this.props.goDetail(this.state.photographerId)
+            }
+            else{
+                this.props.goHome()
+            }
         }
     }
 
@@ -74,20 +109,13 @@ class Container extends Component{
                     })
                     const result = await login(email, password)
                     if(result.token){
+                        await this.setState({
+                            token: result.token
+                        })
                         await getProfileByToken(result.token)
                         await getNotificationByToken(result.token)
                         await getOrderListByToken(result.token)
                         await checkMessageByToken(result.token)
-                        this.setState({
-                            isSubmitting: false
-                        })
-                        getSaveToken(result.token)
-                        if(goRequest){
-                            goDetail(photographerId)
-                        }
-                        else{
-                            goHome()
-                        }
                     }
                     else{
                         this.setState({

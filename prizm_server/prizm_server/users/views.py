@@ -107,7 +107,6 @@ class AdminProfile(APIView):
         country_number = request.data.get('countryNumber', None)
         mobile = request.data.get('mobile', None)
         instagram_account = request.data.get('instagram', None)
-        print(name, country_number, mobile, instagram_account)
         if name and country_number and mobile and instagram_account:
             if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
@@ -141,7 +140,7 @@ class EmailVerification(APIView):
         uuid = request.query_params.get('uuid', None)
         if uuid:
             try:
-                email_verification = models.EmailVerification.objects.get(uuid = uuid)
+                email_verification = models.EmailVerification.objects.get(uuid = uuid, is_expired = False)
                 now = timezone.now().timestamp()
                 created = email_verification.created_at.timestamp()
 

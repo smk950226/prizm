@@ -5,11 +5,12 @@ import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { router : { location }, customer : { request }, user : { isLoggedIn } } = state;
+    const { router : { location }, customer : { request }, user : { isLoggedIn, profile } } = state;
     return {
         pathname: location.pathname,
         request,
-        isLoggedIn
+        isLoggedIn,
+        profile
     }
 }
 
@@ -49,6 +50,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     photographerId
                 }
             }))
+        },
+        sendVerificationEmail: () => {
+            return dispatch(userAction.sendVerificationEmail())
         }
     }
 }

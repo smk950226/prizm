@@ -135,7 +135,10 @@ class PhotographerDetail extends Component{
         goHome: PropTypes.func.isRequired,
         dateRange: PropTypes.array.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
-        goReviewList: PropTypes.func.isRequired
+        goReviewList: PropTypes.func.isRequired,
+        profile: PropTypes.object.isRequired,
+        isSendingEmail: PropTypes.bool.isRequired,
+        send: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -148,7 +151,7 @@ class PhotographerDetail extends Component{
     }
 
     render(){
-        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted, dateRange, isLoggedIn } = this.props;
+        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted, dateRange, isLoggedIn, profile, isSendingEmail } = this.props;
         return(
             <div className={`${requestSubmitted ? styles.safearea : isConfirmPage ? styles.safearea : styles.safeareaTop} ${styles.containerCustomer} ${requestSubmitted ? `${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : null}`}>
                 {loading ? (
@@ -432,20 +435,49 @@ class PhotographerDetail extends Component{
                             </Fragment>
                         )
                     ) : (
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.heightFullPercent} ${styles.px3}`} style={{position: 'relative'}}>
-                            <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/request_complete.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: '100%', maxWidth: 400}} />
-                                <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>{this.context.t("Your request was submitted successfully")}</p>
-                                <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
-                                    {this.context.t(`${photographer.nickname} is now reviewing your request.`)}<br/>
-                                    {this.context.t(`We will soon send you a confirmation message`)}<br/>
-                                    {this.context.t(`to your email and mobile number.`)}
-                                </p>
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
-                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go to the main page")}</p>
+                        profile.is_verified ? (
+                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.heightFullPercent} ${styles.px3}`} style={{position: 'relative'}}>
+                                <div className={`${styles.textCenter}`}>
+                                    <img src={require('../../assets/images/request_complete.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: '100%', maxWidth: 400}} />
+                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>{this.context.t("Your request was submitted successfully")}</p>
+                                    <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
+                                        {this.context.t(`${photographer.nickname} is now reviewing your request.`)}<br/>
+                                        {this.context.t(`We will soon send you a confirmation message`)}<br/>
+                                        {this.context.t(`to your email and mobile number.`)}
+                                    </p>
+                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go to the main page")}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div className={`${styles.mt3} ${styles.mtMd5} ${styles.px3}`}>
+                                <p className={`${styles.fontExtraBold} ${styles.font1416} ${styles.textCenter}`}>{this.context.t("Your Reservation Request has been submitted!")}</p>
+                                <div className={`${styles.mt2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                    <img src={require('../../assets/images/email_verifing.png')} width={'60%'} className={`${styles.imgVerifing}`} />
+                                </div>
+                                <p className={`${styles.font1416} ${styles.mt3} ${styles.textCenter}`}>
+                                    {this.context.t("We sent a ")}
+                                    <span className={`${styles.pink}`}>{this.context.t("verification email ")}</span>
+                                    {this.context.t("to the following address :")}
+                                </p>
+                                <p className={`${styles.font1416} ${styles.mt3} ${styles.textCenter}`}>
+                                    {profile.email}
+                                </p>
+                                <p className={`${styles.font1416} ${styles.mt3} ${styles.textCenter}`}>
+                                    <span className={`${styles.pink}`}>{this.context.t("Please verify yourself by clicking the link attached in the email.")}</span>
+                                    {this.context.t("When you complete the email verification, your request details will be sent to the selected photographer")}
+                                </p>
+                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.justifyContentMdCenter} ${styles.mt5}`}>
+                                    <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48}} onClick={this.props.send}>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Resend")}</p>
+                                    </div>
+                                    <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Main")}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )
                     )
                 )}
                 <Modal

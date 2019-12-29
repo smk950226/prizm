@@ -13,7 +13,9 @@ class Container extends Component{
         removeRequest: PropTypes.func.isRequired,
         goHome: PropTypes.func.isRequired,
         getOrderList: PropTypes.func.isRequired,
-        goReviewList: PropTypes.func.isRequired
+        goReviewList: PropTypes.func.isRequired,
+        profile: PropTypes.object,
+        sendVerificationEmail: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -49,7 +51,8 @@ class Container extends Component{
             isConfirmPage: props.location.state ? props.location.state.isConfirmPage ? props.location.state.isConfirmPage : false : false,
             fromAuth: props.location.state ? props.location.state.fromAuth ? props.location.state.fromAuth : false : false,
             requestSubmitted: false,
-            dateRange: []
+            dateRange: [],
+            isSendingEmail: false
         }
     }
 
@@ -66,7 +69,7 @@ class Container extends Component{
             alert(result.error)
         }
         else{
-            alert('An error has occurred..')
+            alert(this.context.t('An error has occurred..'))
         }
     }
 
@@ -399,34 +402,63 @@ class Container extends Component{
 
     _submit = async() => {
         const { isSubmitting } = this.state;
-        const { createRequest, request, removeRequest, getOrderList } = this.props;
+        const { createRequest, request, removeRequest, getOrderList, profile, sendVerificationEmail } = this.props;
         if(!isSubmitting){
-            const result = await createRequest(request.photographer.id, request.location.id, request.option.id, request.comment, request.dateOption, request.date, request.hour, request.min, request.startDate, request.endDate)
-            if(result.status === 'ok'){
-                await getOrderList()
+            if(profile){
+                const result = await createRequest(request.photographer.id, request.location.id, request.option.id, request.comment, request.dateOption, request.date, request.hour, request.min, request.startDate, request.endDate)
+                if(result.status === 'ok'){
+                    await getOrderList()
+                    if(!profile.is_verified){
+                        const result = await sendVerificationEmail()
+                    }
+                    this.setState({
+                        isSubmitting: false,
+                        requestSubmitted: true
+                    })
+                    await removeRequest()
+                }
+                else if(result.error){
+                    this.setState({
+                        isSubmitting: false,
+                        requestSubmitted: false
+                    })
+                    alert(result.error)
+                }
+                else{
+                    this.setState({
+                        isSubmitting: false,
+                        requestSubmitted: false
+                    })
+                    alert(this.context.t('An error has occurred..'))
+                }
                 this.setState({
-                    isSubmitting: false,
-                    requestSubmitted: true
+                    isSubmitting: false
                 })
-                await removeRequest()
-            }
-            else if(result.error){
-                this.setState({
-                    isSubmitting: false,
-                    requestSubmitted: false
-                })
-                alert(result.error)
             }
             else{
-                this.setState({
-                    isSubmitting: false,
-                    requestSubmitted: false
-                })
-                alert('An error has occurred..')
+                alert(this.context.t('Login is required.'))
             }
-            this.setState({
-                isSubmitting: false
-            })
+        }
+    }
+
+    _send = async() => {
+        const { isSendingEmail } = this.state;
+        const { sendVerificationEmail, isLoggedIn } = this.props;
+        if(!isSendingEmail){
+            if(isLoggedIn){
+                const result = await sendVerificationEmail()
+                if(result.status === 'ok'){
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                }
+                else{
+                    alert(this.context.t("An error has occurred.."))
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                }
+            }
         }
     }
 
@@ -466,6 +498,7 @@ class Container extends Component{
             selectDateRange={this._selectDateRange}
             goConfirm={this._goConfirm}
             submit={this._submit}
+            send={this._send}
             />
         )
     }

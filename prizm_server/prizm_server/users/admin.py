@@ -3,6 +3,7 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.auth import get_user_model
 
 from prizm_server.users.forms import UserChangeForm, UserCreationForm
+from . import models
 
 User = get_user_model()
 
@@ -33,3 +34,9 @@ class UserAdmin(auth_admin.UserAdmin):
             'password'
         )})
     ]
+
+
+@admin.register(models.EmailVerification)
+class EmailVerificationAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'created_at', 'is_verified', 'is_expired']
+    list_display_links = ['id', 'user']
