@@ -13,12 +13,13 @@ class UserAdmin(auth_admin.UserAdmin):
 
     form = UserChangeForm
     add_form = UserCreationForm
-    list_display = ["username", "name", "is_superuser", 'user_type', 'country_code', 'is_verified']
-    search_fields = ["name", 'email']
+    list_display = ["username", "first_name", 'last_name', "is_superuser", 'user_type', 'country_code', 'is_verified']
+    search_fields = ['email']
     fieldsets = [
         ('개인정보', {'fields': [
             'username',
-            'name',
+            'first_name',
+            'last_name',
             'email',
             'country_code',
             'country_number',

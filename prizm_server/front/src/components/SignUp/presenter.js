@@ -12,9 +12,13 @@ const SignUp = (props, context) => (
             <p className={`${styles.fontBold} ${styles.font17} ${styles.mx2}`}>|</p>
             <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer} ${styles.opacity4}`} onClick={() => props.goSignIn(props.goRequest, props.photographerId)}>{context.t("Sign In")}</p>
         </div>
-        <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{context.t("Full name")}</p>
+        <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{context.t("First name")}</p>
         <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
+            <input className={`${styles.textInput2}`} type={"text"} name={"firstName"} value={props.firstName} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
+        </div>
+        <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Last name")}</p>
+        <div className={`${styles.widthFull}`}>
+            <input className={`${styles.textInput2}`} type={"text"} name={"lastName"} value={props.lastName} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
         </div>
         <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Email")}</p>
         <div className={`${styles.widthFull}`}>
@@ -86,7 +90,8 @@ const SignUp = (props, context) => (
 
 SignUp.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     countryNumber: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,

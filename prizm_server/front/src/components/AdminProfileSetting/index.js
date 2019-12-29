@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goHome: () => {
             dispatch(push('/'))
         },
-        adminEditProfile: (name, countryNumber, mobile, instagram) => {
-            return dispatch(userAction.adminEditProfile(name, countryNumber, mobile, instagram))
+        adminEditProfile: (firstName, lastName, countryNumber, mobile, instagram) => {
+            return dispatch(userAction.adminEditProfile(firstName, lastName, countryNumber, mobile, instagram))
         },
         getProfile: () => {
             dispatch(userAction.getProfile())

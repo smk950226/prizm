@@ -25,7 +25,8 @@ class Container extends Component{
     constructor(props){
         super(props)
         this.state = {
-            name: "",
+            firstName: "",
+            lastName: "",
             email: "",
             countryNumber: "",
             countryCode: "",
@@ -264,10 +265,10 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form } = this.state;
+        const { isSubmitting, firstName, lastName, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form } = this.state;
         const { checkDuplicate, signUp, getProfileByToken, getNotificationByToken, getOrderListByToken } = this.props;
         if(!isSubmitting){
-            if(name && email && countryNumber && countryCode && mobile && password && password2){
+            if(firstName && lastName && email && countryNumber && countryCode && mobile && password && password2){
                 if(emailForm){
                     if(passwordForm){
                         if(password === password2){
@@ -277,7 +278,7 @@ class Container extends Component{
                                 })
                                 const check = await checkDuplicate(email, mobile, countryNumber);
                                 if(check.status === 'ok'){
-                                    const result = await signUp(email, password, name, countryNumber, countryCode, mobile)
+                                    const result = await signUp(email, password, firstName, lastName, countryNumber, countryCode, mobile)
                                     if(result.token){
                                         await this.setState({
                                             token: result.token

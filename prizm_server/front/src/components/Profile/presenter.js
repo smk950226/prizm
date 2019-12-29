@@ -8,9 +8,13 @@ import { COUNTRY_NUMBER } from '../../utils/country';
 const Profile = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
         <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{context.t("Profile")}</p>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("Full name")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("First name")}</p>
         <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} />
+            <input className={`${styles.textInput2}`} type={"text"} name={"firstName"} value={props.firstName} onChange={props.handleInputChange} />
+        </div>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Last name")}</p>
+        <div className={`${styles.widthFull}`}>
+            <input className={`${styles.textInput2}`} type={"text"} name={"lastName"} value={props.lastName} onChange={props.handleInputChange} />
         </div>
         <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Email")}</p>
         <div className={`${styles.widthFull}`}>
@@ -54,7 +58,8 @@ Profile.propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
     handleCountryNumberChange: PropTypes.func.isRequired,
     handleShowCountryNumber: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
     countryNumber: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     emailForm: PropTypes.bool.isRequired,

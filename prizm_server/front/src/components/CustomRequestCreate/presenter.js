@@ -210,7 +210,8 @@ class CustomRequestCreate extends Component{
         loginEmail: '',
         loginPassword: '',
         loginEmailForm: false,
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         countryNumber: "",
         countryCode: "",
@@ -250,12 +251,14 @@ class CustomRequestCreate extends Component{
             this.props.getProfile()
         }
         if(this.state.fetchedProfile && !this.state.fetchClear){
-            if(!this.props.profile.is_verified){
-                const result =  await this.props.sendVerificationEmail()
+            if(this.props.profile){
+                if(!this.props.profile.is_verified){
+                    const result =  await this.props.sendVerificationEmail()
+                }
+                this.setState({
+                    fetchClear: true
+                })
             }
-            this.setState({
-                fetchClear: true
-            })
         }
     }
 
@@ -332,6 +335,14 @@ class CustomRequestCreate extends Component{
             if(numberReg.test(value)){
                 this.setState({
                     [name]: value
+                });
+            }
+        }
+        else if(name === 'mobile'){
+            let numberReg = /^[0-9]*$/;
+            if(numberReg.test(value)){
+                this.setState({
+                    [name]: value.replace(/^0+/, '')
                 });
             }
         }
@@ -878,10 +889,10 @@ class CustomRequestCreate extends Component{
     }
 
     _signup = async() => {
-        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form, option, extraOption, people, extraPeople, hour, extraHour, dateOption, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, locationOption, locations } = this.state;
+        const { isSubmitting, firstName, lastName, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form, option, extraOption, people, extraPeople, hour, extraHour, dateOption, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, locationOption, locations } = this.state;
         const { checkDuplicate, signUp, getProfileByToken, getSaveToken, getNotificationByToken, getOrderListByToken, createCustomRequestByToken } = this.props;
         if(!isSubmitting){
-            if(name && email && countryNumber && countryCode && mobile && password && password2){
+            if(firstName && lastName && email && countryNumber && countryCode && mobile && password && password2){
                 if(emailForm){
                     if(passwordForm){
                         if(password === password2){
@@ -891,7 +902,7 @@ class CustomRequestCreate extends Component{
                                 })
                                 const check = await checkDuplicate(email, mobile, countryNumber);
                                 if(check.status === 'ok'){
-                                    const result = await signUp(email, password, name, countryNumber, countryCode, mobile)
+                                    const result = await signUp(email, password, firstName, lastName, countryNumber, countryCode, mobile)
                                     if(result.token){
                                         await getProfileByToken(result.token)
                                         await getNotificationByToken(result.token)
@@ -1190,7 +1201,8 @@ class CustomRequestCreate extends Component{
             auth,
             loginEmail,
             loginPassword,
-            name,
+            firstName,
+            lastName,
             email,
             countryNumber,
             countryCode,
@@ -1668,9 +1680,13 @@ class CustomRequestCreate extends Component{
                             {!isLoggedIn && auth === 'signup' ? (
                                 <div className={`${styles.py3} ${styles.px3}`}>
                                     <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("6. 회원가입 후 예약 완료하기 ")}</p>
-                                    <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{this.context.t("Full name")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{this.context.t("First name")}</p>
                                     <div className={`${styles.widthFull}`}>
-                                        <input className={`${styles.textInput2}`} type={"text"} name={"name"} value={name} onChange={this._handleInputChange} />
+                                        <input className={`${styles.textInput2}`} type={"text"} name={"firstName"} value={firstName} onChange={this._handleInputChange} />
+                                    </div>
+                                    <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{this.context.t("Last name")}</p>
+                                    <div className={`${styles.widthFull}`}>
+                                        <input className={`${styles.textInput2}`} type={"text"} name={"lastName"} value={lastName} onChange={this._handleInputChange} />
                                     </div>
                                     <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{this.context.t("Email")}</p>
                                     <div className={`${styles.widthFull}`}>

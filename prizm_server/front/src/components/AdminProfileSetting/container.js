@@ -21,7 +21,8 @@ class Container extends Component{
         const { profile } = props;
         this.state = {
             email: profile ? profile.email : "",
-            name: profile ? profile.name : "",
+            firstName: profile ? profile.first_name : "",
+            lastName: profile ? profile.last_name : "",
             countryNumber: profile ? profile.country_number : "",
             mobile: profile ? profile.mobile : "",
             instagram: profile ? profile.instagram_account :"",
@@ -54,12 +55,6 @@ class Container extends Component{
                 });
             }
         }
-        else if(name === 'instagram'){
-            this.setState({
-                [name]: value.replace(/^@+/, ''),
-                edited: true
-            });
-        }
         else{
             this.setState({
                 [name]: value,
@@ -82,15 +77,16 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, countryNumber, mobile, instagram, edited } = this.state;
+        const { isSubmitting, firstName, lastName, countryNumber, mobile, instagram, edited } = this.state;
         const { adminEditProfile, getProfile } = this.props;
         if(!isSubmitting){
             if(edited){
-                if(name && countryNumber && mobile && instagram){
+                if(firstName && lastName && countryNumber && mobile && instagram){
                     this.setState({
                         isSubmitting: true
                     })
-                    const result = await adminEditProfile(name, countryNumber, mobile, instagram)
+                    const replacedInstagram = instagram.replace('instagram.com/', '')
+                    const result = await adminEditProfile(firstName, lastName, countryNumber, mobile, replacedInstagram)
                     if(result.status === 'ok'){
                         await getProfile()
                         this.setState({

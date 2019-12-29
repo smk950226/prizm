@@ -76,7 +76,7 @@ function getCheckNewMessage(newMessage){
     }
 }
 
-function signUp(email, password, name, countryNumber, countryCode, mobile){
+function signUp(email, password, firstName, lastName, countryNumber, countryCode, mobile){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/rest-auth/registration/`, {
            method: 'POST',
@@ -87,7 +87,8 @@ function signUp(email, password, name, countryNumber, countryCode, mobile){
                username: email,
                password1: password,
                password2: password,
-               name,
+               firstName, 
+               lastName,
                countryNumber,
                countryCode,
                email,
@@ -109,7 +110,7 @@ function signUp(email, password, name, countryNumber, countryCode, mobile){
     }
 }
 
-function signUpAdmin(email, password, name, countryNumber, countryCode, mobile, instagram, userType){
+function signUpAdmin(email, password, firstName, lastName, countryNumber, countryCode, mobile, instagram, userType){
     return (dispatch) => {
         return fetch(`${FETCH_URL}/rest-auth/registration/`, {
            method: 'POST',
@@ -120,7 +121,8 @@ function signUpAdmin(email, password, name, countryNumber, countryCode, mobile, 
                username: email,
                password1: password,
                password2: password,
-               name,
+               firstName, 
+               lastName,
                countryNumber, 
                countryCode,
                email,
@@ -227,7 +229,7 @@ function getProfile(){
     }
 }
 
-function editProfile(name, countryNumber, mobile){
+function editProfile(firstName, lastName, countryNumber, mobile){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
         return fetch(`${FETCH_URL}/api/users/profile/`, {
@@ -237,7 +239,8 @@ function editProfile(name, countryNumber, mobile){
                 "Authorization": `JWT ${token}`
             },
             body: JSON.stringify({
-                name,
+                firstName, 
+                lastName, 
                 countryNumber,
                 mobile,
             })
@@ -255,7 +258,7 @@ function editProfile(name, countryNumber, mobile){
     }
 }
 
-function adminEditProfile(name, countryNumber, mobile, instagram){
+function adminEditProfile(firstName, lastName, countryNumber, mobile, instagram){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
         return fetch(`${FETCH_URL}/api/users/profile/admin/`, {
@@ -265,7 +268,8 @@ function adminEditProfile(name, countryNumber, mobile, instagram){
                 "Authorization": `JWT ${token}`
             },
             body: JSON.stringify({
-                name,
+                firstName,
+                lastName,
                 countryNumber,
                 mobile,
                 instagram

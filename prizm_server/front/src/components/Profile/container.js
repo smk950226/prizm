@@ -21,7 +21,8 @@ class Container extends Component{
         const { profile } = props;
         this.state = {
             email: profile ? profile.email : "",
-            name: profile ? profile.name : "",
+            firstName: profile ? profile.first_name : "",
+            lastName: profile ? profile.last_name : "",
             countryNumber: profile ? profile.country_number : "",
             mobile: profile ? profile.mobile : "",
             emailForm: profile ? true : false,
@@ -70,15 +71,15 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, countryNumber, mobile, edited } = this.state;
+        const { isSubmitting, firstName, lastName, countryNumber, mobile, edited } = this.state;
         const { editProfile, getProfile } = this.props;
         if(!isSubmitting){
             if(edited){
-                if(name && countryNumber && mobile){
+                if(firstName && lastName && countryNumber && mobile){
                     this.setState({
                         isSubmitting: true
                     })
-                    const result = await editProfile(name, countryNumber, mobile)
+                    const result = await editProfile(firstName, lastName, countryNumber, mobile)
                     if(result.status === 'ok'){
                         await getProfile()
                         this.setState({

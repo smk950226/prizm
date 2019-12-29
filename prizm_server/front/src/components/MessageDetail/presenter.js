@@ -261,7 +261,7 @@ class MessageList extends Component{
                                                 )}
                                                 {message.message_type === 'order_confirm' && (
                                                     <p className={`${styles.font1214} ${styles.white}`} style={{lineHeight: 1.42}}>
-                                                        {`Hi, ${profile.name}. Thank you very much for the reservation. Your reservation is confirmed! Our meeting location is as follows : `}<span className={`${styles.fontBold} ${styles.underline} ${styles.cursorPointer}`} onClick={this.props.openMap}>{this.context.t("HERE")}</span>
+                                                        {`Hi, ${profile.first_name} ${profile.last_name}. Thank you very much for the reservation. Your reservation is confirmed! Our meeting location is as follows : `}<span className={`${styles.fontBold} ${styles.underline} ${styles.cursorPointer}`} onClick={this.props.openMap}>{this.context.t("HERE")}</span>
                                                         <br/><br/>
                                                         {`If you have any questions, feel free to leave a message here or contact me at :`}
                                                         <br/><br/>
@@ -274,7 +274,7 @@ class MessageList extends Component{
                                                 )}
                                                 {message.message_type === 'order_redating' && (
                                                     <p className={`${styles.font1214} ${styles.white}`} style={{lineHeight: 1.42}}>
-                                                        {`Hi, ${profile.name}.  I just saw your reservation! Below is my availability from ${availableFrom.getFullYear()}/${availableFrom.getMonth() + 1}/${availableFrom.getDate()} to ${availableTo.getFullYear()}/${availableTo.getMonth() + 1}/${availableTo.getDate()}. Please select your preferred timeslot at the timetable below and send me back. I will reach you back as soon as possible. Thank you!`}
+                                                        {`Hi, ${profile.first_name} ${profile.last_name}.  I just saw your reservation! Below is my availability from ${availableFrom.getFullYear()}/${availableFrom.getMonth() + 1}/${availableFrom.getDate()} to ${availableTo.getFullYear()}/${availableTo.getMonth() + 1}/${availableTo.getDate()}. Please select your preferred timeslot at the timetable below and send me back. I will reach you back as soon as possible. Thank you!`}
                                                     </p>
                                                 )}
                                             </div>
@@ -302,7 +302,7 @@ class MessageList extends Component{
                                                     )}
                                                     {message.message_type === 'order_confirm' && (
                                                         <p className={`${styles.font1214} ${styles.white}`} style={{lineHeight: 1.42}}>
-                                                            {`Hi, ${profile.name}. Thank you very much for the reservation. Your reservation is confirmed! Our meeting location is as follows : `}<span className={`${styles.fontBold} ${styles.underline} ${styles.cursorPointer}`} onClick={this.props.openMap}>{this.context.t("HERE")}</span>
+                                                            {`Hi, ${profile.first_name} ${profile.last_name}. Thank you very much for the reservation. Your reservation is confirmed! Our meeting location is as follows : `}<span className={`${styles.fontBold} ${styles.underline} ${styles.cursorPointer}`} onClick={this.props.openMap}>{this.context.t("HERE")}</span>
                                                             <br/><br/>
                                                             {`If you have any questions, feel free to leave a message here or contact me at :`}
                                                             <br/><br/>
@@ -315,7 +315,7 @@ class MessageList extends Component{
                                                     )}
                                                     {message.message_type === 'order_redating' && (
                                                         <p className={`${styles.font1214} ${styles.white}`} style={{lineHeight: 1.42}}>
-                                                            {`Hi, ${profile.name}.  I just saw your reservation! Below is my availability from ${availableFrom.getFullYear()}/${availableFrom.getMonth() + 1}/${availableFrom.getDate()} to ${availableTo.getFullYear()}/${availableTo.getMonth() + 1}/${availableTo.getDate()}. Please select your preferred timeslot at the timetable below and send me back. I will reach you back as soon as possible. Thank you!`}
+                                                            {`Hi, ${profile.first_name} ${profile.last_name}.  I just saw your reservation! Below is my availability from ${availableFrom.getFullYear()}/${availableFrom.getMonth() + 1}/${availableFrom.getDate()} to ${availableTo.getFullYear()}/${availableTo.getMonth() + 1}/${availableTo.getDate()}. Please select your preferred timeslot at the timetable below and send me back. I will reach you back as soon as possible. Thank you!`}
                                                         </p>
                                                     )}
                                                 </div>

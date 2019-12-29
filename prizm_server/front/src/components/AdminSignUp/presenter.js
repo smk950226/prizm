@@ -11,9 +11,13 @@ const AdminSignUp = (props, context) => (
         <div className={`${styles.mobileOnly}`}>
             <p className={`${styles.fontBold} ${styles.font2024} ${styles.mt3}`}>{context.t("Welcome to PRIZM")}</p>
             <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information below to continue")}</p>
-            <p className={`${styles.fontBold} ${styles.font1012}`} style={{marginTop: 50}}>{context.t("Full name")}</p>
+            <p className={`${styles.fontBold} ${styles.font1012}`} style={{marginTop: 50}}>{context.t("First name")}</p>
             <div className={`${styles.widthFull}`}>
-                <input className={`${styles.textInput6}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
+                <input className={`${styles.textInput6}`} type={"text"} name={"firstName"} value={props.firstName} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
+            </div>
+            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Last name")}</p>
+            <div className={`${styles.widthFull}`}>
+                <input className={`${styles.textInput6}`} type={"text"} name={"lastName"} value={props.lastName} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Mobile Number")}</p>
             <div className={`${styles.positionRelative}`}>
@@ -64,9 +68,13 @@ const AdminSignUp = (props, context) => (
                     <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information beslow to continue")}</p>
                 </div>
                 <div className={`${styles.colMd6} ${styles.colXl5} ${styles.px0}`} style={{maxWidth: 420}}>
-                    <p className={`${styles.fontBold} ${styles.font1012}`}>{context.t("Full name")}</p>
+                    <p className={`${styles.fontBold} ${styles.font1012}`}>{context.t("First name")}</p>
                     <div className={`${styles.widthFull}`}>
-                        <input className={`${styles.textInput6}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
+                        <input className={`${styles.textInput6}`} type={"text"} name={"firstName"} value={props.firstName} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
+                    </div>
+                    <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Last name")}</p>
+                    <div className={`${styles.widthFull}`}>
+                        <input className={`${styles.textInput6}`} type={"text"} name={"lastName"} value={props.lastName} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
                     <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Mobile Number")}</p>
                     <div className={`${styles.positionRelative}`}>
@@ -150,7 +158,8 @@ const AdminSignUp = (props, context) => (
 
 AdminSignUp.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     countryNumber: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,

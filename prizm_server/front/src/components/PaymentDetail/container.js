@@ -284,7 +284,7 @@ class Container extends Component{
                                         name : `PRIZM order to ${order.photographer.nickname}`,
                                         amount : price,
                                         buyer_email : profile.email,
-                                        buyer_name : profile.name,
+                                        buyer_name : `${profile.first_name} ${profile.last_name}`,
                                         buyer_tel : `+${profile.country_number} ${profile.mobile}`,
                                         m_redirect_url: `${FETCH_URL}/payment/success/`
                                     }, async(rsp) => {

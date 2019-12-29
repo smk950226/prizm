@@ -26,7 +26,8 @@ class Container extends Component{
     constructor(props){
         super(props)
         this.state = {
-            name: "",
+            firstName: "",
+            lastName: "",
             email: "",
             mobile: "",
             password: "",
@@ -236,10 +237,10 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, name, email, countryNumber, countryCode, mobile, password, password2, instagram, emailForm, passwordForm, password2Form } = this.state;
+        const { isSubmitting, firstName, lastName, email, countryNumber, countryCode, mobile, password, password2, instagram, emailForm, passwordForm, password2Form } = this.state;
         const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, getPhotographerByToken } = this.props;
         if(!isSubmitting){
-            if(name && email && countryNumber && countryCode && mobile && password && password2 && instagram){
+            if(firstName && lastName && email && countryNumber && countryCode && mobile && password && password2 && instagram){
                 if(emailForm){
                     if(passwordForm){
                         if(password === password2){
@@ -249,8 +250,8 @@ class Container extends Component{
                                 })
                                 const check = await checkDuplicate(email, mobile, countryNumber, instagram);
                                 if(check.status === 'ok'){
-                                    const replacedInstagram = instagram.replace('instagram/', '')
-                                    const result = await signUpAdmin(email, password, name, countryNumber, countryCode, mobile, replacedInstagram, 'photographer')
+                                    const replacedInstagram = instagram.replace('instagram.com/', '')
+                                    const result = await signUpAdmin(email, password, firstName, lastName, countryNumber, countryCode, mobile, replacedInstagram, 'photographer')
                                     if(result.token){
                                         await this.setState({
                                             token: result.token

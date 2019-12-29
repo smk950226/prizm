@@ -4,6 +4,7 @@ import styles from '../../style/styles.module.scss';
 import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
 import { COUNTRY_NUMBER } from '../../utils/country';
+import InputMask from 'react-input-mask';
 
 const AdminProfileSetting = (props, context) => (
     <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
@@ -11,9 +12,13 @@ const AdminProfileSetting = (props, context) => (
             <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{context.t("Profile")}</p>
             <p className={`${styles.fontBold} ${styles.font13} ${styles.pink} ${styles.cursorPointer} ${props.editable ? styles.hidden : null}`} onClick={props.enableEdit}>{context.t("Edit")}</p>
         </div>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("Full name")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("First name")}</p>
         <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"name"} value={props.name} onChange={props.handleInputChange} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
+            <input className={`${styles.textInput2}`} type={"text"} name={"firstName"} value={props.firstName} onChange={props.handleInputChange} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
+        </div>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Last name")}</p>
+        <div className={`${styles.widthFull}`}>
+            <input className={`${styles.textInput2}`} type={"text"} name={"lastName"} value={props.lastName} onChange={props.handleInputChange} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
         </div>
         <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Mobile")}</p>
         <div className={`${styles.positionRelative}`}>
@@ -42,7 +47,13 @@ const AdminProfileSetting = (props, context) => (
         </div>
         <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Instagram")}</p>
         <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"instagram"} value={props.instagram} onChange={props.handleInputChange} contentEditable={props.editable ? null : true} readOnly={props.editable ? null : true} />
+            <InputMask mask={'inst\\agr\\am.com/********************'} 
+            formatChars={{
+                '*': '[A-Za-z0-9!@#$()-_+=.,]'
+            }}
+            maskChar={''} alwaysShowMask={true} value={props.instagram} readOnly={props.editable ? null : true} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress}>
+                {(inputProps) => <input {...inputProps} type={"text"} name={"instagram"} className={`${styles.textInput2}`} contentEditable={props.editable ? null : true} />}
+            </InputMask>
         </div>
         <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Email")}</p>
         <div className={`${styles.widthFull}`}>
@@ -75,8 +86,9 @@ AdminProfileSetting.propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
     handleCountryNumberChange: PropTypes.func.isRequired,
     handleShowCountryNumber: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    countryNumber: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+
     mobile: PropTypes.string.isRequired,
     emailForm: PropTypes.bool.isRequired,
     showCountryNumber: PropTypes.bool.isRequired,

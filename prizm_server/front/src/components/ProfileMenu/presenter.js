@@ -43,7 +43,7 @@ class ProfileMenu extends Component{
         }
         return(
             <div className={`${styles.safearea} ${styles.containerCustomer}`}>
-                <p className={`${styles.fontBold} ${styles.font20} ${styles.px3} ${styles.mt45}`}>{isLoggedIn ? profile ? profile.name : this.context.t("Sign In to view your profile") : this.context.t("Sign In to view your profile")}</p>
+                <p className={`${styles.fontBold} ${styles.font20} ${styles.px3} ${styles.mt45}`}>{isLoggedIn ? profile ? `${profile.first_name} ${profile.last_name}` : this.context.t("Sign In to view your profile") : this.context.t("Sign In to view your profile")}</p>
                 {isLoggedIn ? (
                     <Fragment>
                         <div className={`${styles.borderBtmGrayDc} ${styles.py3} ${styles.mt45} ${styles.cursorPointer}`} onClick={this.props.goProfile}>

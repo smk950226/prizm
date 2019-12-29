@@ -84,7 +84,7 @@ class Navigation extends Component{
                             <div className={`${styles.col12} ${styles.px0}`}>
                                 <p className={`${styles.font17} ${styles.mb1}`} style={{lineHeight: 1.35}}>
                                     {this.context.t("Welcome Back,")}<br/>
-                                    {isLoggedIn ? profile? profile.name : 'Anonymous' : 'Anonymous'}
+                                    {isLoggedIn ? profile? `${profile.first_name} ${profile.last_name}` : 'Anonymous' : 'Anonymous'}
                                 </p>
                                 {isLoggedIn ? (
                                     <Fragment>

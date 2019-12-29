@@ -65,14 +65,16 @@ class Profile(APIView):
 
     def put(self, request, format = None):
         user = request.user
-        name = request.data.get('name', None)
+        first_name = request.data.get('firstName', None)
+        last_name = request.data.get('lastName', None)
         country_number = request.data.get('countryNumber', None)
         mobile = request.data.get('mobile', None)
-        if name and country_number and mobile:
+        if first_name and last_name and country_number and mobile:
             if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
             else:
-                user.name = name
+                user.first_name = first_name
+                user.last_name = last_name
                 user.country_number = country_number
                 user.mobile = mobile
                 user.save()
@@ -103,18 +105,20 @@ class AdminProfile(APIView):
     permission_classes = [AdminAuthenticated]
     def put(self, request, format = None):
         user = request.user
-        name = request.data.get('name', None)
+        first_name = request.data.get('firstName', None)
+        last_name = request.data.get('lastName', None)
         country_number = request.data.get('countryNumber', None)
         mobile = request.data.get('mobile', None)
         instagram_account = request.data.get('instagram', None)
-        if name and country_number and mobile and instagram_account:
+        if first_name and last_name and country_number and mobile and instagram_account:
             if len(User.objects.filter(mobile = mobile, country_number = country_number).exclude(id = user.id)) > 0:
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This mobile number has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
             else:
                 if len(User.objects.filter(instagram_account = instagram_account).exclude(id = user.id)) > 0:
                     return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This Instagram account has already been taken. Please contact us at contact@prizm.cloud if you have any inquiries.')})
                 else:
-                    user.name = name
+                    user.first_name = first_name
+                    user.last_name = last_name
                     user.country_number = country_number
                     user.mobile = mobile
                     user.instagram_account = instagram_account
