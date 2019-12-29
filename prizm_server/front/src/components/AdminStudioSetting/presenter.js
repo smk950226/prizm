@@ -275,14 +275,14 @@ const AdminSignUp = (props, context) => {
                         </div>
                         <p className={`${styles.mt1} ${styles.font911}`}>{context.t("ex) your work experiences, exhibitions, awards, etc")}</p>
                         <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                            <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Education (Optional)")}</p>
-                            <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.education ? null : styles.hidden}`} />
+                            <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Equipment (Optional)")}</p>
+                            <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.equipment ? null : styles.hidden}`} />
                         </div>
-                        <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in the most recent educational background.")}</p>
+                        <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in your equipment.")}</p>
                         <div className={`${styles.containerStudioInput}`}>
-                            <input className={`${styles.textInput6}`} type={"text"} name={"education"} value={props.education} onChange={props.handleInputChange} maxLength={30} />
+                            <input className={`${styles.textInput6}`} type={"text"} name={"equipment"} value={props.equipment} onChange={props.handleInputChange} maxLength={30} />
                         </div>
-                        <p className={`${styles.mt1} ${styles.font911}`}>{context.t("ex) Hannam High School, College of Havana, Nakseong University")}</p>
+                        <p className={`${styles.mt1} ${styles.font911}`}>{context.t("ex) Sony A7 II, Canon EOS 5 D Mark IV, EF 50mm F12 USM")}</p>
                         <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Portfolio (Optional)")}</p>
                             <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.portfolio ? null : styles.hidden}`} />
@@ -560,10 +560,10 @@ const AdminSignUp = (props, context) => {
                                 <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Career")}</p>
                                 <p className={`${styles.font10}`}>{props.career}</p>
                             </div>
-                            {props.education ? (
+                            {props.equipment ? (
                                 <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                    <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Education")}</p>
-                                    <p className={`${styles.font10}`}>{props.education}</p>
+                                    <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Equipment")}</p>
+                                    <p className={`${styles.font10}`}>{props.equipment}</p>
                                 </div>
                             ) : (
                                 null
@@ -758,10 +758,10 @@ const AdminSignUp = (props, context) => {
                                 <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Career")}</p>
                                 <p className={`${styles.font10}`}>{props.career}</p>
                             </div>
-                            {props.education ? (
+                            {props.equipment ? (
                             <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Education")}</p>
-                                <p className={`${styles.font10}`}>{props.education}</p>
+                                <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Equipment")}</p>
+                                <p className={`${styles.font10}`}>{props.equipment}</p>
                             </div>
                             ) : (
                                 null
@@ -1172,7 +1172,7 @@ AdminSignUp.propTypes = {
     submitProfile: PropTypes.func.isRequired,
     profileImage: PropTypes.any,
     handleInputChange: PropTypes.func.isRequired,
-    education: PropTypes.string.isRequired,
+    equipment: PropTypes.string.isRequired,
     career: PropTypes.string.isRequired,
     portfolio: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,

@@ -181,7 +181,7 @@ function getPhotographerByToken(token){
     }
 }
 
-function updateStudio(portfolios, nickname, mainLocation, education, career, portfolioUrl, description, profileImage, locations, options, studioId, update){
+function updateStudio(portfolios, nickname, mainLocation, equipment, career, portfolioUrl, description, profileImage, locations, options, studioId, update){
     return (dispatch, getState) => {
         const { user : { token } } = getState()
         let formData = new FormData();
@@ -195,7 +195,7 @@ function updateStudio(portfolios, nickname, mainLocation, education, career, por
         }
         formData.append('nickname', nickname)
         formData.append('mainLocation', mainLocation)
-        formData.append('education', education)
+        formData.append('equipment', equipment)
         formData.append('career', career)
         formData.append('portfolioUrl', portfolioUrl)
         formData.append('description', description)

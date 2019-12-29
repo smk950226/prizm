@@ -179,10 +179,10 @@ class PhotographerDetail extends Component{
                                         <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Career")}</p>
                                         <p className={`${styles.font10}`}>{photographer.career}</p>
                                     </div>
-                                    {photographer.education ? (
+                                    {photographer.equipment ? (
                                         <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                            <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Education")}</p>
-                                            <p className={`${styles.font10}`}>{photographer.education}</p>
+                                            <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Equipment")}</p>
+                                            <p className={`${styles.font10}`}>{photographer.equipment}</p>
                                         </div>
                                     ) : (
                                         null

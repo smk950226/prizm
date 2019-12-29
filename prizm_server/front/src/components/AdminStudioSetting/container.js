@@ -59,7 +59,7 @@ class Container extends Component{
             opacityList,
             nickname: photographer ? photographer.nickname ? photographer.nickname : "" : "",
             mainLocation: photographer ? photographer.nickname ? photographer.main_location : "" : "",
-            education: photographer ? photographer.nickname ? photographer.education : "" : "",
+            equipment: photographer ? photographer.nickname ? photographer.equipment : "" : "",
             career: photographer ? photographer.nickname ? photographer.career : "" : "",
             portfolio: photographer ? photographer.nickname ? photographer.portfolio_url : "" : "",
             portfolioForm: photographer ? photographer.nickname ? true : false : false,
@@ -778,7 +778,7 @@ class Container extends Component{
     }
 
     _confirm = async() => {
-        const { submitImages, nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, studioId, studioId2, studioIdConfirm, portfolioForm, isSubmitting, update } = this.state;
+        const { submitImages, nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, studioId, studioId2, studioIdConfirm, portfolioForm, isSubmitting, update } = this.state;
         const { updateStudio, getPhotographer, goClear } = this.props;
         if(!isSubmitting){
             if(submitImages.length > 0){
@@ -798,7 +798,7 @@ class Container extends Component{
                                         else{
                                             replacedStudioId = studioId
                                         }
-                                        const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
+                                        const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
                                         if(result.status === 'ok'){
                                             await getPhotographer()
                                             if(update){
@@ -857,7 +857,7 @@ class Container extends Component{
                                     else{
                                         replacedStudioId = studioId
                                     }
-                                    const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, education, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
+                                    const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
                                     if(result.status === 'ok'){
                                         await getPhotographer()
                                         if(update){
