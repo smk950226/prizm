@@ -277,7 +277,7 @@ class AdminOrder(APIView):
         photographer = user.photographer
         order_status = request.query_params.get('status', None)
 
-        orders = models.Order.objects.filter(photographer = photographer).order_by('-id')
+        orders = models.Order.objects.filter(photographer = photographer, user__is_verified = True).order_by('-id')
 
         if order_status:
             if order_status == 'pending':
@@ -697,7 +697,7 @@ class ReviewCreate(APIView):
 class CustomRequest(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, format = None):
-        custom_request = models.CustomRequest.objects.all()
+        custom_request = models.CustomRequest.objects.filter(user__is_verified = True)
 
         paginator = OrderNumberPagination()
         result_page = paginator.paginate_queryset(custom_request, request)
