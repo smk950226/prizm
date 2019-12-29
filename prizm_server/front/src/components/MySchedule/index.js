@@ -4,11 +4,12 @@ import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { orderList, isLoggedIn }, router : { location } } = state;
+    const { user : { orderList, isLoggedIn, profile }, router : { location } } = state;
     return {
         orderList,
         pathname: location.pathname,
-        isLoggedIn
+        isLoggedIn,
+        profile
     }
 }
 
@@ -49,6 +50,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         checkNotification: () => {
             dispatch(userAction.checkNotification())
+        },
+        sendVerificationEmail: () => {
+            return dispatch(userAction.sendVerificationEmail())
         }
     }
 }

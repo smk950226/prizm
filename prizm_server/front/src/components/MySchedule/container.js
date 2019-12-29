@@ -16,7 +16,9 @@ class Container extends Component{
         goMyScheduleDetail: PropTypes.func.isRequired,
         goPayment: PropTypes.func.isRequired,
         goReveiwCreate: PropTypes.func.isRequired,
-        checkNotification: PropTypes.func.isRequired
+        checkNotification: PropTypes.func.isRequired,
+        profile: PropTypes.object.isRequired,
+        sendVerificationEmail: PropTypes.func.isRequired
     }
 
     constructor(props){
@@ -29,7 +31,8 @@ class Container extends Component{
             fetchClear: false,
             page: 1,
             hasNextPage: true,
-            isLoadingMore: false
+            isLoadingMore: false,
+            isSendingEmail: false
         }
     }
 
@@ -109,12 +112,34 @@ class Container extends Component{
         }
     }
 
+    _send = async() => {
+        const { isSendingEmail } = this.state;
+        const { sendVerificationEmail, isLoggedIn } = this.props;
+        if(!isSendingEmail){
+            if(isLoggedIn){
+                const result = await sendVerificationEmail()
+                if(result.status === 'ok'){
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                }
+                else{
+                    alert(this.context.t("An error has occurred.."))
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                }
+            }
+        }
+    }
+
     render(){
         return(
             <MySchedule 
             {...this.props} 
             {...this.state} 
             orderListMore={this._orderListMore}
+            send={this._send}
             />
         )
     }

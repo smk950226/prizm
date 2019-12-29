@@ -10,7 +10,9 @@ class MySchedule extends Component{
         loading: PropTypes.bool.isRequired,
         goPayment: PropTypes.func.isRequired,
         goReveiwCreate: PropTypes.func.isRequired,
-        orderListMore: PropTypes.func.isRequired
+        orderListMore: PropTypes.func.isRequired,
+        profile: PropTypes.object.isRequired,
+        isSendingEmail: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
@@ -39,10 +41,22 @@ class MySchedule extends Component{
     }
 
     render(){
-        const { loading, orderList } = this.props;
+        const { loading, orderList, profile, isSendingEmail } = this.props;
         return(
             <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{this.context.t("My Schedule")}</p>
+                {!profile.is_verified && (
+                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3} ${styles.widthFull}`}>
+                        <p className={`${styles.font1214} ${styles.pink}`} style={{width: 'calc(100% - 100px)'}}>
+                            {this.context.t("Your request will be sent to the photographer when you complete the email verification")}
+                        </p>
+                        <div className={`${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, width: 100}} onClick={this.props.send}>
+                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                {this.context.t("Resend")}
+                            </p>
+                        </div>
+                    </div>
+                )}
                 {loading ? (
                     <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`}>
                         <Loader type="Oval" color="#d66c8b" height={20} width={20} />

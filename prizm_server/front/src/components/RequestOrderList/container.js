@@ -36,25 +36,30 @@ class Container extends Component{
         const { getRequestOrderList, profile, goHome } = this.props;
         const { requestId } = this.state;
         if(profile && requestId){
-            const result = await getRequestOrderList(requestId)
-            if(result.status === 'ok'){
-                this.setState({
-                    loading: false,
-                    orders: result.orders
-                })
-            }
-            else if(result.error){
-                this.setState({
-                    loading: false
-                })
-                alert(result.error)
-                goHome()
+            if(profile.custom_request_status.status === 'open'){
+                const result = await getRequestOrderList(requestId)
+                if(result.status === 'ok'){
+                    this.setState({
+                        loading: false,
+                        orders: result.orders
+                    })
+                }
+                else if(result.error){
+                    this.setState({
+                        loading: false
+                    })
+                    alert(result.error)
+                    goHome()
+                }
+                else{
+                    this.setState({
+                        loading: false
+                    })
+                    alert(this.context.t("An error has ocurred.."))
+                    goHome()
+                }
             }
             else{
-                this.setState({
-                    loading: false
-                })
-                alert(this.context.t("An error has ocurred.."))
                 goHome()
             }
         }

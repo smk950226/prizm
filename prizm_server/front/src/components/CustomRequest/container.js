@@ -9,7 +9,9 @@ class Container extends Component{
         cancelCustomRequest: PropTypes.func.isRequired,
         goSignin: PropTypes.func.isRequired,
         getProfile: PropTypes.func.isRequired,
-        goRequestOrderList: PropTypes.func.isRequired
+        goRequestOrderList: PropTypes.func.isRequired,
+        sendVerificationEmail: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
@@ -18,7 +20,8 @@ class Container extends Component{
 
     state = {
         isSubmitting: false,
-        fetchedProfile: false
+        fetchedProfile: false,
+        isSendingEmail: false
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
@@ -75,12 +78,34 @@ class Container extends Component{
         }
     }
 
+    _send = async() => {
+        const { isSendingEmail } = this.state;
+        const { sendVerificationEmail, isLoggedIn } = this.props;
+        if(!isSendingEmail){
+            if(isLoggedIn){
+                const result = await sendVerificationEmail()
+                if(result.status === 'ok'){
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                }
+                else{
+                    alert(this.context.t("An error has occurred.."))
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                }
+            }
+        }
+    }
+
     render(){
         return (
             <CustomRequest 
             {...this.props} 
             {...this.state}
             cancel={this._cancel}
+            send={this._send}
             />
         )
     }
