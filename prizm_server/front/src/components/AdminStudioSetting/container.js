@@ -1,9 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AdminStudioSetting from './presenter';
-import styles from '../../style/styles.module.scss';
 
 const opacityList = [0.8, 0.6, 0.4, 0.2]
+
+const ampm = [
+    'AM',
+    'PM'
+]
+
+const hourList = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12'
+]
+
+const minList = [
+    '00',
+    '30'
+]
 
 class Container extends Component{
     static propTypes = {
@@ -95,10 +119,9 @@ class Container extends Component{
             showOptionPlus: false,
             dateConfirm: false,
             selectDateStep: 1,
-            selectedHour: "",
-            selectedMin: "",
-            showHourList: false,
-            showMinList: false,
+            selectedHour: "02",
+            selectedMin: "00",
+            selectedAmPm: "PM",
             dateOption: 0,
             selectedDate: "",
             selectedStartDate: "",
@@ -109,7 +132,17 @@ class Container extends Component{
             studioId: photographer ? photographer.nickname ? photographer.studio_id : "" : "",
             studioId2: photographer ? photographer.nickname ? photographer.studio_id : "" : "",
             studioIdConfirm: photographer ? photographer.nickname ? true : false : false,
-            isSubmitting: false
+            isSubmitting: false,
+            valueGroups: {
+                ampm: 'PM',
+                hour: '02',
+                min: '00'
+            }, 
+            optionGroups: {
+                ampm: ampm,
+                hour: hourList,
+                min: minList
+            }
         }
     }
 
@@ -588,12 +621,23 @@ class Container extends Component{
                 showCalendar2: false,
                 selectedDate: "",
                 dateConfirm: false,
-                selectedHour: "",
-                selectedMin: "",
+                selectedHour: "02",
+                selectedMin: "00",
+                selectedAmPm: 'PM',
                 selectDateStep: 1,
                 selectedStartDate: "",
                 selectedEndDate: "",
-                show3: false
+                show3: false,
+                valueGroups: {
+                    ampm: 'PM',
+                    hour: '02',
+                    min: '00'
+                }, 
+                optionGroups: {
+                    ampm: ampm,
+                    hour: hourList,
+                    min: minList
+                }
             })
         }
         else{
@@ -605,10 +649,21 @@ class Container extends Component{
                 dateConfirm: false,
                 selectedHour: "",
                 selectedMin: "",
+                selectedAmPm: "",
                 selectDateStep: 1,
                 selectedStartDate: "",
                 selectedEndDate: "",
-                show3: false
+                show3: false,
+                valueGroups: {
+                    ampm: 'PM',
+                    hour: '02',
+                    min: '00'
+                }, 
+                optionGroups: {
+                    ampm: ampm,
+                    hour: hourList,
+                    min: minList
+                }
             })
         }
     }
@@ -620,10 +675,21 @@ class Container extends Component{
             dateConfirm: false,
             selectedHour: "",
             selectedMin: "",
+            selectedAmPm: "",
             selectDateStep: 1,
             selectedStartDate: "",
             selectedEndDate: "",
-            show3: false
+            show3: false,
+            valueGroups: {
+                ampm: 'PM',
+                hour: '02',
+                min: '00'
+            }, 
+            optionGroups: {
+                ampm: ampm,
+                hour: hourList,
+                min: minList
+            }
         })
     }
 
@@ -642,13 +708,16 @@ class Container extends Component{
     }
 
     _confirmDate = () => {
-        const { selectedMin, selectedHour, dateOption, selectedStartDate, selectedEndDate } = this.state;
+        const { valueGroups : { ampm, hour, min }, dateOption, selectedStartDate, selectedEndDate } = this.state;
         if(dateOption === 1){
-            if(selectedMin && selectedHour){
+            if(ampm && hour && min){
                 this.setState({
                     dateConfirm: true,
                     showCalendar1: false,
-                    show3: true
+                    show3: true,
+                    selectedAmPm: ampm,
+                    selectedHour: hour,
+                    selectedMin: min
                 })
             }
             else{
@@ -675,35 +744,25 @@ class Container extends Component{
         }
     }
 
-    _selectHour = (selectedHour) => {
-        this.setState({
-            selectedHour
-        })
-    }
-
-    _selectMin = (selectedMin) => {
-        this.setState({
-            selectedMin
-        })
-    }
-
-    _handleShowHourList = () => {
-        this.setState({
-            showHourList: !this.state.showHourList
-        })
-    }
-
-    _handleShowMinList = () => {
-        this.setState({
-            showMinList: !this.state.showMinList
-        })
-    }
-
     _goConfirm = async() => {
-        const { selectedLocation, dateOption, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, selectedOption, photographer, comment } = this.state;
+        const { selectedLocation, dateOption, selectedDate, selectedHour, selectedAmPm, selectedMin, selectedStartDate, selectedEndDate, selectedOption, photographer, comment } = this.state;
         const { getRequest, isLoggedIn, goSignUp } = this.props;
         if(dateOption === 1){
-            if(selectedLocation.id && selectedDate && selectedHour && selectedMin && selectedOption){
+            if(selectedLocation.id && selectedDate && selectedHour && selectedAmPm && selectedMin && selectedOption){
+                let submitHour = selectedHour
+                if(selectedAmPm === 'PM'){
+                    if(selectedHour !== '12'){
+                        submitHour = String(Number(selectedHour) + 12)
+                    }
+                    else{
+                        submitHour = '12'
+                    }
+                }
+                else{
+                    if(selectedHour === '12'){
+                        submitHour = '00'
+                    }
+                }
                 await getRequest({
                     photographer: photographer,
                     location: selectedLocation,
@@ -711,7 +770,7 @@ class Container extends Component{
                     comment,
                     dateOption,
                     date: selectedDate ?  String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : "",
-                    hour: selectedHour,
+                    hour: submitHour,
                     min: selectedMin,
                     startDate: selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : "",
                     endDate: selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
@@ -734,6 +793,20 @@ class Container extends Component{
         }
         else{
             if(selectedLocation.id && selectedStartDate && selectedEndDate && selectedOption){
+                let submitHour = selectedHour
+                if(selectedAmPm === 'PM'){
+                    if(selectedHour !== '12'){
+                        submitHour = String(Number(selectedHour) + 12)
+                    }
+                    else{
+                        submitHour = '12'
+                    }
+                }
+                else{
+                    if(selectedHour === '12'){
+                        submitHour = '00'
+                    }
+                }
                 await getRequest({
                     photographer: photographer,
                     location: selectedLocation,
@@ -741,7 +814,7 @@ class Container extends Component{
                     comment,
                     dateOption,
                     date: selectedDate ? String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : "",
-                    hour: selectedHour,
+                    hour: submitHour,
                     min: selectedMin,
                     startDate: selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : "",
                     endDate: selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
@@ -776,6 +849,15 @@ class Container extends Component{
             customerSelectedOption: {}
         })
     }
+
+    _handleChangeTimes = (name, value) => {
+        this.setState(({valueGroups}) => ({
+            valueGroups: {
+              ...valueGroups,
+              [name]: value,
+            }
+        }));
+    };
 
     _confirm = async() => {
         const { submitImages, nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, studioId, studioId2, studioIdConfirm, portfolioForm, isSubmitting, update } = this.state;
@@ -965,15 +1047,12 @@ class Container extends Component{
             selectDate={this._selectDate}
             selectDateRange={this._selectDateRange}
             confirmDate={this._confirmDate}
-            selectHour={this._selectHour}
-            selectMin={this._selectMin}
-            handleShowHourList={this._handleShowHourList}
-            handleShowMinList={this._handleShowMinList}
             goConfirm={this._goConfirm}
             selectOption={this._selectOption}
             blankOption={this._blankOption}
             confirm={this._confirm}
             onSort={this._onSort}
+            handleChangeTimes={this._handleChangeTimes}
             />
         )
     }

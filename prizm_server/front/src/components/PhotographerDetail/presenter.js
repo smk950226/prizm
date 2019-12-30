@@ -13,6 +13,7 @@ import { GOOGLE_API_KEY } from '../../config/secrets';
 import Calendar from 'react-calendar';
 import Modal from 'react-responsive-modal';
 import { Collapse } from 'react-collapse';
+import Picker from 'react-mobile-picker-scroll';
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -39,38 +40,6 @@ const ProfileDivLg = styled.div`
     background-position: center center;
     background-attachment: scroll;
 `
-
-const hourList = [
-    '00',
-    '01',
-    '02',
-    '03',
-    '04',
-    '05',
-    '06',
-    '07',
-    '08',
-    '09',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-    '22',
-    '23'
-]
-
-const minList = [
-    '00',
-    '30'
-]
 
 class PhotographerDetail extends Component{
     static propTypes = {
@@ -117,12 +86,7 @@ class PhotographerDetail extends Component{
         changeDateStep: PropTypes.func.isRequired,
         selectedHour: PropTypes.string.isRequired,
         selectedMin: PropTypes.string.isRequired,
-        selectHour: PropTypes.func.isRequired,
-        selectMin: PropTypes.func.isRequired,
-        handleShowHourList: PropTypes.func.isRequired,
-        handleShowMinList: PropTypes.func.isRequired,
-        showHourList: PropTypes.bool.isRequired,
-        showMinList: PropTypes.bool.isRequired,
+        selectedAmPm: PropTypes.string.isRequired,
         selectDateRange: PropTypes.func.isRequired,
         selectedStartDate: PropTypes.any.isRequired,
         selectedEndDate: PropTypes.any.isRequired,
@@ -138,7 +102,10 @@ class PhotographerDetail extends Component{
         goReviewList: PropTypes.func.isRequired,
         profile: PropTypes.object.isRequired,
         isSendingEmail: PropTypes.bool.isRequired,
-        send: PropTypes.func.isRequired
+        send: PropTypes.func.isRequired,
+        handleChangeTimes: PropTypes.func.isRequired,
+        optionGroups: PropTypes.object.isRequired,
+        valueGroups: PropTypes.object.isRequired
     }
 
     static contextTypes = {
@@ -151,7 +118,7 @@ class PhotographerDetail extends Component{
     }
 
     render(){
-        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, showHourList, showMinList, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted, dateRange, isLoggedIn, profile, isSendingEmail } = this.props;
+        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, selectedAmPm, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted, dateRange, isLoggedIn, profile, isSendingEmail, optionGroups, valueGroups } = this.props;
         return(
             <div className={`${requestSubmitted ? styles.safearea : isConfirmPage ? styles.safearea : styles.safeareaTop} ${styles.containerCustomer} ${requestSubmitted ? `${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : null}`}>
                 {loading ? (
@@ -256,7 +223,7 @@ class PhotographerDetail extends Component{
                                         <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Date&Time")}</p>
                                         <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`}/>
                                     </div>
-                                    <Collapse isOpened={show2} theme={{collapse: styles.collapse}}>
+                                    <Collapse isOpened={show2} theme={{collapse: styles.collapse}} initialStyle={{height: 'auto'}}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 1 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(1)}>
                                         <div className={`${styles.checkBox} ${dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                             {dateOption === 1 && (
@@ -273,7 +240,7 @@ class PhotographerDetail extends Component{
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()}`}</p>
                                             </div>
                                             <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => this.props.openCalendar1()}>
-                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedHour}:${selectedMin}`}</p>
+                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedAmPm} ${selectedHour}:${selectedMin}`}</p>
                                             </div>
                                         </div>
                                     )}
@@ -407,7 +374,7 @@ class PhotographerDetail extends Component{
                                         <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Date&Time")}</p>
                                         {dateOption === 1 ? (
                                             <Fragment>
-                                                <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()} ${selectedHour}:${selectedMin}`}</p>
+                                                <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()} ${selectedAmPm} ${selectedHour}:${selectedMin}`}</p>
                                                 <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I have a specific date in mind")}</p>
                                             </Fragment>
                                         ) : (
@@ -520,27 +487,10 @@ class PhotographerDetail extends Component{
                                     </div>
                                     <div className={`${styles.py5}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                            <div className={`${styles.textInput5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} type={"text"} name={"time"} onClick={this.props.handleShowHourList} style={{position: 'relative'}}>
-                                                <p className={`${styles.font13} ${styles.mx2} ${styles.textCenter}`}>{selectedHour}</p>
-                                                {showHourList && (
-                                                    <div style={{position: 'absolute', top: 25, width: 50, maxHeight: 150}} className={`${styles.bgWhite} ${styles.borderDropdown} ${styles.overflowYScroll}`}>
-                                                        {hourList.map((hour,index) => (
-                                                            <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer} ${styles.textCenter}`} onClick={() => this.props.selectHour(hour)}>{hour}</p>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <p className={`${styles.font13} ${styles.mx2}`}>:</p>
-                                            <div className={`${styles.textInput5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} type={"text"} name={"time"} onClick={this.props.handleShowMinList} style={{position: 'relative'}}>
-                                                <p className={`${styles.font13} ${styles.mx2} ${styles.textCenter}`}>{selectedMin}</p>
-                                                {showMinList && (
-                                                    <div style={{position: 'absolute', top: 25, width: 50, maxHeight: 150}} className={`${styles.bgWhite} ${styles.borderDropdown} ${styles.overflowYScroll}`}>
-                                                        {minList.map((min,index) => (
-                                                            <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer} ${styles.textCenter}`} onClick={() => this.props.selectMin(min)}>{min}</p>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
+                                            <Picker
+                                            optionGroups={optionGroups}
+                                            valueGroups={valueGroups}
+                                            onChange={this.props.handleChangeTimes} />
                                         </div>
                                     </div>
                                 </div>

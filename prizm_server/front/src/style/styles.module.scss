@@ -310,7 +310,7 @@ p{
     width: 100%;
 }
 .height-custom-request{
-    height: calc(100vh - 210px)
+    min-height: calc(100vh - 210px)
 }
 
 .width-half-btn{

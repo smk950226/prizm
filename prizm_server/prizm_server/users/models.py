@@ -46,7 +46,8 @@ class User(AbstractUser):
                 if orders.count() >= 3:
                     return {
                         'id': last_request.id,
-                        'status': 'open'
+                        'status': 'open',
+                        'count': orders.count()
                     }
                 else:
                     return {

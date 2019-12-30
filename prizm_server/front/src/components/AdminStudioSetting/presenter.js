@@ -11,6 +11,7 @@ import MdAdd from 'react-ionicons/lib/MdAdd';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { GOOGLE_API_KEY } from '../../config/secrets';
 import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
+import Picker from 'react-mobile-picker-scroll';
 
 import _ from "lodash";
 import { compose, withProps, lifecycle } from "recompose";
@@ -151,38 +152,6 @@ const Map2 = withScriptjs(withGoogleMap((props) => (
     {props.isMarkerShown && <Marker icon={require('../../assets/images/icon_marker.png')} position={{ lat: props.lat, lng: props.lng }} />}
   </GoogleMap>
 )))
-
-const hourList = [
-    '00',
-    '01',
-    '02',
-    '03',
-    '04',
-    '05',
-    '06',
-    '07',
-    '08',
-    '09',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-    '22',
-    '23'
-]
-
-const minList = [
-    '00',
-    '30'
-]
 
 const AdminSignUp = (props, context) => {
     const { images } = props;
@@ -637,7 +606,7 @@ const AdminSignUp = (props, context) => {
                                 <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("2. Date&Time")}</p>
                                 <img src={require('../../assets/images/icon_arrow_down.png')} alt={context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${props.show2 ? styles.rotate : null}`}/>
                             </div>
-                            <Collapse isOpened={props.show2} theme={{collapse: styles.collapse}}>
+                            <Collapse isOpened={props.show2} theme={{collapse: styles.collapse}} initialStyle={{height: 'auto'}}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={props.dateOption === 1 ? props.blankDateOption : () => props.handleChangeDateOption(1)}>
                                 <div className={`${styles.checkBox} ${props.dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                     {props.dateOption === 1 && (
@@ -654,7 +623,7 @@ const AdminSignUp = (props, context) => {
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${props.selectedDate.getFullYear()}/${String(props.selectedDate.getMonth() + 1).length === 2 ? (props.selectedDate.getMonth() + 1) : '0'.concat(String(props.selectedDate.getMonth() + 1))}/${props.selectedDate.getDate()}`}</p>
                                     </div>
                                     <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => props.openCalendar1()}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${props.selectedHour}:${props.selectedMin}`}</p>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${props.selectedAmPm} ${props.selectedHour}:${props.selectedMin}`}</p>
                                     </div>
                                 </div>
                             )}
@@ -718,10 +687,6 @@ const AdminSignUp = (props, context) => {
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit the request")}</p>
                             </div>
                             </Collapse>
-                        </div>
-                        <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
-                            <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("Find other photogrpahes in New York")}</p>
-                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={context.t("Find More")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} />
                         </div>
                     </div>
                 )}
@@ -836,7 +801,7 @@ const AdminSignUp = (props, context) => {
                                 <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("2. Date&Time")}</p>
                                 <img src={require('../../assets/images/icon_arrow_down.png')} alt={context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${props.show2 ? styles.rotate : null}`}/>
                             </div>
-                            <Collapse isOpened={props.show2} theme={{collapse: styles.collapse}}>
+                            <Collapse isOpened={props.show2} theme={{collapse: styles.collapse}} initialStyle={{height: 'auto'}}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={props.dateOption === 1 ? props.blankDateOption : () => props.handleChangeDateOption(1)}>
                                 <div className={`${styles.checkBox} ${props.dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                     {props.dateOption === 1 && (
@@ -853,7 +818,7 @@ const AdminSignUp = (props, context) => {
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${props.selectedDate.getFullYear()}/${String(props.selectedDate.getMonth() + 1).length === 2 ? (props.selectedDate.getMonth() + 1) : '0'.concat(String(props.selectedDate.getMonth() + 1))}/${props.selectedDate.getDate()}`}</p>
                                     </div>
                                     <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => props.openCalendar1()}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${props.selectedHour}:${props.selectedMin}`}</p>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${props.selectedAmPm} ${props.selectedHour}:${props.selectedMin}`}</p>
                                     </div>
                                 </div>
                             )}
@@ -917,10 +882,6 @@ const AdminSignUp = (props, context) => {
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit the request")}</p>
                             </div>
                             </Collapse>
-                        </div>
-                        <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
-                            <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("Find other photogrpahes in New York")}</p>
-                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={context.t("Find More")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} />
                         </div>
                         </div>
                     </div>
@@ -1096,27 +1057,10 @@ const AdminSignUp = (props, context) => {
                                 </div>
                                 <div className={`${styles.py5}`}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                        <div className={`${styles.textInput5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} type={"text"} name={"time"} onClick={props.handleShowHourList} style={{position: 'relative'}}>
-                                            <p className={`${styles.font13} ${styles.mx2} ${styles.textCenter}`}>{props.selectedHour}</p>
-                                            {props.showHourList && (
-                                                <div style={{position: 'absolute', top: 25, width: 50, maxHeight: 150}} className={`${styles.bgWhite} ${styles.borderDropdown} ${styles.overflowYScroll}`}>
-                                                    {hourList.map((hour,index) => (
-                                                        <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer} ${styles.textCenter}`} onClick={() => props.selectHour(hour)}>{hour}</p>
-                                                    ))}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <p className={`${styles.font13} ${styles.mx2}`}>:</p>
-                                        <div className={`${styles.textInput5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} type={"text"} name={"time"} onClick={props.handleShowMinList} style={{position: 'relative'}}>
-                                            <p className={`${styles.font13} ${styles.mx2} ${styles.textCenter}`}>{props.selectedMin}</p>
-                                            {props.showMinList && (
-                                                <div style={{position: 'absolute', top: 25, width: 50, maxHeight: 150}} className={`${styles.bgWhite} ${styles.borderDropdown} ${styles.overflowYScroll}`}>
-                                                    {minList.map((min,index) => (
-                                                        <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer} ${styles.textCenter}`} onClick={() => props.selectMin(min)}>{min}</p>
-                                                    ))}
-                                                </div>
-                                            )}
-                                        </div>
+                                        <Picker
+                                        optionGroups={props.optionGroups}
+                                        valueGroups={props.valueGroups}
+                                        onChange={props.handleChangeTimes} />
                                     </div>
                                 </div>
                             </div>
@@ -1231,8 +1175,7 @@ AdminSignUp.propTypes = {
     selectDateStep: PropTypes.number.isRequired,
     selectedHour: PropTypes.string.isRequired,
     selectedMin: PropTypes.string.isRequired,
-    showHourList: PropTypes.bool.isRequired,
-    showMinList: PropTypes.bool.isRequired,
+    selectedAmPm: PropTypes.string.isRequired,
     dateOption: PropTypes.number.isRequired,
     selectedDate: PropTypes.string.isRequired,
     selectedStartDate: PropTypes.string.isRequired,
@@ -1243,10 +1186,6 @@ AdminSignUp.propTypes = {
     selectDate: PropTypes.func.isRequired,
     selectDateRange: PropTypes.func.isRequired,
     confirmDate: PropTypes.func.isRequired,
-    selectHour: PropTypes.func.isRequired,
-    selectMin: PropTypes.func.isRequired,
-    handleShowHourList: PropTypes.func.isRequired,
-    handleShowMinList: PropTypes.func.isRequired,
     goConfirm: PropTypes.func.isRequired,
     dateRange: PropTypes.array.isRequired,
     customerSelectedOption: PropTypes.object.isRequired,
@@ -1259,7 +1198,8 @@ AdminSignUp.propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
     confirm: PropTypes.func.isRequired,
     update: PropTypes.bool.isRequired,
-    onSort: PropTypes.func.isRequired
+    onSort: PropTypes.func.isRequired,
+    handleChangeTimes: PropTypes.func.isRequired
 }
 
 AdminSignUp.contextTypes = {

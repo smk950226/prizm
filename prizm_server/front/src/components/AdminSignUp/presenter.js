@@ -53,7 +53,7 @@ const AdminSignUp = (props, context) => (
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
-            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Password confirm")}</p>
+            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Confirm your password")}</p>
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
@@ -110,7 +110,7 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.widthFull}`}>
                         <input className={`${styles.textInput6}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
-                    <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Password confirm")}</p>
+                    <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Confirm your password")}</p>
                     <div className={`${styles.widthFull}`}>
                         <input className={`${styles.textInput6}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>

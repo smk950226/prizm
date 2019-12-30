@@ -11,6 +11,7 @@ import MdAdd from 'react-ionicons/lib/MdAdd';
 import MdClose from 'react-ionicons/lib/MdClose';
 import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import ReactCountryFlag from "react-country-flag";
+import Picker from 'react-mobile-picker-scroll';
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { GOOGLE_API_KEY } from '../../config/secrets';
@@ -122,8 +123,12 @@ const sliderSettings = {
     adaptiveHeight: true
 };
 
+const ampm = [
+    'AM',
+    'PM'
+]
+
 const hourList = [
-    '00',
     '01',
     '02',
     '03',
@@ -135,18 +140,7 @@ const hourList = [
     '09',
     '10',
     '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-    '22',
-    '23'
+    '12'
 ]
 
 const minList = [
@@ -193,10 +187,9 @@ class CustomRequestCreate extends Component{
         selectedEndDate: "",
         dateConfirm: false,
         selectDateStep: 1,
-        selectedHour: "",
-        selectedMin: "",
-        showHourList: false,
-        showMinList: false,
+        selectedHour: "02",
+        selectedMin: "00",
+        selectedAmPm: "PM",
         dateRange: [],
         hour: 0,
         extraHour: '',
@@ -228,7 +221,17 @@ class CustomRequestCreate extends Component{
         confirmed: false,
         fetchedProfile: false,
         fetchClear: this.props.isLoggedIn ? true : false,
-        isSendingEmail: false
+        isSendingEmail: false,
+        valueGroups: {
+            ampm: 'PM',
+            hour: '02',
+            min: '00'
+        }, 
+        optionGroups: {
+            ampm: ampm,
+            hour: hourList,
+            min: minList
+        }
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
@@ -246,6 +249,10 @@ class CustomRequestCreate extends Component{
         }
     }
 
+    componentDidMount = () => {
+        window.scrollTo(0,0)
+    }
+
     componentDidUpdate = async(prevProps, prevState) => {
         if(!prevState.confirmed && this.state.confirmed){
             this.props.getProfile()
@@ -259,6 +266,9 @@ class CustomRequestCreate extends Component{
                     fetchClear: true
                 })
             }
+        }
+        if(prevState.step !== this.state.step){
+            window.scrollTo(0,0)
         }
     }
 
@@ -327,6 +337,15 @@ class CustomRequestCreate extends Component{
             })
         }
     }
+
+    handleChange = (name, value) => {
+        this.setState(({valueGroups}) => ({
+          valueGroups: {
+            ...valueGroups,
+            [name]: value
+          }
+        }));
+    };
 
     _handleInputChange = (event) => {
         const { target : { value, name } } = event;
@@ -519,11 +538,22 @@ class CustomRequestCreate extends Component{
                 showCalendar2: false,
                 selectedDate: "",
                 dateConfirm: false,
-                selectedHour: "",
-                selectedMin: "",
+                selectedHour: "02",
+                selectedMin: "00",
+                selectedAmPm: 'PM',
                 selectDateStep: 1,
                 selectedStartDate: "",
                 selectedEndDate: "",
+                valueGroups: {
+                    ampm: 'PM',
+                    hour: '02',
+                    min: '00'
+                }, 
+                optionGroups: {
+                    ampm: ampm,
+                    hour: hourList,
+                    min: minList
+                }
             })
         }
         else{
@@ -535,9 +565,20 @@ class CustomRequestCreate extends Component{
                 dateConfirm: false,
                 selectedHour: "",
                 selectedMin: "",
+                selectedAmPm: "",
                 selectDateStep: 1,
                 selectedStartDate: "",
                 selectedEndDate: "",
+                valueGroups: {
+                    ampm: 'PM',
+                    hour: '02',
+                    min: '00'
+                }, 
+                optionGroups: {
+                    ampm: ampm,
+                    hour: hourList,
+                    min: minList
+                }
             })
         }
     }
@@ -566,19 +607,33 @@ class CustomRequestCreate extends Component{
             dateConfirm: false,
             selectedHour: "",
             selectedMin: "",
+            selectedAmPm: "",
             selectDateStep: 1,
             selectedStartDate: "",
             selectedEndDate: "",
+            valueGroups: {
+                ampm: 'PM',
+                hour: '02',
+                min: '00'
+            }, 
+            optionGroups: {
+                ampm: ampm,
+                hour: hourList,
+                min: minList
+            }
         })
     }
 
     _confirmDate = () => {
-        const { selectedMin, selectedHour, dateOption, selectedStartDate, selectedEndDate } = this.state;
+        const { valueGroups : { ampm, hour, min }, dateOption, selectedStartDate, selectedEndDate } = this.state;
         if(dateOption === 1){
-            if(selectedMin && selectedHour){
+            if(ampm && hour && min){
                 this.setState({
                     dateConfirm: true,
-                    showCalendar1: false
+                    showCalendar1: false,
+                    selectedHour: hour,
+                    selectedMin: min,
+                    selectedAmPm: ampm
                 })
             }
             else{
@@ -651,29 +706,14 @@ class CustomRequestCreate extends Component{
         })
     }
 
-    _handleShowHourList = () => {
-        this.setState({
-            showHourList: !this.state.showHourList
-        })
-    }
-
-    _handleShowMinList = () => {
-        this.setState({
-            showMinList: !this.state.showMinList
-        })
-    }
-
-    _selectHour = (selectedHour) => {
-        this.setState({
-            selectedHour
-        })
-    }
-
-    _selectMin = (selectedMin) => {
-        this.setState({
-            selectedMin
-        })
-    }
+    _handleChangeTimes = (name, value) => {
+        this.setState(({valueGroups}) => ({
+            valueGroups: {
+              ...valueGroups,
+              [name]: value,
+            }
+        }));
+    };
 
     _changeDateStep = (selectDateStep) => {
         if(selectDateStep === 2){
@@ -793,7 +833,7 @@ class CustomRequestCreate extends Component{
     }
 
     _login = async() => {
-        const { isSubmitting, loginEmail,  loginPassword, loginEmailForm, option, extraOption, people, extraPeople, hour, extraHour, dateOption, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, locationOption, locations } = this.state;
+        const { isSubmitting, loginEmail,  loginPassword, loginEmailForm, option, extraOption, people, extraPeople, hour, extraHour, dateOption, selectedDate, selectedHour, selectedMin, selectedAmPm, selectedStartDate, selectedEndDate, locationOption, locations } = this.state;
         const { login, getProfileByToken, getSaveToken, getNotificationByToken, getOrderListByToken, checkMessageByToken, createCustomRequestByToken } = this.props;
         if(!isSubmitting){
             if(loginEmail && loginPassword){
@@ -845,8 +885,21 @@ class CustomRequestCreate extends Component{
                             startDate = selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : ""
                             endDate = selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
                         }
-
-                        const submit = await createCustomRequestByToken(result.token, photograpyType, person, time, dateOption, date, selectedHour, selectedMin, startDate, endDate, locationOption, locations)
+                        let submitHour = selectedHour
+                        if(selectedAmPm === 'PM'){
+                            if(selectedHour !== '12'){
+                                submitHour = String(Number(selectedHour) + 12)
+                            }
+                            else{
+                                submitHour = '12'
+                            }
+                        }
+                        else{
+                            if(selectedHour === '12'){
+                                submitHour = '00'
+                            }
+                        }
+                        const submit = await createCustomRequestByToken(result.token, photograpyType, person, time, dateOption, date, submitHour, selectedMin, startDate, endDate, locationOption, locations)
                         if(submit.status === 'ok'){
                             getSaveToken(result.token)
                             this.setState({
@@ -889,7 +942,7 @@ class CustomRequestCreate extends Component{
     }
 
     _signup = async() => {
-        const { isSubmitting, firstName, lastName, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form, option, extraOption, people, extraPeople, hour, extraHour, dateOption, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, locationOption, locations } = this.state;
+        const { isSubmitting, firstName, lastName, email, countryNumber, countryCode, mobile, password, password2, emailForm, passwordForm, password2Form, option, extraOption, people, extraPeople, hour, extraHour, dateOption, selectedDate, selectedHour, selectedMin, selectedAmPm, selectedStartDate, selectedEndDate, locationOption, locations } = this.state;
         const { checkDuplicate, signUp, getProfileByToken, getSaveToken, getNotificationByToken, getOrderListByToken, createCustomRequestByToken } = this.props;
         if(!isSubmitting){
             if(firstName && lastName && email && countryNumber && countryCode && mobile && password && password2){
@@ -945,8 +998,21 @@ class CustomRequestCreate extends Component{
                                             startDate = selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : ""
                                             endDate = selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
                                         }
-
-                                        const submit = await createCustomRequestByToken(result.token, photograpyType, person, time, dateOption, date, selectedHour, selectedMin, startDate, endDate, locationOption, locations)
+                                        let submitHour = selectedHour
+                                        if(selectedAmPm === 'PM'){
+                                            if(selectedHour !== '12'){
+                                                submitHour = String(Number(selectedHour) + 12)
+                                            }
+                                            else{
+                                                submitHour = '12'
+                                            }
+                                        }
+                                        else{
+                                            if(selectedHour === '12'){
+                                                submitHour = '00'
+                                            }
+                                        }
+                                        const submit = await createCustomRequestByToken(result.token, photograpyType, person, time, dateOption, date, submitHour, selectedMin, startDate, endDate, locationOption, locations)
                                         if(submit.status === 'ok'){
                                             getSaveToken(result.token)
                                             this.setState({
@@ -1014,7 +1080,7 @@ class CustomRequestCreate extends Component{
     }
 
     _nextSlide = async() => {
-        const { step, isLoggedIn, option, extraOption, people, extraPeople, dateOption, dateConfirm, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, hour, extraHour, locationOption, locations, isSubmitting } = this.state;
+        const { step, isLoggedIn, option, extraOption, people, extraPeople, dateOption, dateConfirm, selectedDate, selectedHour, selectedMin, selectedAmPm, selectedStartDate, selectedEndDate, hour, extraHour, locationOption, locations, isSubmitting } = this.state;
         const { createCustomRequest, profile, sendVerificationEmail } = this.props;
         if(step === 1){
             if((((option.length > 0) && ((option.indexOf('extra') < 0))) || (extraOption !== '')) && (((people !==0) && (people !==-1)) || (extraPeople !== ''))){
@@ -1027,7 +1093,7 @@ class CustomRequestCreate extends Component{
         else if(step === 2){
             if(dateConfirm){
                 if(dateOption === 1){
-                    if(selectedDate && selectedHour && selectedMin){
+                    if(selectedDate && selectedHour && selectedMin && selectedAmPm){
                         if(((hour !== 0) && (hour !== -1)) || (extraHour !== '')){
                             this.setState({
                                 step: 3
@@ -1091,8 +1157,22 @@ class CustomRequestCreate extends Component{
                         startDate = selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : ""
                         endDate = selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
                     }
+                    let submitHour = selectedHour
+                    if(selectedAmPm === 'PM'){
+                        if(selectedHour !== '12'){
+                            submitHour = String(Number(selectedHour) + 12)
+                        }
+                        else{
+                            submitHour = '12'
+                        }
+                    }
+                    else{
+                        if(selectedHour === '12'){
+                            submitHour = '00'
+                        }
+                    }
 
-                    const submit = await createCustomRequest(photograpyType, person, time, dateOption, date, selectedHour, selectedMin, startDate, endDate, locationOption, locations)
+                    const submit = await createCustomRequest(photograpyType, person, time, dateOption, date, submitHour, selectedMin, startDate, endDate, locationOption, locations)
                     if(submit.status === 'ok'){
                         if(!profile.is_verified){
                             const result = await sendVerificationEmail()
@@ -1184,10 +1264,9 @@ class CustomRequestCreate extends Component{
             selectedDate, 
             selectedHour, 
             selectedMin, 
+            selectedAmPm,
             selectedStartDate, 
             selectedEndDate, 
-            showHourList, 
-            showMinList, 
             dateRange, 
             dateConfirm, 
             hour, 
@@ -1216,7 +1295,9 @@ class CustomRequestCreate extends Component{
             isLoggedIn,
             confirmed,
             fetchClear,
-            isSendingEmail
+            isSendingEmail,
+            optionGroups,
+            valueGroups
         } = this.state;
         const { profile } = this.props;
         return(
@@ -1299,8 +1380,7 @@ class CustomRequestCreate extends Component{
                         initialSlide={step-1}
                         >
                             <div className={`${styles.py3} ${styles.px3}`}>
-                                <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("1. 희망하는 사진 촬영 유형을 선택해주세요. ")}<span className={`${styles.fontNormal} ${styles.font12} ${styles.mobile380None}`}>{this.context.t(" (중복 선택 가능)")}</span></p>
-                                <p className={`${styles.fontNormal} ${styles.font12} ${styles.textRight} ${styles.mobile380Only}`}>{this.context.t(" (중복 선택 가능)")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("1. Please select your desired photography type(s) ")}</p>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`}>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
@@ -1309,7 +1389,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Alone")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('alone')}>{this.context.t("단독 사진")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('alone')}>{this.context.t("Individual Photo")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1319,7 +1399,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Street")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('street')}>{this.context.t("거리에서")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('street')}>{this.context.t("Street")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1329,7 +1409,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Couple")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('couple')}>{this.context.t("연인과 함께")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('couple')}>{this.context.t("Couple")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1339,7 +1419,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Indoor")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('indoor')}>{this.context.t("실내에서")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('indoor')}>{this.context.t("Indoor")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1349,7 +1429,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Wedding")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('wedding')}>{this.context.t("웨딩 사진")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('wedding')}>{this.context.t("Wedding")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1359,7 +1439,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Propose")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('propose')}>{this.context.t("프로포즈")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('propose')}>{this.context.t("Romantic Proposal")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1369,7 +1449,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Friend")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('friend')}>{this.context.t("친구들과 함께")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('friend')}>{this.context.t("Friends")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1379,7 +1459,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Daily")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('daily')}>{this.context.t("일상의 기록")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('daily')}>{this.context.t("Everyday Life")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1389,7 +1469,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Family")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('family')}>{this.context.t("가족과 함께")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('family')}>{this.context.t("Family")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col6} ${styles.px0} ${styles.mb3}`}>
@@ -1399,7 +1479,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Travel")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('travel')}>{this.context.t("여행의 순간")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('travel')}>{this.context.t("Travel Moment")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.col12} ${styles.px0} ${styles.mb3}`}>
@@ -1409,12 +1489,12 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Extra")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('extra')}>{this.context.t("기타 : ")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeOption('extra')}>{this.context.t("Others : ")}</p>
                                             <input className={`${styles.textInput11} ${styles.ml2}`} readOnly={option.indexOf('extra') > -1 ? false : true} type={"text"} value={extraOption} name={'extraOption'} onChange={this._handleInputChange} />
                                         </div>
                                     </div>
                                 </div>
-                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt5}`}>{this.context.t("2. 몇 명이 사진촬영을 진행할 예정인가요?")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt5}`}>{this.context.t("2. How many people are joining the photo shoot?")}</p>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.mt3} ${styles.justifyContentBetween}`}>
                                     <div className={`${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
@@ -1423,7 +1503,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Alone")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(1)}>{this.context.t("1명")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(1)}>{this.context.t("1 person (solo)")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.px0} ${styles.mb3}`}>
@@ -1433,7 +1513,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Alone")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(2)}>{this.context.t("2명")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(2)}>{this.context.t("2 people")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.px0} ${styles.mb3}`}>
@@ -1443,7 +1523,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Alone")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(3)}>{this.context.t("3명")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(3)}>{this.context.t("3 people")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.px0} ${styles.mb3}`}>
@@ -1453,7 +1533,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Alone")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(4)}>{this.context.t("4명")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(4)}>{this.context.t("4 people")}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1464,9 +1544,9 @@ class CustomRequestCreate extends Component{
                                                 <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Alone")} style={{width: 10, height: 10}} />
                                             )}
                                         </div>
-                                        <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(-1)}>{this.context.t("기타 : ")}</p>
+                                        <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangePeople(-1)}>{this.context.t("Others : ")}</p>
                                         <input className={`${styles.textInput11} ${styles.ml2}`} style={{width: 50}} type={"text"} readOnly={people === -1 ? false : true} value={extraPeople} name={'extraPeople'} onChange={this._handleInputChange} />
-                                        <p className={`${styles.font1214} ${styles.ml1}`} onClick={() => this._handleChangePeople(-1)}>{this.context.t("명")}</p>
+                                        <p className={`${styles.font1214} ${styles.ml1}`} onClick={() => this._handleChangePeople(-1)}>{this.context.t("people")}</p>
                                     </div>
                                 </div>
                                 <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._nextSlide}>
@@ -1474,7 +1554,7 @@ class CustomRequestCreate extends Component{
                                 </div>
                             </div>
                             <div className={`${styles.py3} ${styles.px3}`}>
-                                <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("3. 사진 촬영은 언제 진행하고 싶으신가요? ")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("3. When would you like to meet your photographer? ")}</p>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`}>
                                     <div className={`${styles.col12} ${styles.px0}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
@@ -1484,7 +1564,7 @@ class CustomRequestCreate extends Component{
                                                 )}
                                             </div>
                                             <div className={`${styles.checkBoxText}`}>
-                                                <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeDateOption(1)}>{this.context.t("정해둔 날짜와 시간이 있습니다.")}</p>
+                                                <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeDateOption(1)}>{this.context.t("I have a specific date and time in mind.")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1494,7 +1574,7 @@ class CustomRequestCreate extends Component{
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()}`}</p>
                                             </div>
                                             <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => this._openCalendar1()}>
-                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedHour}:${selectedMin}`}</p>
+                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedAmPm} ${selectedHour}:${selectedMin}`}</p>
                                             </div>
                                         </div>
                                     )}
@@ -1506,7 +1586,7 @@ class CustomRequestCreate extends Component{
                                                 )}
                                             </div>
                                             <div className={`${styles.checkBoxText}`}>
-                                                <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeDateOption(2)}>{this.context.t("아직 정확한 날짜와 시간은 정하지 않았지만, 다음의 기간에 뉴욕에 머무를 계획입니다 : ")}</p>
+                                                <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeDateOption(2)}>{this.context.t("I don’t have a specific date yet, but I’m staying in New York City during : ")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1521,7 +1601,7 @@ class CustomRequestCreate extends Component{
                                         </div>
                                     )}
                                 </div>
-                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt5}`}>{this.context.t("4. 몇 시간 동안 촬영을 진행하고 싶으신가요?")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt5}`}>{this.context.t("4. How long do you want to spend your time with the photographer?")}</p>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.mt3} ${styles.justifyContentBetween}`}>
                                     <div className={`${styles.px0} ${styles.mb3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
@@ -1530,7 +1610,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("1 Hour")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeHour(1)}>{this.context.t("1시간")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeHour(1)}>{this.context.t("1 hour")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.px0} ${styles.mb3}`}>
@@ -1540,7 +1620,7 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("2 Hour")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeHour(2)}>{this.context.t("2시간")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeHour(2)}>{this.context.t("2 hours")}</p>
                                         </div>
                                     </div>
                                     <div className={`${styles.px0} ${styles.mb3}`}>
@@ -1550,9 +1630,9 @@ class CustomRequestCreate extends Component{
                                                     <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("Extra Hour")} style={{width: 10, height: 10}} />
                                                 )}
                                             </div>
-                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeHour(-1)}>{this.context.t("기타 : ")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeHour(-1)}>{this.context.t("Others : ")}</p>
                                             <input className={`${styles.textInput11} ${styles.ml2}`} readOnly={hour === -1 ? false : true} style={{width: 50}} type={"text"} value={extraHour} name={'extraHour'} maxLength={3} onChange={this._handleInputChange} />
-                                            <p className={`${styles.font1214} ${styles.ml1}`} onClick={() => this._handleChangeHour(-1)}>{this.context.t("시간")}</p>
+                                            <p className={`${styles.font1214} ${styles.ml1}`} onClick={() => this._handleChangeHour(-1)}>{this.context.t("hours")}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1561,7 +1641,7 @@ class CustomRequestCreate extends Component{
                                 </div>
                             </div>
                             <div className={`${styles.py3} ${styles.px3}`}>
-                                <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("5. 사진 촬영 장소를 선택해주세요. ")}</p>
+                                <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("5. Where would you like to take the travel photography? ")}</p>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`}>
                                     <div className={`${styles.col12} ${styles.px0}`}>
                                         <div className={`${styles.row} ${styles.mx0}`}>
@@ -1571,8 +1651,7 @@ class CustomRequestCreate extends Component{
                                                 )}
                                             </div>
                                             <div className={`${styles.checkBoxText}`}>
-                                                <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeLocationOption(1)}>{this.context.t("장소를 직접 선택하겠습니다.")}</p>
-                                                <p className={`${styles.font1012} ${styles.gray2f} ${styles.ml2}`} onClick={() => this._handleChangeLocationOption(1)}>{this.context.t("하나 이상의 옵션을 선택하는 것도 가능합니다.")}</p>
+                                                <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeLocationOption(1)}>{this.context.t("I’d like to select my desired location(s). Click here to add a new location. ")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1601,7 +1680,7 @@ class CustomRequestCreate extends Component{
                                                 <div>
                                                     <MdAdd fontSize="16px" color="#ffffff" />
                                                 </div>
-                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("장소 추가하기")}</p>
+                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add a location")}</p>
                                                 <div className={`${styles.hidden}`}>
                                                     <MdAdd fontSize="16px" color="#ffffff" />
                                                 </div>
@@ -1668,7 +1747,7 @@ class CustomRequestCreate extends Component{
                                                 )}
                                             </div>
                                             <div className={`${styles.checkBoxText}`}>
-                                                <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeLocationOption(2)}>{this.context.t("직접 선택하는 대신, 사진작가의 추천을 받겠습니다.")}</p>
+                                                <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeLocationOption(2)}>{this.context.t("I’d rather follow my photographer’s recommendation.")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1679,7 +1758,7 @@ class CustomRequestCreate extends Component{
                             </div>
                             {!isLoggedIn && auth === 'signup' ? (
                                 <div className={`${styles.py3} ${styles.px3}`}>
-                                    <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("6. 회원가입 후 예약 완료하기 ")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("6. Sign-up and submit your request ")}</p>
                                     <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{this.context.t("First name")}</p>
                                     <div className={`${styles.widthFull}`}>
                                         <input className={`${styles.textInput2}`} type={"text"} name={"firstName"} value={firstName} onChange={this._handleInputChange} />
@@ -1715,13 +1794,13 @@ class CustomRequestCreate extends Component{
                                     <div className={`${styles.widthFull}`}>
                                         <input className={`${styles.textInput2}`} type={"password"} name={"password"} value={password} onChange={this._handleInputChange} />
                                     </div>
-                                    <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{this.context.t("Password confirm")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{this.context.t("Confirm your password")}</p>
                                     <div className={`${styles.widthFull}`}>
                                         <input className={`${styles.textInput2}`} type={"password"} name={"password2"} value={password2} onChange={this._handleInputChange} />
                                     </div>
-                                    <p className={`${styles.font1214} ${styles.pink} ${styles.textCenter} ${styles.mt3} ${styles.cursorPointer}`} onClick={() => this._handleChangeAuth('login')}>{this.context.t("이미 PRIZM 회원이신가요?")}</p>
+                                    <p className={`${styles.font1214} ${styles.pink} ${styles.textCenter} ${styles.mt3} ${styles.cursorPointer}`} onClick={() => this._handleChangeAuth('login')}>{this.context.t("Already have PRIZM account?")}</p>
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this._signup}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("맞춤예약 신청 완료!")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Click here to submit your request")}</p>
                                     </div>
                                     <Modal
                                     open={showCountryNumber} 
@@ -1757,7 +1836,7 @@ class CustomRequestCreate extends Component{
                                 </div>
                             ) : (
                                 <div className={`${styles.py3} ${styles.px3}`}>
-                                    <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("6. 로그인 후 예약 완료하기 ")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1416}`}>{this.context.t("6. Sign-in and submit your request ")}</p>
                                     <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{this.context.t("Email")}</p>
                                     <div className={`${styles.widthFull}`}>
                                         <input className={`${styles.textInput2}`} type={"text"} name={"loginEmail"} value={loginEmail} onChange={this._handleInputChange} />
@@ -1766,9 +1845,9 @@ class CustomRequestCreate extends Component{
                                     <div className={`${styles.widthFull}`}>
                                         <input className={`${styles.textInput2}`} type={"password"} name={"loginPassword"} value={loginPassword} onChange={this._handleInputChange} />
                                     </div>
-                                    <p className={`${styles.font1214} ${styles.pink} ${styles.textCenter} ${styles.mt3} ${styles.cursorPointer}`} onClick={() => this._handleChangeAuth('signup')}>{this.context.t("PRIZM이 처음이신가요?")}</p>
+                                    <p className={`${styles.font1214} ${styles.pink} ${styles.textCenter} ${styles.mt3} ${styles.cursorPointer}`} onClick={() => this._handleChangeAuth('signup')}>{this.context.t("First time to PRIZM?")}</p>
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this._login}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("맞춤예약 신청 완료!")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Click here to submit your request")}</p>
                                     </div>
                                 </div>
                             )}
@@ -1813,27 +1892,10 @@ class CustomRequestCreate extends Component{
                                             </div>
                                             <div className={`${styles.py5}`}>
                                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                                    <div className={`${styles.textInput5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} type={"text"} name={"time"} onClick={this._handleShowHourList} style={{position: 'relative'}}>
-                                                        <p className={`${styles.font13} ${styles.mx2} ${styles.textCenter}`}>{selectedHour}</p>
-                                                        {showHourList && (
-                                                            <div style={{position: 'absolute', top: 25, width: 50, maxHeight: 150}} className={`${styles.bgWhite} ${styles.borderDropdown} ${styles.overflowYScroll}`}>
-                                                                {hourList.map((hour,index) => (
-                                                                    <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer} ${styles.textCenter}`} onClick={() => this._selectHour(hour)}>{hour}</p>
-                                                                ))}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                    <p className={`${styles.font13} ${styles.mx2}`}>:</p>
-                                                    <div className={`${styles.textInput5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer}`} type={"text"} name={"time"} onClick={this._handleShowMinList} style={{position: 'relative'}}>
-                                                        <p className={`${styles.font13} ${styles.mx2} ${styles.textCenter}`}>{selectedMin}</p>
-                                                        {showMinList && (
-                                                            <div style={{position: 'absolute', top: 25, width: 50, maxHeight: 150}} className={`${styles.bgWhite} ${styles.borderDropdown} ${styles.overflowYScroll}`}>
-                                                                {minList.map((min,index) => (
-                                                                    <p key={index} className={`${styles.font13} ${styles.py2} ${styles.cursorPointer} ${styles.textCenter}`} onClick={() => this._selectMin(min)}>{min}</p>
-                                                                ))}
-                                                            </div>
-                                                        )}
-                                                    </div>
+                                                    <Picker
+                                                    optionGroups={optionGroups}
+                                                    valueGroups={valueGroups}
+                                                    onChange={this._handleChangeTimes} />
                                                 </div>
                                             </div>
                                         </div>

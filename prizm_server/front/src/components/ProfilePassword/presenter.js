@@ -13,7 +13,7 @@ const ProfilePassword = (props, context) => (
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} />
         </div>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("New password confirm")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Confirm your new password")}</p>
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} />
         </div>
