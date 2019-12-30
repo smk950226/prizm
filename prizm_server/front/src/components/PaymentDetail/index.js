@@ -51,6 +51,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getExchangeRate: (country) => {
             return dispatch(customerAction.getExchangeRate(country))
+        },
+        getProfile: () => {
+            dispatch(userAction.getProfile())
         }
     }
 }

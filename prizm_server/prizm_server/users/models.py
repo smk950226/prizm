@@ -35,25 +35,43 @@ class User(AbstractUser):
     def custom_request_status(self):
         custom_request = self.customrequest_set.all()
         if custom_request.count() > 0:
-            last_request = custom_request.order_by('-id').first()
-            if last_request.is_closed:
-                return {
-                    'id': -1,
-                    'status': 'none'
-                }
-            else:
-                orders = last_request.requestorder_set.all()
-                if orders.count() >= 3:
+            custom = custom_request.filter(is_closed = True, order__isnull = False).order_by('-id')
+            if custom.count() > 0:
+                custom = custom.first()
+                order = custom.order
+                if (order.status == 'cancelled') or (order.status == 'completed'):
                     return {
-                        'id': last_request.id,
-                        'status': 'open',
-                        'count': orders.count()
+                        'id': -1,
+                        'status': 'none'
                     }
                 else:
                     return {
-                        'id': last_request.id,
-                        'status': 'close'
+                        'id': custom.id,
+                        'status': 'confirmed',
+                        'orderId': order.id,
+                        'payment': order.status,
+                        'confirmed_at': order.confirmed_at
                     }
+            else:
+                last_request = custom_request.order_by('-id').first()
+                if last_request.is_closed:
+                    return {
+                        'id': -1,
+                        'status': 'none'
+                    }
+                else:
+                    orders = last_request.requestorder_set.all()
+                    if orders.count() >= 1:
+                        return {
+                            'id': last_request.id,
+                            'status': 'open',
+                            'count': orders.count()
+                        }
+                    else:
+                        return {
+                            'id': last_request.id,
+                            'status': 'close'
+                        }
         else:
             return {
                 'id': -1,

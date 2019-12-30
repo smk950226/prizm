@@ -11,7 +11,9 @@ class Container extends Component{
         getProfile: PropTypes.func.isRequired,
         goRequestOrderList: PropTypes.func.isRequired,
         sendVerificationEmail: PropTypes.func.isRequired,
-        isLoggedIn: PropTypes.bool.isRequired
+        isLoggedIn: PropTypes.bool.isRequired,
+        getOrderDetail: PropTypes.func.isRequired,
+        goPayment: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -21,7 +23,9 @@ class Container extends Component{
     state = {
         isSubmitting: false,
         fetchedProfile: false,
-        isSendingEmail: false
+        isSendingEmail: false,
+        showCancel: false,
+        isLoading: false
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
@@ -45,6 +49,18 @@ class Container extends Component{
         }
     }
 
+    _openCancel = () => {
+        this.setState({
+            showCancel: true
+        })
+    }
+
+    _closeCancel = () => {
+        this.setState({
+            showCancel: false
+        })
+    }
+
     _cancel = async() => {
         const { cancelCustomRequest, profile, getProfile } = this.props;
         const { isSubmitting } = this.state;
@@ -57,7 +73,8 @@ class Container extends Component{
                     const result = await cancelCustomRequest(profile.custom_request_status.id)
                     if(result.status === 'ok'){
                         this.setState({
-                            isSubmitting: false
+                            isSubmitting: false,
+                            showCancel: false
                         })
                         await getProfile()
                     }
@@ -99,6 +116,15 @@ class Container extends Component{
         }
     }
 
+    _goPayment = async(orderId) => {
+        const { getOrderDetail, goPayment } = this.props;
+        const { isLoading } = this.state;
+        if(!isLoading){
+            const order = await getOrderDetail(orderId)
+            goPayment(order)
+        }
+    }
+
     render(){
         return (
             <CustomRequest 
@@ -106,6 +132,9 @@ class Container extends Component{
             {...this.state}
             cancel={this._cancel}
             send={this._send}
+            openCancel={this._openCancel}
+            closeCancel={this._closeCancel}
+            goPayment={this._goPayment}
             />
         )
     }

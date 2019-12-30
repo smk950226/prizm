@@ -1116,85 +1116,172 @@ class CustomRequestCreate extends Component{
         }
         else if(step === 3){
             if(isLoggedIn){
-                if(!isSubmitting){
-                    this.setState({
-                        isSubmitting: true
-                    })
-                    let photograpyTypeTemp = option;
-                    const find = option.indexOf('extra');
-                    if(find > -1){
-                        photograpyTypeTemp.push(extraOption)
-                    }
-                    let photograpyType = []
-                    photograpyTypeTemp.map((pho) => {
-                        if(pho === 'extra'){
-                            photograpyType.push(extraOption)
-                            return null;
+                if(locationOption === 1){
+                    if(locations && locations.length > 0){
+                        if(!isSubmitting){
+                            this.setState({
+                                isSubmitting: true
+                            })
+                            let photograpyTypeTemp = option;
+                            const find = option.indexOf('extra');
+                            if(find > -1){
+                                photograpyTypeTemp.push(extraOption)
+                            }
+                            let photograpyType = []
+                            photograpyTypeTemp.map((pho) => {
+                                if(pho === 'extra'){
+                                    photograpyType.push(extraOption)
+                                    return null;
+                                }
+                                else if(pho === extraOption){
+                                    return null;
+                                }
+                                else{
+                                    photograpyType.push(pho)
+                                    return null
+                                }
+                            })
+                            let person = people
+                            if(people === -1){
+                                person = Number(extraPeople)
+                            }
+                            let time = hour
+                            if(hour === -1){
+                                time = Number(extraHour)
+                            }
+                            let date = ''
+                            if(dateOption === 1){
+                                date = selectedDate ? String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : ""
+                            }
+                            let startDate = ''
+                            let endDate = ''
+                            if(dateOption === 2){
+                                startDate = selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : ""
+                                endDate = selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
+                            }
+                            let submitHour = selectedHour
+                            if(selectedAmPm === 'PM'){
+                                if(selectedHour !== '12'){
+                                    submitHour = String(Number(selectedHour) + 12)
+                                }
+                                else{
+                                    submitHour = '12'
+                                }
+                            }
+                            else{
+                                if(selectedHour === '12'){
+                                    submitHour = '00'
+                                }
+                            }
+        
+                            const submit = await createCustomRequest(photograpyType, person, time, dateOption, date, submitHour, selectedMin, startDate, endDate, locationOption, locations)
+                            if(submit.status === 'ok'){
+                                if(!profile.is_verified){
+                                    const result = await sendVerificationEmail()
+                                }
+                                this.setState({
+                                    isSubmitting: false,
+                                    confirmed: true
+                                })
+                            }
+                            else if(submit.error){
+                                this.setState({
+                                    isSubmitting: false,
+                                    confirmed: false
+                                })
+                                alert(submit.error)
+                            }
+                            else{
+                                this.setState({
+                                    isSubmitting: false,
+                                    confirmed: false
+                                })
+                                alert(this.context.t("An error has occurred.."))
+                            }
                         }
-                        else if(pho === extraOption){
-                            return null;
+                    }
+                }
+                else if(locationOption === 2){
+                    if(!isSubmitting){
+                        this.setState({
+                            isSubmitting: true
+                        })
+                        let photograpyTypeTemp = option;
+                        const find = option.indexOf('extra');
+                        if(find > -1){
+                            photograpyTypeTemp.push(extraOption)
+                        }
+                        let photograpyType = []
+                        photograpyTypeTemp.map((pho) => {
+                            if(pho === 'extra'){
+                                photograpyType.push(extraOption)
+                                return null;
+                            }
+                            else if(pho === extraOption){
+                                return null;
+                            }
+                            else{
+                                photograpyType.push(pho)
+                                return null
+                            }
+                        })
+                        let person = people
+                        if(people === -1){
+                            person = Number(extraPeople)
+                        }
+                        let time = hour
+                        if(hour === -1){
+                            time = Number(extraHour)
+                        }
+                        let date = ''
+                        if(dateOption === 1){
+                            date = selectedDate ? String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : ""
+                        }
+                        let startDate = ''
+                        let endDate = ''
+                        if(dateOption === 2){
+                            startDate = selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : ""
+                            endDate = selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
+                        }
+                        let submitHour = selectedHour
+                        if(selectedAmPm === 'PM'){
+                            if(selectedHour !== '12'){
+                                submitHour = String(Number(selectedHour) + 12)
+                            }
+                            else{
+                                submitHour = '12'
+                            }
                         }
                         else{
-                            photograpyType.push(pho)
-                            return null
+                            if(selectedHour === '12'){
+                                submitHour = '00'
+                            }
                         }
-                    })
-                    let person = people
-                    if(people === -1){
-                        person = Number(extraPeople)
-                    }
-                    let time = hour
-                    if(hour === -1){
-                        time = Number(extraHour)
-                    }
-                    let date = ''
-                    if(dateOption === 1){
-                        date = selectedDate ? String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : ""
-                    }
-                    let startDate = ''
-                    let endDate = ''
-                    if(dateOption === 2){
-                        startDate = selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : ""
-                        endDate = selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
-                    }
-                    let submitHour = selectedHour
-                    if(selectedAmPm === 'PM'){
-                        if(selectedHour !== '12'){
-                            submitHour = String(Number(selectedHour) + 12)
+    
+                        const submit = await createCustomRequest(photograpyType, person, time, dateOption, date, submitHour, selectedMin, startDate, endDate, locationOption, locations)
+                        if(submit.status === 'ok'){
+                            if(!profile.is_verified){
+                                const result = await sendVerificationEmail()
+                            }
+                            this.setState({
+                                isSubmitting: false,
+                                confirmed: true
+                            })
+                        }
+                        else if(submit.error){
+                            this.setState({
+                                isSubmitting: false,
+                                confirmed: false
+                            })
+                            alert(submit.error)
                         }
                         else{
-                            submitHour = '12'
+                            this.setState({
+                                isSubmitting: false,
+                                confirmed: false
+                            })
+                            alert(this.context.t("An error has occurred.."))
                         }
-                    }
-                    else{
-                        if(selectedHour === '12'){
-                            submitHour = '00'
-                        }
-                    }
-
-                    const submit = await createCustomRequest(photograpyType, person, time, dateOption, date, submitHour, selectedMin, startDate, endDate, locationOption, locations)
-                    if(submit.status === 'ok'){
-                        if(!profile.is_verified){
-                            const result = await sendVerificationEmail()
-                        }
-                        this.setState({
-                            isSubmitting: false,
-                            confirmed: true
-                        })
-                    }
-                    else if(submit.error){
-                        this.setState({
-                            isSubmitting: false,
-                            confirmed: false
-                        })
-                        alert(submit.error)
-                    }
-                    else{
-                        this.setState({
-                            isSubmitting: false,
-                            confirmed: false
-                        })
-                        alert(this.context.t("An error has occurred.."))
                     }
                 }
             }

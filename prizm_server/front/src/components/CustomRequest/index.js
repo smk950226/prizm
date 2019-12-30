@@ -37,6 +37,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         sendVerificationEmail: () => {
             return dispatch(userAction.sendVerificationEmail())
+        },
+        getOrderDetail: (orderId) => {
+            return dispatch(userAction.getOrderDetail(orderId))
+        },
+        goPayment: (order) => {
+            dispatch(push({
+                pathname: '/payment/',
+                state: {
+                    order
+                }
+            }))
         }
     }
 }

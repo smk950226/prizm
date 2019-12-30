@@ -17,7 +17,8 @@ class Container extends Component{
         price: PropTypes.number,
         checkPrice: PropTypes.func.isRequired,
         pay: PropTypes.func.isRequired,
-        getExchangeRate: PropTypes.func.isRequired
+        getExchangeRate: PropTypes.func.isRequired,
+        getProfile: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -145,7 +146,7 @@ class Container extends Component{
 
     _payDeposit = async(amount) => {
         const { name, isSubmitting, order, isDeposit } = this.state;
-        const { createDeposit, profile, paymentExpire, goHome, refresh, goPaymentSuccess, getPrice, price, checkPrice } = this.props;
+        const { createDeposit, profile, paymentExpire, goHome, refresh, getPrice, price, checkPrice, getProfile, goPaymentSuccess } = this.props;
         if(!isSubmitting){
             if(order.status === 'confirmed'){
                 if(price === amount){
@@ -158,6 +159,7 @@ class Container extends Component{
                                 const deadline =  new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3);
                                 const now = new Date()
                                 if(now > deadline){
+                                    await getProfile()
                                     await paymentExpire(order.id)
                                     await refresh()
                                     this.setState({
@@ -171,11 +173,12 @@ class Container extends Component{
                                     if(check.status === 'ok'){
                                         const result = await createDeposit(name, price, order.id)
                                         if(result.status === 'ok'){
+                                            await getProfile()
+                                            await getPrice(null)
+                                            await refresh()
                                             this.setState({
                                                 isSubmitting: false
                                             })
-                                            await getPrice(null)
-                                            await refresh()
                                             const now = new Date().getTime()
                                             goPaymentSuccess(isDeposit, price, now)
                                         }
@@ -222,20 +225,20 @@ class Container extends Component{
     }
 
     _updateMeta = async(meta) => {
-        const { pay, getPrice, goPaymentSuccess, price } = this.props;
+        const { pay, getPrice, goPaymentSuccess, price, getProfile } = this.props;
         const { order, isDeposit } = this.state;
         this.setState({
             isSubmitting: true
         })
         const result = await pay(meta, order.id);
         if(result.status === 'ok'){
+            await getProfile()
             await getPrice(null)
             this.setState({
                 isSubmitting: false
             })
             const now = new Date().getTime()
             goPaymentSuccess(isDeposit, price, now)
-
         }
         else{
             this.setState({

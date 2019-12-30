@@ -85,7 +85,7 @@ class RequestOrderList extends Component{
                             {orders.map((order, index) => {
                                 const location = JSON.parse(order.location.replace(/'/gi, '"'))
                                 return(
-                                <div key={order.id} className={`${styles.py3} ${index % 2 === 0 ? styles.bgWhite : styles.bgGrayF8} ${styles.px3} ${styles.py3}`}>
+                                <div key={order.id} className={`${styles.py3} ${index % 2 === 0 ? styles.bgWhite : styles.bgGrayF8} ${styles.px3} ${styles.py3} ${styles.cursorPointer}`} onClick={() => this.props.goRequestOrderDetail(order)}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                             {order.photographer.profile_image ? (
