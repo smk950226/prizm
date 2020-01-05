@@ -502,6 +502,15 @@ p{
 .bg-url-blue{
     background-color: $url-blue;
 }
+.bg-landing-1{
+    background-color: $landing-1;
+}
+.bg-landing-2{
+    background-color: $landing-2;
+}
+.bg-landing-3{
+    background-color: $landing-3;
+}
 
 .mt-45{
     margin-top: 2.25rem;
@@ -1222,6 +1231,10 @@ textarea {
 .container-msg{
     width: calc(100% - 300px);
 }
+.container-custom-request-msg{
+    width: 100%;
+    height: 50vh;
+}
 @media (min-width: 768px){
     .container-portfolio-lg{
         height: 300px;
@@ -1267,8 +1280,17 @@ textarea {
         width: 360px;
         height: 568px;
     }
+    .container-custom-request-msg{
+        width: 400px;
+        min-height: 100vh;
+    }
 }
-
+@media (min-width: 1350px){
+    .container-custom-request-msg{
+        width: 30%;
+        min-height: 100vh;
+    }
+}
 @media (min-width: 1440px){
     .container-admin-toolbox{
         width: 405px;
@@ -1419,6 +1441,101 @@ textarea {
     background-origin: content-box;
     background-position: center center;
     background-attachment: scroll;
+}
+
+.bg-landing-img-1{
+    background-image: url('../assets/images/landing_1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box;
+    background-position: center center;
+    background-attachment: scroll;
+    width: 100%;
+    height: 50vh;
+}
+.bg-landing-img-2{
+    background-image: url('../assets/images/landing_2.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box;
+    background-position: center center;
+    background-attachment: scroll;
+    width: 100%;
+    height: 50vh;
+}
+.bg-landing-img-3{
+    background-image: url('../assets/images/landing_3.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box;
+    background-position: center center;
+    background-attachment: scroll;
+    width: 100%;
+    height: 50vh;
+}
+@media (min-width: 768px){
+    .bg-landing-img-1{
+        background-image: url('../assets/images/landing_1.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-origin: content-box;
+        background-position: center center;
+        background-attachment: scroll;
+        width: calc(100% - 400px);
+        min-height: 100vh;
+    }
+    .bg-landing-img-2{
+        background-image: url('../assets/images/landing_2.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-origin: content-box;
+        background-position: center center;
+        background-attachment: scroll;
+        width: calc(100% - 400px);
+        min-height: 100vh;
+    }
+    .bg-landing-img-3{
+        background-image: url('../assets/images/landing_3.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-origin: content-box;
+        background-position: center center;
+        background-attachment: scroll;
+        width: calc(100% - 400px);
+        min-height: 100vh;
+    }
+}
+@media (min-width: 1350px){
+    .bg-landing-img-1{
+        background-image: url('../assets/images/landing_1.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-origin: content-box;
+        background-position: center center;
+        background-attachment: scroll;
+        width: 70%;
+        min-height: 100vh;
+    }
+    .bg-landing-img-2{
+        background-image: url('../assets/images/landing_2.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-origin: content-box;
+        background-position: center center;
+        background-attachment: scroll;
+        width: 70%;
+        min-height: 100vh;
+    }
+    .bg-landing-img-3{
+        background-image: url('../assets/images/landing_3.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-origin: content-box;
+        background-position: center center;
+        background-attachment: scroll;
+        width: 70%;
+        min-height: 100vh;
+    }
 }
 
 .banner{

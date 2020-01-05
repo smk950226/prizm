@@ -98,7 +98,8 @@ class GeneralRouteContainer extends Component{
         fetchedProfile: false,
         fetchedNotification: false,
         fetchedNewMessage: false,
-        fetchClear: false
+        fetchClear: false,
+        hideBtmNav: false
     }
 
     componentDidMount = async() => {
@@ -143,8 +144,21 @@ class GeneralRouteContainer extends Component{
         }
     }
 
+    _doHideBtmNav = () => {
+        console.log(11)
+        this.setState({
+            hideBtmNav: true
+        })
+    }
+
+    _undoHideBtmNav = () => {
+        this.setState({
+            hideBtmNav: false
+        })
+    }
+
     render(){
-        const { loading } = this.state;
+        const { loading, hideBtmNav } = this.state;
         const { showBtmNav, goHome } = this.props;
         if(loading){
             return(
@@ -157,8 +171,8 @@ class GeneralRouteContainer extends Component{
             return(
                 <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
                     <Navigation />
-                    <GeneralRoute goHome={goHome} />
-                    <BottomNavigation showBtmNav={showBtmNav} />
+                    <GeneralRoute goHome={goHome} doHideBtmNav={this._doHideBtmNav} undoHideBtmNav={this._undoHideBtmNav} />
+                    <BottomNavigation showBtmNav={showBtmNav} hideBtmNav={hideBtmNav} />
                 </div>
             )
         }
@@ -325,8 +339,7 @@ const GeneralRoute = props => (
         <Route exact path='/review/list/' component={ReviewList} key={18} />
         <Route exact path='/review/create/' component={ReviewCreate} key={19} />
         <Route exact path='/review/complete/' component={ReviewCreateComplete} key={20} />
-        <Route exact path='/custom/request/' component={CustomRequest} key={21} />
-        <Route exact path='/custom/request/create/' component={CustomRequestCreate} key={22} />
+        <Route exact path='/custom/request/' render={() => <CustomRequestCreate {...props} doHideBtmNav={props.doHideBtmNav} undoHideBtmNav={props.undoHideBtmNav} />} key={21} />
         <Route exact path='/custom/request/order/list/' component={RequestOrderList} key={23} />
         <Route exact path='/custom/request/order/detail/' component={RequestOrderDetail} key={24} />
         <Route exact path='/signup/clear/' component={SignUpClear} key={25} />

@@ -10,7 +10,8 @@ class Container extends Component{
         goMySchedule: PropTypes.func.isRequired,
         goCustomRequest: PropTypes.func.isRequired,
         goMessage: PropTypes.func.isRequired,
-        newMessage: PropTypes.bool
+        newMessage: PropTypes.bool,
+        hideBtmNav: PropTypes.bool,
     }
 
     constructor(props){
@@ -48,6 +49,11 @@ class Container extends Component{
     render(){
         if(this.state.pageType === '/welcome/'){
             return null
+        }
+        else if(this.props.hideBtmNav){
+            return(
+                null
+            )
         }
         else{
             return(

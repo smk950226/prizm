@@ -56,6 +56,31 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         sendVerificationEmail: () => {
             return dispatch(userAction.sendVerificationEmail())
+        },
+        getOrderDetail: (orderId) => {
+            return dispatch(userAction.getOrderDetail(orderId))
+        },
+        goPayment: (order) => {
+            dispatch(push({
+                pathname: '/payment/',
+                state: {
+                    order
+                }
+            }))
+        },
+        cancelCustomRequest: (requestId) => {
+            return dispatch(customerAction.cancelCustomRequest(requestId))
+        },
+        goRequestOrderList: (requestId) => {
+            dispatch(push({
+                pathname: '/custom/request/order/list/',
+                state: {
+                    requestId
+                }
+            }))
+        },
+        goSignin: () => {
+            dispatch(push('/signin/'))
         }
     }
 }

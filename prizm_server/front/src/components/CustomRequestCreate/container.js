@@ -19,17 +19,15 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         goCustomRequest: PropTypes.func.isRequired,
         getProfile: PropTypes.func.isRequired,
-        sendVerificationEmail: PropTypes.func.isRequired
-    }
-
-    componentDidMount = () => {
-        const { goCustomRequest, profile } = this.props;
-        if(profile){
-            if(profile.custom_request_status.status !== 'none'){
-                goCustomRequest()
-            }
-        }
-        
+        sendVerificationEmail: PropTypes.func.isRequired,
+        getOrderDetail: PropTypes.func.isRequired,
+        goPayment: PropTypes.func.isRequired,
+        sendVerificationEmail: PropTypes.func.isRequired,
+        cancelCustomRequest: PropTypes.func.isRequired,
+        goRequestOrderList: PropTypes.func.isRequired,
+        goSignin: PropTypes.func.isRequired,
+        doHideBtmNav: PropTypes.func.isRequired,
+        undoHideBtmNav: PropTypes.func.isRequired
     }
 
     render(){
