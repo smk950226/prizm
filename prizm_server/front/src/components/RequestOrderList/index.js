@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             }))
         },
         goCustomRequest: () => {
-            dispatch(push('/custom/request/'))
+            dispatch(push('/'))
         }
     }
 }

@@ -46,10 +46,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             return dispatch(customerAction.createCustomRequestByToken(token, photograpyType, person, hour, dateOption, selectedDate, selectedHour, selectedMin, startDate, endDate, locationOption, locations))
         },
         goHome: () => {
-            dispatch(push('/'))
+            window.location.reload()
         },
         goCustomRequest: () => {
-            dispatch(push('/custom/request/'))
+            dispatch(push('/'))
         },
         getProfile: () => {
             dispatch(userAction.getProfile())

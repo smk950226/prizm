@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
         goCustomRequestCreate: () => {
-            dispatch(push('/custom/request/create/'))
+            dispatch(push('/'))
         },
         cancelCustomRequest: (requestId) => {
             return dispatch(customerAction.cancelCustomRequest(requestId))

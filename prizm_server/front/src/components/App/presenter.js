@@ -320,7 +320,8 @@ class AdminRouteContainer extends Component{
 
 const GeneralRoute = props => (
     <Switch>
-        <Route exact path='/' component={Home} key={1} />
+        <Route exact path='/' render={() => <CustomRequestCreate {...props} doHideBtmNav={props.doHideBtmNav} undoHideBtmNav={props.undoHideBtmNav} />} key={1} />
+        <Route exact path='/artist/' component={Home} key={21} />
         <Route exact path='/welcome/' component={Welcome} key={2} />
         <Route exact path='/signup/' component={SignUp} key={3} />
         <Route exact path='/signin/' component={SignIn} key={4} />
@@ -339,7 +340,6 @@ const GeneralRoute = props => (
         <Route exact path='/review/list/' component={ReviewList} key={18} />
         <Route exact path='/review/create/' component={ReviewCreate} key={19} />
         <Route exact path='/review/complete/' component={ReviewCreateComplete} key={20} />
-        <Route exact path='/custom/request/' render={() => <CustomRequestCreate {...props} doHideBtmNav={props.doHideBtmNav} undoHideBtmNav={props.undoHideBtmNav} />} key={21} />
         <Route exact path='/custom/request/order/list/' component={RequestOrderList} key={23} />
         <Route exact path='/custom/request/order/detail/' component={RequestOrderDetail} key={24} />
         <Route exact path='/signup/clear/' component={SignUpClear} key={25} />

@@ -1513,8 +1513,8 @@ class CustomRequestCreate extends Component{
                                         <Fragment>
                                             {profile.custom_request_status.status === 'none' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
@@ -1524,8 +1524,8 @@ class CustomRequestCreate extends Component{
                                             )}
                                             {profile.custom_request_status.status === 'close' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray33 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
@@ -1547,7 +1547,7 @@ class CustomRequestCreate extends Component{
                                                             </p>
                                                         </div>
                                                     )}
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360}}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.5}}>
                                                         {profile.is_verified ? (
                                                             <Fragment>
                                                                 {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
@@ -1557,15 +1557,15 @@ class CustomRequestCreate extends Component{
                                                             this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                         )}
                                                     </p>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.cursorPointer}`} onClick={this._openCancel}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.bgLanding12} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
                                                         {this.context.t("Make a New Request")}<br/>
                                                     </p>
                                                 </div>
                                             )}
                                             {profile.custom_request_status.status === 'open' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
@@ -1579,7 +1579,7 @@ class CustomRequestCreate extends Component{
                                                         </div>
                                                         </div>
                                                     </div>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.5}}>
                                                         {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
                                                         {this.context.t("Please click the button above to see them in detail")}
                                                     </p>
@@ -1587,8 +1587,8 @@ class CustomRequestCreate extends Component{
                                             )}
                                             {profile.custom_request_status.status === 'confirmed' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
@@ -1618,8 +1618,8 @@ class CustomRequestCreate extends Component{
                                         
                                     ) : (
                                         <div className={``}>
-                                            <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                {this.context.t("Enrich your New York City trip experience")}<br/>
+                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                {this.context.t("Enrich your City trip experience")}<br/>
                                                 {this.context.t("with the best photographers in New York.")}
                                             </p>
                                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt6} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
@@ -1642,12 +1642,12 @@ class CustomRequestCreate extends Component{
     
                                 </div>
                                 <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgLanding2} ${styles.order2} ${styles.orderMd2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                    {profile ? (
+                                {profile ? (
                                         <Fragment>
                                             {profile.custom_request_status.status === 'none' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
@@ -1657,8 +1657,8 @@ class CustomRequestCreate extends Component{
                                             )}
                                             {profile.custom_request_status.status === 'close' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray33 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
@@ -1680,7 +1680,7 @@ class CustomRequestCreate extends Component{
                                                             </p>
                                                         </div>
                                                     )}
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360}}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.5}}>
                                                         {profile.is_verified ? (
                                                             <Fragment>
                                                                 {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
@@ -1690,15 +1690,15 @@ class CustomRequestCreate extends Component{
                                                             this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                         )}
                                                     </p>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.cursorPointer}`} onClick={this._openCancel}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.bgLanding22} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
                                                         {this.context.t("Make a New Request")}<br/>
                                                     </p>
                                                 </div>
                                             )}
                                             {profile.custom_request_status.status === 'open' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
@@ -1712,7 +1712,7 @@ class CustomRequestCreate extends Component{
                                                         </div>
                                                         </div>
                                                     </div>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.5}}>
                                                         {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
                                                         {this.context.t("Please click the button above to see them in detail")}
                                                     </p>
@@ -1720,8 +1720,8 @@ class CustomRequestCreate extends Component{
                                             )}
                                             {profile.custom_request_status.status === 'confirmed' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
@@ -1751,8 +1751,8 @@ class CustomRequestCreate extends Component{
                                         
                                     ) : (
                                         <div className={``}>
-                                            <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                {this.context.t("Enrich your New York City trip experience")}<br/>
+                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                {this.context.t("Enrich your City trip experience")}<br/>
                                                 {this.context.t("with the best photographers in New York.")}
                                             </p>
                                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt6} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
@@ -1769,12 +1769,12 @@ class CustomRequestCreate extends Component{
                         <div>
                             <div className={`${styles.widthFull} ${styles.minHeightFull} ${styles.row} ${styles.mx0}`}>
                                 <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgLanding3} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                    {profile ? (
+                                {profile ? (
                                         <Fragment>
                                             {profile.custom_request_status.status === 'none' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
@@ -1784,8 +1784,8 @@ class CustomRequestCreate extends Component{
                                             )}
                                             {profile.custom_request_status.status === 'close' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray33 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
@@ -1807,7 +1807,7 @@ class CustomRequestCreate extends Component{
                                                             </p>
                                                         </div>
                                                     )}
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360}}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.5}}>
                                                         {profile.is_verified ? (
                                                             <Fragment>
                                                                 {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
@@ -1817,15 +1817,15 @@ class CustomRequestCreate extends Component{
                                                             this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                         )}
                                                     </p>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.cursorPointer}`} onClick={this._openCancel}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.bgLanding32} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
                                                         {this.context.t("Make a New Request")}<br/>
                                                     </p>
                                                 </div>
                                             )}
                                             {profile.custom_request_status.status === 'open' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
@@ -1839,7 +1839,7 @@ class CustomRequestCreate extends Component{
                                                         </div>
                                                         </div>
                                                     </div>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.5}}>
                                                         {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
                                                         {this.context.t("Please click the button above to see them in detail")}
                                                     </p>
@@ -1847,8 +1847,8 @@ class CustomRequestCreate extends Component{
                                             )}
                                             {profile.custom_request_status.status === 'confirmed' && (
                                                 <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                        {this.context.t("Enrich your New York City trip experience")}<br/>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                        {this.context.t("Enrich your City trip experience")}<br/>
                                                         {this.context.t("with the best photographers in New York.")}
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
@@ -1878,8 +1878,8 @@ class CustomRequestCreate extends Component{
                                         
                                     ) : (
                                         <div className={``}>
-                                            <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                                {this.context.t("Enrich your New York City trip experience")}<br/>
+                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.5}}>
+                                                {this.context.t("Enrich your City trip experience")}<br/>
                                                 {this.context.t("with the best photographers in New York.")}
                                             </p>
                                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt6} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>

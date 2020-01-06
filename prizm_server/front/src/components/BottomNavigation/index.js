@@ -15,13 +15,13 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
         goHome: () => {
-            dispatch(push('/'))
+            dispatch(push('/artist/'))
         },
         goMySchedule: () => {
             dispatch(push('/my/schedule/'))
         },
         goCustomRequest: () => {
-            dispatch(push('/custom/request/'))
+            dispatch(push('/'))
         },
         goMessage: () => {
             dispatch(push('/message/'))
