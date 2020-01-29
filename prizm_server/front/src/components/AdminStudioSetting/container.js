@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AdminStudioSetting from './presenter';
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const opacityList = [0.8, 0.6, 0.4, 0.2]
 
 const ampm = [
@@ -142,7 +146,8 @@ class Container extends Component{
                 ampm: ampm,
                 hour: hourList,
                 min: minList
-            }
+            },
+            loop: true
         }
     }
 
@@ -177,7 +182,8 @@ class Container extends Component{
                 }],
                 tempImage: "",
                 tempHeight: 0,
-                tempWidth: 0
+                tempWidth: 0,
+                loop: false
             })
         }
         if((this.state.tempProfileImage !== "") && (this.state.tempProfileHeight > 0) && (this.state.tempProfileWidth > 0)){
@@ -210,29 +216,41 @@ class Container extends Component{
             alert(this.context.t('File formates are limited to jpg, jpeg, and png.'))
         }
         else{
-            var reader = new FileReader();
-            reader.onloadend = () => {
-                this.setState({
-                    tempImage: reader.result
-                });
-            }
+            
             for(var i = 0; i < files.length; i++){
                 let file = files[i]
                 var img = new Image();
+                var reader = new FileReader();
+                reader.onloadend = () => {
+                    this.setState({
+                        tempImage: reader.result
+                    });
+                }
                 img.onload = () => {
                     this.setState({
                         tempWidth: img.width,
                         tempHeight: img.height
                     })
                 };
-                img.src = _URL.createObjectURL(file);
+                img.src = await _URL.createObjectURL(file);
                 await reader.readAsDataURL(file)
-                this.setState({
+                await this.setState({
                     submitImages: [...this.state.submitImages, {
                         idx: this.state.submitImages.length,
                         image: file
                     }]
                 })
+                while(true){
+                    if(this.state.loop){
+                        await sleep(500)
+                    }
+                    else{
+                        this.setState({
+                            loop: true
+                        })
+                        break;
+                    }
+                }
             }
         }
     }

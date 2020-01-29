@@ -6,7 +6,7 @@ import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
 import { COUNTRY_NUMBER } from '../../utils/country';
 
 const Profile = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+    <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
         <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{context.t("Profile")}</p>
         <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("First name")}</p>
         <div className={`${styles.widthFull}`}>

@@ -57,8 +57,8 @@ const AdminSignUp = (props, context) => (
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
-            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, marginTop: 65}} onClick={props.submit}>
-                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("sign up")}</p>
+            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mb3} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, marginTop: 65}} onClick={props.submit}>
+                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Sign Up")}</p>
             </div>
         </div>
         <div className={`${styles.mobileNone}`}>
@@ -114,9 +114,9 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.widthFull}`}>
                         <input className={`${styles.textInput6}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
-                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`}>
+                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull} ${styles.mb3}`}>
                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, marginTop: 65, maxWidth: 140}} onClick={props.submit}>
-                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("sign up")}</p>
+                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Sign Up")}</p>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 
 const AdminProfileSetting = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+    <div className={`${styles.safearea} ${styles.minHeightFull} ${styles.containerCustomer} ${styles.px3}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.justifyContentBetween}`}>
             <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{context.t("Payout Settings")}</p>
             <p className={`${styles.fontBold} ${styles.font13} ${styles.pink} ${styles.cursorPointer} ${props.editable ? styles.hidden : null}`} onClick={props.enableEdit}>{context.t("Edit")}</p>
@@ -66,7 +66,7 @@ const AdminProfileSetting = (props, context) => (
                 <div className={`${styles.mobileNone}`}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                         <div className={`${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, width: 140}} onClick={props.submit}>
-                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save change")}</p>
+                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save Changes")}</p>
                         </div>
                     </div>
                 </div>

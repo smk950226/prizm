@@ -9,6 +9,7 @@ from django.utils import timezone
 from uuid import uuid4
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.core.mail import send_mail
 
 from . import serializers, models
 from prizm_server.common.permissions import AdminAuthenticated
@@ -181,10 +182,98 @@ class SendVerificationEmail(APIView):
         )
 
         verification.save()
+        try:
+            mail = EmailMessage('[PRIZM] Email Verification', render_to_string('users/email_verification.html', context={'user': user.name, 'url': 'https://prizm.cloud/email/verify/'+ str(uuid) +'/'}), 'PRIZM<contact@prizm.cloud>', [user.email])
+            mail.content_subtype = "html"
 
-        mail = EmailMessage('[PRIZM] Email Verification', render_to_string('users/email_verification.html', context={'user': user.name, 'url': 'https://prizm.cloud/email/verify/'+ str(uuid) +'/'}), 'PRIZM<contact@prizm.cloud>', [user.email])
-        mail.content_subtype = "html"
-
-        mail.send()
+            mail.send()
+        except:
+            pass
 
         return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+
+
+class FindPassword(APIView):
+    def post(self, request, format = None):
+        if request.user.is_authenticated:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : '이미 로그인하였습니다.' })
+        else:
+            email = request.data.get('email', None)
+            if email:
+                try:
+                    user = User.objects.get(email = email)
+                    uuid = uuid4()
+                    history = models.FindPasswordHistory.objects.create(
+                        user = user,
+                        uuid = uuid
+                    )
+                    history.save()
+                    try:
+                        send_mail(
+                            subject = "PRIZM의 비밀번호 찾기 메일입니다.",
+                            from_email = "PRIZM<contact@prizm.cloud>",
+                            recipient_list = [email],
+                            message='PRIZM의 비밀번호 찾기 메일입니다.',
+                            html_message = render_to_string('account/password_change.html', context={'user': email, 'url': 'https://prizm.com/find/password/'+str(uuid)}),
+                            fail_silently = False,
+                        )
+                    except:
+                        pass
+                    return Response(status = status.HTTP_200_OK, data = { 'email' : user.email })
+                except:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : '일치하는 유저가 없습니다.' })
+            else:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : '이메일을 입력해주세요.' })
+    
+    def get(self, request, format = None):
+        uuid = request.query_params.get('uuid', None)
+        if uuid:
+            try:
+                history = models.FindPasswordHistory.objects.get(uuid = uuid)
+                if history.is_expired:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '만료된 경로입니다.'})
+                else:
+                    to_tz = timezone.get_default_timezone()
+                    time_delta = timezone.localtime().timestamp() - history.date.astimezone(to_tz).timestamp()
+                    if time_delta > 60*60*2:
+                        history.is_expired = True
+                        history.save()
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '만료된 경로입니다.'})
+                    else:
+                        return Response(status = status.HTTP_200_OK, data = {'user': history.user.email})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '올바르지 않은 경로입니다.'})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '올바르지 않은 경로입니다.'})
+    
+    def put(self, request, format = None):
+        uuid = request.data.get('uuid', None)
+        email = request.data.get('email', None)
+        password1 = request.data.get('password1', None)
+        password2 = request.data.get('password2', None)
+        try:
+            history = models.FindPasswordHistory.objects.get(uuid = uuid)
+            if history.is_expired:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '만료된 경로입니다.'})
+            else:
+                to_tz = timezone.get_default_timezone()
+                time_delta = timezone.localtime().timestamp() - history.date.astimezone(to_tz).timestamp()
+                if time_delta > 60*60*2:
+                    history.is_expired = True
+                    history.save()
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '만료된 경로입니다.'})
+                else:
+                    if email == history.user.email:
+                        if password1 == password2:
+                            history.user.set_password(password2)
+                            history.user.save()
+                            history.is_expired = True
+                            history.is_clear = True
+                            history.save()
+                            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                        else:
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '비밀번호가 일치하지 않습니다.'})
+                    else:
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '올바르지 않은 경로입니다.'})
+        except:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '올바르지 않은 경로입니다.'})

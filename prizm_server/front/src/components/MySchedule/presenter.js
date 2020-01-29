@@ -28,7 +28,12 @@ class MySchedule extends Component{
     }
 
     _isBottom(el) {
-        return el.getBoundingClientRect().bottom <= window.innerHeight;
+        if(el){
+            return el.getBoundingClientRect().bottom <= window.innerHeight;
+        }
+        else{
+            return false
+        }
     }
 
     _handleScroll = async() => {
@@ -43,7 +48,7 @@ class MySchedule extends Component{
     render(){
         const { loading, orderList, profile, isSendingEmail } = this.props;
         return(
-            <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+            <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{this.context.t("My Schedule")}</p>
                 {!profile.is_verified && (
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3} ${styles.widthFull}`}>

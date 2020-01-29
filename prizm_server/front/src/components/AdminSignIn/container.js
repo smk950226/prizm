@@ -15,7 +15,8 @@ class Container extends Component{
         getPhotographerByToken: PropTypes.func.isRequired,
         checkMessageByToken: PropTypes.func.isRequired,
         photographer: PropTypes.object,
-        profile: PropTypes.object
+        profile: PropTypes.object,
+        goFindPassword: PropTypes.func.isRequired
     }
 
     static contextTypes = {

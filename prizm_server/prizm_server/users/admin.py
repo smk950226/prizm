@@ -41,3 +41,9 @@ class UserAdmin(auth_admin.UserAdmin):
 class EmailVerificationAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'created_at', 'is_verified', 'is_expired']
     list_display_links = ['id', 'user']
+
+
+@admin.register(models.FindPasswordHistory)
+class FindPasswordHistoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'date', 'is_clear', 'is_expired']
+    list_display_links = ['id', 'user']

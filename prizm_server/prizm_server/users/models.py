@@ -93,3 +93,19 @@ class EmailVerification(models.Model):
         ordering = ['-id']
         verbose_name = _('Email Verification')
         verbose_name_plural = _('Email Verification')
+
+
+class FindPasswordHistory(models.Model):
+    uuid = models.UUIDField('UUID')
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    date = models.DateTimeField(auto_now_add = True)
+    is_clear = models.BooleanField('성공 여부', default = False)
+    is_expired = models.BooleanField('만료 여부', default = False)
+
+    class Meta:
+        verbose_name = '비밀번호 찾기 기록'
+        verbose_name_plural = '비밀번호 찾기 기록'
+        ordering = ['-id']
+
+    def __str__(self):
+        return str(self.uuid)

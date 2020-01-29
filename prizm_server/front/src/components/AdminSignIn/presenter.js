@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 
 const AdminSignUp = (props, context) => (
-    <div className={`${styles.safeareaAdminMobile} ${styles.containerAdmin} ${styles.pxAdmin}`}>
+    <div className={`${styles.safeareaAdminMobile} ${styles.minHeightFull} ${styles.containerAdmin} ${styles.pxAdmin}`}>
         <div className={`${styles.mobileOnly}`}>
             <p className={`${styles.fontBold} ${styles.font2024} ${styles.mt3}`}>{context.t("Welcome to PRIZM")}</p>
             <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information beslow to continue")}</p>
@@ -16,8 +16,9 @@ const AdminSignUp = (props, context) => (
                 <input className={`${styles.textInput6}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, marginTop: 65}} onClick={props.submit}>
-                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("sign in")}</p>
+                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Sign In")}</p>
             </div>
+            <p className={`${styles.fontBold} ${styles.font12} ${styles.mt3} ${styles.textCenter} ${styles.cursorPointer} ${styles.mb3}`} onClick={props.goFindPassword}>{context.t("Forgot Password?")}</p>
         </div>
         <div className={`${styles.mobileNone}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.minHeightFull} ${styles.widthFull}`}>
@@ -36,9 +37,10 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`}>
                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, marginTop: 65, maxWidth: 140}} onClick={props.submit}>
-                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("sign in")}</p>
+                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Sign In")}</p>
                         </div>
                     </div>
+                    <p className={`${styles.fontBold} ${styles.font12} ${styles.mt3} ${styles.textCenter} ${styles.cursorPointer} ${styles.mb3}`} onClick={props.goFindPassword}>{context.t("Forgot Password?")}</p>
                 </div>
             </div>
         </div>
@@ -51,7 +53,8 @@ AdminSignUp.propTypes = {
     password: PropTypes.string.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
-    handleKeyPress: PropTypes.func.isRequired
+    handleKeyPress: PropTypes.func.isRequired,
+    goFindPassword: PropTypes.func.isRequired
 }
 
 AdminSignUp.contextTypes = {

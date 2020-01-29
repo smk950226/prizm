@@ -7,7 +7,7 @@ import { COUNTRY_NUMBER } from '../../utils/country';
 import InputMask from 'react-input-mask';
 
 const AdminProfileSetting = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+    <div className={`${styles.safearea} ${styles.minHeightFull} ${styles.containerCustomer} ${styles.px3}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.justifyContentBetween}`}>
             <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{context.t("Profile")}</p>
             <p className={`${styles.fontBold} ${styles.font13} ${styles.pink} ${styles.cursorPointer} ${props.editable ? styles.hidden : null}`} onClick={props.enableEdit}>{context.t("Edit")}</p>

@@ -64,7 +64,7 @@ class MessageList extends Component{
     render(){
         const { loading, chatList } = this.props;
         return(
-            <div ref={"messageListContainer"} className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+            <div ref={"messageListContainer"} className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17} ${styles.mb3}`}>{this.context.t("Messages")}</p>
                 {loading ? (
                     <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`}>

@@ -21,6 +21,10 @@ class Container extends Component{
         getRequestListMore: PropTypes.func.isRequired
     }
 
+    static contextTypes = {
+        t: PropTypes.func
+    }
+
     state = {
         loading: true,
         status: 'all',
@@ -61,6 +65,7 @@ class Container extends Component{
                     
                 }
                 else{
+                    alert(this.context.t("Please set up your studio first to manage reservations"))
                     goStudioSetting()
                 }
             }

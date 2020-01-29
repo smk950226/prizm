@@ -31,8 +31,8 @@ class Navigation extends Component{
                                 <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goCustomRequest}>{this.context.t("Custom")}</p>
                             </div>
                             <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/icon_artist.png')} alt={this.context.t("ARTIST")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goHome} />
-                                <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("Artist")}</p>
+                                <img src={require('../../assets/images/icon_artist.png')} alt={this.context.t("Photographers")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goHome} />
+                                <p className={`${styles.font9} ${styles.textCenter} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("Photographers")}</p>
                             </div>
                             <div className={`${styles.textCenter}`}>
                                 <img src={require('../../assets/images/icon_reservation.png')} alt={this.context.t("RESERVATION")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={this.props.goMySchedule} />

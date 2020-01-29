@@ -42,7 +42,7 @@ class ProfileMenu extends Component{
             showNotification = notification.find(noti => noti.is_checked === false)
         }
         return(
-            <div className={`${styles.safearea} ${styles.containerCustomer}`}>
+            <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer}`}>
                 <p className={`${styles.fontBold} ${styles.font20} ${styles.px3} ${styles.mt45}`}>{isLoggedIn ? profile ? `${profile.first_name} ${profile.last_name}` : this.context.t("Sign In to view your profile") : this.context.t("Sign In to view your profile")}</p>
                 {isLoggedIn ? (
                     <Fragment>

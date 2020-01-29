@@ -671,6 +671,49 @@ function sendVerificationEmail(){
     }
 }
 
+function findPassword(email){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/find/password/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email
+            })
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
+function findPasswordUrl(uuid){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/find/password/?uuid=${uuid}`)
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
+function findPasswordResult(uuid, email, password1, password2){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/find/password/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                uuid,
+                email,
+                password1,
+                password2
+            })
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
 const initialState = {
     isLoggedIn: localStorage.getItem('jwt') ? true : false,
     token: localStorage.getItem('jwt')
@@ -784,7 +827,10 @@ const actionCreators = {
     checkMessageByToken,
     getCheckNewMessage,
     emailVerification,
-    sendVerificationEmail
+    sendVerificationEmail,
+    findPassword,
+    findPasswordUrl,
+    findPasswordResult
 }
 
 export { actionCreators }

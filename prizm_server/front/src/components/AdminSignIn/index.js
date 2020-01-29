@@ -42,6 +42,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         checkMessageByToken: (token) => {
             dispatch(userAction.checkMessageByToken(token))
+        },
+        goFindPassword: () => {
+            dispatch(push('/find/password/'))
         }
     }
 }

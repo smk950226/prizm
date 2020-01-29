@@ -4,7 +4,7 @@ import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
 
 const MyPhotos = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+    <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
         <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{context.t("My Photos")}</p>
         {props.loading ? (
             <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`}>

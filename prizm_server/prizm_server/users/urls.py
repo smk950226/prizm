@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/password/', views.ProfilePassword.as_view()),
     path('email/verification/', views.EmailVerification.as_view()),
     path('email/verification/send/', views.SendVerificationEmail.as_view()),
+    path('find/password/', views.FindPassword.as_view()),
 ]

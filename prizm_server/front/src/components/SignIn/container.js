@@ -14,7 +14,8 @@ class Container extends Component{
         getNotificationByToken: PropTypes.func.isRequired,
         getOrderListByToken: PropTypes.func.isRequired,
         checkMessageByToken: PropTypes.func.isRequired,
-        profile: PropTypes.object
+        profile: PropTypes.object,
+        goFindPassword: PropTypes.func.isRequired
     }
 
     static contextTypes = {

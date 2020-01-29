@@ -246,9 +246,7 @@ EMAIL_USE_TLS = True
 # Django Admin URL.
 ADMIN_URL = "admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [("""Explabs""", "seungmin.kim@darlcha.com")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
-MANAGERS = ADMINS
 
 # LOGGING
 # ------------------------------------------------------------------------------

@@ -224,7 +224,7 @@ const AdminSignUp = (props, context) => {
                         </div>
                         <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please enter your (studio) name.")}</p>
                         <div className={`${styles.containerStudioInput}`}>
-                            <input className={`${styles.textInput6}`} type={"text"} name={"nickname"} value={props.nickname} onChange={props.handleInputChange} />
+                            <input className={`${styles.textInput6}`} type={"text"} name={"nickname"} value={props.nickname} maxLength={30} onChange={props.handleInputChange} />
                         </div>
                         <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Main Photography Location")}</p>
@@ -489,7 +489,7 @@ const AdminSignUp = (props, context) => {
                         <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.confirm}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save")}</p>
                         </div>
-                        <input id={`portfolio`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={props.submit} />
+                        <input id={`portfolio`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={props.submit} multiple={true} />
                         <input id={`profile`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={props.submitProfile} />
                     </div>
                 ) : (

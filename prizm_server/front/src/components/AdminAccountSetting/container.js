@@ -26,13 +26,13 @@ class Container extends Component{
             content: photographeraccount ? photographeraccount.content : "",
             birthForm: photographeraccount ? true : false,
             edited: false,
-            editable: false,
+            editable: true,
             isSubmitting: false
         }
     }
 
     componentDidMount = () => {
-        const { isLoggedIn, profile, goHome } = this.props;
+        const { isLoggedIn, profile, goHome, photographer } = this.props;
         if(!isLoggedIn){
             goHome()
         }
@@ -40,10 +40,15 @@ class Container extends Component{
             goHome()
         }
         else{
-            if((profile.country_code === 'KR') || (profile.country_number === '82')){
-                this.setState({
-                    accountType: 'bank_account'
-                })
+            if(photographer.id){
+                if((profile.country_code === 'KR') || (profile.country_number === '82')){
+                    this.setState({
+                        accountType: 'bank_account'
+                    })
+                }
+            }
+            else{
+                goHome()
             }
         }
     }
@@ -90,7 +95,6 @@ class Container extends Component{
             if(this.state.accountType === 'bank_account'){
                 let numberReg = /^[0-9]*$/;
                 if(numberReg.test(value)){
-                    console.log(5)
                     this.setState({
                         [name]: value,
                         edited: true
@@ -126,7 +130,8 @@ class Container extends Component{
                         if(result.status === 'ok'){
                             await getPhotographer()
                             this.setState({
-                                isSubmitting: false
+                                isSubmitting: false,
+                                editable: false
                             })
                             alert(this.context.t("Your account information has been changed."))
                         }

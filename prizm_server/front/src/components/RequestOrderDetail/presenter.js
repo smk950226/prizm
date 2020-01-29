@@ -91,7 +91,7 @@ class PhotographerDetail extends Component{
         const location = JSON.parse(order.location.replace(/'/gi, '"'))
         const availableTime = order.available_time ? JSON.parse(order.available_time.replace(/'/gi, '"')) : []
         return(
-            <div className={`${styles.safearea} ${styles.containerCustomer} ${requestSubmitted ? `${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : null}`}>
+            <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${requestSubmitted ? `${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : null}`}>
                 {loading ? (
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                         <Loader type="Oval" color="#d66c8b" height={20} width={20} />

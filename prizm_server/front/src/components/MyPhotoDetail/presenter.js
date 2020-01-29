@@ -8,7 +8,7 @@ import MdDownload from 'react-ionicons/lib/MdDownload';
 import { FETCH_URL } from '../../config/urls';
 
 const MyPhotos = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+    <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
         <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{`${props.order.location.name}, ${props.order.confirmed_date.slice(0,4)}/${props.order.confirmed_date.slice(5,7)}/${props.order.confirmed_date.slice(8,10)}`}</p>
         {props.loading ? (
             <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3}`}>

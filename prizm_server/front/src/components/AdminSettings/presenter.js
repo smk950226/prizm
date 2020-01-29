@@ -26,7 +26,7 @@ const ProfileDiv = styled.div`
 `
 
 const AdminOrderList = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerAdmin} ${styles.pxAdmin2}`}>
+    <div className={`${styles.safearea} ${styles.minHeightFull} ${styles.containerAdmin} ${styles.pxAdmin2}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItmesCenter} ${styles.justifyContentBetween} ${styles.borderBtmGrayDc} ${styles.py3} ${styles.cursorPointer}`} onClick={props.goProfile}>
             <p className={`${styles.fontBold} ${styles.font1416}`}>{context.t("Profile Settings")}</p>
             <img src={require('../../assets/images/icon_right.png')} alt={context.t("Profile Settings")} className={`${styles.iconArrowRight}`} />

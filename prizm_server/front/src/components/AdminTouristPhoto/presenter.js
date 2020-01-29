@@ -26,7 +26,7 @@ const ProfileDiv = styled.div`
 `
 
 const AdminOrderList = (props, context) => (
-    <div className={`${styles.containerAdmin} ${styles.pxAdmin}`}>
+    <div className={`${styles.containerAdmin} ${styles.minHeightFull} ${styles.pxAdmin}`}>
         {props.loading ? (
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.pt5}`}>
                 <Loader type="Oval" color="#d66c8b" height={20} width={20} />

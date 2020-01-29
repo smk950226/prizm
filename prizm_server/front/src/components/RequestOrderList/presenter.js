@@ -69,7 +69,7 @@ class RequestOrderList extends Component{
     render(){
         const { loading, orders } = this.props;
         return(
-            <div className={`${styles.safearea} ${styles.containerCustomer}`}>
+            <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer}`}>
                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.px3} ${styles.py2} ${styles.bgGrayF8}`}>
                     <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Go Back")} className={`${styles.iconArrowRight} ${styles.cursorPointer}`} onClick={this.props.goCustomRequest} />
                     <p className={`${styles.font1012}`}>{this.context.t("다음 중 마음에 드는 사진작가의 제안을 자유롭게 선택하세요.")}</p>

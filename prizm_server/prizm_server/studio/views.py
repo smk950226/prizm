@@ -451,11 +451,10 @@ class Studio(APIView):
                         new_portfolio_images.append(int(json.loads(port)['id']))
                     else:
                         new_portfolio_images.append(port)
-                print(new_portfolio_images)
-                pre_portfolio = models.Portfolio.objects.filter(photographer = user.photographer).exclude(id__in = pre_portfolio_id)
-                pre_portfolio.delete()
                 
                 if update == 'true':
+                    pre_portfolio = models.Portfolio.objects.filter(photographer = user.photographer).exclude(id__in = pre_portfolio_id)
+                    pre_portfolio.delete()
                     photographer = user.photographer
                     photographer.nickname = nickname
                     if type(profile_image) == type('text'):

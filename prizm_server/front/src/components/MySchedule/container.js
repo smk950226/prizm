@@ -118,6 +118,7 @@ class Container extends Component{
         if(!isSendingEmail){
             if(isLoggedIn){
                 const result = await sendVerificationEmail()
+                console.log(result)
                 if(result.status === 'ok'){
                     this.setState({
                         isSendingEmail: false

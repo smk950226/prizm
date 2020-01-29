@@ -31,6 +31,8 @@ import RequestOrderDetail from '../RequestOrderDetail';
 import SignUpClear from '../SignUpClear';
 import EmailVerification from '../EmailVerification';
 import Footer from '../Footer';
+import FindPassword from '../FindPassword';
+import FindPasswordResult from '../FindPasswordResult';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -313,6 +315,7 @@ class AdminRouteContainer extends Component{
                     {!hideBtmNav && (
                         <AdminBottomNavigation showBtmNav={showBtmNav} />
                     )}
+                    <Footer />
                 </div>
             )
         }
@@ -345,7 +348,8 @@ const GeneralRoute = props => (
         <Route exact path='/custom/request/order/detail/' component={RequestOrderDetail} key={24} />
         <Route exact path='/signup/clear/' component={SignUpClear} key={25} />
         <Route exact path='/email/verify/:uuid/' component={EmailVerification} key={26} />
-        <Route exact path='/:photographerId/' component={PhotographerDetail} key={100} />
+        <Route exact path='/find/password/' component={FindPassword} key={27} />      
+        <Route exact path='/find/password/:uuid' component={FindPasswordResult} key={28} />
         <Route render={(props) => <NotFound {...props} goHome={props.goHome} />} key={101} />
     </Switch>
 )
@@ -367,6 +371,8 @@ const AdminRoute = props => (
         <Route exact path='/message/' component={AdminMessageList} key={13} />
         <Route exact path='/message/detail/:chatId/' component={AdminMessageDetail} key={14} />
         <Route exact path='/my/settings/' component={AdminSettings} key={15} />
+        <Route exact path='/find/password/' component={FindPassword} key={16} />      
+        <Route exact path='/find/password/:uuid' component={FindPasswordResult} key={17} />
         <Route render={(props) => <NotFound {...props} goHome={props.goHome} />} key={101} />
     </Switch>
 )

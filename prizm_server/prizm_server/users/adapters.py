@@ -51,11 +51,13 @@ class AccountAdapter(DefaultAccountAdapter):
         )
 
         verification.save()
+        try:
+            mail = EmailMessage('[PRIZM] Email Verification', render_to_string('users/email_verification.html', context={'user': user.name, 'url': 'https://prizm.cloud/email/verify/'+ str(uuid) +'/'}), 'PRIZM<contact@prizm.cloud>', [user.email])
+            mail.content_subtype = "html"
 
-        mail = EmailMessage('[PRIZM] Email Verification', render_to_string('users/email_verification.html', context={'user': user.name, 'url': 'https://prizm.cloud/email/verify/'+ str(uuid) +'/'}), 'PRIZM<contact@prizm.cloud>', [user.email])
-        mail.content_subtype = "html"
-
-        mail.send()
+            mail.send()
+        except:
+            pass
         return user
 
 
