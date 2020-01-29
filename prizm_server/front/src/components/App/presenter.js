@@ -30,6 +30,7 @@ import RequestOrderList from '../RequestOrderList';
 import RequestOrderDetail from '../RequestOrderDetail';
 import SignUpClear from '../SignUpClear';
 import EmailVerification from '../EmailVerification';
+import Footer from '../Footer';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -145,7 +146,6 @@ class GeneralRouteContainer extends Component{
     }
 
     _doHideBtmNav = () => {
-        console.log(11)
         this.setState({
             hideBtmNav: true
         })
@@ -173,6 +173,7 @@ class GeneralRouteContainer extends Component{
                     <Navigation />
                     <GeneralRoute goHome={goHome} doHideBtmNav={this._doHideBtmNav} undoHideBtmNav={this._undoHideBtmNav} />
                     <BottomNavigation showBtmNav={showBtmNav} hideBtmNav={hideBtmNav} />
+                    <Footer />
                 </div>
             )
         }

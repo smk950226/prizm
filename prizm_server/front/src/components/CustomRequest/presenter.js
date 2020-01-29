@@ -37,8 +37,8 @@ class CustomRequest extends Component{
                             {profile.custom_request_status.status === 'none' && (
                                 <div className={``}>
                                     <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                        {this.context.t("Enrich your New York City trip experience")}<br/>
-                                        {this.context.t("with the best photographers in New York.")}
+                                        {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                        {this.context.t("Enrich your travel with photography")}
                                     </p>
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goCustomRequestCreate}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go Custom Request")}</p>
@@ -48,8 +48,8 @@ class CustomRequest extends Component{
                             {profile.custom_request_status.status === 'close' && (
                                 <div className={``}>
                                     <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                        {this.context.t("Enrich your New York City trip experience")}<br/>
-                                        {this.context.t("with the best photographers in New York.")}
+                                        {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                        {this.context.t("Enrich your travel with photography")}
                                     </p>
                                     <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray33 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 460}}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -88,8 +88,8 @@ class CustomRequest extends Component{
                             {profile.custom_request_status.status === 'open' && (
                                 <div className={``}>
                                     <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                        {this.context.t("Enrich your New York City trip experience")}<br/>
-                                        {this.context.t("with the best photographers in New York.")}
+                                        {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                        {this.context.t("Enrich your travel with photography")}
                                     </p>
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                         <div style={{position: 'relative'}}>
@@ -111,8 +111,8 @@ class CustomRequest extends Component{
                             {profile.custom_request_status.status === 'confirmed' && (
                                 <div className={``}>
                                     <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                        {this.context.t("Enrich your New York City trip experience")}<br/>
-                                        {this.context.t("with the best photographers in New York.")}
+                                        {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                        {this.context.t("Enrich your travel with photography")}
                                     </p>
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 460}}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -142,14 +142,14 @@ class CustomRequest extends Component{
                     ) : (
                         <div className={``}>
                             <p className={`${styles.font1416} ${styles.textCenter}`}>
-                                {this.context.t("Enrich your New York City trip experience")}<br/>
-                                {this.context.t("with the best photographers in New York.")}
+                                {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                {this.context.t("Enrich your travel with photography")}
                             </p>
                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt6} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goCustomRequestCreate}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go Custom Request")}</p>
                             </div>
-                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} onClick={this.props.goSignin}>
-                                {this.context.t("Already requested?")}
+                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
+                                {this.context.t("Already made a reservation?")}
                             </p>
                     </div>
                     )}

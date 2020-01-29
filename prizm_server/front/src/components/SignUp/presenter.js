@@ -6,7 +6,7 @@ import ReactCountryFlag from "react-country-flag";
 import Modal from 'react-responsive-modal';
 
 const SignUp = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+    <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
             <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer}`}>{context.t("Sign Up")}</p>
             <p className={`${styles.fontBold} ${styles.font17} ${styles.mx2}`}>|</p>

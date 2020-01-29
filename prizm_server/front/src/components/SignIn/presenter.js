@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 
 const SignIn = (props, context) => (
-    <div className={`${styles.safearea} ${styles.containerCustomer} ${styles.px3}`}>
+    <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
             <p className={`${styles.fontBold} ${styles.font17} ${styles.cursorPointer} ${styles.opacity4}`} onClick={() => props.goSignUp(props.goRequest, props.photographerId)}>{context.t("Sign Up")}</p>
             <p className={`${styles.fontBold} ${styles.font17} ${styles.mx2}`}>|</p>
