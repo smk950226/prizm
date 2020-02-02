@@ -214,7 +214,7 @@ class FindPassword(APIView):
                             from_email = "PRIZM<contact@prizm.cloud>",
                             recipient_list = [email],
                             message='PRIZM의 비밀번호 찾기 메일입니다.',
-                            html_message = render_to_string('account/password_change.html', context={'user': email, 'url': 'https://prizm.com/find/password/'+str(uuid)}),
+                            html_message = render_to_string('account/password_change.html', context={'user': email, 'url': 'https://prizm.cloud/find/password/'+str(uuid)}),
                             fail_silently = False,
                         )
                     except:

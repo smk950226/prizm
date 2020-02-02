@@ -352,6 +352,7 @@ const GeneralRoute = props => (
         <Route exact path='/find/password/' component={FindPassword} key={27} />      
         <Route exact path='/find/password/:uuid' component={FindPasswordResult} key={28} />
         <Route exact path='/description/' component={Description} key={29} />
+        <Route exact path='/:photographerId/' component={PhotographerDetail} key={30} />
         <Route render={(props) => <NotFound {...props} goHome={props.goHome} />} key={101} />
     </Switch>
 )
