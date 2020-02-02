@@ -21,7 +21,8 @@ class Navigation extends Component{
         goProfileMenu: PropTypes.func.isRequired,
         showNav: PropTypes.bool.isRequired,
         goTerms: PropTypes.func.isRequired,
-        goMyPhotos: PropTypes.func.isRequired
+        goMyPhotos: PropTypes.func.isRequired,
+        goDescription: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -128,16 +129,16 @@ class Navigation extends Component{
                                     </div>
                                 )}
                                 <div className={`${styles.mt3} ${styles.mtMd5} ${styles.px3}`}>
-                                    <p className={`${styles.font1416} ${styles.cursorPointer}`}>{this.context.t("About PRIZM")}</p>
-                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`}>{this.context.t("Why PRIZM")}</p>
-                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`}>{this.context.t("How it works")}</p>
-                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`}>{this.context.t("Support")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer}`} onClick={() => this.props.goDescription('about')}>{this.context.t("About PRIZM")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('why')}>{this.context.t("Why PRIZM")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('how')}>{this.context.t("How it works")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('support')}>{this.context.t("Support")}</p>
                                     <a href={'https://admin.prizm.cloud'} className={`${styles.textDecorationNone}`}>
                                         <p className={`${styles.navBrown} ${styles.font16} ${styles.cursorPointer} ${styles.mt4}`}>{this.context.t("Are you a photographer?")}</p>
                                     </a>
                                 </div>
                             </div>
-                            <img src={require('../../assets/images/main.png')} alt={this.context.t("PRIZM")} className={`${styles.mb3} ${styles.mbMd5}`} style={{width: 150}} />
+                            <img src={require('../../assets/images/main.png')} alt={this.context.t("PRIZM")} className={`${styles.mb3} ${styles.mbMd5}`} style={{width: 150, height: 107}} />
                             {/* {(isLoggedIn && (notification) && (showNotification) && (showNotification.id > 0)) && (
                                 <div className={`${styles.absoluteVerticalCenter} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                                     {confirmNotification > 0 && (

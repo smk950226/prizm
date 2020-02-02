@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Navigation from './presenter';
+import { scroller } from 'react-scroll';
 
 class Container extends Component{
     static propTypes = {
@@ -14,7 +15,8 @@ class Container extends Component{
         goMySchedule: PropTypes.func.isRequired,
         goProfileMenu: PropTypes.func.isRequired,
         goTerms: PropTypes.func.isRequired,
-        goMyPhotos: PropTypes.func.isRequired
+        goMyPhotos: PropTypes.func.isRequired,
+        goDescription: PropTypes.func.isRequired
     }
 
     constructor(props){
@@ -78,6 +80,23 @@ class Container extends Component{
         })
     }
 
+    _goDescription = (menu) => {
+        if(this.props.pathname === '/description/'){
+            this.setState({
+                showMenu: false
+            })
+            scroller.scrollTo(menu, {
+                duration: 500,
+                delay: 100,
+                smooth: true,
+                offset: -100
+            })
+        }
+        else{
+            this.props.goDescription(menu)
+        }
+    }
+
     render(){
         if(this.state.pageType === '/welcome/'){
             return null
@@ -91,6 +110,7 @@ class Container extends Component{
                 closeMenu={this._closeMenu}
                 handleShowMenu={this._handleShowMenu}
                 logout={this._logout}
+                goDescription={this._goDescription}
                 />
             )
         }

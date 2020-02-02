@@ -33,6 +33,7 @@ import EmailVerification from '../EmailVerification';
 import Footer from '../Footer';
 import FindPassword from '../FindPassword';
 import FindPasswordResult from '../FindPasswordResult';
+import Description from '../Description';
 
 import AdminHome from '../AdminHome';
 import AdminNavigation from '../AdminNavigation';
@@ -350,6 +351,7 @@ const GeneralRoute = props => (
         <Route exact path='/email/verify/:uuid/' component={EmailVerification} key={26} />
         <Route exact path='/find/password/' component={FindPassword} key={27} />      
         <Route exact path='/find/password/:uuid' component={FindPasswordResult} key={28} />
+        <Route exact path='/description/' component={Description} key={29} />
         <Route render={(props) => <NotFound {...props} goHome={props.goHome} />} key={101} />
     </Switch>
 )

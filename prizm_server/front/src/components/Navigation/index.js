@@ -38,6 +38,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goTerms: (name) => {
             dispatch(push(`/terms/${name}/`))
+        },
+        goDescription: (menu) => {
+            dispatch(push({
+                pathname: '/description/',
+                state: {
+                    menu
+                }
+            }))
         }
     }
 }
