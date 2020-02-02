@@ -13,7 +13,7 @@ class Container extends Component{
         goSignIn: PropTypes.func.isRequired,
         goSignUp: PropTypes.func.isRequired,
         goMySchedule: PropTypes.func.isRequired,
-        goProfileMenu: PropTypes.func.isRequired,
+        goProfile: PropTypes.func.isRequired,
         goTerms: PropTypes.func.isRequired,
         goMyPhotos: PropTypes.func.isRequired,
         goDescription: PropTypes.func.isRequired
@@ -25,7 +25,8 @@ class Container extends Component{
         this.state = {
             pageType: pathname,
             showMenu: false,
-            showNav: true
+            showNav: true,
+            now: new Date().getHours()
         }
     }
 
@@ -56,7 +57,8 @@ class Container extends Component{
 
     _openMenu = () => {
         this.setState({
-            showMenu: true
+            showMenu: true,
+            now: new Date().getHours()
         })
     }
 
@@ -68,7 +70,8 @@ class Container extends Component{
 
     _handleShowMenu = (state) => {
         this.setState({
-            showMenu: state.isOpen
+            showMenu: state.isOpen,
+            now: new Date().getHours()
         })
     }
 

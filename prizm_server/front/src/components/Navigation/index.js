@@ -33,8 +33,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goMyPhotos: () => {
             dispatch(push('/my/photos/'))
         },
-        goProfileMenu: () => {
-            dispatch(push('/menu/profile/'))
+        goProfile: () => {
+            dispatch(push('/profile/'))
         },
         goTerms: (name) => {
             dispatch(push(`/terms/${name}/`))
