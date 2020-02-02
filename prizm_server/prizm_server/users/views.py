@@ -196,7 +196,7 @@ class SendVerificationEmail(APIView):
 class FindPassword(APIView):
     def post(self, request, format = None):
         if request.user.is_authenticated:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : '이미 로그인하였습니다.' })
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : 'You are already logged in.' })
         else:
             email = request.data.get('email', None)
             if email:
@@ -221,9 +221,9 @@ class FindPassword(APIView):
                         pass
                     return Response(status = status.HTTP_200_OK, data = { 'email' : user.email })
                 except:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : '일치하는 유저가 없습니다.' })
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : 'This account does not exist. Please check your email again.' })
             else:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : '이메일을 입력해주세요.' })
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = { 'error' : 'Please enter your email.' })
     
     def get(self, request, format = None):
         uuid = request.query_params.get('uuid', None)
@@ -231,20 +231,20 @@ class FindPassword(APIView):
             try:
                 history = models.FindPasswordHistory.objects.get(uuid = uuid)
                 if history.is_expired:
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '만료된 경로입니다.'})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'This password reset link has expired and is no longer valid.'})
                 else:
                     to_tz = timezone.get_default_timezone()
                     time_delta = timezone.localtime().timestamp() - history.date.astimezone(to_tz).timestamp()
                     if time_delta > 60*60*2:
                         history.is_expired = True
                         history.save()
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '만료된 경로입니다.'})
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'This password reset link has expired and is no longer valid.'})
                     else:
                         return Response(status = status.HTTP_200_OK, data = {'user': history.user.email})
             except:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '올바르지 않은 경로입니다.'})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'This URL contains an invalid path.'})
         else:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '올바르지 않은 경로입니다.'})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'This URL contains an invalid path.'})
     
     def put(self, request, format = None):
         uuid = request.data.get('uuid', None)
@@ -254,14 +254,14 @@ class FindPassword(APIView):
         try:
             history = models.FindPasswordHistory.objects.get(uuid = uuid)
             if history.is_expired:
-                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '만료된 경로입니다.'})
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'This password reset link has expired and is no longer valid.'})
             else:
                 to_tz = timezone.get_default_timezone()
                 time_delta = timezone.localtime().timestamp() - history.date.astimezone(to_tz).timestamp()
                 if time_delta > 60*60*2:
                     history.is_expired = True
                     history.save()
-                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '만료된 경로입니다.'})
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'This password reset link has expired and is no longer valid.'})
                 else:
                     if email == history.user.email:
                         if password1 == password2:
@@ -272,8 +272,8 @@ class FindPassword(APIView):
                             history.save()
                             return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
                         else:
-                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '비밀번호가 일치하지 않습니다.'})
+                            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'Please check your password again.'})
                     else:
-                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '올바르지 않은 경로입니다.'})
+                        return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'This URL contains an invalid path.'})
         except:
-            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': '올바르지 않은 경로입니다.'})
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'This URL contains an invalid path.'})
