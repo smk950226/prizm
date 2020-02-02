@@ -171,26 +171,29 @@ class SendVerificationEmail(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, format = None):
         user = request.user
-        email_verifications = models.EmailVerification.objects.filter(user = user)
-        email_verifications.update(is_expired = True)
+        if user.is_verified:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': 'Your email is already verified.'})
+        else:
+            email_verifications = models.EmailVerification.objects.filter(user = user)
+            email_verifications.update(is_expired = True)
 
-        uuid = uuid4()
+            uuid = uuid4()
 
-        verification = models.EmailVerification.objects.create(
-            user = user,
-            uuid = uuid
-        )
+            verification = models.EmailVerification.objects.create(
+                user = user,
+                uuid = uuid
+            )
 
-        verification.save()
-        try:
-            mail = EmailMessage('[PRIZM] Email Verification', render_to_string('users/email_verification.html', context={'user': user.name, 'url': 'https://prizm.cloud/email/verify/'+ str(uuid) +'/'}), 'PRIZM<contact@prizm.cloud>', [user.email])
-            mail.content_subtype = "html"
+            verification.save()
+            try:
+                mail = EmailMessage('[PRIZM] Email Verification', render_to_string('users/email_verification.html', context={'user': user.name, 'url': 'https://prizm.cloud/email/verify/'+ str(uuid) +'/'}), 'PRIZM<contact@prizm.cloud>', [user.email])
+                mail.content_subtype = "html"
 
-            mail.send()
-        except:
-            pass
+                mail.send()
+            except:
+                pass
 
-        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
 
 
 class FindPassword(APIView):

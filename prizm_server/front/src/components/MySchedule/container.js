@@ -118,17 +118,23 @@ class Container extends Component{
         if(!isSendingEmail){
             if(isLoggedIn){
                 const result = await sendVerificationEmail()
-                console.log(result)
                 if(result.status === 'ok'){
                     this.setState({
                         isSendingEmail: false
                     })
+                    alert(this.context.t("A verification email has been sent. Please check your inbox."))
                 }
-                else{
-                    alert(this.context.t("An error has occurred.."))
+                else if(result.error){
                     this.setState({
                         isSendingEmail: false
                     })
+                    alert(result.error)
+                }
+                else{
+                    this.setState({
+                        isSendingEmail: false
+                    })
+                    alert(this.context.t("An error has occurred.."))
                 }
             }
         }

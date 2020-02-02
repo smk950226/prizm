@@ -34,12 +34,19 @@ class Container extends Component{
                     this.setState({
                         isSubmitting: false
                     })
+                    alert(this.context.t("A verification email has been sent. Please check your inbox."))
                 }
-                else{
-                    alert(this.context.t("An error has occurred.."))
+                else if(result.error){
                     this.setState({
                         isSubmitting: false
                     })
+                    alert(result.error)
+                }
+                else{
+                    this.setState({
+                        isSubmitting: false
+                    })
+                    alert(this.context.t("An error has occurred.."))
                 }
             }
         }
