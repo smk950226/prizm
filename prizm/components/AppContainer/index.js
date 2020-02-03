@@ -3,10 +3,11 @@ import AppContainer from './presenter';
 import { actionCreators as userActions } from '../../redux/modules/user';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn, profile } } = state;
+    const { user : { isLoggedIn, profile, appType } } = state;
     return {
         isLoggedIn,
-        profile
+        profile,
+        appType
     }
 }
 
@@ -20,6 +21,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         setPushToken: (pushToken) => {
             return dispatch(userActions.setPushToken(pushToken))
+        },
+        getAppType: (appType) => {
+            dispatch(userActions.getAppType(appType))
         }
     }
 }

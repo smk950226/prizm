@@ -1,17 +1,13 @@
 import { FETCH_URL } from '../../config/urls';
-import uuidv1 from 'uuid';
 
-const LOGOUT = 'LOGOUT';
 const SAVE_TOKEN = 'SAVE_TOKEN';
+const LOGOUT = 'LOGOUT';
 const SET_PROFILE = 'SET_PROFILE';
-const SET_NOTICE_NEW = 'SET_NOTICE_NEW';
-const SET_NOTIFICATION_NEW = 'SET_NOTIFICATION_NEW';
-
-function logout(){
-    return {
-        type: LOGOUT
-    }
-};
+const SET_NOTIFICATION = 'SET_NOTIFICATION';
+const SET_ORDER_LIST = 'SET_ORDER_LIST';
+const SET_CHAT_LIST = 'SET_CHAT_LIST';
+const SET_CHECK_NEW_MESSAGE = 'SET_CHECK_NEW_MESSAGE';
+const SET_APP_TYPE = 'SET_APP_TYPE'
 
 function saveToken(token) {
     return {
@@ -20,30 +16,57 @@ function saveToken(token) {
     }
 }
 
-function setProfile(profile){
+function logout(){
+    return {
+        type: LOGOUT
+    }
+};
+
+function setProfile(profile) {
     return {
         type: SET_PROFILE,
         profile
     }
 }
 
-function setNoticeNew(noticeNew){
+function setNotification(notification){
     return {
-        type: SET_NOTICE_NEW,
-        noticeNew
+        type: SET_NOTIFICATION,
+        notification
     }
 }
 
-function setNotificationNew(notificationNew){
+function setOrderList(orderList){
     return {
-        type: SET_NOTIFICATION_NEW,
-        notificationNew
+        type: SET_ORDER_LIST,
+        orderList
     }
 }
 
-function getLogout(){
+function setChatList(chatList){
+    return {
+        type: SET_CHAT_LIST,
+        chatList
+    }
+}
+
+function setCheckNewMessage(newMessage){
+    return {
+        type: SET_CHECK_NEW_MESSAGE,
+        newMessage
+    }
+}
+
+function setAppType(appType){
+    return {
+        type: SET_APP_TYPE,
+        appType
+    }
+}
+
+function getAppType(appType){
     return (dispatch) => {
-        dispatch(logout());
+        dispatch(setAppType(appType))
     }
 }
 
@@ -53,67 +76,72 @@ function getSaveToken(token){
     }
 }
 
-function getNoticeNew(noticeNew){
+function getLogout(){
     return (dispatch) => {
-        dispatch(setNoticeNew(noticeNew))
+        dispatch(logout());
     }
 }
 
-function getNotificationNew(notificationNew){
+function getCheckNewMessage(newMessage){
     return (dispatch) => {
-        dispatch(setNotificationNew(notificationNew))
+        dispatch(setCheckNewMessage(newMessage))
     }
 }
 
-function getInitial(initial){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/users/initial/`, {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            },
-            body: JSON.stringify({
-                initial
-            })
+function signUp(email, password, firstName, lastName, countryNumber, countryCode, mobile){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/rest-auth/registration/`, {
+           method: 'POST',
+           headers: {
+               "Content-Type": "application/json"
+           },
+           body: JSON.stringify({
+               username: email,
+               password1: password,
+               password2: password,
+               firstName, 
+               lastName,
+               countryNumber,
+               countryCode,
+               email,
+               mobile
+           })
         })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
+        .then(response => response.json())
+        .then(json => {
+            if(json.token){
+                return {
+                    token: json.token
+                }
             }
             else{
-                return response.json()
+                return false
             }
         })
-        .then(json => json)
+        .catch(err => console.log(err));
     }
 }
 
-function signUp(username, password, nickname, profile_image){
+function signUpAdmin(email, password, firstName, lastName, countryNumber, countryCode, mobile, instagram, userType){
     return (dispatch) => {
-        let formData = new FormData();
-        if(profile_image){
-            const temp = profile_image.type.split('/')
-            const ext = temp[temp.length - 1]
-            formData.append('profile_image',{
-                uri: profile_image.uri,
-                type: profile_image.type,
-                name: `${uuidv1()}.` + ext
-            })
-        }
-        formData.append('username', username)
-        formData.append('email', username)
-        formData.append('password1', password)
-        formData.append('password2', password)
-        formData.append('nickname', nickname)
         return fetch(`${FETCH_URL}/rest-auth/registration/`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: formData
+           method: 'POST',
+           headers: {
+               "Content-Type": "application/json"
+           },
+           body: JSON.stringify({
+               username: email,
+               password1: password,
+               password2: password,
+               firstName, 
+               lastName,
+               countryNumber, 
+               countryCode,
+               email,
+               mobile,
+               instagram,
+               userType
+           })
         })
         .then(response => response.json())
         .then(json => {
@@ -159,11 +187,13 @@ function login(username, password){
     }
 }
 
-function checkEmail(email){
+function checkPhotographer(token){
     return (dispatch) => {
-        return fetch(`${FETCH_URL}/api/users/check/email/?email=${email}`,{
+        return fetch(`${FETCH_URL}/api/users/check/photographer/`, {
+            method: 'GET',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
             }
         })
         .then(response => response.json())
@@ -171,12 +201,19 @@ function checkEmail(email){
     }
 }
 
-function checkNickname(nickname){
+function checkDuplicate(email, mobile, countryNumber, instagram){
     return (dispatch) => {
-        return fetch(`${FETCH_URL}/api/users/check/nickname/?nickname=${nickname}`,{
+        return fetch(`${FETCH_URL}/api/users/check/duplicate/`, {
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                email,
+                mobile,
+                countryNumber,
+                instagram
+            })
         })
         .then(response => response.json())
         .then(json => json)
@@ -185,7 +222,7 @@ function checkNickname(nickname){
 
 function getProfile(){
     return (dispatch, getState) => {
-        const { user : { token } } = getState();
+        const { user : { token } } = getState()
         fetch(`${FETCH_URL}/api/users/profile/`, {
             headers: {
                 "Content-Type": "application/json",
@@ -193,7 +230,35 @@ function getProfile(){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setProfile(json)))
+    }
+}
+
+function editProfile(firstName, lastName, countryNumber, mobile){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/users/profile/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                firstName, 
+                lastName, 
+                countryNumber,
+                mobile,
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
                 return false
             }
@@ -201,7 +266,64 @@ function getProfile(){
                 return response.json()
             }
         })
-        .then(json => dispatch(setProfile(json)))
+        .then(json => json)
+    }
+}
+
+function adminEditProfile(firstName, lastName, countryNumber, mobile, instagram){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/users/profile/admin/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                firstName,
+                lastName,
+                countryNumber,
+                mobile,
+                instagram
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function editPassword(currentPassword, password){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/users/profile/password/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                currentPassword,
+                password
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
     }
 }
 
@@ -214,977 +336,392 @@ function getProfileByToken(token){
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
-                return false
             }
             else{
                 return response.json()
             }
         })
         .then(json => dispatch(setProfile(json)))
-    }
-}
-
-function getProfileByTokenReturn(token){
-    return (dispatch) => {
-        return fetch(`${FETCH_URL}/api/users/profile/`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => {
-            return json
-        })
-    }
-}
-
-function followUser(userId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/users/follow/`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            },
-            body: JSON.stringify({
-                userId
-            })
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function unfollowUser(userId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/users/follow/`, {
-            method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            },
-            body: JSON.stringify({
-                userId
-            })
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function getNotice(){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/notice/?page=1`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function getNoticeMore(page){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/notice/?page=${page}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else if(response.status === 404){
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function checkNoticeAll(){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/notice/check/`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
     }
 }
 
 function getNotification(){
     return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/notification/?page=1`, {
+        const { user : { token } } = getState()
+        fetch(`${FETCH_URL}/api/notification/`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `JWT ${token}`
             }
         })
         .then(response => {
-            if(response.status === 401){
+            if((response.status === 401) || (response.status === 403)){
                 dispatch(getLogout())
-                return false
             }
             else{
                 return response.json()
             }
         })
-        .then(json => json)
+        .then(json => dispatch(setNotification(json)))
     }
 }
 
-function getNotificationMore(page){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/notification/?page=${page}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else if(response.status === 404){
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function checkNotice(noticeId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/notice/check/`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            },
-            body: JSON.stringify({
-                noticeId
-            })
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else if(response.status === 200){
-                return true
-            }
-            else if(response.status === 201){
-                return 'clear'
-            }
-            else{
-                return false
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function checkNotification(notificationId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/notification/check/`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            },
-            body: JSON.stringify({
-                notificationId
-            })
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else if(response.status === 200){
-                return true
-            }
-            else if(response.status === 201){
-                return 'clear'
-            }
-            else{
-                return false
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function checkNotificationAll(){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/notification/check/`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function followerList(userId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/follower/list/?userId=${userId}&page=1`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function followerListMore(userId, page){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/follower/list/?userId=${userId}&page=${page}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else if(response.status === 404){
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function followingList(userId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/following/list/?userId=${userId}&page=1`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function followingListMore(userId, page){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/following/list/?userId=${userId}&page=${page}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else if(response.status === 404){
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function search(q){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/users/search/?q=${q}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else if(response.status === 203){
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function recommended(){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/users/recommended/`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function getReviewList(userId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/users/list/review/${userId}/?page=1`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function getReviewListMore(userId, page){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/users/list/review/${userId}/?page=${page}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(getLogout())
-                return false
-            }
-            else if(response.status === 404){
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function changeNickname(nickname){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        fetch(`${FETCH_URL}/api/users/change/nickname/`, {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `JWT ${token}`
-            },
-            body: JSON.stringify({
-                nickname,
-            })
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => dispatch(setProfile(json)))
-    }
-}
-
-function changeProfileImg(profileImg){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        let formData = new FormData();
-        if(profileImg){
-            const temp = profileImg.type.split('/')
-            const ext = temp[temp.length - 1]
-            formData.append('profileImg',{
-                uri: profileImg.uri,
-                type: profileImg.type,
-                name: `${uuidv1()}.` + ext
-            })
-        }
-        fetch(`${FETCH_URL}/api/users/change/profileimg/`, {
-            method: 'PUT',
-            headers: {
-                "Authorization": `JWT ${token}`
-            },
-            body: formData
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => dispatch(setProfile(json)))
-    }
-}
-
-function changeProfile(nickname, profileImg, backgroundImg){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        let formData = new FormData();
-        if(backgroundImg){
-            const bgtemp = backgroundImg.type.split('/')
-            const bgext = bgtemp[bgtemp.length - 1]
-            formData.append('backgroundImg',{
-                uri: backgroundImg.uri,
-                type: backgroundImg.type,
-                name: `${uuidv1()}.` + bgext
-            })
-        }
-        if(profileImg){
-            const pftemp = profileImg.type.split('/')
-            const pfext = pftemp[pftemp.length - 1]
-            formData.append('profileImg',{
-                uri: profileImg.uri,
-                type: profileImg.type,
-                name: `${uuidv1()}.` + pfext
-            })
-        }
-        if(nickname){
-            formData.append('nickname', nickname)
-        }
-        fetch(`${FETCH_URL}/api/users/change/profile/`, {
-            method: 'PUT',
-            headers: {
-                "Authorization": `JWT ${token}`
-            },
-            body: formData
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => dispatch(setProfile(json)))
-    }
-}
-
-function changeBackgroundImg(backgroundImg){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        let formData = new FormData();
-        if(backgroundImg){
-            const temp = backgroundImg.type.split('/')
-            const ext = temp[temp.length - 1]
-            formData.append('backgroundImg',{
-                uri: backgroundImg.uri,
-                type: backgroundImg.type,
-                name: `${uuidv1()}.` + ext
-            })
-        }
-        fetch(`${FETCH_URL}/api/users/change/backgroundimg/`, {
-            method: 'PUT',
-            headers: {
-                "Authorization": `JWT ${token}`
-            },
-            body: formData
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => dispatch(setProfile(json)))
-    }
-}
-
-function addInfo(token, nickname, profileImg){
-    return (dispatch, getState) => {
-        let formData = new FormData();
-        if(profileImg){
-            const temp = profileImg.type.split('/')
-            const ext = temp[temp.length - 1]
-            formData.append('profileImg',{
-                uri: profileImg.uri,
-                type: profileImg.type,
-                name: `${uuidv1()}.` + ext
-            })
-        }
-        formData.append('nickname', nickname)
-        fetch(`${FETCH_URL}/api/users/addinfo/`, {
-            method: 'PUT',
-            headers: {
-                "Authorization": `JWT ${token}`
-            },
-            body: formData
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => dispatch(setProfile(json)))
-    }
-}
-
-function kakaoLogin(accessToken){
+function getNotificationByToken(token){
     return (dispatch) => {
-        return fetch(`${FETCH_URL}/api/users/login/kakao/`, {
+        fetch(`${FETCH_URL}/api/notification/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setNotification(json)))
+    }
+}
+
+function getOrderList(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`${FETCH_URL}/api/studio/order/?page=1`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setOrderList(json)))
+    }
+}
+
+function getOrderListMore(page){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/order/?page=${page}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getOrderDetail(orderId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/order/detail/?orderId=${orderId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getOrderListByToken(token){
+    return (dispatch) => {
+        fetch(`${FETCH_URL}/api/studio/order/?page=1`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setOrderList(json)))
+    }
+}
+
+function getChatList(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/chat/?page=1`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setChatList(json)))
+    }
+}
+
+function getChatListMore(page){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/chat/?page=${page}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getMessages(chatId){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/message/?chatId=${chatId}&page=1`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getMessagesMore(chatId, page){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/studio/message/?chatId=${chatId}&page=${page}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else if(response.status === 404){
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function getTerm(name){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/common/terms/?name=${name}`, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
+function checkNotification(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`${FETCH_URL}/api/notification/`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+            }
+            else{
+                dispatch(setNotification([]))
+            }
+        })
+    }
+}
+
+function checkMessage(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        fetch(`${FETCH_URL}/api/chat/check/message/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setCheckNewMessage(json.new_message)))
+    }
+}
+
+function checkMessageByToken(token){
+    return (dispatch) => {
+        fetch(`${FETCH_URL}/api/chat/check/message/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => dispatch(setCheckNewMessage(json.new_message)))
+    }
+}
+
+function emailVerification(uuid){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/email/verification/?uuid=${uuid}`, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
+
+function sendVerificationEmail(){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState()
+        return fetch(`${FETCH_URL}/api/users/email/verification/send/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            }
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
+function findPassword(email){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/find/password/`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                access_token: accessToken,
-            })
-        })
-        .then(response => {
-            return response.json()
-        })
-        .then(json => {
-            if(json.token){
-                return {
-                    token: json.token
-                }
-            }
-            else{
-                return false
-            }
-        })
-   };
-}
-
-function googleLogin(accessToken){
-    return (dispatch) => {
-        if(accessToken){
-            return fetch(`${FETCH_URL}/api/users/login/google/`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    access_token: accessToken,
-                })
-            })
-            .then(response => {
-                return response.json()
-            })
-            .then(json => {
-                if(json.token && json.user){
-                    return {
-                        token: json.token
-                    }
-                }
-                else{
-                    return false
-                }
-            })
-        }
-   };
-}
-
-function facebookLogin(accessToken){
-    return (dispatch) => {
-        if(accessToken){
-            return fetch(`${FETCH_URL}/api/users/login/facebook/`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    access_token: accessToken,
-                })
-            })
-            .then(response => {
-                return response.json()
-            })
-            .then(json => {
-                if(json.token && json.user){
-                    return {
-                        token: json.token
-                    }
-                }
-                else{
-                    return false
-                }
-            })
-        }
-   };
-}
-
-function appleLogin(user, password){
-    return (dispatch) => {
-        return fetch(`${FETCH_URL}/rest-auth/registration/`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: user,
-                password1: password,
-                password2: password
+                email
             })
         })
         .then(response => response.json())
-        .then(json => {
-            if(json.token){
-                return {
-                    token: json.token
-                }
-            }
-            else{
-                return false
-            }
-        })
-        .catch(err => console.log(err));
-    };
+        .then(json => json)
+    }
 }
 
-function checkUsername(username){
+function findPasswordUrl(uuid){
     return (dispatch) => {
-        return fetch(`${FETCH_URL}/api/users/check/username/?username=${username}`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if(response.status === 200){
-                return response.json()
-            }
-            else{
-                return false
-            }
-        })
+        return fetch(`${FETCH_URL}/api/users/find/password/?uuid=${uuid}`)
+        .then(response => response.json())
         .then(json => json)
     }
 }
 
-function getReplyList(reviewId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/reply/?reviewId=${reviewId}&page=1`, {
+function findPasswordResult(uuid, email, password1, password2){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/users/find/password/`, {
+            method: 'PUT',
             headers: {
-                "Authorization": `JWT ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function getReplyListMore(reviewId, page){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/reply/?reviewId=${reviewId}&page=${page}`, {
-            headers: {
-                "Authorization": `JWT ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else if(response.status === 404){
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function getRepliesList(replyId, page){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/replies/?replyId=${replyId}&page=${page}`, {
-            headers: {
-                "Authorization": `JWT ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else if (response.status === 200){
-                return response.json()
-            }
-            else{
-                return false
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function createReviewReply(reviewId, content){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/reply/`, {
-            method: 'POST',
-            headers: {
-                "Authorization": `JWT ${token}`,
-                "Content-Type": "application/json"
+                "Content-Type": 'application/json'
             },
             body: JSON.stringify({
-                reviewId,
-                content
+                uuid,
+                email,
+                password1,
+                password2
             })
         })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function createReplyReply(replyId, content){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/statics/replies/`, {
-            method: 'POST',
-            headers: {
-                "Authorization": `JWT ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                replyId,
-                content
-            })
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function setPushToken(pushToken){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState();
-        return fetch(`${FETCH_URL}/api/users/push/token/`, {
-            method: 'POST',
-            headers: {
-                "Authorization": `JWT ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                pushToken
-            })
-        })
-        .then(response => {
-            if(response.status === 401){
-                dispatch(logout());
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function reportUser(userId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState()
-        return fetch(`${FETCH_URL}/api/statics/report/user/?userId=${userId}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if((response.status === 401) || (response.status === 403)){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
-        .then(json => json)
-    }
-}
-
-function blockUser(userId){
-    return (dispatch, getState) => {
-        const { user : { token } } = getState()
-        return fetch(`${FETCH_URL}/api/statics/block/user/?userId=${userId}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": `JWT ${token}`
-            }
-        })
-        .then(response => {
-            if((response.status === 401) || (response.status === 403)){
-                dispatch(getLogout())
-                return false
-            }
-            else{
-                return response.json()
-            }
-        })
+        .then(response => response.json())
         .then(json => json)
     }
 }
@@ -1192,41 +729,47 @@ function blockUser(userId){
 const initialState = {
     isLoggedIn: false,
     token: null,
-    noticeNew: false,
-    notificationNew: false,
+    appType: null
 };
 
 function reducer(state = initialState, action){
     switch(action.type){
+        case SAVE_TOKEN:
+            return applySetToken(state, action);
         case LOGOUT:
             return applyLogout(state, action);
-        case SAVE_TOKEN:
-            return applySaveToken(state, action);
         case SET_PROFILE:
             return applySetProfile(state, action);
-        case SET_NOTICE_NEW:
-            return applySetNoticeNew(state, action);
-        case SET_NOTIFICATION_NEW:
-            return applySetNotificationNew(state, action);
+        case SET_NOTIFICATION:
+            return applySetNotification(state, action);
+        case SET_ORDER_LIST:
+            return applySetOrderList(state, action);
+        case SET_CHAT_LIST:
+            return applySetChatList(state, action);
+        case SET_CHECK_NEW_MESSAGE:
+            return applySetCheckNewMessage(state, action);
+        case SET_APP_TYPE:
+            return applySetAppType(state, action);
         default:
            return state;
     }
 }
 
-function applyLogout(state, action){
-    return {
-        isLoggedIn: false
-    };
-};
-
-function applySaveToken(state, action){
+function applySetToken(state, action){
     const { token } = action;
     return {
         ...state,
         isLoggedIn: true,
         token
     };
-}
+};
+
+function applyLogout(state, action){
+    return {
+        isLoggedIn: false,
+        token: null,
+    };
+};
 
 function applySetProfile(state, action){
     const { profile } = action;
@@ -1236,73 +779,82 @@ function applySetProfile(state, action){
     }
 }
 
-function applySetNoticeNew(state, action){
-    const { noticeNew } = action;
+function applySetNotification(state, action){
+    const { notification } = action;
     return {
         ...state,
-        noticeNew
+        notification
     }
 }
 
-function applySetNotificationNew(state, action){
-    const { notificationNew } = action;
+function applySetOrderList(state, action){
+    const { orderList } = action;
     return {
         ...state,
-        notificationNew
+        orderList
+    }
+}
+
+function applySetChatList(state, action){
+    const { chatList } = action;
+    return {
+        ...state,
+        chatList
+    }
+}
+
+function applySetCheckNewMessage(state, action){
+    const { newMessage } = action;
+    return {
+        ...state,
+        newMessage
+    }
+}
+
+function applySetAppType(state, action){
+    const { appType } = action;
+    return {
+        ...state,
+        appType
     }
 }
 
 const actionCreators = {
-    getLogout,
-    getSaveToken,
-    getProfile,
-    getProfileByToken,
-    getProfileByTokenReturn,
+    checkDuplicate,
     signUp,
+    getProfileByToken,
+    getSaveToken,
     login,
-    checkEmail,
-    checkNickname,
-    followUser,
-    unfollowUser,
-    getInitial,
-    getNotice,
-    getNoticeMore,
-    checkNotice,
-    checkNoticeAll,
-    followerList,
-    followerListMore,
-    followingList,
-    followingListMore,
-    search,
-    recommended,
-    getReviewList,
-    getReviewListMore,
-    changeNickname,
-    changeProfileImg,
-    changeBackgroundImg,
-    changeProfile,
-    addInfo,
-    kakaoLogin,
+    getLogout,
+    getProfile,
     getNotification,
-    getNotificationMore,
+    getNotificationByToken,
+    getOrderList,
+    getOrderListMore,
+    getOrderListByToken,
+    getOrderDetail,
+    editProfile,
+    editPassword,
+    signUpAdmin,
+    checkPhotographer,
+    adminEditProfile,
+    getChatList,
+    getChatListMore,
+    getMessages,
+    getMessagesMore,
+    getTerm,
     checkNotification,
-    checkNotificationAll,
-    googleLogin,
-    facebookLogin,
-    appleLogin,
-    getReplyList,
-    getReplyListMore,
-    getRepliesList,
-    createReviewReply,
-    createReplyReply,
-    setPushToken,
-    getNoticeNew,
-    getNotificationNew,
-    reportUser,
-    checkUsername,
-    blockUser
+    checkMessage,
+    checkMessageByToken,
+    getCheckNewMessage,
+    emailVerification,
+    sendVerificationEmail,
+    findPassword,
+    findPasswordUrl,
+    findPasswordResult,
+    getAppType
 }
 
 export { actionCreators }
 
-export default reducer;   
+export default reducer; 

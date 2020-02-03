@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StatusBar, ActivityIndicator, Animated, Text } from 'react-native';
+import { View, StatusBar, ActivityIndicator, Text, TouchableWithoutFeedback } from 'react-native';
 import styles from '../../styles';
 // import firebase from 'react-native-firebase';
 
@@ -9,12 +9,13 @@ class AppContainer extends Component {
         isLoggedIn: PropTypes.bool.isRequired,
         logout: PropTypes.func.isRequired,
         initApp: PropTypes.func.isRequired,
-        setPushToken: PropTypes.func.isRequired
+        setPushToken: PropTypes.func.isRequired,
+        appType: PropTypes.string,
+        getAppType: PropTypes.func.isRequired
     };
 
     state = {
         loading: true,
-        scrollY: new Animated.Value(0),
         fetchedProfile: false,
         fetchClear: false,
         pushPermission: false
@@ -120,18 +121,14 @@ class AppContainer extends Component {
                 loading: false,
                 fetchClear: true
             })
-            if(this.state.pushPermission){
-                this._getToken()
-            }
-        }
-        if(!prevProps.isLoggedIn && this.props.isLoggedIn){
-            this.setState({
-                scrollY: new Animated.Value(0)
-            })
+            // if(this.state.pushPermission){
+            //     this._getToken()
+            // }
         }
     }
 
     render(){
+        const { appType } = this.props;
         if(this.state.loading){
             return (
                 <View style={[styles.container, styles.alignItemsCenter, styles.justifyContentCenter]}>
@@ -140,13 +137,55 @@ class AppContainer extends Component {
             )
         }
         else{
-            return(
-                <View style={styles.container}>
-                <StatusBar hidden={false} />
-                    <View style={[styles.container, styles.center]}>
-                        <Text style={[styles.fontLight]}>joi</Text>
+            if(appType === 'customer'){
+                return(
+                    <View style={styles.container}>
+                    <StatusBar hidden={false} />
+                        <View style={[styles.container, styles.center]}>
+                            <TouchableWithoutFeedback onPress={() => this.props.getAppType(null)}>
+                                <View>
+                                    <Text style={[styles.font20, styles.fontBold]}>Customer</Text>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </View>
                     </View>
-                </View>)
+                )
+            }
+            else if(appType === 'admin'){
+                return(
+                    <View style={styles.container}>
+                    <StatusBar hidden={false} />
+                        <View style={[styles.container, styles.center]}>
+                            <TouchableWithoutFeedback onPress={() => this.props.getAppType(null)}>
+                                <View>
+                                    <Text style={[styles.font20, styles.fontBold]}>Admin</Text>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </View>
+                    </View>
+                )
+            } 
+            else{
+                return(
+                    <View style={styles.container}>
+                    <StatusBar hidden={false} />
+                        <View style={[styles.container, styles.center]}>
+                            <View style={[styles.widthFull, styles.row, styles.justifyContentAround]}>
+                                <TouchableWithoutFeedback onPress={() => this.props.getAppType('customer')}>
+                                    <View>
+                                        <Text style={[styles.font20, styles.fontBold]}>Go Customer</Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={() => this.props.getAppType('admin')}>
+                                    <View>
+                                        <Text style={[styles.font20, styles.fontBold]}>Go Admin</Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                    </View>
+                )
+            }            
         }
 
     }
