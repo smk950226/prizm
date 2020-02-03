@@ -9,6 +9,24 @@ class Container extends Component{
         getProfile: PropTypes.func.isRequired,
     }
 
+    constructor(props){
+        super(props)
+        this.state = {
+            now: new Date().getHours()
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        const isDrawerOpen = this.props.navigation.state.isDrawerOpen;
+        const wasDrawerOpen = prevProps.navigation.state.isDrawerOpen;
+          
+        if(!wasDrawerOpen && isDrawerOpen){
+            this.setState({
+                now: new Date().getHours()
+            })
+        }
+      }
+
     render(){
         return(
             <MenuScreen 

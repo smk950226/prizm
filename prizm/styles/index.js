@@ -199,6 +199,14 @@ const styles = StyleSheet.create({
         color: 'black',
         includeFontPadding: false
     },
+    navBlue: {
+        color: '#F3F5FE',
+        includeFontPadding: false
+    },
+    navBrown: {
+        color: '#D19B69',
+        includeFontPadding: false
+    },
     bgBlack: {
         backgroundColor: '#000000'
     },
@@ -207,6 +215,12 @@ const styles = StyleSheet.create({
     },
     bgTransparent: {
         backgroundColor: 'transparent'
+    },
+    bgNavBlue: {
+        backgroundColor: '#F3F5FE'
+    },
+    bgNavBrown: {
+        backgroundColor: '#D19B69'
     },
     justifyContentCenter: {
         justifyContent: 'center'
@@ -593,6 +607,10 @@ const styles = StyleSheet.create({
     icon50: {
         width: 50,
         height: 50
+    },
+    iconArrow: {
+        width: 45*0.4,
+        height: 36*0.4
     }
 })
 
