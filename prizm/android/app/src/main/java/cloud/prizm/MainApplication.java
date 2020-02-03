@@ -1,4 +1,4 @@
-package com.prizm;
+package cloud.prizm;
 
 import android.app.Application;
 import android.content.Context;

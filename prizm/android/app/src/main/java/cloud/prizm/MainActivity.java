@@ -1,4 +1,4 @@
-package com.prizm;
+package cloud.prizm;
 
 import com.facebook.react.ReactActivity;
 
