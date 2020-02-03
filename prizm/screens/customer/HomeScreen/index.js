@@ -1,16 +1,13 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import PropTypes from 'prop-types';
-import styles from '../../../styles';
+import { connect } from 'react-redux';
+import Container from './container';
+import { actionCreators as userActions } from '../../../redux/modules/user';
 
-const HomeScreen = (props, context) => (
-    <View style={[styles.container, styles.center]}>
-        <Text style={[styles.font40, styles.mt50]}>{context.t("Home")}</Text>
-    </View>
-)
-
-HomeScreen.contextTypes = {
-    t: PropTypes.func
+const mapStateToProps = (state, ownProps) => {
+    const { user : { isLoggedIn, profile } } = state;
+    return {
+        isLoggedIn,
+        profile
+    }
 }
 
-export default HomeScreen;
+export default connect(mapStateToProps)(Container);

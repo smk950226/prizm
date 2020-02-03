@@ -16,7 +16,14 @@ class Container extends Component{
         }
     }
 
-    componentDidUpdate(prevProps){
+    componentDidMount = async() => {
+        const { isLoggedIn, getProfile } = this.props;
+        if(isLoggedIn){
+            await getProfile()
+        }
+    }
+
+    componentDidUpdate = (prevProps) => {
         const isDrawerOpen = this.props.navigation.state.isDrawerOpen;
         const wasDrawerOpen = prevProps.navigation.state.isDrawerOpen;
           
@@ -25,7 +32,10 @@ class Container extends Component{
                 now: new Date().getHours()
             })
         }
-      }
+        if(!prevProps.isLoggedIn && this.props.isLoggedIn){
+            this.props.getProfile()
+        }
+    }
 
     render(){
         return(

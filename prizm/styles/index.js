@@ -207,6 +207,38 @@ const styles = StyleSheet.create({
         color: '#D19B69',
         includeFontPadding: false
     },
+    gray33: {
+        color: '#333333',
+        includeFontPadding: false
+    },
+    gray93: {
+        color: '#939393',
+        includeFontPadding: false
+    },
+    pink: {
+        color: '#d66c8b',
+        includeFontPadding: false
+    },
+    pending: {
+        color: '#BB01E8',
+        includeFontPadding: false
+    },
+    confirmed: {
+        color: '#6CD69F',
+        includeFontPadding: false
+    },
+    completed: {
+        color: '#0182E7',
+        includeFontPadding: false
+    },
+    cancelled: {
+        color: '#E80800',
+        includeFontPadding: false
+    },
+    paid: {
+        color: '#E58D32',
+        includeFontPadding: false
+    },
     bgBlack: {
         backgroundColor: '#000000'
     },
@@ -221,6 +253,39 @@ const styles = StyleSheet.create({
     },
     bgNavBrown: {
         backgroundColor: '#D19B69'
+    },
+    bgGray33: {
+        backgroundColor: '#333333'
+    },
+    bgGray93: {
+        backgroundColor: '#939393'
+    },
+    bgPink: {
+        backgroundColor: '#d66c8b'
+    },
+    bgPending: {
+        backgroundColor: '#BB01E8'
+    },
+    bgConfirmed: {
+        backgroundColor: '#6CD69F'
+    },
+    bgCompleted: {
+        backgroundColor: '#0182E7'
+    },
+    bgCancelled: {
+        backgroundColor: '#E80800'
+    },
+    bgPaid: {
+        backgroundColor: '#E58D32'
+    },
+    bgLanding1: {
+        backgroundColor: '#F3F1E8'
+    },
+    bgLanding2: {
+        backgroundColor: '#F0DDC4'
+    },
+    bgLanding3: {
+        backgroundColor: '#F2F2F2'
     },
     justifyContentCenter: {
         justifyContent: 'center'
@@ -611,6 +676,9 @@ const styles = StyleSheet.create({
     iconArrow: {
         width: 45*0.4,
         height: 36*0.4
+    },
+    maxWidth360: {
+        maxWidth: 360
     }
 })
 
