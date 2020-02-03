@@ -17,6 +17,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* prizmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* prizmTests.m */; };
 		50A5CA95DC42E4D0AE8E7236 /* libPods-prizm-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 011883192495F3A4FBF51156 /* libPods-prizm-tvOSTests.a */; };
+		6D1A4A0D23E80D75009260E0 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 6D1A4A0C23E80D75009260E0 /* Fonts */; };
 		72C64D6399269CE891C9F70D /* libPods-prizm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C16E4D8CF1027597A5A4CD61 /* libPods-prizm.a */; };
 		74D63ABF9519FAE4122C7196 /* libPods-prizm-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDD0E7252FD63D15513C51B /* libPods-prizm-tvOS.a */; };
 		8468A1C2289F3B130C8E6FDA /* libPods-prizmTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BEAD35BFB28CE6F6B96ED64 /* libPods-prizmTests.a */; };
@@ -60,6 +61,7 @@
 		3BEAD35BFB28CE6F6B96ED64 /* libPods-prizmTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-prizmTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5861AE8D63960F2A9E8268 /* Pods-prizmTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prizmTests.debug.xcconfig"; path = "Target Support Files/Pods-prizmTests/Pods-prizmTests.debug.xcconfig"; sourceTree = "<group>"; };
 		57DDB5C229AACD268B0CBAE0 /* Pods-prizmTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prizmTests.release.xcconfig"; path = "Target Support Files/Pods-prizmTests/Pods-prizmTests.release.xcconfig"; sourceTree = "<group>"; };
+		6D1A4A0C23E80D75009260E0 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		C16E4D8CF1027597A5A4CD61 /* libPods-prizm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-prizm.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6C392173128F789B68FE33 /* Pods-prizm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prizm.debug.xcconfig"; path = "Target Support Files/Pods-prizm/Pods-prizm.debug.xcconfig"; sourceTree = "<group>"; };
 		E9BE3F7ED74C51AEF6EE1CAB /* Pods-prizm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prizm.release.xcconfig"; path = "Target Support Files/Pods-prizm/Pods-prizm.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				6D1A4A0C23E80D75009260E0 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* prizm */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* prizmTests */,
@@ -336,6 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D1A4A0D23E80D75009260E0 /* Fonts in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
