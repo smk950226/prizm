@@ -565,6 +565,34 @@ const styles = StyleSheet.create({
     center: {
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    icon20: {
+        width: 20,
+        height: 20
+    },
+    icon25: {
+        width: 25,
+        height: 25
+    },
+    icon30: {
+        width: 30,
+        height: 30
+    },
+    icon35: {
+        width: 35,
+        height: 35
+    },
+    icon40: {
+        width: 40,
+        height: 40
+    },
+    icon45: {
+        width: 45,
+        height: 45
+    },
+    icon50: {
+        width: 50,
+        height: 50
     }
 })
 

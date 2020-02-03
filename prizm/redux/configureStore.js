@@ -1,6 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
+import { i18nState } from 'redux-i18n';
 import thunk from 'redux-thunk';
 import user from './modules/user';
 import customer from './modules/customer';
@@ -16,7 +17,8 @@ const persistConfig = {
 const reducer = persistCombineReducers(persistConfig, {
     user,
     customer,
-    admin
+    admin,
+    i18nState
 });
 
 const configureStore = () => {

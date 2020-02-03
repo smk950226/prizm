@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StatusBar, ActivityIndicator, Text, TouchableWithoutFeedback } from 'react-native';
 import styles from '../../styles';
+import CustomerContainer from '../../navigation/CustomerNavigation';
 // import firebase from 'react-native-firebase';
 
 class AppContainer extends Component {
@@ -140,14 +141,8 @@ class AppContainer extends Component {
             if(appType === 'customer'){
                 return(
                     <View style={styles.container}>
-                    <StatusBar hidden={false} />
-                        <View style={[styles.container, styles.center]}>
-                            <TouchableWithoutFeedback onPress={() => this.props.getAppType(null)}>
-                                <View>
-                                    <Text style={[styles.font20, styles.fontBold]}>Customer</Text>
-                                </View>
-                            </TouchableWithoutFeedback>
-                        </View>
+                        <StatusBar hidden={false} />
+                        <CustomerContainer/>
                     </View>
                 )
             }
