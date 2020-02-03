@@ -4,6 +4,7 @@ import Container from './container';
 import { actionCreators as userAction } from '../../redux/modules/user';
 import { actionCreators as adminAction } from '../../redux/modules/admin';
 import { push } from 'react-router-redux';
+import { setLanguage } from "redux-i18n";
 
 const mapStateToProps = (state, ownProps) => {
     const { user : { profile, isLoggedIn, notification, newMessage }, router : { location }, admin: { photographer } } = state;
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goHome: () => {
             dispatch(push('/'))
+        },
+        changeLang: (lang) => {
+            dispatch(setLanguage(lang))
         }
     }
 }

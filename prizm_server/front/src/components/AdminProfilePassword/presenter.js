@@ -5,7 +5,7 @@ import styles from '../../style/styles.module.scss';
 const AdminProfilePassword = (props, context) => (
     <div className={`${styles.safearea} ${styles.minHeightFull} ${styles.containerCustomer} ${styles.px3}`}>
         <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{context.t("Profile")}</p>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("Currend password")}</p>
+        <p className={`${styles.fontBold} ${styles.font10} ${styles.pt45}`}>{context.t("Current password")}</p>
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"currentPassword"} value={props.currentPassword} onChange={props.handleInputChange} />
         </div>

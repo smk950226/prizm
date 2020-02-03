@@ -27,11 +27,11 @@ class FindPassword extends Component{
             return(
                 <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
-                        <p className={`${styles.fontBold} ${styles.font17}`}>{this.context.t("비밀번호 재설정")}</p>
+                        <p className={`${styles.fontBold} ${styles.font17}`}>{this.context.t("Reset your password")}</p>
                     </div>
                     <div className={`${styles.row} ${styles.justifyContentBetween} ${styles.textCenter} ${styles.p0} ${styles.mx0} ${styles.mt4}`}>
                         <p className={`${styles.col12} ${styles.textCenter} ${styles.font14}`}>
-                            {this.context.t("아래의 메일로 비밀번호 재설정 링크를 발송하였습니다.")}
+                            {this.context.t("We have sent a password reset link to your email.")}
                         </p>
                     </div>
                     <div className={`${styles.widthFull} ${styles.mt4}`}>
@@ -47,7 +47,7 @@ class FindPassword extends Component{
             return(
                 <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
-                        <p className={`${styles.fontBold} ${styles.font17}`}>{this.context.t("비밀번호 재설정")}</p>
+                        <p className={`${styles.fontBold} ${styles.font17}`}>{this.context.t("Reset your password")}</p>
                     </div>
                     <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{this.context.t("Email")}</p>
                     <div className={`${styles.widthFull}`}>
@@ -55,8 +55,8 @@ class FindPassword extends Component{
                     </div>
                     <div className={`${styles.row} ${styles.justifyContentBetween} ${styles.textCenter} ${styles.p0} ${styles.mx0} ${styles.mt4}`}>
                         <p className={`${styles.col12} ${styles.textCenter} ${styles.font14}`}>
-                            {this.context.t("가입하신 이메일 주소를 입력하면")}<br/>
-                            {this.context.t("새로운 비밀번호를 설정할 수 있는 링크를 보내드립니다.")}
+                            {this.context.t("Please enter your PRIXM account email.")}<br/>
+                            {this.context.t("We will send you a password reset link to the email.")}
                         </p>
                     </div>
                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.handleFindPassword}>

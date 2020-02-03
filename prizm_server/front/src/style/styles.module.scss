@@ -1501,6 +1501,16 @@ textarea {
     width: 100%;
     height: 50%;
 }
+.banner-img{
+    background-image: url('../assets/images/seoul.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box;
+    background-position: center center;
+    background-attachment: scroll;
+    width: 100%;
+    height: 100px;
+}
 @media (min-width: 768px){
     .bg-landing-img-1{
         background-image: url('../assets/images/landing_1.jpeg');

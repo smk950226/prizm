@@ -1,0 +1,2167 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ko_KR\n"
+
+#: src/components/NotFound/index.js
+msgid "404"
+msgstr "404"
+
+#: src/components/AdminAccountSetting/container.js
+msgid "Your account information has been changed."
+msgstr "계좌정보가 변경되었습니다."
+
+#: src/components/AdminAccountSetting/container.js
+#: src/components/AdminCustomerImage/container.js
+#: src/components/AdminMessageDetail/container.js
+#: src/components/AdminProfilePassword/container.js
+#: src/components/AdminProfileSetting/container.js
+#: src/components/AdminSignUp/container.js
+#: src/components/AdminStudioSetting/container.js
+#: src/components/CustomRequest/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/EmailVerification/container.js
+#: src/components/MessageDetail/container.js
+#: src/components/MyPhotoDetail/container.js
+#: src/components/MySchedule/container.js src/components/OrderComp/container.js
+#: src/components/PaymentDetail/container.js
+#: src/components/PaymentSuccess/container.js
+#: src/components/PhotographerDetail/container.js
+#: src/components/Profile/container.js
+#: src/components/ProfilePassword/container.js
+#: src/components/RequestComp/container.js
+#: src/components/RequestOrderDetail/container.js
+#: src/components/SignUp/container.js src/components/SignUpClear/container.js
+msgid "An error has occurred.."
+msgstr "오류가 발생하였습니다."
+
+#: src/components/AdminAccountSetting/container.js
+msgid "Please check your date of birth again."
+msgstr "생년월일을 확인해주세요."
+
+#: src/components/AdminAccountSetting/container.js
+#: src/components/AdminProfilePassword/container.js
+#: src/components/AdminProfileSetting/container.js
+#: src/components/AdminSignIn/container.js
+#: src/components/AdminSignUp/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/Profile/container.js
+#: src/components/ProfilePassword/container.js
+#: src/components/SignIn/container.js src/components/SignUp/container.js
+msgid "Please fill in the information."
+msgstr "정보를 입력해주세요."
+
+#: src/components/AdminAccountSetting/presenter.js
+#: src/components/AdminSettings/presenter.js
+msgid "Payout Settings"
+msgstr "대금 수령"
+
+#: src/components/AdminAccountSetting/presenter.js
+#: src/components/AdminProfilePassword/presenter.js
+#: src/components/AdminProfileSetting/presenter.js
+msgid "Edit"
+msgstr "편집"
+
+#: src/components/AdminAccountSetting/presenter.js
+msgid "Please enter the payout information."
+msgstr "대금 수령 정보를 입력해주세요."
+
+#: src/components/AdminAccountSetting/presenter.js
+msgid "Legal Name"
+msgstr "예금주명"
+
+#: src/components/AdminAccountSetting/presenter.js
+msgid "Date of Birth"
+msgstr "생년월일"
+
+#: src/components/AdminAccountSetting/presenter.js
+msgid "Payout Options"
+msgstr "대금 수령 옵션"
+
+#: src/components/AdminAccountSetting/presenter.js
+msgid "Bank Account"
+msgstr "은행 계좌"
+
+#: src/components/AdminAccountSetting/presenter.js
+msgid "Paypal Account"
+msgstr "페이팔 계정"
+
+#: src/components/AdminAccountSetting/presenter.js
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Save"
+msgstr "저장"
+
+#: src/components/AdminAccountSetting/presenter.js
+msgid "Save Changes"
+msgstr "변경사항 저장"
+
+#: src/components/AdminBottomNavigation/presenter.js
+msgid "STUDIO"
+msgstr "스튜디오"
+
+#: src/components/AdminBottomNavigation/presenter.js
+#: src/components/AdminMenu/presenter.js
+#: src/components/AdminNavigation/presenter.js
+#: src/components/AdminOrderList/presenter.js
+msgid "Edit Studio"
+msgstr "스튜디오 수정"
+
+#: src/components/AdminBottomNavigation/presenter.js
+#: src/components/BottomNavigation/presenter.js
+msgid "RESERVATION"
+msgstr "예약"
+
+#: src/components/AdminBottomNavigation/presenter.js
+#: src/components/BottomNavigation/presenter.js
+msgid "Reservations"
+msgstr "예약"
+
+#: src/components/AdminBottomNavigation/presenter.js
+#: src/components/BottomNavigation/presenter.js
+msgid "MESSAGE"
+msgstr "메세지"
+
+#: src/components/AdminBottomNavigation/presenter.js
+#: src/components/AdminMessageList/presenter.js
+#: src/components/AdminNavigation/presenter.js
+#: src/components/BottomNavigation/presenter.js
+#: src/components/MessageList/presenter.js
+msgid "Messages"
+msgstr "메세지"
+
+#: src/components/AdminBottomNavigation/presenter.js
+msgid "PROFILE"
+msgstr "프로필"
+
+#: src/components/AdminBottomNavigation/presenter.js
+msgid "Settings"
+msgstr "설정"
+
+#: src/components/AdminCustomerImage/container.js
+#: src/components/AdminStudioSetting/container.js
+msgid "File formates are limited to jpg, jpeg, and png."
+msgstr "jpg, jpeg, png 파일만 선택할 수 있습니다."
+
+#: src/components/AdminCustomerImage/presenter.js
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/MyPhotos/presenter.js src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+msgid "Completed"
+msgstr "완료"
+
+#: src/components/AdminCustomerImage/presenter.js
+msgid "Click here to mark this photo session as Completed"
+msgstr "여기를 클릭하여 사진촬영 세션을 완료하세요."
+
+#: src/components/AdminCustomerImage/presenter.js
+msgid "I have fully uploaded my client's photos as discussed earlier."
+msgstr "고객과 사전에 논의된 사항에 따라 사진 업로드를 완료하였습니다."
+
+#: src/components/AdminCustomerImage/presenter.js
+#: src/components/FindPasswordResult/presenter.js
+#: src/components/OrderComp/presenter.js
+msgid "Confirm"
+msgstr "확인"
+
+#: src/components/AdminCustomerImage/presenter.js
+#: src/components/AdminMessageDetail/presenter.js
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/MessageDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+msgid "Cancel"
+msgstr "취소"
+
+#: src/components/AdminHome/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/NotFound/index.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestComp/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+#: src/components/ReviewCreateComplete/index.js
+msgid "Submitted"
+msgstr "제출완료"
+
+#: src/components/AdminHome/presenter.js
+msgid "Meet tourists from all over the world"
+msgstr "전세계 관광객을 만나보세요."
+
+#: src/components/AdminHome/presenter.js
+msgid "Receive payment worldwide"
+msgstr "쉽고 안전한 대금수령"
+
+#: src/components/AdminHome/presenter.js
+msgid "Manage your reservations conveniently"
+msgstr "언어걱정 없는 자동화된 예약관리"
+
+#: src/components/AdminHome/presenter.js
+msgid "Connect with your instagram"
+msgstr "인스타그램 연동"
+
+#: src/components/AdminHome/presenter.js
+msgid "Get started"
+msgstr "시작하기"
+
+#: src/components/AdminHome/presenter.js
+#: src/components/FindPassword/presenter.js
+msgid "Login"
+msgstr "로그인"
+
+#: src/components/AdminHome/presenter.js
+msgid "Download Partnership Proposal"
+msgstr "사진작가 파트너십 제안서 다운로드"
+
+#: src/components/AdminMenu/presenter.js
+#: src/components/AdminNavigation/presenter.js
+#: src/components/AdminOrderList/presenter.js
+msgid "Manage Reservations"
+msgstr "예약 관리"
+
+#: src/components/AdminMenu/presenter.js
+#: src/components/AdminNavigation/presenter.js
+#: src/components/AdminOrderList/presenter.js
+#: src/components/AdminTouristPhoto/presenter.js
+msgid "Tourist Photos"
+msgstr "여행객 사진"
+
+#: src/components/AdminMenu/presenter.js
+#: src/components/AdminNavigation/presenter.js
+#: src/components/AdminSettings/presenter.js
+msgid "Profile Settings"
+msgstr "프로필 설정"
+
+#: src/components/AdminMenu/presenter.js
+#: src/components/AdminNavigation/presenter.js
+msgid "Account Settings"
+msgstr "계좌 설정"
+
+#: src/components/AdminMenu/presenter.js
+#: src/components/AdminNavigation/presenter.js
+msgid "Log out"
+msgstr "로그아웃"
+
+#: src/components/AdminMessageDetail/presenter.js
+#: src/components/AdminMessageList/presenter.js
+#: src/components/MessageDetail/presenter.js
+#: src/components/MessageList/presenter.js src/components/MyPhotos/presenter.js
+#: src/components/MySchedule/presenter.js
+msgid "Detail"
+msgstr "자세히보기"
+
+#: src/components/AdminMessageDetail/presenter.js
+#: src/components/MessageDetail/presenter.js
+msgid "HERE"
+msgstr "여기"
+
+#: src/components/AdminMessageDetail/presenter.js
+#: src/components/MessageDetail/presenter.js
+msgid "Please select time or Cancel reservation"
+msgstr "시간을 선택하거나 예약을 취소해주세요."
+
+#: src/components/AdminMessageDetail/presenter.js
+#: src/components/FindPassword/presenter.js
+#: src/components/MessageDetail/presenter.js
+msgid "Send"
+msgstr "보내기"
+
+#: src/components/AdminMessageDetail/presenter.js
+msgid "message"
+msgstr "메세지"
+
+#: src/components/AdminMessageList/presenter.js
+#: src/components/AdminOrderList/presenter.js
+#: src/components/MessageList/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/RequestOrderList/presenter.js
+msgid "Request not exist"
+msgstr "요청이 존재하지 않습니다."
+
+#: src/components/AdminMessageList/presenter.js
+msgid "You haven't received any messages."
+msgstr "아직 메세지를 받지 않았습니다."
+
+#: src/components/AdminMessageList/presenter.js
+msgid ""
+"Messages will appear when you confirm the schedule at the 'Manage "
+"Reservations' menu"
+msgstr "‘예약 관리’ 메뉴에서 예약을 확정하면 메세지가 보입니다."
+
+#: src/components/AdminNavigation/presenter.js
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/Navigation/presenter.js
+msgid "MENU"
+msgstr "메뉴"
+
+#: src/components/AdminNavigation/presenter.js
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/Navigation/presenter.js
+msgid "PRIZM"
+msgstr "PRIZM"
+
+#: src/components/AdminNavigation/presenter.js
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/Profile/presenter.js src/components/SignUp/presenter.js
+msgid "Mobile"
+msgstr "모바일"
+
+#: src/components/AdminNavigation/presenter.js
+#: src/components/AdminProfilePassword/presenter.js
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/Navigation/presenter.js src/components/Profile/presenter.js
+#: src/components/ProfileMenu/presenter.js
+#: src/components/ProfilePassword/presenter.js
+msgid "Profile"
+msgstr "프로필"
+
+#: src/components/AdminNavigation/presenter.js
+msgid "Payout"
+msgstr "대금수령"
+
+#: src/components/AdminNavigation/presenter.js
+msgid "Logout"
+msgstr "로그아웃"
+
+#: src/components/AdminOrderList/container.js
+msgid "Please set up your studio first to manage reservations"
+msgstr "예약을 관리하기 위해 먼저 스튜디오를 설정해주세요."
+
+#: src/components/AdminOrderList/presenter.js
+msgid "Custom Requests"
+msgstr "맞춤 예약"
+
+#: src/components/AdminOrderList/presenter.js
+msgid "All"
+msgstr "전체"
+
+#: src/components/AdminOrderList/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+msgid "Pending"
+msgstr "처리중"
+
+#: src/components/AdminOrderList/presenter.js
+#: src/components/MyPhotos/presenter.js src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+msgid "Confirmed"
+msgstr "확정"
+
+#: src/components/AdminOrderList/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+#: src/components/PaymentSuccess/presenter.js
+msgid "Paid"
+msgstr "결제완료"
+
+#: src/components/AdminOrderList/presenter.js
+msgid "Past"
+msgstr "과거"
+
+#: src/components/AdminOrderList/presenter.js
+msgid "When your proposal gets"
+msgstr "제안이 고객에게"
+
+#: src/components/AdminOrderList/presenter.js
+#: src/components/RequestComp/presenter.js
+msgid "Selected"
+msgstr "체택"
+
+#: src/components/AdminOrderList/presenter.js
+msgid ""
+"by the client, the request will be shown as a confirmed reservation at the"
+msgstr "되면, 요청은 "
+
+#: src/components/AdminOrderList/presenter.js
+msgid " Confirmed "
+msgstr " 확정 "
+
+#: src/components/AdminOrderList/presenter.js
+msgid "section above."
+msgstr "된 요청으로 보입니다."
+
+#: src/components/AdminOrderList/presenter.js
+msgid "You haven't received reservation requests yet."
+msgstr "아직 예약 요청을 받지 않았습니다."
+
+#: src/components/AdminProfilePassword/container.js
+#: src/components/ProfilePassword/container.js
+msgid "Your password has been changed successfully."
+msgstr "비밀번호가 변경되었습니다."
+
+#: src/components/AdminProfilePassword/container.js
+#: src/components/AdminSignUp/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/ProfilePassword/container.js
+#: src/components/SignUp/container.js
+msgid "Invalid Password."
+msgstr "올바르지 않은 비밀번호입니다."
+
+#: src/components/AdminProfilePassword/container.js
+#: src/components/AdminSignUp/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/ProfilePassword/container.js
+#: src/components/SignUp/container.js
+msgid ""
+"Your password should be at least 8 characters long and should include a mix "
+"of alphabets and numbers."
+msgstr "비밀번호는 최소 8자, 최소 1개의 알파벳과 숫자를 포함해야 합니다."
+
+#: src/components/AdminProfilePassword/presenter.js
+#: src/components/ProfilePassword/presenter.js
+msgid "Currend password"
+msgstr "현재 비밀번호"
+
+#: src/components/AdminProfilePassword/presenter.js
+#: src/components/FindPasswordResult/presenter.js
+#: src/components/ProfilePassword/presenter.js
+msgid "New password"
+msgstr "새 비밀번호"
+
+#: src/components/AdminProfilePassword/presenter.js
+#: src/components/ProfilePassword/presenter.js
+msgid "Confirm your new password"
+msgstr "새 비밀번호 확인"
+
+#: src/components/AdminProfilePassword/presenter.js
+#: src/components/ProfilePassword/presenter.js
+msgid "Change Profile?"
+msgstr "프로필 변경"
+
+#: src/components/AdminProfilePassword/presenter.js
+msgid "Edit password"
+msgstr "비밀번호 변경"
+
+#: src/components/AdminProfileSetting/container.js
+#: src/components/Profile/container.js
+msgid "Your account information has been changed successfully."
+msgstr "프로필 정보가 변경되었습니다."
+
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/AdminSignUp/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/Profile/presenter.js src/components/SignUp/presenter.js
+msgid "First name"
+msgstr "이름"
+
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/AdminSignUp/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/Profile/presenter.js src/components/SignUp/presenter.js
+msgid "Last name"
+msgstr "성"
+
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/AdminSignUp/presenter.js
+msgid "Instagram"
+msgstr "인스타그램"
+
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/AdminSignIn/presenter.js
+#: src/components/AdminSignUp/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/FindPassword/presenter.js
+#: src/components/FindPasswordResult/presenter.js
+#: src/components/Profile/presenter.js src/components/SignIn/presenter.js
+#: src/components/SignUp/presenter.js
+msgid "Email"
+msgstr "이메일"
+
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/Profile/presenter.js
+msgid "Change Password?"
+msgstr "비밀번호 변경"
+
+#: src/components/AdminProfileSetting/presenter.js
+msgid "Save change"
+msgstr "변경사항 저장"
+
+#: src/components/AdminSettings/presenter.js
+#: src/components/ProfileMenu/presenter.js
+msgid "Log Out"
+msgstr "로그아웃"
+
+#: src/components/AdminSignIn/container.js
+msgid "This is not a valid photographer account."
+msgstr "올바른 사진 작가 계정이 아닙니다."
+
+#: src/components/AdminSignIn/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/SignIn/container.js
+msgid "Please check your email and password again."
+msgstr "이메일과 비밀번호를 확인해주세요."
+
+#: src/components/AdminSignIn/container.js
+#: src/components/AdminSignUp/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/SignIn/container.js src/components/SignUp/container.js
+msgid "Please enter a valid email address."
+msgstr "올바른 형식의 이메일을 입력해주세요."
+
+#: src/components/AdminSignIn/presenter.js
+#: src/components/AdminSignUp/presenter.js
+msgid "Welcome to PRIZM"
+msgstr "PRIZM에 오신것을 환영합니다"
+
+#: src/components/AdminSignIn/presenter.js
+#: src/components/AdminSignUp/presenter.js
+msgid "Please fill out information beslow to continue"
+msgstr "계속하기 위해, 아래의 정보를 입력해주세요"
+
+#: src/components/AdminSignIn/presenter.js
+#: src/components/AdminSignUp/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/SignIn/presenter.js src/components/SignUp/presenter.js
+msgid "Password"
+msgstr "비밀번호"
+
+#: src/components/AdminSignIn/presenter.js
+#: src/components/Navigation/presenter.js
+#: src/components/ProfileMenu/presenter.js src/components/SignIn/presenter.js
+#: src/components/SignUp/presenter.js
+msgid "Sign In"
+msgstr "로그인"
+
+#: src/components/AdminSignIn/presenter.js src/components/SignIn/presenter.js
+msgid "Forgot Password?"
+msgstr "비밀번호를 잊으셨나요?"
+
+#: src/components/AdminSignUp/presenter.js
+msgid "Please fill out information below to continue"
+msgstr "계속하기 위해, 아래의 정보를 입력해주세요"
+
+#: src/components/AdminSignUp/presenter.js
+msgid "Mobile Number"
+msgstr "휴대전화 번호"
+
+#: src/components/AdminSignUp/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/SignUp/presenter.js
+msgid "Confirm your password"
+msgstr "비밀번호 확인"
+
+#: src/components/AdminSignUp/presenter.js
+#: src/components/Navigation/presenter.js
+#: src/components/ProfileMenu/presenter.js src/components/SignIn/presenter.js
+#: src/components/SignUp/presenter.js
+msgid "Sign Up"
+msgstr "회원 가입"
+
+#: src/components/AdminSignUp/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/SignUp/presenter.js
+msgid "Nationality"
+msgstr "국적"
+
+#: src/components/AdminStudioSetting/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/container.js
+msgid "Please select date."
+msgstr "날짜를 선택해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/container.js
+msgid "Please select time."
+msgstr "시간을 선택해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/container.js
+msgid "Please select your date range."
+msgstr "기간을 선택해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+#: src/components/PhotographerDetail/container.js
+msgid "Please select all of the options above."
+msgstr "모든 옵션을 선택해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+msgid "Your studio information has been changed successfully."
+msgstr "스튜디옹 정보가 변경되었습니다."
+
+#: src/components/AdminStudioSetting/container.js
+msgid "Please check the studio URL again."
+msgstr "스튜디오 URL을 다시 확인해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+msgid "Please enter at least one service & pricing option."
+msgstr "최소 1개 이상의 서비스 & 가격 옵션을 입력해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+msgid "Please enter at least one photography location."
+msgstr "최소 1개 이상의 촬영 장소를 입력해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+msgid "Please enter a valid URL for the portfolio."
+msgstr "올바른 형식의 포트폴리오 URL을 입력해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+msgid "Please fill in all the information above to create and save this option"
+msgstr "이 옵션을 생성하기 위해 위의 정보를 모두 입력해주세요."
+
+#: src/components/AdminStudioSetting/container.js
+msgid "Please upload at least one photograph."
+msgstr "최소 1개 이상의 사진을 업로드해주세요."
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "My Studio Setup"
+msgstr "스튜디오 설정"
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please fill out information below to create your first "
+msgstr "당신의 첫번째 스튜디오 생성을 위해 아래의 정보를 입력해주세요."
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid " Studio"
+msgstr " "
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Your Portfolio"
+msgstr "포트폴리오"
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid ""
+"Please upload sample images to be shown at the top of your PRIZM studio."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "If you want to remove an uploaded image, double click the image."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Profile Picture"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please upload a profile picture."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Name"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please enter your (studio) name."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Main Photography Location"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please type in your main photography (business) location."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Career"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please type in your career information."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "ex) your work experiences, exhibitions, awards, etc"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Equipment (Optional)"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please type in your equipment."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "ex) Sony A7 II, Canon EOS 5 D Mark IV, EF 50mm F12 USM"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Portfolio (Optional)"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid ""
+"If you have a website where potential clients can view your portfolio, "
+"please enter the URL. If not, you are fine to leave this area blank."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Description"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please briefly introduce yourself."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Introduce yourself to potential PRIZM clients here."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Select Photography Spots"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Detailed location where you would like to meet tourists"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Search on the map to add your first photography spot"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Add a new location"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Search location"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Service and Pricing"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Click the button below to create a new service & pricing option."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Create a new option"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Title"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "ex) National Geographic Photographer, ABC Photographer"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Photography Type"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "ex) Wedding, Couple, Single, Group"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "ex) BlahBlahBlah"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Person(s)"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Hour(s)"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Price (USD, $)"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Your PRIZM Studio URL"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please type in a desired URL for your PRIZM studio."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Confirm Your URL"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Please confirm the studio URL."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid ""
+"Make sure to double check that all the information is correct. Scroll up/"
+"down the right screen to swipe and view your information on PRIZM Studio"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Make sure to double check that all the information is correct."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid ""
+"Scroll up/down the right screen to swipe and view your information on PRIZM "
+"Studio"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "a whole new photography experience"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Equipment"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Portfolio"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "More ..."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Abbr"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+#: src/components/ReviewCreate/presenter.js
+msgid "Review"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Go Review"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "1. Select Location"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "More"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestComp/presenter.js
+msgid "There is no available location."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "2. Date&Time"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "I have a specific date in mind"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid ""
+"I don’t have a specific date in mind yes, but my availability in Newyork "
+"City is as follows :"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "3. Service&Pricing"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "There is no available service & pricing option."
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "4. Comments"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "comment"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Submit the request"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "go back"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+msgid "Search Location"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Next Month"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Next Year"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Prev Month"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Prev Year"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Next"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Before"
+msgstr ""
+
+#: src/components/AdminStudioSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Done"
+msgstr ""
+
+#: src/components/AdminStudioSettingClear/presenter.js
+msgid "Registration Completed !"
+msgstr ""
+
+#: src/components/AdminStudioSettingClear/presenter.js
+msgid "Check your PRIZM Studio at :"
+msgstr ""
+
+#: src/components/AdminStudioSettingClear/presenter.js
+msgid "Complete"
+msgstr ""
+
+#: src/components/AdminStudioSettingClear/presenter.js
+msgid "Home"
+msgstr ""
+
+#: src/components/BottomNavigation/presenter.js
+msgid "Custom"
+msgstr ""
+
+#: src/components/BottomNavigation/presenter.js
+msgid "Photographers"
+msgstr ""
+
+#: src/components/CustomRequest/container.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/MySchedule/container.js
+#: src/components/PhotographerDetail/container.js
+#: src/components/SignUpClear/container.js
+msgid "A verification email has been sent. Please check your inbox."
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js src/components/Home/presenter.js
+msgid "NEWYORK"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Meet the "
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "coolest photographers in Seoul"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Enrich your travel with photography"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+msgid "Go Custom Request"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Your custom request has been submitted."
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Please complete the email verification"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Resend Verification Email"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "We are waiting for photographers to submit their proposals."
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid ""
+"We will notify you through text message and email when we have received "
+"proposals from photographers"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid ""
+"When you complete the email verification, your request details will be sent "
+"to photographers and you will soon receive various proposals."
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Make a New Request"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Proposals for "
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "PRIZM photographers' proposals have arrived."
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Please click the button above to see them in detail"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Your custom request has been confirmed."
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/MessageDetail/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/Navigation/presenter.js
+#: src/components/ProfileMenu/presenter.js
+msgid "Add Payment Details"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Waiting for Payment"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Payment Successful!"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Already made a reservation?"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid ""
+"If you make a new custom request, your existing request will be "
+"automatically cancelled."
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Continue?"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+msgid "OK"
+msgstr ""
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Back"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Book your photographer now >>"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid ""
+"Your request has been succesfully submitted and sent to PRIZM photographers."
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "We will reach you via email and SMS soon. Thank you!"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "메인화면으로 이동하기"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Your Custom Request has been submitted!"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/SignUpClear/presenter.js
+msgid "We sent a "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/SignUpClear/presenter.js
+msgid "verification email "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/SignUpClear/presenter.js
+msgid "to the following address :"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Please verify yourself by clicking the link attached in the email."
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/SignUpClear/presenter.js
+msgid "Resend"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/SignUpClear/presenter.js
+msgid "Main"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "1. Please select your desired photography type(s) "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Alone"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Individual Photo"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Street"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Couple"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Indoor"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Wedding"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Propose"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Romantic Proposal"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Friend"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Friends"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Daily"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Everyday Life"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Family"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Travel"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Travel Moment"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Extra"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Others : "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "2. How many people are joining the photo shoot?"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "1 person (solo)"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "2 people"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "3 people"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "4 people"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "people"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "NEXT"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "3. When would you like to meet your photographer? "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Specific"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "I have a specific date and time in mind."
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Range"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid ""
+"I don’t have a specific date yet, but I’m staying in New York City during : "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "4. How long do you want to spend your time with the photographer?"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "1 Hour"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "1 hour"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "2 Hour"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "2 hours"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Extra Hour"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "hours"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "5. Where would you like to take the travel photography? "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid ""
+"I’d like to select my desired location(s). Click here to add a new location. "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Add a location"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "I’d rather follow my photographer’s recommendation."
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "6. Sign-up and submit your request "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/SignUp/presenter.js
+msgid ""
+"Your reservation details and confirmation message from photographers will be "
+"sent to your email and mobile number."
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Already have PRIZM account?"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "Click here to submit your request"
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "6. Sign-in and submit your request "
+msgstr ""
+
+#: src/components/CustomRequestCreate/presenter.js
+msgid "First time to PRIZM?"
+msgstr ""
+
+#: src/components/Description/presenter.js
+#: src/components/Navigation/presenter.js
+msgid "About PRIZM"
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"PRIZM is a photography-centered tourism platform that connects travelers "
+"with talented local photographers in Seoul, South Korea. Browse the "
+"'Photographer' section to view available photographers, or simply submit a "
+"'Custom Request' - which takes less than 3 minutes to complete - so that we "
+"can find the right photographer for you."
+msgstr ""
+
+#: src/components/Description/presenter.js
+#: src/components/Navigation/presenter.js
+msgid "Why PRIZM"
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"① You can make reservation and interact with your photographer even if you "
+"don't speak any local language. Our reservation system guarantees that both "
+"traveler and photographer successfully complete reservation matters with "
+"simple clicks and drags. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"② Photographer receives your money only after you have received your photos. "
+"While you will be asked to make payment after confirming your reservation "
+"details, the payment will only be transferred to your photographer after you "
+"have successfully received your travel photos. PRIZM safely holds the "
+"payment as deposit until you actually meet your photographer and get a photo "
+"session. On a very rare occasion, if the photographer does not show up or "
+"fails to deliver your photos, you will get 100% refund for your payment. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"③ You don't have to worry even if you don't have a specific local "
+"photographer in mind. Submit a 'Custom Request' and simply let us know a "
+"little information such as your desired date & time so that we could find "
+"the right photographer for you. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+#: src/components/Navigation/presenter.js
+msgid "How it works"
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "Custom Request"
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "① Click on the 'Book your photographer now' button. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "② Go through the reservation form and fill in the blanks."
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"③ When you complete the form, we'll recommend you at least 3 photographers "
+"registered in PRIZM within 72 hours. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"④ Choose your favorite photographer and start messaging him/her to discuss "
+"the meeting time and location. (Don't worry - setting up the date and time "
+"will be done with clicks and drags on your screen, without much of manual "
+"messaging.) "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "⑤ Confirm your reservation and enter payment details. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"⑥ After you have had a photo session with your photographer, your photos "
+"will be sent both to your e-mail and PRIZM website. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"⑦ Your paymnt will be transferred to the photographer after you have "
+"received your photos. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "Selecting your photographer yourself"
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"① A list of PRIZM photographers is available at the 'Photographers' menu. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"② If you tab or click a photographer's icon, you will be directed to the "
+"photographer's online studio.  "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"③ If you decide to make a reservation with the photographer, follow the "
+"reservation guideline in the studio and submit your reservation. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid ""
+"④ Soon you will receive a message from the photographer to set up the date "
+"and time. (Don't worry - this process will be handled with simple clicks and "
+"drags on your screen) "
+msgstr ""
+
+#: src/components/Description/presenter.js
+#: src/components/Navigation/presenter.js
+msgid "Support"
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "If you have any questions, please send us an email at :"
+msgstr ""
+
+#: src/components/Description/presenter.js src/components/Footer/presenter.js
+msgid "contact@prizm.cloud"
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "We will respond within 24 hours. "
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "If you need an immediate support in Seoul, call us at :"
+msgstr ""
+
+#: src/components/Description/presenter.js
+msgid "+82-10-5309-3547"
+msgstr ""
+
+#: src/components/EmailVerification/container.js
+msgid "Your email is verified!"
+msgstr ""
+
+#: src/components/FindPassword/presenter.js
+#: src/components/FindPasswordResult/presenter.js
+msgid "Reset your password"
+msgstr ""
+
+#: src/components/FindPassword/presenter.js
+msgid "We have sent a password reset link to your email."
+msgstr ""
+
+#: src/components/FindPassword/presenter.js
+msgid "Please enter your PRIXM account email."
+msgstr ""
+
+#: src/components/FindPassword/presenter.js
+msgid "We will send you a password reset link to the email."
+msgstr ""
+
+#: src/components/FindPasswordResult/presenter.js
+msgid "Change"
+msgstr ""
+
+#: src/components/FindPasswordResult/presenter.js
+msgid "Please check your email again."
+msgstr ""
+
+#: src/components/Footer/presenter.js src/components/ProfileMenu/presenter.js
+msgid "Terms of Use"
+msgstr ""
+
+#: src/components/Footer/presenter.js src/components/ProfileMenu/presenter.js
+msgid "Privacy Policy"
+msgstr ""
+
+#: src/components/Footer/presenter.js
+msgid "EXPLABS"
+msgstr ""
+
+#: src/components/Footer/presenter.js
+msgid "Registration No. : 161-60-00371"
+msgstr ""
+
+#: src/components/Footer/presenter.js
+msgid "Jungwoo Lee"
+msgstr ""
+
+#: src/components/Footer/presenter.js
+msgid "128, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea (06234)"
+msgstr ""
+
+#: src/components/Footer/presenter.js
+msgid "+82-2-1670-0506"
+msgstr ""
+
+#: src/components/Footer/presenter.js
+msgid " | Jungwoo Lee | Registration No. : 161-60-00371"
+msgstr ""
+
+#: src/components/Footer/presenter.js
+msgid "contact@prizm.cloud | +82-2-1670-0506"
+msgstr ""
+
+#: src/components/MessageDetail/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+msgid "View Payment Information"
+msgstr ""
+
+#: src/components/MessageDetail/presenter.js
+msgid "Message"
+msgstr ""
+
+#: src/components/MessageList/presenter.js
+msgid "You haven't received any messages yet."
+msgstr ""
+
+#: src/components/MessageList/presenter.js
+msgid "A new chatroom will appear when you submit a request to a photographer."
+msgstr ""
+
+#: src/components/MyPhotoDetail/presenter.js
+msgid ""
+"Files below are optimized for mobile uses. Original files have been sent to "
+"your email."
+msgstr ""
+
+#: src/components/MyPhotoDetail/presenter.js
+msgid "Download"
+msgstr ""
+
+#: src/components/MyPhotoDetail/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+msgid "Leave a Review"
+msgstr ""
+
+#: src/components/MyPhotos/presenter.js src/components/Navigation/presenter.js
+#: src/components/ProfileMenu/presenter.js
+msgid "My Photos"
+msgstr ""
+
+#: src/components/MySchedule/presenter.js
+#: src/components/ProfileMenu/presenter.js
+msgid "My Schedule"
+msgstr ""
+
+#: src/components/MySchedule/presenter.js
+msgid ""
+"Your request will be sent to the photographer when you complete the email "
+"verification"
+msgstr ""
+
+#: src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+msgid "Cancelled"
+msgstr ""
+
+#: src/components/MySchedule/presenter.js
+#: src/components/RequestOrderList/presenter.js
+msgid "You haven't made any reservations yet."
+msgstr ""
+
+#: src/components/MySchedule/presenter.js
+#: src/components/RequestOrderList/presenter.js
+msgid "A new schedule will appear when you submit a request to a photographer."
+msgstr ""
+
+#: src/components/MyScheduleDetail/container.js
+#: src/components/ReviewCreate/container.js
+#: src/components/ReviewList/container.js
+msgid "Invalid request!"
+msgstr ""
+
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Location"
+msgstr ""
+
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestComp/presenter.js
+msgid "Date&Time"
+msgstr ""
+
+#: src/components/MyScheduleDetail/presenter.js
+#: src/components/OrderComp/presenter.js
+#: src/components/PaymentDetail/presenter.js
+#: src/components/PhotographerDetail/presenter.js
+msgid "Service&Pricing"
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "Meet the best photographers in New York"
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "Enrich your trip with photography"
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "Welcome to "
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "PRIZM!"
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "Sign in to find the coolest photographers in "
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "Seoul."
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "Book your photographer without hassle."
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "My schedule"
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "Sign Out"
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+msgid "Are you a photographer?"
+msgstr ""
+
+#: src/components/Navigation/presenter.js
+#: src/components/ProfileMenu/presenter.js
+msgid "Please make another reservation."
+msgstr ""
+
+#: src/components/NotFound/index.js
+msgid "Page not found"
+msgstr ""
+
+#: src/components/NotFound/index.js
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+#: src/components/ReviewCreateComplete/index.js
+msgid "Go to the main page"
+msgstr ""
+
+#: src/components/OrderComp/container.js
+msgid "Please select available date & time."
+msgstr ""
+
+#: src/components/OrderComp/container.js
+msgid "Please select your response."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid ""
+"This reservation has been confirmed. We are waiting for payment from your "
+"client. If payment is not made within 72 hours, the reservation will be "
+"canceled automatically."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid ""
+"This reservation has been confirmed and fully paid. Payout will be available "
+"when you upload tourist photos and mark this schedule as 'Completed.'"
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid "This reservation has been cancelled."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid ""
+"Your availability table (below) was sent to your client. We are waiting for "
+"the client's response."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid "Are you sure you want to decline the request?"
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid "Click here to decline the reservation request."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid "Decline"
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid "How would you like to respond?"
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+#: src/components/RequestComp/presenter.js
+msgid ""
+"Yes, I’m available at the date&time. I’d like to confirm the reservation."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid ""
+"No, I’d not be available at the date&time, but I’d like to suggest other "
+"date&time options to my client."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid ""
+"Yes, I'm available at the selected period. I'd like to suggest timeslot "
+"options to the client."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid "Please select your available timeslots in the table below."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid ""
+"Then we will send it to your client and guide him/her to choose the most "
+"desired option."
+msgstr ""
+
+#: src/components/OrderComp/presenter.js
+msgid "No, I’d not be available and would like to decline the request."
+msgstr ""
+
+#: src/components/PaymentDetail/container.js
+msgid "Payment period has expired."
+msgstr ""
+
+#: src/components/PaymentDetail/container.js
+msgid "Invalid user information. Please login again."
+msgstr ""
+
+#: src/components/PaymentDetail/container.js
+msgid "Incorrect Price."
+msgstr ""
+
+#: src/components/PaymentDetail/container.js
+msgid "This payment option is only available for Korean customers."
+msgstr ""
+
+#: src/components/PaymentDetail/container.js
+msgid "Type the remitter's name."
+msgstr ""
+
+#: src/components/PaymentDetail/container.js
+msgid "Invalid request."
+msgstr ""
+
+#: src/components/PaymentDetail/container.js
+msgid "This option is not available for Korean customers."
+msgstr ""
+
+#: src/components/PaymentDetail/presenter.js
+msgid "Remitter's Name"
+msgstr ""
+
+#: src/components/PaymentDetail/presenter.js
+msgid "Process Payment"
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid "Your reservation has been successfully submitted!"
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid "Account Number : IBK (Industrial Bank of Korea) 054-146700-04-018"
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid "Copy"
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid "Account holder : EXPLABS"
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid ""
+"Your payment will be transferred to the photographer only after you have "
+"completed the photo session. PRIZM will safely hold your payment until then."
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid "Please refer to the Terms of Use for cancellation and refund polices."
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid "Go back to the main page"
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid "Your payment has been successfully submitted!"
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid ""
+"Payment will be transferred to your photographer only after you have "
+"completed the photo session and received photographs. Until then, your "
+"payment will be safely kept as a deposit."
+msgstr ""
+
+#: src/components/PaymentSuccess/presenter.js
+msgid ""
+"For information regarding cancellation and refund policies, please refer to "
+"our Terms of Service."
+msgstr ""
+
+#: src/components/PhotographerDetail/container.js
+msgid "Login is required."
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid "Sign up & Submit the request"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid "Find other photographers in New York"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid "Find More"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid "Please review your reservation deatils : "
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid ""
+"I don’t have a specific date in mind yes, but my availability in Newyork "
+"City is as above"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid "Comment"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid "Confirm and Submit Request"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid "Submit Request"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Your request was submitted successfully"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid "Your Reservation Request has been submitted!"
+msgstr ""
+
+#: src/components/PhotographerDetail/presenter.js
+msgid ""
+"When you complete the email verification, your request details will be sent "
+"to the selected photographer"
+msgstr ""
+
+#: src/components/Profile/presenter.js
+msgid "Edit profile"
+msgstr ""
+
+#: src/components/ProfileMenu/presenter.js
+msgid "Sign In to view your profile"
+msgstr ""
+
+#: src/components/ProfilePassword/presenter.js
+msgid "edit password"
+msgstr ""
+
+#: src/components/RequestComp/container.js
+msgid "Please suggest price for the requested photography experience."
+msgstr ""
+
+#: src/components/RequestComp/container.js
+msgid "Please check availaibility for the suggested date and time."
+msgstr ""
+
+#: src/components/RequestComp/container.js
+msgid "Please select a photography location."
+msgstr ""
+
+#: src/components/RequestComp/container.js
+msgid "Please select your available date and time."
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "Closed"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "Apply"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "Photograpy Type"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "Person(s)/Hour(s)"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "Desired Location"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "Your Proposal"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "1. Photography Type : "
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "2. Person(s)/Hour(s) : "
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "3. Photography Location"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "4. Date&Time"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "5. Price"
+msgstr ""
+
+#: src/components/RequestComp/presenter.js
+msgid "Send Your Proposal"
+msgstr ""
+
+#: src/components/RequestOrderDetail/presenter.js
+msgid "1. Photography Location"
+msgstr ""
+
+#: src/components/RequestOrderDetail/presenter.js
+msgid "2. Price"
+msgstr ""
+
+#: src/components/RequestOrderDetail/presenter.js
+msgid "3. Date & Time"
+msgstr ""
+
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Please select your desired time(s)."
+msgstr ""
+
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Select this proposal"
+msgstr ""
+
+#: src/components/RequestOrderList/container.js
+msgid "An error has ocurred.."
+msgstr ""
+
+#: src/components/RequestOrderList/presenter.js
+msgid "Go Back"
+msgstr ""
+
+#: src/components/RequestOrderList/presenter.js
+msgid "Please select your most preferred photographer."
+msgstr ""
+
+#: src/components/RequestOrderList/presenter.js
+msgid "Details >"
+msgstr ""
+
+#: src/components/RequestOrderList/presenter.js
+msgid "Photography Location"
+msgstr ""
+
+#: src/components/RequestOrderList/presenter.js
+msgid "Price"
+msgstr ""
+
+#: src/components/ReviewCreate/container.js
+msgid "Please fill out all informations."
+msgstr ""
+
+#: src/components/ReviewCreate/presenter.js
+#: src/components/ReviewList/presenter.js
+msgid "Go back"
+msgstr ""
+
+#: src/components/ReviewCreate/presenter.js
+msgid "Rate & Review"
+msgstr ""
+
+#: src/components/ReviewCreate/presenter.js
+msgid "How was your overall experiance?"
+msgstr ""
+
+#: src/components/ReviewCreate/presenter.js
+msgid "Share details of your experience with the photographer here:"
+msgstr ""
+
+#: src/components/ReviewCreate/presenter.js
+msgid "Submit Review"
+msgstr ""
+
+#: src/components/ReviewCreateComplete/index.js
+msgid "Your review has been submitted!"
+msgstr ""
+
+#: src/components/ReviewCreateComplete/index.js
+msgid ""
+"Thank you very much for the review. We hope you had a great experience with "
+"PRIZM."
+msgstr ""
+
+#: src/components/ReviewCreateComplete/index.js
+msgid ""
+"If you have any questions or suggestions, feel free to reach us at "
+"contact@prizm.cloud"
+msgstr ""
+
+#: src/components/ReviewCreateComplete/index.js
+msgid "Hope to see you again at your next trip!"
+msgstr ""
+
+#: src/components/ReviewList/presenter.js
+msgid "Reviews"
+msgstr ""
+
+#: src/components/ReviewList/presenter.js
+msgid "client reviews"
+msgstr ""
+
+#: src/components/ReviewList/presenter.js
+msgid "There aren't any reviews for the photographer yet!"
+msgstr ""
+
+#: src/components/SignIn/presenter.js
+msgid "Sign In & Submit the request"
+msgstr ""
+
+#: src/components/SignUp/presenter.js
+msgid "Sign Up & Submit the request"
+msgstr ""
+
+#: src/components/SignUpClear/presenter.js
+msgid "Thanks for signing up!"
+msgstr ""
+
+#: src/components/SignUpClear/presenter.js
+msgid "Please verify yourself by clicking the link attached in the email. "
+msgstr ""
+
+#: src/components/SignUpClear/presenter.js
+msgid ""
+"When you complete the email verification, you will be able to freely make "
+"reservations."
+msgstr ""
+
+#: src/components/Terms/presenter.js
+msgid "Terms of Use is temporarily unavailable."
+msgstr ""
+
+#: src/components/Welcome/presenter.js
+msgid "Meet the best photographers in New York City."
+msgstr ""
+
+#: src/components/Welcome/presenter.js
+msgid ""
+"PRIZM connects tourists in need of travel photography with photographers "
+"around the world."
+msgstr ""
+
+#: src/components/Welcome/presenter.js
+msgid "  Enter your email here to stay connected with us."
+msgstr ""
+
+#: src/components/Welcome/presenter.js
+msgid "prizm.cloud"
+msgstr ""

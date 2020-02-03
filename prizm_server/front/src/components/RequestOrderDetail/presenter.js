@@ -159,7 +159,7 @@ class PhotographerDetail extends Component{
                             <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                             <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={show1 ? this.props.close1 : this.props.open1}>
-                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. 촬영 장소")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Photography Location")}</p>
                                     <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} />
                                 </div>
                                 <Collapse isOpened={show1} theme={{collapse: styles.collapse}}>
@@ -184,7 +184,7 @@ class PhotographerDetail extends Component{
                             <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                             <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={show2 ? this.props.close2 : this.props.open2}>
-                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. 가격")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Price")}</p>
                                     <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`}/>
                                 </div>
                                 <Collapse isOpened={show2} theme={{collapse: styles.collapse}}>
@@ -196,7 +196,7 @@ class PhotographerDetail extends Component{
                             <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                             <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={show3 ? this.props.close3 : this.props.open3}>
-                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. 날짜 및 시간")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. Date & Time")}</p>
                                     <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`}/>
                                 </div>
                                 <Collapse isOpened={show3} theme={{collapse: styles.collapse}}>
@@ -215,7 +215,7 @@ class PhotographerDetail extends Component{
                                     ) : (
                                         <div className={`${styles.py3} ${styles.bgGray33}`}>
                                             <p className={`${styles.font1214} ${styles.white} ${styles.px3}`} style={{lineHeight: 1.2}}>
-                                                {this.context.t("초록색으로 표시된 범위 중 원하는 시간을 선택하세요.")}<br/>
+                                                {this.context.t("Please select your desired time(s).")}<br/>
                                             </p>
                                             <DayContainer length={dayList.length}>
                                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.flexNowrap}`} style={{height: 15}}>
@@ -247,10 +247,10 @@ class PhotographerDetail extends Component{
                             <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                     <div className={`${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this.props.submit}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("이 제안을 선택")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Select this proposal")}</p>
                                     </div>
                                     <div className={`${styles.bgGray97} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={() => this.props.goRequestOrderList(order.custom_request.id)}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("뒤로 돌아가기")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Back")}</p>
                                     </div>
                                 </div>
                             </div>

@@ -23,7 +23,8 @@ class Navigation extends Component{
         goTerms: PropTypes.func.isRequired,
         goMyPhotos: PropTypes.func.isRequired,
         goDescription: PropTypes.func.isRequired,
-        now: PropTypes.number.isRequired
+        now: PropTypes.number.isRequired,
+        changeLang: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -58,11 +59,18 @@ class Navigation extends Component{
                 <Fragment>
                 <div className={`${styles.positionNav} ${styles.widthFull} ${styles.py4} ${styles.bgWhite} ${styles.px3}`} style={{zIndex: 2}}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                        <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                        <div className={`${styles.col4} ${styles.colSm2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <img src={require('../../assets/images/icon_menu.png')} alt={this.context.t("MENU")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={openMenu} />
                         </div>
-                        <div className={`${styles.col10} ${styles.px0}`}>
-                            <p className={`${styles.textCenter} ${styles.fontBold} ${styles.font20} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
+                        <div className={`${styles.col4} ${styles.colSm8} ${styles.px0}`}>
+                            {!(this.props.pathname === '/artist/') && (
+                                <p className={`${styles.textCenter} ${styles.fontBold} ${styles.font20} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
+                            )}
+                        </div>
+                        <div className={`${styles.col4} ${styles.colSm2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
+                            <p className={`${styles.font1214} ${styles.gray8e} ${styles.cursorPointer}`} onClick={() => this.props.changeLang('kr')}>한국어</p>
+                            <p className={`${styles.font1214} ${styles.gray8e} ${styles.mx2}`}>|</p>
+                            <p className={`${styles.font1214} ${styles.gray8e} ${styles.cursorPointer}`} onClick={() => this.props.changeLang('en')}>English</p>
                         </div>
                     </div>
                     {/* <div className={`${styles.widthFull} ${styles.positionNavDescription}`}>

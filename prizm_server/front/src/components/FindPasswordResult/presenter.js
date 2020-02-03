@@ -30,7 +30,7 @@ class FindPasswordResult extends Component{
             return(
                 <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
-                        <p className={`${styles.fontBold} ${styles.font17}`}>{this.context.t("비밀번호 재설정")}</p>
+                        <p className={`${styles.fontBold} ${styles.font17}`}>{this.context.t("Reset your password")}</p>
                     </div>
                     <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{this.context.t("New password")}</p>
                     <div className={`${styles.widthFull}`}>
@@ -50,7 +50,7 @@ class FindPasswordResult extends Component{
             return(
                 <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.pt45}`}>
-                        <p className={`${styles.fontBold} ${styles.font17}`}>{this.context.t("비밀번호 재설정")}</p>
+                        <p className={`${styles.fontBold} ${styles.font17}`}>{this.context.t("Reset your password")}</p>
                     </div>
                     <p className={`${styles.fontBold} ${styles.font12} ${styles.pt45}`}>{this.context.t("Email")}</p>
                     <div className={`${styles.widthFull}`}>
@@ -58,7 +58,7 @@ class FindPasswordResult extends Component{
                     </div>
                     <div className={`${styles.row} ${styles.justifyContentBetween} ${styles.textCenter} ${styles.p0} ${styles.mx0} ${styles.mt4}`}>
                         <p className={`${styles.col12} ${styles.textCenter} ${styles.font14}`}>
-                            {this.context.t("이메일을 다시한번 확인해주세요.")}<br/>
+                            {this.context.t("Please check your email again.")}<br/>
                         </p>
                     </div>
                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.handleFindPassword}>

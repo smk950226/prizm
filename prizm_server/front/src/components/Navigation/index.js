@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import Container from './container';
 import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
+import { setLanguage } from "redux-i18n";
 
 const mapStateToProps = (state, ownProps) => {
     const { user : { isLoggedIn, profile, notification }, router : { location } } = state;
@@ -46,6 +47,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     menu
                 }
             }))
+        },
+        changeLang: (lang) => {
+            dispatch(setLanguage(lang))
         }
     }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import App from './presenter';
+import { setLanguage } from "redux-i18n"
 
 class Container extends Component{
     static propTypes = {
@@ -23,6 +24,12 @@ class Container extends Component{
 
     componentDidMount(){
         window.addEventListener('scroll', this._handleScroll, false)
+        fetch('https://ipapi.co/json/').then((response) => response.json())
+        .then(json => {
+            this.props.changeLang(json.country_code.toLowerCase())
+        }).catch((error) => {
+            console.log(error);
+        });
         if((window.location.href.startsWith('http://admin.prizm.cloud/')) || (window.location.href.startsWith('https://admin.prizm.cloud/'))){
             this.setState({
                 admin: true

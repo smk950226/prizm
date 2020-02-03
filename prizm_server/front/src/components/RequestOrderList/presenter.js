@@ -72,7 +72,7 @@ class RequestOrderList extends Component{
             <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer}`}>
                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.px3} ${styles.py2} ${styles.bgGrayF8}`}>
                     <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Go Back")} className={`${styles.iconArrowRight} ${styles.cursorPointer}`} onClick={this.props.goCustomRequest} />
-                    <p className={`${styles.font1012}`}>{this.context.t("다음 중 마음에 드는 사진작가의 제안을 자유롭게 선택하세요.")}</p>
+                    <p className={`${styles.font1012}`}>{this.context.t("Please select your most preferred photographer.")}</p>
                     <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("Go Back")} className={`${styles.iconArrowRight} ${styles.hidden}`} />
                 </div>
                 {loading ? (
@@ -100,21 +100,21 @@ class RequestOrderList extends Component{
                                         </div>
                                         <div>
                                             <p className={`${styles.font1214} ${styles.pink} ${styles.cursorPointer}`} onClick={() => this.props.goRequestOrderDetail(order)}>
-                                                {this.context.t("자세히 보기 >")}
+                                                {this.context.t("Details >")}
                                             </p>
                                         </div>
                                     </div>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.mt3}`}>
                                         <p className={`${styles.font1214}`}>
                                             <span className={`${styles.fontBold}`}>
-                                                {this.context.t("촬영 장소")}
+                                                {this.context.t("Photography Location")}
                                             </span>
                                             {` : ${location.name}`}
                                         </p>
                                         <div className={`${styles.bgBlack} ${styles.mx2}`} style={{width: 2, height: 14}} />
                                         <p className={`${styles.font1214}`}>
                                             <span className={`${styles.fontBold}`}>
-                                                {this.context.t("가격")}
+                                                {this.context.t("Price")}
                                             </span>
                                             {` : $${numberWithCommas(order.price)}`}
                                         </p>

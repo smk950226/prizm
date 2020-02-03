@@ -1914,8 +1914,8 @@ class CustomRequestCreate extends Component{
                                     <div className={`${styles.textCenter}`}>
                                         <img src={require('../../assets/images/request_complete.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: '100%', maxWidth: 400}} />
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>
-                                            {this.context.t("맞춤예약 신청이 완료되었습니다!")}<br/>
-                                            {this.context.t("추후 SMS와 이메일로 안내해드리겠습니다.")}
+                                            {this.context.t("Your request has been succesfully submitted and sent to PRIZM photographers.")}<br/>
+                                            {this.context.t("We will reach you via email and SMS soon. Thank you!")}
                                         </p>
     
                                         <p className={`${styles.font12} ${styles.mt3} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
