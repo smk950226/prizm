@@ -1917,11 +1917,6 @@ class CustomRequestCreate extends Component{
                                             {this.context.t("Your request has been succesfully submitted and sent to PRIZM photographers.")}<br/>
                                             {this.context.t("We will reach you via email and SMS soon. Thank you!")}
                                         </p>
-    
-                                        <p className={`${styles.font12} ${styles.mt3} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
-                                            {this.context.t(`회원님의 예약 내역이 사진작가들에게 전달되었으며,`)}<br/>
-                                            {this.context.t(`곧 다양한 작가들의 촬영 견적을 받아보실 수 있습니다.`)}<br/>
-                                        </p>
                                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("메인화면으로 이동하기")}</p>
                                         </div>

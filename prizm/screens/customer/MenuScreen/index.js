@@ -12,6 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
+        logout: () => {
+            dispatch(userActions.getLogout())
+        },
         getProfile: () => {
             dispatch(userActions.getProfile());
         }

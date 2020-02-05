@@ -7,7 +7,8 @@ class MenuScreen extends Component{
     static propTypes = {
         profile: PropTypes.object,
         isLoggedIn: PropTypes.bool.isRequired,
-        now: PropTypes.number.isRequired
+        now: PropTypes.number.isRequired,
+        logout: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -169,7 +170,7 @@ class MenuScreen extends Component{
                                 </View>
                             </TouchableWithoutFeedback>
                             {isLoggedIn ? (
-                                <TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={this.props.logout}>
                                     <View style={[styles.mt20]}>
                                         <Text style={[styles.font16, styles.navBrown]}>
                                             {this.context.t("Sign Out")}

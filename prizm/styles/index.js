@@ -242,6 +242,9 @@ const styles = StyleSheet.create({
     bgBlack: {
         backgroundColor: '#000000'
     },
+    bgBlack03: {
+        backgroundColor: 'rgba(0,0,0,0.3)'
+    },
     bgWhite: {
         backgroundColor: '#FFFFFF'
     },
@@ -645,6 +648,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    icon10: {
+        width: 10,
+        height: 10
+    },
+    icon15: {
+        width: 15,
+        height: 15
+    },
     icon20: {
         width: 20,
         height: 20
@@ -677,8 +688,85 @@ const styles = StyleSheet.create({
         width: 45*0.4,
         height: 36*0.4
     },
+    iconArrowVertical: {
+        width: 21*0.8,
+        height: 33*0.8
+    },
+    iconArrowVerticalSm: {
+        width: 21*0.6,
+        height: 33*0.6
+    },
     maxWidth360: {
         maxWidth: 360
+    },
+    hidden: {
+        opacity: 0
+    },
+    checkbox: {
+        borderColor: '#cecece',
+        borderWidth: 2,
+        backgroundColor: '#ffffff'
+    },
+    checkboxChecked: {
+        borderColor: '#d66c8b',
+        borderWidth: 2,
+        backgroundColor: '#ffffff'
+    },
+    textinputUnderline: {
+        borderBottomColor: '#000000',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        paddingVertical: 0,
+        marginVertical: 0,
+        includeFontPadding: false
+    },
+    circle10: {
+        width: 10,
+        height: 10,
+        borderRadius: 5
+    },
+    circle15: {
+        width: 15,
+        height: 15,
+        borderRadius: 7.5
+    },
+    circle20: {
+        width: 20,
+        height: 20,
+        borderRadius: 10
+    },
+    circle25: {
+        width: 25,
+        height: 25,
+        borderRadius: 12.5
+    },
+    circle30: {
+        width: 30,
+        height: 30,
+        borderRadius: 15
+    },
+    circle35: {
+        width: 35,
+        height: 35,
+        borderRadius: 17.5
+    },
+    circle40: {
+        width: 40,
+        height: 40,
+        borderRadius: 20
+    },
+    circle45: {
+        width: 45,
+        height: 45,
+        borderRadius: 22.5
+    },
+    circle50: {
+        width: 50,
+        height: 50,
+        borderRadius: 25
+    },
+    borderBtmBlack: {
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#000'
     }
 })
 

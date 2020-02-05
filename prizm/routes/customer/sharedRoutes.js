@@ -13,10 +13,18 @@ const sharedOptions = {
             fontSize: 20,
             fontFamily: 'NanumSquareOTFEB00'
         },
-        headerLeft: () => (
+        headerTitleAlign: 'center',
+        headerRight: () => (
             <TouchableWithoutFeedback onPress={navigation.toggleDrawer}>
-                <View style={[styles.ml20]}>
+                <View style={[styles.mr20]}>
                     <Image source={require('../../assets/images/icon_menu.png')} style={[styles.icon25]} />
+                </View>
+            </TouchableWithoutFeedback>
+        ),
+        headerLeft: () => (
+            <TouchableWithoutFeedback onPress={()=> navigation.goBack()}>
+                <View style={[styles.ml20]}>
+                    <Image source={require('../../assets/images/icon_left.png')} style={[styles.iconArrowVerticalSm]} />
                 </View>
             </TouchableWithoutFeedback>
         )

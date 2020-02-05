@@ -2,16 +2,17 @@ import React, { Fragment } from 'react';
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
-import Swiper from 'react-native-swiper';
+import Swiper from '../../../components/Swiper';
 
 const HomeScreen = (props, context) => (
-    <View style={[styles.container, styles.center]}>
+    <View style={[styles.container, styles.center, styles.bgLanding1]}>
         <View style={[styles.flex1]}>
             <Swiper 
             showsButtons={false}
             autoplay={true}
             showsPagination={false}
             autoplayTimeout={5}
+            styles={[styles.flex1]}
             >
                 <View style={styles.container}>
                     <View style={[styles.flex1]}>
@@ -30,7 +31,7 @@ const HomeScreen = (props, context) => (
                 </View>
             </Swiper>
         </View>
-        <View style={[styles.flex1, styles.center, styles.bgLanding1]}>
+        <View style={[styles.flex1, styles.center]}>
             <View>
                 {props.profile ? (
                     <Fragment>
@@ -44,7 +45,7 @@ const HomeScreen = (props, context) => (
                                         {context.t("Enrich your travel with photography")}
                                     </Text>
                                 </View>
-                                <TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={() => props.navigation.navigate('CustomRequestCreate')}>
                                     <View style={[styles.mt30, styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                             {context.t("Book your photographer now >>")}
@@ -100,7 +101,7 @@ const HomeScreen = (props, context) => (
                                         </Text>
                                     </Fragment>
                                 ) : (
-                                    <Text style={[styles.font14, styles.mt10, styles.pink]}>
+                                    <Text style={[styles.font14, styles.mt10, styles.pink, styles.px15]}>
                                         {context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")}
                                     </Text>
                                 )}
@@ -193,7 +194,7 @@ const HomeScreen = (props, context) => (
                                 {context.t("Enrich your travel with photography")}
                             </Text>
                         </View>
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={() => props.navigation.navigate('CustomRequestCreate')}>
                             <View style={[styles.mt30, styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                 <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                     {context.t("Book your photographer now >>")}

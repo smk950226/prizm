@@ -7,6 +7,7 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         profile: PropTypes.object,
         getProfile: PropTypes.func.isRequired,
+        logout: PropTypes.func.isRequired
     }
 
     constructor(props){
