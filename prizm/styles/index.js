@@ -791,6 +791,12 @@ const styles = StyleSheet.create({
     borderBtmGrayDc: {
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#dcdcdc'
+    },
+    imageShadow: {
+        shadowColor: '#000',
+        shadowOffset: { width: 3, height: 5 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
     }
 })
 

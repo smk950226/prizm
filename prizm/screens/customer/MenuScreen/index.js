@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Container from './container';
-import { actionCreators as userActions } from '../../../redux/modules/user';
+import { actionCreators as userAction } from '../../../redux/modules/user';
 
 const mapStateToProps = (state, ownProps) => {
     const { user : { isLoggedIn, profile } } = state;
@@ -13,10 +13,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return{
         logout: () => {
-            dispatch(userActions.getLogout())
+            dispatch(userAction.getLogout())
         },
         getProfile: () => {
-            dispatch(userActions.getProfile());
+            dispatch(userAction.getProfile());
         }
     }
 }

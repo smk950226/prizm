@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import HomeScreen from './presenter';
+import { NavigationEvents } from "react-navigation";
 
 class Container extends Component{
     static propTypes = {
@@ -99,16 +100,30 @@ class Container extends Component{
         }
     }
 
+    _remount = async() => {
+        const { getProfile, isLoggedIn } = this.props;
+        if(isLoggedIn){
+            getProfile()
+        }
+    }
+
     render(){
         return(
-            <HomeScreen 
-                {...this.props} 
-                {...this.state}
-                openCancel={this._openCancel}
-                closeCancel={this._closeCancel}
-                cancel={this._cancel}
-                send={this._send}
-            />
+            <Fragment>
+                <NavigationEvents
+                onWillFocus={payload => {
+                    this._remount()
+                }}
+                />
+                <HomeScreen 
+                    {...this.props} 
+                    {...this.state}
+                    openCancel={this._openCancel}
+                    closeCancel={this._closeCancel}
+                    cancel={this._cancel}
+                    send={this._send}
+                />
+            </Fragment>
         )
     }
 }
