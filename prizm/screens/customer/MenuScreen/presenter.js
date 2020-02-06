@@ -141,28 +141,28 @@ class MenuScreen extends Component{
                                     </TouchableWithoutFeedback>
                                 </Fragment>
                             )}
-                            <TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Description', { menu: 'about' })}>
                                 <View style={[styles.mt20]}>
                                     <Text style={[styles.font16]}>
                                         {this.context.t("About PRIZM")}
                                     </Text>
                                 </View>
                             </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Description', { menu: 'why' })}>
                                 <View style={[styles.mt10]}>
                                     <Text style={[styles.font16]}>
                                         {this.context.t("Why PRIZM")}
                                     </Text>
                                 </View>
                             </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Description', { menu: 'how' })}>
                                 <View style={[styles.mt10]}>
                                     <Text style={[styles.font16]}>
                                         {this.context.t("How it works")}
                                     </Text>
                                 </View>
                             </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Description', { menu: 'support' })}>
                                 <View style={[styles.mt10]}>
                                     <Text style={[styles.font16]}>
                                         {this.context.t("Support")}

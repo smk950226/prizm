@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
 
-const SignUpClear = (props, context) => (
+const SignUpClearScreen = (props, context) => (
     <View style={[styles.container, styles.bgWhite, styles.center, styles.px15]}>
         <Fragment>
             <Text style={[styles.font14, styles.textCenter]}>
@@ -46,14 +46,14 @@ const SignUpClear = (props, context) => (
     </View>
 )
 
-SignUpClear.propTypes = {
+SignUpClearScreen.propTypes = {
     profile: PropTypes.object.isRequired,
     send: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired
 }
 
-SignUpClear.contextTypes = {
+SignUpClearScreen.contextTypes = {
     t: PropTypes.func
 }
 
-export default SignUpClear;
+export default SignUpClearScreen;

@@ -3,7 +3,7 @@ import { View, Text, Dimensions, TouchableWithoutFeedback, Image, ScrollView, Te
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
 
-const SignIn = (props, context) => (
+const SignInScreen = (props, context) => (
     <View style={[styles.container, styles.bgWhite, styles.px15]}>
         <View style={[styles.mt20, styles.row, styles.alignItemsCenter]}>
             <TouchableWithoutFeedback onPress={() => props.navigation.navigate('SignUp', { goRequest: props.goRequest, photographerId: props.photographerId })}>
@@ -69,7 +69,7 @@ const SignIn = (props, context) => (
     </View>
 )
 
-SignIn.propTypes = {
+SignInScreen.propTypes = {
     submit: PropTypes.func.isRequired,
     handleEmailChange: PropTypes.func.isRequired,
     handlePasswordChange: PropTypes.func.isRequired,
@@ -80,8 +80,8 @@ SignIn.propTypes = {
     goRequest: PropTypes.bool.isRequired
 }
 
-SignIn.contextTypes = {
+SignInScreen.contextTypes = {
     t: PropTypes.func
 }
 
-export default SignIn;
+export default SignInScreen;

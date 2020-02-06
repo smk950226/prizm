@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import SignUp from './presenter';
+import SignUpScreen from './presenter';
 import { COUNTRY_CODE } from '../../../utils/country';
 
 class Container extends Component{
@@ -348,7 +348,7 @@ class Container extends Component{
 
     render(){
         return(
-            <SignUp 
+            <SignUpScreen 
             {...this.props} 
             {...this.state} 
             handleCountryNumberChange={this._handleCountryNumberChange}

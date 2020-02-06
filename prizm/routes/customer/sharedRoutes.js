@@ -3,6 +3,7 @@ import { Image, Text, View, TouchableWithoutFeedback, Platform } from 'react-nat
 import SignUpScreen from '../../screens/customer/SignUpScreen';
 import SignUpClearScreen from '../../screens/customer/SignUpClearScreen';
 import SignInScreen from '../../screens/customer/SignInScreen';
+import DescriptionScreen from '../../screens/customer/DescriptionScreen';
 import styles from '../../styles';
 
 const sharedRoutes = {
@@ -14,6 +15,9 @@ const sharedRoutes = {
     },
     SignIn: {
         screen: SignInScreen
+    },
+    Description: {
+        screen: DescriptionScreen
     }
 };
 

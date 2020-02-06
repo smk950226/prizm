@@ -767,6 +767,10 @@ const styles = StyleSheet.create({
     borderBtmBlack: {
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#000'
+    },
+    borderBtmGrayDc: {
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#dcdcdc'
     }
 })
 

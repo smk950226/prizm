@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import SignUpClear from './presenter';
+import SignUpClearScreen from './presenter';
 
 class Container extends Component{
     static propTypes = {
@@ -54,7 +54,7 @@ class Container extends Component{
 
     render(){
         return(
-            <SignUpClear 
+            <SignUpClearScreen 
             {...this.props}
             {...this.state}
             send={this._send}

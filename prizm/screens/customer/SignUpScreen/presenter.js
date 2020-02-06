@@ -6,7 +6,7 @@ import Modal from 'react-native-modal';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Flag from 'react-native-flags';
 
-const SignUp = (props, context) => (
+const SignUpScreen = (props, context) => (
     <View style={[styles.container, styles.bgWhite, styles.px15]}>
         <View style={[styles.mt20, styles.row, styles.alignItemsCenter]}>
             <TouchableWithoutFeedback>
@@ -183,7 +183,7 @@ const SignUp = (props, context) => (
     </View>
 )
 
-SignUp.propTypes = {
+SignUpScreen.propTypes = {
     handleCountryNumberChange: PropTypes.func.isRequired,
     handleShowCuntryNumberChange: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
@@ -211,8 +211,8 @@ SignUp.propTypes = {
     countryList: PropTypes.array
 }
 
-SignUp.contextTypes = {
+SignUpScreen.contextTypes = {
     t: PropTypes.func
 }
 
-export default SignUp;
+export default SignUpScreen;
