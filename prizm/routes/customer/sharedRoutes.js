@@ -4,6 +4,7 @@ import SignUpScreen from '../../screens/customer/SignUpScreen';
 import SignUpClearScreen from '../../screens/customer/SignUpClearScreen';
 import SignInScreen from '../../screens/customer/SignInScreen';
 import DescriptionScreen from '../../screens/customer/DescriptionScreen';
+import FindPasswordScreen from '../../screens/customer/FindPasswordScreen';
 import styles from '../../styles';
 
 const sharedRoutes = {
@@ -18,6 +19,9 @@ const sharedRoutes = {
     },
     Description: {
         screen: DescriptionScreen
+    },
+    FindPassword: {
+        screen: FindPasswordScreen
     }
 };
 

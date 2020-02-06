@@ -55,7 +55,7 @@ class FindPassword extends Component{
                     </div>
                     <div className={`${styles.row} ${styles.justifyContentBetween} ${styles.textCenter} ${styles.p0} ${styles.mx0} ${styles.mt4}`}>
                         <p className={`${styles.col12} ${styles.textCenter} ${styles.font14}`}>
-                            {this.context.t("Please enter your PRIXM account email.")}<br/>
+                            {this.context.t("Please enter your PRIZM account email.")}<br/>
                             {this.context.t("We will send you a password reset link to the email.")}
                         </p>
                     </div>

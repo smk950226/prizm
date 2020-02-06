@@ -57,6 +57,13 @@ const SignInScreen = (props, context) => (
                     placeholderTextColor={'#000000'}
                     underlineColorAndroid={'transparent'}
                 />
+                <TouchableWithoutFeedback onPress={() => props.navigation.navigate('FindPassword')}>
+                    <View>
+                        <Text style={[styles.font12, styles.fontRegular, styles.textCenter, styles.mt10]}>
+                            {context.t("Forgot Password?")}
+                        </Text>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
             <TouchableWithoutFeedback onPress={props.submit}>
                 <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, props.isSubmitting ? { opacity: 0.7 } : null]}>
