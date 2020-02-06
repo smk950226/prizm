@@ -76,7 +76,7 @@ class Container extends Component{
             })
             this.props.getSaveToken(this.state.token)
             if(this.state.goRequest){
-                this.props.goDetail(this.state.photographerId)
+                this.props.navigation.navigate('PhotographerDetail', { photographerId: this.state.photographerId })
             }
             else{
                 this.props.navigation.navigate('SignUpClear')
@@ -89,6 +89,9 @@ class Container extends Component{
                 goRequest: goRequest ? goRequest : false,
                 photographerId: photographerId ? photographerId : null
             })
+        }
+        if(!prevProps.isLoggedIn && this.props.isLoggedIn){
+            this.props.navigation.navigate('Home')
         }
     }
 

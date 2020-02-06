@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Image, Text, View, TouchableWithoutFeedback, Platform } from 'react-native';
 import SignUpScreen from '../../screens/customer/SignUpScreen';
 import SignUpClearScreen from '../../screens/customer/SignUpClearScreen';
+import SignInScreen from '../../screens/customer/SignInScreen';
 import styles from '../../styles';
 
 const sharedRoutes = {
@@ -10,6 +11,9 @@ const sharedRoutes = {
     },
     SignUpClear: {
         screen: SignUpClearScreen
+    },
+    SignIn: {
+        screen: SignInScreen
     }
 };
 

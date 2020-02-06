@@ -131,7 +131,7 @@ class MenuScreen extends Component{
                                             <Image source={require('../../../assets/images/icon_arrow_right.png')} style={[styles.iconArrow, styles.ml10]} />
                                         </View>
                                     </TouchableWithoutFeedback>
-                                    <TouchableWithoutFeedback>
+                                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SignIn')}>
                                         <View style={[styles.row, styles.alignItemsCenter, styles.mt10]}>
                                             <Text style={[styles.font16, styles.fontBold]}>
                                                 {this.context.t("Sign In")}

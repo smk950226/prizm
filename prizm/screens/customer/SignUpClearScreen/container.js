@@ -7,7 +7,7 @@ class Container extends Component{
     static propTypes = {
         profile: PropTypes.object.isRequired,
         sendVerificationEmail: PropTypes.func.isRequired,
-        isLoggedIn: PropTypes.func.isRequired
+        isLoggedIn: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
