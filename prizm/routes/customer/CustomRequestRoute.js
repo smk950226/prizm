@@ -14,7 +14,8 @@ const CustomRequestRoute = createStackNavigator(
         },
         CustomRequestCreate: {
             screen: CustomRequestCreateScreen
-        }
+        },
+        ...sharedRoutes
     },
     {
         ...sharedOptions

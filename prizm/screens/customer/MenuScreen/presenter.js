@@ -123,7 +123,7 @@ class MenuScreen extends Component{
                                 </Fragment>
                             ) : (
                                 <Fragment>
-                                    <TouchableWithoutFeedback>
+                                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SignUp')}>
                                         <View style={[styles.row, styles.alignItemsCenter, styles.mt20]}>
                                             <Text style={[styles.font16, styles.fontBold]}>
                                                 {this.context.t("Sign Up")}

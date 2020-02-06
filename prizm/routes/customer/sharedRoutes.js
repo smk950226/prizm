@@ -1,9 +1,16 @@
 import React, { Fragment } from 'react';
 import { Image, Text, View, TouchableWithoutFeedback, Platform } from 'react-native';
+import SignUpScreen from '../../screens/customer/SignUpScreen';
+import SignUpClearScreen from '../../screens/customer/SignUpClearScreen';
 import styles from '../../styles';
 
 const sharedRoutes = {
-    
+    SignUp: {
+        screen: SignUpScreen
+    },
+    SignUpClear: {
+        screen: SignUpClearScreen
+    }
 };
 
 const sharedOptions = {

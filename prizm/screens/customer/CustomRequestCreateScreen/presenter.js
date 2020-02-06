@@ -14,6 +14,7 @@ import { GOOGLE_API_KEY_GEO_CODING } from '../../../config/secrets';
 import uuidv4 from 'uuid/v4';
 import Flag from 'react-native-flags';
 import { COUNTRY_CODE } from '../../../utils/country';
+
 const { width, height } = Dimensions.get('window');
 
 const statusBarHeight = getStatusBarHeight()
@@ -807,13 +808,13 @@ class CustomRequestCreateScreen extends Component{
         })
     }
 
-    _openCuntryNumberModal = () => {
+    _openCountryNumberModal = () => {
         this.setState({
             showCountryNumber: true
         })
     }
 
-    _closeCuntryNumberModal = () => {
+    _closeCountryNumberModal = () => {
         this.setState({
             showCountryNumber: false
         })
@@ -1998,8 +1999,7 @@ class CustomRequestCreateScreen extends Component{
                                         customStyles={{
                                             dateInput: {
                                                 borderWidth: 0,
-                                                color: '#000',
-                                                backgroundColor: '#cecece'
+                                                color: '#000'
                                             },
                                             placeholderText: {
                                                 color: '#000'
@@ -2199,8 +2199,8 @@ class CustomRequestCreateScreen extends Component{
                     </Modal>
                     <Modal
                     isVisible={showCountryNumber}
-                    onBackButtonPress={this._closeCuntryNumberModal}
-                    onBackdropPress={this._closeCuntryNumberModal}
+                    onBackButtonPress={this._closeCountryNumberModal}
+                    onBackdropPress={this._closeCountryNumberModal}
                     >
                         <View style={[styles.bgWhite, styles.pt20, styles.center, styles.px30]}>
                             <TextInput
@@ -2212,6 +2212,7 @@ class CustomRequestCreateScreen extends Component{
                                 returnKeyType={'next'} 
                                 placeholderTextColor={'#000000'}
                                 underlineColorAndroid={'transparent'}
+                                placeholder={this.context.t("Search Country")}
                             />
                             <ScrollView 
                             style={[styles.mt10, { height: 500 }]}
