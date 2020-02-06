@@ -684,6 +684,26 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50
     },
+    icon60: {
+        width: 60,
+        height: 60
+    },
+    icon70: {
+        width: 70,
+        height: 70
+    },
+    icon80: {
+        width: 80,
+        height: 80
+    },
+    icon90: {
+        width: 90,
+        height: 90
+    },
+    icon100: {
+        width: 100,
+        height: 100
+    },
     iconArrow: {
         width: 45*0.4,
         height: 36*0.4
