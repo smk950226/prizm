@@ -451,7 +451,7 @@ const AdminSignUp = (props, context) => {
                         <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Your PRIZM Studio URL")}</p>
                         </div>
-                        <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in a desired URL for your PRIZM studio.")}</p>
+                        <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please type in a desired URL for your PRIZM studio. (only english)")}</p>
                         <div className={`${styles.containerStudioInput}`}>
                             <InputMask mask={'prizm.cloud/********************'} 
                             formatChars={{
@@ -547,11 +547,8 @@ const AdminSignUp = (props, context) => {
                             )}
                             <div className={`${styles.mt3}`}>
                                 <p className={`${styles.font11}`} style={{lineHeight: 1.45}}>
-                                    <Truncate lines={props.isTruncated ? 4 : null} ellipsis={<span>...</span>}>
                                         {props.description}
-                                    </Truncate>
                                 </p>
-                                <p className={`${styles.fontBold} ${styles.font13} ${styles.green} ${styles.mt2} ${styles.cursorPointer}`} onClick={props.isTruncated ? props.undoTruncate : props.doTruncate}>{props.isTruncated ? context.t("More ...") : context.t("Abbr")}</p>
                             </div>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.my3}`}>
                                 <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Review")}</p>
@@ -741,11 +738,8 @@ const AdminSignUp = (props, context) => {
                             )}
                             <div className={`${styles.mt3}`}>
                                 <p className={`${styles.font11}`} style={{lineHeight: 1.45}}>
-                                    <Truncate lines={props.isTruncated ? 4 : null} ellipsis={<span>...</span>}>
                                         {props.description}
-                                    </Truncate>
                                 </p>
-                                <p className={`${styles.fontBold} ${styles.font13} ${styles.green} ${styles.mt2} ${styles.cursorPointer}`} onClick={props.isTruncated ? props.undoTruncate : props.doTruncate}>{props.isTruncated ? context.t("More ...") : context.t("Abbr")}</p>
                             </div>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.my3}`}>
                                 <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Review")}</p>

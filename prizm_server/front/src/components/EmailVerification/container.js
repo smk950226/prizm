@@ -8,7 +8,10 @@ import styles from '../../style/styles.module.scss';
 class Container extends Component{
     static propTypes = {
         emailVerification: PropTypes.func.isRequired,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        profile: PropTypes.object,
+        getProfile: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
@@ -16,15 +19,20 @@ class Container extends Component{
     }
 
     state = {
-        loading: true,
+        loading: true
     }
 
     componentDidMount = async() => {
-        const { match : { params : { uuid } }, emailVerification, goHome } = this.props;
+        const { match : { params : { uuid } }, emailVerification, goHome, isLoggedIn, getProfile } = this.props;
         const result = await emailVerification(uuid)
         if(result.status === 'ok'){
-            alert(this.context.t("Your email is verified!"))
-            goHome()
+            if(isLoggedIn){
+                await getProfile()
+            }
+            else{
+                alert(this.context.t("Your email is verified!"))
+                goHome()
+            }
         }
         else if(result.error){
             alert(result.error)
@@ -33,6 +41,13 @@ class Container extends Component{
         else{
             alert(this.context.t("An error has occurred.."))
             goHome()
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if(prevProps.profile !== this.props.profile){
+            alert(this.context.t("Your email is verified!"))
+            this.props.goHome()
         }
     }
 

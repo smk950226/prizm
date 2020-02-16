@@ -199,6 +199,28 @@ class Container extends Component{
                 tempProfileWidth: 0
             })
         }
+        if(prevProps.photographer !== this.props.photographer){
+            if(this.state.update){
+                this.setState({
+                    isSubmitting: false
+                })
+                alert(this.context.t("Your studio information has been changed successfully."))
+            }
+            else{
+                this.setState({
+                    isSubmitting: false
+                })
+                let replacedStudioId = ""
+                const { studioId } = this.state;
+                if(studioId.startsWith('prizm.cloud/')){
+                    replacedStudioId = studioId.slice(12)
+                }
+                else{
+                    replacedStudioId = studioId
+                }
+                this.props.goClear(replacedStudioId)
+            }
+        }
     }
 
     _submit = async(e) => {
@@ -901,18 +923,18 @@ class Container extends Component{
                                         const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
                                         if(result.status === 'ok'){
                                             await getPhotographer()
-                                            if(update){
-                                                this.setState({
-                                                    isSubmitting: false
-                                                })
-                                                alert(this.context.t("Your studio information has been changed successfully."))
-                                            }
-                                            else{
-                                                this.setState({
-                                                    isSubmitting: false
-                                                })
-                                                goClear(studioId)
-                                            }
+                                            // if(update){
+                                            //     this.setState({
+                                            //         isSubmitting: false
+                                            //     })
+                                            //     alert(this.context.t("Your studio information has been changed successfully."))
+                                            // }
+                                            // else{
+                                            //     this.setState({
+                                            //         isSubmitting: false
+                                            //     })
+                                            //     goClear(studioId)
+                                            // }
                                         }
                                         else if(result.error){
                                             this.setState({
@@ -960,18 +982,18 @@ class Container extends Component{
                                     const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
                                     if(result.status === 'ok'){
                                         await getPhotographer()
-                                        if(update){
-                                            this.setState({
-                                                isSubmitting: false
-                                            })
-                                            alert(this.context.t("Your studio information has been changed successfully."))
-                                        }
-                                        else{
-                                            this.setState({
-                                                isSubmitting: false
-                                            })
-                                            goClear(studioId)
-                                        }
+                                        // if(update){
+                                        //     this.setState({
+                                        //         isSubmitting: false
+                                        //     })
+                                        //     alert(this.context.t("Your studio information has been changed successfully."))
+                                        // }
+                                        // else{
+                                        //     this.setState({
+                                        //         isSubmitting: false
+                                        //     })
+                                        //     goClear(studioId)
+                                        // }
                                     }
                                     else if(result.error){
                                         this.setState({

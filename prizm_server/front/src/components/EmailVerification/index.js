@@ -4,9 +4,11 @@ import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { router : { location } } = state;
+    const { router : { location }, user : { profile, isLoggedIn } } = state;
     return {
-        pathname: location.pathname
+        pathname: location.pathname,
+        profile,
+        isLoggedIn
     }
 }
 
@@ -17,6 +19,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         goHome: () => {
             dispatch(push('/'))
+        },
+        getProfile: () => {
+            dispatch(userAction.getProfile())
         }
     }
 }
