@@ -60,19 +60,19 @@ class AdminMessageList extends Component{
                                                 )}
                                             </div>
                                             {chat.order.status === 'pending' && (
-                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt2} ${styles.pending}`}>{this.context.t(`Pending  (${chat.order.date_option === 'Specific' ? `${chat.order.specific_date.slice(2,4)}/${chat.order.specific_date.slice(5,7)}/${chat.order.specific_date.slice(8,10)}` : `${chat.order.start_date.slice(2,4)}/${chat.order.start_date.slice(5,7)}/${chat.order.start_date.slice(8,10)}`})`)}</p>
+                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt2} ${styles.pending}`}>{this.context.t("Pending")}{this.context.t(`  (${chat.order.date_option === 'Specific' ? `${chat.order.specific_date.slice(2,4)}/${chat.order.specific_date.slice(5,7)}/${chat.order.specific_date.slice(8,10)}` : `${chat.order.start_date.slice(2,4)}/${chat.order.start_date.slice(5,7)}/${chat.order.start_date.slice(8,10)}`})`)}</p>
                                             )}
                                             {((chat.order.status === 'confirmed') || (chat.order.status === 'waiting_payment')) && (
-                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.confirmed} ${styles.mt2}`}>{this.context.t(`Confirmed (${chat.order.confirmed_date.slice(2,4)}/${chat.order.confirmed_date.slice(5,7)}/${chat.order.confirmed_date.slice(8,10)})`)}</p>
+                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.confirmed} ${styles.mt2}`}>{this.context.t("Confirmed")}{this.context.t(` (${chat.order.confirmed_date.slice(2,4)}/${chat.order.confirmed_date.slice(5,7)}/${chat.order.confirmed_date.slice(8,10)})`)}</p>
                                             )}
                                             {chat.order.status === 'paid' && (
-                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.paid} ${styles.mt2}`}>{this.context.t(`Paid (${chat.order.confirmed_date.slice(2,4)}/${chat.order.confirmed_date.slice(5,7)}/${chat.order.confirmed_date.slice(8,10)})`)}</p>
+                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.paid} ${styles.mt2}`}>{this.context.t("Paid")}{this.context.t(`Paid (${chat.order.confirmed_date.slice(2,4)}/${chat.order.confirmed_date.slice(5,7)}/${chat.order.confirmed_date.slice(8,10)})`)}</p>
                                             )}
                                             {chat.order.status === 'cancelled' && (
-                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.cancelled} ${styles.mt2}`}>{this.context.t(`Cancelled (${chat.order.date_option === 'Specific' ? `${chat.order.specific_date.slice(2,4)}/${chat.order.specific_date.slice(5,7)}/${chat.order.specific_date.slice(8,10)}` : `${chat.order.start_date.slice(2,4)}/${chat.order.start_date.slice(5,7)}/${chat.order.start_date.slice(8,10)}`})`)}</p>
+                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.cancelled} ${styles.mt2}`}>{this.context.t("Cancelled")}{this.context.t(` (${chat.order.date_option === 'Specific' ? `${chat.order.specific_date.slice(2,4)}/${chat.order.specific_date.slice(5,7)}/${chat.order.specific_date.slice(8,10)}` : `${chat.order.start_date.slice(2,4)}/${chat.order.start_date.slice(5,7)}/${chat.order.start_date.slice(8,10)}`})`)}</p>
                                             )}
                                             {chat.order.status === 'completed' && (
-                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt2} ${styles.completed}`}>{this.context.t(`Completed (${chat.order.confirmed_date.slice(2,4)}/${chat.order.confirmed_date.slice(5,7)}/${chat.order.confirmed_date.slice(8,10)})`)}</p>
+                                                <p className={`${styles.fontBold} ${styles.font1416} ${styles.mt2} ${styles.completed}`}>{this.context.t("Completed")}{this.context.t(` (${chat.order.confirmed_date.slice(2,4)}/${chat.order.confirmed_date.slice(5,7)}/${chat.order.confirmed_date.slice(8,10)})`)}</p>
                                             )}
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@ class AdminMessageList extends Component{
                             ))
                         ) : (
                             <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/email_verifing.png')} alt={this.context.t("Request not exist")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%', maxWidth: 400}} />
+                                <img src={require('../../assets/images/email_verifing.png')} alt={this.context.t("This request no longer exists")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%', maxWidth: 400}} />
                                 <p className={`${styles.font1214} ${styles.mt3}`}>
                                     {this.context.t("You haven't received any messages.")}<br/>
                                     {this.context.t("Messages will appear when you confirm the schedule at the 'Manage Reservations' menu")}

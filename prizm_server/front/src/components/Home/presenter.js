@@ -4,6 +4,7 @@ import styles from '../../style/styles.module.scss';
 import styled from 'styled-components';
 import PortfolioSlider from '../PortfolioSlider';
 import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 const ProfileDiv = styled.div`
     width: 40px;
@@ -20,7 +21,8 @@ const ProfileDiv = styled.div`
 class Home extends Component{
     static propTypes = {
         photographerList: PropTypes.array,
-        isLoadingMore: PropTypes.bool.isRequired
+        isLoadingMore: PropTypes.bool.isRequired,
+        loading: PropTypes.bool.isRequired
     }
 
     static contextTypes = {
@@ -49,42 +51,48 @@ class Home extends Component{
     }
 
     render(){
-        const { photographerList } = this.props;
+        const { photographerList, loading } = this.props;
         return(
             <div className={`${styles.containerCustomer} ${styles.minHeightFullBtmNav} ${styles.safearea}`}>
                 {/* <div className={`${styles.bgNewyork} ${styles.widthFull} ${styles.banner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                    <p className={`${styles.font16} ${styles.fontBold} ${styles.white}`}>{this.context.t("NEWYORK")}</p>
+                    <p className={`${styles.font16} ${styles.fontBold} ${styles.white}`}>{this.context.t("SEOUL")}</p>
                 </div> */}
                 <div className={`${styles.widthFull} ${styles.bannerImg}`}>
                     
                 </div>
                 <div className={`${styles.mt4} ${styles.px3}`} ref={"photographerContainer"}>
-                    {photographerList && photographerList.length > 0 ? (
-                        photographerList.map(photographer => (
-                            <Fragment key={photographer.id}>
-                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb4}`}>
-                                    <div>
-                                        <Link to={`/${photographer.studio_id}/`} style={{textDecoration: 'none', color: 'black'}}>
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <ProfileDiv image={photographer.profile_image} />
-                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.ml3}`}>{photographer.nickname}</p>
-                                        </div>
-                                        </Link>
-                                    </div>
-                                    <a target={'_blank'} href={`https://instagram.com/${photographer.user.instagram_account}/`} className={`${styles.bgGray33} ${styles.px2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${styles.textDecorationNone}`} style={{height: 25}}>
-                                        <img src={require('../../assets/images/icon_instagram.png')} alt={"Instagram"} className={`${styles.iconInstagram}`} />
-                                        <p className={`${styles.fontBold} ${styles.font11} ${styles.white} ${styles.ml1}`}>Instagram</p>
-                                    </a>
-                                </div>
-                                {photographer.portfolio_set.length > 0 ? (
-                                    <PortfolioSlider portfolio={photographer.portfolio_set} nickname={photographer.nickname} lg={true} />
-                                ) : (
-                                    null
-                                )}
-                            </Fragment>
-                        ))
+                    {loading ? (
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                            <Loader type="Oval" color="#d66c8b" height={20} width={20} />
+                        </div>
                     ) : (
-                        null
+                        photographerList && photographerList.length > 0 ? (
+                            photographerList.map(photographer => (
+                                <Fragment key={photographer.id}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb4}`}>
+                                        <div>
+                                            <Link to={`/${photographer.studio_id}/`} style={{textDecoration: 'none', color: 'black'}}>
+                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                                <ProfileDiv image={photographer.profile_image} />
+                                                <p className={`${styles.fontBold} ${styles.font13} ${styles.ml3}`}>{photographer.nickname}</p>
+                                            </div>
+                                            </Link>
+                                        </div>
+                                        <a target={'_blank'} href={`https://instagram.com/${photographer.user.instagram_account}/`} className={`${styles.bgGray33} ${styles.px2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${styles.textDecorationNone}`} style={{height: 25}}>
+                                            <img src={require('../../assets/images/icon_instagram.png')} alt={"Instagram"} className={`${styles.iconInstagram}`} />
+                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.white} ${styles.ml1}`}>Instagram</p>
+                                        </a>
+                                    </div>
+                                    {photographer.portfolio_set.length > 0 ? (
+                                        <PortfolioSlider portfolio={photographer.portfolio_set} nickname={photographer.nickname} lg={true} />
+                                    ) : (
+                                        null
+                                    )}
+                                </Fragment>
+                            ))
+                        ) : (
+                            null
+                        )
                     )}
                 </div>
             </div>

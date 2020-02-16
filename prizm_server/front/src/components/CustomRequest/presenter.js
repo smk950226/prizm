@@ -29,7 +29,7 @@ class CustomRequest extends Component{
             <div className={`${styles.containerCustomer} ${styles.safearea}`}>
                 <div className={`${styles.widthFull} ${styles.banner}`} style={{position: 'relative', overflow: 'hidden'}}>
                     <video id="video_background" src={require('../../assets/videos/newyork.mp4')} className={`${styles.widthFull} ${styles.banner}`} style={{objectFit: 'cover'}} autoPlay={true} loop={true} muted={true} playsInline={true} />
-                    <p className={`${styles.font16} ${styles.fontBold} ${styles.white} ${styles.absoluteCenter}`}>{this.context.t("NEWYORK")}</p>
+                    <p className={`${styles.font16} ${styles.fontBold} ${styles.white} ${styles.absoluteCenter}`}>{this.context.t("SEOUL")}</p>
                 </div>
                 <div className={`${styles.heightCustomRequest} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull} ${styles.px3}`}>
                     {profile ? (
@@ -133,7 +133,10 @@ class CustomRequest extends Component{
                                         </p>
                                     </div>
                                     {profile.custom_request_status.payment !== 'paid' && (
-                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>{this.context.t(`Please add payment details by : ${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                            {this.context.t("Please add payment details by : ")}
+                                            {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                        </p>
                                     )}
                                 </div>
                             )}

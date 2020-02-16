@@ -75,7 +75,7 @@ class Navigation extends Component{
                     </div>
                     {/* <div className={`${styles.widthFull} ${styles.positionNavDescription}`}>
                         <p className={`${styles.textCenter} ${styles.font10}`}>
-                            {this.context.t("Meet the best photographers in New York")}<br/>
+                            {this.context.t("Meet the best photographers in Seoul")}<br/>
                             {this.context.t("Enrich your trip with photography")}
                         </p>
                     </div> */}

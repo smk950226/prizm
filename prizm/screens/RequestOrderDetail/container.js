@@ -234,7 +234,7 @@ class Container extends Component{
                     }
                 }
                 else{
-                    alert(this.context.t(`${order.custom_request.hour}시간을 선택해주세요.`))
+                    alert(`${order.custom_request.hour}` + this.context.t("시간을 선택해주세요."))
                 }
             }
         }

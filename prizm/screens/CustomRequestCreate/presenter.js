@@ -1619,7 +1619,10 @@ class CustomRequestCreate extends Component{
                                                         </p>
                                                     </div>
                                                     {profile.custom_request_status.payment !== 'paid' && (
-                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>{this.context.t(`Please add payment details by : ${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                            {this.context.t("Please add payment details by : ")}
+                                                            {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                        </p>
                                                     )}
                                                 </div>
                                             )}
@@ -1752,7 +1755,10 @@ class CustomRequestCreate extends Component{
                                                         </p>
                                                     </div>
                                                     {profile.custom_request_status.payment !== 'paid' && (
-                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>{this.context.t(`Please add payment details by : ${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                            {this.context.t("Please add payment details by : ")}
+                                                            {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                        </p>
                                                     )}
                                                 </div>
                                             )}
@@ -1879,7 +1885,10 @@ class CustomRequestCreate extends Component{
                                                         </p>
                                                     </div>
                                                     {profile.custom_request_status.payment !== 'paid' && (
-                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>{this.context.t(`Please add payment details by : ${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                            {this.context.t("Please add payment details by : ")}
+                                                            {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                        </p>
                                                     )}
                                                 </div>
                                             )}
@@ -1917,7 +1926,7 @@ class CustomRequestCreate extends Component{
                                     <div className={`${styles.textCenter}`}>
                                         <img src={require('../../assets/images/request_complete.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: '100%', maxWidth: 400}} />
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.mt3}`}>
-                                            {this.context.t("Your request has been succesfully submitted and sent to PRIZM photographers.")}<br/>
+                                            {this.context.t("Your request has been successfully submitted and sent to PRIZM photographers.")}<br/>
                                             {this.context.t("We will reach you via email and SMS soon. Thank you!")}
                                         </p>
                                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
@@ -2190,7 +2199,7 @@ class CustomRequestCreate extends Component{
                                                         )}
                                                     </div>
                                                     <div className={`${styles.checkBoxText}`}>
-                                                        <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeDateOption(2)}>{this.context.t("I don’t have a specific date yet, but I’m staying in New York City during : ")}</p>
+                                                        <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeDateOption(2)}>{this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2255,7 +2264,7 @@ class CustomRequestCreate extends Component{
                                                         )}
                                                     </div>
                                                     <div className={`${styles.checkBoxText}`}>
-                                                        <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeLocationOption(1)}>{this.context.t("I’d like to select my desired location(s). Click here to add a new location. ")}</p>
+                                                        <p className={`${styles.font1214} ${styles.ml2}`} onClick={() => this._handleChangeLocationOption(1)}>{this.context.t("I'd like to select my desired location(s) myself. Click here to add a new location. ")}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2392,7 +2401,7 @@ class CustomRequestCreate extends Component{
                                                 </div>
                                             </div>
                                             <p className={`${styles.my3} ${styles.font10}`}>
-                                                {this.context.t("Your reservation details and confirmation message from photographers will be sent to your email and mobile number.")}
+                                                {this.context.t("We will make notiifications on your reservation via email and SMS.")}
                                             </p>
                                             <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{this.context.t("Password")}</p>
                                             <div className={`${styles.widthFull}`}>

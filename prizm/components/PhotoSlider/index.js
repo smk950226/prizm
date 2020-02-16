@@ -8,7 +8,8 @@ import Swiper from '../Swiper';
 class PhotoSlider extends Component{
     static propTypes = {
         images: PropTypes.array.isRequired,
-        name: PropTypes.string
+        name: PropTypes.string,
+        height: PropTypes.number
     }
     
     static contextTypes = {
@@ -44,6 +45,13 @@ class PhotoSlider extends Component{
     render(){
         const { images, name } = this.props;
         const { showSlider, showIndex } = this.state;
+        let { height } = this.props;
+        if(height){
+            
+        }
+        else{
+            height = 100
+        }
         return(
             <View style={[styles.container]}>
                 <ScrollView
@@ -55,7 +63,7 @@ class PhotoSlider extends Component{
                         images.map((image, index) => (
                             <TouchableWithoutFeedback key={index} onPress={() => this._openSlider(index)}>
                                 <View>
-                                    <Image source={{uri: image.image}} style={[{height: 100, width: image.width*100/image.height}, index === images.length - 1 ? null : styles.mr5, styles.imageShadow]} resizeMode={'contain'} />
+                                    <Image source={{uri: image.image}} style={[{height: height, width: image.width*height/image.height}, index === images.length - 1 ? null : styles.mr5, styles.imageShadow]} resizeMode={'contain'} />
                                 </View>
                             </TouchableWithoutFeedback>
                         ))

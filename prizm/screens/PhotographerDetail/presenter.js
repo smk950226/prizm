@@ -247,11 +247,11 @@ class PhotographerDetail extends Component{
                                     <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 2 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(2)}>
                                         <div className={`${styles.checkBox} ${dateOption !== 2 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                             {dateOption === 2 && (
-                                                <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")} className={`${styles.iconCheck}`} />
+                                                <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")} className={`${styles.iconCheck}`} />
                                             )}
                                         </div>
                                         <div className={`${styles.checkBoxText}`}>
-                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}</p>
                                         </div>
                                     </div>
                                     {dateConfirm && (dateOption === 2) && (
@@ -295,18 +295,18 @@ class PhotographerDetail extends Component{
                                 <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                                 <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
-                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments")}</p>
+                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments (Optional)")}</p>
                                         <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show4 ? styles.rotate : null}`} />
                                     </div>
                                     <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
-                                    <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("comment")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
+                                    <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("Please leave your message here.")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goConfirm}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{isLoggedIn ? this.context.t("Submit the request") : this.context.t("Sign up & Submit the request")}</p>
                                     </div>
                                     </Collapse>
                                 </div>
                                 {/* <div className={`${styles.py3} ${styles.px3} ${styles.bgGrayE7} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={this.props.goHome}>
-                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("Find other photographers in New York")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("Find other photographers in Seoul")}</p>
                                     <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Find More")} className={`${styles.cursorPointer}`} style={{width: 15, height: 12}} />
                                 </div> */}
                             </Fragment>
@@ -337,7 +337,7 @@ class PhotographerDetail extends Component{
                                         ) : (
                                             <Fragment>
                                                 <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{`${request.startDate.split('-')[0]}/${String(request.startDate.split('-')[1]).length === 2 ? (request.startDate.split('-')[1]) : '0'.concat(String(request.startDate.split('-')[1]))}/${request.startDate.split('-')[2]} ~ ${request.endDate.split('-')[0]}/${String(request.endDate.split('-')[1]).length === 2 ? (request.endDate.split('-')[1]) : '0'.concat(String(request.endDate.split('-')[1]))}/${request.endDate.split('-')[2]}`}</p>
-                                                <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as above")}</p>
+                                                <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}</p>
                                             </Fragment>
                                         )}
                                         <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Service&Pricing")}</p>
@@ -380,7 +380,7 @@ class PhotographerDetail extends Component{
                                         ) : (
                                             <Fragment>
                                                 <p className={`${styles.mt2} ${styles.fontBold} ${styles.font14}`}>{`${selectedStartDate.getFullYear()}/${String(selectedStartDate.getMonth() + 1).length === 2 ? (selectedStartDate.getMonth() + 1) : '0'.concat(String(selectedStartDate.getMonth() + 1))}/${selectedStartDate.getDate()} ~ ${selectedEndDate.getFullYear()}/${String(selectedEndDate.getMonth() + 1).length === 2 ? (selectedEndDate.getMonth() + 1) : '0'.concat(String(selectedEndDate.getMonth() + 1))}/${selectedEndDate.getDate()}`}</p>
-                                                <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as above")}</p>
+                                                <p className={`${styles.mt1} ${styles.font11}`}>{this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}</p>
                                             </Fragment>
                                         )}
                                         <p className={`${styles.mt5} ${styles.fontBold} ${styles.font13}`}>{this.context.t("Service&Pricing")}</p>
@@ -408,9 +408,9 @@ class PhotographerDetail extends Component{
                                     <img src={require('../../assets/images/request_complete.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: '100%', maxWidth: 400}} />
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>{this.context.t("Your request was submitted successfully")}</p>
                                     <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
-                                        {this.context.t(`${photographer.nickname} is now reviewing your request.`)}<br/>
-                                        {this.context.t(`We will soon send you a confirmation message`)}<br/>
-                                        {this.context.t(`to your email and mobile number.`)}
+                                        {photographer.nickname}{this.context.t(" is now reviewing your request.")}<br/>
+                                        {this.context.t("We will soon send you a confirmation message")}<br/>
+                                        {this.context.t("to your email and mobile number.")}
                                     </p>
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go to the main page")}</p>

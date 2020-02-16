@@ -107,7 +107,10 @@ class MySchedule extends Component{
                                         <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.props.goPayment(order)} style={{height: 48}}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add Payment Details")}</p>
                                         </div>
-                                        <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{this.context.t(`Please add payment details by : ${new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+                                        <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>
+                                            {this.context.t("Please add payment details by : ")}
+                                            {this.context.t(`${new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                        </p>
                                         </Fragment>
                                     )}
                                     {order.status === 'waiting_payment' && (
@@ -115,7 +118,10 @@ class MySchedule extends Component{
                                         <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.props.goPayment(order)} style={{height: 48}}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("View Payment Information")}</p>
                                         </div>
-                                        <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{this.context.t(`Please make payment by : ${new Date(new Date(order.deposit.created_at).getTime() + 1000*60*60*24*1)}`)}</p>
+                                        <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>
+                                            {this.context.t("Please make payment by : ")}
+                                            {this.context.t(`${new Date(new Date(order.deposit.created_at).getTime() + 1000*60*60*24*1)}`)}
+                                        </p>
                                         </Fragment>
                                     )}
                                     {order.status === 'completed' && !order.is_reviewed && (
@@ -128,7 +134,7 @@ class MySchedule extends Component{
                         </div>
                     ) : (
                         <div className={`${styles.textCenter}`}>
-                            <img src={require('../../assets/images/main.png')} alt={this.context.t("Request not exist")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%', maxWidth: 400}} />
+                            <img src={require('../../assets/images/main.png')} alt={this.context.t("This request no longer exists")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%', maxWidth: 400}} />
                             <p className={`${styles.font1214} ${styles.mt3}`}>
                                 {this.context.t("You haven't made any reservations yet.")}<br/>
                                 {this.context.t("A new schedule will appear when you submit a request to a photographer.")}

@@ -10,7 +10,7 @@ const AdminSignUp = (props, context) => (
     <div className={`${styles.safeareaAdminMobile} ${styles.containerAdmin} ${styles.pxAdmin}`}>
         <div className={`${styles.mobileOnly}`}>
             <p className={`${styles.fontBold} ${styles.font2024} ${styles.mt3}`}>{context.t("Welcome to PRIZM")}</p>
-            <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information below to continue")}</p>
+            <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill in the information below to continue")}</p>
             <p className={`${styles.fontBold} ${styles.font1012}`} style={{marginTop: 50}}>{context.t("First name")}</p>
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"text"} name={"firstName"} value={props.firstName} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
@@ -65,7 +65,7 @@ const AdminSignUp = (props, context) => (
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.minHeightFull} ${styles.widthFull}`}>
                 <div className={`${styles.colMd6} ${styles.colXl7} ${styles.px0}`}>
                     <p className={`${styles.fontBold} ${styles.font2024} ${styles.mt3}`}>{context.t("Welcome to PRIZM")}</p>
-                    <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill out information below to continue")}</p>
+                    <p className={`${styles.font1416} ${styles.mt1} ${styles.mtXl2}`}>{context.t("Please fill in the information below to continue")}</p>
                 </div>
                 <div className={`${styles.colMd6} ${styles.colXl5} ${styles.px0}`} style={{maxWidth: 420}}>
                     <p className={`${styles.fontBold} ${styles.font1012}`}>{context.t("First name")}</p>

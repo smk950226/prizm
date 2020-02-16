@@ -53,7 +53,7 @@ class Home extends Component{
         return(
             <div className={`${styles.containerCustomer} ${styles.minHeightFullBtmNav} ${styles.safearea}`}>
                 {/* <div className={`${styles.bgNewyork} ${styles.widthFull} ${styles.banner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                    <p className={`${styles.font16} ${styles.fontBold} ${styles.white}`}>{this.context.t("NEWYORK")}</p>
+                    <p className={`${styles.font16} ${styles.fontBold} ${styles.white}`}>{this.context.t("SEOUL")}</p>
                 </div> */}
                 <div className={`${styles.widthFull} ${styles.bannerImg}`}>
                     

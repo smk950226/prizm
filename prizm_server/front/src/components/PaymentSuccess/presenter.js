@@ -32,8 +32,11 @@ const PaymentSuccess = (props, context) => (
                                 </CopyToClipboard>
                             </div>
                             <p className={`${styles.font1214}`} style={{lineHeight: 1.5}}>{context.t('Account holder : EXPLABS')}</p>
-                            <p className={`${styles.font1214} ${styles.completed}`} style={{lineHeight: 1.5}}>{context.t(`Payment Due : ${props.deadline.getFullYear()}/${props.deadline.getMonth() + 1}/${props.deadline.getDate()} ${props.deadline.getHours()}:${props.deadline.getMinutes()}`)}</p>
-                            <p className={`${styles.font1012} ${styles.completed}`} style={{lineHeight: 1.5}}>{context.t(`(Your reservation will be cancelled if you do not make payment by the payment due.)`)}</p>
+                            <p className={`${styles.font1214} ${styles.completed}`} style={{lineHeight: 1.5}}>
+                            {context.t("Payment Due : ")}
+                            {context.t(`${props.deadline.getFullYear()}/${props.deadline.getMonth() + 1}/${props.deadline.getDate()} ${props.deadline.getHours()}:${props.deadline.getMinutes()}`)}
+                            </p>
+                            <p className={`${styles.font1012} ${styles.completed}`} style={{lineHeight: 1.5}}>{context.t("(Your reservation will be cancelled if you do not make payment by the payment due.)")}</p>
                             <div className={`${styles.textCenter}`}>
                                 <img src={require('../../assets/images/signup_complete.png')} alt={context.t("Paid")} className={`${styles.mt3}`} style={{width: '80%', maxWidth: 400}} />
                             </div>

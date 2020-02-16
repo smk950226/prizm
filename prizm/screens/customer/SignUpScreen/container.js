@@ -76,7 +76,7 @@ class Container extends Component{
             })
             this.props.getSaveToken(this.state.token)
             if(this.state.goRequest){
-                this.props.navigation.navigate('PhotographerDetail', { photographerId: this.state.photographerId })
+                this.props.navigation.navigate('PhotographerDetail', { photographerId: this.state.photographerId, fromAuth: true, isConfirmPage: true })
             }
             else{
                 this.props.navigation.navigate('SignUpClear')

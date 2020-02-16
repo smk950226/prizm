@@ -99,27 +99,18 @@ class Container extends Component{
     }
 
     render(){
-        const { loading, photographerList } = this.state;
-        if(loading){
-            return(
-                <div className={`${styles.heightFull} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                    <Loader type="Oval" color="#d66c8b" height={20} width={20} />
-                </div>
-            )
-        }
-        else{
-            return (
-                <Home 
-                {...this.props} 
-                {...this.state}
-                photographerList={photographerList}
-                handleInputChange={this._handleInputChange}
-                handleKeyPress={this._handleKeyPress}
-                submit={this._submit}
-                photographerListMore={this._photographerListMore}
-                />
-            )
-        }
+        const { photographerList } = this.state;
+        return (
+            <Home 
+            {...this.props} 
+            {...this.state}
+            photographerList={photographerList}
+            handleInputChange={this._handleInputChange}
+            handleKeyPress={this._handleKeyPress}
+            submit={this._submit}
+            photographerListMore={this._photographerListMore}
+            />
+        )
     }
 }
 

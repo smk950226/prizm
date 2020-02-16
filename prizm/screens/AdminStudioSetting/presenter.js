@@ -378,7 +378,7 @@ const AdminSignUp = (props, context) => {
                                             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Title")}</p>
                                         </div>
                                         <div className={`${styles.containerStudioInput}`}>
-                                            <input className={`${styles.textInput6}`} type={"text"} name={"optionTitle"} value={props.optionTitle} onChange={props.handleInputChange} placeholder={context.t("ex) National Geographic Photographer, ABC Photographer")} />
+                                            <input className={`${styles.textInput6}`} type={"text"} name={"optionTitle"} value={props.optionTitle} onChange={props.handleInputChange} placeholder={context.t("ex) Romantic Wedding, Couple in Seoul")} />
                                         </div>
                                         <div className={`${styles.mt4} ${styles.mtMd3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Photography Type")}</p>
@@ -390,7 +390,7 @@ const AdminSignUp = (props, context) => {
                                             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Description")}</p>
                                         </div>
                                         <div className={`${styles.containerStudioInput}`}>
-                                            <input className={`${styles.textInput6}`} type={"text"} name={"optionDescription"} value={props.optionDescription} onChange={props.handleInputChange} placeholder={context.t("ex) BlahBlahBlah")} />
+                                            <input className={`${styles.textInput6}`} type={"text"} name={"optionDescription"} value={props.optionDescription} onChange={props.handleInputChange} placeholder={context.t("ex) Please describe this service option here.")} />
                                         </div>
                                         <div className={`${styles.mt4} ${styles.mtMd3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                             <div className={`${styles.col3} ${styles.px0}`}>
@@ -477,13 +477,13 @@ const AdminSignUp = (props, context) => {
                         </div>
                         <div className={`${styles.mobileOnly} ${styles.mt45}`}>
                             <p className={`${styles.fontBold} ${styles.font1214}`}>
-                                {context.t("Make sure to double check that all the information is correct. Scroll up/down the right screen to swipe and view your information on PRIZM Studio")}
+                                {context.t("Make sure to double check that all the information is correct. Click on the smartphone icon at the top right corner to view your PRIZM Studio.")}
                             </p>
                         </div>
                         <div className={`${styles.mobileNone} ${styles.mt5}`}>
                             <p className={`${styles.fontBold} ${styles.font1214}`}>
                                 {context.t("Make sure to double check that all the information is correct.")}<br/>
-                                {context.t("Scroll up/down the right screen to swipe and view your information on PRIZM Studio")}
+                                {context.t("Click on the smartphone icon at the top right corner to view your PRIZM Studio.")}
                             </p>
                         </div>
                         <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.confirm}>
@@ -630,11 +630,11 @@ const AdminSignUp = (props, context) => {
                             <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={props.dateOption === 2 ? props.blankDateOption : () => props.handleChangeDateOption(2)}>
                                 <div className={`${styles.checkBox} ${props.dateOption !== 2 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                     {props.dateOption === 2 && (
-                                        <img src={require('../../assets/images/icon_check.png')} alt={context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")} className={`${styles.iconCheck}`} />
+                                        <img src={require('../../assets/images/icon_check.png')} alt={context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")} className={`${styles.iconCheck}`} />
                                     )}
                                 </div>
                                 <div className={`${styles.checkBoxText}`}>
-                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}</p>
                                 </div>
                             </div>
                             {props.dateConfirm && (props.dateOption === 2) && (
@@ -678,11 +678,11 @@ const AdminSignUp = (props, context) => {
                         <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                         <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
-                                <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("4. Comments")}</p>
+                                <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("4. Comments (Optional)")}</p>
                                 <img src={require('../../assets/images/icon_arrow_down.png')} alt={context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${props.show4 ? styles.rotate : null}`} />
                             </div>
                             <Collapse isOpened={props.show4} theme={{collapse: styles.collapse}}>
-                            <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={context.t("comment")} value={props.comment} name={"comment"} onChange={props.handleInputChange} />
+                            <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={context.t("Please leave your message here.")} value={props.comment} name={"comment"} onChange={props.handleInputChange} />
                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit the request")}</p>
                             </div>
@@ -825,11 +825,11 @@ const AdminSignUp = (props, context) => {
                             <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={props.dateOption === 2 ? props.blankDateOption : () => props.handleChangeDateOption(2)}>
                                 <div className={`${styles.checkBox} ${props.dateOption !== 2 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                     {props.dateOption === 2 && (
-                                        <img src={require('../../assets/images/icon_check.png')} alt={context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")} className={`${styles.iconCheck}`} />
+                                        <img src={require('../../assets/images/icon_check.png')} alt={context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")} className={`${styles.iconCheck}`} />
                                     )}
                                 </div>
                                 <div className={`${styles.checkBoxText}`}>
-                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{context.t("I don’t have a specific date in mind yes, but my availability in Newyork City is as follows :")}</p>
+                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}</p>
                                 </div>
                             </div>
                             {props.dateConfirm && (props.dateOption === 2) && (
@@ -873,11 +873,11 @@ const AdminSignUp = (props, context) => {
                         <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
                         <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
-                                <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("4. Comments")}</p>
+                                <p className={`${styles.fontBold} ${styles.font13}`}>{context.t("4. Comments (Optional)")}</p>
                                 <img src={require('../../assets/images/icon_arrow_down.png')} alt={context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${props.show4 ? styles.rotate : null}`} />
                             </div>
                             <Collapse isOpened={props.show4} theme={{collapse: styles.collapse}}>
-                            <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={context.t("comment")} value={props.comment} name={"comment"} onChange={props.handleInputChange} />
+                            <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={context.t("Please leave your message here.")} value={props.comment} name={"comment"} onChange={props.handleInputChange} />
                             <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit the request")}</p>
                             </div>
@@ -977,7 +977,7 @@ const AdminSignUp = (props, context) => {
                             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Title")}</p>
                         </div>
                         <div className={`${styles.containerStudioInput}`}>
-                            <input className={`${styles.textInput6}`} type={"text"} name={"optionTitle"} value={props.optionTitle} onChange={props.handleInputChange} placeholder={context.t("ex) National Geographic Photographer, ABC Photographer")} />
+                            <input className={`${styles.textInput6}`} type={"text"} name={"optionTitle"} value={props.optionTitle} onChange={props.handleInputChange} placeholder={context.t("ex) Romantic Wedding, Couple in Seoul")} />
                         </div>
                         <div className={`${styles.mt4} ${styles.mtMd3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Photography Type")}</p>
@@ -989,7 +989,7 @@ const AdminSignUp = (props, context) => {
                             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mr2}`}>{context.t("Description")}</p>
                         </div>
                         <div className={`${styles.containerStudioInput}`}>
-                            <input className={`${styles.textInput6}`} type={"text"} name={"optionDescription"} value={props.optionDescription} onChange={props.handleInputChange} placeholder={context.t("ex) BlahBlahBlah")} />
+                            <input className={`${styles.textInput6}`} type={"text"} name={"optionDescription"} value={props.optionDescription} onChange={props.handleInputChange} placeholder={context.t("ex) Please describe this service option here.")} />
                         </div>
                         <div className={`${styles.mt4} ${styles.mtMd3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                             <div className={`${styles.col3} ${styles.px0}`}>

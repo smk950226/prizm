@@ -23,7 +23,7 @@ class Welcome extends Component{
                 <div className={`${styles.absoluteCenter} ${styles.widthFull} ${styles.heightFull}`} style={{backgroundColor: 'rgba(0,0,0,0.6)'}}></div>
                 <div className={`${styles.absoluteCenter} ${styles.widthFull}`}>
                     <p className={`${styles.white} ${styles.fontLight} ${styles.font24} ${styles.textCenter}`}>
-                        {this.context.t("Meet the best photographers in New York City.")}
+                        {this.context.t("Meet the best photographers in Seoul.")}
                     </p>
                     <p className={`${styles.white} ${styles.fontLight} ${styles.font16} ${styles.textCenter} ${styles.mt2}`}>
                         {this.context.t("PRIZM connects tourists in need of travel photography with photographers around the world.")}
@@ -37,7 +37,7 @@ class Welcome extends Component{
                         </div>
                     </div>
                     <p className={`${styles.white} ${styles.fontLight} ${styles.font24} ${styles.textCenter} ${styles.hidden}`}>
-                        {this.context.t("Meet the best photographers in New York City.")}
+                        {this.context.t("Meet the best photographers in Seoul.")}
                     </p>
                     <p className={`${styles.white} ${styles.fontLight} ${styles.font16} ${styles.textCenter} ${styles.mt2} ${styles.hidden}`}>
                         {this.context.t("PRIZM connects tourists in need of travel photography with photographers around the world.")}

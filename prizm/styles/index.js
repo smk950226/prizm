@@ -215,6 +215,10 @@ const styles = StyleSheet.create({
         color: '#939393',
         includeFontPadding: false
     },
+    grayF4: {
+        color: '#F4F4F4',
+        includeFontPadding: false
+    },
     pink: {
         color: '#d66c8b',
         includeFontPadding: false
@@ -262,6 +266,9 @@ const styles = StyleSheet.create({
     },
     bgGray93: {
         backgroundColor: '#939393'
+    },
+    bgGrayF4: {
+        backgroundColor: '#F4F4F4'
     },
     bgPink: {
         backgroundColor: '#d66c8b'
@@ -704,6 +711,10 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100
     },
+    iconArrowSm: {
+        width: 45*0.3,
+        height: 36*0.3
+    },
     iconArrow: {
         width: 45*0.4,
         height: 36*0.4
@@ -784,6 +795,31 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 25
     },
+    circle60: {
+        width: 60,
+        height: 60,
+        borderRadius: 30
+    },
+    circle70: {
+        width: 70,
+        height: 70,
+        borderRadius: 35
+    },
+    circle80: {
+        width: 80,
+        height: 80,
+        borderRadius: 40
+    },
+    circle90: {
+        width: 90,
+        height: 90,
+        borderRadius: 45
+    },
+    circle100: {
+        width: 100,
+        height: 100,
+        borderRadius: 50
+    },
     borderBtmBlack: {
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#000'
@@ -791,6 +827,14 @@ const styles = StyleSheet.create({
     borderBtmGrayDc: {
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#dcdcdc'
+    },
+    borderPink3: {
+        borderColor: '#d66c8b',
+        borderWidth: 3
+    },
+    borderGrayF43: {
+        borderColor: '#f4f4f4',
+        borderWidth: 3
     },
     imageShadow: {
         shadowColor: '#000',

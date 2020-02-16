@@ -76,7 +76,10 @@ const MyScheduleDetail = (props, context) => (
             <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => props.goPayment(props.order)} style={{height: 48}}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Add Payment Details")}</p>
             </div>
-            <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please add payment details by : ${new Date(new Date(props.order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}</p>
+            <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>
+            {context.t("Please add payment details by : ")}
+            {context.t(`${new Date(new Date(props.order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+            </p>
             </Fragment>
         )}
         {props.order.status === 'waiting_payment' && (
@@ -84,7 +87,10 @@ const MyScheduleDetail = (props, context) => (
             <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => props.goPayment(props.order)} style={{height: 48}}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("View Payment Information")}</p>
             </div>
-            <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>{context.t(`Please make payment by : ${new Date(new Date(props.order.deposit.created_at).getTime() + 1000*60*60*24*1)}`)}</p>
+            <p className={`${styles.font11} ${styles.mt2} ${styles.gray93}`}>
+            {context.t("Please make payment by : ")}
+            {context.t(`${new Date(new Date(props.order.deposit.created_at).getTime() + 1000*60*60*24*1)}`)}
+            </p>
             </Fragment>
         )}
         {props.order.status === 'completed' && !props.order.is_reviewed && (

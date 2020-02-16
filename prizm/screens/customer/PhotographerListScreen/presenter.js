@@ -19,27 +19,29 @@ const PhotographerListScreen = (props, context) => (
                     <Image source={require('../../../assets/images/seoul.png')} style={[styles.widthFull, { height: 70 }]} resizeMode={'cover'} />
                 }
                 renderItem={({item}) => (
-                        <View key={item.id} style={[styles.mb10]}>
-                        <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween, styles.px15, styles.py10]}>
-                            <View style={[styles.row, styles.alignItemsCenter]}>
-                                <Image source={item.profile_image ? {uri: item.profile_image} : require('../../../assets/images/icon_profile.png')} style={[styles.circle40]} />
-                                <Text style={[styles.font14, styles.fontBold, styles.ml10]}>
-                                    {item.nickname}
-                                </Text>
-                            </View>
-                            <TouchableWithoutFeedback onPress={item.instagram_account ? Linking.openURL(`instagram://user?username=${item.instagram_account}`) : null}>
-                                <View style={[styles.row, styles.justifyContentCenter, styles.alignItemsCenter, styles.px10, styles.py5, styles.bgGray33]}>
-                                    <Image source={require('../../../assets/images/icon_instagram.png')} style={[styles.icon10]} />
-                                    <Text style={[styles.font12, styles.white, styles.ml5]}>
-                                        {context.t("Instagram")}
+                    <TouchableWithoutFeedback key={item.id} onPress={() => props.navigation.navigate('PhotographerDetail', { photographer: item })}>
+                        <View style={[styles.mb10]}>
+                            <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween, styles.px15, styles.py10]}>
+                                <View style={[styles.row, styles.alignItemsCenter]}>
+                                    <Image source={item.profile_image ? {uri: item.profile_image} : require('../../../assets/images/icon_profile.png')} style={[styles.circle40]} />
+                                    <Text style={[styles.font14, styles.fontBold, styles.ml10]}>
+                                        {item.nickname}
                                     </Text>
                                 </View>
-                            </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={item.instagram_account ? Linking.openURL(`instagram://user?username=${item.instagram_account}`) : null}>
+                                    <View style={[styles.row, styles.justifyContentCenter, styles.alignItemsCenter, styles.px10, styles.py5, styles.bgGray33]}>
+                                        <Image source={require('../../../assets/images/icon_instagram.png')} style={[styles.icon10]} />
+                                        <Text style={[styles.font12, styles.white, styles.ml5]}>
+                                            {context.t("Instagram")}
+                                        </Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </View>
+                            <View style={[styles.mt10, { height: 100 }]}>
+                                <PhotoSlider images={item.portfolio_set} name={item.nickname} height={100} />
+                            </View>
                         </View>
-                        <View style={[styles.mt10, { height: 100 }]}>
-                            <PhotoSlider images={item.portfolio_set} name={item.nickname} />
-                        </View>
-                    </View>
+                    </TouchableWithoutFeedback>
                 )} 
                 numColumns={1} 
                 keyExtractor={item => String(item.id)} 

@@ -1153,7 +1153,7 @@ class CustomRequestCreateScreen extends Component{
                         <Fragment>
                             <Image source={require('../../../assets/images/request_complete.png')} style={[{width: 2338*0.1, height: 1668*0.1}, styles.alignSelfCenter]} />
                             <Text style={[styles.font14, styles.mt20, styles.textCenter]}>
-                                {this.context.t("Your request has been succesfully submitted and sent to PRIZM photographers.")}
+                                {this.context.t("Your request has been successfully submitted and sent to PRIZM photographers.")}
                             </Text>
                             <Text style={[styles.font14, styles.mt5, styles.textCenter]}>
                                 {this.context.t("We will reach you via email and SMS soon. Thank you!")}
@@ -1550,7 +1550,7 @@ class CustomRequestCreateScreen extends Component{
                                                     )}
                                                 </View>
                                                 <Text style={[styles.font14, styles.fontRegular, styles.ml10]}>
-                                                    {this.context.t("I don’t have a specific date yet, but I’m staying in New York City during : ")}
+                                                    {this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}
                                                 </Text>
                                             </View>
                                         </TouchableWithoutFeedback>
@@ -1802,7 +1802,7 @@ class CustomRequestCreateScreen extends Component{
                                                 </View>
                                             </View>
                                             <Text style={[styles.mt5, styles.font10]}>
-                                                {this.context.t("Your reservation details and confirmation message from photographers will be sent to your email and mobile number.")}
+                                                {this.context.t("We will make notiifications on your reservation via email and SMS.")}
                                             </Text>
                                             <Text style={[styles.fontBold, styles.font12, styles.mt10]}>
                                                 {this.context.t("Password")}

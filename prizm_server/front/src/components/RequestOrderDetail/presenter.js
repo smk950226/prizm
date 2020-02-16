@@ -262,9 +262,9 @@ class PhotographerDetail extends Component{
                                 <img src={require('../../assets/images/request_complete.png')} alt={this.context.t("Submitted")} className={`${styles.mb4}`} style={{width: '100%', maxWidth: 400}} />
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.mt5}`}>{this.context.t("Your request was submitted successfully")}</p>
                                 <p className={`${styles.font12} ${styles.mt5} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
-                                    {this.context.t(`${order.photographer.nickname} is now reviewing your request.`)}<br/>
-                                    {this.context.t(`We will soon send you a confirmation message`)}<br/>
-                                    {this.context.t(`to your email and mobile number.`)}
+                                    {order.photographer.nickname}{this.context.t(" is now reviewing your request.")}<br/>
+                                    {this.context.t("We will soon send you a confirmation message")}<br/>
+                                    {this.context.t("to your email and mobile number.")}
                                 </p>
                                 <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go to the main page")}</p>

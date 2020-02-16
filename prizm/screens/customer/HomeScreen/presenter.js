@@ -17,17 +17,17 @@ const HomeScreen = (props, context) => (
             >
                 <View style={styles.container}>
                     <View style={[styles.flex1]}>
-                        <Image source={require('../../../assets/images/landing_1.jpeg')} style={[styles.widthFull, styles.heightFull]} resizeMode={'cover'} />
+                        <Image source={require('../../../assets/images/landing_1.jpg')} style={[styles.widthFull, styles.heightFull]} resizeMode={'cover'} />
                     </View> 
                 </View>
                 <View style={styles.container}>
                     <View style={[styles.flex1]}>
-                        <Image source={require('../../../assets/images/landing_2.jpeg')} style={[styles.widthFull, styles.heightFull]} resizeMode={'cover'} />
+                        <Image source={require('../../../assets/images/landing_2.jpg')} style={[styles.widthFull, styles.heightFull]} resizeMode={'cover'} />
                     </View> 
                 </View>
                 <View style={styles.container}>
                     <View style={[styles.flex1]}>
-                        <Image source={require('../../../assets/images/landing_3.jpeg')} style={[styles.widthFull, styles.heightFull]} resizeMode={'cover'} />
+                        <Image source={require('../../../assets/images/landing_3.jpg')} style={[styles.widthFull, styles.heightFull]} resizeMode={'cover'} />
                     </View> 
                 </View>
             </Swiper>
@@ -179,7 +179,7 @@ const HomeScreen = (props, context) => (
                                     </View>
                                 </TouchableWithoutFeedback>
                                 <Text style={[styles.mt10, styles.pink, styles.font10]}>
-                                    {context.t(`Please add payment details by : ${new Date(new Date(props.profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                    {context.t("Please add payment details by : ")}{context.t(`${new Date(new Date(props.profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
                                 </Text>
                             </View>
                         )}

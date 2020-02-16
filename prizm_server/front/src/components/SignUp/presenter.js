@@ -41,7 +41,7 @@ const SignUp = (props, context) => (
             </div>
         </div>
         <p className={`${styles.my3} ${styles.font10}`}>
-            {context.t("Your reservation details and confirmation message from photographers will be sent to your email and mobile number.")}
+            {context.t("We will make notiifications on your reservation via email and SMS.")}
         </p>
         <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{context.t("Password")}</p>
         <div className={`${styles.widthFull}`}>

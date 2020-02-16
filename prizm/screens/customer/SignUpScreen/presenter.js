@@ -99,7 +99,7 @@ const SignUpScreen = (props, context) => (
                     </View>
                 </View>
                 <Text style={[styles.mt5, styles.font10]}>
-                    {context.t("Your reservation details and confirmation message from photographers will be sent to your email and mobile number.")}
+                    {context.t("We will make notiifications on your reservation via email and SMS.")}
                 </Text>
                 <Text style={[styles.fontBold, styles.font12, styles.mt10]}>
                     {context.t("Password")}

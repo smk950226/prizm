@@ -12,7 +12,7 @@ const AdminHome = (props, context) => (
                         <img src={require('../../assets/images/prizm_admin_main.png')} alt={context.t("Submitted")} className={`${styles.mb3}`} style={{width: '100%'}} />
                     </div>
                     <p className={`${styles.fontBold} ${styles.fontAdminHome}`} style={{lineHeight: 1.5}}>
-                        {context.t(`The easiest way to create your mobile studio`)}
+                        {context.t("The easiest way to create your mobile studio")}
                     </p>
                     <p className={`${styles.mtR45} ${styles.fontAdminHome2}`} style={{lineHeight: 1.3}}>
                         {context.t("Meet tourists from all over the world")}<br/>
@@ -40,7 +40,7 @@ const AdminHome = (props, context) => (
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.pxAdmin} ${styles.heightFullSafearea}`} style={{position: 'relative'}}>
                 <div className={`${styles.colMd7} ${styles.colLg6} ${styles.px0}`}>
                     <p className={`${styles.font2022} ${styles.fontBold}`} style={{lineHeight: 1.5}}>
-                        {context.t(`The easiest way to create your mobile studio`)}
+                        {context.t("The easiest way to create your mobile studio")}
                     </p>
                     <p className={`${styles.font131416} ${styles.mtR45}`} style={{lineHeight: 1.3}}>
                         {context.t("Meet tourists from all over the world")}<br/>

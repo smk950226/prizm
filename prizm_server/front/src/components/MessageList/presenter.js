@@ -112,7 +112,7 @@ class MessageList extends Component{
                             ))
                         ) : (
                             <div className={`${styles.textCenter}`}>
-                                <img src={require('../../assets/images/email_verifing.png')} alt={this.context.t("Request not exist")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%', maxWidth: 400}} />
+                                <img src={require('../../assets/images/email_verifing.png')} alt={this.context.t("This request no longer exists")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%', maxWidth: 400}} />
                                 <p className={`${styles.font1214} ${styles.mt3}`}>
                                     {this.context.t("You haven't received any messages yet.")}<br/>
                                     {this.context.t("A new chatroom will appear when you submit a request to a photographer.")}
