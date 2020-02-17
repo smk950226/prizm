@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
+import MyLoader from '../Loader';
 
 const AdminSignUp = (props, context) => (
     <div className={`${styles.safeareaAdminMobile} ${styles.minHeightFull} ${styles.containerAdmin} ${styles.pxAdmin}`}>
@@ -36,7 +37,7 @@ const AdminSignUp = (props, context) => (
                         <input className={`${styles.textInput6}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`}>
-                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, marginTop: 65, maxWidth: 140}} onClick={props.submit}>
+                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, marginTop: 65, maxWidth: 140}} onClick={props.submit}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Sign In")}</p>
                         </div>
                     </div>
@@ -44,6 +45,9 @@ const AdminSignUp = (props, context) => (
                 </div>
             </div>
         </div>
+        {props.isSubmitting && (
+            <MyLoader />
+        )}
     </div>
 )
 

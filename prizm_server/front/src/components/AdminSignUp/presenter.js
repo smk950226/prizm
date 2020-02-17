@@ -5,6 +5,7 @@ import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import ReactCountryFlag from "react-country-flag";
 import Modal from 'react-responsive-modal';
 import InputMask from 'react-input-mask';
+import MyLoader from '../Loader';
 
 const AdminSignUp = (props, context) => (
     <div className={`${styles.safeareaAdminMobile} ${styles.containerAdmin} ${styles.pxAdmin}`}>
@@ -37,7 +38,7 @@ const AdminSignUp = (props, context) => (
             </div>
             <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Instagram")}</p>
             <div className={`${styles.widthFull}`}>
-                <InputMask mask={'inst\\agr\\am.com/********************'} 
+                <InputMask mask={'inst\\agr\\am.com/******************************'} 
                 formatChars={{
                     '*': '[A-Za-z0-9!@#$()-_+=.,]'
                 }}
@@ -94,7 +95,7 @@ const AdminSignUp = (props, context) => (
                     </div>
                     <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Instagram")}</p>
                     <div className={`${styles.widthFull}`}>
-                        <InputMask mask={'inst\\agr\\am.com/********************'} 
+                        <InputMask mask={'inst\\agr\\am.com/******************************'} 
                         formatChars={{
                             '*': '[A-Za-z0-9!@#$()-_+=.,]'
                         }}
@@ -122,6 +123,9 @@ const AdminSignUp = (props, context) => (
                 </div>
             </div>
         </div>
+        {props.isSubmitting && (
+            <MyLoader />
+        )}
         <Modal
         open={props.showCountryNumber} 
         onClose={props.closeShowCountryNumber} 
@@ -132,7 +136,7 @@ const AdminSignUp = (props, context) => (
                 <p className={`${styles.textCenter} ${styles.my3} ${styles.fontBold} ${styles.font1214}`}>{context.t("Nationality")}</p>
                 <div className={`${styles.px5}`}>
                     <div className={`${styles.widthFull}`}>
-                        <input className={`${styles.textInput2}`} type={"text"} name={"q"} value={props.q} onChange={props.handleInputChange} />
+                        <input className={`${styles.textInput2}`} type={"text"} name={"q"} placeholder={context.t("Type your country")} value={props.q} onChange={props.handleInputChange} />
                     </div>
                 </div>
                 <div className={`${styles.overflowYScroll} ${styles.px3} ${styles.pt2}`} style={{maxHeight: 300}}>

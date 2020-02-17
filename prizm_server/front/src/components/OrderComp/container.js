@@ -15,18 +15,23 @@ class Container extends Component{
         t: PropTypes.func.isRequired
     }
 
-    state = {
-        loading: true,
-        showResponse: true,
-        checkedOption: 0,
-        showDatePicker: false,
-        selectedTime: [],
-        isSubmitting: false,
-        showDecline: false
+    constructor(props){
+        super(props);
+        const { order } = props;
+        this.state = {
+            order,
+            loading: true,
+            showResponse: true,
+            checkedOption: 0,
+            showDatePicker: false,
+            selectedTime: [],
+            isSubmitting: false,
+            showDecline: false
+        }
     }
 
     componentDidMount = () => {
-        const { order } = this.props;
+        const { order } = this.state;
         let dayList = []
         const timeList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
         if(order.date_option === 'Specific'){
@@ -61,6 +66,14 @@ class Container extends Component{
                 loading: false,
                 dayList,
                 timeList
+            })
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if(prevProps.order !== this.props.order){
+            this.setState({
+                order: this.props.order
             })
         }
     }
@@ -141,8 +154,8 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { checkedOption, selectedTime, isSubmitting } = this.state;
-        const { order, responseToOrder, refresh } = this.props;
+        const { checkedOption, selectedTime, isSubmitting, order } = this.state;
+        const { responseToOrder, refresh } = this.props;
         if(!isSubmitting){
             if(checkedOption > 0){
                 this.setState({
@@ -154,6 +167,7 @@ class Container extends Component{
                         if(result.status === 'ok'){
                             await refresh(result.order)
                             this.setState({
+                                order: result.order,
                                 checkedOption: 0,
                                 showDatePicker: false,
                                 selectedTime: [],
@@ -185,6 +199,7 @@ class Container extends Component{
                     if(result.status === 'ok'){
                         await refresh(result.order)
                         this.setState({
+                            order: result.order,
                             checkedOption: 0,
                             showDatePicker: false,
                             selectedTime: [],
@@ -215,16 +230,17 @@ class Container extends Component{
         this.setState({
             checkedOption: 3
         })
-        const { isSubmitting } = this.state;
-        const { order, responseToOrder, refresh } = this.props;
+        const { isSubmitting, order } = this.state;
+        const { responseToOrder, refresh } = this.props;
         if(!isSubmitting){
             this.setState({
                 isSubmitting: true
             })
             const result = await responseToOrder(order.id, 3)
             if(result.status === 'ok'){
-                await refresh()
+                await refresh(result.order)
                 this.setState({
+                    order: result.order,
                     checkedOption: 0,
                     showDatePicker: false,
                     selectedTime: [],

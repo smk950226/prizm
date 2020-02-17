@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
+import MyLoader from '../Loader';
 
 const AdminProfilePassword = (props, context) => (
     <div className={`${styles.safearea} ${styles.minHeightFull} ${styles.containerCustomer} ${styles.px3}`}>
@@ -18,19 +19,22 @@ const AdminProfilePassword = (props, context) => (
             <input className={`${styles.textInput2}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} />
         </div>
         <div className={`${styles.mobileOnly}`}>
-            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
+            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} `} style={{height: 48}} onClick={props.submit}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Edit")}</p>
             </div>
             <p className={`${styles.fontBold} ${styles.font12} ${styles.mt3} ${styles.textCenter} ${styles.cursorPointer}`} onClick={props.goProfile}>{context.t("Do you want to change your profile?")}</p>
         </div>
         <div className={`${styles.mobileNone}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                <div className={`${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, width: 140}} onClick={props.submit}>
+                <div className={`${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} `} style={{height: 48, width: 140}} onClick={props.submit}>
                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Change Password")}</p>
                 </div>
             </div>
             <p className={`${styles.fontBold} ${styles.font12} ${styles.mt3} ${styles.textCenter} ${styles.cursorPointer}`} onClick={props.goProfile}>{context.t("Do you want to change your profile?")}</p>
         </div>
+        {props.isSubmitting && (
+            <MyLoader />
+        )}
     </div>
 )
 

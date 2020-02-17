@@ -4,6 +4,7 @@ import styles from '../../style/styles.module.scss';
 import Rating from 'react-rating';
 import MdStar from 'react-ionicons/lib/MdStar';
 import TextareaAutosize from 'react-textarea-autosize';
+import MyLoader from '../Loader';
 
 const ReviewCreate = (props, context) => (
     <div className={`${styles.widthFull} ${styles.containerCustomer} ${styles.bgWhite} ${styles.minHeightFull}`}>
@@ -31,10 +32,13 @@ const ReviewCreate = (props, context) => (
             </div>
             <p className={`${styles.font1416}`}>{context.t("Share details of your experience with the photographer here:")}</p>
             <TextareaAutosize maxRows={15} className={`${styles.textArea3} ${styles.mt3} ${styles.py3} ${styles.px2}`} type={"text"} name={"comment"} value={props.comment} placeholder={context.t("Review")} onChange={props.handleInputChange} />
-            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
+            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} `} style={{height: 48}} onClick={props.submit}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit Review")}</p>
             </div>
         </div>
+        {props.isSubmitting && (
+            <MyLoader />
+        )}
     </div>
 )
 

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { GOOGLE_API_KEY } from '../../config/secrets';
 import LocationComp from '../LocationComp';
+import MyLoader from '../Loader';
 
 const DayContainer = styled.div`
     height: ${props => `${(props.length*32)+45}px`};
@@ -266,13 +267,16 @@ class RequestComp extends Component{
                             </div>
                             {request.status === 'none' && (
                                 <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter}`}>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${request.date_option === 'Specific' ? checkTime ? null : styles.opacity7 : null} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48, width: 200}} onClick={this.props.submit}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${request.date_option === 'Specific' ? checkTime ? null : styles.opacity7 : null} `} style={{height: 48, width: 200}} onClick={this.props.submit}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Send Your Proposal")}</p>
                                     </div>
                                 </div>
                             )}
                         </div>
                     </Collapse>
+                )}
+                {isSubmitting && (
+                    <MyLoader />
                 )}
             </Fragment>
         )

@@ -2425,7 +2425,7 @@ class CustomRequestCreate extends Component{
                                                     <p className={`${styles.textCenter} ${styles.my3} ${styles.fontBold} ${styles.font1214}`}>{this.context.t("Nationality")}</p>
                                                     <div className={`${styles.px5}`}>
                                                         <div className={`${styles.widthFull}`}>
-                                                            <input className={`${styles.textInput2}`} type={"text"} name={"q"} value={q} onChange={this._handleInputChange} />
+                                                            <input className={`${styles.textInput2}`} type={"text"} name={"q"} placeholder={this.context.t("Type your country")} value={q} onChange={this._handleInputChange} />
                                                         </div>
                                                     </div>
                                                     <div className={`${styles.overflowYScroll} ${styles.px3} ${styles.pt2}`} style={{maxHeight: 300}}>

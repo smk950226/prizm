@@ -4,6 +4,7 @@ import styles from '../../style/styles.module.scss';
 import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import ReactCountryFlag from "react-country-flag";
 import Modal from 'react-responsive-modal';
+import MyLoader from '../Loader';
 
 const SignUp = (props, context) => (
     <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
@@ -51,9 +52,12 @@ const SignUp = (props, context) => (
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"password2"} value={props.password2} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
         </div>
-        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
+        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.submit}>
             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{props.goRequest ? context.t("Sign Up & Submit the request") : context.t("Sign Up")}</p>
         </div>
+        {props.isSubmitting && (
+            <MyLoader />
+        )}
         <Modal
         open={props.showCountryNumber} 
         onClose={props.closeShowCountryNumber} 
@@ -64,7 +68,7 @@ const SignUp = (props, context) => (
                 <p className={`${styles.textCenter} ${styles.my3} ${styles.fontBold} ${styles.font1214}`}>{context.t("Nationality")}</p>
                 <div className={`${styles.px5}`}>
                     <div className={`${styles.widthFull}`}>
-                        <input className={`${styles.textInput2}`} type={"text"} name={"q"} value={props.q} onChange={props.handleInputChange} />
+                        <input className={`${styles.textInput2}`} type={"text"} name={"q"} placeholder={context.t("Type your country")} value={props.q} onChange={props.handleInputChange} />
                     </div>
                 </div>
                 <div className={`${styles.overflowYScroll} ${styles.px3} ${styles.pt2}`} style={{maxHeight: 300}}>

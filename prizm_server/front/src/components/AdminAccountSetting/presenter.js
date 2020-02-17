@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
+import MyLoader from '../Loader';
 
 const AdminProfileSetting = (props, context) => (
     <div className={`${styles.safearea} ${styles.minHeightFull} ${styles.containerCustomer} ${styles.px3}`}>
@@ -59,18 +60,21 @@ const AdminProfileSetting = (props, context) => (
         {props.editable && (
             <Fragment>
                 <div className={`${styles.mobileOnly}`}>
-                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.submit}>
+                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.submit}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save")}</p>
                     </div>
                 </div>
                 <div className={`${styles.mobileNone}`}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                        <div className={`${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48, width: 140}} onClick={props.submit}>
+                        <div className={`${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, width: 140}} onClick={props.submit}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save Changes")}</p>
                         </div>
                     </div>
                 </div>
             </Fragment>
+        )}
+        {props.isSubmitting && (
+            <MyLoader />
         )}
     </div>
 )

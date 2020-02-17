@@ -784,99 +784,6 @@ class Container extends Component{
         }
     }
 
-    _goConfirm = async() => {
-        const { selectedLocation, dateOption, selectedDate, selectedHour, selectedAmPm, selectedMin, selectedStartDate, selectedEndDate, selectedOption, photographer, comment } = this.state;
-        const { getRequest, isLoggedIn, goSignUp } = this.props;
-        if(dateOption === 1){
-            if(selectedLocation.id && selectedDate && selectedHour && selectedAmPm && selectedMin && selectedOption){
-                let submitHour = selectedHour
-                if(selectedAmPm === 'PM'){
-                    if(selectedHour !== '12'){
-                        submitHour = String(Number(selectedHour) + 12)
-                    }
-                    else{
-                        submitHour = '12'
-                    }
-                }
-                else{
-                    if(selectedHour === '12'){
-                        submitHour = '00'
-                    }
-                }
-                await getRequest({
-                    photographer: photographer,
-                    location: selectedLocation,
-                    option: selectedOption,
-                    comment,
-                    dateOption,
-                    date: selectedDate ?  String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : "",
-                    hour: submitHour,
-                    min: selectedMin,
-                    startDate: selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : "",
-                    endDate: selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
-                })
-                if(isLoggedIn){
-                    this.setState({
-                        isConfirmPage: true
-                    })
-                }
-                else{
-                    goSignUp(photographer.studio_id)
-                }
-            }
-            else{
-                this.setState({
-                    isConfirmPage: false
-                })
-                alert(this.context.t("Please select all of the options above."))
-            }
-        }
-        else{
-            if(selectedLocation.id && selectedStartDate && selectedEndDate && selectedOption){
-                let submitHour = selectedHour
-                if(selectedAmPm === 'PM'){
-                    if(selectedHour !== '12'){
-                        submitHour = String(Number(selectedHour) + 12)
-                    }
-                    else{
-                        submitHour = '12'
-                    }
-                }
-                else{
-                    if(selectedHour === '12'){
-                        submitHour = '00'
-                    }
-                }
-                await getRequest({
-                    photographer: photographer,
-                    location: selectedLocation,
-                    option: selectedOption,
-                    comment,
-                    dateOption,
-                    date: selectedDate ? String(selectedDate.getFullYear()).concat('-', String(selectedDate.getMonth() + 1), '-', String(selectedDate.getDate())) : "",
-                    hour: submitHour,
-                    min: selectedMin,
-                    startDate: selectedStartDate ? String(selectedStartDate.getFullYear()).concat('-', String(selectedStartDate.getMonth() + 1), '-', String(selectedStartDate.getDate())) : "",
-                    endDate: selectedEndDate ? String(selectedEndDate.getFullYear()).concat('-', String(selectedEndDate.getMonth() + 1), '-', String(selectedEndDate.getDate())) : ""
-                })
-                if(isLoggedIn){
-                    this.setState({
-                        isConfirmPage: true
-                    })
-                }
-                else{
-                    goSignUp(photographer.studio_id)
-                }
-            }
-            else{
-                this.setState({
-                    isConfirmPage: false
-                })
-                alert(this.context.t("Please select all of the options above."))
-            }
-        }
-    }
-
     _selectOption = (customerSelectedOption) => {
         this.setState({
             customerSelectedOption,
@@ -1087,7 +994,6 @@ class Container extends Component{
             selectDate={this._selectDate}
             selectDateRange={this._selectDateRange}
             confirmDate={this._confirmDate}
-            goConfirm={this._goConfirm}
             selectOption={this._selectOption}
             blankOption={this._blankOption}
             confirm={this._confirm}

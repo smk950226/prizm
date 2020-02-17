@@ -12,7 +12,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import { GOOGLE_API_KEY } from '../../config/secrets';
 import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
 import Picker from 'react-mobile-picker-scroll';
-
+import MyLoader from '../Loader';
 import _ from "lodash";
 import { compose, withProps, lifecycle } from "recompose";
 import { StandaloneSearchBox } from "react-google-maps/lib/components/places/StandaloneSearchBox";
@@ -457,7 +457,7 @@ const AdminSignUp = (props, context) => {
                             formatChars={{
                                 '*': '[A-Za-z0-9!@#$()-_+=.,]'
                             }}
-                            maskChar={''} alwaysShowMask={false} value={props.studioId} onChange={props.handleInputChange}>
+                            maskChar={''} alwaysShowMask={true} value={props.studioId} onChange={props.handleInputChange}>
                                 {(inputProps) => <input {...inputProps} type={"text"} name={"studioId"} className={`${styles.textInput6}`} />}
                             </InputMask>
                         </div>
@@ -471,7 +471,7 @@ const AdminSignUp = (props, context) => {
                             formatChars={{
                                 '*': '[A-Za-z0-9!@#$()-_+=.,]'
                             }}
-                            maskChar={''} alwaysShowMask={false} value={props.studioId2} onChange={props.handleInputChange}>
+                            maskChar={''} alwaysShowMask={true} value={props.studioId2} onChange={props.handleInputChange}>
                                 {(inputProps) => <input {...inputProps} type={"text"} name={"studioId2"} className={`${styles.textInput6}`} />}
                             </InputMask>
                         </div>
@@ -881,6 +881,9 @@ const AdminSignUp = (props, context) => {
                     </div>
                 </div>
             </div>
+            {props.isSubmitting && (
+                <MyLoader />
+            )}
             <Modal
             isOpen={props.showLocationModal}
             onRequestClose={props.closeLocationModal}
@@ -1180,7 +1183,6 @@ AdminSignUp.propTypes = {
     selectDate: PropTypes.func.isRequired,
     selectDateRange: PropTypes.func.isRequired,
     confirmDate: PropTypes.func.isRequired,
-    goConfirm: PropTypes.func.isRequired,
     dateRange: PropTypes.array.isRequired,
     customerSelectedOption: PropTypes.object.isRequired,
     selectOption: PropTypes.func.isRequired,

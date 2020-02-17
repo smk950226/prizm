@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import { Collapse } from 'react-collapse';
 import styled from 'styled-components';
+import MyLoader from '../Loader';
 
 const DayContainer = styled.div`
     height: ${props => `${(props.length*32)+15}px`};
@@ -169,10 +170,10 @@ const OrderComp = (props, context) => (
                                 <Collapse isOpened={props.showDecline} theme={{collapse: styles.collapse}}>
                                     <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
-                                            <div className={`${styles.bgPink} ${styles.py2} ${styles.px3} ${styles.mt2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} onClick={props.decline}>
+                                            <div className={`${styles.bgPink} ${styles.py2} ${styles.px3} ${styles.mt2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} onClick={props.decline}>
                                                 <p className={`${styles.fontBold} ${styles.font1416} ${styles.white}`}>{context.t("Decline")}</p>
                                             </div>
-                                            <div className={`${styles.bgPink} ${styles.py2} ${styles.px3} ${styles.mt2} ${styles.row} ${styles.mr0} ${styles.ml3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} onClick={props.closeDecline}>
+                                            <div className={`${styles.bgPink} ${styles.py2} ${styles.px3} ${styles.mt2} ${styles.row} ${styles.mr0} ${styles.ml3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} onClick={props.closeDecline}>
                                                 <p className={`${styles.fontBold} ${styles.font1416} ${styles.white}`}>{context.t("Cancel")}</p>
                                             </div>
                                         </div>
@@ -251,7 +252,7 @@ const OrderComp = (props, context) => (
                                     </div>
                                 </div>
                                 <div className={`${styles.row} ${styles.mx0}`}>
-                                    <div className={`${styles.bgConfirmed} ${styles.py2} ${styles.px3} ${styles.mt5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} onClick={props.submit}>
+                                    <div className={`${styles.bgConfirmed} ${styles.py2} ${styles.px3} ${styles.mt5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} onClick={props.submit}>
                                         <p className={`${styles.fontBold} ${styles.font1416} ${styles.white}`}>{context.t("Confirm")}</p>
                                     </div>
                                 </div>
@@ -260,6 +261,9 @@ const OrderComp = (props, context) => (
                     </div>
                 )}
             </Collapse>
+        )}
+        {props.isSubmitting && (
+            <MyLoader />
         )}
     </Fragment>
 )

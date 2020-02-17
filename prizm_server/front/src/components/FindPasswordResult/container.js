@@ -13,6 +13,10 @@ class Container extends Component{
         goSignin: PropTypes.func.isRequired
     }
 
+    static contextTypes = {
+        t: PropTypes.func
+    }
+
     state = {
         email: "",
         emailForm: false,
@@ -46,7 +50,7 @@ class Container extends Component{
             this.setState({
                 loading: false
             })
-            alert('오류가 발생하였습니다.')
+            alert(this.context.t("An error has occurred.."))
             goHome()
         }
     }
@@ -111,11 +115,11 @@ class Container extends Component{
                             finded: false,
                             isSubmitting: false
                         })
-                        alert("이메일이 일치하지 않습니다.")
+                        alert(this.context.t("Invalid Email."))
                     }
                 }
                 else{
-                    alert('올바른 형식을 입력해주세요.')
+                    alert(this.context.t("Please enter a valid email address."))
                 }
             }
         }
@@ -140,15 +144,15 @@ class Container extends Component{
                         finded: false,
                         isSubmitting: false
                     })
-                    alert("이메일이 일치하지 않습니다.")
+                    alert(this.context.t("Invalid Email."))
                 }
             }
             else{
-                alert('올바른 형식을 입력해주세요.')
+                alert(this.context.t("Please enter a valid email address."))
             }
         }
         else{
-            alert('회원 정보를 입력해주세요.')
+            alert(this.context.t("Please fill in the information."))
         }
     }
 
@@ -168,7 +172,7 @@ class Container extends Component{
                             this.setState({
                                 isSubmitting: false
                             })
-                            alert("비밀번호가 변경되었습니다.")
+                            alert(this.context.t("Your password has been successfully changed."))
                             goSignin()
                         }
                         else if(result.error){
@@ -181,19 +185,19 @@ class Container extends Component{
                             this.setState({
                                 isSubmitting: false
                             })
-                            alert("오류가 발생하였습니다.")
+                            alert(this.context.t("An error has occurred.."))
                         }
                     }
                     else{
-                        alert('비밀번호는 알파벳, 숫자로 이루어진 8자 이상의 조합이어야 합니다.')
+                        alert(this.context.t("Your password should be at least 8 characters long and should include a mix of alphabets and numbers."))
                     }
                 }
                 else{
-                    alert("비밀번호가 일치하지 않습니다.")
+                    alert(this.context.t("Invalid Password."))
                 }
             }
             else{
-                alert("비밀번호를 입력해주세요.")
+                alert(this.context.t("Please enter a password."))
             }
         }
     }
@@ -217,7 +221,7 @@ class Container extends Component{
                                 this.setState({
                                     isSubmitting: false
                                 })
-                                alert("비밀번호가 변경되었습니다.")
+                                alert(this.context.t("Your password has been successfully changed."))
                                 goSignin()
                             }
                             else if(result.error){
@@ -230,15 +234,15 @@ class Container extends Component{
                                 this.setState({
                                     isSubmitting: false
                                 })
-                                alert("오류가 발생하였습니다.")
+                                alert(this.context.t("An error has occurred.."))
                             }
                         }
                         else{
-                            alert('비밀번호는 알파벳, 숫자로 이루어진 8자 이상의 조합이어야 합니다.')
+                            alert(this.context.t("Your password should be at least 8 characters long and should include a mix of alphabets and numbers."))
                         }
                     }
                     else{
-                        alert("비밀번호가 일치하지 않습니다.")
+                        alert(this.context.t("Invalid Password."))
                     }
                 }
             }

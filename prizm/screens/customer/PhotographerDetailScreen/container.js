@@ -195,6 +195,8 @@ class Container extends Component{
             selectedLocation,
             show2: true
         })
+
+        return true
     }
 
     _blankLocation = () => {
@@ -255,6 +257,7 @@ class Container extends Component{
             selectedOption,
             show4: true
         })
+        return true
     }
 
     _blankOption = () => {
@@ -291,35 +294,45 @@ class Container extends Component{
             if(selectedDate && selectedHour && selectedMin){
                 this.setState({
                     dateConfirm: true,
-                    showCalendar1: false
+                    showCalendar1: false,
+                    show3: true
                 })
+
+                return true
             }
             else{
                 this.setState({
                     dateConfirm: false
                 })
                 Alert.alert(null, this.context.t("Please select time."))
+
+                return false
             }
         }
         else{
             if(selectedStartDate && selectedEndDate){
                 this.setState({
                     dateConfirm: true,
-                    showCalendar2: false
+                    showCalendar2: false,
+                    show3: true
                 })
+
+                return true
             }
             else{
                 this.setState({
                     dateConfirm: false
                 })
                 Alert.alert(null, this.context.t("Please select your date range."))
+
+                return false
             }
         }
     }
 
     _goConfirm = async() => {
         const { selectedLocation, dateOption, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, selectedOption, photographer, comment } = this.state;
-        const { getRequest, isLoggedIn, goSignUp } = this.props;
+        const { getRequest, isLoggedIn } = this.props;
         if(dateOption === 1){
             if(selectedLocation.id && selectedDate && selectedHour && selectedMin && selectedOption){
                 let submitHour = selectedHour
@@ -341,7 +354,7 @@ class Container extends Component{
                     })
                 }
                 else{
-                    goSignUp(photographer.studio_id)
+                    this.props.navigation.navigate('SignUp', { photographerId: photographer.studio_id, goRequest: true })
                 }
             }
             else{
@@ -372,7 +385,7 @@ class Container extends Component{
                     })
                 }
                 else{
-                    goSignUp(photographer.studio_id)
+                    this.props.navigation.navigate('SignUp', { photographerId: photographer.studio_id, goRequest: true })
                 }
             }
             else{
@@ -461,6 +474,12 @@ class Container extends Component{
         })
     };
 
+    _handleChangeComment = (comment) => {
+        this.setState({
+            comment
+        })
+    }
+
     render(){
         return (
             <PhotographerDetailScreen 
@@ -495,6 +514,7 @@ class Container extends Component{
             submit={this._submit}
             send={this._send}
             handleChangeTimes={this._handleChangeTimes}
+            handleChangeComment={this._handleChangeComment}
             />
         )
     }

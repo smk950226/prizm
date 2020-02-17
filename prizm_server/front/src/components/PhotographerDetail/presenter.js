@@ -14,6 +14,7 @@ import Calendar from 'react-calendar';
 import Modal from 'react-responsive-modal';
 import { Collapse } from 'react-collapse';
 import Picker from 'react-mobile-picker-scroll';
+import MyLoader from '../Loader';
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -276,7 +277,7 @@ class PhotographerDetail extends Component{
                                     <div className={`${styles.my3}`}>
                                         {photographer.option_set && photographer.option_set.length > 0 ? (
                                             photographer.option_set.map((option, index) => (
-                                                <div key={index} className={`${styles.py4} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.index === photographer.option_set.length - 1 ? null : styles.mb2} ${styles.cursorPointer} ${selectedOption.id === option.id ? styles.borderPink : styles.borderGrayD9} ${selectedOption.id === option.id ? styles.bgPink : styles.bgWhite}`} onClick={selectedOption.id === option.id ? this.props.blankOption : () => this.props.selectOption(option)}>
+                                                <div key={index} className={`${styles.py4} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${index === photographer.option_set.length - 1 ? null : styles.mb2} ${styles.cursorPointer} ${selectedOption.id === option.id ? styles.borderPink : styles.borderGrayD9} ${selectedOption.id === option.id ? styles.bgPink : styles.bgWhite}`} onClick={selectedOption.id === option.id ? this.props.blankOption : () => this.props.selectOption(option)}>
                                                     <div>
                                                         <p className={`${styles.fontBold} ${styles.font14} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{`${option.title} (${option.person > 1 ? `${option.person} people` : `${option.person} person`}, ${option.hour > 1 ? `${option.hour} hrs` : `${option.hour} hr`})`}</p>
                                                         <p className={`${styles.font10} ${styles.mt2} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{option.description}</p>
@@ -300,7 +301,7 @@ class PhotographerDetail extends Component{
                                     </div>
                                     <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
                                     <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("Please leave your message here.")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goConfirm}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}} onClick={this.props.goConfirm}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{isLoggedIn ? this.context.t("Submit the request") : this.context.t("Sign up & Submit the request")}</p>
                                     </div>
                                     </Collapse>
@@ -351,7 +352,7 @@ class PhotographerDetail extends Component{
                                         ) : (
                                             null
                                         )}
-                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.submit}>
+                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn}`} style={{height: 48}} onClick={this.props.submit}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm and Submit Request")}</p>
                                         </div>
                                     </div>
@@ -394,7 +395,7 @@ class PhotographerDetail extends Component{
                                         ) : (
                                             null
                                         )}
-                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.submit}>
+                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn}`} style={{height: 48}} onClick={this.props.submit}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm and Submit Request")}</p>
                                         </div>
                                     </div>
@@ -447,6 +448,9 @@ class PhotographerDetail extends Component{
                         )
                     )
                 )}
+                {isSubmitting && (
+                    <MyLoader />
+                )}
                 <Modal
                 open={showCalendar1} 
                 onClose={this.props.closeCalendar1} 
@@ -469,7 +473,7 @@ class PhotographerDetail extends Component{
                                 value={selectedDate}
                                 onChange={this.props.selectDate}
                                 />
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={() => this.props.changeDateStep(2)}>
+                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.changeDateStep(2)}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Next")}</p>
                                 </div>
                             </Fragment>
@@ -494,7 +498,7 @@ class PhotographerDetail extends Component{
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirmDate}>
+                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirmDate}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                                 </div>
                             </Fragment>
@@ -523,7 +527,7 @@ class PhotographerDetail extends Component{
                             tileClassName={`${styles.font12}`}
                             onChange={this.props.selectDateRange}
                             />
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirmDate}>
+                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirmDate}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                             </div>
                         </Fragment>

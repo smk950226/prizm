@@ -27,6 +27,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         responsetToRequsetOrder: (orderId, selectedTime) => {
             return dispatch(customerAction.responsetToRequsetOrder(orderId, selectedTime))
+        },
+        getProfile: () => {
+            dispatch(userAction.getProfile())
         }
     }
 }

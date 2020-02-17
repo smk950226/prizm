@@ -11,6 +11,7 @@ import MdStar from 'react-ionicons/lib/MdStar';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { GOOGLE_API_KEY } from '../../config/secrets';
 import { Collapse } from 'react-collapse';
+import MyLoader from '../Loader';
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -246,7 +247,7 @@ class PhotographerDetail extends Component{
                             </div>
                             <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                    <div className={`${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this.props.submit}>
+                                    <div className={`${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this.props.submit}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Select this proposal")}</p>
                                     </div>
                                     <div className={`${styles.bgGray97} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={() => this.props.goRequestOrderList(order.custom_request.id)}>
@@ -272,6 +273,9 @@ class PhotographerDetail extends Component{
                             </div>
                         </div>
                     )
+                )}
+                {isSubmitting && (
+                    <MyLoader />
                 )}
             </div>
         )

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
+import MyLoader from '../Loader';
 
 class MySchedule extends Component{
     static propTypes = {
@@ -50,7 +51,7 @@ class MySchedule extends Component{
         return(
             <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
                 <p className={`${styles.mt45} ${styles.fontBold} ${styles.font17}`}>{this.context.t("My Schedule")}</p>
-                {!profile.is_verified && (
+                {profile && !profile.is_verified && (
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3} ${styles.widthFull}`}>
                         <p className={`${styles.font1214} ${styles.pink}`} style={{width: 'calc(100% - 100px)'}}>
                             {this.context.t("Your request will be sent to the photographer when you complete the email verification")}
@@ -141,6 +142,9 @@ class MySchedule extends Component{
                             </p>
                         </div>
                     )
+                )}
+                {isSendingEmail && (
+                    <MyLoader />
                 )}
             </div>
         )

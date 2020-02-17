@@ -97,7 +97,7 @@ class CustomRequest extends Component{
                                         <div style={{position: 'absolute', top: -20, right: -5}}>
                                             <div style={{position: 'relative'}}>
                                                 <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
-                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter} ${styles.pb1}`}>{profile.custom_request_status.count}</p>
+                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
                                             </div>
                                         </div>
                                         </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Profile from './presenter';
+import { COUNTRY_CODE } from '../../utils/country';
 
 class Container extends Component{
     static propTypes = {
@@ -28,7 +29,9 @@ class Container extends Component{
             emailForm: profile ? true : false,
             showCountryNumber: false,
             isSubmitting: false,
-            edited: false
+            edited: false,
+            q: "",
+            countryList: []
         }
     }
 
@@ -49,25 +52,30 @@ class Container extends Component{
                 });
             }
         }
+        else if(name === 'q'){
+            this.setState({
+                [name]: value
+            });
+            let countryList = [];
+            COUNTRY_CODE.map(country => {
+                if(country.label.toLowerCase().indexOf(value.toLowerCase()) > -1){
+                    countryList.push(country)
+                    return null;
+                }
+                else{
+                    return null
+                }
+            })
+            this.setState({
+                countryList
+            })
+        }
         else{
             this.setState({
                 [name]: value,
                 edited: true
             });
         }
-    }
-
-    _handleCountryNumberChange = (countryNumber) => {
-        this.setState({
-            countryNumber,
-            showCountryNumber: false
-        })
-    }
-
-    _handleShowCountryNumber = () => {
-        this.setState({
-            showCountryNumber: !this.state.showCountryNumber
-        })
     }
 
     _submit = async() => {
@@ -107,6 +115,33 @@ class Container extends Component{
         }
     }
 
+    _handleCountryNumberChange = (countryNumber, countryCode) => {
+        this.setState({
+            countryNumber,
+            countryCode,
+            showCountryNumber: false,
+            edited: true
+        })
+    }
+
+    _handleShowCountryNumber = () => {
+        this.setState({
+            showCountryNumber: !this.state.showCountryNumber
+        })
+    }
+
+    _openShowCountryNumber = () => {
+        this.setState({
+            showCountryNumber: true
+        })
+    }
+
+    _closeShowCountryNumber = () => {
+        this.setState({
+            showCountryNumber: false
+        })
+    }
+
     render(){
         return(
             <Profile 
@@ -115,6 +150,8 @@ class Container extends Component{
             handleInputChange={this._handleInputChange}
             handleCountryNumberChange={this._handleCountryNumberChange}
             handleShowCountryNumber={this._handleShowCountryNumber}
+            openShowCountryNumber={this._openShowCountryNumber}
+            closeShowCountryNumber={this._closeShowCountryNumber}
             submit={this._submit}
             />
         )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
-import { Link } from 'react-router-dom';
+import MyLoader from '../Loader';
 
 class FindPassword extends Component{
     static proptTypes = {
@@ -37,9 +37,12 @@ class FindPassword extends Component{
                     <div className={`${styles.widthFull} ${styles.mt4}`}>
                         <input className={`${styles.textInput2}`} type={"text"} name={"finded"} value={finded} readOnly={true} />
                     </div>
-                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goSignin}>
+                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goSignin}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Login")}</p>
                     </div>
+                    {isSubmitting && (
+                        <MyLoader />
+                    )}
                 </div>
             )
         }
@@ -59,9 +62,12 @@ class FindPassword extends Component{
                             {this.context.t("We will send you a password reset link to the email.")}
                         </p>
                     </div>
-                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.handleFindPassword}>
+                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.handleFindPassword}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Send")}</p>
                     </div>
+                    {isSubmitting && (
+                        <MyLoader />
+                    )}
                 </div>
             )
         }

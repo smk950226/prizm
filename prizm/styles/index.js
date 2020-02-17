@@ -289,13 +289,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#E58D32'
     },
     bgLanding1: {
-        backgroundColor: '#F3F1E8'
+        backgroundColor: '#E7ECEC'
     },
     bgLanding2: {
-        backgroundColor: '#F0DDC4'
+        backgroundColor: '#DFE8EF'
     },
     bgLanding3: {
-        backgroundColor: '#F2F2F2'
+        backgroundColor: '#E7EDED'
     },
     justifyContentCenter: {
         justifyContent: 'center'
@@ -828,6 +828,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#dcdcdc'
     },
+    borderPink: {
+        borderColor: '#d66c8b',
+        borderWidth: StyleSheet.hairlineWidth
+    },
     borderPink3: {
         borderColor: '#d66c8b',
         borderWidth: 3
@@ -835,6 +839,14 @@ const styles = StyleSheet.create({
     borderGrayF43: {
         borderColor: '#f4f4f4',
         borderWidth: 3
+    },
+    borderBlack: {
+        borderColor: '#000000',
+        borderWidth: StyleSheet.hairlineWidth
+    },
+    borderGrayD9: {
+        borderColor: '#d9d9d9',
+        borderWidth: StyleSheet.hairlineWidth
     },
     imageShadow: {
         shadowColor: '#000',

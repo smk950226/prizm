@@ -12,6 +12,7 @@ import MdClose from 'react-ionicons/lib/MdClose';
 import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
 import ReactCountryFlag from "react-country-flag";
 import Picker from 'react-mobile-picker-scroll';
+import MyLoader from '../Loader';
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { GOOGLE_API_KEY } from '../../config/secrets';
@@ -877,6 +878,7 @@ class CustomRequestCreate extends Component{
                     })
                     const result = await login(loginEmail, loginPassword)
                     if(result.token){
+                        await getSaveToken(result.token)
                         await getProfileByToken(result.token)
                         await getNotificationByToken(result.token)
                         await getOrderListByToken(result.token)
@@ -935,14 +937,12 @@ class CustomRequestCreate extends Component{
                         }
                         const submit = await createCustomRequestByToken(result.token, photograpyType, person, time, dateOption, date, submitHour, selectedMin, startDate, endDate, locationOption, locations)
                         if(submit.status === 'ok'){
-                            getSaveToken(result.token)
                             this.setState({
                                 isSubmitting: false,
                                 confirmed: true
                             })
                         }
                         else if(submit.error){
-                            getSaveToken(result.token)
                             this.setState({
                                 isSubmitting: false,
                                 confirmed: false
@@ -950,7 +950,6 @@ class CustomRequestCreate extends Component{
                             alert(submit.error)
                         }
                         else{
-                            getSaveToken(result.token)
                             this.setState({
                                 isSubmitting: false,
                                 confirmed: false
@@ -991,6 +990,7 @@ class CustomRequestCreate extends Component{
                                 if(check.status === 'ok'){
                                     const result = await signUp(email, password, firstName, lastName, countryNumber, countryCode, mobile)
                                     if(result.token){
+                                        await getSaveToken(result.token)
                                         await getProfileByToken(result.token)
                                         await getNotificationByToken(result.token)
                                         await getOrderListByToken(result.token)
@@ -1048,14 +1048,12 @@ class CustomRequestCreate extends Component{
                                         }
                                         const submit = await createCustomRequestByToken(result.token, photograpyType, person, time, dateOption, date, submitHour, selectedMin, startDate, endDate, locationOption, locations)
                                         if(submit.status === 'ok'){
-                                            getSaveToken(result.token)
                                             this.setState({
                                                 isSubmitting: false,
                                                 confirmed: true
                                             })
                                         }
                                         else if(submit.error){
-                                            getSaveToken(result.token)
                                             this.setState({
                                                 isSubmitting: false,
                                                 confirmed: false
@@ -1063,7 +1061,6 @@ class CustomRequestCreate extends Component{
                                             alert(submit.error)
                                         }
                                         else{
-                                            getSaveToken(result.token)
                                             this.setState({
                                                 isSubmitting: false,
                                                 confirmed: false
@@ -1354,6 +1351,9 @@ class CustomRequestCreate extends Component{
         const { sendVerificationEmail, isLoggedIn } = this.props;
         if(!isSendingEmail){
             if(isLoggedIn){
+                this.setState({
+                    isSendingEmail: true
+                })
                 const result = await sendVerificationEmail()
                 if(result.status === 'ok'){
                     this.setState({
@@ -1580,7 +1580,7 @@ class CustomRequestCreate extends Component{
                                                         <div style={{position: 'absolute', top: -20, right: -5}}>
                                                             <div style={{position: 'relative'}}>
                                                                 <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
-                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter} ${styles.pb1}`}>{profile.custom_request_status.count}</p>
+                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -1716,7 +1716,7 @@ class CustomRequestCreate extends Component{
                                                         <div style={{position: 'absolute', top: -20, right: -5}}>
                                                             <div style={{position: 'relative'}}>
                                                                 <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
-                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter} ${styles.pb1}`}>{profile.custom_request_status.count}</p>
+                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -1846,7 +1846,7 @@ class CustomRequestCreate extends Component{
                                                         <div style={{position: 'absolute', top: -20, right: -5}}>
                                                             <div style={{position: 'relative'}}>
                                                                 <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
-                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter} ${styles.pb1}`}>{profile.custom_request_status.count}</p>
+                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -1926,13 +1926,8 @@ class CustomRequestCreate extends Component{
                                             {this.context.t("Your request has been successfully submitted and sent to PRIZM photographers.")}<br/>
                                             {this.context.t("We will reach you via email and SMS soon. Thank you!")}
                                         </p>
-    
-                                        <p className={`${styles.font12} ${styles.mt3} ${styles.textCenter}`} style={{lineHeight: 1.25}}>
-                                            {this.context.t("회원님의 예약 내역이 사진작가들에게 전달되었으며,")}<br/>
-                                            {this.context.t("곧 다양한 작가들의 촬영 견적을 받아보실 수 있습니다.")}<br/>
-                                        </p>
                                         <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
-                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("메인화면으로 이동하기")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Main")}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -2427,7 +2422,7 @@ class CustomRequestCreate extends Component{
                                                     <p className={`${styles.textCenter} ${styles.my3} ${styles.fontBold} ${styles.font1214}`}>{this.context.t("Nationality")}</p>
                                                     <div className={`${styles.px5}`}>
                                                         <div className={`${styles.widthFull}`}>
-                                                            <input className={`${styles.textInput2}`} type={"text"} name={"q"} value={q} onChange={this._handleInputChange} />
+                                                            <input className={`${styles.textInput2}`} type={"text"} name={"q"} placeholder={this.context.t("Type your country")} value={q} onChange={this._handleInputChange} />
                                                         </div>
                                                     </div>
                                                     <div className={`${styles.overflowYScroll} ${styles.px3} ${styles.pt2}`} style={{maxHeight: 300}}>
@@ -2582,6 +2577,9 @@ class CustomRequestCreate extends Component{
                         </div>
                     </div>
                 </Modal>
+                {(isSubmitting || isSendingEmail) && (
+                    <MyLoader />
+                )}
             </Fragment>
         )
     }

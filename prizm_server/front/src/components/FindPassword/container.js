@@ -9,6 +9,10 @@ class Container extends Component{
         goSignin: PropTypes.func.isRequired
     }
 
+    static contextTypes = {
+        t: PropTypes.func
+    }
+
     state = {
         email: "",
         emailForm: false,
@@ -66,11 +70,11 @@ class Container extends Component{
                             finded: "",
                             isSubmitting: false
                         })
-                        alert("An error has occurred..")
+                        alert(this.context.t("An error has occurred.."))
                     }
                 }
                 else{
-                    alert('올바른 형식을 입력해주세요.')
+                    alert(this.context.t('Please enter a valid email address.'))
                 }
             }
         }
@@ -104,15 +108,15 @@ class Container extends Component{
                         finded: "",
                         isSubmitting: false
                     })
-                    alert("An error has occurred..")
+                    alert(this.context.t("An error has occurred.."))
                 }
             }
             else{
-                alert('올바른 형식을 입력해주세요.')
+                alert(this.context.t('Please enter a valid email address.'))
             }
         }
         else{
-            alert('회원 정보를 입력해주세요.')
+            alert(this.context.t('Please enter a valid email address.'))
         }
     }
 

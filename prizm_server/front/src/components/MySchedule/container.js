@@ -21,6 +21,10 @@ class Container extends Component{
         sendVerificationEmail: PropTypes.func.isRequired
     }
 
+    static contextTypes = {
+        t: PropTypes.func
+    }
+
     constructor(props){
         super(props)
         const { orderList } = props;
@@ -117,6 +121,9 @@ class Container extends Component{
         const { sendVerificationEmail, isLoggedIn } = this.props;
         if(!isSendingEmail){
             if(isLoggedIn){
+                this.setState({
+                    isSendingEmail: true
+                })
                 const result = await sendVerificationEmail()
                 if(result.status === 'ok'){
                     this.setState({

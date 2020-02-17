@@ -22,48 +22,29 @@ class Container extends Component{
             page: 1,
             hasNextPage: true,
             isLoadingMore: false,
-            fetchedPhotographerList: false,
-            fetchClear: false,
             refreshing: false,
         }
     }
 
     componentDidMount = async() => {
         const { getPhotographerList, photographerList } = this.props;
+        await getPhotographerList()
         if(photographerList){
             this.setState({
-                loading: false,
-                fetchClear: true
+                loading: false
             })
-        }
-        else{
-            await getPhotographerList()
         }
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
-        const { fetchedPhotographerList } = prevState;
-        if(!fetchedPhotographerList){
-            let update = {}
-            if(nextProps.photographerList){
-                update.fetchedPhotographerList = true
-                update.photographerList = nextProps.photographerList
-                update.refreshing = false
-            }
-
+        let update = {}
+        if(nextProps.photographerList){
+            update.photographerList = nextProps.photographerList
+            update.refreshing = false
             return update
         }
         else{
             return null
-        }
-    }
-
-    componentDidUpdate = () => {
-        if(this.state.fetchedPhotographerList && !this.state.fetchClear){
-            this.setState({
-                loading: false,
-                fetchClear: true,
-            })
         }
     }
 

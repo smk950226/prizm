@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../style/styles.module.scss';
+import MyLoader from '../Loader';
 
 const ProfilePassword = (props, context) => (
     <div className={`${styles.safearea} ${styles.minHeightFullBtmNav} ${styles.containerCustomer} ${styles.px3}`}>
@@ -21,6 +22,9 @@ const ProfilePassword = (props, context) => (
             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Change Password")}</p>
         </div>
         <p className={`${styles.fontBold} ${styles.font12} ${styles.mt3} ${styles.textCenter} ${styles.cursorPointer}`} onClick={props.goProfile}>{context.t("Do you want to change your profile?")}</p>
+        {props.isSubmitting && (
+            <MyLoader />
+        )}
     </div>
 )
 

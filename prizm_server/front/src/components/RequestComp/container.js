@@ -20,6 +20,7 @@ class Container extends Component{
         super(props);
         const { request } = props;
         this.state = {
+            request,
             loading: true,
             showResponse: false,
             isSubmitting: false,
@@ -32,7 +33,7 @@ class Container extends Component{
     }
 
     componentDidMount = () => {
-        const { request } = this.props;
+        const { request } = this.state;
         let dayList = []
         const timeList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
         if(request.date_option === 'Specific'){
@@ -67,6 +68,14 @@ class Container extends Component{
                 loading: false,
                 dayList,
                 timeList
+            })
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if(prevProps.request !== this.props.request){
+            this.setState({
+                request: this.state.request
             })
         }
     }
@@ -120,17 +129,21 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { checkTime, selectedTime, isSubmitting, price, selectedLocation } = this.state;
-        const { request, createRequestOrder, refresh } = this.props;
+        const { request, checkTime, selectedTime, isSubmitting, price, selectedLocation } = this.state;
+        const { createRequestOrder, refresh } = this.props;
         if(!isSubmitting){
             if(request.date_option === 'Specific'){
                 if(selectedLocation.name){
                     if(checkTime){
                         if(price){
+                            this.setState({
+                                isSubmitting: true
+                            })
                             const result = await createRequestOrder(request.id, selectedLocation, '', price)
                             if(result.status === 'ok'){
                                 await refresh(result.custom_request)
                                 this.setState({
+                                    request: result.custom_request,
                                     selectedTime: [],
                                     selectedLocation: {},
                                     checkTime: false,
@@ -168,10 +181,14 @@ class Container extends Component{
                 if(selectedLocation.name){
                     if(selectedTime.length > 0){
                         if(price){
+                            this.setState({
+                                isSubmitting: true
+                            })
                             const result = await createRequestOrder(request.id, selectedLocation, selectedTime, price)
                             if(result.status === 'ok'){
                                 await refresh(result.custom_request)
                                 this.setState({
+                                    request: result.custom_request,
                                     selectedTime: [],
                                     selectedLocation: {},
                                     checkTime: false,

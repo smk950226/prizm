@@ -7,7 +7,8 @@ class Container extends Component{
         isLoggedIn: PropTypes.bool.isRequired,
         goHome: PropTypes.func.isRequired,
         goRequestOrderList: PropTypes.func.isRequired,
-        responsetToRequsetOrder: PropTypes.func.isRequired
+        responsetToRequsetOrder: PropTypes.func.isRequired,
+        getProfile: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -167,7 +168,7 @@ class Container extends Component{
 
     _submit = async() => {
         const { isSubmitting, order, selectedTime } = this.state;
-        const { responsetToRequsetOrder } = this.props;
+        const { responsetToRequsetOrder, getProfile } = this.props;
         if(!isSubmitting){
             if(order.custom_request.date_option === 'Specific'){
                 this.setState({
@@ -175,6 +176,7 @@ class Container extends Component{
                 })
                 const result = await responsetToRequsetOrder(order.id)
                 if(result.status === 'ok'){
+                    await getProfile()
                     this.setState({
                         isSubmitting: false,
                         requestSubmitted: true
@@ -212,6 +214,7 @@ class Container extends Component{
                     })
                     const result = await responsetToRequsetOrder(order.id, selectedTime[0].time)
                     if(result.status === 'ok'){
+                        await getProfile()
                         this.setState({
                             isSubmitting: false,
                             requestSubmitted: true,
