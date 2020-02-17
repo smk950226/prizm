@@ -22,7 +22,11 @@ const PaymentSuccess = (props, context) => (
                     {props.isDeposit ? (
                         <Fragment>
                             <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("Your reservation has been successfully submitted!")}</p>
-                            <p className={`${styles.font1214} ${styles.mt3}`}>{context.t(`Please send ${numberWithCommas(props.price)} KRW to the following bank account :`)}</p>
+                            <p className={`${styles.font1214} ${styles.mt3}`}>
+                                {context.t("Please use the following bank account to send ")}
+                                {numberWithCommas(props.price)}
+                                {context.t("KRW")}
+                            </p>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`} style={{lineHeight: 1.5}}>
                                 <p className={`${styles.font1214} ${styles.mr2}`}>{context.t('Account Number : IBK (Industrial Bank of Korea) 054-146700-04-018')}</p>
                                 <CopyToClipboard text={'054-146700-04-018'}>

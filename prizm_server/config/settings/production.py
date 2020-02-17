@@ -43,25 +43,10 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('ec2-3-94-150-64.compute-1.amazonaws.com', 6379)],
+            "hosts": [('ec2-13-124-173-31.ap-northeast-2.compute.amazonaws.com', 6379)],
         },
     },
 }
-
-# CACHES
-# ------------------------------------------------------------------------------
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": env("REDIS_URL"),
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#             # Mimicing memcache behavior.
-#             # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
-#             "IGNORE_EXCEPTIONS": True,
-#         },
-#     }
-# }
 
 # SECURITY
 # ------------------------------------------------------------------------------
