@@ -124,7 +124,7 @@ class AdminOrderList extends Component{
                                     </Fragment>
                                 ) : (
                                     <div className={`${styles.textCenter}`}>
-                                        <img src={require('../../assets/images/main.png')} alt={this.context.t("RThis request no longer exists")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
+                                        <img src={require('../../assets/images/main.png')} alt={this.context.t("This request no longer exists")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
                                         <p className={`${styles.font1214} ${styles.mt3}`}>{this.context.t("You haven't received reservation requests yet.")}</p>
                                     </div>
                                 )
@@ -135,7 +135,7 @@ class AdminOrderList extends Component{
                                     ))
                                 ) : (
                                     <div className={`${styles.textCenter}`}>
-                                        <img src={require('../../assets/images/main.png')} alt={this.context.t("RThis request no longer exists")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
+                                        <img src={require('../../assets/images/main.png')} alt={this.context.t("This request no longer exists")} className={`${styles.mt5}`} style={{width: '80%', maxWidth: 400}} />
                                         <p className={`${styles.font1214} ${styles.mt3}`}>{this.context.t("You haven't received reservation requests yet.")}</p>
                                     </div>
                                 )

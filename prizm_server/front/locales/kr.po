@@ -18,7 +18,7 @@ msgstr "404"
 
 #: src/components/AdminAccountSetting/container.js
 msgid "Your account information has been changed."
-msgstr "계좌정보가 변경되었습니다."
+msgstr "계좌 정보가 변경되었습니다."
 
 #: src/components/AdminAccountSetting/container.js
 #: src/components/AdminCustomerImage/container.js
@@ -30,6 +30,8 @@ msgstr "계좌정보가 변경되었습니다."
 #: src/components/CustomRequest/container.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/EmailVerification/container.js
+#: src/components/FindPassword/container.js
+#: src/components/FindPasswordResult/container.js
 #: src/components/MessageDetail/container.js
 #: src/components/MyPhotoDetail/container.js
 #: src/components/MySchedule/container.js src/components/OrderComp/container.js
@@ -42,7 +44,7 @@ msgstr "계좌정보가 변경되었습니다."
 #: src/components/RequestOrderDetail/container.js
 #: src/components/SignUp/container.js src/components/SignUpClear/container.js
 msgid "An error has occurred.."
-msgstr "오류가 발생하였습니다."
+msgstr "에러가 발생했습니다."
 
 #: src/components/AdminAccountSetting/container.js
 msgid "Please check your date of birth again."
@@ -54,16 +56,17 @@ msgstr "생년월일을 확인해주세요."
 #: src/components/AdminSignIn/container.js
 #: src/components/AdminSignUp/container.js
 #: src/components/CustomRequestCreate/presenter.js
+#: src/components/FindPasswordResult/container.js
 #: src/components/Profile/container.js
 #: src/components/ProfilePassword/container.js
 #: src/components/SignIn/container.js src/components/SignUp/container.js
 msgid "Please fill in the information."
-msgstr "정보를 입력해주세요."
+msgstr "정보를 모두 입력해주세요."
 
 #: src/components/AdminAccountSetting/presenter.js
 #: src/components/AdminSettings/presenter.js
 msgid "Payout Settings"
-msgstr "대금 수령"
+msgstr "대금수령 설정"
 
 #: src/components/AdminAccountSetting/presenter.js
 #: src/components/AdminProfilePassword/presenter.js
@@ -73,7 +76,7 @@ msgstr "편집"
 
 #: src/components/AdminAccountSetting/presenter.js
 msgid "Please enter the payout information."
-msgstr "대금 수령 정보를 입력해주세요."
+msgstr "대금수령 정보를 입력해주세요."
 
 #: src/components/AdminAccountSetting/presenter.js
 msgid "Legal Name"
@@ -85,25 +88,29 @@ msgstr "생년월일"
 
 #: src/components/AdminAccountSetting/presenter.js
 msgid "Payout Options"
-msgstr "대금 수령 옵션"
+msgstr "대금수령 방법"
+
+#: src/components/AdminAccountSetting/presenter.js
+msgid "Bank Name"
+msgstr "은행명"
 
 #: src/components/AdminAccountSetting/presenter.js
 msgid "Bank Account"
-msgstr "은행 계좌"
+msgstr "계좌번호"
 
 #: src/components/AdminAccountSetting/presenter.js
 msgid "Paypal Account"
-msgstr "페이팔 계정"
+msgstr "Paypal 계정"
 
 #: src/components/AdminAccountSetting/presenter.js
 #: src/components/AdminProfileSetting/presenter.js
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Save"
-msgstr "저장"
+msgstr "저장하기"
 
 #: src/components/AdminAccountSetting/presenter.js
 msgid "Save Changes"
-msgstr "변경사항 저장"
+msgstr "변경사항 저장하기"
 
 #: src/components/AdminBottomNavigation/presenter.js
 msgid "STUDIO"
@@ -114,7 +121,7 @@ msgstr "스튜디오"
 #: src/components/AdminNavigation/presenter.js
 #: src/components/AdminOrderList/presenter.js
 msgid "Edit Studio"
-msgstr "스튜디오 수정"
+msgstr "스튜디오 편집"
 
 #: src/components/AdminBottomNavigation/presenter.js
 #: src/components/BottomNavigation/presenter.js
@@ -124,12 +131,12 @@ msgstr "예약"
 #: src/components/AdminBottomNavigation/presenter.js
 #: src/components/BottomNavigation/presenter.js
 msgid "Reservations"
-msgstr "예약"
+msgstr "예약내역"
 
 #: src/components/AdminBottomNavigation/presenter.js
 #: src/components/BottomNavigation/presenter.js
 msgid "MESSAGE"
-msgstr "메세지"
+msgstr "메시지"
 
 #: src/components/AdminBottomNavigation/presenter.js
 #: src/components/AdminMessageList/presenter.js
@@ -137,7 +144,7 @@ msgstr "메세지"
 #: src/components/BottomNavigation/presenter.js
 #: src/components/MessageList/presenter.js
 msgid "Messages"
-msgstr "메세지"
+msgstr "메시지"
 
 #: src/components/AdminBottomNavigation/presenter.js
 msgid "PROFILE"
@@ -150,7 +157,7 @@ msgstr "설정"
 #: src/components/AdminCustomerImage/container.js
 #: src/components/AdminStudioSetting/container.js
 msgid "File formates are limited to jpg, jpeg, and png."
-msgstr "jpg, jpeg, png 파일만 선택할 수 있습니다."
+msgstr "jpg, jpeg, png 형식의 파일만 업로드 가능합니다."
 
 #: src/components/AdminCustomerImage/presenter.js
 #: src/components/AdminStudioSetting/presenter.js
@@ -166,7 +173,7 @@ msgstr "여기를 클릭하여 사진촬영 세션을 완료하세요."
 
 #: src/components/AdminCustomerImage/presenter.js
 msgid "I have fully uploaded my client's photos as discussed earlier."
-msgstr "고객과 사전에 논의된 사항에 따라 사진 업로드를 완료하였습니다."
+msgstr "고객과 사전에 협의한 대로 사진을 모두 업로드하였습니다."
 
 #: src/components/AdminCustomerImage/presenter.js
 #: src/components/FindPasswordResult/presenter.js
@@ -190,23 +197,27 @@ msgstr "취소"
 #: src/components/RequestOrderDetail/presenter.js
 #: src/components/ReviewCreateComplete/index.js
 msgid "Submitted"
-msgstr "제출완료"
+msgstr "제출됨"
+
+#: src/components/AdminHome/presenter.js
+msgid "The easiest way to create your mobile studio"
+msgstr "당신만의 온라인 스튜디오를 만드는 가장 똑똑한 방법"
 
 #: src/components/AdminHome/presenter.js
 msgid "Meet tourists from all over the world"
-msgstr "전세계 관광객을 만나보세요."
+msgstr "외국인 관광객 실시간 매칭"
 
 #: src/components/AdminHome/presenter.js
 msgid "Receive payment worldwide"
-msgstr "쉽고 안전한 대금수령"
-
-#: src/components/AdminHome/presenter.js
-msgid "Manage your reservations conveniently"
 msgstr "언어걱정 없는 자동화된 예약관리"
 
 #: src/components/AdminHome/presenter.js
+msgid "Manage your reservations conveniently"
+msgstr "쉽고 안전한 대금수령"
+
+#: src/components/AdminHome/presenter.js
 msgid "Connect with your instagram"
-msgstr "인스타그램 연동"
+msgstr "지금 바로 시작해보세요."
 
 #: src/components/AdminHome/presenter.js
 msgid "Get started"
@@ -232,7 +243,7 @@ msgstr "예약 관리"
 #: src/components/AdminOrderList/presenter.js
 #: src/components/AdminTouristPhoto/presenter.js
 msgid "Tourist Photos"
-msgstr "여행객 사진"
+msgstr "고객 사진"
 
 #: src/components/AdminMenu/presenter.js
 #: src/components/AdminNavigation/presenter.js
@@ -250,13 +261,19 @@ msgstr "계좌 설정"
 msgid "Log out"
 msgstr "로그아웃"
 
+#: src/components/AdminMessageDetail/container.js
+#: src/components/MessageDetail/container.js
+#: src/components/RequestOrderDetail/container.js
+msgid "hour(s) must be selected."
+msgstr "시간을 선택해주세요."
+
 #: src/components/AdminMessageDetail/presenter.js
 #: src/components/AdminMessageList/presenter.js
 #: src/components/MessageDetail/presenter.js
 #: src/components/MessageList/presenter.js src/components/MyPhotos/presenter.js
 #: src/components/MySchedule/presenter.js
 msgid "Detail"
-msgstr "자세히보기"
+msgstr "자세히"
 
 #: src/components/AdminMessageDetail/presenter.js
 #: src/components/MessageDetail/presenter.js
@@ -266,7 +283,7 @@ msgstr "여기"
 #: src/components/AdminMessageDetail/presenter.js
 #: src/components/MessageDetail/presenter.js
 msgid "Please select time or Cancel reservation"
-msgstr "시간을 선택하거나 예약을 취소해주세요."
+msgstr "시간을 선택하세요. 가능한 시간이 없으면 예약을 취소해주세요."
 
 #: src/components/AdminMessageDetail/presenter.js
 #: src/components/FindPassword/presenter.js
@@ -276,25 +293,25 @@ msgstr "보내기"
 
 #: src/components/AdminMessageDetail/presenter.js
 msgid "message"
-msgstr "메세지"
+msgstr "메시지"
 
 #: src/components/AdminMessageList/presenter.js
 #: src/components/AdminOrderList/presenter.js
 #: src/components/MessageList/presenter.js
 #: src/components/MySchedule/presenter.js
 #: src/components/RequestOrderList/presenter.js
-msgid "Request not exist"
+msgid "This request no longer exists"
 msgstr "요청이 존재하지 않습니다."
 
 #: src/components/AdminMessageList/presenter.js
 msgid "You haven't received any messages."
-msgstr "아직 메세지를 받지 않았습니다."
+msgstr "받은 메시지가 없습니다."
 
 #: src/components/AdminMessageList/presenter.js
 msgid ""
 "Messages will appear when you confirm the schedule at the 'Manage "
 "Reservations' menu"
-msgstr "‘예약 관리’ 메뉴에서 예약을 확정하면 메세지가 보입니다."
+msgstr "‘예약관리’ 메뉴에서 예약을 확정하면 메시지가 나타납니다."
 
 #: src/components/AdminNavigation/presenter.js
 #: src/components/AdminStudioSetting/presenter.js
@@ -306,7 +323,7 @@ msgstr "메뉴"
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/Navigation/presenter.js
 msgid "PRIZM"
-msgstr "PRIZM"
+msgstr "프리즘"
 
 #: src/components/AdminNavigation/presenter.js
 #: src/components/AdminProfileSetting/presenter.js
@@ -334,15 +351,15 @@ msgstr "로그아웃"
 
 #: src/components/AdminOrderList/container.js
 msgid "Please set up your studio first to manage reservations"
-msgstr "예약을 관리하기 위해 먼저 스튜디오를 설정해주세요."
+msgstr "먼저 스튜디오 설정을 완료해주세요."
 
 #: src/components/AdminOrderList/presenter.js
 msgid "Custom Requests"
-msgstr "맞춤 예약"
+msgstr "맞춤예약"
 
 #: src/components/AdminOrderList/presenter.js
 msgid "All"
-msgstr "전체"
+msgstr "모두"
 
 #: src/components/AdminOrderList/presenter.js
 #: src/components/MySchedule/presenter.js
@@ -356,7 +373,7 @@ msgstr "처리중"
 #: src/components/MyScheduleDetail/presenter.js
 #: src/components/OrderComp/presenter.js
 msgid "Confirmed"
-msgstr "확정"
+msgstr "확정됨"
 
 #: src/components/AdminOrderList/presenter.js
 #: src/components/MySchedule/presenter.js
@@ -364,37 +381,37 @@ msgstr "확정"
 #: src/components/OrderComp/presenter.js
 #: src/components/PaymentSuccess/presenter.js
 msgid "Paid"
-msgstr "결제완료"
+msgstr "결제됨"
 
 #: src/components/AdminOrderList/presenter.js
 msgid "Past"
-msgstr "과거"
+msgstr "과거 내역"
 
 #: src/components/AdminOrderList/presenter.js
 msgid "When your proposal gets"
-msgstr "제안이 고객에게"
+msgstr "고객에게 제안하신 내용이"
 
 #: src/components/AdminOrderList/presenter.js
 #: src/components/RequestComp/presenter.js
 msgid "Selected"
-msgstr "체택"
+msgstr "선택될 경우"
 
 #: src/components/AdminOrderList/presenter.js
 msgid ""
 "by the client, the request will be shown as a confirmed reservation at the"
-msgstr "되면, 요청은 "
+msgstr "예약이 확정되며"
 
 #: src/components/AdminOrderList/presenter.js
 msgid " Confirmed "
-msgstr " 확정 "
+msgstr " 상단 메뉴 중 ‘확정됨’에 "
 
 #: src/components/AdminOrderList/presenter.js
 msgid "section above."
-msgstr "된 요청으로 보입니다."
+msgstr "해당 예약이 표시됩니다."
 
 #: src/components/AdminOrderList/presenter.js
 msgid "You haven't received reservation requests yet."
-msgstr "아직 예약 요청을 받지 않았습니다."
+msgstr "받은 예약 신청이 없습니다."
 
 #: src/components/AdminProfilePassword/container.js
 #: src/components/ProfilePassword/container.js
@@ -404,6 +421,7 @@ msgstr "비밀번호가 변경되었습니다."
 #: src/components/AdminProfilePassword/container.js
 #: src/components/AdminSignUp/container.js
 #: src/components/CustomRequestCreate/presenter.js
+#: src/components/FindPasswordResult/container.js
 #: src/components/ProfilePassword/container.js
 #: src/components/SignUp/container.js
 msgid "Invalid Password."
@@ -412,61 +430,63 @@ msgstr "올바르지 않은 비밀번호입니다."
 #: src/components/AdminProfilePassword/container.js
 #: src/components/AdminSignUp/container.js
 #: src/components/CustomRequestCreate/presenter.js
+#: src/components/FindPasswordResult/container.js
 #: src/components/ProfilePassword/container.js
 #: src/components/SignUp/container.js
 msgid ""
 "Your password should be at least 8 characters long and should include a mix "
 "of alphabets and numbers."
-msgstr "비밀번호는 최소 8자, 최소 1개의 알파벳과 숫자를 포함해야 합니다."
+msgstr "비밀번호는 최소 8자리, 영문+숫자 혼합으로 구성해주세요."
 
 #: src/components/AdminProfilePassword/presenter.js
 #: src/components/ProfilePassword/presenter.js
-msgid "Currend password"
+msgid "Current password"
 msgstr "현재 비밀번호"
 
 #: src/components/AdminProfilePassword/presenter.js
 #: src/components/FindPasswordResult/presenter.js
 #: src/components/ProfilePassword/presenter.js
 msgid "New password"
-msgstr "새 비밀번호"
+msgstr "새로운 비밀번호"
 
 #: src/components/AdminProfilePassword/presenter.js
 #: src/components/ProfilePassword/presenter.js
 msgid "Confirm your new password"
-msgstr "새 비밀번호 확인"
+msgstr "새로운 비밀번호 확인"
 
 #: src/components/AdminProfilePassword/presenter.js
 #: src/components/ProfilePassword/presenter.js
-msgid "Change Profile?"
-msgstr "프로필 변경"
+msgid "Do you want to change your profile?"
+msgstr "프로필을 변경하시겠습니까?"
 
 #: src/components/AdminProfilePassword/presenter.js
-msgid "Edit password"
+#: src/components/ProfilePassword/presenter.js
+msgid "Change Password"
 msgstr "비밀번호 변경"
 
 #: src/components/AdminProfileSetting/container.js
 #: src/components/Profile/container.js
 msgid "Your account information has been changed successfully."
-msgstr "프로필 정보가 변경되었습니다."
+msgstr "계정 정보가 성공적으로 변경되었습니다."
 
 #: src/components/AdminProfileSetting/presenter.js
 #: src/components/AdminSignUp/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/Profile/presenter.js src/components/SignUp/presenter.js
 msgid "First name"
-msgstr "이름"
+msgstr "성"
 
 #: src/components/AdminProfileSetting/presenter.js
 #: src/components/AdminSignUp/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/Profile/presenter.js src/components/SignUp/presenter.js
 msgid "Last name"
-msgstr "성"
+msgstr "이름"
 
 #: src/components/AdminProfileSetting/presenter.js
 #: src/components/AdminSignUp/presenter.js
 msgid "Instagram"
-msgstr "인스타그램"
+msgstr "인스타그램 주소"
 
 #: src/components/AdminProfileSetting/presenter.js
 #: src/components/AdminSignIn/presenter.js
@@ -477,16 +497,30 @@ msgstr "인스타그램"
 #: src/components/Profile/presenter.js src/components/SignIn/presenter.js
 #: src/components/SignUp/presenter.js
 msgid "Email"
-msgstr "이메일"
+msgstr "이메일 주소"
 
 #: src/components/AdminProfileSetting/presenter.js
 #: src/components/Profile/presenter.js
-msgid "Change Password?"
-msgstr "비밀번호 변경"
+msgid "Do you want to change your password?"
+msgstr "비밀번호를 변경하시겠습니까?"
 
 #: src/components/AdminProfileSetting/presenter.js
 msgid "Save change"
-msgstr "변경사항 저장"
+msgstr "변경내역 저장하기"
+
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/AdminSignUp/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/Profile/presenter.js src/components/SignUp/presenter.js
+msgid "Nationality"
+msgstr "국적"
+
+#: src/components/AdminProfileSetting/presenter.js
+#: src/components/AdminSignUp/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/Profile/presenter.js src/components/SignUp/presenter.js
+msgid "Type your country"
+msgstr "국가를 입력해주세요."
 
 #: src/components/AdminSettings/presenter.js
 #: src/components/ProfileMenu/presenter.js
@@ -495,7 +529,7 @@ msgstr "로그아웃"
 
 #: src/components/AdminSignIn/container.js
 msgid "This is not a valid photographer account."
-msgstr "올바른 사진 작가 계정이 아닙니다."
+msgstr "유효한 작가 계정이 아닙니다."
 
 #: src/components/AdminSignIn/container.js
 #: src/components/CustomRequestCreate/presenter.js
@@ -506,19 +540,21 @@ msgstr "이메일과 비밀번호를 확인해주세요."
 #: src/components/AdminSignIn/container.js
 #: src/components/AdminSignUp/container.js
 #: src/components/CustomRequestCreate/presenter.js
+#: src/components/FindPassword/container.js
+#: src/components/FindPasswordResult/container.js
 #: src/components/SignIn/container.js src/components/SignUp/container.js
 msgid "Please enter a valid email address."
-msgstr "올바른 형식의 이메일을 입력해주세요."
+msgstr "유효한 이메일 주소를 입력해주세요."
 
 #: src/components/AdminSignIn/presenter.js
 #: src/components/AdminSignUp/presenter.js
 msgid "Welcome to PRIZM"
-msgstr "PRIZM에 오신것을 환영합니다"
+msgstr "프리즘에 오신 것을 환영합니다!"
 
 #: src/components/AdminSignIn/presenter.js
 #: src/components/AdminSignUp/presenter.js
-msgid "Please fill out information beslow to continue"
-msgstr "계속하기 위해, 아래의 정보를 입력해주세요"
+msgid "Please fill in the information below to continue"
+msgstr "계속하려면 아래의 정보를 입력해주세요."
 
 #: src/components/AdminSignIn/presenter.js
 #: src/components/AdminSignUp/presenter.js
@@ -539,12 +575,8 @@ msgid "Forgot Password?"
 msgstr "비밀번호를 잊으셨나요?"
 
 #: src/components/AdminSignUp/presenter.js
-msgid "Please fill out information below to continue"
-msgstr "계속하기 위해, 아래의 정보를 입력해주세요"
-
-#: src/components/AdminSignUp/presenter.js
 msgid "Mobile Number"
-msgstr "휴대전화 번호"
+msgstr "휴대전화번호"
 
 #: src/components/AdminSignUp/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
@@ -557,13 +589,11 @@ msgstr "비밀번호 확인"
 #: src/components/ProfileMenu/presenter.js src/components/SignIn/presenter.js
 #: src/components/SignUp/presenter.js
 msgid "Sign Up"
-msgstr "회원 가입"
+msgstr "회원가입"
 
-#: src/components/AdminSignUp/presenter.js
-#: src/components/CustomRequestCreate/presenter.js
-#: src/components/SignUp/presenter.js
-msgid "Nationality"
-msgstr "국적"
+#: src/components/AdminStudioSetting/container.js
+msgid "Your studio information has been changed successfully."
+msgstr "스튜디오 정보가 정상적으로 변경되었습니다."
 
 #: src/components/AdminStudioSetting/container.js
 #: src/components/CustomRequestCreate/presenter.js
@@ -581,40 +611,23 @@ msgstr "시간을 선택해주세요."
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/container.js
 msgid "Please select your date range."
-msgstr "기간을 선택해주세요."
-
-#: src/components/AdminStudioSetting/container.js
-#: src/components/PhotographerDetail/container.js
-msgid "Please select all of the options above."
-msgstr "모든 옵션을 선택해주세요."
-
-#: src/components/AdminStudioSetting/container.js
-msgid "Your studio information has been changed successfully."
-msgstr "스튜디옹 정보가 변경되었습니다."
-
-#: src/components/AdminStudioSetting/container.js
-msgid "Please check the studio URL again."
-msgstr "스튜디오 URL을 다시 확인해주세요."
+msgstr "날짜 범위를 선택해주세요."
 
 #: src/components/AdminStudioSetting/container.js
 msgid "Please enter at least one service & pricing option."
-msgstr "최소 1개 이상의 서비스 & 가격 옵션을 입력해주세요."
+msgstr "하나 이상의 서비스&가격 옵션을 입력해주세요."
 
 #: src/components/AdminStudioSetting/container.js
 msgid "Please enter at least one photography location."
-msgstr "최소 1개 이상의 촬영 장소를 입력해주세요."
-
-#: src/components/AdminStudioSetting/container.js
-msgid "Please enter a valid URL for the portfolio."
-msgstr "올바른 형식의 포트폴리오 URL을 입력해주세요."
+msgstr "하나 이상의 촬영 장소를 입력해주세요."
 
 #: src/components/AdminStudioSetting/container.js
 msgid "Please fill in all the information above to create and save this option"
-msgstr "이 옵션을 생성하기 위해 위의 정보를 모두 입력해주세요."
+msgstr "옵션을 생성 및 저장하기 위해서는 위의 모든 정보를 입력해주세요."
 
 #: src/components/AdminStudioSetting/container.js
 msgid "Please upload at least one photograph."
-msgstr "최소 1개 이상의 사진을 업로드해주세요."
+msgstr "한 장 이상의 사진을 업로드해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "My Studio Setup"
@@ -622,11 +635,11 @@ msgstr "스튜디오 설정"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Please fill out information below to create your first "
-msgstr "당신의 첫번째 스튜디오 생성을 위해 아래의 정보를 입력해주세요."
+msgstr "아래 정보를 입력하여 첫 프리즘 스튜디오를"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid " Studio"
-msgstr " "
+msgstr " 생성해보세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Your Portfolio"
@@ -635,353 +648,325 @@ msgstr "포트폴리오"
 #: src/components/AdminStudioSetting/presenter.js
 msgid ""
 "Please upload sample images to be shown at the top of your PRIZM studio."
-msgstr ""
+msgstr "프리즘 스튜디오 상단에 표시될 대표 사진들을 업로드해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "If you want to remove an uploaded image, double click the image."
-msgstr ""
+msgstr "업로드된 사진을 제거하려면 사진을 더블클릭하세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Profile Picture"
-msgstr ""
+msgstr "프로필 사진"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Please upload a profile picture."
-msgstr ""
+msgstr "프로필 사진을 업로드해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Please enter your (studio) name."
-msgstr ""
+msgstr "(스튜디오) 이름을 입력해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Main Photography Location"
-msgstr ""
+msgstr "주요 촬영 지역"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Please type in your main photography (business) location."
-msgstr ""
+msgstr "주로 사진촬영을 진행하는 지역을 입력해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestOrderDetail/presenter.js
 msgid "Career"
-msgstr ""
+msgstr "커리어"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Please type in your career information."
-msgstr ""
+msgstr "커리어 정보를 입력해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "ex) your work experiences, exhibitions, awards, etc"
-msgstr ""
+msgstr "예시) 경력, 전시회, 수상내역 등"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Equipment (Optional)"
-msgstr ""
+msgstr "장비(선택)"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Please type in your equipment."
-msgstr ""
+msgstr "촬영 장비에 대한 정보를 입력해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "ex) Sony A7 II, Canon EOS 5 D Mark IV, EF 50mm F12 USM"
-msgstr ""
-
-#: src/components/AdminStudioSetting/presenter.js
-msgid "Portfolio (Optional)"
-msgstr ""
-
-#: src/components/AdminStudioSetting/presenter.js
-msgid ""
-"If you have a website where potential clients can view your portfolio, "
-"please enter the URL. If not, you are fine to leave this area blank."
-msgstr ""
+msgstr "예시) Sony A7 II, Canon EOS 5 D Mark IV, EF 50mm F12 USM 등"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Description"
-msgstr ""
+msgstr "사진작가 소개"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Please briefly introduce yourself."
-msgstr ""
+msgstr "잠재고객을 위한 자기소개를 간략히 작성해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Introduce yourself to potential PRIZM clients here."
-msgstr ""
+msgstr "여기에 문구를 입력해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Select Photography Spots"
-msgstr ""
+msgstr "촬영장소 선택"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Detailed location where you would like to meet tourists"
-msgstr ""
+msgstr "관광객과 만나 사진촬영을 진행하실 구체적인 장소들을 선택해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Search on the map to add your first photography spot"
-msgstr ""
+msgstr "지도에서 검색하여 새로운 촬영 장소를 선택해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Add a new location"
-msgstr ""
+msgstr "촬영 장소 추가하기"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Search location"
-msgstr ""
+msgstr "장소 검색하기"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Service and Pricing"
-msgstr ""
+msgstr "서비스 & 가격"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Click the button below to create a new service & pricing option."
-msgstr ""
+msgstr "아래 버튼을 클릭하여 새로운 서비스 & 가격 옵션을 생성하세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Create a new option"
-msgstr ""
+msgstr "새로운 옵션 생성"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Title"
 msgstr ""
+"제목 (한국어로 입력하실 경우 프리즘 팀에서 자체적으로 번역을 진행합니다.)"
 
 #: src/components/AdminStudioSetting/presenter.js
-msgid "ex) National Geographic Photographer, ABC Photographer"
-msgstr ""
+msgid "ex) Romantic Wedding, Couple in Seoul"
+msgstr "ex) Romantic Wedding, Couple in Seoul"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Photography Type"
 msgstr ""
+"사진촬영 유형 (한국어로 입력하실 경우 프리즘 팀에서 자체적으로 번역을 진행합"
+"니다.)"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "ex) Wedding, Couple, Single, Group"
-msgstr ""
+msgstr "ex) Wedding(웨딩), Couple(커플), Single(1인), Group(단체) 등"
 
 #: src/components/AdminStudioSetting/presenter.js
-msgid "ex) BlahBlahBlah"
+msgid "ex) Please describe this service option here."
 msgstr ""
+"상세 설명을 입력해주세요. (한국어로 입력하실 경우 프리즘 팀에서 자체적으로 변"
+"역을 진행합니다.)"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Person(s)"
-msgstr ""
+msgstr "인원(명)"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Hour(s)"
-msgstr ""
+msgstr "시간(숫자만 입력)"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Price (USD, $)"
-msgstr ""
+msgstr "가격(원)"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Your PRIZM Studio URL"
-msgstr ""
+msgstr "PRIZM 스튜디오 URL 주소"
 
 #: src/components/AdminStudioSetting/presenter.js
-msgid "Please type in a desired URL for your PRIZM studio."
-msgstr ""
-
-#: src/components/AdminStudioSetting/presenter.js
-msgid "Confirm Your URL"
-msgstr ""
-
-#: src/components/AdminStudioSetting/presenter.js
-msgid "Please confirm the studio URL."
-msgstr ""
+msgid "Please type in a desired URL for your PRIZM studio. (only english)"
+msgstr "사용하고자 하는 URL 주소를 양식에 맞게 입력해주세요. (영어만 가능)"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid ""
-"Make sure to double check that all the information is correct. Scroll up/"
-"down the right screen to swipe and view your information on PRIZM Studio"
+"Make sure to double check that all the information is correct. Click on the "
+"smartphone icon at the top right corner to view your PRIZM Studio."
 msgstr ""
+"입력하신 정보에 오류가 없는지 다시 한 번 확인해주세요. 우측 상단의 스마트폰 "
+"아이콘을 클릭하면 스튜디오 미리보기가 가능합니다."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Make sure to double check that all the information is correct."
-msgstr ""
+msgstr "입력하신 정보에 오류가 없는지 다시 한 번 확인해주세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid ""
-"Scroll up/down the right screen to swipe and view your information on PRIZM "
-"Studio"
-msgstr ""
+"Click on the smartphone icon at the top right corner to view your PRIZM "
+"Studio."
+msgstr "우측 상단의 스마트폰 아이콘을 클릭하면 스튜디오 미리보기가 가능합니다."
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "a whole new photography experience"
-msgstr ""
+msgstr "새로운 여행스냅 사진촬영 경험을 선사합니다."
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestOrderDetail/presenter.js
 msgid "Equipment"
-msgstr ""
-
-#: src/components/AdminStudioSetting/presenter.js
-#: src/components/PhotographerDetail/presenter.js
-#: src/components/RequestOrderDetail/presenter.js
-msgid "Portfolio"
-msgstr ""
-
-#: src/components/AdminStudioSetting/presenter.js
-#: src/components/PhotographerDetail/presenter.js
-#: src/components/RequestOrderDetail/presenter.js
-msgid "More ..."
-msgstr ""
-
-#: src/components/AdminStudioSetting/presenter.js
-#: src/components/PhotographerDetail/presenter.js
-#: src/components/RequestOrderDetail/presenter.js
-msgid "Abbr"
-msgstr ""
+msgstr "촬영장비"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestOrderDetail/presenter.js
 #: src/components/ReviewCreate/presenter.js
 msgid "Review"
-msgstr ""
+msgstr "리뷰"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestOrderDetail/presenter.js
 msgid "Go Review"
-msgstr ""
+msgstr "리뷰보기"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "1. Select Location"
-msgstr ""
+msgstr "1. 촬영장소 선택"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestOrderDetail/presenter.js
 msgid "More"
-msgstr ""
+msgstr "더보기"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestComp/presenter.js
 msgid "There is no available location."
-msgstr ""
+msgstr "등록된 장소가 없습니다."
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "2. Date&Time"
-msgstr ""
+msgstr "2. 날짜 및 시간"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "I have a specific date in mind"
-msgstr ""
+msgstr "사진촬영을 원하는 날짜가 있습니다."
 
 #: src/components/AdminStudioSetting/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid ""
-"I don’t have a specific date in mind yes, but my availability in Newyork "
-"City is as follows :"
-msgstr ""
+"I don't have a specific date in mind, but my availability in Seoul is as "
+"follows :"
+msgstr "촬영 날짜를 정하진 않았지만, 다음의 기간에 서울에 머무를 계획입니다 : "
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "3. Service&Pricing"
-msgstr ""
+msgstr "3. 서비스 & 가격"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "There is no available service & pricing option."
-msgstr ""
+msgstr "등록된 서비스 & 가격 옵션이 없습니다."
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
-msgid "4. Comments"
-msgstr ""
+msgid "4. Comments (Optional)"
+msgstr "4. 요청사항(선택)"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
-msgid "comment"
-msgstr ""
+msgid "Please leave your message here."
+msgstr "추가적인 요청사항을 입력하세요."
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Submit the request"
-msgstr ""
+msgstr "예약 신청하기"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "go back"
-msgstr ""
+msgstr "돌아가기"
 
 #: src/components/AdminStudioSetting/presenter.js
 msgid "Search Location"
-msgstr ""
+msgstr "장소 검색"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Next Month"
-msgstr ""
+msgstr "다음달"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Next Year"
-msgstr ""
+msgstr "내년"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Prev Month"
-msgstr ""
+msgstr "이전달"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Prev Year"
-msgstr ""
+msgstr "작년"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Next"
-msgstr ""
+msgstr "다음"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Before"
-msgstr ""
+msgstr "이전"
 
 #: src/components/AdminStudioSetting/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Done"
-msgstr ""
+msgstr "완료"
 
 #: src/components/AdminStudioSettingClear/presenter.js
 msgid "Registration Completed !"
-msgstr ""
+msgstr "스튜디오 생성 및 사진작가 등록이 완료되었습니다!"
 
 #: src/components/AdminStudioSettingClear/presenter.js
 msgid "Check your PRIZM Studio at :"
-msgstr ""
+msgstr "다음의 주소에서 프리즘 스튜디오를 확인하세요 : "
 
 #: src/components/AdminStudioSettingClear/presenter.js
 msgid "Complete"
-msgstr ""
+msgstr "완료"
 
 #: src/components/AdminStudioSettingClear/presenter.js
 msgid "Home"
-msgstr ""
+msgstr "홈으로"
 
 #: src/components/BottomNavigation/presenter.js
 msgid "Custom"
-msgstr ""
+msgstr "맞춤예약"
 
 #: src/components/BottomNavigation/presenter.js
 msgid "Photographers"
-msgstr ""
+msgstr "사진작가"
 
 #: src/components/CustomRequest/container.js
 #: src/components/CustomRequestCreate/presenter.js
@@ -989,50 +974,50 @@ msgstr ""
 #: src/components/PhotographerDetail/container.js
 #: src/components/SignUpClear/container.js
 msgid "A verification email has been sent. Please check your inbox."
-msgstr ""
+msgstr "인증 메일이 전송되었습니다. 수신함을 확인해주세요."
 
 #: src/components/CustomRequest/presenter.js src/components/Home/presenter.js
-msgid "NEWYORK"
-msgstr ""
+msgid "SEOUL"
+msgstr "서울"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Meet the "
-msgstr ""
+msgstr "서울의 "
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "coolest photographers in Seoul"
-msgstr ""
+msgstr "가장 멋진 사진작가들을 만나보세요."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Enrich your travel with photography"
-msgstr ""
+msgstr "당신의 여행을 사진촬영으로 더욱 특별하게 만들어보세요."
 
 #: src/components/CustomRequest/presenter.js
 msgid "Go Custom Request"
-msgstr ""
+msgstr "맞춤예약 신청하기"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Your custom request has been submitted."
-msgstr ""
+msgstr "맞춤예약 신청이 제출되었습니다."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Please complete the email verification"
-msgstr ""
+msgstr "이메일 인증을 완료해주세요."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Resend Verification Email"
-msgstr ""
+msgstr "인증메일 재전송"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "We are waiting for photographers to submit their proposals."
-msgstr ""
+msgstr "사진작가들의 제안을 기다리고 있습니다."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
@@ -1040,6 +1025,7 @@ msgid ""
 "We will notify you through text message and email when we have received "
 "proposals from photographers"
 msgstr ""
+"사진작가들의 제안이 도착하면 이메일과 문자메시지를 통해 안내해드리겠습니다."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
@@ -1047,31 +1033,33 @@ msgid ""
 "When you complete the email verification, your request details will be sent "
 "to photographers and you will soon receive various proposals."
 msgstr ""
+"이메일 인증을 완료하면, 맞춤예약 신청 내역이 사진작가들에게 전달되며, 곧 다양"
+"한 제안들을 받아보실 수 있습니다."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Make a New Request"
-msgstr ""
+msgstr "새로운 맞춤예약 신청하기"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Proposals for "
-msgstr ""
+msgstr "Proposals for "
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "PRIZM photographers' proposals have arrived."
-msgstr ""
+msgstr "프리즘 사진작가들의 제안이 도착했습니다."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Please click the button above to see them in detail"
-msgstr ""
+msgstr "자세한 내용을 확인하려면 위의 버튼을 클릭해주세요."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Your custom request has been confirmed."
-msgstr ""
+msgstr "맞춤예약이 확정되었습니다."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
@@ -1081,300 +1069,298 @@ msgstr ""
 #: src/components/Navigation/presenter.js
 #: src/components/ProfileMenu/presenter.js
 msgid "Add Payment Details"
-msgstr ""
+msgstr "결제정보 입력하기"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Waiting for Payment"
-msgstr ""
+msgstr "결제 대기중"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Payment Successful!"
-msgstr ""
+msgstr "결제가 완료되었습니다!"
+
+#: src/components/CustomRequest/presenter.js
+#: src/components/CustomRequestCreate/presenter.js
+#: src/components/MessageDetail/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+msgid "Please add payment details by : "
+msgstr "다음의 기한까지 결제정보를 입력해주세요 : "
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Already made a reservation?"
-msgstr ""
+msgstr "이미 예약을 신청하셨나요?"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid ""
 "If you make a new custom request, your existing request will be "
 "automatically cancelled."
-msgstr ""
+msgstr "새로운 맞춤예약을 신청하실 경우 기존의 예약은 자동으로 취소됩니다."
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Continue?"
-msgstr ""
+msgstr "계속하시겠습니까?"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 msgid "OK"
-msgstr ""
+msgstr "네"
 
 #: src/components/CustomRequest/presenter.js
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/RequestOrderDetail/presenter.js
 msgid "Back"
-msgstr ""
+msgstr "취소"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Book your photographer now >>"
-msgstr ""
+msgstr "3분만에 예약 신청하기 >>"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid ""
-"Your request has been succesfully submitted and sent to PRIZM photographers."
-msgstr ""
+"Your request has been successfully submitted and sent to PRIZM photographers."
+msgstr "예약이 성공적으로 제출되었으며, 사진작가들에게 전달되었습니다."
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "We will reach you via email and SMS soon. Thank you!"
-msgstr ""
+msgstr "곧 이메일과 문자메시지를 통해 안내드리겠습니다. 감사합니다."
 
 #: src/components/CustomRequestCreate/presenter.js
-msgid "메인화면으로 이동하기"
-msgstr ""
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/SignUpClear/presenter.js
+msgid "Main"
+msgstr "홈화면으로 이동하기"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Your Custom Request has been submitted!"
-msgstr ""
+msgstr "맞춤예약 신청이 제출되었습니다."
 
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/SignUpClear/presenter.js
 msgid "We sent a "
-msgstr ""
+msgstr "아래의 이메일 주소로 "
 
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/SignUpClear/presenter.js
 msgid "verification email "
-msgstr ""
+msgstr "인증 이메일이 "
 
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/SignUpClear/presenter.js
 msgid "to the following address :"
-msgstr ""
+msgstr "전송되었습니다 :"
 
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Please verify yourself by clicking the link attached in the email."
-msgstr ""
+msgstr "메일 본문의 링크를 클릭하여 인증을 완료해주세요."
 
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/MySchedule/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/SignUpClear/presenter.js
 msgid "Resend"
-msgstr ""
-
-#: src/components/CustomRequestCreate/presenter.js
-#: src/components/PhotographerDetail/presenter.js
-#: src/components/SignUpClear/presenter.js
-msgid "Main"
-msgstr ""
+msgstr "재전송"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "1. Please select your desired photography type(s) "
-msgstr ""
+msgstr "1. 원하는 사진촬영 유형을 선택해주세요 (복수선택 가능)"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Alone"
-msgstr ""
+msgstr "혼자"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Individual Photo"
-msgstr ""
+msgstr "단독사진"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Street"
-msgstr ""
+msgstr "거리에서"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Couple"
-msgstr ""
+msgstr "커플사진"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Indoor"
-msgstr ""
+msgstr "실내에서"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Wedding"
-msgstr ""
+msgstr "웨딩사진"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Propose"
-msgstr ""
+msgstr "프로포즈"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Romantic Proposal"
-msgstr ""
+msgstr "로맨틱한 프로포즈"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Friend"
-msgstr ""
+msgstr "친구들과 함께"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Friends"
-msgstr ""
+msgstr "친구들과 함께"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Daily"
-msgstr ""
+msgstr "도시의 일상"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Everyday Life"
-msgstr ""
+msgstr "도시의 일상"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Family"
-msgstr ""
+msgstr "가족사진"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Travel"
-msgstr ""
+msgstr "여행의 순간"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Travel Moment"
-msgstr ""
+msgstr "여행의 순간"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Extra"
-msgstr ""
+msgstr "기타"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Others : "
-msgstr ""
+msgstr "기타"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "2. How many people are joining the photo shoot?"
-msgstr ""
+msgstr "2. 촬영 인원을 선택해주세요."
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "1 person (solo)"
-msgstr ""
+msgstr "1명"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "2 people"
-msgstr ""
+msgstr "2명"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "3 people"
-msgstr ""
+msgstr "3명"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "4 people"
-msgstr ""
+msgstr "4명"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "people"
-msgstr ""
+msgstr "명"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "NEXT"
-msgstr ""
+msgstr "다음"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "3. When would you like to meet your photographer? "
-msgstr ""
+msgstr "3. 언제 사진을 촬영하고 싶으신가요?"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Specific"
-msgstr ""
+msgstr "구체적인"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "I have a specific date and time in mind."
-msgstr ""
+msgstr "사진촬영을 원하는 날짜가 있습니다."
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Range"
-msgstr ""
-
-#: src/components/CustomRequestCreate/presenter.js
-msgid ""
-"I don’t have a specific date yet, but I’m staying in New York City during : "
-msgstr ""
+msgstr "범위"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "4. How long do you want to spend your time with the photographer?"
-msgstr ""
+msgstr "4. 몇 시간동안 사진을 촬영하고 싶으신가요?"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "1 Hour"
-msgstr ""
+msgstr "1시간"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "1 hour"
-msgstr ""
+msgstr "1시간"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "2 Hour"
-msgstr ""
+msgstr "2시간"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "2 hours"
-msgstr ""
+msgstr "2시간"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Extra Hour"
-msgstr ""
+msgstr "기타"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "hours"
-msgstr ""
+msgstr "시간"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "5. Where would you like to take the travel photography? "
-msgstr ""
+msgstr "5. 어디에서 사진을 촬영하고 싶으신가요?"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid ""
-"I’d like to select my desired location(s). Click here to add a new location. "
-msgstr ""
+"I'd like to select my desired location(s) myself. Click here to add a new "
+"location. "
+msgstr "직접 촬영장소를 선택하겠습니다."
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Add a location"
-msgstr ""
+msgstr "장소 추가하기"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "I’d rather follow my photographer’s recommendation."
-msgstr ""
+msgstr "사진작가가 추천한 장소에서 사진을 촬영하겠습니다."
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "6. Sign-up and submit your request "
-msgstr ""
+msgstr "6. 회원가입 후 예약신청 제출하기"
 
 #: src/components/CustomRequestCreate/presenter.js
 #: src/components/SignUp/presenter.js
-msgid ""
-"Your reservation details and confirmation message from photographers will be "
-"sent to your email and mobile number."
-msgstr ""
+msgid "We will make notiifications on your reservation via email and SMS."
+msgstr "예약 관련 내용들을 이메일과 문자메시지로 안내해드립니다."
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Already have PRIZM account?"
-msgstr ""
+msgstr "이미 프리즘 계정이 있으신가요?"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "Click here to submit your request"
-msgstr ""
+msgstr "예약신청 제출하기"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "6. Sign-in and submit your request "
-msgstr ""
+msgstr "6. 로그인 후 예약신청 제출하기"
 
 #: src/components/CustomRequestCreate/presenter.js
 msgid "First time to PRIZM?"
-msgstr ""
+msgstr "PRIZM이 처음이신가요?"
 
 #: src/components/Description/presenter.js
 #: src/components/Navigation/presenter.js
 msgid "About PRIZM"
-msgstr ""
+msgstr "About 프리즘"
 
 #: src/components/Description/presenter.js
 msgid ""
@@ -1384,11 +1370,15 @@ msgid ""
 "'Custom Request' - which takes less than 3 minutes to complete - so that we "
 "can find the right photographer for you."
 msgstr ""
+"PRIZM은 서울을 방문하는 여행객들에게 서울의 가장 뛰어나고 멋진 사진작가들을 "
+"매칭해드리는 서비스입니다. ‘사진작가’ 메뉴를 클릭하셔서 PRIZM 파트너 사진작가"
+"들을 직접 살펴보시거나, ‘맞춤예약’ 메뉴를 통해 3분만에 예약을 신청해보세요. "
+"당신에게 적합한 사진작가를 PRIZM에서 찾아드립니다."
 
 #: src/components/Description/presenter.js
 #: src/components/Navigation/presenter.js
 msgid "Why PRIZM"
-msgstr ""
+msgstr "Why 프리즘"
 
 #: src/components/Description/presenter.js
 msgid ""
@@ -1397,6 +1387,9 @@ msgid ""
 "traveler and photographer successfully complete reservation matters with "
 "simple clicks and drags. "
 msgstr ""
+"① 현지 언어를 전혀 할 줄 모르더라도 손쉽게 예약을 신청하고 사진작가와 소통하"
+"실 수 있습니다. PRIZM의 예약 시스템은 클릭과 드래그만으로 사진작가와 효과적으"
+"로 소통하실 수 있도록 설계되어 있습니다."
 
 #: src/components/Description/presenter.js
 msgid ""
@@ -1408,6 +1401,12 @@ msgid ""
 "session. On a very rare occasion, if the photographer does not show up or "
 "fails to deliver your photos, you will get 100% refund for your payment. "
 msgstr ""
+"② 사진을 최종적으로 수령하신 이후에만 결제하신 금액이 사진작가에게 전달됩니"
+"다. 예약을 확정하는 단계에서 결제를 완료해주셔야 하지만, 사진작가는 사진촬영"
+"을 완료하고 고객에게 사진을 전달한 뒤에만 해당 금액을 수령할 수 있습니다. 사"
+"진을 수령하시기 전까지는 PRIZM 팀에서 결제 금액을 안전하게 보장합니다. 아주 "
+"예외적인 상황으로 인해 사진작가가 사진을 전달하지 않을 경우 100% 환불을 보장"
+"합니다."
 
 #: src/components/Description/presenter.js
 msgid ""
@@ -1416,29 +1415,34 @@ msgid ""
 "little information such as your desired date & time so that we could find "
 "the right photographer for you. "
 msgstr ""
+"③ 현지의 사진작가를 알지 못해도 걱정하지 않으셔도 됩니다. ‘맞춤예약’을 클릭하"
+"시고 촬영을 원하는 날짜 등 기본적인 정보만 입력해주세요. PRIZM에서 사진작가들"
+"을 선별하여 제안해드립니다."
 
 #: src/components/Description/presenter.js
 #: src/components/Navigation/presenter.js
 msgid "How it works"
-msgstr ""
+msgstr "이용방법"
 
 #: src/components/Description/presenter.js
 msgid "Custom Request"
-msgstr ""
+msgstr "맞춤예약을 신청하실 경우"
 
 #: src/components/Description/presenter.js
 msgid "① Click on the 'Book your photographer now' button. "
-msgstr ""
+msgstr "① ‘3분만에 예약 신청하기’ 버튼을 클릭해주세요."
 
 #: src/components/Description/presenter.js
 msgid "② Go through the reservation form and fill in the blanks."
-msgstr ""
+msgstr "② 예약 신청서의 내용을 빠짐없이 작성해주세요."
 
 #: src/components/Description/presenter.js
 msgid ""
 "③ When you complete the form, we'll recommend you at least 3 photographers "
 "registered in PRIZM within 72 hours. "
 msgstr ""
+"③ 신청서 작성을 완료하시면, 72시간 내에 최소 3명의 선별된 사진작가를 제안드립"
+"니다."
 
 #: src/components/Description/presenter.js
 msgid ""
@@ -1447,43 +1451,52 @@ msgid ""
 "will be done with clicks and drags on your screen, without much of manual "
 "messaging.) "
 msgstr ""
+"④ 각 작가의 스튜디오를 자유롭게 확인하고, 가장 마음에 드는 사진작가를 골라주"
+"세요. 날짜와 시간을 확정하기 위한 대화를 시작할 수 있습니다. (걱정하지 마세"
+"요. 클릭과 드래그 만으로 효과적으로 날짜와 시간을 확정하실 수 있습니다.)"
 
 #: src/components/Description/presenter.js
 msgid "⑤ Confirm your reservation and enter payment details. "
-msgstr ""
+msgstr "⑤ 예약 내용을 최종 확인하시고, 결제 정보를 입력해주세요."
 
 #: src/components/Description/presenter.js
 msgid ""
 "⑥ After you have had a photo session with your photographer, your photos "
 "will be sent both to your e-mail and PRIZM website. "
 msgstr ""
+"⑥ 사진촬영 진행 후 사진작가의 편집이 완료되면, 사진을 PRIZM 페이지와 이메일"
+"을 통해 전달해드립니다."
 
 #: src/components/Description/presenter.js
 msgid ""
 "⑦ Your paymnt will be transferred to the photographer after you have "
 "received your photos. "
-msgstr ""
+msgstr "⑦ 사진을 수령하신 이후에만 결제하신 금액이 사진작가에게 전달됩니다."
 
 #: src/components/Description/presenter.js
 msgid "Selecting your photographer yourself"
-msgstr ""
+msgstr "직접 사진작가를 선택하실 경우"
 
 #: src/components/Description/presenter.js
 msgid ""
 "① A list of PRIZM photographers is available at the 'Photographers' menu. "
-msgstr ""
+msgstr "① ‘사진작가’ 메뉴에서 PRIZM 파트너 사진작가들을 확인하실 수 있습니다."
 
 #: src/components/Description/presenter.js
 msgid ""
 "② If you tab or click a photographer's icon, you will be directed to the "
 "photographer's online studio.  "
 msgstr ""
+"② 각 사진작가의 아이콘을 클릭하시면, 해당 사진작가의 온라인 스튜디오로 이동합"
+"니다."
 
 #: src/components/Description/presenter.js
 msgid ""
 "③ If you decide to make a reservation with the photographer, follow the "
 "reservation guideline in the studio and submit your reservation. "
 msgstr ""
+"③ 선택한 사진작가와 예약을 진행하기로 결정하셨다면, 스튜디오 내 예약 가이드라"
+"인에 따라 내용을 입력하신 후 예약 신청을 제출해주세요."
 
 #: src/components/Description/presenter.js
 msgid ""
@@ -1491,252 +1504,279 @@ msgid ""
 "and time. (Don't worry - this process will be handled with simple clicks and "
 "drags on your screen) "
 msgstr ""
+"④ 곧 사진작가로부터 날짜 및 시간 확정을 위한 메시지가 도착합니다. (걱정하지 "
+"마세요. 클릭과 드래그 만으로 효과적으로 날짜와 시간을 확정하실 수 있습니다.)"
 
 #: src/components/Description/presenter.js
 #: src/components/Navigation/presenter.js
 msgid "Support"
-msgstr ""
+msgstr "고객지원"
 
 #: src/components/Description/presenter.js
 msgid "If you have any questions, please send us an email at :"
-msgstr ""
+msgstr "문의사항은 언제든지 다음 이메일로 전달해주세요 : "
 
 #: src/components/Description/presenter.js src/components/Footer/presenter.js
 msgid "contact@prizm.cloud"
-msgstr ""
+msgstr "contact@prizm.cloud"
 
 #: src/components/Description/presenter.js
 msgid "We will respond within 24 hours. "
-msgstr ""
+msgstr "24시간 이내에 답변드리겠습니다."
 
 #: src/components/Description/presenter.js
 msgid "If you need an immediate support in Seoul, call us at :"
-msgstr ""
+msgstr "서울에서 급히 도움이 필요할 경우 아래의 연락처로 전화해주세요 :"
 
 #: src/components/Description/presenter.js
 msgid "+82-10-5309-3547"
-msgstr ""
+msgstr "+82-10-5309-3547"
 
 #: src/components/EmailVerification/container.js
 msgid "Your email is verified!"
-msgstr ""
+msgstr "이메일 인증이 완료되었습니다!"
 
 #: src/components/FindPassword/presenter.js
 #: src/components/FindPasswordResult/presenter.js
 msgid "Reset your password"
-msgstr ""
+msgstr "비밀번호 재설정하기"
 
 #: src/components/FindPassword/presenter.js
 msgid "We have sent a password reset link to your email."
-msgstr ""
+msgstr "비밀번호 재설정 링크가 가입하신 이메일로 전송되었습니다."
 
 #: src/components/FindPassword/presenter.js
 msgid "Please enter your PRIXM account email."
-msgstr ""
+msgstr "가입하신 프리즘 계정 이메일을 입력해주세요."
 
 #: src/components/FindPassword/presenter.js
 msgid "We will send you a password reset link to the email."
-msgstr ""
+msgstr "이메일로 비밀번호 재설정 링크를 전송해드립니다."
+
+#: src/components/FindPasswordResult/container.js
+msgid "Invalid Email."
+msgstr "이메일이 올바르지 않습니다."
+
+#: src/components/FindPasswordResult/container.js
+msgid "Your password has been successfully changed."
+msgstr "비밀번호가 변경되었습니다."
+
+#: src/components/FindPasswordResult/container.js
+msgid "Please enter a password."
+msgstr "비밀번호를 입력해주세요."
 
 #: src/components/FindPasswordResult/presenter.js
 msgid "Change"
-msgstr ""
+msgstr "변경하기"
 
 #: src/components/FindPasswordResult/presenter.js
 msgid "Please check your email again."
-msgstr ""
+msgstr "이메일 주소를 확인해주세요.”"
 
 #: src/components/Footer/presenter.js src/components/ProfileMenu/presenter.js
 msgid "Terms of Use"
-msgstr ""
+msgstr "이용약관"
 
 #: src/components/Footer/presenter.js src/components/ProfileMenu/presenter.js
 msgid "Privacy Policy"
-msgstr ""
+msgstr "개인정보처리방침"
 
 #: src/components/Footer/presenter.js
 msgid "EXPLABS"
-msgstr ""
+msgstr "이엑스피랩스"
 
 #: src/components/Footer/presenter.js
 msgid "Registration No. : 161-60-00371"
-msgstr ""
+msgstr "사업자등록번호 : 161-60-00371"
 
 #: src/components/Footer/presenter.js
 msgid "Jungwoo Lee"
-msgstr ""
+msgstr "이정우"
 
 #: src/components/Footer/presenter.js
 msgid "128, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea (06234)"
-msgstr ""
+msgstr "서울시 강남구 테헤란로 128 성곡빌딩 203호 (06234)"
 
 #: src/components/Footer/presenter.js
 msgid "+82-2-1670-0506"
-msgstr ""
+msgstr "02-1670-0506"
 
 #: src/components/Footer/presenter.js
 msgid " | Jungwoo Lee | Registration No. : 161-60-00371"
-msgstr ""
+msgstr " | 이정우 | 사업자등록번호 : 161-60-00371"
 
 #: src/components/Footer/presenter.js
 msgid "contact@prizm.cloud | +82-2-1670-0506"
-msgstr ""
+msgstr "contact@prizm.cloud | 02-1670-0506"
 
 #: src/components/MessageDetail/presenter.js
 #: src/components/MySchedule/presenter.js
 #: src/components/MyScheduleDetail/presenter.js
 msgid "View Payment Information"
-msgstr ""
+msgstr "결제정보 보기"
+
+#: src/components/MessageDetail/presenter.js
+#: src/components/MySchedule/presenter.js
+#: src/components/MyScheduleDetail/presenter.js
+msgid "Please make payment by : "
+msgstr "다음의 기한까지 결제를 완료해주세요 : "
 
 #: src/components/MessageDetail/presenter.js
 msgid "Message"
-msgstr ""
+msgstr "메시지"
 
 #: src/components/MessageList/presenter.js
 msgid "You haven't received any messages yet."
-msgstr ""
+msgstr "받은 메시지가 없습니다."
 
 #: src/components/MessageList/presenter.js
 msgid "A new chatroom will appear when you submit a request to a photographer."
-msgstr ""
+msgstr "예약신청을 완료하면 사진작가와의 메시지창이 나타납니다."
 
 #: src/components/MyPhotoDetail/presenter.js
 msgid ""
 "Files below are optimized for mobile uses. Original files have been sent to "
 "your email."
 msgstr ""
+"아래 사진들은 모바일 환경에 최적화되어 있습니다. 원본 파일은 가입하신 이메일"
+"로 전송되었습니다."
 
 #: src/components/MyPhotoDetail/presenter.js
 msgid "Download"
-msgstr ""
+msgstr "다운로드"
 
 #: src/components/MyPhotoDetail/presenter.js
 #: src/components/MySchedule/presenter.js
 #: src/components/MyScheduleDetail/presenter.js
 msgid "Leave a Review"
-msgstr ""
+msgstr "리뷰 남기기"
 
 #: src/components/MyPhotos/presenter.js src/components/Navigation/presenter.js
 #: src/components/ProfileMenu/presenter.js
 msgid "My Photos"
-msgstr ""
+msgstr "나의 사진"
 
 #: src/components/MySchedule/presenter.js
 #: src/components/ProfileMenu/presenter.js
 msgid "My Schedule"
-msgstr ""
+msgstr "나의 예약"
 
 #: src/components/MySchedule/presenter.js
 msgid ""
 "Your request will be sent to the photographer when you complete the email "
 "verification"
-msgstr ""
+msgstr "이메일 인증을 완료하면 신청하신 내역이 사진작가에게 전달됩니다."
 
 #: src/components/MySchedule/presenter.js
 #: src/components/MyScheduleDetail/presenter.js
 #: src/components/OrderComp/presenter.js
 msgid "Cancelled"
-msgstr ""
+msgstr "취소됨"
 
 #: src/components/MySchedule/presenter.js
 #: src/components/RequestOrderList/presenter.js
 msgid "You haven't made any reservations yet."
-msgstr ""
+msgstr "예약 내역이 없습니다."
 
 #: src/components/MySchedule/presenter.js
 #: src/components/RequestOrderList/presenter.js
 msgid "A new schedule will appear when you submit a request to a photographer."
-msgstr ""
+msgstr "먼저 예약 신청을 완료해주세요."
 
 #: src/components/MyScheduleDetail/container.js
 #: src/components/ReviewCreate/container.js
 #: src/components/ReviewList/container.js
 msgid "Invalid request!"
-msgstr ""
+msgstr "잘못된 요청입니다."
 
 #: src/components/MyScheduleDetail/presenter.js
 #: src/components/OrderComp/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Location"
-msgstr ""
+msgstr "촬영 장소"
 
 #: src/components/MyScheduleDetail/presenter.js
 #: src/components/OrderComp/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestComp/presenter.js
 msgid "Date&Time"
-msgstr ""
+msgstr "날짜 및 시간"
 
 #: src/components/MyScheduleDetail/presenter.js
 #: src/components/OrderComp/presenter.js
 #: src/components/PaymentDetail/presenter.js
 #: src/components/PhotographerDetail/presenter.js
 msgid "Service&Pricing"
-msgstr ""
+msgstr "서비스&가격"
 
 #: src/components/Navigation/presenter.js
-msgid "Meet the best photographers in New York"
-msgstr ""
+msgid "Meet the best photographers in Seoul"
+msgstr "서울의 가장 멋진 사진작가들을 만나보세요."
 
 #: src/components/Navigation/presenter.js
 msgid "Enrich your trip with photography"
-msgstr ""
+msgstr "당신의 여행을 사진촬영으로 더욱 특별하게 만들어보세요."
 
 #: src/components/Navigation/presenter.js
 msgid "Welcome to "
-msgstr ""
+msgstr "프리즘에 오신 것을 "
 
 #: src/components/Navigation/presenter.js
 msgid "PRIZM!"
-msgstr ""
+msgstr "환영합니다!"
 
 #: src/components/Navigation/presenter.js
 msgid "Sign in to find the coolest photographers in "
-msgstr ""
+msgstr "로그인하여 서울의 가장 멋진 사진작가들을 확인해보세요."
 
 #: src/components/Navigation/presenter.js
 msgid "Seoul."
-msgstr ""
+msgstr " "
 
 #: src/components/Navigation/presenter.js
 msgid "Book your photographer without hassle."
-msgstr ""
+msgstr "정말 빠르고 쉽게 사진촬영을 예약할 수 있습니다."
 
 #: src/components/Navigation/presenter.js
 msgid "My schedule"
-msgstr ""
+msgstr "나의 일정"
 
 #: src/components/Navigation/presenter.js
 msgid "Sign Out"
-msgstr ""
+msgstr "로그아웃"
 
 #: src/components/Navigation/presenter.js
 msgid "Are you a photographer?"
-msgstr ""
+msgstr "사진작가이신가요?"
 
 #: src/components/Navigation/presenter.js
 #: src/components/ProfileMenu/presenter.js
 msgid "Please make another reservation."
-msgstr ""
+msgstr "다른 예약을 신청해주세요."
 
 #: src/components/NotFound/index.js
 msgid "Page not found"
-msgstr ""
+msgstr "페이지를 찾을 수 없습니다."
+
+#: src/components/NotFound/index.js
+msgid ""
+"The page you are looking for doesn't exist or another error has occured."
+msgstr "찾으시는 페이지가 존재하지 않습니다."
 
 #: src/components/NotFound/index.js
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestOrderDetail/presenter.js
 #: src/components/ReviewCreateComplete/index.js
 msgid "Go to the main page"
-msgstr ""
+msgstr "홈으로 이동하기"
 
 #: src/components/OrderComp/container.js
 msgid "Please select available date & time."
-msgstr ""
+msgstr "가능한 시간 및 날짜를 선택해주세요."
 
 #: src/components/OrderComp/container.js
 msgid "Please select your response."
-msgstr ""
+msgstr "답변을 선택해주세요."
 
 #: src/components/OrderComp/presenter.js
 msgid ""
@@ -1744,140 +1784,164 @@ msgid ""
 "client. If payment is not made within 72 hours, the reservation will be "
 "canceled automatically."
 msgstr ""
+"예약이 확정되었으며, 고객의 결제를 기다리고 있습니다. 예약확정 후 72시간 내 "
+"결제가 이루어지지 않을 경우 예약이 자동으로 취소됩니다."
 
 #: src/components/OrderComp/presenter.js
 msgid ""
 "This reservation has been confirmed and fully paid. Payout will be available "
 "when you upload tourist photos and mark this schedule as 'Completed.'"
 msgstr ""
+"결제가 완료되었습니다. 촬영 후 사진을 업로드하신 뒤 일정을 완료하면 대금을 수"
+"령하실 수 있습니다."
 
 #: src/components/OrderComp/presenter.js
 msgid "This reservation has been cancelled."
-msgstr ""
+msgstr "이 예약은 취소되었습니다."
 
 #: src/components/OrderComp/presenter.js
 msgid ""
 "Your availability table (below) was sent to your client. We are waiting for "
 "the client's response."
 msgstr ""
+"아래와 같이 선택하신 날짜 및 시간이 고객에게 전달되었으며, 응답을 기다리고 있"
+"습니다."
 
 #: src/components/OrderComp/presenter.js
 msgid "Are you sure you want to decline the request?"
-msgstr ""
+msgstr "정말 예약 요청을 거절하시겠습니까?"
 
 #: src/components/OrderComp/presenter.js
 msgid "Click here to decline the reservation request."
-msgstr ""
+msgstr "예약 요청을 거절하시려면 여기를 눌러주세요."
 
 #: src/components/OrderComp/presenter.js
 msgid "Decline"
-msgstr ""
+msgstr "거절하기"
 
 #: src/components/OrderComp/presenter.js
 msgid "How would you like to respond?"
-msgstr ""
+msgstr "답변을 선택해주세요."
 
 #: src/components/OrderComp/presenter.js
 #: src/components/RequestComp/presenter.js
 msgid ""
 "Yes, I’m available at the date&time. I’d like to confirm the reservation."
-msgstr ""
+msgstr "네, 선택된 날짜 및 시간에 사진촬영이 가능하며 예약을 확정하겠습니다."
 
 #: src/components/OrderComp/presenter.js
 msgid ""
 "No, I’d not be available at the date&time, but I’d like to suggest other "
 "date&time options to my client."
 msgstr ""
+"선택된 일정에는 사진촬영이 불가능하지만, 다른 날짜 및 시간을 제안하겠습니다."
 
 #: src/components/OrderComp/presenter.js
 msgid ""
 "Yes, I'm available at the selected period. I'd like to suggest timeslot "
 "options to the client."
 msgstr ""
+"네, 해당 날짜 범위에 사진촬영이 가능하며, 구체적인 시간을 고객에게 제시하겠습"
+"니다."
 
 #: src/components/OrderComp/presenter.js
 msgid "Please select your available timeslots in the table below."
-msgstr ""
+msgstr "아래 테이블에서 가능한 시간들을 선택해주세요."
 
 #: src/components/OrderComp/presenter.js
 msgid ""
 "Then we will send it to your client and guide him/her to choose the most "
 "desired option."
 msgstr ""
+"선택을 완료하시면 테이블이 고객에게 전달되며, 고객은 그 중 가장 선호하는 시간"
+"을 선택하게 됩니다."
 
 #: src/components/OrderComp/presenter.js
 msgid "No, I’d not be available and would like to decline the request."
 msgstr ""
+"아니오, 해당 일정에는 사진촬영이 불가능하며 예약 신청을 거절하겠습니다."
 
 #: src/components/PaymentDetail/container.js
 msgid "Payment period has expired."
-msgstr ""
+msgstr "고객의 결제 기한이 초과되었습니다."
 
 #: src/components/PaymentDetail/container.js
 msgid "Invalid user information. Please login again."
-msgstr ""
+msgstr "유효하지지 않은 유저 정보입니다. 다시 로그인해주세요."
 
 #: src/components/PaymentDetail/container.js
 msgid "Incorrect Price."
-msgstr ""
+msgstr "유효하지 않은 가격입니다."
 
 #: src/components/PaymentDetail/container.js
 msgid "This payment option is only available for Korean customers."
-msgstr ""
+msgstr "선택하신 결제 옵션은 한국 고객만 선택 가능합니다."
 
 #: src/components/PaymentDetail/container.js
 msgid "Type the remitter's name."
-msgstr ""
+msgstr "입금자명을 입력해주세요."
 
 #: src/components/PaymentDetail/container.js
 msgid "Invalid request."
-msgstr ""
+msgstr "잘못된 요청입니다."
 
 #: src/components/PaymentDetail/container.js
 msgid "This option is not available for Korean customers."
-msgstr ""
+msgstr "선택하신 옵션은 한국 고객만 선택 가능합니다."
 
 #: src/components/PaymentDetail/presenter.js
 msgid "Remitter's Name"
-msgstr ""
+msgstr "입금자명"
 
 #: src/components/PaymentDetail/presenter.js
 msgid "Process Payment"
-msgstr ""
+msgstr "결제하기"
 
 #: src/components/PaymentSuccess/presenter.js
 msgid "Your reservation has been successfully submitted!"
-msgstr ""
+msgstr "예약이 성공적으로 신청되었습니다!"
 
 #: src/components/PaymentSuccess/presenter.js
 msgid "Account Number : IBK (Industrial Bank of Korea) 054-146700-04-018"
-msgstr ""
+msgstr "계좌번호 : 기업은행 054-146700-04-018"
 
 #: src/components/PaymentSuccess/presenter.js
 msgid "Copy"
-msgstr ""
+msgstr "복사"
 
 #: src/components/PaymentSuccess/presenter.js
 msgid "Account holder : EXPLABS"
-msgstr ""
+msgstr "예금주명 : 이정우(이엑스피랩스)"
+
+#: src/components/PaymentSuccess/presenter.js
+msgid "Payment Due : "
+msgstr "결제 기한 : "
+
+#: src/components/PaymentSuccess/presenter.js
+msgid ""
+"(Your reservation will be cancelled if you do not make payment by the "
+"payment due.)"
+msgstr "(결제 기한까지 결제를 완료하지 않으면 예약이 취소됩니다.)"
 
 #: src/components/PaymentSuccess/presenter.js
 msgid ""
 "Your payment will be transferred to the photographer only after you have "
 "completed the photo session. PRIZM will safely hold your payment until then."
 msgstr ""
+"결제하신 내역은 촬영 완료 후 사진을 전달받으신 이후에 사진작가에게 전달되며, "
+"그 이전에는 프리즘에서 대금을 안전하게 보관합니다."
 
 #: src/components/PaymentSuccess/presenter.js
 msgid "Please refer to the Terms of Use for cancellation and refund polices."
-msgstr ""
+msgstr "예약 취소 및 환불 정책은 이용약관을 참고해주시기 바랍니다."
 
 #: src/components/PaymentSuccess/presenter.js
 msgid "Go back to the main page"
-msgstr ""
+msgstr "메인 페이지로 돌아가기"
 
 #: src/components/PaymentSuccess/presenter.js
 msgid "Your payment has been successfully submitted!"
-msgstr ""
+msgstr "결제가 완료되었습니다!"
 
 #: src/components/PaymentSuccess/presenter.js
 msgid ""
@@ -1885,283 +1949,307 @@ msgid ""
 "completed the photo session and received photographs. Until then, your "
 "payment will be safely kept as a deposit."
 msgstr ""
+"결제하신 내역은 촬영 완료 후 사진을 전달받으신 이후에 사진작가에게 전달되며, "
+"그 이전에는 프리즘에서 대금을 안전하게 보관합니다."
 
 #: src/components/PaymentSuccess/presenter.js
 msgid ""
 "For information regarding cancellation and refund policies, please refer to "
 "our Terms of Service."
-msgstr ""
+msgstr "예약 취소 및 환불 정책은 이용약관을 참고해주시기 바랍니다."
+
+#: src/components/PhotographerDetail/container.js
+msgid "Please select all of the options above."
+msgstr "위의 모든 옵션을 선택해주세요."
 
 #: src/components/PhotographerDetail/container.js
 msgid "Login is required."
-msgstr ""
+msgstr "로그인이 필요합니다."
+
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "More ..."
+msgstr "더보기"
+
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "Abbr"
+msgstr "줄이기"
 
 #: src/components/PhotographerDetail/presenter.js
 msgid "Sign up & Submit the request"
-msgstr ""
+msgstr "회원가입 및 예약신청"
 
 #: src/components/PhotographerDetail/presenter.js
-msgid "Find other photographers in New York"
-msgstr ""
+msgid "Find other photographers in Seoul"
+msgstr "서울의 다른 사진작가 찾아보기"
 
 #: src/components/PhotographerDetail/presenter.js
 msgid "Find More"
-msgstr ""
+msgstr "더보기"
 
 #: src/components/PhotographerDetail/presenter.js
 msgid "Please review your reservation deatils : "
-msgstr ""
-
-#: src/components/PhotographerDetail/presenter.js
-msgid ""
-"I don’t have a specific date in mind yes, but my availability in Newyork "
-"City is as above"
-msgstr ""
+msgstr "예약신청 내역을 확인해주세요."
 
 #: src/components/PhotographerDetail/presenter.js
 msgid "Comment"
-msgstr ""
+msgstr "요청사항(선택)"
 
 #: src/components/PhotographerDetail/presenter.js
 msgid "Confirm and Submit Request"
-msgstr ""
+msgstr "예약신청 완료하기"
 
 #: src/components/PhotographerDetail/presenter.js
 msgid "Submit Request"
-msgstr ""
+msgstr "예약신청 완료하기"
 
 #: src/components/PhotographerDetail/presenter.js
 #: src/components/RequestOrderDetail/presenter.js
 msgid "Your request was submitted successfully"
-msgstr ""
+msgstr "예약신청이 제출되었습니다."
+
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid " is now reviewing your request."
+msgstr "님이 요청을 검토중입니다."
+
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "We will soon send you a confirmation message"
+msgstr "이메일과 SMS를 통해 곧 "
+
+#: src/components/PhotographerDetail/presenter.js
+#: src/components/RequestOrderDetail/presenter.js
+msgid "to your email and mobile number."
+msgstr "확정 메세지를 보내드리겠습니다."
 
 #: src/components/PhotographerDetail/presenter.js
 msgid "Your Reservation Request has been submitted!"
-msgstr ""
+msgstr "예약신청이 제출되었습니다."
 
 #: src/components/PhotographerDetail/presenter.js
 msgid ""
 "When you complete the email verification, your request details will be sent "
 "to the selected photographer"
-msgstr ""
+msgstr "이메일 인증을 완료하면, 예약 내역이 사진작가에게 전달됩니다."
 
 #: src/components/Profile/presenter.js
 msgid "Edit profile"
-msgstr ""
+msgstr "프로필 수정"
 
 #: src/components/ProfileMenu/presenter.js
 msgid "Sign In to view your profile"
-msgstr ""
-
-#: src/components/ProfilePassword/presenter.js
-msgid "edit password"
-msgstr ""
+msgstr "프로필을 보려면 로그인하세요."
 
 #: src/components/RequestComp/container.js
 msgid "Please suggest price for the requested photography experience."
-msgstr ""
+msgstr "제안하고자 하는 서비스 가격을 입력해주세요."
 
 #: src/components/RequestComp/container.js
 msgid "Please check availaibility for the suggested date and time."
-msgstr ""
+msgstr "날짜 및 시간 가능 여부를 체크하ㅐ주세요."
 
 #: src/components/RequestComp/container.js
 msgid "Please select a photography location."
-msgstr ""
+msgstr "사진촬영 장소를 선택해주세요."
 
 #: src/components/RequestComp/container.js
 msgid "Please select your available date and time."
-msgstr ""
+msgstr "가능한 날짜와 시간을 선택해주세요."
 
 #: src/components/RequestComp/presenter.js
 msgid "Closed"
-msgstr ""
+msgstr "마감됨"
 
 #: src/components/RequestComp/presenter.js
 msgid "Apply"
-msgstr ""
+msgstr "신청하기"
 
 #: src/components/RequestComp/presenter.js
 msgid "Photograpy Type"
-msgstr ""
+msgstr "사진 유형"
 
 #: src/components/RequestComp/presenter.js
 msgid "Person(s)/Hour(s)"
-msgstr ""
+msgstr "인원/시간"
 
 #: src/components/RequestComp/presenter.js
 msgid "Desired Location"
-msgstr ""
+msgstr "촬영장소"
 
 #: src/components/RequestComp/presenter.js
 msgid "Your Proposal"
-msgstr ""
+msgstr "제안 내용"
 
 #: src/components/RequestComp/presenter.js
 msgid "1. Photography Type : "
-msgstr ""
+msgstr "1. 사진 유형 : "
 
 #: src/components/RequestComp/presenter.js
 msgid "2. Person(s)/Hour(s) : "
-msgstr ""
+msgstr "2. 인원/시간 : "
 
 #: src/components/RequestComp/presenter.js
 msgid "3. Photography Location"
-msgstr ""
+msgstr "3. 촬영장소"
 
 #: src/components/RequestComp/presenter.js
 msgid "4. Date&Time"
-msgstr ""
+msgstr "4. 날짜 및 시간"
 
 #: src/components/RequestComp/presenter.js
 msgid "5. Price"
-msgstr ""
+msgstr "5. 가격"
 
 #: src/components/RequestComp/presenter.js
 msgid "Send Your Proposal"
-msgstr ""
+msgstr "고객에게 제안하기"
 
 #: src/components/RequestOrderDetail/presenter.js
 msgid "1. Photography Location"
-msgstr ""
+msgstr "1. 촬영장소"
 
 #: src/components/RequestOrderDetail/presenter.js
 msgid "2. Price"
-msgstr ""
+msgstr "2. 가격"
 
 #: src/components/RequestOrderDetail/presenter.js
 msgid "3. Date & Time"
-msgstr ""
+msgstr "3. 날짜 및 시간"
 
 #: src/components/RequestOrderDetail/presenter.js
 msgid "Please select your desired time(s)."
-msgstr ""
+msgstr "“촬영을 희망하는 시간을 선택해주세요. (중복가능)"
 
 #: src/components/RequestOrderDetail/presenter.js
 msgid "Select this proposal"
-msgstr ""
+msgstr "이 제안 선택하기"
 
 #: src/components/RequestOrderList/container.js
 msgid "An error has ocurred.."
-msgstr ""
+msgstr "오류가 발생했습니다."
 
 #: src/components/RequestOrderList/presenter.js
 msgid "Go Back"
-msgstr ""
+msgstr "돌아가기"
 
 #: src/components/RequestOrderList/presenter.js
 msgid "Please select your most preferred photographer."
-msgstr ""
+msgstr "가장 선호하는 사진작가를 선택해주세요."
 
 #: src/components/RequestOrderList/presenter.js
 msgid "Details >"
-msgstr ""
+msgstr "자세히 >"
 
 #: src/components/RequestOrderList/presenter.js
 msgid "Photography Location"
-msgstr ""
+msgstr "촬영장소"
 
 #: src/components/RequestOrderList/presenter.js
 msgid "Price"
-msgstr ""
+msgstr "가격"
 
 #: src/components/ReviewCreate/container.js
 msgid "Please fill out all informations."
-msgstr ""
+msgstr "정보를 빠짐없이 입력해주세요."
 
 #: src/components/ReviewCreate/presenter.js
 #: src/components/ReviewList/presenter.js
 msgid "Go back"
-msgstr ""
+msgstr "돌아가기"
 
 #: src/components/ReviewCreate/presenter.js
 msgid "Rate & Review"
-msgstr ""
+msgstr "리뷰남기기"
 
 #: src/components/ReviewCreate/presenter.js
 msgid "How was your overall experiance?"
-msgstr ""
+msgstr "반적인 경험을 이야기해주세요."
 
 #: src/components/ReviewCreate/presenter.js
 msgid "Share details of your experience with the photographer here:"
-msgstr ""
+msgstr "여기에 사진작가와의 경험에 대한 리뷰를 남겨주세요."
 
 #: src/components/ReviewCreate/presenter.js
 msgid "Submit Review"
-msgstr ""
+msgstr "리뷰 제출하기"
 
 #: src/components/ReviewCreateComplete/index.js
 msgid "Your review has been submitted!"
-msgstr ""
+msgstr "리뷰가 제출되었습니다."
 
 #: src/components/ReviewCreateComplete/index.js
 msgid ""
 "Thank you very much for the review. We hope you had a great experience with "
 "PRIZM."
 msgstr ""
+"리뷰를 작성해주셔서 감사합니다. PRIZM과 함께 좋은 추억 만드셨길 바라겠습니다."
 
 #: src/components/ReviewCreateComplete/index.js
 msgid ""
 "If you have any questions or suggestions, feel free to reach us at "
 "contact@prizm.cloud"
-msgstr ""
+msgstr "문의사항 또는 제안사항은 언제든 contact@prizm.cloud로 전달해주세요."
 
 #: src/components/ReviewCreateComplete/index.js
 msgid "Hope to see you again at your next trip!"
-msgstr ""
+msgstr "다음 여행에도 PRIZM과 함께해주세요!"
 
 #: src/components/ReviewList/presenter.js
 msgid "Reviews"
-msgstr ""
+msgstr "리뷰"
 
 #: src/components/ReviewList/presenter.js
 msgid "client reviews"
-msgstr ""
+msgstr "고객 리뷰"
 
 #: src/components/ReviewList/presenter.js
 msgid "There aren't any reviews for the photographer yet!"
-msgstr ""
+msgstr "아직 리뷰가 존재하지 않습니다."
 
 #: src/components/SignIn/presenter.js
 msgid "Sign In & Submit the request"
-msgstr ""
+msgstr "로그인 및 예약 신청하기"
 
 #: src/components/SignUp/presenter.js
 msgid "Sign Up & Submit the request"
-msgstr ""
+msgstr "회원가입 및 예약 신청하기"
 
 #: src/components/SignUpClear/presenter.js
 msgid "Thanks for signing up!"
-msgstr ""
+msgstr "회원가입을 환영합니다!"
 
 #: src/components/SignUpClear/presenter.js
 msgid "Please verify yourself by clicking the link attached in the email. "
-msgstr ""
+msgstr "인증 메일에 포함된 링크를 클릭하여 본인인증을 완료해주세요."
 
 #: src/components/SignUpClear/presenter.js
 msgid ""
 "When you complete the email verification, you will be able to freely make "
 "reservations."
-msgstr ""
+msgstr "메일 인증을 완료하면, 자유롭게 예약을 신청하실 수 있습니다."
 
 #: src/components/Terms/presenter.js
 msgid "Terms of Use is temporarily unavailable."
-msgstr ""
+msgstr "이용약관을 불러올 수 없습니다."
 
 #: src/components/Welcome/presenter.js
-msgid "Meet the best photographers in New York City."
-msgstr ""
+msgid "Meet the best photographers in Seoul."
+msgstr "서울의 가장 멋진 사진작가들을 만나보세요."
 
 #: src/components/Welcome/presenter.js
 msgid ""
 "PRIZM connects tourists in need of travel photography with photographers "
 "around the world."
 msgstr ""
+"PRIZM은 스냅사진 촬영을 원하는 관광객들에게 서울 최고의 사진작가들을 매칭해드"
+"립니다."
 
 #: src/components/Welcome/presenter.js
 msgid "  Enter your email here to stay connected with us."
-msgstr ""
+msgstr "  이메일을 입력하고 PRIZM의 소식을 받아보세요."
 
 #: src/components/Welcome/presenter.js
 msgid "prizm.cloud"
-msgstr ""
+msgstr "prizm.cloud"
