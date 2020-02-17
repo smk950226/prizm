@@ -253,14 +253,6 @@ const AdminSignUp = (props, context) => {
                         </div>
                         <p className={`${styles.mt1} ${styles.font911}`}>{context.t("ex) Sony A7 II, Canon EOS 5 D Mark IV, EF 50mm F12 USM")}</p>
                         <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                            <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Portfolio (Optional)")}</p>
-                            <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.portfolio ? null : styles.hidden}`} />
-                        </div>
-                        <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("If you have a website where potential clients can view your portfolio, please enter the URL. If not, you are fine to leave this area blank.")}</p>
-                        <div className={`${styles.containerStudioInput}`}>
-                            <input className={`${styles.textInput6}`} type={"text"} name={"portfolio"} value={props.portfolio} onChange={props.handleInputChange} maxLength={30} />
-                        </div>
-                        <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Description")}</p>
                             <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.description ? null : styles.hidden}`} />
                         </div>
@@ -461,20 +453,6 @@ const AdminSignUp = (props, context) => {
                                 {(inputProps) => <input {...inputProps} type={"text"} name={"studioId"} className={`${styles.textInput6}`} />}
                             </InputMask>
                         </div>
-                        <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                            <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{context.t("Confirm Your URL")}</p>
-                            <MdCheckmark fontSize="20px" color="#3cd59e" className={`${props.studioIdConfirm ? null : styles.hidden}`} />
-                        </div>
-                        <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Please confirm the studio URL.")}</p>
-                        <div className={`${styles.containerStudioInput}`}>
-                            <InputMask mask={'prizm.cloud/********************'} 
-                            formatChars={{
-                                '*': '[A-Za-z0-9!@#$()-_+=.,]'
-                            }}
-                            maskChar={''} alwaysShowMask={false} value={props.studioId2} onChange={props.handleInputChange}>
-                                {(inputProps) => <input {...inputProps} type={"text"} name={"studioId2"} className={`${styles.textInput6}`} />}
-                            </InputMask>
-                        </div>
                         <div className={`${styles.mobileOnly} ${styles.mt45}`}>
                             <p className={`${styles.fontBold} ${styles.font1214}`}>
                                 {context.t("Make sure to double check that all the information is correct. Click on the smartphone icon at the top right corner to view your PRIZM Studio.")}
@@ -533,14 +511,6 @@ const AdminSignUp = (props, context) => {
                                 <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
                                     <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Equipment")}</p>
                                     <p className={`${styles.font10}`}>{props.equipment}</p>
-                                </div>
-                            ) : (
-                                null
-                            )}
-                            {props.portfolio ? (
-                                <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                    <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Portfolio")}</p>
-                                    <a href={props.portfolio} target={'_blank'} className={`${styles.font10} ${styles.black}`} style={{textDecoration: 'none'}}>{props.portfolio}</a>
                                 </div>
                             ) : (
                                 null
@@ -728,14 +698,6 @@ const AdminSignUp = (props, context) => {
                                 <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Equipment")}</p>
                                 <p className={`${styles.font10}`}>{props.equipment}</p>
                             </div>
-                            ) : (
-                                null
-                            )}
-                            {props.portfolio ? (
-                                <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                    <p className={`${styles.fontBold} ${styles.font12}`}>{context.t("Portfolio")}</p>
-                                    <a href={props.portfolio} target={'_blank'} className={`${styles.font10} ${styles.black}`} style={{textDecoration: 'none'}}>{props.portfolio}</a>
-                                </div>
                             ) : (
                                 null
                             )}
@@ -1118,7 +1080,6 @@ AdminSignUp.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
     equipment: PropTypes.string.isRequired,
     career: PropTypes.string.isRequired,
-    portfolio: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     isTruncated: PropTypes.bool.isRequired,
     doTruncate: PropTypes.func.isRequired,
@@ -1193,8 +1154,6 @@ AdminSignUp.propTypes = {
     blankOption: PropTypes.func.isRequired,
     comment: PropTypes.string.isRequired,
     studioId: PropTypes.string.isRequired,
-    studioId2: PropTypes.string.isRequired,
-    studioIdConfirm: PropTypes.bool.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     confirm: PropTypes.func.isRequired,
     update: PropTypes.bool.isRequired,

@@ -5,7 +5,7 @@ from django.utils.safestring import mark_safe
 
 @admin.register(models.PhotographerAccount)
 class PhotographerAccountAdmin(admin.ModelAdmin):
-    list_display = ['id', 'photographer', 'account_type']
+    list_display = ['id', 'photographer', 'account_type', 'bank_name']
     list_display_links = ['id', 'photographer']
     list_filter = ['account_type']
 

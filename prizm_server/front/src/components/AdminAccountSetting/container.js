@@ -22,12 +22,15 @@ class Container extends Component{
         this.state = {
             legalName: photographeraccount ? photographeraccount.legal_name : "",
             birth: photographeraccount ? photographeraccount.birth : "",
-            accountType: photographeraccount ? photographeraccount.account_type : "paypal_account",
+            accountType: photographeraccount ? photographeraccount.account_type : "bank_account",
             content: photographeraccount ? photographeraccount.content : "",
+            bankName: photographeraccount ? photographeraccount.bank_name : "",
+            bankCode: photographeraccount ? photographeraccount.bank_code: "",
             birthForm: photographeraccount ? true : false,
             edited: false,
             editable: true,
-            isSubmitting: false
+            isSubmitting: false,
+            showBankList: false
         }
     }
 
@@ -41,11 +44,11 @@ class Container extends Component{
         }
         else{
             if(photographer.id){
-                if((profile.country_code === 'KR') || (profile.country_number === '82')){
-                    this.setState({
-                        accountType: 'bank_account'
-                    })
-                }
+                // if((profile.country_code === 'KR') || (profile.country_number === '82')){
+                //     this.setState({
+                //         accountType: 'bank_account'
+                //     })
+                // }
             }
             else{
                 goHome()
@@ -117,16 +120,16 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, legalName, birth, accountType, content, edited, birthForm } = this.state;
+        const { isSubmitting, legalName, birth, accountType, content, edited, birthForm, bankCode, bankName } = this.state;
         const { editAccount, getPhotographer } = this.props;
         if(!isSubmitting){
             if(edited){
-                if(legalName && birth && accountType && content){
+                if(legalName && birth && accountType && content && bankCode && bankName){
                     if(birthForm){
                         this.setState({
                             isSubmitting: true
                         })
-                        const result = await editAccount(legalName, birth, accountType, content)
+                        const result = await editAccount(legalName, birth, accountType, content, bankCode, bankName)
                         if(result.status === 'ok'){
                             await getPhotographer()
                             this.setState({
@@ -165,6 +168,33 @@ class Container extends Component{
         })
     }
 
+    _handleBankChange = (bankName, bankCode) => {
+        this.setState({
+            bankName,
+            bankCode,
+            showBankList: false,
+            edited: true
+        })
+    }
+
+    _handleShowBankList = () => {
+        this.setState({
+            showBankList: !this.state.showBankList
+        })
+    }
+
+    _openShowBankList = () => {
+        this.setState({
+            showBankList: true
+        })
+    }
+
+    _closeShowBankList = () => {
+        this.setState({
+            showBankList: false
+        })
+    }
+
     render(){
         return(
             <AdminProfileSetting 
@@ -173,6 +203,10 @@ class Container extends Component{
             handleInputChange={this._handleInputChange}
             submit={this._submit}
             enableEdit={this._enableEdit}
+            handleBankChange={this._handleBankChange}
+            handleShowBankList={this._handleShowBankList}
+            openShowBankList={this._openShowBankList}
+            closeShowBankList={this._closeShowBankList}
             />
         )
     }

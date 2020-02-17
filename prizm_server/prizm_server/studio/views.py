@@ -427,7 +427,6 @@ class Studio(APIView):
         main_location = request.data.get('mainLocation', None)
         equipment = request.data.get('equipment', None)
         career = request.data.get('career', None)
-        portfolio_url = request.data.get('portfolioUrl', None)
         description = request.data.get('description', None)
         profile_image = request.data.get('profileImage', None)
         locations = request.data.getlist('locations[]')
@@ -465,7 +464,6 @@ class Studio(APIView):
                     photographer.equipment = equipment
                     photographer.career = career
                     photographer.studio_id = studio_id
-                    photographer.portfolio_url = portfolio_url
                     photographer.description = description
 
                     photographer.save()
@@ -543,7 +541,6 @@ class Studio(APIView):
                         equipment = equipment,
                         career = career,
                         studio_id = studio_id,
-                        portfolio_url = portfolio_url,
                         description = description
                     )
 

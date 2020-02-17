@@ -181,7 +181,7 @@ function getPhotographerByToken(token){
     }
 }
 
-function updateStudio(portfolios, nickname, mainLocation, equipment, career, portfolioUrl, description, profileImage, locations, options, studioId, update){
+function updateStudio(portfolios, nickname, mainLocation, equipment, career, description, profileImage, locations, options, studioId, update){
     return (dispatch, getState) => {
         const { user : { token } } = getState()
         let formData = new FormData();
@@ -197,7 +197,6 @@ function updateStudio(portfolios, nickname, mainLocation, equipment, career, por
         formData.append('mainLocation', mainLocation)
         formData.append('equipment', equipment)
         formData.append('career', career)
-        formData.append('portfolioUrl', portfolioUrl)
         formData.append('description', description)
         if(profileImage.type){
             formData.append('profileImage', profileImage, profileImage.name)
@@ -250,7 +249,7 @@ function locationDetail(placeId){
     }
 }
 
-function editAccount(legalName, birth, accountType, content){
+function editAccount(legalName, birth, accountType, content, bankCode, bankName){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
         return fetch(`${FETCH_URL}/api/payment/photographer/account/`, {
@@ -263,7 +262,9 @@ function editAccount(legalName, birth, accountType, content){
                 legalName,
                 birth,
                 accountType,
-                content
+                content,
+                bankCode, 
+                bankName
             })
         })
         .then(response => {

@@ -168,7 +168,12 @@ class MessageList extends Component{
     }
 
     _isTop(el) {
-        return (el.getBoundingClientRect().top >= -5) && (el.getBoundingClientRect().top < 5);
+        if(el){
+            return (el.getBoundingClientRect().top >= -5) && (el.getBoundingClientRect().top < 5);
+        }
+        else{
+            return false
+        }
     }
 
     _handleScroll = async() => {

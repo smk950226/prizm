@@ -89,8 +89,6 @@ class Container extends Component{
             mainLocation: photographer ? photographer.nickname ? photographer.main_location : "" : "",
             equipment: photographer ? photographer.nickname ? photographer.equipment : "" : "",
             career: photographer ? photographer.nickname ? photographer.career : "" : "",
-            portfolio: photographer ? photographer.nickname ? photographer.portfolio_url : "" : "",
-            portfolioForm: photographer ? photographer.nickname ? true : false : false,
             description: photographer ? photographer.nickname ? photographer.description : "" : "",
             tempImage: "",
             tempHeight: 0,
@@ -134,8 +132,6 @@ class Container extends Component{
             customerSelectedOption: {},
             comment: "",
             studioId: photographer ? photographer.nickname ? photographer.studio_id : "" : "",
-            studioId2: photographer ? photographer.nickname ? photographer.studio_id : "" : "",
-            studioIdConfirm: photographer ? photographer.nickname ? true : false : false,
             isSubmitting: false,
             valueGroups: {
                 ampm: 'PM',
@@ -316,65 +312,6 @@ class Container extends Component{
                 this.setState({
                     [name]: value
                 });
-            }
-        }
-        else if(name === 'portfolio'){
-            let reg = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-            if(reg.test(value)){
-                this.setState({
-                    [name]: value,
-                    portfolioForm: true
-                })
-            }
-            else{
-                this.setState({
-                    [name]: value,
-                    portfolioForm: false
-                })
-            }
-        }
-        else if(name === 'studioId'){
-            if(this.state.studioId2){
-                if(this.state.studioId2 === value){
-                    this.setState({
-                        [name]: value,
-                        studioIdConfirm: true
-                    })
-                }
-                else{
-                    this.setState({
-                        [name]: value,
-                        studioIdConfirm: false
-                    })
-                }
-            }
-            else{
-                this.setState({
-                    [name]: value,
-                    studioIdConfirm: false
-                })
-            }
-        }
-        else if(name === 'studioId2'){
-            if(this.state.studioId){
-                if(this.state.studioId === value){
-                    this.setState({
-                        [name]: value,
-                        studioIdConfirm: true
-                    })
-                }
-                else{
-                    this.setState({
-                        [name]: value,
-                        studioIdConfirm: false
-                    })
-                }
-            }
-            else{
-                this.setState({
-                    [name]: value,
-                    studioIdConfirm: false
-                })
             }
         }
         else{
@@ -878,125 +815,58 @@ class Container extends Component{
     };
 
     _confirm = async() => {
-        const { submitImages, nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, studioId, studioId2, studioIdConfirm, portfolioForm, isSubmitting, update } = this.state;
+        const { submitImages, nickname, mainLocation, equipment, career, description, submitProfileImage, locations, options, studioId, isSubmitting, update } = this.state;
         const { updateStudio, getPhotographer, goClear } = this.props;
         if(!isSubmitting){
             if(submitImages.length > 0){
-                if(nickname && mainLocation && career && description && submitProfileImage && studioId && studioId2){
-                    if(portfolio){
-                        if(portfolioForm){
-                            if(locations.length > 0){
-                                if(options.length > 0){
-                                    if((studioId === studioId2) && studioIdConfirm){
-                                        this.setState({
-                                            isSubmitting: true
-                                        })
-                                        let replacedStudioId = ""
-                                        if(studioId.startsWith('prizm.cloud/')){
-                                            replacedStudioId = studioId.slice(12)
-                                        }
-                                        else{
-                                            replacedStudioId = studioId
-                                        }
-                                        const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
-                                        if(result.status === 'ok'){
-                                            await getPhotographer()
-                                            if(update){
-                                                this.setState({
-                                                    isSubmitting: false
-                                                })
-                                                alert(this.context.t("Your studio information has been changed successfully."))
-                                            }
-                                            else{
-                                                this.setState({
-                                                    isSubmitting: false
-                                                })
-                                                goClear(studioId)
-                                            }
-                                        }
-                                        else if(result.error){
-                                            this.setState({
-                                                isSubmitting: false
-                                            })
-                                            alert(result.error)
-                                        }
-                                        else{
-                                            this.setState({
-                                                isSubmitting: false
-                                            })
-                                            alert(this.context.t("An error has occurred.."))
-                                        }
-                                    }
-                                    else{
-                                        alert(this.context.t("Please check the studio URL again."))
-                                    }
-                                }
-                                else{
-                                    alert(this.context.t("Please enter at least one service & pricing option."))
-                                }
+                if(nickname && mainLocation && career && description && submitProfileImage && studioId){
+                    if(locations.length > 0){
+                        if(options.length > 0){
+                            this.setState({
+                                isSubmitting: true
+                            })
+                            let replacedStudioId = ""
+                            if(studioId.startsWith('prizm.cloud/')){
+                                replacedStudioId = studioId.slice(12)
                             }
                             else{
-                                alert(this.context.t("Please enter at least one photography location."))
+                                replacedStudioId = studioId
+                            }
+                            const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, equipment, career, description, submitProfileImage, locations, options, replacedStudioId, update)
+                            if(result.status === 'ok'){
+                                await getPhotographer()
+                                if(update){
+                                    this.setState({
+                                        isSubmitting: false
+                                    })
+                                    alert(this.context.t("Your studio information has been changed successfully."))
+                                }
+                                else{
+                                    this.setState({
+                                        isSubmitting: false
+                                    })
+                                    goClear(studioId)
+                                }
+                            }
+                            else if(result.error){
+                                this.setState({
+                                    isSubmitting: false
+                                })
+                                alert(result.error)
+                            }
+                            else{
+                                this.setState({
+                                    isSubmitting: false
+                                })
+                                alert(this.context.t("An error has occurred.."))
                             }
                         }
                         else{
-                            alert(this.context.t("Please enter a valid URL for the portfolio."))
+                            alert(this.context.t("Please enter at least one service & pricing option."))
                         }
                     }
                     else{
-                        if(locations.length > 0){
-                            if(options.length > 0){
-                                if((studioId === studioId2) && studioIdConfirm){
-                                    this.setState({
-                                        isSubmitting: true
-                                    })
-                                    let replacedStudioId = ""
-                                    if(studioId.startsWith('prizm.cloud/')){
-                                        replacedStudioId = studioId.slice(12)
-                                    }
-                                    else{
-                                        replacedStudioId = studioId
-                                    }
-                                    const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, equipment, career, portfolio, description, submitProfileImage, locations, options, replacedStudioId, update)
-                                    if(result.status === 'ok'){
-                                        await getPhotographer()
-                                        if(update){
-                                            this.setState({
-                                                isSubmitting: false
-                                            })
-                                            alert(this.context.t("Your studio information has been changed successfully."))
-                                        }
-                                        else{
-                                            this.setState({
-                                                isSubmitting: false
-                                            })
-                                            goClear(studioId)
-                                        }
-                                    }
-                                    else if(result.error){
-                                        this.setState({
-                                            isSubmitting: false
-                                        })
-                                        alert(result.error)
-                                    }
-                                    else{
-                                        this.setState({
-                                            isSubmitting: false
-                                        })
-                                        alert(this.context.t("An error has occurred.."))
-                                    }
-                                }
-                                else{
-                                    alert(this.context.t("Please check the studio URL again."))
-                                }
-                            }
-                            else{
-                                alert(this.context.t("Please enter at least one service & pricing option."))
-                            }
-                        }
-                        else{
-                            alert(this.context.t("Please enter at least one photography location."))
-                        }
+                        alert(this.context.t("Please enter at least one photography location."))
                     }
                 }
                 else{

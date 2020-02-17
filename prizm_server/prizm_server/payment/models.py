@@ -11,6 +11,8 @@ class PhotographerAccount(models.Model):
     birth = models.CharField(_("Birth"), max_length = 20)
     account_type = models.CharField(_("Account Type"), max_length = 100, choices = (('bank_account', 'Bank Account'),('paypal_account', 'Paypal Account')))
     content = models.CharField(_("Content"), max_length = 255)
+    bank_name = models.CharField(_("Bank Name"), max_length = 255, blank = True, null = True)
+    bank_code = models.CharField(_("Bank Code"), max_length = 255, blank = True, null = True)
 
     def __str__(self):
         return self.photographer.nickname + '-' + self.account_type

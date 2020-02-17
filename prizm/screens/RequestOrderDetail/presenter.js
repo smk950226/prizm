@@ -124,14 +124,6 @@ class PhotographerDetail extends Component{
                                 ) : (
                                     null
                                 )}
-                                {order.photographer.portfolio_url ? (
-                                    <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                        <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Portfolio")}</p>
-                                        <a href={order.photographer.portfolio_url} target={'_blank'} className={`${styles.font10} ${styles.black}`} style={{textDecoration: 'none'}}>{order.photographer.portfolio_url}</a>
-                                    </div>
-                                ) : (
-                                    null
-                                )}
                                 <div className={`${styles.mt3}`}>
                                     <p className={`${styles.font11}`} style={{lineHeight: 1.45}}>
                                         <Truncate lines={isTruncated ? 4 : null} ellipsis={<span>...</span>}>

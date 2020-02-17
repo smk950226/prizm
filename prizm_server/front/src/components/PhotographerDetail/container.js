@@ -479,6 +479,9 @@ class Container extends Component{
         const { createRequest, request, removeRequest, getOrderList, profile, sendVerificationEmail } = this.props;
         if(!isSubmitting){
             if(profile){
+                this.setState({
+                    isSubmitting: true
+                })
                 const result = await createRequest(request.photographer.id, request.location.id, request.option.id, request.comment, request.dateOption, request.date, request.hour, request.min, request.startDate, request.endDate)
                 if(result.status === 'ok'){
                     await getOrderList()
@@ -520,6 +523,9 @@ class Container extends Component{
         const { sendVerificationEmail, isLoggedIn } = this.props;
         if(!isSendingEmail){
             if(isLoggedIn){
+                this.setState({
+                    isSendingEmail: true
+                })
                 const result = await sendVerificationEmail()
                 if(result.status === 'ok'){
                     this.setState({

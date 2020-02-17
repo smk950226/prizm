@@ -25,8 +25,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         locationDetail: (placecId) => {
             return dispatch(adminAction.locationDetail(placecId))
         },
-        updateStudio: (portfolios, nickname, mainLocation, equipment, career, portfolioUrl, description, profileImage, locations, options, studioId, update) => {
-            return dispatch(adminAction.updateStudio(portfolios, nickname, mainLocation, equipment, career, portfolioUrl, description, profileImage, locations, options, studioId, update))
+        updateStudio: (portfolios, nickname, mainLocation, equipment, career, description, profileImage, locations, options, studioId, update) => {
+            return dispatch(adminAction.updateStudio(portfolios, nickname, mainLocation, equipment, career, description, profileImage, locations, options, studioId, update))
         },
         getPhotographer: () => {
             dispatch(adminAction.getPhotographer())

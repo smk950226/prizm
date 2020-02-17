@@ -14,7 +14,6 @@ class Photographer(models.Model):
     equipment = models.CharField(_('Equipment'), max_length = 255, blank = True, null = True)
     career = models.CharField(_('Career'), max_length = 255)
     studio_id = models.CharField(_('Studio ID'), max_length = 255)
-    portfolio_url = models.CharField(_('Portfolio URL'), max_length = 500, blank = True, null = True)
     description = models.TextField(_('Description'))
 
     def __str__(self):

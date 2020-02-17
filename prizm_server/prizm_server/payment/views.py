@@ -13,7 +13,7 @@ from prizm_server.common.permissions import AdminAuthenticated
 from prizm_server.studio import models as studio_models
 from prizm_server.common import models as common_models
 
-import math, json
+import math, json, requests
 
 User = get_user_model()
 
@@ -26,29 +26,53 @@ class PhotographerAccount(APIView):
         birth = request.data.get('birth', None)
         account_type = request.data.get('accountType', None)
         content = request.data.get('content', None)
+        bank_code = request.data.get('bankCode', None)
+        bank_name = request.data.get('bankName', None)
 
-        if legal_name and birth and account_type and content:
-            try:
-                photographer.photographeraccount
-                account = photographer.photographeraccount
-                account.legal_name = legal_name
-                account.birth = birth
-                account.account_type = account_type
-                account.content = content
-                account.save()
+        if legal_name and birth and account_type and content and bank_code and bank_name:
+            IAMPORT_API_KEY = settings.IAMPORT_API_KEY
+            IAMPORT_API_SECRET = settings.IAMPORT_API_SECRET
+            data = {'imp_key': IAMPORT_API_KEY, 'imp_secret': IAMPORT_API_SECRET}
 
-                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
-            except:
-                account = models.PhotographerAccount.objects.create(
-                    photographer = photographer,
-                    legal_name = legal_name,
-                    birth = birth,
-                    account_type = account_type,
-                    content = content
-                )
-                account.save()
+            imp = requests.post('https://api.iamport.kr/users/getToken', data = data)
+            
+            access_token = json.loads(imp.text)['response']['access_token']
+            headers = {'Authorization': access_token}
 
-                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            pre_imp = requests.get('https://api.iamport.kr/vbanks/holder?bank_code={}&bank_num={}&_token={}'.format(bank_code, content, access_token))
+            if json.loads(pre_imp.text)['code'] == -1:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please check your account information again.')})
+            elif json.loads(pre_imp.text)['code'] == 0:
+                if json.loads(pre_imp.text)['response']['bank_holder'] != legal_name:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please check your account information again.')})
+                else:
+                    try:
+                        photographer.photographeraccount
+                        account = photographer.photographeraccount
+                        account.legal_name = legal_name
+                        account.birth = birth
+                        account.account_type = account_type
+                        account.content = content
+                        account.bank_code = bank_code
+                        account.bank_name = bank_name
+                        account.save()
+
+                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+                    except:
+                        account = models.PhotographerAccount.objects.create(
+                            photographer = photographer,
+                            legal_name = legal_name,
+                            birth = birth,
+                            account_type = account_type,
+                            content = content,
+                            bank_code = bank_code,
+                            bank_name = bank_name
+                        )
+                        account.save()
+
+                        return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            else:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('An error has occurred..')})
         else:
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in the payout information to complete the account setup.')})
 

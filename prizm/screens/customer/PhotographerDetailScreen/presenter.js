@@ -199,18 +199,6 @@ class PhotographerDetailScreen extends Component{
                         ) : (
                             null
                         )}
-                        {photographer.portfolio_url ? (
-                            <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween, styles.mt5]}>
-                                <Text style={[styles.font14, styles.fontBold]}>
-                                    {this.context.t("Portfolio")}
-                                </Text>
-                                <Text style={[styles.font14]}>
-                                    {photographer.portfolio_url}
-                                </Text>
-                            </View>
-                        ) : (
-                            null
-                        )}
                         <TouchableWithoutFeedback onPress={isTruncated ? this.props.undoTruncate : this.props.doTruncate}>
                             <View>
                                 <Text 

@@ -40,7 +40,7 @@ class PhotographerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Photographer
-        fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'equipment', 'career', 'studio_id', 'portfolio_set', 'location_set', 'option_set', 'portfolio_url', 'description', 'total_rating', 'review_count', 'photographeraccount']
+        fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'equipment', 'career', 'studio_id', 'portfolio_set', 'location_set', 'option_set', 'description', 'total_rating', 'review_count', 'photographeraccount']
 
 
 class PhotographerPortfolioSerializer(serializers.ModelSerializer):
@@ -49,7 +49,7 @@ class PhotographerPortfolioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Photographer
-        fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'equipment', 'career', 'studio_id', 'portfolio_set', 'portfolio_url', 'description', 'total_rating', 'review_count']
+        fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'equipment', 'career', 'studio_id', 'portfolio_set', 'description', 'total_rating', 'review_count']
 
 
 class PhotographerShortSerializer(serializers.ModelSerializer):
