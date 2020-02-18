@@ -1442,8 +1442,8 @@ class CustomRequestCreate extends Component{
             delay: 100,
             smooth: true
         })
-        this.props.undoHideBtmNav()
         await sleep(700)
+        window.scrollTo(0,0)
         this.setState({
             showLanding: false
         })

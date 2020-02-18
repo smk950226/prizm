@@ -12,7 +12,8 @@ class Container extends Component{
         initAdmin: PropTypes.func.isRequired,
         photographer: PropTypes.any,
         newMessage: PropTypes.bool,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        logout: PropTypes.func.isRequired
     }
 
     state = {

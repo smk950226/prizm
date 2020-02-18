@@ -35,6 +35,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         changeLang: (lang) => {
             dispatch(setLanguage(lang))
+        },
+        logout: () => {
+            dispatch(userAction.getLogout())
         }
     }
 }

@@ -10,7 +10,7 @@ const AdminStudioSettingClear = (props, context) => (
                     <p className={`${styles.fontBold} ${styles.font2024}`}>{context.t("Registration Completed !")}</p>
                     <p className={`${styles.font1416} ${styles.mt1} ${styles.mtMd2}`}>{context.t("Check your PRIZM Studio at :")}</p>
                     <a href={`https://prizm.cloud/${props.studioId}/`} target={'_blank'} className={`${styles.textDecorationNone}`}>
-                        <p className={`${styles.fontBold} ${styles.font1418} ${styles.mt3} ${styles.urlBlue}`}>{`prizm.cloud/${props.studioId.slice(10)}/`}</p>
+                        <p className={`${styles.fontBold} ${styles.font1418} ${styles.mt3} ${styles.urlBlue}`}>{`prizm.cloud/${props.studioId}/`}</p>
                     </a>
                     <div className={`${styles.col12} ${styles.px0} ${styles.textCenter} ${styles.mobileOnly}`}>
                         <img src={require('../../assets/images/signup_complete.png')} alt={context.t("Complete")} className={`${styles.mt4} ${styles.mb4}`} style={{width: '100%'}} />

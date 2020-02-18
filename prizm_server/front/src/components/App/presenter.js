@@ -61,12 +61,12 @@ Modal.setAppElement('#root')
 const App = (props) => {
     if(props.admin){
         return(
-            <AdminRouteContainer initAdmin={props.initAdmin} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} newMessage={props.newMessage} goHome={props.goHome} />
+            <AdminRouteContainer initAdmin={props.initAdmin} logout={props.logout} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} newMessage={props.newMessage} goHome={props.goHome} />
         )
     }
     else{
         return(
-            <GeneralRouteContainer initApp={props.initApp} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} newMessage={props.newMessage} goHome={props.goHome} />
+            <GeneralRouteContainer initApp={props.initApp} logout={props.logout} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} newMessage={props.newMessage} goHome={props.goHome} />
         )
     }
 }
@@ -83,7 +83,8 @@ App.propTypes = {
     initAdmin: PropTypes.func.isRequired,
     photographer: PropTypes.any,
     newMessage: PropTypes.bool,
-    goHome: PropTypes.func.isRequired
+    goHome: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired
 }
 
 class GeneralRouteContainer extends Component{
@@ -94,7 +95,8 @@ class GeneralRouteContainer extends Component{
         showBtmNav: PropTypes.bool.isRequired,
         notification: PropTypes.array,
         newMessage: PropTypes.bool,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        logout: PropTypes.func.isRequired
     }
 
     state = {
@@ -191,7 +193,8 @@ class AdminRouteContainer extends Component{
         photographer: PropTypes.object,
         showBtmNav: PropTypes.bool.isRequired,
         newMessage: PropTypes.bool,
-        goHome: PropTypes.func.isRequired
+        goHome: PropTypes.func.isRequired,
+        logout: PropTypes.func.isRequired
     }
 
     state = {
@@ -207,9 +210,25 @@ class AdminRouteContainer extends Component{
     }
 
     componentDidMount = async() => {
-        const { isLoggedIn, initAdmin } = this.props;
+        const { isLoggedIn, initAdmin, profile, logout } = this.props;
         if(isLoggedIn){
-            await initAdmin()
+            if(profile){
+                if(profile.user_type === 'photographer'){
+                    await initAdmin()
+                }
+                else{
+                    logout()
+                    this.setState({
+                        loading: false
+                    })
+                }
+            }
+            else{
+                logout()
+                this.setState({
+                    loading: false
+                })
+            }
         }
         else{
             this.setState({
@@ -222,10 +241,10 @@ class AdminRouteContainer extends Component{
         const { fetchedProfile, fetchedPhotographer, fetchedNewMessage } = prevState;
         if((!fetchedProfile) || (!fetchedPhotographer) || (!fetchedNewMessage)){
             let update = {}
-            if(nextProps.profile){
+            if((nextProps.profile) || (nextProps.profile === false)){
                 update.fetchedProfile = true
             }
-            if(nextProps.photographer || (nextProps.photographer === false)){
+            if((nextProps.photographer) || (nextProps.photographer === false)){
                 update.fetchedPhotographer = true
             }
             if((nextProps.newMessage) || (nextProps.newMessage === false)){
