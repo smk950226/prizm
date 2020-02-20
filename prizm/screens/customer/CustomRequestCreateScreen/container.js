@@ -19,7 +19,8 @@ class Container extends Component{
         getProfile: PropTypes.func.isRequired,
         getOrderDetail: PropTypes.func.isRequired,
         sendVerificationEmail: PropTypes.func.isRequired,
-        cancelCustomRequest: PropTypes.func.isRequired
+        cancelCustomRequest: PropTypes.func.isRequired,
+        profile: PropTypes.object
     }
 
     render(){

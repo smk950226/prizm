@@ -31,22 +31,43 @@ class Container extends Component{
             if(isLoggedIn){
                 const result = await sendVerificationEmail()
                 if(result.status === 'ok'){
-                    this.setState({
-                        isSubmitting: false
-                    })
-                    Alert.alert(null, this.context.t("A verification email has been sent. Please check your inbox."))
+                    Alert.alert(null, 
+                        this.context.t("A verification email has been sent. Please check your inbox."),
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSubmitting: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
                 else if(result.error){
-                    this.setState({
-                        isSubmitting: false
-                    })
-                    Alert.alert(null, result.error)
+                    Alert.alert(null, 
+                        result.error,
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSubmitting: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
                 else{
-                    this.setState({
-                        isSubmitting: false
-                    })
-                    Alert.alert(null, this.context.t("An error has occurred.."))
+                    Alert.alert(null, 
+                        this.context.t("An error has occurred.."),
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSubmitting: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
             }
         }

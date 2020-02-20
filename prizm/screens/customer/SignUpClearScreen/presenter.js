@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
+import Modal from 'react-native-modal';
+import Loader from '../../../components/Loader';
 
 const SignUpClearScreen = (props, context) => (
     <View style={[styles.container, styles.bgWhite, styles.center, styles.px15]}>
@@ -25,7 +27,7 @@ const SignUpClearScreen = (props, context) => (
             <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween, styles.mt20]}>
                 <View style={[styles.flex1, styles.pr5]}>
                     <TouchableWithoutFeedback onPress={props.send}>
-                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20, props.isSubmitting ? { opacity: 0.7 } : null]}>
+                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                 {context.t("RESEND")}
                             </Text>
@@ -43,6 +45,19 @@ const SignUpClearScreen = (props, context) => (
                 </View>
             </View>
         </Fragment>
+        <Modal
+        isVisible={props.isSubmitting}
+        onBackButtonPress={null}
+        onBackdropPress={null}
+        backdropOpacity={0.7}
+        backdropColor={'#ffffff'}
+        animationIn={"fadeIn"}
+        animationOut={"fadeOut"}
+        >
+            <View style={[styles.container, styles.center]}>
+                <Loader/>
+            </View>
+        </Modal>
     </View>
 )
 

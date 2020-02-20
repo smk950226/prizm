@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { View, Text, Dimensions, TouchableWithoutFeedback, Image, ScrollView, TextInput, Alert, SafeAreaView, TouchableHighlightBase } from 'react-native';
+import { View, Text, Dimensions, TouchableWithoutFeedback, Image, ScrollView, TextInput, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
 import MapView, { Marker } from 'react-native-maps';
@@ -14,6 +14,7 @@ import { GOOGLE_API_KEY_GEO_CODING } from '../../../config/secrets';
 import uuidv4 from 'uuid/v4';
 import Flag from 'react-native-flags';
 import { COUNTRY_CODE } from '../../../utils/country';
+import Loader from '../../../components/Loader';
 
 const { width, height } = Dimensions.get('window');
 
@@ -100,14 +101,24 @@ class CustomRequestCreateScreen extends Component{
             fetchedProfile: false,
             fetchClear: this.props.isLoggedIn ? true : false,
             isSendingEmail: false,
-            isLoading: false,
             showCancel: false,
-            isCancel: false,
             showCreate: false,
             showLanding: true,
             showPlaceList: false
         }
     }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.profile){
+            return {
+                fetchClear: true
+            }
+        }
+        else{
+            return null
+        }
+    }
+
 
     _next = async() => {
         const { step, isLoggedIn, option, extraOption, people, extraPeople, dateOption, dateConfirm, selectedDate, selectedHour, selectedMin, selectedStartDate, selectedEndDate, hour, extraHour, locationOption, locations, isSubmitting } = this.state;
@@ -150,7 +161,8 @@ class CustomRequestCreateScreen extends Component{
                     if(locations && locations.length > 0){
                         if(!isSubmitting){
                             this.setState({
-                                isSubmitting: true
+                                isSubmitting: true,
+                                fetchClear: true
                             })
                             let photograpyTypeTemp = []
                             option.map(op => {
@@ -203,18 +215,32 @@ class CustomRequestCreateScreen extends Component{
                                 })
                             }
                             else if(submit.error){
-                                this.setState({
-                                    isSubmitting: false,
-                                    confirmed: false
-                                })
-                                Alert.alert(null, submit.error)
+                                Alert.alert(null, 
+                                    submit.error,
+                                    [
+                                      {text: 'OK', onPress: () => {
+                                        this.setState({
+                                            isSubmitting: false,
+                                            confirmed: false
+                                        })
+                                      }},
+                                    ],
+                                    {cancelable: false}
+                                )
                             }
                             else{
-                                this.setState({
-                                    isSubmitting: false,
-                                    confirmed: false
-                                })
-                                Alert.alert(null, this.context.t("An error has occurred.."))
+                                Alert.alert(null, 
+                                    this.context.t("An error has occurred.."),
+                                    [
+                                      {text: 'OK', onPress: () => {
+                                        this.setState({
+                                            isSubmitting: false,
+                                            confirmed: false
+                                        })
+                                      }},
+                                    ],
+                                    {cancelable: false}
+                                )
                             }
                         }
                     }
@@ -222,7 +248,8 @@ class CustomRequestCreateScreen extends Component{
                 else if(locationOption === 2){
                     if(!isSubmitting){
                         this.setState({
-                            isSubmitting: true
+                            isSubmitting: true,
+                            fetchClear: true
                         })
                         let photograpyTypeTemp = []
                         option.map(op => {
@@ -275,18 +302,32 @@ class CustomRequestCreateScreen extends Component{
                             })
                         }
                         else if(submit.error){
-                            this.setState({
-                                isSubmitting: false,
-                                confirmed: false
-                            })
-                            Alert.alert(null, submit.error)
+                            Alert.alert(null, 
+                                submit.error,
+                                [
+                                  {text: 'OK', onPress: () => {
+                                    this.setState({
+                                        isSubmitting: false,
+                                        confirmed: false
+                                    })
+                                  }},
+                                ],
+                                {cancelable: false}
+                            )
                         }
                         else{
-                            this.setState({
-                                isSubmitting: false,
-                                confirmed: false
-                            })
-                            Alert.alert(null, this.context.t("An error has occurred.."))
+                            Alert.alert(null, 
+                                this.context.t("An error has occurred.."),
+                                [
+                                  {text: 'OK', onPress: () => {
+                                    this.setState({
+                                        isSubmitting: false,
+                                        confirmed: false
+                                    })
+                                  }},
+                                ],
+                                {cancelable: false}
+                            )
                         }
                     }
                 }
@@ -915,26 +956,47 @@ class CustomRequestCreateScreen extends Component{
                         }
                         else if(submit.error){
                             getSaveToken(result.token)
-                            this.setState({
-                                isSubmitting: false,
-                                confirmed: false
-                            })
-                            Alert.alert(null, submit.error)
+                            Alert.alert(null, 
+                                submit.error,
+                                [
+                                  {text: 'OK', onPress: () => {
+                                    this.setState({
+                                        isSubmitting: false,
+                                        confirmed: false
+                                    })
+                                  }},
+                                ],
+                                {cancelable: false}
+                            )
                         }
                         else{
                             getSaveToken(result.token)
-                            this.setState({
-                                isSubmitting: false,
-                                confirmed: false
-                            })
-                            Alert.alert(null, this.context.t("An error has occurred.."))
+                            Alert.alert(null, 
+                                this.context.t("An error has occurred.."),
+                                [
+                                  {text: 'OK', onPress: () => {
+                                    this.setState({
+                                        isSubmitting: false,
+                                        confirmed: false
+                                    })
+                                  }},
+                                ],
+                                {cancelable: false}
+                            )
                         }
                     }
                     else{
-                        this.setState({
-                            isSubmitting: false
-                        })
-                        Alert.alert(null, this.context.t("Please check your email and password again."))
+                        Alert.alert(null, 
+                            this.context.t("Please check your email and password again."),
+                            [
+                              {text: 'OK', onPress: () => {
+                                this.setState({
+                                    isSubmitting: false
+                                })
+                              }},
+                            ],
+                            {cancelable: false}
+                        )
                     }
                 }
                 else{
@@ -1016,39 +1078,74 @@ class CustomRequestCreateScreen extends Component{
                                         }
                                         else if(submit.error){
                                             getSaveToken(result.token)
-                                            this.setState({
-                                                isSubmitting: false,
-                                                confirmed: false
-                                            })
-                                            Alert.alert(null, submit.error)
+                                            Alert.alert(null, 
+                                                submit.error,
+                                                [
+                                                  {text: 'OK', onPress: () => {
+                                                    this.setState({
+                                                        isSubmitting: false,
+                                                        confirmed: false
+                                                    })
+                                                  }},
+                                                ],
+                                                {cancelable: false}
+                                            )
                                         }
                                         else{
                                             getSaveToken(result.token)
-                                            this.setState({
-                                                isSubmitting: false,
-                                                confirmed: false
-                                            })
-                                            Alert.alert(null, this.context.t("An error has occurred.."))
+                                            Alert.alert(null, 
+                                                this.context.t("An error has occurred.."),
+                                                [
+                                                  {text: 'OK', onPress: () => {
+                                                    this.setState({
+                                                        isSubmitting: false,
+                                                        confirmed: false
+                                                    })
+                                                  }},
+                                                ],
+                                                {cancelable: false}
+                                            )
                                         }
                                     }
                                     else{
-                                        this.setState({
-                                            isSubmitting: false
-                                        })
-                                        Alert.alert(null, this.context.t("An error has occurred.."))
+                                        Alert.alert(null, 
+                                            this.context.t("An error has occurred.."),
+                                            [
+                                              {text: 'OK', onPress: () => {
+                                                this.setState({
+                                                    isSubmitting: false
+                                                })
+                                              }},
+                                            ],
+                                            {cancelable: false}
+                                        )
                                     }
                                 }
                                 else if(check.error){
-                                    this.setState({
-                                        isSubmitting: false
-                                    })
-                                    Alert.alert(null, this.context.t(check.error))
+                                    Alert.alert(null, 
+                                        check.error,
+                                        [
+                                          {text: 'OK', onPress: () => {
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                          }},
+                                        ],
+                                        {cancelable: false}
+                                    )
                                 }
                                 else{
-                                    this.setState({
-                                        isSubmitting: false
-                                    })
-                                    Alert.alert(null, this.context.t("An error has occurred.."))
+                                    Alert.alert(null, 
+                                        this.context.t("An error has occurred.."),
+                                        [
+                                          {text: 'OK', onPress: () => {
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                          }},
+                                        ],
+                                        {cancelable: false}
+                                    )
                                 }
                             }
                             else{
@@ -1078,24 +1175,48 @@ class CustomRequestCreateScreen extends Component{
         const { sendVerificationEmail, isLoggedIn } = this.props;
         if(!isSendingEmail){
             if(isLoggedIn){
+                this.setState({
+                    isSendingEmail: true
+                })
                 const result = await sendVerificationEmail()
                 if(result.status === 'ok'){
-                    this.setState({
-                        isSendingEmail: false
-                    })
-                    Alert.alert(null, this.context.t("A verification email has been sent. Please check your inbox."))
+                    Alert.alert(null, 
+                        this.context.t("A verification email has been sent. Please check your inbox."),
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSendingEmail: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
                 else if(result.error){
-                    this.setState({
-                        isSendingEmail: false
-                    })
-                    Alert.alert(null, result.error)
+                    Alert.alert(null, 
+                        result.error,
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSendingEmail: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
                 else{
-                    this.setState({
-                        isSendingEmail: false
-                    })
-                    Alert.alert(null, this.context.t("An error has occurred.."))
+                    Alert.alert(null, 
+                        this.context.t("An error has occurred.."),
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSendingEmail: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
             }
         }
@@ -1143,11 +1264,12 @@ class CustomRequestCreateScreen extends Component{
             countryList,
             confirmed,
             fetchClear,
-            profile,
             isSendingEmail
         } = this.state;
+        const { profile } = this.props;
         return(
-            (confirmed && fetchClear && profile) ? (
+            <Fragment>
+            {(confirmed && fetchClear && profile) ? (
                 profile.is_verified ? (
                     <View style={[styles.container, styles.bgWhite, styles.center, styles.px15]}>
                         <Fragment>
@@ -2240,7 +2362,34 @@ class CustomRequestCreateScreen extends Component{
                         </View>
                     </Modal>
                 </View>
-            )
+            )}
+            <Modal
+            isVisible={isSendingEmail}
+            onBackButtonPress={null}
+            onBackdropPress={null}
+            backdropOpacity={0.7}
+            backdropColor={'#ffffff'}
+            animationIn={"fadeIn"}
+            animationOut={"fadeOut"}
+            >
+                <View style={[styles.container, styles.center]}>
+                    <Loader/>
+                </View>
+            </Modal>
+            <Modal
+            isVisible={isSubmitting}
+            onBackButtonPress={null}
+            onBackdropPress={null}
+            backdropOpacity={0.7}
+            backdropColor={'#ffffff'}
+            animationIn={"fadeIn"}
+            animationOut={"fadeOut"}
+            >
+                <View style={[styles.container, styles.center]}>
+                    <Loader/>
+                </View>
+            </Modal>
+            </Fragment>
         )
     }
 }

@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
-import { View, Text, Dimensions, TouchableWithoutFeedback, Image, ScrollView, TextInput, Alert, SafeAreaView, TouchableHighlightBase } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableWithoutFeedback, Image, ScrollView, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
 import Modal from 'react-native-modal';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Flag from 'react-native-flags';
+import Loader from '../../../components/Loader';
 
 const SignUpScreen = (props, context) => (
     <View style={[styles.container, styles.bgWhite, styles.px15]}>
@@ -131,7 +131,7 @@ const SignUpScreen = (props, context) => (
                 />
             </View>
             <TouchableWithoutFeedback onPress={props.submit}>
-                <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, props.isSubmitting ? { opacity: 0.7 } : null]}>
+                <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                     <Text style={[styles.font16, styles.fontBold, styles.white]}>
                         {props.goRequest ? context.t("Sign Up & Submit the request") : context.t("Sign Up")}
                     </Text>
@@ -153,7 +153,7 @@ const SignUpScreen = (props, context) => (
                     returnKeyType={'next'} 
                     placeholderTextColor={'#000000'}
                     underlineColorAndroid={'transparent'}
-                    placeholder={context.t("Search Count")}
+                    placeholder={context.t("Search Country")}
                 />
                 <ScrollView 
                 style={[styles.mt10, { height: 500 }]}
@@ -178,6 +178,19 @@ const SignUpScreen = (props, context) => (
                         </TouchableWithoutFeedback>
                     ))}
                 </ScrollView>
+            </View>
+        </Modal>
+        <Modal
+        isVisible={props.isSubmitting}
+        onBackButtonPress={null}
+        onBackdropPress={null}
+        backdropOpacity={0.7}
+        backdropColor={'#ffffff'}
+        animationIn={"fadeIn"}
+        animationOut={"fadeOut"}
+        >
+            <View style={[styles.container, styles.center]}>
+                <Loader/>
             </View>
         </Modal>
     </View>

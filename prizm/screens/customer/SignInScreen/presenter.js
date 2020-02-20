@@ -1,7 +1,9 @@
-import React, { Component, Fragment } from 'react';
-import { View, Text, Dimensions, TouchableWithoutFeedback, Image, ScrollView, TextInput, Alert, SafeAreaView, TouchableHighlightBase } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableWithoutFeedback, ScrollView, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
+import Modal from 'react-native-modal';
+import Loader from '../../../components/Loader';
 
 const SignInScreen = (props, context) => (
     <View style={[styles.container, styles.bgWhite, styles.px15]}>
@@ -66,13 +68,26 @@ const SignInScreen = (props, context) => (
                 </TouchableWithoutFeedback>
             </View>
             <TouchableWithoutFeedback onPress={props.submit}>
-                <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, props.isSubmitting ? { opacity: 0.7 } : null]}>
+                <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                     <Text style={[styles.font16, styles.fontBold, styles.white]}>
                         {props.goRequest ? context.t("Sign In & Submit the request") : context.t("Sign In")}
                     </Text>
                 </View>
             </TouchableWithoutFeedback>
         </ScrollView>
+        <Modal
+        isVisible={props.isSubmitting}
+        onBackButtonPress={null}
+        onBackdropPress={null}
+        backdropOpacity={0.7}
+        backdropColor={'#ffffff'}
+        animationIn={"fadeIn"}
+        animationOut={"fadeOut"}
+        >
+            <View style={[styles.container, styles.center]}>
+                <Loader/>
+            </View>
+        </Modal>
     </View>
 )
 

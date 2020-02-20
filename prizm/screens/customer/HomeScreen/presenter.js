@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styles from '../../../styles';
 import Swiper from '../../../components/Swiper';
 import Modal from 'react-native-modal';
+import Loader from '../../../components/Loader';
 
 const HomeScreen = (props, context) => (
     <View style={[styles.container, styles.center, styles.bgLanding1]}>
@@ -248,6 +249,19 @@ const HomeScreen = (props, context) => (
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
+            </View>
+        </Modal>
+        <Modal
+        isVisible={props.isSendingEmail}
+        onBackButtonPress={null}
+        onBackdropPress={null}
+        backdropOpacity={0.7}
+        backdropColor={'#ffffff'}
+        animationIn={"fadeIn"}
+        animationOut={"fadeOut"}
+        >
+            <View style={[styles.container, styles.center]}>
+                <Loader/>
             </View>
         </Modal>
     </View>

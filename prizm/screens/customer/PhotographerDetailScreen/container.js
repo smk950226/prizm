@@ -73,6 +73,17 @@ class Container extends Component{
         }
     }
 
+    componentDidUpdate = async(prevProps, prevState) => {
+        if(prevProps.navigation.getParam('fromAuth', null) !== this.props.navigation.getParam('fromAuth', null)){
+            const isConfirmPage = this.props.navigation.getParam('isConfirmPage', null)
+            const fromAuth = this.props.navigation.getParam('fromAuth', null)
+            this.setState({
+                isConfirmPage: isConfirmPage ? isConfirmPage : false,
+                fromAuth: fromAuth ? fromAuth : false
+            })
+        }
+    }
+
     _open1 = () => {
         this.setState({
             show1: true
@@ -402,6 +413,9 @@ class Container extends Component{
         const { createRequest, request, removeRequest, getOrderList, profile, sendVerificationEmail } = this.props;
         if(!isSubmitting){
             if(profile){
+                this.setState({
+                    isSubmitting: true
+                })
                 const result = await createRequest(request.photographer.id, request.location.id, request.option.id, request.comment, request.dateOption, request.date, request.hour, request.min, request.startDate, request.endDate)
                 if(result.status === 'ok'){
                     await getOrderList()
@@ -415,22 +429,37 @@ class Container extends Component{
                     await removeRequest()
                 }
                 else if(result.error){
-                    this.setState({
-                        isSubmitting: false,
-                        requestSubmitted: false
-                    })
-                    Alert.alert(null, result.error)
+                    Alert.alert(null, 
+                        result.error,
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSubmitting: false,
+                                requestSubmitted: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
                 else{
                     this.setState({
                         isSubmitting: false,
                         requestSubmitted: false
                     })
-                    Alert.alert(null, this.context.t('An error has occurred..'))
+                    Alert.alert(null, 
+                        this.context.t('An error has occurred..'),
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSubmitting: false,
+                                requestSubmitted: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
-                this.setState({
-                    isSubmitting: false
-                })
             }
             else{
                 Alert.alert(null, this.context.t('Login is required.'))
@@ -443,24 +472,48 @@ class Container extends Component{
         const { sendVerificationEmail, isLoggedIn } = this.props;
         if(!isSendingEmail){
             if(isLoggedIn){
+                this.setState({
+                    isSendingEmail: true
+                })
                 const result = await sendVerificationEmail()
                 if(result.status === 'ok'){
-                    this.setState({
-                        isSendingEmail: false
-                    })
-                    Alert.alert(null, this.context.t("A verification email has been sent. Please check your inbox."))
+                    Alert.alert(null, 
+                        this.context.t("A verification email has been sent. Please check your inbox."),
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSendingEmail: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
                 else if(result.error){
-                    this.setState({
-                        isSendingEmail: false
-                    })
-                    Alert.alert(null, result.error)
+                    Alert.alert(null, 
+                        result.error,
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSendingEmail: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
                 else{
-                    this.setState({
-                        isSendingEmail: false
-                    })
-                    Alert.alert(null, this.context.t("An error has occurred.."))
+                    Alert.alert(null, 
+                        this.context.t("An error has occurred.."),
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                isSendingEmail: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
             }
         }

@@ -62,18 +62,32 @@ class Container extends Component{
                     })
                 }
                 else if(check.error){
-                    this.setState({
-                        finded: "",
-                        isSubmitting: false
-                    })
-                    Alert.alert(null, check.error)
+                    Alert.alert(null, 
+                        check.error,
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                finded: "",
+                                isSubmitting: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
                 else{
-                    this.setState({
-                        finded: "",
-                        isSubmitting: false
-                    })
-                    Alert.alert(null, "An error has occurred..")
+                    Alert.alert(null, 
+                        this.context.t("An error has occurred.."),
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.setState({
+                                finded: "",
+                                isSubmitting: false
+                            })
+                          }},
+                        ],
+                        {cancelable: false}
+                    )
                 }
             }
             else{

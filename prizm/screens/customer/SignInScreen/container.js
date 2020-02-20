@@ -31,7 +31,8 @@ class Container extends Component{
             goRequest: goRequest ? goRequest : false,
             photographerId: photographerId ? photographerId : null,
             fetchedProfile: false,
-            fetchClear: false
+            fetchClear: false,
+            token: ""
         }
     }
 
@@ -67,8 +68,11 @@ class Container extends Component{
             if(this.state.goRequest){
                 this.props.navigation.navigate('PhotographerDetail', { photographerId: this.state.photographerId, fromAuth: true, isConfirmPage: true })
             }
+            else{
+                this.props.navigation.navigate('Home')
+            }
         }
-        if(prevProps !== this.props){
+        if(prevProps.navigation.getParam('goRequest', null) !== this.props.navigation.getParam('goRequest', null)){
             const goRequest = this.props.navigation.getParam('goRequest', null)
             const photographerId = this.props.navigation.getParam('photographerId', null)
             this.setState({
@@ -76,7 +80,7 @@ class Container extends Component{
                 photographerId: photographerId ? photographerId : null
             })
         }
-        if(!prevProps.isLoggedIn && this.props.isLoggedIn){
+        if((this.state.token === "") && !prevProps.isLoggedIn && this.props.isLoggedIn){
             this.props.navigation.navigate('Home')
         }
     }
@@ -104,8 +108,8 @@ class Container extends Component{
     }
 
     _submit = async() => {
-        const { isSubmitting, email,  password, emailForm, goRequest, photographerId } = this.state;
-        const { login, getProfileByToken, getSaveToken, goHome, goDetail, getNotificationByToken, getOrderListByToken, checkMessageByToken } = this.props;
+        const { isSubmitting, email,  password, emailForm } = this.state;
+        const { login, getProfileByToken, getNotificationByToken, getOrderListByToken, checkMessageByToken } = this.props;
         if(!isSubmitting){
             if(email && password){
                 if(emailForm){
@@ -121,13 +125,19 @@ class Container extends Component{
                         await getNotificationByToken(result.token)
                         await getOrderListByToken(result.token)
                         await checkMessageByToken(result.token)
-                        this.props.navigation.navigate('Home')
                     }
                     else{
-                        this.setState({
-                            isSubmitting: false
-                        })
-                        Alert.alert(null, this.context.t("Please check your email and password again."))
+                        Alert.alert(null, 
+                            this.context.t("Please check your email and password again."),
+                            [
+                              {text: 'OK', onPress: () => {
+                                this.setState({
+                                    isSubmitting: false
+                                })
+                              }},
+                            ],
+                            {cancelable: false}
+                        )
                     }
                 }
                 else{

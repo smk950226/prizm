@@ -42,7 +42,8 @@ class Container extends Component{
             photographerId: photographerId ? photographerId : null,
             countryList: [],
             fetchedProfile: false,
-            fetchClear: false
+            fetchClear: false,
+            token: ""
         }
     }
 
@@ -90,7 +91,7 @@ class Container extends Component{
                 photographerId: photographerId ? photographerId : null
             })
         }
-        if(!prevProps.isLoggedIn && this.props.isLoggedIn){
+        if((this.state.token === "") && !prevProps.isLoggedIn && this.props.isLoggedIn){
             this.props.navigation.navigate('Home')
         }
     }
@@ -305,23 +306,45 @@ class Container extends Component{
                                         await getOrderListByToken(result.token)
                                     }
                                     else{
-                                        this.setState({
-                                            isSubmitting: false
-                                        })
-                                        Alert.alert(null, this.context.t("An error has occurred.."))
+                                        
+                                        Alert.alert(null, 
+                                            this.context.t("An error has occurred.."),
+                                            [
+                                              {text: 'OK', onPress: () => {
+                                                this.setState({
+                                                    isSubmitting: false
+                                                })
+                                              }},
+                                            ],
+                                            {cancelable: false}
+                                        )
                                     }
                                 }
                                 else if(check.error){
-                                    this.setState({
-                                        isSubmitting: false
-                                    })
-                                    Alert.alert(null, this.context.t(check.error))
+                                    Alert.alert(null, 
+                                        this.context.t(check.error),
+                                        [
+                                          {text: 'OK', onPress: () => {
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                          }},
+                                        ],
+                                        {cancelable: false}
+                                    )
                                 }
                                 else{
-                                    this.setState({
-                                        isSubmitting: false
-                                    })
-                                    Alert.alert(null, this.context.t("An error has occurred.."))
+                                    Alert.alert(null, 
+                                        this.context.t("An error has occurred.."),
+                                        [
+                                          {text: 'OK', onPress: () => {
+                                            this.setState({
+                                                isSubmitting: false
+                                            })
+                                          }},
+                                        ],
+                                        {cancelable: false}
+                                    )
                                 }
                             }
                             else{
