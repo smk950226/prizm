@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 import CustomRequestContainer from '../routes/customer/CustomRequestRoute';
 import PhotographerContainer from '../routes/customer/PhotographerRoute';
+import ReservationContainer from '../routes/customer/ReservationRoute';
 import MenuScreen from '../screens/customer/MenuScreen';
 import styles from '../styles';
 
@@ -27,7 +28,7 @@ const TabNavigation = createBottomTabNavigator({
         }
     },
     Reservations: {
-        screen: CustomRequestContainer,
+        screen: ReservationContainer,
         navigationOptions: {
             tabBarIcon: ({focused}) => (
                 <Image source={focused ? require('../assets/images/icon_reservation_active.png') : require('../assets/images/icon_reservation.png')} style={styles.icon25} />
