@@ -126,7 +126,7 @@ class MySchedule extends Component{
                                         </Fragment>
                                     )}
                                     {order.status === 'completed' && !order.is_reviewed && (
-                                        <div className={`${styles.widthFull} ${styles.bgCompleted} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.props.goReveiwCreate(order)} style={{height: 48}}>
+                                        <div className={`${styles.widthFull} ${styles.bgCompleted} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mt3}`} onClick={() => this.props.goPayment(order)} style={{height: 48}}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Leave a Review")}</p>
                                         </div>
                                     )}

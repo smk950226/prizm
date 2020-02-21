@@ -560,7 +560,7 @@ class PhotographerDetailScreen extends Component{
                                                 longitudeDelta: height*0.01/width,
                                             }}
                                             region={region}
-                                            onMapReady={() => this._mapReady}
+                                            onMapReady={this._mapReady}
                                             >
                                                 <Marker
                                                 key={String(region.lat)}
@@ -655,7 +655,7 @@ class PhotographerDetailScreen extends Component{
                                                 longitudeDelta: height*0.01/width,
                                             }}
                                             region={region}
-                                            onMapReady={() => this._mapReady}
+                                            onMapReady={this._mapReady}
                                             >
                                                 <Marker
                                                 key={String(region.lat)}

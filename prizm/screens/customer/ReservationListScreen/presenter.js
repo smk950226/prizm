@@ -55,7 +55,7 @@ class ReservationListScreen extends Component{
                             alwaysBounceVertical={false}
                             data={orderList} 
                             renderItem={({item, index}) => (
-                                <TouchableWithoutFeedback key={item.id}>
+                                <TouchableWithoutFeedback key={item.id} onPress={() => this.props.navigation.navigate('ReservationDetail', { orderId: item.id, item })}>
                                     <View style={[(index === orderList.length - 1) ? null : styles.borderBtmGrayDc, styles.py15]}>
                                         <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween]}>
                                             <View style={[styles.flex9, styles.row, styles.alignItemsCenter]}>
@@ -106,7 +106,7 @@ class ReservationListScreen extends Component{
                                         </View>
                                         {item.status === 'confirmed' && (
                                             <Fragment>
-                                                <TouchableWithoutFeedback>
+                                                <TouchableWithoutFeedback onPress={() => this.props.goPayment(order)}>
                                                     <View style={[styles.widthFull, styles.bgConfirmed, styles.center, styles.mt10]}>
                                                         <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                             {this.context.t("Add Payment Details")}
@@ -121,7 +121,7 @@ class ReservationListScreen extends Component{
                                         )}
                                         {item.status === 'waiting_payment' && (
                                             <Fragment>
-                                                <TouchableWithoutFeedback>
+                                                <TouchableWithoutFeedback onPress={() => this.props.goPayment(order)}>
                                                     <View style={[styles.widthFull, styles.bgConfirmed, styles.center, styles.mt10]}>
                                                         <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                             {this.context.t("View Payment Information")}
@@ -135,7 +135,7 @@ class ReservationListScreen extends Component{
                                             </Fragment>
                                         )}
                                         {item.status === 'completed' && !item.is_reviewed && (
-                                            <TouchableWithoutFeedback>
+                                            <TouchableWithoutFeedback onPress={() => this.props.goPayment(order)}>
                                                 <View style={[styles.widthFull, styles.bgCompleted, styles.center, styles.mt10]}>
                                                     <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                         {this.context.t("Leave a Review")}
