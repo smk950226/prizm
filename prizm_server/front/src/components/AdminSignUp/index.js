@@ -42,6 +42,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getPhotographerByToken: (token) => {
             dispatch(adminAction.getPhotographerByToken(token))
+        },
+        getSetPhotographer: (photographer) => {
+            dispatch(adminAction.getSetPhotographer(photographer))
         }
     }
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import App from './presenter';
-import { setLanguage } from "redux-i18n"
+import styles from '../../style/styles.module.scss';
+import Loader from 'react-loader-spinner';
 
 class Container extends Component{
     static propTypes = {
@@ -13,17 +14,21 @@ class Container extends Component{
         photographer: PropTypes.any,
         newMessage: PropTypes.bool,
         goHome: PropTypes.func.isRequired,
-        logout: PropTypes.func.isRequired
+        logout: PropTypes.func.isRequired,
+        getProfile: PropTypes.func.isRequired
     }
 
     state = {
         lastScrollTop: 0,
         delta: 30,
         showBtmNav: true,
-        admin: false
+        admin: false,
+        loading: true,
+        fetchedProfile: false,
+        fetchClear: false
     }
 
-    componentDidMount(){
+    componentDidMount = async() => {
         window.addEventListener('scroll', this._handleScroll, false)
         fetch('https://ipapi.co/json/').then((response) => response.json())
         .then(json => {
@@ -41,10 +46,43 @@ class Container extends Component{
                 admin: false
             })
         }
+        const { isLoggedIn, getProfile } = this.props;
+        if(isLoggedIn){
+            await getProfile()
+        }
+        else{
+            this.setState({
+                loading: false
+            })
+        }
     }
 
     componentWillUnmount(){
         window.removeEventListener('scroll', this._handleScroll, false);
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        const { fetchedProfile } = prevState;
+        if((!fetchedProfile)){
+            let update = {}
+            if(nextProps.profile){
+                update.fetchedProfile = true
+            }
+
+            return update
+        }
+        else{
+            return null
+        }
+    }
+
+    componentDidUpdate = () => {
+        if(this.state.fetchedProfile && !this.state.fetchClear){
+            this.setState({
+                loading: false,
+                fetchClear: true,
+            })
+        }
     }
 
     _handleScroll = async() => {
@@ -71,7 +109,20 @@ class Container extends Component{
     }
 
     render(){
-        return <App {...this.props} {...this.state} />
+        const { loading } = this.state;
+        if(loading){
+            return(
+                <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                    <Loader type="Oval" color="#d66c8b" height={20} width={20} />
+                </div>
+            )
+        }
+        else{
+            return(
+                <App {...this.props} {...this.state} />
+            )
+        }
+        
     }
 }
 

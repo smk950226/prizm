@@ -75,10 +75,10 @@ class AdminOrderList extends Component{
                     <div className={`${styles.safearea} ${styles.containerAdminToolboxSide}`}>
                         <div className={`${styles.mobileNone}`}>
                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt4}`}>
-                                <ProfileDiv image={photographer.profile_image} />
+                                <ProfileDiv image={photographer ? photographer.profile_image : ""} />
                                 <div className={`${styles.ml3}`}>
-                                    <p className={`${styles.fontBold} ${styles.font2024}`}>{photographer.nickname}<span className={`${styles.ml3} ${styles.fontBold} ${styles.font1113} ${styles.pink} ${styles.cursorPointer}`} onClick={this.props.goStudioSetting}>{this.context.t("Edit Studio")}</span></p>
-                                    <a href={`https://prizm.cloud/${photographer.studio_id}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${photographer.studio_id}`}</a>
+                                    <p className={`${styles.fontBold} ${styles.font2024}`}>{photographer ? photographer.nickname : ""}<span className={`${styles.ml3} ${styles.fontBold} ${styles.font1113} ${styles.pink} ${styles.cursorPointer}`} onClick={this.props.goStudioSetting}>{this.context.t("Edit Studio")}</span></p>
+                                    <a href={`https://prizm.cloud/${photographer ? photographer.studio_id : ""}`} target={'_blank'} className={`${styles.textDecorationNone} ${styles.urlBlue} ${styles.fontBold} ${styles.font1416} ${styles.mt2}`}>{`prizm.cloud/${photographer ? photographer.studio_id : ""}`}</a>
                                 </div>
                             </div>
                         </div>

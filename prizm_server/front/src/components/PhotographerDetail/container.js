@@ -101,9 +101,11 @@ class Container extends Component{
         }
         else if(result.error){
             alert(result.error)
+            this.props.goHome()
         }
         else{
             alert(this.context.t('An error has occurred..'))
+            this.props.goHome()
         }
     }
 

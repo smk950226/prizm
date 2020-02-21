@@ -143,7 +143,8 @@ class Container extends Component{
                 hour: hourList,
                 min: minList
             },
-            loop: true
+            loop: true,
+            updateClear: false
         }
     }
 
@@ -195,7 +196,7 @@ class Container extends Component{
                 tempProfileWidth: 0
             })
         }
-        if(prevProps.photographer !== this.props.photographer){
+        if(this.state.updateClear && prevProps.photographer !== this.props.photographer){
             if(this.state.update){
                 this.setState({
                     isSubmitting: false
@@ -216,6 +217,176 @@ class Container extends Component{
                 }
                 this.props.goClear(replacedStudioId)
             }
+        }
+        if(!this.state.updateClear && prevProps.profile !== this.props.profile){
+            const { photographer } = this.props;
+            let submitImages = []
+            let images = []
+            if(photographer){
+                if(photographer.nickname){
+                    photographer.portfolio_set.map((image, index) => {
+                        submitImages.push({
+                            idx: index,
+                            image: image
+                        })
+                        images.push({
+                            idx: index,
+                            image: image
+                        })
+                    })
+                }
+            }
+            this.setState({
+                update: photographer ? photographer.nickname ? true : false : false,
+                images: photographer ? photographer.nickname ? images : [] : [],
+                submitImages: photographer ? photographer.nickname ? submitImages : [] : [],
+                opacityList,
+                nickname: photographer ? photographer.nickname ? photographer.nickname : "" : "",
+                mainLocation: photographer ? photographer.nickname ? photographer.main_location : "" : "",
+                equipment: photographer ? photographer.nickname ? photographer.equipment : "" : "",
+                career: photographer ? photographer.nickname ? photographer.career : "" : "",
+                description: photographer ? photographer.nickname ? photographer.description : "" : "",
+                tempImage: "",
+                tempHeight: 0,
+                tempWidth: 0,
+                profileImage: photographer ? photographer.nickname ? photographer.profile_image : "" : "",
+                submitProfileImage: photographer ? photographer.nickname ? photographer.profile_image : "" : "",
+                tempProfileImage: "",
+                tempProfileHeight: 0,
+                tempProfileWidth: 0,
+                isTruncated: true,
+                locations: photographer ? photographer.nickname ? photographer.location_set : [] : [],
+                options: photographer ? photographer.nickname ? photographer.option_set : [] : [],
+                locationSearch: "",
+                locationSearched: false,
+                searchedLocations: [],
+                selectedLocation: {},
+                show1: false,
+                show2: false,
+                show3: false,
+                show4: false,
+                showCalendar1: false,
+                showCalendar2: false,
+                customerSelectedLocation: {},
+                optionTitle: "",
+                optionType: "",
+                optionDescription: "",
+                optionPerson: "",
+                optionHour: "",
+                optionPrice: "",
+                showOptionPlus: false,
+                dateConfirm: false,
+                selectDateStep: 1,
+                selectedHour: "02",
+                selectedMin: "00",
+                selectedAmPm: "PM",
+                dateOption: 0,
+                selectedDate: "",
+                selectedStartDate: "",
+                selectedEndDate: "",
+                dateRange: [],
+                customerSelectedOption: {},
+                comment: "",
+                studioId: photographer ? photographer.nickname ? photographer.studio_id : "" : "",
+                isSubmitting: false,
+                valueGroups: {
+                    ampm: 'PM',
+                    hour: '02',
+                    min: '00'
+                }, 
+                optionGroups: {
+                    ampm: ampm,
+                    hour: hourList,
+                    min: minList
+                },
+                loop: true,
+                updateClear: false
+            })
+        }
+        if(prevProps.photographer !== this.props.photographer){
+            const { photographer } = this.props;
+            let submitImages = []
+            let images = []
+            if(photographer){
+                if(photographer.nickname){
+                    photographer.portfolio_set.map((image, index) => {
+                        submitImages.push({
+                            idx: index,
+                            image: image
+                        })
+                        images.push({
+                            idx: index,
+                            image: image
+                        })
+                    })
+                }
+            }
+            this.setState({
+                update: photographer ? photographer.nickname ? true : false : false,
+                images: photographer ? photographer.nickname ? images : [] : [],
+                submitImages: photographer ? photographer.nickname ? submitImages : [] : [],
+                opacityList,
+                nickname: photographer ? photographer.nickname ? photographer.nickname : "" : "",
+                mainLocation: photographer ? photographer.nickname ? photographer.main_location : "" : "",
+                equipment: photographer ? photographer.nickname ? photographer.equipment : "" : "",
+                career: photographer ? photographer.nickname ? photographer.career : "" : "",
+                description: photographer ? photographer.nickname ? photographer.description : "" : "",
+                tempImage: "",
+                tempHeight: 0,
+                tempWidth: 0,
+                profileImage: photographer ? photographer.nickname ? photographer.profile_image : "" : "",
+                submitProfileImage: photographer ? photographer.nickname ? photographer.profile_image : "" : "",
+                tempProfileImage: "",
+                tempProfileHeight: 0,
+                tempProfileWidth: 0,
+                isTruncated: true,
+                locations: photographer ? photographer.nickname ? photographer.location_set : [] : [],
+                options: photographer ? photographer.nickname ? photographer.option_set : [] : [],
+                locationSearch: "",
+                locationSearched: false,
+                searchedLocations: [],
+                selectedLocation: {},
+                show1: false,
+                show2: false,
+                show3: false,
+                show4: false,
+                showCalendar1: false,
+                showCalendar2: false,
+                customerSelectedLocation: {},
+                optionTitle: "",
+                optionType: "",
+                optionDescription: "",
+                optionPerson: "",
+                optionHour: "",
+                optionPrice: "",
+                showOptionPlus: false,
+                dateConfirm: false,
+                selectDateStep: 1,
+                selectedHour: "02",
+                selectedMin: "00",
+                selectedAmPm: "PM",
+                dateOption: 0,
+                selectedDate: "",
+                selectedStartDate: "",
+                selectedEndDate: "",
+                dateRange: [],
+                customerSelectedOption: {},
+                comment: "",
+                studioId: photographer ? photographer.nickname ? photographer.studio_id : "" : "",
+                isSubmitting: false,
+                valueGroups: {
+                    ampm: 'PM',
+                    hour: '02',
+                    min: '00'
+                }, 
+                optionGroups: {
+                    ampm: ampm,
+                    hour: hourList,
+                    min: minList
+                },
+                loop: true,
+                updateClear: false
+            })
         }
     }
 
@@ -763,6 +934,9 @@ class Container extends Component{
                             }
                             const result = await updateStudio(submitImages.reverse(), nickname, mainLocation, equipment, career, description, submitProfileImage, locations, options, replacedStudioId, update)
                             if(result.status === 'ok'){
+                                await this.setState({
+                                    updateClear: true
+                                })
                                 await getPhotographer()
                                 // if(update){
                                 //     this.setState({

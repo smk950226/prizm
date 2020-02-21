@@ -16,7 +16,8 @@ class Container extends Component{
         getPhotographerByToken: PropTypes.func.isRequired,
         goStudioSetting: PropTypes.func.isRequired,
         photographer: PropTypes.object,
-        profile: PropTypes.object
+        profile: PropTypes.object,
+        getSetPhotographer: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -238,7 +239,7 @@ class Container extends Component{
 
     _submit = async() => {
         const { isSubmitting, firstName, lastName, email, countryNumber, countryCode, mobile, password, password2, instagram, emailForm, passwordForm, password2Form } = this.state;
-        const { checkDuplicate, signUpAdmin, getProfileByToken, getSaveToken, getPhotographerByToken } = this.props;
+        const { checkDuplicate, signUpAdmin, getProfileByToken, getSetPhotographer, getPhotographerByToken } = this.props;
         if(!isSubmitting){
             if(firstName && lastName && email && countryNumber && countryCode && mobile && password && password2 && instagram){
                 if(emailForm){
@@ -256,6 +257,7 @@ class Container extends Component{
                                         await this.setState({
                                             token: result.token
                                         })
+                                        await getSetPhotographer(null)
                                         await getProfileByToken(result.token)
                                         await getPhotographerByToken(result.token)
                                     }

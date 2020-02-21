@@ -95,10 +95,10 @@ const HomeScreen = (props, context) => (
                                 )}
                                 {props.profile.is_verified ? (
                                     <Fragment>
-                                        <Text style={[styles.font14, styles.mt10, styles.pink]}>
+                                        <Text style={[styles.font14, styles.mt10, styles.pink, styles.textCenter, styles.px15]}>
                                             {context.t("We are waiting for photographers to submit their proposals.")}
                                         </Text>
-                                        <Text style={[styles.font14, styles.pink, styles.mt5]}>
+                                        <Text style={[styles.font14, styles.pink, styles.mt5, styles.textCenter, styles.px15]}>
                                             {context.t("We will notify you through text message and email when we have received proposals from photographers")}
                                         </Text>
                                     </Fragment>
@@ -126,16 +126,18 @@ const HomeScreen = (props, context) => (
                                         {context.t("Enrich your travel with photography")}
                                     </Text>
                                 </View>
-                                <TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={() => props.navigation.navigate('CustomRequestList', { requestId: props.profile.custom_request_status.id })}>
                                     <View style={[styles.mt30, styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
-                                        <Text style={[styles.fontBold, styles.font14, styles.white]}>
-                                            {context.t(`Proposals for ${props.profile.first_name} ${props.profile.last_name}`)}
-                                        </Text>
-                                        <View style={[{position: 'absolute', top: -10, right: 20}, styles.center]}>
-                                            <Image source={require('../../../assets/images/icon_count.png')} style={[{width: 20, height: 20}]} />
-                                            <Text style={[styles.fontExtraBold, styles.font8, { position: 'absolute' }]}>
-                                                {props.profile.custom_request_status.count}
+                                        <View>
+                                            <Text style={[styles.fontBold, styles.font14, styles.white]}>
+                                                {context.t(`Proposals for ${props.profile.first_name} ${props.profile.last_name}`)}
                                             </Text>
+                                            <View style={[{position: 'absolute', top: -20, right: -20}, styles.center]}>
+                                                <Image source={require('../../../assets/images/icon_count.png')} style={[{width: 20, height: 20}]} />
+                                                <Text style={[styles.fontExtraBold, styles.font8, { position: 'absolute' }]}>
+                                                    {props.profile.custom_request_status.count}
+                                                </Text>
+                                            </View>
                                         </View>
                                     </View>
                                 </TouchableWithoutFeedback>
@@ -203,7 +205,7 @@ const HomeScreen = (props, context) => (
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={() => props.navigation.navigate('SignIn')}>
                             <View>
                                 <Text style={[styles.mt10, styles.pink, styles.font14, styles.textCenter]}>
                                     {context.t("Already made a reservation?")}

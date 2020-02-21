@@ -270,6 +270,12 @@ const styles = StyleSheet.create({
     bgGrayF4: {
         backgroundColor: '#F4F4F4'
     },
+    bgGrayF8: {
+        backgroundColor: '#F8F8F8'
+    },
+    bgGray97: {
+        backgroundColor: '#979797'
+    },
     bgPink: {
         backgroundColor: '#d66c8b'
     },

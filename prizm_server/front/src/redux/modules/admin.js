@@ -13,6 +13,12 @@ function setPhotographer(photographer) {
     }
 }
 
+function getSetPhotographer(photographer){
+    return (dispatch) => {
+        dispatch(setPhotographer(photographer))
+    }
+}
+
 function getAdminOrderList(status){
     return (dispatch, getState) => {
         const { user : { token } } = getState()
@@ -418,7 +424,8 @@ const actionCreators = {
     orderComplete,
     getRequestList,
     getRequestListMore,
-    createRequestOrder
+    createRequestOrder,
+    getSetPhotographer
 }
 
 export { actionCreators }
