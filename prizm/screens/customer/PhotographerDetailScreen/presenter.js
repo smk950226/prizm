@@ -743,7 +743,7 @@ class PhotographerDetailScreen extends Component{
                                             routeName: 'PhotographerList'
                                         })]
                                     }))}>
-                                    <View style={[styles.bgGray33, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                    <View style={[styles.bgGray33, styles.mt20, styles.px20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("Go to the main page")}
                                         </Text>

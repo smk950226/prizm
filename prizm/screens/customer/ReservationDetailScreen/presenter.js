@@ -133,13 +133,13 @@ class ReservationDetailScreen extends Component{
                         {order.status === 'confirmed' && (
                             <Fragment>
                                 <TouchableWithoutFeedback onPress={() => this.props.goPayment(order)}>
-                                    <View style={[styles.bgConfirmed, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                    <View style={[styles.bgConfirmed, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("Add Payment Details")}
                                         </Text>
                                     </View>
                                 </TouchableWithoutFeedback>
-                                <Text style={[styles.font11, styles.mt5, styles.gray93]}>
+                                <Text style={[styles.font11, styles.mt5, styles.gray93, styles.px15]}>
                                     {this.context.t("Please add payment details by : \n")}
                                     {this.context.t(`${new Date(new Date(order.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
                                 </Text>
@@ -148,13 +148,13 @@ class ReservationDetailScreen extends Component{
                         {order.status === 'waiting_payment' && (
                             <Fragment>
                                 <TouchableWithoutFeedback onPress={() => this.props.goPayment(order)}>
-                                    <View style={[styles.bgConfirmed, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                    <View style={[styles.bgConfirmed, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("Add Payment Details")}
                                         </Text>
                                     </View>
                                 </TouchableWithoutFeedback>
-                                <Text style={[styles.font11, styles.mt5, styles.gray93]}>
+                                <Text style={[styles.font11, styles.mt5, styles.gray93, styles.px15]}>
                                     {this.context.t("Please make payment by : \n")}
                                     {this.context.t(`${new Date(new Date(order.deposit.created_at).getTime() + 1000*60*60*24*1)}`)}
                                 </Text>
@@ -162,7 +162,7 @@ class ReservationDetailScreen extends Component{
                         )}
                         {order.status === 'completed' && !order.is_reviewed && (
                             <TouchableWithoutFeedback onPress={() => this.props.goReveiwCreate(order)}>
-                                <View style={[styles.bgCompleted, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                <View style={[styles.bgCompleted, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                     <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                         {this.context.t("Leave a Review")}
                                     </Text>

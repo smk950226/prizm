@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from '../../screens/customer/HomeScreen';
 import CustomRequestCreateScreen from '../../screens/customer/CustomRequestCreateScreen';
 import CustomRequestListScreen from '../../screens/customer/CustomRequestListScreen';
+import CustomRequestDetailScreen from '../../screens/customer/CustomRequestDetailScreen';
 import sharedRoutes, { sharedOptions } from './sharedRoutes';
 
 const CustomRequestRoute = createStackNavigator(
@@ -16,6 +17,9 @@ const CustomRequestRoute = createStackNavigator(
         },
         CustomRequestList: {
             screen: CustomRequestListScreen
+        },
+        CustomRequestDetail: {
+            screen: CustomRequestDetailScreen
         },
         ...sharedRoutes
     },

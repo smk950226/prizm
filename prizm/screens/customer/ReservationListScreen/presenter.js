@@ -55,36 +55,36 @@ class ReservationListScreen extends Component{
                             alwaysBounceVertical={false}
                             data={orderList} 
                             renderItem={({item, index}) => (
-                                <TouchableWithoutFeedback key={item.id} onPress={() => this.props.navigation.navigate('ReservationDetail', { orderId: item.id, item })}>
+                                <TouchableWithoutFeedback key={item.id} onPress={() => this.props.navigation.navigate('ReservationDetail', { orderId: item.id, order: item })}>
                                     <View style={[(index === orderList.length - 1) ? null : styles.borderBtmGrayDc, styles.py15]}>
                                         <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween]}>
                                             <View style={[styles.flex9, styles.row, styles.alignItemsCenter]}>
                                                 {item.status === 'pending' && (
-                                                    <Text style={[styles.fontBold, styles.font13, styles.flex2, styles.pending]}>
+                                                    <Text style={[styles.fontBold, styles.font13, styles.flex3, styles.pending]}>
                                                         {this.context.t("Pending")}
                                                     </Text>
                                                 )}
                                                 {((item.status === 'confirmed') || (item.status === 'waiting_payment')) && (
-                                                    <Text style={[styles.fontBold, styles.font13, styles.flex2, styles.confirmed]}>
+                                                    <Text style={[styles.fontBold, styles.font13, styles.flex3, styles.confirmed]}>
                                                         {this.context.t("Confirmed")}
                                                     </Text>
                                                 )}
                                                 {item.status === 'paid' && (
-                                                    <Text style={[styles.fontBold, styles.font13, styles.flex2, styles.paid]}>
+                                                    <Text style={[styles.fontBold, styles.font13, styles.flex3, styles.paid]}>
                                                         {this.context.t("Paid")}
                                                     </Text>
                                                 )}
                                                 {item.status === 'cancelled' && (
-                                                    <Text style={[styles.fontBold, styles.font13, styles.flex2, styles.cancelled]}>
+                                                    <Text style={[styles.fontBold, styles.font13, styles.flex3, styles.cancelled]}>
                                                         {this.context.t("Cancelled")}
                                                     </Text>
                                                 )}
                                                 {item.status === 'completed' && (
-                                                    <Text style={[styles.fontBold, styles.font13, styles.flex2, styles.completed]}>
+                                                    <Text style={[styles.fontBold, styles.font13, styles.flex3, styles.completed]}>
                                                         {this.context.t("Completed")}
                                                     </Text>
                                                 )}
-                                                <View style={[styles.flex8]}>
+                                                <View style={[styles.flex7]}>
                                                     {item.date_option === 'Specific' && (
                                                         <Text style={[styles.ml15, styles.fontBold, styles.font11]}>
                                                             {item.specific_date.slice(2,4).concat('/',item.specific_date.slice(5,7),'/',item.specific_date.slice(8,10))}
@@ -107,7 +107,7 @@ class ReservationListScreen extends Component{
                                         {item.status === 'confirmed' && (
                                             <Fragment>
                                                 <TouchableWithoutFeedback onPress={() => this.props.goPayment(order)}>
-                                                    <View style={[styles.widthFull, styles.bgConfirmed, styles.center, styles.mt10]}>
+                                                    <View style={[styles.widthFull, styles.bgConfirmed, styles.center, styles.mt10, styles.py15]}>
                                                         <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                             {this.context.t("Add Payment Details")}
                                                         </Text>
@@ -122,7 +122,7 @@ class ReservationListScreen extends Component{
                                         {item.status === 'waiting_payment' && (
                                             <Fragment>
                                                 <TouchableWithoutFeedback onPress={() => this.props.goPayment(order)}>
-                                                    <View style={[styles.widthFull, styles.bgConfirmed, styles.center, styles.mt10]}>
+                                                    <View style={[styles.widthFull, styles.bgConfirmed, styles.center, styles.mt10, styles.py15]}>
                                                         <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                             {this.context.t("View Payment Information")}
                                                         </Text>
@@ -136,7 +136,7 @@ class ReservationListScreen extends Component{
                                         )}
                                         {item.status === 'completed' && !item.is_reviewed && (
                                             <TouchableWithoutFeedback onPress={() => this.props.goPayment(order)}>
-                                                <View style={[styles.widthFull, styles.bgCompleted, styles.center, styles.mt10]}>
+                                                <View style={[styles.widthFull, styles.bgCompleted, styles.center, styles.mt10, styles.py15]}>
                                                     <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                         {this.context.t("Leave a Review")}
                                                     </Text>

@@ -44,47 +44,43 @@ class RequestOrderList extends Component{
                         renderItem={({item, index}) => {
                             const location = JSON.parse(item.location.replace(/'/gi, '"'))
                             return(
-                            <TouchableWithoutFeedback key={item.id} onPress={() => this.props.goRequestOrderDetail(item)}>
-                                <View style={[styles.py15, index % 2 === 0 ? styles.bgWhite : styles.bgGrayF8, styles.px15]}>
-                                    <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween]}>
-                                        <View style={[styles.flex8, styles.row, styles.alignItemsCenter]}>
-                                            {item.photographer.profile_image ? (
-                                                <Image source={{uri: item.photographer.profile_image}} style={[styles.circle50]} />
-                                            ) : (
-                                                <View style={[styles.circle50, styles.bgGray97]} />
-                                            )}
-                                            <View style={[styles.ml15]}>
-                                                <Text style={[styles.fontBold, styles.font14]}>
-                                                    {item.photographer.nickname}
-                                                </Text>
-                                                <Text style={[styles.font13, styles.mt5]}>
-                                                    {item.photographer.career}
+                                <TouchableWithoutFeedback key={item.id} onPress={() => this.props.navigation.navigate('CustomRequestDetail', {order: item})}>
+                                    <View style={[styles.py15, index % 2 === 0 ? styles.bgWhite : styles.bgGrayF8, styles.px15]}>
+                                        <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween]}>
+                                            <View style={[styles.flex8, styles.row, styles.alignItemsCenter]}>
+                                                <Image source={item.photographer.profile_image ? {uri: item.photographer.profile_image} : require('../../../assets/images/icon_profile.png')} style={[styles.circle50]} />
+                                                <View style={[styles.ml15]}>
+                                                    <Text style={[styles.fontBold, styles.font14]}>
+                                                        {item.photographer.nickname}
+                                                    </Text>
+                                                    <Text style={[styles.font13, styles.mt5]}>
+                                                        {item.photographer.career}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                            <View style={[styles.flex2]}>
+                                                <Text style={[styles.font12, styles.pink, styles.textRight]}>
+                                                    {this.context.t("Details >")}
                                                 </Text>
                                             </View>
                                         </View>
-                                        <View style={[styles.flex2]}>
-                                            <Text style={[styles.font12, styles.pink, styles.textRight]}>
-                                                {this.context.t("Details >")}
+                                        <View style={[styles.row, styles.mt10]}>
+                                            <Text style={[styles.font12]}>
+                                                <Text style={[styles.fontBold]}>
+                                                    {this.context.t("Photography Location")}
+                                                </Text>
+                                                {` : ${location.name}`}
+                                            </Text>
+                                            <View style={[styles.bgBlack, styles.mx10, { width: 2, height: 14 }]} />
+                                            <Text style={[styles.font12]}>
+                                                <Text style={[styles.fontBold]}>
+                                                    {this.context.t("Price")}
+                                                </Text>
+                                                {` : $${numberWithCommas(item.price)}`}
                                             </Text>
                                         </View>
                                     </View>
-                                    <View style={[styles.row, styles.mt10]}>
-                                        <Text style={[styles.font12]}>
-                                            <Text style={[styles.fontBold]}>
-                                                {this.context.t("Photography Location")}
-                                            </Text>
-                                            {` : ${location.name}`}
-                                        </Text>
-                                        <View style={[styles.bgBlack, styles.mx10, { width: 2, height: 14 }]} />
-                                        <Text style={[styles.font12]}>
-                                            <Text style={[styles.fontBold]}>
-                                                {this.context.t("Price")}
-                                            </Text>
-                                            {` : $${numberWithCommas(item.price)}`}
-                                        </Text>
-                                    </View>
-                                </View>
-                            </TouchableWithoutFeedback>
+                                </TouchableWithoutFeedback>
                         )}} 
                         numColumns={1} 
                         keyExtractor={item => String(item.id)} 

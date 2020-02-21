@@ -29,7 +29,7 @@ User = get_user_model()
 
 class Photographer(APIView):
     def get(self, request, format = None):
-        photographers = models.Photographer.objects.all()
+        photographers = models.Photographer.objects.all().order_by('-id')
         paginator = MainPageNumberPagination()
         result_page = paginator.paginate_queryset(photographers, request)
         serializer = serializers.PhotographerPortfolioSerializer(result_page, many = True, context = {'request': request})

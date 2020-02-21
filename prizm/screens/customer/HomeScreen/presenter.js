@@ -33,7 +33,7 @@ const HomeScreen = (props, context) => (
                 </View>
             </Swiper>
         </View>
-        <View style={[styles.flex1, styles.center]}>
+        <View style={[styles.flex1, styles.center, styles.px15]}>
             <View>
                 {props.profile ? (
                     <Fragment>
@@ -95,15 +95,15 @@ const HomeScreen = (props, context) => (
                                 )}
                                 {props.profile.is_verified ? (
                                     <Fragment>
-                                        <Text style={[styles.font14, styles.mt10, styles.pink, styles.textCenter, styles.px15]}>
+                                        <Text style={[styles.font14, styles.mt10, styles.pink, styles.textCenter]}>
                                             {context.t("We are waiting for photographers to submit their proposals.")}
                                         </Text>
-                                        <Text style={[styles.font14, styles.pink, styles.mt5, styles.textCenter, styles.px15]}>
+                                        <Text style={[styles.font14, styles.pink, styles.mt5, styles.textCenter]}>
                                             {context.t("We will notify you through text message and email when we have received proposals from photographers")}
                                         </Text>
                                     </Fragment>
                                 ) : (
-                                    <Text style={[styles.font14, styles.mt10, styles.pink, styles.px15]}>
+                                    <Text style={[styles.font14, styles.mt10, styles.pink]}>
                                         {context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")}
                                     </Text>
                                 )}

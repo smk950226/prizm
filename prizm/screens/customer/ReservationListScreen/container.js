@@ -73,6 +73,7 @@ class Container extends Component{
             this.setState({
                 loading: false,
                 fetchClear: true,
+                refreshing: false
             })
         }
     }
@@ -177,7 +178,10 @@ class Container extends Component{
         const { getOrderList } = this.props;
         this.setState({
             fetchClear: false,
-            fetchedOrderList: false
+            fetchedOrderList: false,
+            isLoadingMore: false,
+            page: 1,
+            hasNextPage: true
         })
         await getOrderList()
     }

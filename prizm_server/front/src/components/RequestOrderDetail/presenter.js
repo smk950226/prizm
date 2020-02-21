@@ -159,7 +159,7 @@ class PhotographerDetail extends Component{
                                     <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
                                         <LocationComp location={location} selectedLocation={location} index={0} total={1} blankLocation={() => console.log('blank')} selectLocation={() => console.log('select')} />
                                     </div>
-                                    {location.lat ? (
+                                    {location.name ? (
                                         <div className={`${styles.mt3}`}>
                                             <Map
                                             isMarkerShown={true}
