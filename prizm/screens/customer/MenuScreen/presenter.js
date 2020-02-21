@@ -96,7 +96,7 @@ class MenuScreen extends Component{
                         <View style={[styles.bgWhite, styles.px20]}>
                             {isLoggedIn ? (
                                 <Fragment>
-                                    <TouchableWithoutFeedback>
+                                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Profile')}>
                                         <View style={[styles.row, styles.alignItemsCenter, styles.mt20]}>
                                             <Text style={[styles.font16, styles.fontBold]}>
                                                 {this.context.t("Profile")}
@@ -104,7 +104,7 @@ class MenuScreen extends Component{
                                             <Image source={require('../../../assets/images/icon_arrow_right.png')} style={[styles.iconArrow, styles.ml10]} />
                                         </View>
                                     </TouchableWithoutFeedback>
-                                    <TouchableWithoutFeedback>
+                                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('ReservationList')}>
                                         <View style={[styles.row, styles.alignItemsCenter, styles.mt10]}>
                                             <Text style={[styles.font16, styles.fontBold]}>
                                                 {this.context.t("My Schedule")}
