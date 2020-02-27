@@ -15,7 +15,8 @@ class Container extends Component{
         goDetail: PropTypes.func.isRequired,
         getNotificationByToken: PropTypes.func.isRequired,
         getOrderListByToken: PropTypes.func.isRequired,
-        goSignUpClear: PropTypes.func.isRequired
+        goSignUpClear: PropTypes.func.isRequired,
+        lang: PropTypes.string
     }
 
     static contextTypes = {
@@ -43,7 +44,8 @@ class Container extends Component{
             photographerId: props.location.state ? props.location.state.photographerId ? props.location.state.photographerId : null : null,
             countryList: [],
             fetchedProfile: false,
-            fetchClear: false
+            fetchClear: false,
+            findedCountry: {}
         }
     }
 
@@ -51,6 +53,15 @@ class Container extends Component{
         window.scrollTo(0,0)
         if(this.props.isLoggedIn){
             this.props.goHome()
+        }
+        const { lang } = this.props;
+        if(lang){
+            let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
+            if(findedCountry){
+                this.setState({
+                    findedCountry
+                })
+            }
         }
     }
 
@@ -69,7 +80,7 @@ class Container extends Component{
         }
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate = (prevProps, prevState) => {
         if(this.state.fetchedProfile && !this.state.fetchClear){
             this.setState({
                 loading: false,
@@ -82,6 +93,17 @@ class Container extends Component{
             }
             else{
                 this.props.goSignUpClear()
+            }
+        }
+        if(prevProps.lang !== this.props.lang){
+            const { lang } = this.props;
+            if(lang){
+                let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
+                if(findedCountry){
+                    this.setState({
+                        findedCountry
+                    })
+                }
             }
         }
     }

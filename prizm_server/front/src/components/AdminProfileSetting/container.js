@@ -10,7 +10,8 @@ class Container extends Component{
         goHome: PropTypes.func.isRequired,
         adminEditProfile: PropTypes.func.isRequired,
         getProfile: PropTypes.func.isRequired,
-        goPasswordChange: PropTypes.func.isRequired
+        goPasswordChange: PropTypes.func.isRequired,
+        lang: PropTypes.string
     }
 
     static contextTypes = {
@@ -33,7 +34,8 @@ class Container extends Component{
             edited: false,
             editable: false,
             countryList: [],
-            q: ""
+            q: "",
+            findedCountry: {}
         }
     }
 
@@ -44,6 +46,29 @@ class Container extends Component{
         }
         else if(profile.user_type !== 'photographer'){
             goHome()
+        }
+        const { lang } = this.props;
+        if(lang){
+            let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
+            if(findedCountry){
+                this.setState({
+                    findedCountry
+                })
+            }
+        }
+    }
+
+    componentDidUpdate = async(prevProps, prevState) => {
+        if(prevProps.lang !== this.props.lang){
+            const { lang } = this.props;
+            if(lang){
+                let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
+                if(findedCountry){
+                    this.setState({
+                        findedCountry
+                    })
+                }
+            }
         }
     }
 

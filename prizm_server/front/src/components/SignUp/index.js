@@ -4,11 +4,12 @@ import { actionCreators as userAction } from '../../redux/modules/user';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn, profile }, router : { location } } = state;
+    const { user : { isLoggedIn, profile }, router : { location }, i18nState : { lang } } = state;
     return {
         isLoggedIn,
         pathname: location.pathname,
-        profile
+        profile,
+        lang
     }
 }
 

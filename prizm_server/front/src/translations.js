@@ -88,7 +88,7 @@ export const translations = {
     'Do you want to change your password?': '비밀번호를 변경하시겠습니까?',
     'Save change': '변경내역 저장하기',
     'Nationality': '국적',
-    'Type your country': '국가를 입력해주세요.',
+    'Type your country': '국가를 입력해주세요. (영어)',
     'Log Out': '로그아웃',
     'This is not a valid photographer account.': '유효한 작가 계정이 아닙니다.',
     'Please check your email and password again.': '이메일과 비밀번호를 확인해주세요.',

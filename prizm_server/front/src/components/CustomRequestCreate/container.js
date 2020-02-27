@@ -27,7 +27,8 @@ class Container extends Component{
         goRequestOrderList: PropTypes.func.isRequired,
         goSignin: PropTypes.func.isRequired,
         doHideBtmNav: PropTypes.func.isRequired,
-        undoHideBtmNav: PropTypes.func.isRequired
+        undoHideBtmNav: PropTypes.func.isRequired,
+        lang: PropTypes.string
     }
 
     render(){

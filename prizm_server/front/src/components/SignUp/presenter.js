@@ -72,20 +72,56 @@ const SignUp = (props, context) => (
                     </div>
                 </div>
                 <div className={`${styles.overflowYScroll} ${styles.px3} ${styles.pt2}`} style={{maxHeight: 300}}>
-                    {props.q !== "" && props.countryList.map((country, index) => (
-                        <div key={index} className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => props.handleCountryNumberChange(country.number, country.value)}>
+                    {props.findedCountry && (
+                        <div className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => props.handleCountryNumberChange(props.findedCountry.number, props.findedCountry.value)}>
                             <ReactCountryFlag 
                                 styleProps={{
                                     width: '15px',
                                     height: '15px'
                                 }}
-                                code={country.value}
+                                code={props.findedCountry.value}
                                 svg
                             />
-                            <p className={`${styles.font1214} ${styles.ml2}`}>{country.label}</p>
-                            <p className={`${styles.font1214} ${styles.ml2}`}>{`+${country.number}`}</p>
+                            <p className={`${styles.font1214} ${styles.ml2}`}>{props.findedCountry.label}</p>
+                            <p className={`${styles.font1214} ${styles.ml2}`}>{`+${props.findedCountry.number}`}</p>
                         </div>
-                    ))}
+                    )}
+                    {props.q !== "" && props.countryList.map((country, index) => {
+                        if(props.findedCountry.value){
+                            if(props.findedCountry.value !== country.value){
+                                return (
+                                    <div key={index} className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => props.handleCountryNumberChange(country.number, country.value)}>
+                                        <ReactCountryFlag 
+                                            styleProps={{
+                                                width: '15px',
+                                                height: '15px'
+                                            }}
+                                            code={country.value}
+                                            svg
+                                        />
+                                        <p className={`${styles.font1214} ${styles.ml2}`}>{country.label}</p>
+                                        <p className={`${styles.font1214} ${styles.ml2}`}>{`+${country.number}`}</p>
+                                    </div>
+                                )
+                            }
+                        }
+                        else{
+                            return (
+                                <div key={index} className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => props.handleCountryNumberChange(country.number, country.value)}>
+                                    <ReactCountryFlag 
+                                        styleProps={{
+                                            width: '15px',
+                                            height: '15px'
+                                        }}
+                                        code={country.value}
+                                        svg
+                                    />
+                                    <p className={`${styles.font1214} ${styles.ml2}`}>{country.label}</p>
+                                    <p className={`${styles.font1214} ${styles.ml2}`}>{`+${country.number}`}</p>
+                                </div>
+                            )
+                        }
+                    })}
                 </div>
             </div>
         </Modal>
@@ -112,7 +148,8 @@ SignUp.propTypes = {
     closeShowCountryNumber: PropTypes.func.isRequired,
     q: PropTypes.string.isRequired,
     countryList: PropTypes.array,
-    handleKeyPress: PropTypes.func.isRequired
+    handleKeyPress: PropTypes.func.isRequired,
+    findedCountry: PropTypes.object
 }
 
 SignUp.contextTypes = {

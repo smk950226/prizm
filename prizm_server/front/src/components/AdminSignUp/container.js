@@ -17,7 +17,8 @@ class Container extends Component{
         goStudioSetting: PropTypes.func.isRequired,
         photographer: PropTypes.object,
         profile: PropTypes.object,
-        getSetPhotographer: PropTypes.func.isRequired
+        getSetPhotographer: PropTypes.func.isRequired,
+        lang: PropTypes.string
     }
 
     static contextTypes = {
@@ -46,6 +47,7 @@ class Container extends Component{
             fetchedPhotographer: false,
             fetchedProfile: false,
             fetchClear: false,
+            findedCountry: {}
         }
     }
 
@@ -53,6 +55,15 @@ class Container extends Component{
         window.scrollTo(0,0)
         if(this.props.isLoggedIn){
             this.props.goReservation()
+        }
+        const { lang } = this.props;
+        if(lang){
+            let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
+            if(findedCountry){
+                this.setState({
+                    findedCountry
+                })
+            }
         }
     }
 
@@ -82,6 +93,17 @@ class Container extends Component{
             })
             await this.props.getSaveToken(this.state.token)
             this.props.goStudioSetting()
+        }
+        if(prevProps.lang !== this.props.lang){
+            const { lang } = this.props;
+            if(lang){
+                let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
+                if(findedCountry){
+                    this.setState({
+                        findedCountry
+                    })
+                }
+            }
         }
     }
 

@@ -194,7 +194,8 @@ class CustomRequestCreate extends Component{
         goRequestOrderList: PropTypes.func.isRequired,
         goSignin: PropTypes.func.isRequired,
         doHideBtmNav: PropTypes.func.isRequired,
-        undoHideBtmNav: PropTypes.func.isRequired
+        undoHideBtmNav: PropTypes.func.isRequired,
+        lang: PropTypes.string
     }
 
     static contextTypes = {
@@ -266,7 +267,8 @@ class CustomRequestCreate extends Component{
         showCancel: false,
         isCancel: false,
         showCreate: false,
-        showLanding: true
+        showLanding: true,
+        findedCountry: {}
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
@@ -286,6 +288,15 @@ class CustomRequestCreate extends Component{
 
     componentDidMount = () => {
         window.scrollTo(0,0)
+        const { lang } = this.props;
+        if(lang){
+            let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
+            if(findedCountry){
+                this.setState({
+                    findedCountry
+                })
+            }
+        }
     }
 
     componentDidUpdate = async(prevProps, prevState) => {
@@ -304,6 +315,17 @@ class CustomRequestCreate extends Component{
         }
         if(prevState.step !== this.state.step){
             window.scrollTo(0,0)
+        }
+        if(prevProps.lang !== this.props.lang){
+            const { lang } = this.props;
+            if(lang){
+                let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
+                if(findedCountry){
+                    this.setState({
+                        findedCountry
+                    })
+                }
+            }
         }
     }
 
@@ -1492,6 +1514,7 @@ class CustomRequestCreate extends Component{
             showCountryNumber,
             isSubmitting,
             countryList,
+            findedCountry,
             isLoggedIn,
             confirmed,
             fetchClear,
@@ -2426,20 +2449,56 @@ class CustomRequestCreate extends Component{
                                                         </div>
                                                     </div>
                                                     <div className={`${styles.overflowYScroll} ${styles.px3} ${styles.pt2}`} style={{maxHeight: 300}}>
-                                                        {q !== "" && countryList.map((country, index) => (
-                                                            <div key={index} className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => this._handleCountryNumberChange(country.number, country.value)}>
+                                                        {findedCountry && (
+                                                            <div className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => this._handleCountryNumberChange(findedCountry.number, findedCountry.value)}>
                                                                 <ReactCountryFlag 
                                                                     styleProps={{
                                                                         width: '15px',
                                                                         height: '15px'
                                                                     }}
-                                                                    code={country.value}
+                                                                    code={findedCountry.value}
                                                                     svg
                                                                 />
-                                                                <p className={`${styles.font1214} ${styles.ml2}`}>{country.label}</p>
-                                                                <p className={`${styles.font1214} ${styles.ml2}`}>{`+${country.number}`}</p>
+                                                                <p className={`${styles.font1214} ${styles.ml2}`}>{findedCountry.label}</p>
+                                                                <p className={`${styles.font1214} ${styles.ml2}`}>{`+${findedCountry.number}`}</p>
                                                             </div>
-                                                        ))}
+                                                        )}
+                                                        {q !== "" && countryList.map((country, index) => {
+                                                            if(findedCountry.value){
+                                                                if(findedCountry.value !== country.value){
+                                                                    return (
+                                                                        <div key={index} className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => this._handleCountryNumberChange(country.number, country.value)}>
+                                                                            <ReactCountryFlag 
+                                                                                styleProps={{
+                                                                                    width: '15px',
+                                                                                    height: '15px'
+                                                                                }}
+                                                                                code={country.value}
+                                                                                svg
+                                                                            />
+                                                                            <p className={`${styles.font1214} ${styles.ml2}`}>{country.label}</p>
+                                                                            <p className={`${styles.font1214} ${styles.ml2}`}>{`+${country.number}`}</p>
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            }
+                                                            else{
+                                                                return (
+                                                                    <div key={index} className={`${styles.row} ${styles.mx0} ${styles.mb2}`} onClick={() => this._handleCountryNumberChange(country.number, country.value)}>
+                                                                        <ReactCountryFlag 
+                                                                            styleProps={{
+                                                                                width: '15px',
+                                                                                height: '15px'
+                                                                            }}
+                                                                            code={country.value}
+                                                                            svg
+                                                                        />
+                                                                        <p className={`${styles.font1214} ${styles.ml2}`}>{country.label}</p>
+                                                                        <p className={`${styles.font1214} ${styles.ml2}`}>{`+${country.number}`}</p>
+                                                                    </div>
+                                                                )
+                                                            }
+                                                        })}
                                                     </div>
                                                 </div>
                                             </Modal>
