@@ -42,6 +42,7 @@ import AdminOrderList from '../AdminOrderList';
 import AdminMenu from '../AdminMenu';
 import AdminTouristPhoto from '../AdminTouristPhoto';
 import AdminStudioSetting from '../AdminStudioSetting';
+import AdminStudioSettingAlert from '../AdminStudioSettingAlert';
 import AdminStudioSettingClear from '../AdminStudioSettingClear';
 import AdminProfileSetting from '../AdminProfileSetting';
 import AdminProfilePassword from '../AdminProfilePassword';
@@ -384,6 +385,7 @@ const AdminRoute = props => (
         <Route exact path='/menu/' component={AdminMenu} key={5} />
         <Route exact path='/tourist/photo/' component={AdminTouristPhoto} key={6} />
         <Route exact path='/studio/edit/' render={() => <AdminStudioSetting {...props} />} key={7} />
+        <Route exact path='/studio/create/' component={AdminStudioSettingAlert} key={18} />
         <Route exact path='/studio/edit/complete/' component={AdminStudioSettingClear} key={8} />
         <Route exact path='/profile/' component={AdminProfileSetting} key={9} />
         <Route exact path='/profile/password/' component={AdminProfilePassword} key={10} />

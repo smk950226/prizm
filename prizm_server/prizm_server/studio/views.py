@@ -434,7 +434,7 @@ class Studio(APIView):
         studio_id = request.data.get('studioId')
         update = request.data.get('update')
 
-        if (len(portfolio_images) > 0) and nickname and main_location and career and description and profile_image and (len(locations) > 0) and (len(options) > 0) and studio_id:
+        if (len(portfolio_images) > 0) and nickname and main_location and description and profile_image and (len(locations) > 0) and (len(options) > 0) and studio_id:
             if (studio_id == 'admin') or (studio_id == 'djangoadmin') or (studio_id.find('/') > -1) or (studio_id == '') or (studio_id == 'welcome') or (studio_id == 'artist') or(studio_id == 'description') or (studio_id == 'payment') or (studio_id == 'message') or (studio_id == 'signup') or (studio_id == 'signin') or (studio_id == 'profile') or (studio_id == 'reservation') or (studio_id == 'menu'):
                 return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('This URL is not available. Please try another url for your online studio.')})
             elif models.Photographer.objects.filter(studio_id = studio_id).exclude(user__id = user.id).count() > 0:

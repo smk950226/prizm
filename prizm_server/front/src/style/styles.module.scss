@@ -426,6 +426,12 @@ p{
 .nav-brown{
     color: $nav-brown;
 }
+.description{
+    color: $description;
+}
+.alert{
+    color: $alert;
+}
 
 .bg-black{
     background-color: $black;
@@ -532,6 +538,12 @@ p{
 .bg-landing-32{
     background-color: $landing-32;
 }
+.bg-description{
+    background-color: $description;
+}
+.bg-alert{
+    background-color: $alert;
+}
 
 .mt-45{
     margin-top: 2.25rem;
@@ -573,6 +585,10 @@ p{
 .px-admin-2{
     padding-left: 1rem;
     padding-right: 1rem;
+}
+.px-bubble{
+    padding-left: 1rem;
+    padding-right: calc(1rem + 12px);
 }
 .pb-6{
     padding-bottom: 4rem;
@@ -905,6 +921,18 @@ p{
         color: $gray-8e;
     }
 }
+.main-location-input{
+    background-color: 'transparent';
+    font-size: 11px;
+    border: none;
+    outline: none;
+    width: calc(100% - 50px);
+    padding: 14px 0 8.5px;
+
+    &::placeholder {
+        color: $gray-8e;
+    }
+}
 .check-box{
     cursor: pointer;
     border: 2px solid $pink;
@@ -991,9 +1019,21 @@ textarea {
     border: 1px solid $gray-6d;
     min-height: 120px;
 }
+.text-area-4{
+    height: 250px;
+    width: 100%;
+    border: 1px solid $gray-6d;
+    font-size: 11px;
+}
 @media (min-width: 1440px){
     .text-area-2{
         height: 120px;
+        width: 100%;
+        border: 1px solid $gray-6d;
+        font-size: 13px;
+    }
+    .text-area-4{
+        height: 250px;
         width: 100%;
         border: 1px solid $gray-6d;
         font-size: 13px;
@@ -1405,6 +1445,11 @@ textarea {
         padding-top: 72px;
     }
 }
+@media (max-height: 760px){
+    .safearea-admin-pc{
+        padding-top: 72px;
+    }
+}
 
 .border-stick-4{
     background-color: $white;
@@ -1645,4 +1690,13 @@ textarea {
 }
 .line-height-15{
     line-height: 1.5;
+}
+.bubble-bottom{
+    width: 20px;
+    height: 20px; 
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #969696;
+    transform: translateY(-50%);
 }

@@ -144,7 +144,11 @@ class Container extends Component{
                 min: minList
             },
             loop: true,
-            updateClear: false
+            updateClear: false,
+            step: 1,
+            showCityList: false,
+            studioIdError: false,
+            showLocationAdded: false
         }
     }
 
@@ -560,8 +564,14 @@ class Container extends Component{
                     lat: selectedLocation.geometry.location.lat(),
                     lng: selectedLocation.geometry.location.lng()
                 }],
-                selectedLocation
+                selectedLocation,
+                showLocationAdded: true
             })
+            setTimeout(() => {
+                this.setState({
+                    showLocationAdded: false
+                })
+            }, 1200)
         }
     }
 
@@ -919,7 +929,7 @@ class Container extends Component{
         const { updateStudio, getPhotographer, goClear } = this.props;
         if(!isSubmitting){
             if(submitImages.length > 0){
-                if(nickname && mainLocation && career && description && submitProfileImage && studioId){
+                if(nickname && mainLocation && description && submitProfileImage && studioId){
                     if(locations.length > 0){
                         if(options.length > 0){
                             this.setState({
@@ -999,6 +1009,53 @@ class Container extends Component{
         })
     }
 
+    _openCityList = () => {
+        this.setState({
+            showCityList: true
+        })
+    }
+
+    _closeCityList = () => {
+        this.setState({
+            showCityList: false
+        })
+    }
+
+    _handleCityList = () => {
+        this.setState({
+            showCityList: !this.state.showCityList
+        })
+    }
+
+    _selectCity = (mainLocation) => {
+        this.setState({
+            mainLocation,
+            showCityList: false
+        })
+    }
+
+    _changeStep = (step) => {
+        this.setState({
+            step
+        })
+    }
+
+    _handleStudioIdChange = (event) => {
+        const { target : { value } } = event;
+        let reg = /^[A-Za-z0-9!@#$()-_+=.,]*$/;
+        if(reg.test(value)){
+            this.setState({
+                studioId: value,
+                studioIdError: false
+            })
+        }
+        else{
+            this.setState({
+                studioIdError: true
+            })
+        }
+    }
+
     render(){
         return(
             <AdminStudioSetting 
@@ -1043,6 +1100,12 @@ class Container extends Component{
             confirm={this._confirm}
             onSort={this._onSort}
             handleChangeTimes={this._handleChangeTimes}
+            openCityList={this._openCityList}
+            closeCityList={this._closeCityList}
+            handleCityList={this._handleCityList}
+            selectCity={this._selectCity}
+            changeStep={this._changeStep}
+            handleStudioIdChange={this._handleStudioIdChange}
             />
         )
     }

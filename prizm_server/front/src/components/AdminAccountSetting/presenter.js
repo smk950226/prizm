@@ -67,8 +67,13 @@ const AdminProfileSetting = (props, context) => (
         {props.accountType === 'paypal_account' && (
             <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("Paypal Account")}</p>
         )} */}
-        <div className={`${styles.widthFull}`}>
-            <input className={`${styles.textInput2}`} type={"text"} name={"content"} value={props.content} onChange={props.handleInputChange} readOnly={props.editable ? null : true} />
+        <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+            <div className={`${styles.col8} ${styles.colMd9} ${styles.px0}`}>
+                <input className={`${styles.textInput2}`} type={"text"} name={"content"} value={props.content} onChange={props.handleInputChange} readOnly={props.editable ? null : true} />
+            </div>
+            <div className={`${styles.col3} ${styles.colMd2} ${styles.px0} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.check}>
+                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Validate")}</p>
+            </div>
         </div>
         {props.editable && (
             <Fragment>
@@ -129,7 +134,8 @@ AdminProfileSetting.propTypes = {
     handleShowBankList: PropTypes.func.isRequired,
     openShowBankList: PropTypes.func.isRequired,
     closeShowBankList: PropTypes.func.isRequired,
-    showBankList: PropTypes.bool.isRequired
+    showBankList: PropTypes.bool.isRequired,
+    check: PropTypes.func.isRequired
 }
 
 AdminProfileSetting.contextTypes = {

@@ -14,7 +14,7 @@ class Container extends Component{
         goReservation: PropTypes.func.isRequired,
         goSignIn: PropTypes.func.isRequired,
         getPhotographerByToken: PropTypes.func.isRequired,
-        goStudioSetting: PropTypes.func.isRequired,
+        goStudioSettingCreate: PropTypes.func.isRequired,
         photographer: PropTypes.object,
         profile: PropTypes.object,
         getSetPhotographer: PropTypes.func.isRequired,
@@ -92,7 +92,7 @@ class Container extends Component{
                 isSubmitting: false
             })
             await this.props.getSaveToken(this.state.token)
-            this.props.goStudioSetting()
+            this.props.goStudioSettingCreate()
         }
         if(prevProps.lang !== this.props.lang){
             const { lang } = this.props;

@@ -12,7 +12,7 @@ class Photographer(models.Model):
     profile_image = models.ImageField(_('Profile Image'), upload_to = 'studio/photographer/profile/', blank = True, null = True)
     main_location = models.CharField(_('Location'), max_length = 255)
     equipment = models.CharField(_('Equipment'), max_length = 255, blank = True, null = True)
-    career = models.CharField(_('Career'), max_length = 255)
+    career = models.CharField(_('Career'), max_length = 255, blank = True, null = True)
     studio_id = models.CharField(_('Studio ID'), max_length = 255)
     description = models.TextField(_('Description'))
 

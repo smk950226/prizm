@@ -77,6 +77,41 @@ class PhotographerAccount(APIView):
             return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in the payout information to complete the account setup.')})
 
 
+class PhotographerAccountCheck(APIView):
+    permission_classes = [AdminAuthenticated]
+    def post(self, request, format = None):
+        user = request.user
+        photographer = user.photographer
+        legal_name = request.data.get('legalName', None)
+        birth = request.data.get('birth', None)
+        account_type = request.data.get('accountType', None)
+        content = request.data.get('content', None)
+        bank_code = request.data.get('bankCode', None)
+        bank_name = request.data.get('bankName', None)
+
+        if legal_name and birth and account_type and content and bank_code and bank_name:
+            IAMPORT_API_KEY = settings.IAMPORT_API_KEY
+            IAMPORT_API_SECRET = settings.IAMPORT_API_SECRET
+            data = {'imp_key': IAMPORT_API_KEY, 'imp_secret': IAMPORT_API_SECRET}
+
+            imp = requests.post('https://api.iamport.kr/users/getToken', data = data)
+            
+            access_token = json.loads(imp.text)['response']['access_token']
+            headers = {'Authorization': access_token}
+
+            pre_imp = requests.get('https://api.iamport.kr/vbanks/holder?bank_code={}&bank_num={}&_token={}'.format(bank_code, content, access_token))
+            if json.loads(pre_imp.text)['code'] == -1:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please check your account information again.')})
+            elif json.loads(pre_imp.text)['code'] == 0:
+                if json.loads(pre_imp.text)['response']['bank_holder'] != legal_name:
+                    return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please check your account information again.')})
+                else:
+                    return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            else:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('An error has occurred..')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Please fill in the payout information to complete the account setup.')})
+
 class Deposit(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, format = None):

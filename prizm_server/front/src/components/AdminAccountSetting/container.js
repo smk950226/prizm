@@ -8,6 +8,7 @@ class Container extends Component{
         profile: PropTypes.object,
         goHome: PropTypes.func.isRequired,
         editAccount: PropTypes.func.isRequired,
+        checkAccount: PropTypes.func.isRequired,
         getPhotographer: PropTypes.func.isRequired,
         goPasswordChange: PropTypes.func.isRequired
     }
@@ -162,6 +163,47 @@ class Container extends Component{
         }
     }
 
+    _check = async() => {
+        const { isSubmitting, legalName, birth, accountType, content, edited, birthForm, bankCode, bankName } = this.state;
+        const { checkAccount } = this.props;
+        if(!isSubmitting){
+            if(edited){
+                if(legalName && birth && accountType && content && bankCode && bankName){
+                    if(birthForm){
+                        this.setState({
+                            isSubmitting: true
+                        })
+                        const result = await checkAccount(legalName, birth, accountType, content, bankCode, bankName)
+                        if(result.status === 'ok'){
+                            this.setState({
+                                isSubmitting: false
+                            })
+                            alert(this.context.t("You can use this account."))
+                        }
+                        else if(result.error){
+                            this.setState({
+                                isSubmitting: false
+                            })
+                            alert(result.error)
+                        }
+                        else{
+                            this.setState({
+                                isSubmitting: false
+                            })
+                            alert(this.context.t("An error has occurred.."))
+                        }
+                    }
+                    else{
+                        alert(this.context.t("Please check your date of birth again."))
+                    }
+                }
+                else{
+                    alert(this.context.t("Please fill in the information."))
+                }
+            }
+        }
+    }
+
     _enableEdit = () => {
         this.setState({
             editable: true
@@ -207,6 +249,7 @@ class Container extends Component{
             handleShowBankList={this._handleShowBankList}
             openShowBankList={this._openShowBankList}
             closeShowBankList={this._closeShowBankList}
+            check={this._check}
             />
         )
     }

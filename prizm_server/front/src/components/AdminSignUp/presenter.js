@@ -50,7 +50,14 @@ const AdminSignUp = (props, context) => (
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"text"} name={"email"} value={props.email} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
-            <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Password")}</p>
+            <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.flexNowrap}`}>
+                <p className={`${styles.fontBold} ${styles.font1012}`} style={{wordBreak: 'keep-all'}}>
+                    {context.t("Password")}
+                </p>
+                <p className={`${styles.fontNormal} ${styles.font8} ${styles.pink} ${styles.ml2}`}>
+                    {context.t("At least 8 characters long and should include a mix of alphabets and numbers.")}
+                </p>
+            </div>
             <div className={`${styles.widthFull}`}>
                 <input className={`${styles.textInput6}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
             </div>
@@ -62,7 +69,7 @@ const AdminSignUp = (props, context) => (
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Sign Up")}</p>
             </div>
         </div>
-        <div className={`${styles.mobileNone}`}>
+        <div className={`${styles.mobileNone} ${styles.safeareaAdminPc}`}>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.minHeightFull} ${styles.widthFull}`}>
                 <div className={`${styles.colMd6} ${styles.colXl7} ${styles.px0}`}>
                     <p className={`${styles.fontBold} ${styles.font2024} ${styles.mt3}`}>{context.t("Welcome to PRIZM")}</p>
@@ -107,7 +114,14 @@ const AdminSignUp = (props, context) => (
                     <div className={`${styles.widthFull}`}>
                         <input className={`${styles.textInput6}`} type={"text"} name={"email"} value={props.email} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>
-                    <p className={`${styles.fontBold} ${styles.font1012} ${styles.mt4}`}>{context.t("Password")}</p>
+                    <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.flexNowrap}`}>
+                        <p className={`${styles.fontBold} ${styles.font1012}`} style={{wordBreak: 'keep-all'}}>
+                            {context.t("Password")}
+                        </p>
+                        <p className={`${styles.fontNormal} ${styles.font8} ${styles.pink} ${styles.ml2}`}>
+                            {context.t("At least 8 characters long and should include a mix of alphabets and numbers.")}
+                        </p>
+                    </div>
                     <div className={`${styles.widthFull}`}>
                         <input className={`${styles.textInput6}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} onKeyPress={props.handleKeyPress} />
                     </div>

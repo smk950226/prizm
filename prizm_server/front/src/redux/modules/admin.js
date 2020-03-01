@@ -255,6 +255,37 @@ function locationDetail(placeId){
     }
 }
 
+function checkAccount(legalName, birth, accountType, content, bankCode, bankName){
+    return (dispatch, getState) => {
+        const { user : { token } } = getState();
+        return fetch(`${FETCH_URL}/api/payment/photographer/account/check/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `JWT ${token}`
+            },
+            body: JSON.stringify({
+                legalName,
+                birth,
+                accountType,
+                content,
+                bankCode, 
+                bankName
+            })
+        })
+        .then(response => {
+            if((response.status === 401) || (response.status === 403)){
+                dispatch(userActions.getLogout())
+                return false
+            }
+            else{
+                return response.json()
+            }
+        })
+        .then(json => json)
+    }
+}
+
 function editAccount(legalName, birth, accountType, content, bankCode, bankName){
     return (dispatch, getState) => {
         const { user : { token } } = getState();
@@ -425,7 +456,8 @@ const actionCreators = {
     getRequestList,
     getRequestListMore,
     createRequestOrder,
-    getSetPhotographer
+    getSetPhotographer,
+    checkAccount
 }
 
 export { actionCreators }

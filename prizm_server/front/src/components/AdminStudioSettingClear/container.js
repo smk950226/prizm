@@ -18,6 +18,7 @@ class Container extends Component{
     componentWillMount = () => {
         const { valid } = this.state;
         const { goHome } = this.props;
+        window.scrollTo(0,0)
         if(!valid){
             goHome()
         }

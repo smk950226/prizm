@@ -38,6 +38,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getRequestListMore: (page) => {
             return dispatch(adminAction.getRequestListMore(page))
+        },
+        goStudioSettingCreate: () => {
+            dispatch(push('/studio/create/'))
         }
     }
 }

@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         editAccount: (legalName, birth, accountType, content, bankCode, bankName) => {
             return dispatch(adminAction.editAccount(legalName, birth, accountType, content, bankCode, bankName))
         },
+        checkAccount: (legalName, birth, accountType, content, bankCode, bankName) => {
+            return dispatch(adminAction.checkAccount(legalName, birth, accountType, content, bankCode, bankName))
+        },
         getPhotographer: () => {
             dispatch(adminAction.getPhotographer())
         },

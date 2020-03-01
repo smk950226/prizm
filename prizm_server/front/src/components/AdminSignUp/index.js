@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         goSignIn: () => {
             dispatch(push('/signin/'))
         },
-        goStudioSetting: () => {
-            dispatch(push('/studio/edit/'))
+        goStudioSettingCreate: () => {
+            dispatch(push('/studio/create/'))
         },
         getPhotographerByToken: (token) => {
             dispatch(adminAction.getPhotographerByToken(token))

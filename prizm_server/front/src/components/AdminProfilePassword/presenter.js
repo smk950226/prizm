@@ -10,7 +10,14 @@ const AdminProfilePassword = (props, context) => (
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"currentPassword"} value={props.currentPassword} onChange={props.handleInputChange} />
         </div>
-        <p className={`${styles.fontBold} ${styles.font10} ${styles.mt4}`}>{context.t("New password")}</p>
+        <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.flexNowrap}`}>
+            <p className={`${styles.fontBold} ${styles.font10}`} style={{wordBreak: 'keep-all', minWidth: 73}}>
+                {context.t("New password")}
+            </p>
+            <p className={`${styles.fontNormal} ${styles.font8} ${styles.pink} ${styles.ml2}`}>
+                {context.t("At least 8 characters long and should include a mix of alphabets and numbers.")}
+            </p>
+        </div>
         <div className={`${styles.widthFull}`}>
             <input className={`${styles.textInput2}`} type={"password"} name={"password"} value={props.password} onChange={props.handleInputChange} />
         </div>

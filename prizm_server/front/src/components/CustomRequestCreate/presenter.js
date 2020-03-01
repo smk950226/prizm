@@ -2423,7 +2423,14 @@ class CustomRequestCreate extends Component{
                                             <p className={`${styles.my3} ${styles.font10}`}>
                                                 {this.context.t("We will make notiifications on your reservation via email and SMS.")}
                                             </p>
-                                            <p className={`${styles.fontBold} ${styles.font12} ${styles.mt4}`}>{this.context.t("Password")}</p>
+                                            <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.flexNowrap}`}>
+                                                <p className={`${styles.fontBold} ${styles.font12}`} style={{wordBreak: 'keep-all'}}>
+                                                    {this.context.t("Password")}
+                                                </p>
+                                                <p className={`${styles.fontNormal} ${styles.font8} ${styles.pink} ${styles.ml2}`}>
+                                                    {this.context.t("At least 8 characters long and should include a mix of alphabets and numbers.")}
+                                                </p>
+                                            </div>
                                             <div className={`${styles.widthFull}`}>
                                                 <input className={`${styles.textInput2}`} type={"password"} name={"password"} value={password} onChange={this._handleInputChange} />
                                             </div>

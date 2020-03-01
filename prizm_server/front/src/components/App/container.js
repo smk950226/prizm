@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import App from './presenter';
 import styles from '../../style/styles.module.scss';
 import Loader from 'react-loader-spinner';
+import MyLoader from '../Loader';
 
 class Container extends Component{
     static propTypes = {
@@ -15,7 +16,8 @@ class Container extends Component{
         newMessage: PropTypes.bool,
         goHome: PropTypes.func.isRequired,
         logout: PropTypes.func.isRequired,
-        getProfile: PropTypes.func.isRequired
+        getProfile: PropTypes.func.isRequired,
+        lang: PropTypes.string
     }
 
     state = {
@@ -25,7 +27,9 @@ class Container extends Component{
         admin: false,
         loading: true,
         fetchedProfile: false,
-        fetchClear: false
+        fetchClear: false,
+        fetchedLang: false,
+        changedLang: false
     }
 
     componentDidMount = async() => {
@@ -33,9 +37,12 @@ class Container extends Component{
         fetch('https://ipapi.co/json/').then((response) => response.json())
         .then(json => {
             this.props.changeLang(json.country_code.toLowerCase())
-        }).catch((error) => {
-            console.log(error);
-        });
+        })
+        .then(() => {
+            this.setState({
+                changedLang: true
+            })
+        })
         if((window.location.href.startsWith('http://admin.prizm.cloud/')) || (window.location.href.startsWith('https://admin.prizm.cloud/'))){
             this.setState({
                 admin: true
@@ -52,7 +59,7 @@ class Container extends Component{
         }
         else{
             this.setState({
-                loading: false
+                fetchedProfile: true
             })
         }
     }
@@ -76,12 +83,25 @@ class Container extends Component{
         }
     }
 
-    componentDidUpdate = () => {
-        if(this.state.fetchedProfile && !this.state.fetchClear){
+    componentDidUpdate = (prevProps, prevState) => {
+        if(this.state.fetchedProfile && this.state.fetchedLang && !this.state.fetchClear){
             this.setState({
                 loading: false,
                 fetchClear: true,
             })
+        }
+        if(prevProps.lang !== this.props.lang){
+            this.setState({
+                fetchedLang: true
+            })
+        }
+        else if(this.state.changedLang && (this.props.lang === 'en') && !this.state.fetchedLang){
+            this.setState({
+                fetchedLang: true
+            })
+        }
+        if(prevProps.pathname !== this.props.pathname){
+            window.scrollTo(0,0)
         }
     }
 
@@ -113,7 +133,7 @@ class Container extends Component{
         if(loading){
             return(
                 <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                    <Loader type="Oval" color="#d66c8b" height={20} width={20} />
+                    <MyLoader />
                 </div>
             )
         }

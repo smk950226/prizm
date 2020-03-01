@@ -84,23 +84,23 @@ class AdminOrderList extends Component{
                         </div>
                         <p className={`${styles.mt4} ${styles.fontBold} ${styles.font201820}`}>{this.context.t("Manage Reservations")}</p>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.mb3} ${styles.flexNowrap}`} style={{overflowX: 'scroll'}}>
-                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${status === 'custom' ? styles.confirmed : styles.black} ${status === 'custom' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box', minWidth: 98.5}} onClick={() => this.props.handleStatusChange('custom')}>
+                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr2} ${styles.mrMd4} ${styles.py1} ${styles.cursorPointer} ${status === 'custom' ? styles.confirmed : styles.black} ${status === 'custom' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box', wordBreak: 'keep-all'}} onClick={() => this.props.handleStatusChange('custom')}>
                                 {this.context.t("Custom Requests")}
                             </p>
-                            <div className={`${styles.bgBlack} ${styles.mr4}`} style={{width: 2, minWidth: 2, height: 14}} />
-                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${status === 'all' ? styles.confirmed : styles.black} ${status === 'all' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('all')}>
+                            <div className={`${styles.bgBlack} ${styles.mr2} ${styles.mrMd4}`} style={{width: 2, minWidth: 2, height: 14}} />
+                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr2} ${styles.mrMd4} ${styles.py1} ${styles.cursorPointer} ${status === 'all' ? styles.confirmed : styles.black} ${status === 'all' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('all')}>
                                 {this.context.t("All")}
                             </p>
-                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${status === 'pending' ? styles.confirmed : styles.black} ${status === 'pending' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('pending')}>
+                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr2} ${styles.mrMd4} ${styles.py1} ${styles.cursorPointer} ${status === 'pending' ? styles.confirmed : styles.black} ${status === 'pending' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('pending')}>
                                 {this.context.t("Pending")}
                             </p>
-                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${status === 'confirmed' ? styles.confirmed : styles.black} ${status === 'confirmed' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('confirmed')}>
+                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr2} ${styles.mrMd4} ${styles.py1} ${styles.cursorPointer} ${status === 'confirmed' ? styles.confirmed : styles.black} ${status === 'confirmed' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('confirmed')}>
                                 {this.context.t("Confirmed")}
                             </p>
-                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${status === 'paid' ? styles.confirmed : styles.black} ${status === 'paid' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('paid')}>
+                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr2} ${styles.mrMd4} ${styles.py1} ${styles.cursorPointer} ${status === 'paid' ? styles.confirmed : styles.black} ${status === 'paid' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('paid')}>
                                 {this.context.t("Paid")}
                             </p>
-                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr4} ${styles.py1} ${styles.cursorPointer} ${status === 'past' ? styles.confirmed : styles.black} ${status === 'past' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('past')}>
+                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.mr2} ${styles.mrMd4} ${styles.py1} ${styles.cursorPointer} ${status === 'past' ? styles.confirmed : styles.black} ${status === 'past' ? styles.borderBtmConfirmed2 : styles.black}`} style={{boxSizing: 'border-box'}} onClick={() => this.props.handleStatusChange('past')}>
                                 {this.context.t("Past")}
                             </p>
                         </div>

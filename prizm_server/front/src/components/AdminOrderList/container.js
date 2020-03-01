@@ -18,7 +18,8 @@ class Container extends Component{
         goProfile: PropTypes.func.isRequired,
         goAccount: PropTypes.func.isRequired,
         getRequestList: PropTypes.func.isRequired,
-        getRequestListMore: PropTypes.func.isRequired
+        getRequestListMore: PropTypes.func.isRequired,
+        goStudioSettingCreate: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -37,7 +38,7 @@ class Container extends Component{
     }
 
     componentDidMount = async() => {
-        const { getAdminOrderList, getRequestList, isLoggedIn, profile, goHome, photographer, goStudioSetting } = this.props;
+        const { getAdminOrderList, getRequestList, isLoggedIn, profile, goHome, photographer, goStudioSetting, goStudioSettingCreate } = this.props;
         const { status } = this.state;
         if(isLoggedIn){
             if(profile && (profile.user_type === 'photographer')){
@@ -65,8 +66,7 @@ class Container extends Component{
                     
                 }
                 else{
-                    alert(this.context.t("Please set up your studio first to manage reservations"))
-                    goStudioSetting()
+                    goStudioSettingCreate()
                 }
             }
             else{
