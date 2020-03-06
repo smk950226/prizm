@@ -75,6 +75,7 @@ export const translations = {
     'Your password has been changed successfully.': '비밀번호가 변경되었습니다.',
     'Invalid Password.': '올바르지 않은 비밀번호입니다.',
     'Your password should be at least 8 characters long and should include a mix of alphabets and numbers.': '비밀번호는 최소 8자리, 영문+숫자 혼합으로 구성해주세요.',
+    'At least 8 characters long and should include a mix of alphabets and numbers.': '비밀번호는 최소 8자리, 영문+숫자 혼합으로 구성해주세요.',
     'Current password': '현재 비밀번호',
     'New password': '새로운 비밀번호',
     'Confirm your new password': '새로운 비밀번호 확인',

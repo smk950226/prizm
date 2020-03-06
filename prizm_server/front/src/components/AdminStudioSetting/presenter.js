@@ -455,19 +455,19 @@ class AdminSignUp extends Component{
                                 <MdCheckmark fontSize="20px" color="#3cd59e" className={`${mainLocation ? null : styles.hidden}`} />
                             </div>
                             <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{this.context.t("Please type in your main photography (business) location.")}</p>
-                            <div className={`${styles.containerStudioInput} ${styles.textInput6} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.p0} ${styles.justifyContentBetween}`} onClick={this.props.handleCityList}>
+                            <div className={`${styles.containerStudioInput} ${styles.textInput6} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.p0} ${styles.justifyContentBetween}`} style={{position: 'relative'}} onClick={this.props.handleCityList}>
                                 <input className={`${styles.mainLocationInput}`} readOnly={true} type={"text"} name={"mainLocation"} value={mainLocation} />
                                 <MdArrowDropdown fontSize="13px" color="#000000" />
+                                {showCityList && (
+                                    <div style={{position: 'absolute', top: 38, maxHeight: 150}} className={`${styles.bgWhite} ${styles.widthFull} ${styles.py2} ${styles.overflowYScroll}`}>
+                                        {CITY_LIST.map(city => (
+                                            <p key={city.value} className={`${styles.font1113} ${styles.cursorPointer} ${styles.py2}`} onClick={() => this.props.selectCity(city.label)}>
+                                                {city.label}
+                                            </p>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
-                            {showCityList && (
-                                <div style={{position: 'absolute', maxHeight: 150}} className={`${styles.bgWhite} ${styles.widthFull} ${styles.py2} ${styles.overflowYScroll}`}>
-                                    {CITY_LIST.map(city => (
-                                        <p key={city.value} className={`${styles.font1113} ${styles.cursorPointer} ${styles.py2}`} onClick={() => this.props.selectCity(city.label)}>
-                                            {city.label}
-                                        </p>
-                                    ))}
-                                </div>
-                            )}
                             <div className={`${styles.mt45} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                 <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{this.context.t("Career (Optional)")}</p>
                                 <MdCheckmark fontSize="20px" color="#3cd59e" className={`${career ? null : styles.hidden}`} />
@@ -992,19 +992,19 @@ class AdminSignUp extends Component{
                                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${mainLocation ? null : styles.hidden}`} />
                                     </div>
                                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{this.context.t("Please type in your main photography (business) location.")}</p>
-                                    <div className={`${styles.containerStudioInput} ${styles.textInput6} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.p0} ${styles.justifyContentBetween}`} onClick={this.props.handleCityList}>
+                                    <div className={`${styles.containerStudioInput} ${styles.textInput6} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.p0} ${styles.justifyContentBetween}`} style={{position: 'relative'}} onClick={this.props.handleCityList}>
                                         <input className={`${styles.mainLocationInput}`} readOnly={true} type={"text"} name={"mainLocation"} value={mainLocation} />
                                         <MdArrowDropdown fontSize="13px" color="#000000" />
+                                        {showCityList && (
+                                            <div style={{position: 'absolute', top: 38, maxHeight: 150}} className={`${styles.bgWhite} ${styles.widthFull} ${styles.py2} ${styles.overflowYScroll}`}>
+                                                {CITY_LIST.map(city => (
+                                                    <p key={city.value} className={`${styles.font1113} ${styles.cursorPointer} ${styles.py2}`} onClick={() => this.props.selectCity(city.label)}>
+                                                        {city.label}
+                                                    </p>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
-                                    {showCityList && (
-                                        <div style={{position: 'absolute', maxHeight: 150}} className={`${styles.bgWhite} ${styles.widthFull} ${styles.py2} ${styles.overflowYScroll}`}>
-                                            {CITY_LIST.map(city => (
-                                                <p key={city.value} className={`${styles.font1113} ${styles.cursorPointer} ${styles.py2}`} onClick={() => this.props.selectCity(city.label)}>
-                                                    {city.label}
-                                                </p>
-                                            ))}
-                                        </div>
-                                    )}
                                     <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._nextSlide}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("NEXT")}</p>
                                     </div>
