@@ -54,7 +54,8 @@ class Container extends Component{
         getPhotographer: PropTypes.func.isRequired,
         goClear: PropTypes.func.isRequired,
         displayBtmNav: PropTypes.func.isRequired,
-        hideBtmNav: PropTypes.func.isRequired
+        hideBtmNav: PropTypes.func.isRequired,
+        lang: PropTypes.string
     }
 
     static contextTypes = {

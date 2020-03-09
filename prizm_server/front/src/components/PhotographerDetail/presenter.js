@@ -345,7 +345,7 @@ class PhotographerDetail extends Component{
                                             null
                                         )}
                                         <div className={`${styles.mobileNone}`}>
-                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn}`} style={{height: 48}}>
+                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn}`} style={{height: 48}} onClick={this.props.submit}>
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm and Submit Request")}</p>
                                             </div>
                                         </div>
@@ -395,7 +395,7 @@ class PhotographerDetail extends Component{
                                             null
                                         )}
                                         <div className={`${styles.mobileNone}`}>
-                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn}`} style={{height: 48}}>
+                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn}`} style={{height: 48}} onClick={this.props.submit}>
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm and Submit Request")}</p>
                                             </div>
                                         </div>

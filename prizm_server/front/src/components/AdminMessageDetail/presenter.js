@@ -139,7 +139,7 @@ class AdminMessageDetail extends Component{
                 availableFrom,
                 availableTo,
                 loadingDay: false,
-                availableTime: order.available_time ? JSON.parse(order.available_time) : []
+                availableTime: order.available_time ? JSON.parse(order.available_time.replace(/'/gi, '"')) : []
             })
         }
     }
@@ -167,7 +167,12 @@ class AdminMessageDetail extends Component{
     }
 
     _isTop(el) {
-        return (el.getBoundingClientRect().top >= -5) && (el.getBoundingClientRect().top < 5);
+        if(el){
+            return (el.getBoundingClientRect().top >= -5) && (el.getBoundingClientRect().top < 5);
+        }
+        else{
+            return false
+        }
     }
 
     _handleScroll = async() => {

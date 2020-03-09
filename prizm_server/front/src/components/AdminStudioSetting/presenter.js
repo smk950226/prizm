@@ -278,7 +278,8 @@ class AdminSignUp extends Component{
         changeStep: PropTypes.func.isRequired,
         studioIdError: PropTypes.bool.isRequired,
         handleStudioIdChange: PropTypes.func.isRequired,
-        showLocationAdded: PropTypes.bool.isRequired
+        showLocationAdded: PropTypes.bool.isRequired,
+        lang: PropTypes.string
     }
 
     static contextTypes = {
@@ -377,7 +378,8 @@ class AdminSignUp extends Component{
             step,
             showCityList,
             studioIdError,
-            showLocationAdded
+            showLocationAdded,
+            lang
          } = this.props;
         let displayImages = []
         const dragableImages = images.map((image, index) => {
@@ -393,7 +395,13 @@ class AdminSignUp extends Component{
                     <div className={`${styles.row} ${styles.mx0} ${styles.widthFull}`}>
                         <div className={`${styles.safearea} ${styles.containerAdminStudioSide} ${styles.heightFull} ${styles.overflowYScroll}`}>
                             <p className={`${styles.mtStudio} ${styles.fontBold} ${styles.font2024}`}>{update ? this.context.t(`Hello, ${nickname}!`) : this.context.t("My Studio Setup")}</p>
-                            <p className={`${styles.mt1} ${styles.mtMd2} ${styles.font1416}`}>{this.context.t("Please fill out information below to create your first ")}<span className={`${styles.fontBold}`}>{'PRIZM'}</span>{this.context.t(" Studio")}</p>
+                            <p className={`${styles.mt1} ${styles.mtMd2} ${styles.font1416}`}>
+                            {this.context.t("Please fill out information below to create your first ")}
+                            {lang === 'en' ? (
+                                <span className={`${styles.fontBold}`}>{'PRIZM'}</span>
+                            ) : (null)}
+                            {this.context.t(" Studio")}
+                            </p>
                             <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                 <p className={`${styles.fontBold} ${styles.font1416} ${styles.mr2}`}>{this.context.t("Your Portfolio")}</p>
                                 <MdCheckmark fontSize="20px" color="#3cd59e" className={`${images && images.length > 0 ? null : styles.hidden}`} />

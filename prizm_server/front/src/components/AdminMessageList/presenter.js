@@ -54,7 +54,7 @@ class AdminMessageList extends Component{
                                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.col11} ${styles.px0}`}>
                                         <div className={``}>
                                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                                <p className={`${styles.fontBold} ${styles.font1416}`}>{chat.order.user.name}</p>
+                                                <p className={`${styles.fontBold} ${styles.font1416}`}>{`${chat.order.user.last_name} ${chat.order.user.first_name}`}</p>
                                                 {chat.exist_new_message && (
                                                     <div className={`${styles.circle8} ${styles.bgRed} ${styles.ml2} ${styles.mb1}`} />
                                                 )}

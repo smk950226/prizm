@@ -239,7 +239,7 @@ class Container extends Component{
                     fromUser: profile.id,
                     toUser: toUser,
                     chatId: chatId,
-                    text: "Sorry, I couldn't find the time available. I'd like to cancel the reservation.",
+                    text: this.context.t("Sorry, I couldn't find the time available. I'd like to cancel the reservation."),
                     messageeType: messageType
                 }
                 WebSocketInstance.newChatMessage(messageObj);

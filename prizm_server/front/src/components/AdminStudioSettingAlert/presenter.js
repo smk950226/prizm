@@ -19,18 +19,18 @@ class AdminOrderList extends Component{
     render(){
         return(
             <div className={`${styles.safearea} ${styles.minHeightFull} ${styles.containerCustomer} ${styles.px3}`}>
-                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{this.context.t("Studio Create")}</p>
+                <p className={`${styles.mt45} ${styles.fontBold} ${styles.font2024}`}>{this.context.t("Create your studio")}</p>
                 <div className={`${styles.mt3} ${styles.textCenter}`}>
                     <img src={require('../../assets/images/main.png')} style={{width: '40%', minWidth: 150, maxWidth: 300}} />
                 </div>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.mt4}`}>
-                    {this.context.t("From now on, we will create your studio.")}
+                    {this.context.t("Let's create your first PRIZM studio.")}
                 </p>
                 <p className={`${styles.font14} ${styles.mt4}`}>
-                    {this.context.t("The customer will check the author's information through the studio and schedule the filming according to the location and service & pricing options you have set.")}
+                    {this.context.t("Your studio works as potential clients' gateways to make reservations according to locations and service&pricing options available on the webpage.")}
                 </p>
                 <p className={`${styles.font14} ${styles.mt4}`}>
-                    {this.context.t("Please enter details so that the customer can get enough information about you. Also, prepare your profile pictures and examples to be displayed at the top of the studio page.")}
+                    {this.context.t("Please introduce yourself in detail so that your clients can get enough information about you. Also, please prepare your profile picture and example photos to be displayed on the webpage.")}
                 </p>
                 <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mb3}`} style={{height: 48, marginTop: 65}} onClick={this.props.goStudioSetting}>
                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Create Studio")}</p>

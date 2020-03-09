@@ -86,12 +86,12 @@ class AdminNavigation extends Component{
                                     <p className={`${styles.fontBold} ${styles.font171315} ${styles.cursorPointer} ${styles.mr3} ${styles.mrLg5}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
                                     {isLoggedIn && (
                                         <Fragment>
-                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${styles.mlLg5} ${pathname === '/studio/edit/' ? styles.pink : null}`} onClick={this.props.goStudioSetting}>{this.context.t("Edit Studio")}</p>
-                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname === '/reservation/' ? styles.pink : null}`} onClick={this.props.goReservation}>{this.context.t("Manage Reservations")}</p>
-                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname.indexOf('/message/') > -1 ? styles.pink : null}`} onClick={this.props.goMessage}>{this.context.t("Messages")}</p>
-                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname === '/profile/' ? styles.pink : null}`} onClick={this.props.goProfile}>{this.context.t("Profile")}</p>
-                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3} ${pathname === '/profile/account/' ? styles.pink : null}`} onClick={this.props.goAccount}>{this.context.t("Payout")}</p>
-                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml3}`} onClick={this.props.logout}>{this.context.t("Logout")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml4} ${styles.mlLg5} ${pathname === '/studio/edit/' ? styles.pink : null}`} onClick={this.props.goStudioSetting}>{this.context.t("Edit Studio")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml4} ${pathname === '/reservation/' ? styles.pink : null}`} onClick={this.props.goReservation}>{this.context.t("Manage Reservations")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml4} ${pathname.indexOf('/message/') > -1 ? styles.pink : null}`} onClick={this.props.goMessage}>{this.context.t("Messages")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml4} ${pathname === '/profile/' ? styles.pink : null}`} onClick={this.props.goProfile}>{this.context.t("Profile")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml4} ${pathname === '/profile/account/' ? styles.pink : null}`} onClick={this.props.goAccount}>{this.context.t("Payout")}</p>
+                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.cursorPointer} ${styles.ml4}`} onClick={this.props.logout}>{this.context.t("Logout")}</p>
                                         </Fragment>
                                     )}
                                 </div>

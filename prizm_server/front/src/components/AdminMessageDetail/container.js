@@ -30,6 +30,7 @@ class Container extends Component{
     constructor(props){
         super(props)
         const { match : { params : { chatId } }, profile : { id } } = props;
+        console.log(props.location.state.order)
         this.state = {
             loading: true,
             page: 1,
@@ -41,11 +42,7 @@ class Container extends Component{
             profileImage: props.location.state ? props.location.state.order ? props.location.state.order.photographer.profile_image : null : null,
             toUser: props.location.state ? props.location.state.order ? props.location.state.order.photographer.user.id : null : null,
             photographer: props.location.state ? props.location.state.order ? props.location.state.order.photographer : null : null,
-            order: props.location.state ? props.location.state.order ? {
-                ...props.location.state.order,
-                location: JSON.parse(props.location.state.order.location),
-                option: JSON.parse(props.location.state.order.option)
-            } : null : null,
+            order: props.location.state ? props.location.state.order ? props.location.state.order : null : null,
             text: "",
             messageType: 'normal',
             added: false,
@@ -74,12 +71,13 @@ class Container extends Component{
         )
     }
 
-    setMessages(messages, redating, redatingMsgId){
+    setMessages(messages, redating, redatingMsgId, existNewMessage){
         this.setState({
             messages: messages.reverse(),
             loading: false,
             redating,
-            redatingMsgId
+            redatingMsgId,
+            existNewMessage
         })
     }
 
@@ -90,7 +88,7 @@ class Container extends Component{
         })
     }
 
-    moreMessage(messages, hasNextPage, redating, redatingMsgId){
+    moreMessage(messages, hasNextPage, redating, redatingMsgId, existNewMessage){
         if(hasNextPage){
             this.setState({
                 messages: [...messages.reverse(), ...this.state.messages],
@@ -98,7 +96,8 @@ class Container extends Component{
                 page: this.state.page + 1,
                 hasNextPage,
                 redating,
-                redatingMsgId
+                redatingMsgId, 
+                existNewMessage
             })
         }
         else{
@@ -106,10 +105,13 @@ class Container extends Component{
                 messages: [...messages.reverse(), ...this.state.messages],
                 isLoadingMore: false,
                 hasNextPage,
-                redatingMsgId
+                redatingMsgId, 
+                existNewMessage
             })
         }
-        
+        if(this.state.refreshChat){
+            this.state.refreshChat(existNewMessage)
+        }
     }
 
     _handleAdded = () => {
@@ -237,7 +239,7 @@ class Container extends Component{
                     fromUser: profile.id,
                     toUser: toUser,
                     chatId: chatId,
-                    text: "Sorry, I couldn't find the time available. I'd like to cancel the reservation.",
+                    text: this.context.t("Sorry, I couldn't find the time available. I'd like to cancel the reservation."),
                     messageeType: messageType
                 }
                 WebSocketInstance.newChatMessage(messageObj);
