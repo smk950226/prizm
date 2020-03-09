@@ -341,10 +341,10 @@ p{
         width: 140px
     }
     .height-full-safearea{
-        height: calc(100vh - 72px);
+        height: calc(100vh - 56px);
     }
     .min-height-full-safearea{
-        min-height: calc(100vh - 72px);;
+        min-height: calc(100vh - 56px);;
     }
 }
 
@@ -1317,7 +1317,7 @@ textarea {
 }
 .container-custom-request-msg{
     width: 100%;
-    height: 50%;
+    height: 200px;
 }
 @media (min-width: 768px){
     .container-portfolio-lg{
@@ -1366,13 +1366,13 @@ textarea {
     }
     .container-custom-request-msg{
         width: 400px;
-        height: calc(100vh - 72px);
+        height: calc(100vh - 56px);
     }
 }
 @media (min-width: 1350px){
     .container-custom-request-msg{
         width: 30%;
-        height: calc(100vh - 72px);
+        height: calc(100vh - 56px);
     }
 }
 @media (min-width: 1440px){
@@ -1551,7 +1551,7 @@ textarea {
     background-position: center center;
     background-attachment: scroll;
     width: 100%;
-    height: 50%;
+    height: calc(100vh - 200px - 56px - 48px);
 }
 .bg-landing-img-2{
     background-image: url('../assets/images/landing_2.jpg');
@@ -1561,7 +1561,7 @@ textarea {
     background-position: center center;
     background-attachment: scroll;
     width: 100%;
-    height: 50%;
+    height: calc(100vh - 200px - 56px - 48px);
 }
 .bg-landing-img-3{
     background-image: url('../assets/images/landing_3.jpg');
@@ -1571,7 +1571,7 @@ textarea {
     background-position: center center;
     background-attachment: scroll;
     width: 100%;
-    height: 50%;
+    height: calc(100vh - 200px - 56px - 48px);
 }
 .banner-img{
     background-image: url('../assets/images/seoul.png');
@@ -1592,7 +1592,7 @@ textarea {
         background-position: center center;
         background-attachment: scroll;
         width: calc(100% - 400px);
-        height: calc(100vh - 72px)
+        height: calc(100vh - 56px)
     }
     .bg-landing-img-2{
         background-image: url('../assets/images/landing_2.jpg');
@@ -1602,7 +1602,7 @@ textarea {
         background-position: center center;
         background-attachment: scroll;
         width: calc(100% - 400px);
-        height: calc(100vh - 72px)
+        height: calc(100vh - 56px)
     }
     .bg-landing-img-3{
         background-image: url('../assets/images/landing_3.jpg');
@@ -1612,7 +1612,7 @@ textarea {
         background-position: center center;
         background-attachment: scroll;
         width: calc(100% - 400px);
-        height: calc(100vh - 72px)
+        height: calc(100vh - 56px)
     }
 }
 @media (min-width: 1350px){
@@ -1624,7 +1624,7 @@ textarea {
         background-position: center center;
         background-attachment: scroll;
         width: 70%;
-        height: calc(100vh - 72px)
+        height: calc(100vh - 56px)
     }
     .bg-landing-img-2{
         background-image: url('../assets/images/landing_2.jpg');
@@ -1634,7 +1634,7 @@ textarea {
         background-position: center center;
         background-attachment: scroll;
         width: 70%;
-        height: calc(100vh - 72px)
+        height: calc(100vh - 56px)
     }
     .bg-landing-img-3{
         background-image: url('../assets/images/landing_3.jpg');
@@ -1644,7 +1644,7 @@ textarea {
         background-position: center center;
         background-attachment: scroll;
         width: 70%;
-        height: calc(100vh - 72px)
+        height: calc(100vh - 56px)
     }
 }
 

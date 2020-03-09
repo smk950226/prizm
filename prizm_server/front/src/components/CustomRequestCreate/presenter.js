@@ -1536,7 +1536,7 @@ class CustomRequestCreate extends Component{
                     {...sliderSettings2}
                     initialSlide={step-1}>
                         <div className={`${styles.safeareaTop}`}>
-                            <div className={`${styles.widthFull} ${styles.heightFullSafearea} ${styles.row} ${styles.mx0}`}>
+                            <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
                                 <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                     {profile ? (
                                         <Fragment>
@@ -1669,7 +1669,7 @@ class CustomRequestCreate extends Component{
                             </div>
                         </div>
                         <div className={`${styles.safeareaTop}`}>
-                            <div className={`${styles.widthFull} ${styles.heightFullSafearea} ${styles.row} ${styles.mx0}`}>
+                            <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
                                 <div className={`${styles.bgLandingImg2} ${styles.order1} ${styles.orderMd1}`}>
     
                                 </div>
@@ -1802,7 +1802,7 @@ class CustomRequestCreate extends Component{
                             </div>
                         </div>
                         <div className={`${styles.safeareaTop}`}>
-                            <div className={`${styles.widthFull} ${styles.heightFullSafearea} ${styles.row} ${styles.mx0}`}>
+                            <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
                                 <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                 {profile ? (
                                         <Fragment>
