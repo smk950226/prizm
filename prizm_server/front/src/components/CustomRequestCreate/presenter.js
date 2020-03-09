@@ -134,7 +134,7 @@ const sliderSettings2 = {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 6000,
     accessibility: false,
     draggable: false,
@@ -268,7 +268,8 @@ class CustomRequestCreate extends Component{
         isCancel: false,
         showCreate: false,
         showLanding: true,
-        findedCountry: {}
+        findedCountry: {},
+        msgHeight: 150
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
@@ -289,6 +290,12 @@ class CustomRequestCreate extends Component{
     componentDidMount = () => {
         window.scrollTo(0,0)
         const { lang } = this.props;
+        if(this.msgContainer){
+            const msgHeight = this.msgContainer.clientHeight;
+            this.setState({
+                msgHeight
+            })
+        }
         if(lang){
             let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
             if(findedCountry){
@@ -305,6 +312,12 @@ class CustomRequestCreate extends Component{
         }
         if(this.state.fetchedProfile && !this.state.fetchClear){
             if(this.props.profile){
+                if(this.msgContainer){
+                    const msgHeight = this.msgContainer.clientHeight;
+                    this.setState({
+                        msgHeight
+                    })
+                }
                 if(!this.props.profile.is_verified){
                     const result =  await this.props.sendVerificationEmail()
                 }
@@ -325,6 +338,22 @@ class CustomRequestCreate extends Component{
                         findedCountry
                     })
                 }
+            }
+        }
+        if(prevProps.profile !== this.props.profile){
+            if(this.msgContainer){
+                const msgHeight = this.msgContainer.clientHeight;
+                this.setState({
+                    msgHeight
+                })
+            }
+        }
+        if(prevProps.isLoggedIn !== this.props.isLoggedIn){
+            if(this.msgContainer){
+                const msgHeight = this.msgContainer.clientHeight;
+                this.setState({
+                    msgHeight
+                })
             }
         }
     }
@@ -1525,22 +1554,132 @@ class CustomRequestCreate extends Component{
             showCancel,
             isCancel,
             showCreate,
-            showLanding
+            showLanding,
+            msgHeight
         } = this.state;
         const { profile } = this.props;
         return(
             <Fragment>
                 {showLanding && (
                     <Element name="1">
-                    <Slider ref={c => (this.slider2 = c)}
-                    {...sliderSettings2}
-                    initialSlide={step-1}>
-                        <div className={`${styles.safeareaTop}`}>
-                            <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
-                                <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                    {profile ? (
-                                        <Fragment>
-                                            {profile.custom_request_status.status === 'none' && (
+                        <div className={`${styles.mobileOnly}`}>
+                            <Slider ref={c => (this.slider2 = c)}
+                            {...sliderSettings2}
+                            initialSlide={step-1}>
+                                <div className={`${styles.safeareaTop}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
+                                        <div ref={(el) => { this.msgContainer = el }} className={`${styles.containerCustomRequestMsg} ${styles.py3} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                            {profile ? (
+                                                <Fragment>
+                                                    {profile.custom_request_status.status === 'none' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'close' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.is_verified ? (
+                                                                        this.context.t("Your custom request has been submitted.")
+                                                                    ) : (
+                                                                        <Fragment>
+                                                                            {this.context.t("Your custom request has been submitted.")}<br/>
+                                                                            {this.context.t("Please complete the email verification")}
+                                                                        </Fragment>
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {!profile.is_verified  && (
+                                                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
+                                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                        {this.context.t("Resend Verification Email")}
+                                                                    </p>
+                                                                </div>
+                                                            )}
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
+                                                                {profile.is_verified ? (
+                                                                    <Fragment>
+                                                                        {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
+                                                                        {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
+                                                                    </Fragment>
+                                                                ) : (
+                                                                    this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
+                                                                )}
+                                                            </p>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding12} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
+                                                                {this.context.t("Make a New Request")}<br/>
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'open' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
+                                                                <div style={{position: 'relative'}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
+                                                                <div style={{position: 'absolute', top: -20, right: -5}}>
+                                                                    <div style={{position: 'relative'}}>
+                                                                        <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
+                                                                        <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
+                                                                {this.context.t("Please click the button above to see them in detail")}
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'confirmed' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {this.context.t("Your custom request has been confirmed.")}
+                                                                </p>
+                                                            </div>
+                                                            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.custom_request_status.payment === 'confirmed' && (
+                                                                        this.context.t("Add Payment Details")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'waiting_payment' && (
+                                                                        this.context.t("Waiting for Payment")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'paid' && (
+                                                                        this.context.t("Payment Successful!")
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {profile.custom_request_status.payment !== 'paid' && (
+                                                                <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                                    {this.context.t("Please add payment details by : ")}
+                                                                    {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </Fragment>
+                                                
+                                            ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
                                                         {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
@@ -1549,134 +1688,134 @@ class CustomRequestCreate extends Component{
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
                                                     </div>
+                                                    <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
+                                                        {this.context.t("Already made a reservation?")}
+                                                    </p>
                                                 </div>
                                             )}
-                                            {profile.custom_request_status.status === 'close' && (
-                                                <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
-                                                    </p>
-                                                    <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {profile.is_verified ? (
-                                                                this.context.t("Your custom request has been submitted.")
-                                                            ) : (
-                                                                <Fragment>
-                                                                    {this.context.t("Your custom request has been submitted.")}<br/>
-                                                                    {this.context.t("Please complete the email verification")}
-                                                                </Fragment>
+                                        </div>
+                                        <div className={`${styles.bgLandingImg1} ${styles.order1} ${styles.orderMd2}`} style={{height: `calc(100vh - ${msgHeight}px - 56px - 45px)`}}>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`${styles.safeareaTop}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
+                                        <div className={`${styles.bgLandingImg2} ${styles.order1} ${styles.orderMd1}`}>
+            
+                                        </div>
+                                        <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                        {profile ? (
+                                                <Fragment>
+                                                    {profile.custom_request_status.status === 'none' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'close' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.is_verified ? (
+                                                                        this.context.t("Your custom request has been submitted.")
+                                                                    ) : (
+                                                                        <Fragment>
+                                                                            {this.context.t("Your custom request has been submitted.")}<br/>
+                                                                            {this.context.t("Please complete the email verification")}
+                                                                        </Fragment>
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {!profile.is_verified  && (
+                                                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
+                                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                        {this.context.t("Resend Verification Email")}
+                                                                    </p>
+                                                                </div>
                                                             )}
-                                                        </p>
-                                                    </div>
-                                                    {!profile.is_verified  && (
-                                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
-                                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                                {this.context.t("Resend Verification Email")}
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
+                                                                {profile.is_verified ? (
+                                                                    <Fragment>
+                                                                        {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
+                                                                        {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
+                                                                    </Fragment>
+                                                                ) : (
+                                                                    this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
+                                                                )}
+                                                            </p>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding22} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
+                                                                {this.context.t("Make a New Request")}<br/>
                                                             </p>
                                                         </div>
                                                     )}
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
-                                                        {profile.is_verified ? (
-                                                            <Fragment>
-                                                                {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
-                                                                {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
-                                                            </Fragment>
-                                                        ) : (
-                                                            this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
-                                                        )}
-                                                    </p>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.bgLanding12} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                        {this.context.t("Make a New Request")}<br/>
-                                                    </p>
-                                                </div>
-                                            )}
-                                            {profile.custom_request_status.status === 'open' && (
-                                                <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
-                                                    </p>
-                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
-                                                        <div style={{position: 'relative'}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
-                                                        <div style={{position: 'absolute', top: -20, right: -5}}>
-                                                            <div style={{position: 'relative'}}>
-                                                                <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
-                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                    {profile.custom_request_status.status === 'open' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
+                                                                <div style={{position: 'relative'}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
+                                                                <div style={{position: 'absolute', top: -20, right: -5}}>
+                                                                    <div style={{position: 'relative'}}>
+                                                                        <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
+                                                                        <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
                                                             </div>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
+                                                                {this.context.t("Please click the button above to see them in detail")}
+                                                            </p>
                                                         </div>
-                                                        </div>
-                                                    </div>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
-                                                        {this.context.t("Please click the button above to see them in detail")}
-                                                    </p>
-                                                </div>
-                                            )}
-                                            {profile.custom_request_status.status === 'confirmed' && (
-                                                <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
-                                                    </p>
-                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {this.context.t("Your custom request has been confirmed.")}
-                                                        </p>
-                                                    </div>
-                                                    <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {profile.custom_request_status.payment === 'confirmed' && (
-                                                                this.context.t("Add Payment Details")
-                                                            )}
-                                                            {profile.custom_request_status.payment === 'waiting_payment' && (
-                                                                this.context.t("Waiting for Payment")
-                                                            )}
-                                                            {profile.custom_request_status.payment === 'paid' && (
-                                                                this.context.t("Payment Successful!")
-                                                            )}
-                                                        </p>
-                                                    </div>
-                                                    {profile.custom_request_status.payment !== 'paid' && (
-                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
-                                                            {this.context.t("Please add payment details by : ")}
-                                                            {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
-                                                        </p>
                                                     )}
-                                                </div>
-                                            )}
-                                        </Fragment>
-                                        
-                                    ) : (
-                                        <div className={``}>
-                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                {this.context.t("Enrich your travel with photography")}
-                                            </p>
-                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
-                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
-                                            </div>
-                                            <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
-                                                {this.context.t("Already made a reservation?")}
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className={`${styles.bgLandingImg1} ${styles.order1} ${styles.orderMd2}`}>
-    
-                                </div>
-                            </div>
-                        </div>
-                        <div className={`${styles.safeareaTop}`}>
-                            <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
-                                <div className={`${styles.bgLandingImg2} ${styles.order1} ${styles.orderMd1}`}>
-    
-                                </div>
-                                <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                {profile ? (
-                                        <Fragment>
-                                            {profile.custom_request_status.status === 'none' && (
+                                                    {profile.custom_request_status.status === 'confirmed' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {this.context.t("Your custom request has been confirmed.")}
+                                                                </p>
+                                                            </div>
+                                                            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.custom_request_status.payment === 'confirmed' && (
+                                                                        this.context.t("Add Payment Details")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'waiting_payment' && (
+                                                                        this.context.t("Waiting for Payment")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'paid' && (
+                                                                        this.context.t("Payment Successful!")
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {profile.custom_request_status.payment !== 'paid' && (
+                                                                <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                                    {this.context.t("Please add payment details by : ")}
+                                                                    {this.context.t(`x${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </Fragment>
+                                                
+                                            ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
                                                         {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
@@ -1685,128 +1824,128 @@ class CustomRequestCreate extends Component{
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
                                                     </div>
+                                                    <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
+                                                        {this.context.t("Already made a reservation?")}
+                                                    </p>
                                                 </div>
                                             )}
-                                            {profile.custom_request_status.status === 'close' && (
-                                                <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
-                                                    </p>
-                                                    <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {profile.is_verified ? (
-                                                                this.context.t("Your custom request has been submitted.")
-                                                            ) : (
-                                                                <Fragment>
-                                                                    {this.context.t("Your custom request has been submitted.")}<br/>
-                                                                    {this.context.t("Please complete the email verification")}
-                                                                </Fragment>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`${styles.safeareaTop}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
+                                        <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                        {profile ? (
+                                                <Fragment>
+                                                    {profile.custom_request_status.status === 'none' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'close' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.is_verified ? (
+                                                                        this.context.t("Your custom request has been submitted.")
+                                                                    ) : (
+                                                                        <Fragment>
+                                                                            {this.context.t("Your custom request has been submitted.")}<br/>
+                                                                            {this.context.t("Please complete the email verification")}
+                                                                        </Fragment>
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {!profile.is_verified  && (
+                                                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
+                                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                        {this.context.t("Resend Verification Email")}
+                                                                    </p>
+                                                                </div>
                                                             )}
-                                                        </p>
-                                                    </div>
-                                                    {!profile.is_verified  && (
-                                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
-                                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                                {this.context.t("Resend Verification Email")}
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
+                                                                {profile.is_verified ? (
+                                                                    <Fragment>
+                                                                        {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
+                                                                        {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
+                                                                    </Fragment>
+                                                                ) : (
+                                                                    this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
+                                                                )}
+                                                            </p>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding32} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
+                                                                {this.context.t("Make a New Request")}<br/>
                                                             </p>
                                                         </div>
                                                     )}
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
-                                                        {profile.is_verified ? (
-                                                            <Fragment>
-                                                                {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
-                                                                {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
-                                                            </Fragment>
-                                                        ) : (
-                                                            this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
-                                                        )}
-                                                    </p>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.bgLanding22} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                        {this.context.t("Make a New Request")}<br/>
-                                                    </p>
-                                                </div>
-                                            )}
-                                            {profile.custom_request_status.status === 'open' && (
-                                                <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
-                                                    </p>
-                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
-                                                        <div style={{position: 'relative'}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
-                                                        <div style={{position: 'absolute', top: -20, right: -5}}>
-                                                            <div style={{position: 'relative'}}>
-                                                                <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
-                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                    {profile.custom_request_status.status === 'open' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
+                                                                <div style={{position: 'relative'}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
+                                                                <div style={{position: 'absolute', top: -20, right: -5}}>
+                                                                    <div style={{position: 'relative'}}>
+                                                                        <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
+                                                                        <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
                                                             </div>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
+                                                                {this.context.t("Please click the button above to see them in detail")}
+                                                            </p>
                                                         </div>
-                                                        </div>
-                                                    </div>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
-                                                        {this.context.t("Please click the button above to see them in detail")}
-                                                    </p>
-                                                </div>
-                                            )}
-                                            {profile.custom_request_status.status === 'confirmed' && (
-                                                <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
-                                                    </p>
-                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {this.context.t("Your custom request has been confirmed.")}
-                                                        </p>
-                                                    </div>
-                                                    <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {profile.custom_request_status.payment === 'confirmed' && (
-                                                                this.context.t("Add Payment Details")
-                                                            )}
-                                                            {profile.custom_request_status.payment === 'waiting_payment' && (
-                                                                this.context.t("Waiting for Payment")
-                                                            )}
-                                                            {profile.custom_request_status.payment === 'paid' && (
-                                                                this.context.t("Payment Successful!")
-                                                            )}
-                                                        </p>
-                                                    </div>
-                                                    {profile.custom_request_status.payment !== 'paid' && (
-                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
-                                                            {this.context.t("Please add payment details by : ")}
-                                                            {this.context.t(`x${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
-                                                        </p>
                                                     )}
-                                                </div>
-                                            )}
-                                        </Fragment>
-                                        
-                                    ) : (
-                                        <div className={``}>
-                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                {this.context.t("Enrich your travel with photography")}
-                                            </p>
-                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
-                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
-                                            </div>
-                                            <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
-                                                {this.context.t("Already made a reservation?")}
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className={`${styles.safeareaTop}`}>
-                            <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
-                                <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                {profile ? (
-                                        <Fragment>
-                                            {profile.custom_request_status.status === 'none' && (
+                                                    {profile.custom_request_status.status === 'confirmed' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {this.context.t("Your custom request has been confirmed.")}
+                                                                </p>
+                                                            </div>
+                                                            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.custom_request_status.payment === 'confirmed' && (
+                                                                        this.context.t("Add Payment Details")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'waiting_payment' && (
+                                                                        this.context.t("Waiting for Payment")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'paid' && (
+                                                                        this.context.t("Payment Successful!")
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {profile.custom_request_status.payment !== 'paid' && (
+                                                                <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                                    {this.context.t("Please add payment details by : ")}
+                                                                    {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </Fragment>
+                                                
+                                            ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
                                                         {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
@@ -1815,126 +1954,424 @@ class CustomRequestCreate extends Component{
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
                                                     </div>
+                                                    <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
+                                                        {this.context.t("Already made a reservation?")}
+                                                    </p>
                                                 </div>
                                             )}
-                                            {profile.custom_request_status.status === 'close' && (
-                                                <div className={``}>
-                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
-                                                    </p>
-                                                    <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {profile.is_verified ? (
-                                                                this.context.t("Your custom request has been submitted.")
-                                                            ) : (
-                                                                <Fragment>
-                                                                    {this.context.t("Your custom request has been submitted.")}<br/>
-                                                                    {this.context.t("Please complete the email verification")}
-                                                                </Fragment>
+                                        </div>
+                                        <div className={`${styles.bgLandingImg3} ${styles.order1} ${styles.orderMd2}`}>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            </Slider>
+                        </div>
+                        <div className={`${styles.mobileNone}`}>
+                            <Slider ref={c => (this.slider2 = c)}
+                            {...sliderSettings2}
+                            initialSlide={step-1}>
+                                <div className={`${styles.safeareaTop}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
+                                        <div className={`${styles.containerCustomRequestMsg} ${styles.py3} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                            {profile ? (
+                                                <Fragment>
+                                                    {profile.custom_request_status.status === 'none' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'close' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.is_verified ? (
+                                                                        this.context.t("Your custom request has been submitted.")
+                                                                    ) : (
+                                                                        <Fragment>
+                                                                            {this.context.t("Your custom request has been submitted.")}<br/>
+                                                                            {this.context.t("Please complete the email verification")}
+                                                                        </Fragment>
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {!profile.is_verified  && (
+                                                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
+                                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                        {this.context.t("Resend Verification Email")}
+                                                                    </p>
+                                                                </div>
                                                             )}
-                                                        </p>
-                                                    </div>
-                                                    {!profile.is_verified  && (
-                                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
-                                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                                {this.context.t("Resend Verification Email")}
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
+                                                                {profile.is_verified ? (
+                                                                    <Fragment>
+                                                                        {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
+                                                                        {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
+                                                                    </Fragment>
+                                                                ) : (
+                                                                    this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
+                                                                )}
+                                                            </p>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding12} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
+                                                                {this.context.t("Make a New Request")}<br/>
                                                             </p>
                                                         </div>
                                                     )}
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
-                                                        {profile.is_verified ? (
-                                                            <Fragment>
-                                                                {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
-                                                                {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
-                                                            </Fragment>
-                                                        ) : (
-                                                            this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
-                                                        )}
-                                                    </p>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt5} ${styles.gray93} ${styles.bgLanding32} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                        {this.context.t("Make a New Request")}<br/>
-                                                    </p>
-                                                </div>
-                                            )}
-                                            {profile.custom_request_status.status === 'open' && (
+                                                    {profile.custom_request_status.status === 'open' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
+                                                                <div style={{position: 'relative'}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
+                                                                <div style={{position: 'absolute', top: -20, right: -5}}>
+                                                                    <div style={{position: 'relative'}}>
+                                                                        <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
+                                                                        <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
+                                                                {this.context.t("Please click the button above to see them in detail")}
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'confirmed' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {this.context.t("Your custom request has been confirmed.")}
+                                                                </p>
+                                                            </div>
+                                                            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.custom_request_status.payment === 'confirmed' && (
+                                                                        this.context.t("Add Payment Details")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'waiting_payment' && (
+                                                                        this.context.t("Waiting for Payment")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'paid' && (
+                                                                        this.context.t("Payment Successful!")
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {profile.custom_request_status.payment !== 'paid' && (
+                                                                <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                                    {this.context.t("Please add payment details by : ")}
+                                                                    {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </Fragment>
+                                                
+                                            ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
                                                         {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
                                                         {this.context.t("Enrich your travel with photography")}
                                                     </p>
-                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
-                                                        <div style={{position: 'relative'}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
-                                                        <div style={{position: 'absolute', top: -20, right: -5}}>
-                                                            <div style={{position: 'relative'}}>
-                                                                <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
-                                                                <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                        <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
+                                                    </div>
+                                                    <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
+                                                        {this.context.t("Already made a reservation?")}
+                                                    </p>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className={`${styles.bgLandingImg1} ${styles.order1} ${styles.orderMd2}`} >
+            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`${styles.safeareaTop}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
+                                        <div className={`${styles.bgLandingImg2} ${styles.order1} ${styles.orderMd1}`}>
+            
+                                        </div>
+                                        <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                        {profile ? (
+                                                <Fragment>
+                                                    {profile.custom_request_status.status === 'none' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
                                                             </div>
                                                         </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'close' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.is_verified ? (
+                                                                        this.context.t("Your custom request has been submitted.")
+                                                                    ) : (
+                                                                        <Fragment>
+                                                                            {this.context.t("Your custom request has been submitted.")}<br/>
+                                                                            {this.context.t("Please complete the email verification")}
+                                                                        </Fragment>
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {!profile.is_verified  && (
+                                                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
+                                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                        {this.context.t("Resend Verification Email")}
+                                                                    </p>
+                                                                </div>
+                                                            )}
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
+                                                                {profile.is_verified ? (
+                                                                    <Fragment>
+                                                                        {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
+                                                                        {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
+                                                                    </Fragment>
+                                                                ) : (
+                                                                    this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
+                                                                )}
+                                                            </p>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding22} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
+                                                                {this.context.t("Make a New Request")}<br/>
+                                                            </p>
                                                         </div>
-                                                    </div>
-                                                    <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
-                                                        {this.context.t("Please click the button above to see them in detail")}
-                                                    </p>
-                                                </div>
-                                            )}
-                                            {profile.custom_request_status.status === 'confirmed' && (
+                                                    )}
+                                                    {profile.custom_request_status.status === 'open' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
+                                                                <div style={{position: 'relative'}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
+                                                                <div style={{position: 'absolute', top: -20, right: -5}}>
+                                                                    <div style={{position: 'relative'}}>
+                                                                        <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
+                                                                        <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
+                                                                {this.context.t("Please click the button above to see them in detail")}
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'confirmed' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {this.context.t("Your custom request has been confirmed.")}
+                                                                </p>
+                                                            </div>
+                                                            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.custom_request_status.payment === 'confirmed' && (
+                                                                        this.context.t("Add Payment Details")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'waiting_payment' && (
+                                                                        this.context.t("Waiting for Payment")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'paid' && (
+                                                                        this.context.t("Payment Successful!")
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {profile.custom_request_status.payment !== 'paid' && (
+                                                                <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                                    {this.context.t("Please add payment details by : ")}
+                                                                    {this.context.t(`x${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </Fragment>
+                                                
+                                            ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
                                                         {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
                                                         {this.context.t("Enrich your travel with photography")}
                                                     </p>
-                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {this.context.t("Your custom request has been confirmed.")}
-                                                        </p>
+                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                        <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
                                                     </div>
-                                                    <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
-                                                            {profile.custom_request_status.payment === 'confirmed' && (
-                                                                this.context.t("Add Payment Details")
-                                                            )}
-                                                            {profile.custom_request_status.payment === 'waiting_payment' && (
-                                                                this.context.t("Waiting for Payment")
-                                                            )}
-                                                            {profile.custom_request_status.payment === 'paid' && (
-                                                                this.context.t("Payment Successful!")
-                                                            )}
-                                                        </p>
-                                                    </div>
-                                                    {profile.custom_request_status.payment !== 'paid' && (
-                                                        <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
-                                                            {this.context.t("Please add payment details by : ")}
-                                                            {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
-                                                        </p>
-                                                    )}
+                                                    <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
+                                                        {this.context.t("Already made a reservation?")}
+                                                    </p>
                                                 </div>
                                             )}
-                                        </Fragment>
-                                        
-                                    ) : (
-                                        <div className={``}>
-                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                {this.context.t("Enrich your travel with photography")}
-                                            </p>
-                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
-                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
-                                            </div>
-                                            <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
-                                                {this.context.t("Already made a reservation?")}
-                                            </p>
                                         </div>
-                                    )}
+                                    </div>
                                 </div>
-                                <div className={`${styles.bgLandingImg3} ${styles.order1} ${styles.orderMd2}`}>
-    
+                                <div className={`${styles.safeareaTop}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
+                                        <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                        {profile ? (
+                                                <Fragment>
+                                                    {profile.custom_request_status.status === 'none' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'close' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.is_verified ? (
+                                                                        this.context.t("Your custom request has been submitted.")
+                                                                    ) : (
+                                                                        <Fragment>
+                                                                            {this.context.t("Your custom request has been submitted.")}<br/>
+                                                                            {this.context.t("Please complete the email verification")}
+                                                                        </Fragment>
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {!profile.is_verified  && (
+                                                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={this._send}>
+                                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                        {this.context.t("Resend Verification Email")}
+                                                                    </p>
+                                                                </div>
+                                                            )}
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{maxWidth: 360, lineHeight: 1.3}}>
+                                                                {profile.is_verified ? (
+                                                                    <Fragment>
+                                                                        {this.context.t("We are waiting for photographers to submit their proposals.")}<br/>
+                                                                        {this.context.t("We will notify you through text message and email when we have received proposals from photographers")}
+                                                                    </Fragment>
+                                                                ) : (
+                                                                    this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
+                                                                )}
+                                                            </p>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding32} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
+                                                                {this.context.t("Make a New Request")}<br/>
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'open' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
+                                                                <div style={{position: 'relative'}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
+                                                                <div style={{position: 'absolute', top: -20, right: -5}}>
+                                                                    <div style={{position: 'relative'}}>
+                                                                        <img src={require('../../assets/images/icon_count.png')} style={{width: 20}} />
+                                                                        <p className={`${styles.fontExtraBold} ${styles.font8} ${styles.absoluteCenter}`}>{profile.custom_request_status.count}</p>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("PRIZM photographers' proposals have arrived.")}<br/>
+                                                                {this.context.t("Please click the button above to see them in detail")}
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    {profile.custom_request_status.status === 'confirmed' && (
+                                                        <div className={``}>
+                                                            <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                                {this.context.t("Enrich your travel with photography")}
+                                                            </p>
+                                                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {this.context.t("Your custom request has been confirmed.")}
+                                                                </p>
+                                                            </div>
+                                                            <div className={`${styles.widthFull} ${styles.bgConfirmed} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isLoading ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 360}} onClick={() => this._goPayment(profile.custom_request_status.orderId)}>
+                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
+                                                                    {profile.custom_request_status.payment === 'confirmed' && (
+                                                                        this.context.t("Add Payment Details")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'waiting_payment' && (
+                                                                        this.context.t("Waiting for Payment")
+                                                                    )}
+                                                                    {profile.custom_request_status.payment === 'paid' && (
+                                                                        this.context.t("Payment Successful!")
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                            {profile.custom_request_status.payment !== 'paid' && (
+                                                                <p className={`${styles.font10} ${styles.textCenter} ${styles.mt2} ${styles.pink}`}>
+                                                                    {this.context.t("Please add payment details by : ")}
+                                                                    {this.context.t(`${new Date(new Date(profile.custom_request_status.confirmed_at).getTime() + 1000*60*60*24*3)}`)}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </Fragment>
+                                                
+                                            ) : (
+                                                <div className={``}>
+                                                    <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
+                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
+                                                        {this.context.t("Enrich your travel with photography")}
+                                                    </p>
+                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
+                                                        <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
+                                                    </div>
+                                                    <p className={`${styles.font1216} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
+                                                        {this.context.t("Already made a reservation?")}
+                                                    </p>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className={`${styles.bgLandingImg3} ${styles.order1} ${styles.orderMd2}`}>
+            
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </Slider>
                         </div>
-                    </Slider>
                     </Element>
                 )}
                 {showCreate && (

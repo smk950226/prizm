@@ -11,6 +11,7 @@
     "@svgr/webpack": "4.3.2",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
+    "add": "^2.0.6",
     "babel-eslint": "10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.0.6",
@@ -77,6 +78,7 @@
     "react-modal": "^3.11.1",
     "react-rating": "^2.0.1",
     "react-redux": "^7.1.1",
+    "react-resize-detector": "^4.2.1",
     "react-responsive-modal": "^4.0.1",
     "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
@@ -107,7 +109,8 @@
     "webpack": "4.41.0",
     "webpack-dev-server": "3.2.1",
     "webpack-manifest-plugin": "2.1.1",
-    "workbox-webpack-plugin": "4.3.1"
+    "workbox-webpack-plugin": "4.3.1",
+    "yarn": "^1.22.1"
   },
   "scripts": {
     "start": "node scripts/start.js",
