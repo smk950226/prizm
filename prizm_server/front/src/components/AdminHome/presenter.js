@@ -21,10 +21,10 @@ const AdminHome = (props, context) => (
                         {context.t("Connect with your instagram")}
                     </p>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.containerHalfBtn}`}>
-                        <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignUp}>
+                        <div className={`${styles.widthHalfBtn} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignUp}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Get started")}</p>
                         </div>
-                        <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignIn}>
+                        <div className={`${styles.widthHalfBtn} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignIn}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Login")}</p>
                         </div>
                     </div>
@@ -49,10 +49,10 @@ const AdminHome = (props, context) => (
                         {context.t("Connect with your instagram")}
                     </p>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.containerHalfBtn}`}>
-                        <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignUp}>
+                        <div className={`${styles.widthHalfBtn} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignUp}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Get started")}</p>
                         </div>
-                        <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignIn}>
+                        <div className={`${styles.widthHalfBtn} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goSignIn}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Login")}</p>
                         </div>
                     </div>

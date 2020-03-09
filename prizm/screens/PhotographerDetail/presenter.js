@@ -292,7 +292,7 @@ class PhotographerDetail extends Component{
                                     </div>
                                     <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
                                     <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("Please leave your message here.")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goConfirm}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.goConfirm}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{isLoggedIn ? this.context.t("Submit the request") : this.context.t("Sign up & Submit the request")}</p>
                                     </div>
                                     </Collapse>
@@ -343,7 +343,7 @@ class PhotographerDetail extends Component{
                                         ) : (
                                             null
                                         )}
-                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.submit}>
+                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.submit}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm and Submit Request")}</p>
                                         </div>
                                     </div>
@@ -386,7 +386,7 @@ class PhotographerDetail extends Component{
                                         ) : (
                                             null
                                         )}
-                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.submit}>
+                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt5} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.submit}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm and Submit Request")}</p>
                                         </div>
                                     </div>
@@ -404,7 +404,7 @@ class PhotographerDetail extends Component{
                                         {this.context.t("We will soon send you a confirmation message")}<br/>
                                         {this.context.t("to your email and mobile number.")}
                                     </p>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go to the main page")}</p>
                                     </div>
                                 </div>
@@ -428,10 +428,10 @@ class PhotographerDetail extends Component{
                                     {this.context.t("When you complete the email verification, your request details will be sent to the selected photographer")}
                                 </p>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.justifyContentMdCenter} ${styles.mt5}`}>
-                                    <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48}} onClick={this.props.send}>
+                                    <div className={`${styles.widthHalfBtn} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48}} onClick={this.props.send}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Resend")}</p>
                                     </div>
-                                    <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
+                                    <div className={`${styles.widthHalfBtn} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goHome}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Main")}</p>
                                     </div>
                                 </div>
@@ -461,7 +461,7 @@ class PhotographerDetail extends Component{
                                 value={selectedDate}
                                 onChange={this.props.selectDate}
                                 />
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={() => this.props.changeDateStep(2)}>
+                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={() => this.props.changeDateStep(2)}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Next")}</p>
                                 </div>
                             </Fragment>
@@ -486,7 +486,7 @@ class PhotographerDetail extends Component{
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirmDate}>
+                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirmDate}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                                 </div>
                             </Fragment>
@@ -515,7 +515,7 @@ class PhotographerDetail extends Component{
                             tileClassName={`${styles.font12}`}
                             onChange={this.props.selectDateRange}
                             />
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirmDate}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirmDate}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                             </div>
                         </Fragment>

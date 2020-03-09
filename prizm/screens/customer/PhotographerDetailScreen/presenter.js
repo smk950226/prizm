@@ -520,7 +520,7 @@ class PhotographerDetailScreen extends Component{
                                                 textAlignVertical={'top'}
                                             />
                                             <TouchableWithoutFeedback onPress={this.props.goConfirm}>
-                                                <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter, styles.mt10]}>
+                                                <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter, styles.mt10]}>
                                                     <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                         {isLoggedIn ? this.context.t("Submit the request") : this.context.t("Sign up & Submit the request")}
                                                     </Text>
@@ -620,7 +620,7 @@ class PhotographerDetailScreen extends Component{
                                     )}
                                 </View>
                                 <TouchableWithoutFeedback onPress={this.props.submit}>
-                                    <View style={[styles.bgGray33, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                    <View style={[styles.bgGray16, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("Confirm and Submit Request")}
                                         </Text>
@@ -715,7 +715,7 @@ class PhotographerDetailScreen extends Component{
                                     )}
                                 </View>
                                 <TouchableWithoutFeedback onPress={this.props.submit}>
-                                    <View style={[styles.bgGray33, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                    <View style={[styles.bgGray16, styles.mt20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("Confirm and Submit Request")}
                                         </Text>
@@ -743,7 +743,7 @@ class PhotographerDetailScreen extends Component{
                                             routeName: 'PhotographerList'
                                         })]
                                     }))}>
-                                    <View style={[styles.bgGray33, styles.mt20, styles.px20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                    <View style={[styles.bgGray16, styles.mt20, styles.px20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("Go to the main page")}
                                         </Text>
@@ -777,7 +777,7 @@ class PhotographerDetailScreen extends Component{
                                 <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween, styles.mt20]}>
                                     <View style={[styles.flex1, styles.pr5]}>
                                         <TouchableWithoutFeedback onPress={this.props.send}>
-                                            <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSendingEmail ? { opacity: 0.7 } : null]}>
+                                            <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSendingEmail ? { opacity: 0.7 } : null]}>
                                                 <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                     {this.context.t("Resend")}
                                                 </Text>
@@ -791,7 +791,7 @@ class PhotographerDetailScreen extends Component{
                                             routeName: 'PhotographerList'
                                         })]
                                     }))}>
-                                            <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                            <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
                                                 <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                     {this.context.t("Main")}
                                                 </Text>
@@ -843,7 +843,7 @@ class PhotographerDetailScreen extends Component{
                                 width={width - 60}
                                 />
                                 <TouchableWithoutFeedback onPress={() => this.props.changeDateStep(2)}>
-                                    <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("NEXT")}
                                         </Text>
@@ -898,7 +898,7 @@ class PhotographerDetailScreen extends Component{
                                     onDateChange={(date) => this.props.handleChangeTimes(date)}
                                 />
                                 <TouchableWithoutFeedback onPress={this._confirmDate}>
-                                    <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("DONE")}
                                         </Text>
@@ -946,7 +946,7 @@ class PhotographerDetailScreen extends Component{
                         width={width - 60}
                         />
                         <TouchableWithoutFeedback onPress={this._confirmDate}>
-                            <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
+                            <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
                                 <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                     {this.context.t("DONE")}
                                 </Text>

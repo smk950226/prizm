@@ -187,6 +187,9 @@ p{
 .font-13-16{
     font-size: 13px
 }
+.font-12-16{
+    font-size: 12px
+}
 .font-14-16{
     font-size: 14px
 }
@@ -195,6 +198,9 @@ p{
 }
 .font-16-18{
     font-size: 16px
+}
+.font-17-20{
+    font-size: 17px
 }
 .font-16-20{
     font-size: 16px
@@ -225,6 +231,14 @@ p{
     }
     .font-admin-home-2{
         font-size: 16px;
+    }
+}
+@media (min-width: 768px){
+    .font-17-20{
+        font-size: 20px
+    }
+    .font-12-16{
+        font-size: 16px
     }
 }
 @media (min-width: 1024px){
@@ -295,10 +309,10 @@ p{
     height: 100vh;
 }
 .height-full-safearea{
-    height: calc(100vh - 72px);
+    height: calc(100vh - 56px);
 }
 .min-height-full-safearea{
-    min-height: calc(100vh - 72px);;
+    min-height: calc(100vh - 56px);;
 }
 .min-height-full-btm-nav{
     min-height: calc(100vh - 48px);;
@@ -325,6 +339,12 @@ p{
 @media (min-width: 768px){
     .width-half-btn{
         width: 140px
+    }
+    .height-full-safearea{
+        height: calc(100vh - 72px);
+    }
+    .min-height-full-safearea{
+        min-height: calc(100vh - 72px);;
     }
 }
 
@@ -492,6 +512,9 @@ p{
 }
 .bg-gray-97{
     background-color: $gray-97;
+}
+.bg-gray-16{
+    background-color: $gray-16;
 }
 .bg-pink{
     background-color: $pink;
@@ -1427,11 +1450,11 @@ textarea {
 }
 
 .safearea{
-    padding-top: 72px;
+    padding-top: 56px;
     padding-bottom: 48px;
 }
 .safearea-top{
-    padding-top: 72px;
+    padding-top: 56px;
 }
 .safearea-btm{
     padding-bottom: 48px;
@@ -1496,9 +1519,13 @@ textarea {
 .border-radius-round{
     border-radius: 9999px;
 }
+.border-radius-1{
+    border-radius: 1px;
+}
 
 .btn{
     cursor: pointer;
+    border-radius: 1px;
 
     &:hover,
     &:active,
@@ -1699,4 +1726,7 @@ textarea {
     border-top: 10px solid transparent;
     border-right: 10px solid #969696;
     transform: translateY(-50%);
+}
+.nav-shadow{
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.08);
 }

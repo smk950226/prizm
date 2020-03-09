@@ -32,7 +32,7 @@ class AdminOrderList extends Component{
                 <p className={`${styles.font14} ${styles.mt4}`}>
                     {this.context.t("Please enter details so that the customer can get enough information about you. Also, prepare your profile pictures and examples to be displayed at the top of the studio page.")}
                 </p>
-                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mb3}`} style={{height: 48, marginTop: 65}} onClick={this.props.goStudioSetting}>
+                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${styles.mb3}`} style={{height: 48, marginTop: 65}} onClick={this.props.goStudioSetting}>
                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Create Studio")}</p>
                 </div>
             </div>

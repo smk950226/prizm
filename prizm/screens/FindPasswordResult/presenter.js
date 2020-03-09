@@ -40,7 +40,7 @@ class FindPasswordResult extends Component{
                     <div className={`${styles.widthFull}`}>
                         <input className={`${styles.textInput2}`} type={"password"} name={"password2"} value={password2} onChange={this.props.handleInputChange} onKeyPress={this.props.handleKeyPressResult} />
                     </div>
-                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.handleFindPasswordResult}>
+                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.handleFindPasswordResult}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Change")}</p>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ class FindPasswordResult extends Component{
                             {this.context.t("Please check your email again.")}<br/>
                         </p>
                     </div>
-                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.handleFindPassword}>
+                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.handleFindPassword}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Confirm")}</p>
                     </div>
                 </div>

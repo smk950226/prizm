@@ -15,7 +15,7 @@ const ReviewCreateComplete = (props, context) => (
             <p className={`${styles.font1416} ${styles.mt3}`}>{context.t("Hope to see you again at your next trip!")}</p>
         </div>
         <Link to='/' style={{textDecoration: 'none', color: 'white', width: '100%'}}>
-            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
+            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Go to the main page")}</p>
             </div>
         </Link>

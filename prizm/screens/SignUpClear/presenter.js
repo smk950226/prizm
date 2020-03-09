@@ -22,10 +22,10 @@ const SignUpClear = (props, context) => (
                 {context.t("When you complete the email verification, you will be able to freely make reservations.")}
             </p>
             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.justifyContentMdCenter} ${styles.mt5}`}>
-                <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity07 : null}`} style={{height: 48}} onClick={props.send}>
+                <div className={`${styles.widthHalfBtn} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity07 : null}`} style={{height: 48}} onClick={props.send}>
                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Resend")}</p>
                 </div>
-                <div className={`${styles.widthHalfBtn} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
+                <div className={`${styles.widthHalfBtn} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mxMd3} ${styles.mt4} ${styles.mb3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Main")}</p>
                 </div>
             </div>

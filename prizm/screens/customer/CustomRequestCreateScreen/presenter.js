@@ -1281,7 +1281,7 @@ class CustomRequestCreateScreen extends Component{
                                 {this.context.t("We will reach you via email and SMS soon. Thank you!")}
                             </Text>
                             <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
-                                <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
+                                <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
                                     <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                         {this.context.t("HOME")}
                                     </Text>
@@ -1311,7 +1311,7 @@ class CustomRequestCreateScreen extends Component{
                             <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween, styles.mt20]}>
                                 <View style={[styles.flex1, styles.pr5]}>
                                     <TouchableWithoutFeedback onPress={this._send}>
-                                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20, isSendingEmail ? { opacity: 0.7 } : null]}>
+                                        <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20, isSendingEmail ? { opacity: 0.7 } : null]}>
                                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                 {this.context.t("RESEND")}
                                             </Text>
@@ -1320,7 +1320,7 @@ class CustomRequestCreateScreen extends Component{
                                 </View>
                                 <View style={[styles.flex1, styles.pl5]}>
                                     <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
-                                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
+                                        <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
                                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                 {this.context.t("HOME")}
                                             </Text>
@@ -1609,7 +1609,7 @@ class CustomRequestCreateScreen extends Component{
                                     </View>
                                 </View>
                                 <TouchableWithoutFeedback onPress={this._next}>
-                                    <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("NEXT")}
                                         </Text>
@@ -1759,7 +1759,7 @@ class CustomRequestCreateScreen extends Component{
                                     </View>
                                 </View>
                                 <TouchableWithoutFeedback onPress={this._next}>
-                                    <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("NEXT")}
                                         </Text>
@@ -1808,7 +1808,7 @@ class CustomRequestCreateScreen extends Component{
                                                 </View>
                                             )}
                                             <TouchableWithoutFeedback onPress={locationOption === 1 ? showMap ? this._closeMap : this._openMap : null}>
-                                                <View style={[styles.row, styles.px20, styles.bgGray33, styles.widthFull, styles.alignItemsCenter, styles.justifyContentBetween, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt10]}>
+                                                <View style={[styles.row, styles.px20, styles.bgGray16, styles.widthFull, styles.alignItemsCenter, styles.justifyContentBetween, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt10]}>
                                                     <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                         +
                                                     </Text>
@@ -1838,7 +1838,7 @@ class CustomRequestCreateScreen extends Component{
                                     </View>
                                 </View>
                                 <TouchableWithoutFeedback onPress={this._next}>
-                                    <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                    <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {isLoggedIn ? this.context.t("DONE") : this.context.t("NEXT")}
                                         </Text>
@@ -1963,7 +1963,7 @@ class CustomRequestCreateScreen extends Component{
                                             </TouchableWithoutFeedback>
                                         </View>
                                         <TouchableWithoutFeedback onPress={this._signup}>
-                                            <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                            <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
                                                 <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                     {this.context.t("Click here to submit your request")}
                                                 </Text>
@@ -2018,7 +2018,7 @@ class CustomRequestCreateScreen extends Component{
                                             </TouchableWithoutFeedback>
                                         </View>
                                         <TouchableWithoutFeedback onPress={this._login}>
-                                            <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
+                                            <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, isSubmitting ? { opacity: 0.7 } : null]}>
                                                 <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                     {this.context.t("Click here to submit your request")}
                                                 </Text>
@@ -2086,7 +2086,7 @@ class CustomRequestCreateScreen extends Component{
                                     width={width - 60}
                                     />
                                     <TouchableWithoutFeedback onPress={() => this._changeDateStep(2)}>
-                                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
+                                        <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
                                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                 {this.context.t("NEXT")}
                                             </Text>
@@ -2141,7 +2141,7 @@ class CustomRequestCreateScreen extends Component{
                                         onDateChange={(date) => this._handleChangeTimes(date)}
                                     />
                                     <TouchableWithoutFeedback onPress={this._confirmDate}>
-                                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
+                                        <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
                                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                                 {this.context.t("DONE")}
                                             </Text>
@@ -2189,7 +2189,7 @@ class CustomRequestCreateScreen extends Component{
                             width={width - 60}
                             />
                             <TouchableWithoutFeedback onPress={this._confirmDate}>
-                                <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
+                                <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.py15, styles.alignSelfCenter]}>
                                     <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                         {this.context.t("DONE")}
                                     </Text>
@@ -2307,7 +2307,7 @@ class CustomRequestCreateScreen extends Component{
                                         <Text style={[styles.font14, styles.fontBold]}>
                                             {selectedLocation.name}
                                         </Text>
-                                        <View style={[styles.circle20, locations.find(lo => (lo.lat === selectedLocation.geometry.latitude) && (lo.lng === selectedLocation.geometry.longitude)) ? styles.bgPink: styles.bgGray33, styles.center]}>
+                                        <View style={[styles.circle20, locations.find(lo => (lo.lat === selectedLocation.geometry.latitude) && (lo.lng === selectedLocation.geometry.longitude)) ? styles.bgPink: styles.bgGray16, styles.center]}>
                                         {locations.find(lo => (lo.lat === selectedLocation.geometry.latitude) && (lo.lng === selectedLocation.geometry.longitude)) ? (
                                             <Image source={require('../../../assets/images/icon_close_white.png')} style={[styles.icon10]} />
                                         ) : (

@@ -85,7 +85,7 @@ const Profile = (props, context) => (
             </View>
             <View>
                 <TouchableWithoutFeedback onPress={props.submit}>
-                    <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                    <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                             {context.t("Edit profile")}
                         </Text>

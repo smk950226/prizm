@@ -71,7 +71,7 @@ class Home extends Component{
                                         </div>
                                         </Link>
                                     </div>
-                                    <a target={'_blank'} href={`https://instagram.com/${photographer.user.instagram_account}/`} className={`${styles.bgGray33} ${styles.px2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${styles.textDecorationNone}`} style={{height: 25}}>
+                                    <a target={'_blank'} href={`https://instagram.com/${photographer.user.instagram_account}/`} className={`${styles.bgGray16} ${styles.px2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.cursorPointer} ${styles.textDecorationNone}`} style={{height: 25}}>
                                         <img src={require('../../assets/images/icon_instagram.png')} alt={"Instagram"} className={`${styles.iconInstagram}`} />
                                         <p className={`${styles.fontBold} ${styles.font11} ${styles.white} ${styles.ml1}`}>Instagram</p>
                                     </a>

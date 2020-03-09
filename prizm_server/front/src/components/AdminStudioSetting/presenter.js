@@ -403,7 +403,7 @@ class AdminSignUp extends Component{
                                 {images && images.length > 0 ? (
                                     <Fragment>
                                         <label htmlFor={'portfolio'}>
-                                            <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`}>
+                                            <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`}>
                                                 <p className={`${styles.font40} ${styles.white}`}>+</p>
                                             </div>
                                         </label>
@@ -415,12 +415,12 @@ class AdminSignUp extends Component{
                                 ) : (
                                     <Fragment>
                                         <label htmlFor={'portfolio'}>
-                                            <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`}>
+                                            <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`}>
                                                 <p className={`${styles.font40} ${styles.white}`}>+</p>
                                             </div>
                                         </label>
                                         {opacityList.map((opacity, index) => (
-                                            <div key={index} className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`} style={{opacity: opacity}}>
+                                            <div key={index} className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`} style={{opacity: opacity}}>
                                             </div>
                                         ))}
                                     </Fragment>
@@ -436,7 +436,7 @@ class AdminSignUp extends Component{
                                     {profileImage ? (
                                         <ProfileDivLg image={profileImage.image ? profileImage.image : profileImage} />
                                     ) : (
-                                        <div className={`${styles.containerStudioProfile} ${styles.bgGray33} ${styles.cursorPointer} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                        <div className={`${styles.containerStudioProfile} ${styles.bgGray16} ${styles.cursorPointer} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                             <p className={`${styles.font40} ${styles.white}`}>+</p>
                                         </div>
                                     )}
@@ -503,7 +503,7 @@ class AdminSignUp extends Component{
                                 {this.context.t("Search on the map to add your first photography spot")}
                             </p>
                             <div className={`${styles.mobileOnly} ${styles.mt3}`}>
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openLocationModal}>
+                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openLocationModal}>
                                     <p className={`${styles.font32} ${styles.white}`}>{`+`}</p>
                                     <p className={`${styles.fontBold} ${styles.font12} ${styles.white}`}>{this.context.t("Add a new location")}</p>
                                     <p className={`${styles.font32} ${styles.white} ${styles.hidden}`}>{`+`}</p>
@@ -589,7 +589,7 @@ class AdminSignUp extends Component{
                             </div>
                             <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{this.context.t("Click the button below to create a new service & pricing option.")}</p>
                             <div className={`${styles.mobileOnly} ${styles.mt3}`}>
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openOptionModal}>
+                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openOptionModal}>
                                     <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
                                     <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t("Create a new option")}</p>
                                     <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
@@ -637,11 +637,11 @@ class AdminSignUp extends Component{
                                                         <input className={`${styles.textInput6}`} type={"text"} name={"optionPrice"} value={optionPrice} onChange={this.props.handleInputChange} />
                                                     </div>
                                                 </div>
-                                                <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.completeAddOption}>
+                                                <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt45} ${styles.mtMd3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.completeAddOption}>
                                                     <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t("Save")}</p>
                                                 </div>
                                                 {showOptionPlus && (
-                                                    <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.closeOptionPlus}>
+                                                    <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.closeOptionPlus}>
                                                         <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t("Cancel")}</p>
                                                     </div>
                                                 )}
@@ -650,7 +650,7 @@ class AdminSignUp extends Component{
                                     </Fragment>
                                 )}
                                 {!showOptionPlus && (
-                                    <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openOptionPlus}>
+                                    <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openOptionPlus}>
                                         <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
                                         <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t("Create a new option")}</p>
                                         <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
@@ -703,7 +703,7 @@ class AdminSignUp extends Component{
                                     {this.context.t("Click on the smartphone icon at the top right corner to view your PRIZM Studio.")}
                                 </p>
                             </div>
-                            <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirm}>
+                            <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt45} ${styles.mtMd5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={this.props.confirm}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Create Studio Complete")}</p>
                             </div>
                             <input id={`portfolio`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={this.props.submit} multiple={true} />
@@ -886,7 +886,7 @@ class AdminSignUp extends Component{
                                     </div>
                                     <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
                                     <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("Please leave your message here.")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Submit the request")}</p>
                                     </div>
                                     </Collapse>
@@ -941,7 +941,7 @@ class AdminSignUp extends Component{
                                             {profileImage ? (
                                                 <ProfileDivLg image={profileImage.image ? profileImage.image : profileImage} />
                                             ) : (
-                                                <div className={`${styles.containerStudioProfile} ${styles.bgGray33} ${styles.cursorPointer} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                                <div className={`${styles.containerStudioProfile} ${styles.bgGray16} ${styles.cursorPointer} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                                     <p className={`${styles.font40} ${styles.white}`}>+</p>
                                                 </div>
                                             )}
@@ -964,7 +964,7 @@ class AdminSignUp extends Component{
                                         {images && images.length > 0 ? (
                                             <Fragment>
                                                 <label htmlFor={'portfolio'}>
-                                                    <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`}>
+                                                    <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`}>
                                                         <p className={`${styles.font40} ${styles.white}`}>+</p>
                                                     </div>
                                                 </label>
@@ -976,12 +976,12 @@ class AdminSignUp extends Component{
                                         ) : (
                                             <Fragment>
                                                 <label htmlFor={'portfolio'}>
-                                                    <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`}>
+                                                    <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`}>
                                                         <p className={`${styles.font40} ${styles.white}`}>+</p>
                                                     </div>
                                                 </label>
                                                 {opacityList.map((opacity, index) => (
-                                                    <div key={index} className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`} style={{opacity: opacity}}>
+                                                    <div key={index} className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`} style={{opacity: opacity}}>
                                                     </div>
                                                 ))}
                                             </Fragment>
@@ -1005,7 +1005,7 @@ class AdminSignUp extends Component{
                                             </div>
                                         )}
                                     </div>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._nextSlide}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._nextSlide}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("NEXT")}</p>
                                     </div>
                                 </div>
@@ -1028,7 +1028,7 @@ class AdminSignUp extends Component{
                                         <input className={`${styles.textInput6}`} type={"text"} name={"equipment"} value={equipment} onChange={this.props.handleInputChange} maxLength={30} />
                                     </div>
                                     <p className={`${styles.mt1} ${styles.font911}`}>{this.context.t("ex) Sony A7 II, Canon EOS 5 D Mark IV, EF 50mm F12 USM")}</p>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._nextSlide}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._nextSlide}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("NEXT")}</p>
                                     </div>
                                 </div>
@@ -1041,7 +1041,7 @@ class AdminSignUp extends Component{
                                     <div className={`${styles.containerStudioInput}`}>
                                         <textarea placeholder={this.context.t("Introduce yourself to potential PRIZM clients here.")} className={`${styles.textArea4} ${styles.mt3} ${styles.py3} ${styles.px2}`} value={description} name={"description"} onChange={this.props.handleInputChange} />
                                     </div>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._nextSlide}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._nextSlide}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("NEXT")}</p>
                                     </div>
                                 </div>
@@ -1054,7 +1054,7 @@ class AdminSignUp extends Component{
                                         {this.context.t("Detailed location where you would like to meet tourists")}<br/>
                                         {this.context.t("Search on the map to add your first photography spot")}
                                     </p>
-                                    <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openLocationModal}>
+                                    <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openLocationModal}>
                                         <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
                                         <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t("Add a new location")}</p>
                                         <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
@@ -1081,7 +1081,7 @@ class AdminSignUp extends Component{
                                         <MdCheckmark fontSize="20px" color="#3cd59e" className={`${options && options.length > 0 ? null : styles.hidden}`} />
                                     </div>
                                     <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{this.context.t("Click the button below to create a new service & pricing option.")}</p>
-                                    <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openOptionModal}>
+                                    <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openOptionModal}>
                                         <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
                                         <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t("Create a new option")}</p>
                                         <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
@@ -1126,7 +1126,7 @@ class AdminSignUp extends Component{
                                             {this.context.t("Make sure to double check that all the information is correct. Click on the smartphone icon at the top right corner to view your PRIZM Studio.")}
                                         </p>
                                     </div>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirm}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirm}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Create Studio Complete")}</p>
                                     </div>
                                 </div>
@@ -1312,7 +1312,7 @@ class AdminSignUp extends Component{
                                 </div>
                                 <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
                                 <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("Please leave your message here.")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
+                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Submit the request")}</p>
                                 </div>
                                 </Collapse>
@@ -1498,7 +1498,7 @@ class AdminSignUp extends Component{
                                     </div>
                                 </div>
                             </div>
-                            <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.completeAddOption}>
+                            <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt45} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.completeAddOption}>
                                 <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t("Save")}</p>
                             </div>
                         </div>
@@ -1526,7 +1526,7 @@ class AdminSignUp extends Component{
                                 value={selectedDate}
                                 onChange={this.props.selectDate}
                                 />
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.changeDateStep(2)}>
+                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.changeDateStep(2)}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Next")}</p>
                                 </div>
                             </Fragment>
@@ -1551,7 +1551,7 @@ class AdminSignUp extends Component{
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirmDate}>
+                                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirmDate}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                                 </div>
                             </Fragment>
@@ -1580,7 +1580,7 @@ class AdminSignUp extends Component{
                             tileClassName={`${styles.font12}`}
                             onChange={this.props.selectDateRange}
                             />
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirmDate}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirmDate}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                             </div>
                         </Fragment>

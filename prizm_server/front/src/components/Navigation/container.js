@@ -17,7 +17,8 @@ class Container extends Component{
         goTerms: PropTypes.func.isRequired,
         goMyPhotos: PropTypes.func.isRequired,
         goDescription: PropTypes.func.isRequired,
-        changeLang: PropTypes.func.isRequired
+        changeLang: PropTypes.func.isRequired,
+        lang: PropTypes.string.isRequired
     }
 
     constructor(props){

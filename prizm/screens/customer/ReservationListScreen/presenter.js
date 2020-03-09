@@ -37,7 +37,7 @@ class ReservationListScreen extends Component{
                             {this.context.t("Your request will be sent to the photographer when you complete the email verification")}
                         </Text>
                         <TouchableWithoutFeedback onPress={this.props.send}>
-                            <View style={[styles.bgGray33, styles.center, styles.py15, styles.alignSelfCenter, { width: 100 }]}>
+                            <View style={[styles.bgGray16, styles.center, styles.py15, styles.alignSelfCenter, { width: 100 }]}>
                                 <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                     {this.context.t("Resend")}
                                 </Text>

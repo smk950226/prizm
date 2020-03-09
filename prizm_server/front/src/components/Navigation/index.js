@@ -5,12 +5,13 @@ import { push } from 'react-router-redux';
 import { setLanguage } from "redux-i18n";
 
 const mapStateToProps = (state, ownProps) => {
-    const { user : { isLoggedIn, profile, notification }, router : { location } } = state;
+    const { user : { isLoggedIn, profile, notification }, router : { location }, i18nState : { lang } } = state;
     return {
         isLoggedIn,
         profile,
         pathname: location.pathname,
-        notification
+        notification,
+        lang
     }
 }
 

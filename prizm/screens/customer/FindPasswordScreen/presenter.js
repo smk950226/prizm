@@ -33,7 +33,7 @@ const FindPasswordScreen = (props, context) => {
                         />
                     </View>
                     <TouchableWithoutFeedback onPress={() => props.navigation.navigate('SignIn')}>
-                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                        <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                 {context.t("Login")}
                             </Text>
@@ -76,7 +76,7 @@ const FindPasswordScreen = (props, context) => {
                         </Text>
                     </View>
                     <TouchableWithoutFeedback onPress={props.submit}>
-                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                        <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                 {context.t("Send")}
                             </Text>

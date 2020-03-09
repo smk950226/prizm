@@ -267,7 +267,7 @@ class RequestComp extends Component{
                             </div>
                             {request.status === 'none' && (
                                 <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentCenter}`}>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${request.date_option === 'Specific' ? checkTime ? null : styles.opacity7 : null} `} style={{height: 48, width: 200}} onClick={this.props.submit}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${request.date_option === 'Specific' ? checkTime ? null : styles.opacity7 : null} `} style={{height: 48, width: 200}} onClick={this.props.submit}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Send Your Proposal")}</p>
                                     </div>
                                 </div>

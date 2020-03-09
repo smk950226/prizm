@@ -71,20 +71,20 @@ const AdminProfileSetting = (props, context) => (
             <div className={`${styles.col8} ${styles.colMd9} ${styles.px0}`}>
                 <input className={`${styles.textInput2}`} type={"text"} name={"content"} value={props.content} onChange={props.handleInputChange} readOnly={props.editable ? null : true} />
             </div>
-            <div className={`${styles.col3} ${styles.colMd2} ${styles.px0} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.check}>
+            <div className={`${styles.col3} ${styles.colMd2} ${styles.px0} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.check}>
                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Validate")}</p>
             </div>
         </div>
         {props.editable && (
             <Fragment>
                 <div className={`${styles.mobileOnly}`}>
-                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.submit}>
+                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.submit}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save")}</p>
                     </div>
                 </div>
                 <div className={`${styles.mobileNone}`}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                        <div className={`${styles.bgGray33} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, width: 140}} onClick={props.submit}>
+                        <div className={`${styles.bgGray16} ${styles.mtProfile} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, width: 140}} onClick={props.submit}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save Changes")}</p>
                         </div>
                     </div>

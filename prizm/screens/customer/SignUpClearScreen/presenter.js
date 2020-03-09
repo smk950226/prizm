@@ -27,7 +27,7 @@ const SignUpClearScreen = (props, context) => (
             <View style={[styles.row, styles.alignItemsCenter, styles.justifyContentBetween, styles.mt20]}>
                 <View style={[styles.flex1, styles.pr5]}>
                     <TouchableWithoutFeedback onPress={props.send}>
-                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
+                        <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                 {context.t("RESEND")}
                             </Text>
@@ -36,7 +36,7 @@ const SignUpClearScreen = (props, context) => (
                 </View>
                 <View style={[styles.flex1, styles.pl5]}>
                     <TouchableWithoutFeedback onPress={() => props.navigation.navigate('Home')}>
-                        <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
+                        <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, styles.mt20]}>
                             <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                 {context.t("HOME")}
                             </Text>

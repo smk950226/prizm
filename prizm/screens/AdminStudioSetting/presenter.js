@@ -179,7 +179,7 @@ const AdminSignUp = (props, context) => {
                             {props.images && props.images.length > 0 ? (
                                 <Fragment>
                                     <label htmlFor={'portfolio'}>
-                                        <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`}>
+                                        <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`}>
                                             <p className={`${styles.font40} ${styles.white}`}>+</p>
                                         </div>
                                     </label>
@@ -191,12 +191,12 @@ const AdminSignUp = (props, context) => {
                             ) : (
                                 <Fragment>
                                     <label htmlFor={'portfolio'}>
-                                        <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`}>
+                                        <div className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`}>
                                             <p className={`${styles.font40} ${styles.white}`}>+</p>
                                         </div>
                                     </label>
                                     {props.opacityList.map((opacity, index) => (
-                                        <div key={index} className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray33} ${styles.mr3}`} style={{opacity: opacity}}>
+                                        <div key={index} className={`${styles.containerAdminPortfolioInner} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.bgGray16} ${styles.mr3}`} style={{opacity: opacity}}>
                                         </div>
                                     ))}
                                 </Fragment>
@@ -212,7 +212,7 @@ const AdminSignUp = (props, context) => {
                                 {props.profileImage ? (
                                     <ProfileDivLg image={props.profileImage.image ? props.profileImage.image : props.profileImage} />
                                 ) : (
-                                    <div className={`${styles.containerStudioProfile} ${styles.bgGray33} ${styles.cursorPointer} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                    <div className={`${styles.containerStudioProfile} ${styles.bgGray16} ${styles.cursorPointer} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
                                         <p className={`${styles.font40} ${styles.white}`}>+</p>
                                     </div>
                                 )}
@@ -269,7 +269,7 @@ const AdminSignUp = (props, context) => {
                             {context.t("Search on the map to add your first photography spot")}
                         </p>
                         <div className={`${styles.mobileOnly} ${styles.mt3}`}>
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openLocationModal}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openLocationModal}>
                                 <p className={`${styles.font32} ${styles.white}`}>{`+`}</p>
                                 <p className={`${styles.fontBold} ${styles.font12} ${styles.white}`}>{context.t("Add a new location")}</p>
                                 <p className={`${styles.font32} ${styles.white} ${styles.hidden}`}>{`+`}</p>
@@ -355,7 +355,7 @@ const AdminSignUp = (props, context) => {
                         </div>
                         <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{context.t("Click the button below to create a new service & pricing option.")}</p>
                         <div className={`${styles.mobileOnly} ${styles.mt3}`}>
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionModal}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionModal}>
                                 <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
                                 <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Create a new option")}</p>
                                 <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
@@ -403,11 +403,11 @@ const AdminSignUp = (props, context) => {
                                                     <input className={`${styles.textInput6}`} type={"text"} name={"optionPrice"} value={props.optionPrice} onChange={props.handleInputChange} />
                                                 </div>
                                             </div>
-                                            <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.completeAddOption}>
+                                            <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt45} ${styles.mtMd3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.completeAddOption}>
                                                 <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Save")}</p>
                                             </div>
                                             {props.showOptionPlus && (
-                                                <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.closeOptionPlus}>
+                                                <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.closeOptionPlus}>
                                                     <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Cancel")}</p>
                                                 </div>
                                             )}
@@ -416,7 +416,7 @@ const AdminSignUp = (props, context) => {
                                 </Fragment>
                             )}
                             {!props.showOptionPlus && (
-                                <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionPlus}>
+                                <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt3} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={props.openOptionPlus}>
                                     <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
                                     <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Create a new option")}</p>
                                     <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
@@ -464,7 +464,7 @@ const AdminSignUp = (props, context) => {
                                 {context.t("Click on the smartphone icon at the top right corner to view your PRIZM Studio.")}
                             </p>
                         </div>
-                        <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.mtMd5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.confirm}>
+                        <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt45} ${styles.mtMd5} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} style={{height: 48}} onClick={props.confirm}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Save")}</p>
                         </div>
                         <input id={`portfolio`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={props.submit} multiple={true} />
@@ -653,7 +653,7 @@ const AdminSignUp = (props, context) => {
                             </div>
                             <Collapse isOpened={props.show4} theme={{collapse: styles.collapse}}>
                             <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={context.t("Please leave your message here.")} value={props.comment} name={"comment"} onChange={props.handleInputChange} />
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit the request")}</p>
                             </div>
                             </Collapse>
@@ -840,7 +840,7 @@ const AdminSignUp = (props, context) => {
                             </div>
                             <Collapse isOpened={props.show4} theme={{collapse: styles.collapse}}>
                             <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={context.t("Please leave your message here.")} value={props.comment} name={"comment"} onChange={props.handleInputChange} />
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Submit the request")}</p>
                             </div>
                             </Collapse>
@@ -973,7 +973,7 @@ const AdminSignUp = (props, context) => {
                                 </div>
                             </div>
                         </div>
-                        <div className={`${styles.containerStudioInput} ${styles.bgGray33} ${styles.mt45} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.completeAddOption}>
+                        <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.mt45} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.completeAddOption}>
                             <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Save")}</p>
                         </div>
                     </div>
@@ -1001,7 +1001,7 @@ const AdminSignUp = (props, context) => {
                             value={props.selectedDate}
                             onChange={props.selectDate}
                             />
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => props.changeDateStep(2)}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => props.changeDateStep(2)}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Next")}</p>
                             </div>
                         </Fragment>
@@ -1026,7 +1026,7 @@ const AdminSignUp = (props, context) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.confirmDate}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.confirmDate}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Done")}</p>
                             </div>
                         </Fragment>
@@ -1055,7 +1055,7 @@ const AdminSignUp = (props, context) => {
                         tileClassName={`${styles.font12}`}
                         onChange={props.selectDateRange}
                         />
-                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.confirmDate}>
+                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.confirmDate}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Done")}</p>
                         </div>
                     </Fragment>

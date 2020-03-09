@@ -43,7 +43,7 @@ const PaymentSuccess = (props, context) => (
                             <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("Your payment will be transferred to the photographer only after you have completed the photo session. PRIZM will safely hold your payment until then.")}</p>
                             <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("Please refer to the Terms of Use for cancellation and refund polices.")}</p>
                             
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Go back to the main page")}</p>
                             </div>
                         </Fragment>
@@ -53,7 +53,7 @@ const PaymentSuccess = (props, context) => (
                             <img src={require('../../assets/images/signup_complete.png')} alt={context.t("Paid")} className={`${styles.mt3}`} style={{width: '80%', maxWidth: 400}} />
                             <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("Payment will be transferred to your photographer only after you have completed the photo session and received photographs. Until then, your payment will be safely kept as a deposit.")}</p>
                             <p className={`${styles.font1214} ${styles.mt3}`}>{context.t("For information regarding cancellation and refund policies, please refer to our Terms of Service.")}</p>
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt5} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
                                 <p className={`${styles.font14} ${styles.white}`}>{context.t("Go back to the main page")}</p>
                             </div>
                         </Fragment>

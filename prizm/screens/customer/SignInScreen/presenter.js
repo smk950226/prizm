@@ -68,7 +68,7 @@ const SignInScreen = (props, context) => (
                 </TouchableWithoutFeedback>
             </View>
             <TouchableWithoutFeedback onPress={props.submit}>
-                <View style={[styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                <View style={[styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                     <Text style={[styles.font16, styles.fontBold, styles.white]}>
                         {props.goRequest ? context.t("Sign In & Submit the request") : context.t("Sign In")}
                     </Text>

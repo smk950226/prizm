@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     bgNavBrown: {
         backgroundColor: '#D19B69'
     },
-    bgGray33: {
+    bgGray16: {
         backgroundColor: '#333333'
     },
     bgGray93: {

@@ -15,7 +15,7 @@ const AdminStudioSettingClear = (props, context) => (
                     <div className={`${styles.col12} ${styles.px0} ${styles.textCenter} ${styles.mobileOnly}`}>
                         <img src={require('../../assets/images/signup_complete.png')} alt={context.t("Complete")} className={`${styles.mt4} ${styles.mb4}`} style={{width: '100%'}} />
                     </div>
-                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, marginTop: 70}} onClick={props.goHome}>
+                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, marginTop: 70}} onClick={props.goHome}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Home")}</p>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ const AdminStudioSettingClear = (props, context) => (
                     <a href={`https://prizm.cloud/${props.studioId}/`} target={'_blank'} className={`${styles.textDecorationNone}`}>
                         <p className={`${styles.fontBold} ${styles.font1418} ${styles.mt3} ${styles.urlBlue}`}>{`prizm.cloud/${props.studioId}/`}</p>
                     </a>
-                    <div className={`${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, marginTop: 70, width: 140}} onClick={props.goHome}>
+                    <div className={`${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, marginTop: 70, width: 140}} onClick={props.goHome}>
                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Home")}</p>
                     </div>
                 </div>

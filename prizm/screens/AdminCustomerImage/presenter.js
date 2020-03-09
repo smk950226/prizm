@@ -57,7 +57,7 @@ const AdminCustomerImage = (props, context) => (
                             <Fragment>
                                 <p className={`${styles.font1214} ${styles.completed} ${styles.textRight} ${styles.cursorPointer} ${styles.mb2}`} onClick={props.showCancel ? props.closeCancel : props.openCancel}>{context.t("Click here to mark this photo session as Completed")}</p>
                                 <Collapse isOpened={props.showCancel} theme={{collapse: styles.collapse}}>
-                                    <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
+                                    <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3}`}>
                                         <p className={`${styles.font1012} ${styles.white} ${styles.textRight}`}>
                                             {context.t("I have fully uploaded my client's photos as discussed earlier.")}
                                         </p>

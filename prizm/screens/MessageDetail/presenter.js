@@ -323,7 +323,7 @@ class MessageList extends Component{
                                             </div>
                                         </div>
                                         {redating && (
-                                            <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3} ${styles.mt4}`}>
+                                            <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3} ${styles.mt4}`}>
                                                 <p className={`${styles.font1214} ${styles.white}`} style={{lineHeight: 1.2}}>
                                                     {this.context.t("Please select time or Cancel reservation")}<br/>
                                                 </p>

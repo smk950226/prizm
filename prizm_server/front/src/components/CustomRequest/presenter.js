@@ -40,7 +40,7 @@ class CustomRequest extends Component{
                                         {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
                                         {this.context.t("Enrich your travel with photography")}
                                     </p>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goCustomRequestCreate}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goCustomRequestCreate}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go Custom Request")}</p>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@ class CustomRequest extends Component{
                                         {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
                                         {this.context.t("Enrich your travel with photography")}
                                     </p>
-                                    <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray33 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 460}}>
+                                    <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 460}}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
                                             {profile.is_verified ? (
                                                 this.context.t("Your custom request has been submitted.")
@@ -64,7 +64,7 @@ class CustomRequest extends Component{
                                         </p>
                                     </div>
                                     {!profile.is_verified  && (
-                                        <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 460}} onClick={this.props.send}>
+                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, maxWidth: 460}} onClick={this.props.send}>
                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
                                                 {this.context.t("Resend Verification Email")}
                                             </p>
@@ -91,7 +91,7 @@ class CustomRequest extends Component{
                                         {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
                                         {this.context.t("Enrich your travel with photography")}
                                     </p>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                         <div style={{position: 'relative'}}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Proposals for ")}{profile.first_name} {profile.last_name}</p>
                                         <div style={{position: 'absolute', top: -20, right: -5}}>
@@ -114,7 +114,7 @@ class CustomRequest extends Component{
                                         {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
                                         {this.context.t("Enrich your travel with photography")}
                                     </p>
-                                    <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 460}}>
+                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 460}}>
                                         <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
                                             {this.context.t("Your custom request has been confirmed.")}
                                         </p>
@@ -148,7 +148,7 @@ class CustomRequest extends Component{
                                 {this.context.t("Meet the ")}<span className={`${styles.fontBold}`}>{this.context.t("coolest photographers in Seoul")}</span><br/>
                                 {this.context.t("Enrich your travel with photography")}
                             </p>
-                            <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt6} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goCustomRequestCreate}>
+                            <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt6} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.goCustomRequestCreate}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Go Custom Request")}</p>
                             </div>
                             <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.pink} ${styles.cursorPointer} ${styles.fontBold}`} onClick={this.props.goSignin}>
@@ -178,7 +178,7 @@ class CustomRequest extends Component{
                                 <div className={`${styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this.props.cancel}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("OK")}</p>
                                 </div>
-                                <div className={`${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this.props.closeCancel}>
+                                <div className={`${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this.props.closeCancel}>
                                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Back")}</p>
                                 </div>
                             </div>

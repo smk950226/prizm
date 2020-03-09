@@ -286,12 +286,12 @@ class CustomRequestDetailScreen extends Component{
                                                 </View>
                                             </View>
                                         ) : (
-                                            <View style={[styles.py15, styles.bgGray33]}>
+                                            <View style={[styles.py15, styles.bgGray16]}>
                                                 <Text style={[styles.font12, styles.white, styles.px15]}>
                                                     {this.context.t("Please select your desired time(s).")}
                                                 </Text>
                                                 <View 
-                                                style={[{height: (dayList.length*32) + 45}, styles.widthFull, styles.mt15, styles.bgGray33, styles.px15]}
+                                                style={[{height: (dayList.length*32) + 45}, styles.widthFull, styles.mt15, styles.bgGray16, styles.px15]}
                                                 >
                                                     <ScrollView
                                                     horizontal={true}
@@ -340,7 +340,7 @@ class CustomRequestDetailScreen extends Component{
                                 <View style={[styles.row, styles.alignSelfCenter, styles.justifyContentBetween, styles.mt30, styles.px15]}>
                                     <View style={[styles.flex1, styles.pr5, { height: 40 }, styles.justifyContentCenter]}>
                                         <TouchableWithoutFeedback onPress={this.props.submit}>
-                                            <View style={[styles.flex1, styles.bgGray33, styles.center]}>
+                                            <View style={[styles.flex1, styles.bgGray16, styles.center]}>
                                                 <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                     {this.context.t("Select this proposal")}
                                                 </Text>
@@ -372,7 +372,7 @@ class CustomRequestDetailScreen extends Component{
                                     {this.context.t("to your email and mobile number.")}
                                 </Text>
                                 <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
-                                    <View style={[styles.bgGray33, styles.mt20, styles.px20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.bgGray16, styles.mt20, styles.px20, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.font16, styles.fontBold, styles.white]}>
                                             {this.context.t("Go to the main page")}
                                         </Text>

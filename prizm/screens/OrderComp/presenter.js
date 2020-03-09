@@ -118,32 +118,32 @@ const OrderComp = (props, context) => (
         {(props.order.status !== 'completed') && (
             <Collapse isOpened={props.showResponse} theme={{collapse: styles.collapse}}>
                 {((props.order.status === 'confirmed') || (props.order.status === 'waiting_payment')) && (
-                    <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
+                    <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3}`}>
                         <p className={`${styles.font1113} ${styles.white} ${styles.ml2}`}>
                             {context.t("This reservation has been confirmed. We are waiting for payment from your client. If payment is not made within 72 hours, the reservation will be canceled automatically.")}
                         </p>
                     </div>
                 )}
                 {props.order.status === 'paid' && (
-                    <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
+                    <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3}`}>
                         <p className={`${styles.font1113} ${styles.white} ${styles.ml2}`}>
                             {context.t("This reservation has been confirmed and fully paid. Payout will be available when you upload tourist photos and mark this schedule as 'Completed.'")}
                         </p>
                     </div>
                 )}
                 {props.order.status === 'cancelled' && (
-                    <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
+                    <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3}`}>
                         <p className={`${styles.font1113} ${styles.white} ${styles.ml2}`}>
                             {context.t("This reservation has been cancelled.")}
                         </p>
                     </div>
                 )}
                 {props.order.status === 'pending' && (
-                    <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
+                    <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3}`}>
                         {props.order.available_time ? (
                             <Fragment>
                                 <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{context.t("Your availability table (below) was sent to your client. We are waiting for the client's response.")}</p>
-                                <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
+                                <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3}`}>
                                     <DayContainer length={props.dayList.length}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsEnd} ${styles.flexNowrap}`} style={{height: 15}}>
                                             <p className={`${styles.hidden} ${styles.nowrapInner}`} style={{width: 70}}>{'hidden'}</p>
@@ -167,7 +167,7 @@ const OrderComp = (props, context) => (
                                 </div>
                                 <p className={`${styles.font1214} ${styles.white} ${styles.textRight} ${styles.cursorPointer}`} onClick={props.showDecline ? props.closeDecline : props.openDecline}>{props.showDecline ? context.t("Are you sure you want to decline the request?") : context.t("Click here to decline the reservation request.")}</p>
                                 <Collapse isOpened={props.showDecline} theme={{collapse: styles.collapse}}>
-                                    <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
+                                    <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3}`}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
                                             <div className={`${styles.bgPink} ${styles.py2} ${styles.px3} ${styles.mt2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${props.isSubmitting ? styles.opacity7 : null}`} onClick={props.decline}>
                                                 <p className={`${styles.fontBold} ${styles.font1416} ${styles.white}`}>{context.t("Decline")}</p>
@@ -209,7 +209,7 @@ const OrderComp = (props, context) => (
                                     </div>
                                 </div>
                                 <Collapse isOpened={props.showDatePicker} theme={{collapse: styles.collapse}}>
-                                    <div className={`${styles.bgGray33} ${styles.py3} ${styles.px3}`}>
+                                    <div className={`${styles.bgGray16} ${styles.py3} ${styles.px3}`}>
                                         <p className={`${styles.font1113} ${styles.white}`} style={{lineHeight: 1.2}}>
                                             {context.t("Please select your available timeslots in the table below.")}<br/>
                                             <span className={`${styles.mobileNone}`}>

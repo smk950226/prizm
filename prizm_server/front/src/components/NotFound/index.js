@@ -13,7 +13,7 @@ const NotFound = (props, context) => (
                 {context.t("The page you are looking for doesn't exist or another error has occured.")}<br/>
             </p>
             <Link to='/' style={{textDecoration: 'none', color: 'white'}}>
-                <div className={`${styles.widthFull} ${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
+                <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={props.goHome}>
                     <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{context.t("Go to the main page")}</p>
                 </div>
             </Link>

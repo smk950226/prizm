@@ -48,7 +48,7 @@ const HomeScreen = (props, context) => (
                                     </Text>
                                 </View>
                                 <TouchableWithoutFeedback onPress={() => props.navigation.navigate('CustomRequestCreate')}>
-                                    <View style={[styles.mt30, styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.mt30, styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                             {context.t("Book your photographer now >>")}
                                         </Text>
@@ -67,7 +67,7 @@ const HomeScreen = (props, context) => (
                                     </Text>
                                 </View>
                                 <TouchableWithoutFeedback>
-                                    <View style={[styles.mt15, props.profile.is_verified ? styles.bgGray33 : styles.bgGray93, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.mt15, props.profile.is_verified ? styles.bgGray16 : styles.bgGray93, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         {props.profile.is_verified ? (
                                             <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                 {context.t("Your custom request has been submitted.")}
@@ -86,7 +86,7 @@ const HomeScreen = (props, context) => (
                                 </TouchableWithoutFeedback>
                                 {!props.profile.is_verified  && (
                                     <TouchableWithoutFeedback onPress={props.send}>
-                                        <View style={[styles.mt30, styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, props.isSendingEmail ? { opacity: 0.7 }: null]}>
+                                        <View style={[styles.mt30, styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter, props.isSendingEmail ? { opacity: 0.7 }: null]}>
                                             <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                 {context.t("Resend Verification Email")}
                                             </Text>
@@ -127,7 +127,7 @@ const HomeScreen = (props, context) => (
                                     </Text>
                                 </View>
                                 <TouchableWithoutFeedback onPress={() => props.navigation.navigate('CustomRequestList', { requestId: props.profile.custom_request_status.id })}>
-                                    <View style={[styles.mt30, styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.mt30, styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <View>
                                             <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                                 {context.t(`Proposals for ${props.profile.first_name} ${props.profile.last_name}`)}
@@ -160,7 +160,7 @@ const HomeScreen = (props, context) => (
                                     </Text>
                                 </View>
                                 <TouchableWithoutFeedback>
-                                    <View style={[styles.mt30, styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                                    <View style={[styles.mt30, styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                         <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                             {context.t("Your custom request has been confirmed.")}
                                         </Text>
@@ -199,7 +199,7 @@ const HomeScreen = (props, context) => (
                             </Text>
                         </View>
                         <TouchableWithoutFeedback onPress={() => props.navigation.navigate('CustomRequestCreate')}>
-                            <View style={[styles.mt30, styles.bgGray33, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
+                            <View style={[styles.mt30, styles.bgGray16, styles.widthFull, styles.center, styles.maxWidth360, styles.py15, styles.alignSelfCenter]}>
                                 <Text style={[styles.fontBold, styles.font14, styles.white]}>
                                     {context.t("Book your photographer now >>")}
                                 </Text>
@@ -243,7 +243,7 @@ const HomeScreen = (props, context) => (
                     </View>
                     <View style={[styles.flex1, styles.pl5]}>
                         <TouchableWithoutFeedback onPress={props.closeCancel}>
-                            <View style={[styles.py10, styles.center, styles.bgGray33]}>
+                            <View style={[styles.py10, styles.center, styles.bgGray16]}>
                                 <Text style={[styles.fontBold, styles.font16, styles.white]}>
                                     {context.t("CANCEL")}
                                 </Text>

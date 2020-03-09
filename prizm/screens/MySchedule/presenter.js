@@ -55,7 +55,7 @@ class MySchedule extends Component{
                         <p className={`${styles.font1214} ${styles.pink}`} style={{width: 'calc(100% - 100px)'}}>
                             {this.context.t("Your request will be sent to the photographer when you complete the email verification")}
                         </p>
-                        <div className={`${styles.bgGray33} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, width: 100}} onClick={this.props.send}>
+                        <div className={`${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn} ${isSendingEmail ? styles.opacity07 : null}`} style={{height: 48, width: 100}} onClick={this.props.send}>
                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
                                 {this.context.t("Resend")}
                             </p>

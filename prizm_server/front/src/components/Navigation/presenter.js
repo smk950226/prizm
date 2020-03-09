@@ -24,7 +24,8 @@ class Navigation extends Component{
         goMyPhotos: PropTypes.func.isRequired,
         goDescription: PropTypes.func.isRequired,
         now: PropTypes.number.isRequired,
-        changeLang: PropTypes.func.isRequired
+        changeLang: PropTypes.func.isRequired,
+        lang: PropTypes.string.isRequired
     }
 
     static contextTypes = {
@@ -32,7 +33,7 @@ class Navigation extends Component{
     }
 
     render(){
-        const { showMenu, openMenu, handleShowMenu, profile, isLoggedIn, notification, showNav, now } = this.props;
+        const { showMenu, openMenu, handleShowMenu, profile, isLoggedIn, notification, showNav, now, lang } = this.props;
         let confirmNotification = 0
         let cancelNotification = 0
         let showNotification = {}
@@ -57,20 +58,22 @@ class Navigation extends Component{
         if(showNav){
             return(
                 <Fragment>
-                <div className={`${styles.positionNav} ${styles.widthFull} ${styles.py4} ${styles.bgWhite} ${styles.px3}`} style={{zIndex: 2}}>
+                <div className={`${styles.positionNav} ${styles.widthFull} ${styles.py3} ${styles.bgWhite} ${styles.px3}`} style={{zIndex: 2}}>
                     <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                         <div className={`${styles.col4} ${styles.colSm2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                             <img src={require('../../assets/images/icon_menu.png')} alt={this.context.t("MENU")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={openMenu} />
                         </div>
                         <div className={`${styles.col4} ${styles.colSm8} ${styles.px0}`}>
                             {!(this.props.pathname === '/artist/') && (
-                                <p className={`${styles.textCenter} ${styles.fontBold} ${styles.font20} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
+                                <p className={`${styles.textCenter} ${styles.fontExtraBold} ${styles.font1720} ${styles.cursorPointer}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
                             )}
                         </div>
                         <div className={`${styles.col4} ${styles.colSm2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
-                            <p className={`${styles.font1214} ${styles.gray8e} ${styles.cursorPointer}`} onClick={() => this.props.changeLang('kr')}>한국어</p>
-                            <p className={`${styles.font1214} ${styles.gray8e} ${styles.mx2}`}>|</p>
-                            <p className={`${styles.font1214} ${styles.gray8e} ${styles.cursorPointer}`} onClick={() => this.props.changeLang('en')}>English</p>
+                            {lang === 'en' ? (
+                                <p className={`${styles.font1214} ${styles.gray8e} ${styles.cursorPointer}`} onClick={() => this.props.changeLang('kr')}>한국어</p>
+                            ) : (
+                                <p className={`${styles.font1214} ${styles.gray8e} ${styles.cursorPointer}`} onClick={() => this.props.changeLang('en')}>English</p>
+                            )}
                         </div>
                     </div>
                     {/* <div className={`${styles.widthFull} ${styles.positionNavDescription}`}>
@@ -90,85 +93,89 @@ class Navigation extends Component{
                 className={`${styles.bgWhite}`}
                 >
                     <div>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignContentBetween} ${styles.bgWhite} ${styles.minHeightFull} ${styles.outlineNone}`} style={{zIndex: 3, position: 'relative'}}>
-                            <div className={`${styles.col12} ${styles.px0}`}>
-                                <div className={`${styles.px3} ${styles.py3} ${styles.pyMd5} ${styles.bgNavBlue}`}>
-                                        {isLoggedIn ? profile? (
-                                            <p className={`${styles.font20} ${styles.mb1}`} style={{lineHeight: 1.35}}>
-                                                {((now>=6) && (now<12)) && (
-                                                    `Good morning,`
-                                                )}
-                                                {((now>=12) && (now<18)) && (
-                                                    `Good afternoon,`
-                                                )}
-                                                {((now>=18) && (now<22)) && (
-                                                    `Good evening,`
-                                                )}
-                                                {((now>=22) || (now<6)) && (
-                                                    `Good night,`
-                                                )}
-                                                <br/>{`${profile.first_name} ${profile.last_name}`}
-                                            </p>
-                                        ) : (
-                                            <p className={`${styles.font20} ${styles.mb1}`} style={{lineHeight: 1.35}}>
-                                                {this.context.t("Welcome to ")}<span className={`${styles.fontBold}`}>{this.context.t("PRIZM!")}</span><br/>
-                                                <span className={`${styles.font14} ${styles.mt3}`}>
-                                                    {this.context.t("Sign in to find the coolest photographers in ")}<span className={`${styles.fontBold}`}>{this.context.t("Seoul.")}</span><br/><br/>
-                                                    {this.context.t("Book your photographer without hassle.")}
-                                                </span>
-                                            </p>
-                                        ) : (
-                                            <p className={`${styles.font20} ${styles.mb1}`} style={{lineHeight: 1.35}}>
-                                                {this.context.t("Welcome to ")}<span className={`${styles.fontBold}`}>{this.context.t("PRIZM!")}</span><br/>
-                                                <span className={`${styles.font14} ${styles.mt3}`}>
-                                                    {this.context.t("Sign in to find the coolest photographers in ")}<span className={`${styles.fontBold}`}>{this.context.t("Seoul.")}</span><br/><br/>
-                                                    {this.context.t("Book your photographer without hassle.")}
-                                                </span>
-                                            </p>
-                                        )}
-                                </div>
-                                {isLoggedIn ? (
-                                    <div className={`${styles.px3}`}>
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`}>
-                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goProfile}>{this.context.t("Profile")}</p>
-                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Profile")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goProfile} />
-                                        </div>
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt2}`}>
-                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>{this.context.t("My schedule")}</p>
-                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("My schedule")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goMySchedule} />
-                                        </div>
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt2}`}>
-                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goMyPhotos}>{this.context.t("My Photos")}</p>
-                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("My Photos")} className={`${styles.iconArrow} ${styles.cursorPointer}`} />
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className={`${styles.px3}`}>
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3}`}>
-                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goSignUp}>{this.context.t("Sign Up")}</p>
-                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Sign Up")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goSignUp} />
-                                        </div>
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt2}`}>
-                                            <p className={`${styles.fontBold} ${styles.font16} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goSignIn}>{this.context.t("Sign In")}</p>
-                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Sign In")} className={`${styles.iconArrow} ${styles.cursorPointer}`} onClick={this.props.goSignIn} />
-                                        </div>
-                                    </div>
-                                )}
-                                <div className={`${styles.mt3} ${styles.mtMd5} ${styles.px3}`}>
-                                    <p className={`${styles.font1416} ${styles.cursorPointer}`} onClick={() => this.props.goDescription('about')}>{this.context.t("About PRIZM")}</p>
-                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('why')}>{this.context.t("Why PRIZM")}</p>
-                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('how')}>{this.context.t("How it works")}</p>
-                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('support')}>{this.context.t("Support")}</p>
-                                    {isLoggedIn ? (
-                                        <p className={`${styles.navBrown} ${styles.font16} ${styles.cursorPointer} ${styles.mt4}`} onClick={this.props.logout}>{this.context.t("Sign Out")}</p>
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignContentBetween} ${styles.bgWhite} ${styles.outlineNone}`} style={{zIndex: 3, position: 'relative', minHeight: 568, maxHeight: 640}}>
+                                <div className={`${styles.col12} ${styles.px3} ${styles.mt45} ${styles.pyMd5}`}>
+                                    {isLoggedIn ? profile? (
+                                        <p className={`${styles.font16} ${styles.fontBold}`} style={{lineHeight: 1.35}}>
+                                            {((now>=6) && (now<12)) && (
+                                                this.context.t("Good morning,")
+                                            )}
+                                            {((now>=12) && (now<18)) && (
+                                                this.context.t("Good afternoon,")
+                                            )}
+                                            {((now>=18) && (now<22)) && (
+                                                this.context.t("Good evening,")
+                                            )}
+                                            {((now>=22) || (now<6)) && (
+                                                this.context.t("Good night,")
+                                            )}
+                                            {` ${profile.first_name} ${profile.last_name}`}
+                                        </p>
                                     ) : (
-                                        <a href={'https://admin.prizm.cloud'} className={`${styles.textDecorationNone}`}>
-                                            <p className={`${styles.navBrown} ${styles.font16} ${styles.cursorPointer} ${styles.mt4}`}>{this.context.t("Are you a photographer?")}</p>
-                                        </a>
-                                    )}
-                                </div>
+                                        <Fragment>
+                                        <p className={`${styles.font16} ${styles.fontBold}`} style={{lineHeight: 1.35}}>
+                                            {this.context.t("Welcome to ")}<span className={`${styles.fontBold}`}>{this.context.t("PRIZM!")}</span>
+                                        </p>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${styles.bgPink}`} style={{height: 32, width: 180}}>
+                                            <p className={`${styles.font14} ${styles.mr2} ${styles.cursorPointer} ${styles.white}`} onClick={this.props.goSignIn}>{this.context.t("Sign Up / Sign In")}</p>
+                                        </div>
+                                        </Fragment>
+                                    ) : (
+                                        <Fragment>
+                                        <p className={`${styles.font16} ${styles.fontBold}`} style={{lineHeight: 1.35}}>
+                                            {this.context.t("Welcome to ")}<span className={`${styles.fontBold}`}>{this.context.t("PRIZM!")}</span>
+                                        </p>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn} ${styles.bgPink}`} style={{height: 32, width: 180}}>
+                                            <p className={`${styles.font14} ${styles.mr2} ${styles.cursorPointer} ${styles.white}`} onClick={this.props.goSignIn}>{this.context.t("Sign Up / Sign In")}</p>
+                                        </div>
+                                        </Fragment>
+                                )}
                             </div>
-                            <img src={require('../../assets/images/main.png')} alt={this.context.t("PRIZM")} className={`${styles.mb3} ${styles.mbMd5}`} style={{width: 150, height: 107}} />
+                            {isLoggedIn ? (
+                                <div className={`${styles.col12} ${styles.px3}`}>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                        <p className={`${styles.fontExtraBold} ${styles.font17} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goProfile}>{this.context.t("Profile")}</p>
+                                    </div>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`} style={{marginTop: 20}}>
+                                        <p className={`${styles.fontExtraBold} ${styles.font17} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>{this.context.t("My schedule")}</p>
+                                    </div>
+                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`} style={{marginTop: 20}}>
+                                        <p className={`${styles.fontExtraBold} ${styles.font17} ${styles.mr2} ${styles.cursorPointer}`} onClick={this.props.goMyPhotos}>{this.context.t("My Photos")}</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className={`${styles.col12} ${styles.px3}`}>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.fontBold}`} onClick={() => this.props.goDescription('about')}>{this.context.t("About PRIZM")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.fontBold} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('why')}>{this.context.t("Why PRIZM")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.fontBold} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('how')}>{this.context.t("How it works")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.fontBold} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('support')}>{this.context.t("Support")}</p>
+                                    
+                                </div>
+                            )}
+                            {isLoggedIn ? (
+                                <div className={`${styles.col12} ${styles.px3}`}>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.fontBold}`} onClick={() => this.props.goDescription('about')}>{this.context.t("About PRIZM")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.fontBold} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('why')}>{this.context.t("Why PRIZM")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.fontBold} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('how')}>{this.context.t("How it works")}</p>
+                                    <p className={`${styles.font1416} ${styles.cursorPointer} ${styles.fontBold} ${styles.mt3} ${styles.mtMd4}`} onClick={() => this.props.goDescription('support')}>{this.context.t("Support")}</p>
+                                </div>
+                            ) : (
+                                null
+                            )}
+                            {isLoggedIn ? (
+                                <div className={`${styles.px3} ${styles.mb45}`}>
+                                     <p className={`${styles.pink} ${styles.font16} ${styles.fontBold} ${styles.cursorPointer}`} onClick={this.props.logout}>{this.context.t("Sign Out")}</p>
+                                </div>
+                            ) : (
+                                <div className={`${styles.px3} ${styles.mb45}`}>
+                                     <a href={'https://admin.prizm.cloud'} className={`${styles.textDecorationNone}`}>
+                                        <p className={`${styles.pink} ${styles.font16} ${styles.fontBold} ${styles.cursorPointer} ${styles.mt4}`}>{this.context.t("Are you a photographer?")}</p>
+                                    </a>
+                                    <img src={require('../../assets/images/main.png')} alt={this.context.t("PRIZM")} className={`${styles.mbMd5}`} style={{width: 150, height: 107}} />
+                                </div>
+                            )}
+                            
+                            {/* <img src={require('../../assets/images/main.png')} alt={this.context.t("PRIZM")} className={`${styles.mb3} ${styles.mbMd5}`} style={{width: 150, height: 107}} /> */}
                             {/* {(isLoggedIn && (notification) && (showNotification) && (showNotification.id > 0)) && (
                                 <div className={`${styles.absoluteVerticalCenter} ${styles.cursorPointer}`} onClick={this.props.goMySchedule}>
                                     {confirmNotification > 0 && (

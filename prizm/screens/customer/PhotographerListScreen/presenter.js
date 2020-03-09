@@ -29,7 +29,7 @@ const PhotographerListScreen = (props, context) => (
                                     </Text>
                                 </View>
                                 <TouchableWithoutFeedback onPress={item.instagram_account ? Linking.openURL(`instagram://user?username=${item.instagram_account}`) : null}>
-                                    <View style={[styles.row, styles.justifyContentCenter, styles.alignItemsCenter, styles.px10, styles.py5, styles.bgGray33]}>
+                                    <View style={[styles.row, styles.justifyContentCenter, styles.alignItemsCenter, styles.px10, styles.py5, styles.bgGray16]}>
                                         <Image source={require('../../../assets/images/icon_instagram.png')} style={[styles.icon10]} />
                                         <Text style={[styles.font12, styles.white, styles.ml5]}>
                                             {context.t("Instagram")}
