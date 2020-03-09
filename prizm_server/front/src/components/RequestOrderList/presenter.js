@@ -126,8 +126,7 @@ class RequestOrderList extends Component{
                         <div className={`${styles.textCenter}`}>
                             <img src={require('../../assets/images/main.png')} alt={this.context.t("This request no longer exists")} className={`${styles.mt5} ${styles.pt3}`} style={{width: '80%', maxWidth: 400}} />
                             <p className={`${styles.font1214} ${styles.mt3}`}>
-                                {this.context.t("You haven't made any reservations yet.")}<br/>
-                                {this.context.t("A new schedule will appear when you submit a request to a photographer.")}
+                                {this.context.t("You haven't made any reservations yet.")}
                             </p>
                         </div>
                     )

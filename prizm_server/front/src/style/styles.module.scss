@@ -83,12 +83,18 @@ p{
 .mobile-none{
     display: none;
 }
+.mobile-hidden{
+    visibility: hidden;
+}
 @media (min-width: 768px) {
     .mobile-only{
         display: none;
     }
     .mobile-none{
         display: inherit;
+    }
+    .mobile-hidden{
+        visibility: visible;
     }
 }
 .mobile-380-only{
@@ -712,6 +718,12 @@ p{
     top: 0;
     left: 50%;
     transform: translateX(-50%);
+}
+.position-complete-btn{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 64px;
 }
 
 .text-input-1{

@@ -1574,8 +1574,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'none' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                                 <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -1585,8 +1584,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'close' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -1625,8 +1623,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'open' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                                                 <div style={{position: 'relative'}}>
@@ -1648,8 +1645,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'confirmed' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -1682,8 +1678,7 @@ class CustomRequestCreate extends Component{
                                             ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
+                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -1710,8 +1705,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'none' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                                 <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -1721,8 +1715,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'close' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -1761,8 +1754,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'open' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                                                 <div style={{position: 'relative'}}>
@@ -1784,8 +1776,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'confirmed' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -1818,8 +1809,7 @@ class CustomRequestCreate extends Component{
                                             ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
+                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -1840,8 +1830,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'none' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                                 <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -1851,8 +1840,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'close' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -1891,8 +1879,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'open' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                                                 <div style={{position: 'relative'}}>
@@ -1914,8 +1901,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'confirmed' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -1948,8 +1934,7 @@ class CustomRequestCreate extends Component{
                                             ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
+                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -1979,8 +1964,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'none' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                                 <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -1990,8 +1974,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'close' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -2030,8 +2013,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'open' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                                                 <div style={{position: 'relative'}}>
@@ -2053,8 +2035,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'confirmed' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -2087,8 +2068,7 @@ class CustomRequestCreate extends Component{
                                             ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
+                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -2115,8 +2095,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'none' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                                 <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -2126,8 +2105,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'close' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -2166,8 +2144,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'open' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                                                 <div style={{position: 'relative'}}>
@@ -2189,8 +2166,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'confirmed' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -2223,8 +2199,7 @@ class CustomRequestCreate extends Component{
                                             ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
+                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -2245,8 +2220,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'none' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                                 <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
@@ -2256,8 +2230,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'close' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${profile.is_verified ? styles.bgGray16 : styles.bgGray93} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -2296,8 +2269,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'open' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={() => this.props.goRequestOrderList(profile.custom_request_status.id)}>
                                                                 <div style={{position: 'relative'}}>
@@ -2319,8 +2291,7 @@ class CustomRequestCreate extends Component{
                                                     {profile.custom_request_status.status === 'confirmed' && (
                                                         <div className={``}>
                                                             <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                                {this.context.t("Enrich your travel with photography")}
+                                                                {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                             </p>
                                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48, maxWidth: 360}}>
                                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white} ${styles.textCenter}`}>
@@ -2353,8 +2324,7 @@ class CustomRequestCreate extends Component{
                                             ) : (
                                                 <div className={``}>
                                                     <p className={`${styles.font1416} ${styles.textCenter}`} style={{lineHeight: 1.3}}>
-                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span><br/>
-                                                        {this.context.t("Enrich your travel with photography")}
+                                                        {this.context.t("Meet the ")}<span className={``}>{this.context.t("coolest photographers in Seoul")}</span>
                                                     </p>
                                                     <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt4} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._goCreate}>
                                                         <p className={`${styles.fontBold} ${styles.font16} ${styles.white}`}>{this.context.t("Book your photographer now")}</p>
