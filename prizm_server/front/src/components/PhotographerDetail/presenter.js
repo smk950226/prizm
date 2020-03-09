@@ -106,7 +106,9 @@ class PhotographerDetail extends Component{
         send: PropTypes.func.isRequired,
         handleChangeTimes: PropTypes.func.isRequired,
         optionGroups: PropTypes.object.isRequired,
-        valueGroups: PropTypes.object.isRequired
+        valueGroups: PropTypes.object.isRequired,
+        handleStartEnd: PropTypes.func.isRequired,
+        isStart: PropTypes.bool
     }
 
     static contextTypes = {
@@ -119,7 +121,7 @@ class PhotographerDetail extends Component{
     }
 
     render(){
-        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, selectedAmPm, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted, dateRange, isLoggedIn, profile, isSendingEmail, optionGroups, valueGroups } = this.props;
+        const { photographer, loading, isTruncated, selectedLocation, dateOption, selectedOption, comment, isSubmitting, show1, show2, show3, show4, showCalendar1, showCalendar2, selectedDate, dateConfirm, selectDateStep, selectedHour, selectedMin, selectedAmPm, selectedStartDate, selectedEndDate, isConfirmPage, fromAuth, request, requestSubmitted, dateRange, isLoggedIn, profile, isSendingEmail, optionGroups, valueGroups, isStart } = this.props;
         return(
             <div className={`${requestSubmitted ? styles.safearea : isConfirmPage ? styles.safearea : styles.safeareaTop} ${styles.containerCustomer} ${requestSubmitted ? `${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.minHeightFull}` : `${styles.minHeightFull}`}`}>
                 {loading ? (
@@ -532,7 +534,22 @@ class PhotographerDetail extends Component{
                             navigationLabel={({ date, view, label }) => <p className={`${styles.fontBold} ${styles.font14}`}>{label}</p>}
                             tileClassName={`${styles.font12}`}
                             onChange={this.props.selectDateRange}
+                            onClickDay={this.props.handleStartEnd}
                             />
+                            <p className={`${styles.textCenter} ${styles.py3} ${styles.font14}`}>
+                                {dateRange.length > 0 ? (
+                                    <span className={`${styles.fontBold} ${styles.pink}`}>
+                                        {this.context.t("Done")}
+                                    </span>
+                                ) : (
+                                    <Fragment>
+                                        <span className={`${styles.fontBold} ${styles.pink}`}>
+                                            {isStart ? this.context.t("Start Date") : this.context.t("End Date")}
+                                        </span>
+                                        {this.context.t(" should be selected")}
+                                    </Fragment>
+                                )}
+                            </p>
                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirmDate}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                             </div>

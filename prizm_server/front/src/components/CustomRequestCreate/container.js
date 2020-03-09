@@ -28,7 +28,9 @@ class Container extends Component{
         goSignin: PropTypes.func.isRequired,
         doHideBtmNav: PropTypes.func.isRequired,
         undoHideBtmNav: PropTypes.func.isRequired,
-        lang: PropTypes.string
+        lang: PropTypes.string,
+        openLocationModal: PropTypes.func.isRequired,
+        closeLocationModal: PropTypes.func.isRequired
     }
 
     render(){

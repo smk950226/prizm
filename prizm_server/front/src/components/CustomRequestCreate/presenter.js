@@ -23,10 +23,27 @@ import { compose, withProps, lifecycle } from "recompose";
 import { StandaloneSearchBox } from "react-google-maps/lib/components/places/StandaloneSearchBox";
 import { COUNTRY_CODE } from '../../utils/country';
 import { Element, scroller } from 'react-scroll';
+import Rodal from 'rodal';
+import 'rodal/lib/rodal.css';
+import FullModal from 'react-modal';
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+const customStyles = {
+    content : {
+      top                   : '0',
+      left                  : '0',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '0',
+      border                : 'none',
+      width                 : '100%',
+      zIndex                : 99999,
+      padding               : 0
+    }
+};
 
 const PlacesWithStandaloneSearchBox = compose(
     withProps({
@@ -134,7 +151,7 @@ const sliderSettings2 = {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 6000,
     accessibility: false,
     draggable: false,
@@ -195,7 +212,9 @@ class CustomRequestCreate extends Component{
         goSignin: PropTypes.func.isRequired,
         doHideBtmNav: PropTypes.func.isRequired,
         undoHideBtmNav: PropTypes.func.isRequired,
-        lang: PropTypes.string
+        lang: PropTypes.string,
+        openLocationModal: PropTypes.func.isRequired,
+        closeLocationModal: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -269,7 +288,10 @@ class CustomRequestCreate extends Component{
         showCreate: false,
         showLanding: true,
         findedCountry: {},
-        msgHeight: 150
+        msgHeight: 150,
+        isStart: true,
+        showMapModal: false,
+        showLocationAdded: false,
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
@@ -639,7 +661,8 @@ class CustomRequestCreate extends Component{
                     ampm: ampm,
                     hour: hourList,
                     min: minList
-                }
+                },
+                dateRange: []
             })
         }
         else{
@@ -664,7 +687,8 @@ class CustomRequestCreate extends Component{
                     ampm: ampm,
                     hour: hourList,
                     min: minList
-                }
+                },
+                dateRange: []
             })
         }
     }
@@ -706,7 +730,8 @@ class CustomRequestCreate extends Component{
                 ampm: ampm,
                 hour: hourList,
                 min: minList
-            }
+            },
+            dateRange: []
         })
     }
 
@@ -861,8 +886,14 @@ class CustomRequestCreate extends Component{
                     lat: selectedLocation.geometry.location.lat(),
                     lng: selectedLocation.geometry.location.lng()
                 }],
-                selectedLocation
+                selectedLocation,
+                showLocationAdded: true
             })
+            setTimeout(() => {
+                this.setState({
+                    showLocationAdded: false
+                })
+            }, 1200)
         }
     }
 
@@ -1500,6 +1531,55 @@ class CustomRequestCreate extends Component{
         })
     }
 
+    _makeNew = async() => {
+        await this._cancel()
+        this._goCreate()
+    }
+
+    _handleStartEnd = () => {
+        const { dateRange } = this.state;
+        if(dateRange.length > 0){
+            this.setState({
+                dateRange: [],
+                isStart: true
+            })
+        }
+        else{
+            this.setState({
+                isStart: !this.state.isStart
+            })
+        }
+    }
+
+    _handleMapModal = () => {
+        if(this.state.showMapModal){
+            this.setState({
+                showMapModal: false
+            })
+            this.props.closeLocationModal()
+        }
+        else{
+            this.setState({
+                showMapModal: true
+            })
+            this.props.openLocationModal()
+        }
+    }
+
+    _openMapModal = () => {
+        this.setState({
+            showMapModal: true
+        })
+        this.props.openLocationModal()
+    }
+
+    _closeMapModal = () => {
+        this.setState({
+            showMapModal: false
+        })
+        this.props.closeLocationModal()
+    }
+
     render(){
         const { 
             totalStep, 
@@ -1555,7 +1635,10 @@ class CustomRequestCreate extends Component{
             isCancel,
             showCreate,
             showLanding,
-            msgHeight
+            msgHeight,
+            isStart,
+            showMapModal,
+            showLocationAdded
         } = this.state;
         const { profile } = this.props;
         return(
@@ -1615,9 +1698,14 @@ class CustomRequestCreate extends Component{
                                                                     this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                                 )}
                                                             </p>
-                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding12} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                                {this.context.t("Make a New Request")}<br/>
-                                                            </p>
+                                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                    {this.context.t("Make a new request")}<br/>
+                                                                </p>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                    {this.context.t("Cancel your request")}<br/>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     )}
                                                     {profile.custom_request_status.status === 'open' && (
@@ -1746,9 +1834,14 @@ class CustomRequestCreate extends Component{
                                                                     this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                                 )}
                                                             </p>
-                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding22} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                                {this.context.t("Make a New Request")}<br/>
-                                                            </p>
+                                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                    {this.context.t("Make a new request")}<br/>
+                                                                </p>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                    {this.context.t("Cancel your request")}<br/>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     )}
                                                     {profile.custom_request_status.status === 'open' && (
@@ -1871,9 +1964,14 @@ class CustomRequestCreate extends Component{
                                                                     this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                                 )}
                                                             </p>
-                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding32} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                                {this.context.t("Make a New Request")}<br/>
-                                                            </p>
+                                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                    {this.context.t("Make a new request")}<br/>
+                                                                </p>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                    {this.context.t("Cancel your request")}<br/>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     )}
                                                     {profile.custom_request_status.status === 'open' && (
@@ -2005,9 +2103,14 @@ class CustomRequestCreate extends Component{
                                                                     this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                                 )}
                                                             </p>
-                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding12} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                                {this.context.t("Make a New Request")}<br/>
-                                                            </p>
+                                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                    {this.context.t("Make a new request")}<br/>
+                                                                </p>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                    {this.context.t("Cancel your request")}<br/>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     )}
                                                     {profile.custom_request_status.status === 'open' && (
@@ -2136,9 +2239,14 @@ class CustomRequestCreate extends Component{
                                                                     this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                                 )}
                                                             </p>
-                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding22} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                                {this.context.t("Make a New Request")}<br/>
-                                                            </p>
+                                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                    {this.context.t("Make a new request")}<br/>
+                                                                </p>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                    {this.context.t("Cancel your request")}<br/>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     )}
                                                     {profile.custom_request_status.status === 'open' && (
@@ -2261,9 +2369,14 @@ class CustomRequestCreate extends Component{
                                                                     this.context.t("When you complete the email verification, your request details will be sent to photographers and you will soon receive various proposals.")
                                                                 )}
                                                             </p>
-                                                            <p className={`${styles.font1416} ${styles.textCenter} ${styles.mt3} ${styles.gray93} ${styles.bgLanding32} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, maxWidth: 360}} onClick={this._openCancel}>
-                                                                {this.context.t("Make a New Request")}<br/>
-                                                            </p>
+                                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                    {this.context.t("Make a new request")}<br/>
+                                                                </p>
+                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                    {this.context.t("Cancel your request")}<br/>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     )}
                                                     {profile.custom_request_status.status === 'open' && (
@@ -2716,13 +2829,22 @@ class CustomRequestCreate extends Component{
                                                         ))}
                                                         </div>
                                                     )}
-                                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn} ${styles.px3}`} style={{height: 48}} onClick={locationOption === 1 ? showMap ? this._closeMap : this._openMap : null}>
-                                                        <div>
-                                                            <MdAdd fontSize="16px" color="#ffffff" />
+                                                    <div className={`${styles.mobileOnly} ${styles.widthFull}`}>
+                                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn} ${styles.px3}`} style={{height: 48}} onClick={locationOption === 1 ? showMapModal ? this._closeMapModal : this._openMapModal : null}>
+                                                                <MdAdd fontSize="16px" color="#ffffff" />
+                                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add a location")}</p>
+                                                            <div className={`${styles.hidden}`}>
+                                                                <MdAdd fontSize="16px" color="#ffffff" />
+                                                            </div>
                                                         </div>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add a location")}</p>
-                                                        <div className={`${styles.hidden}`}>
-                                                            <MdAdd fontSize="16px" color="#ffffff" />
+                                                    </div>
+                                                    <div className={`${styles.mobileNone} ${styles.widthFull}`}>
+                                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn} ${styles.px3}`} style={{height: 48}} onClick={locationOption === 1 ? showMap ? this._closeMap : this._openMap : null}>
+                                                                <MdAdd fontSize="16px" color="#ffffff" />
+                                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add a location")}</p>
+                                                            <div className={`${styles.hidden}`}>
+                                                                <MdAdd fontSize="16px" color="#ffffff" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </Fragment>
@@ -2752,7 +2874,21 @@ class CustomRequestCreate extends Component{
                                                             {searchedLocations.map((location, index) => {
                                                                 const find = locations.find(lo => (lo.lat === location.geometry.location.lat()) && (lo.lng === location.geometry.location.lng()))
                                                                 return(
-                                                                    <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} onClick={() => this._selectLocation(location)}>
+                                                                    <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{position: 'relative'}} onClick={() => this._selectLocation(location)}>
+                                                                        {(index === 0) && (
+                                                                            ((searchedLocations.length > 0) && (locations.length === 0)) && (
+                                                                                <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentEnd} ${styles.pxBubble}`} style={{position: 'absolute', right: 0, bottom: -20, zIndex: 99}}>
+                                                                                    <div className={`${styles.col12} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.justifyContentEnd}`}>
+                                                                                        <div className={`${styles.bubbleBottom2}`} />
+                                                                                    </div>
+                                                                                    <div className={`${styles.px3} ${styles.py2}`} style={{backgroundColor: '#969696', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5}}>
+                                                                                        <p className={`${styles.font10} ${styles.white}`}>
+                                                                                            {this.context.t("You can add a location by pressing the button.")}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )
+                                                                        )}
                                                                         <div className={`${styles.col10} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                                                             <div className={`${styles.col1} ${styles.px0}`}>
                                                                                 <p className={`${styles.fontBold} ${styles.font12} ${find ? styles.pink : null}`}>{index + 1}</p>
@@ -3010,13 +3146,140 @@ class CustomRequestCreate extends Component{
                                             navigationLabel={({ date, view, label }) => <p className={`${styles.fontBold} ${styles.font14}`}>{label}</p>}
                                             tileClassName={`${styles.font12}`}
                                             onChange={this._selectDateRange}
+                                            onClickDay={this._handleStartEnd}
                                             />
+                                            <p className={`${styles.textCenter} ${styles.py3} ${styles.font14}`}>
+                                                {dateRange.length > 0 ? (
+                                                    <span className={`${styles.fontBold} ${styles.pink}`}>
+                                                        {this.context.t("Done")}
+                                                    </span>
+                                                ) : (
+                                                    <Fragment>
+                                                        <span className={`${styles.fontBold} ${styles.pink}`}>
+                                                            {isStart ? this.context.t("Start Date") : this.context.t("End Date")}
+                                                        </span>
+                                                        {this.context.t(" should be selected")}
+                                                    </Fragment>
+                                                )}
+                                            </p>
                                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this._confirmDate}>
                                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                                             </div>
                                         </Fragment>
                                     </div>
                                 </Modal>
+                                <FullModal
+                                isOpen={showMapModal}
+                                onRequestClose={this._closeMapModal}
+                                style={customStyles}
+                                >
+                                    <div className={`${styles.widthFull} ${styles.heightFull} ${styles.bgWhite}`} style={{zIndex: 10}}>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.px3} ${styles.py4} ${styles.bgWhite}`}>
+                                            <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`}>
+                                                <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("go back")} className={`${styles.iconArrowRightLg} ${styles.cursorPointer}`} onClick={this.props.closeLocationModal} />
+                                            </div>
+                                            <div className={`${styles.col8} ${styles.coLSm10} ${styles.px0}`}>
+                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{this.context.t("Search Location")}</p>
+                                            </div>
+                                            <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0} ${styles.cursorPointer}`} onClick={this._closeMapModal}>
+                                                <p className={`${styles.fontBold} ${styles.font13} ${styles.textRight}`}>{this.context.t("Completed")}</p>
+                                            </div>
+                                        </div>
+                                        {locations && locations.length > 0 && (
+                                            <div className={`${styles.mt2} ${styles.row} ${styles.mx0}`}>
+                                                {locations.map((location, index) => (
+                                                    <div key={index} className={`${styles.col6} ${styles.colMd4}`}>
+                                                        <div className={`${styles.col12} ${styles.colMd10} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
+                                                            <div className={`${styles.col10} ${styles.px0}`}>
+                                                                <p className={`${styles.fontBold} ${styles.font1012} ${styles.white}`}>{this.context.t(`Location ${index + 1}`)}</p>
+                                                                <p className={`${styles.fontBold} ${styles.font1113} ${styles.white} ${styles.mt1}`}>{location.name}</p>
+                                                            </div>
+                                                            <div className={`${styles.cursorPointer} ${styles.col2} ${styles.px0} ${styles.textRight}`} onClick={() => this._removeLocation(location)}>
+                                                                <MdClose fontSize={'24px'} color={'#ffffff'}/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                        <div className={`${styles.px3} ${styles.py2} ${styles.bgGray5c}`}>
+                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                                <PlacesWithStandaloneSearchBox searchLocation={this._searchLocation} />
+                                            </div>
+                                        </div>
+                                        <Map
+                                        isMarkerShown={locationSearched}
+                                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                                        loadingElement={<div style={{ height: `100%` }} />}
+                                        containerElement={<div className={`${styles.widthFull} ${styles.heightFullPercent}`} />}
+                                        mapElement={<div style={{ height: `100%` }} />}
+                                        searchedLocations={searchedLocations}
+                                        locations={locations}
+                                        lng={locationSearched ? 126.9748523 : 126.9748523}
+                                        lat={locationSearched ? 37.5796212 : 37.5796212}
+                                        selectedLocation={selectedLocation}
+                                        selectLocation={this._selectLocation}
+                                        />
+                                        {searchedLocations.length > 0 ? (
+                                            <div className={`${styles.widthFull}`} style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
+                                                {((searchedLocations.length > 0) && (locations.length === 0)) && (
+                                                    <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentEnd} ${styles.pxBubble}`} style={{position: 'absolute', right: 0, top: -20}}>
+                                                        <div className={`${styles.px3} ${styles.py2}`} style={{backgroundColor: '#969696', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5}}>
+                                                            <p className={`${styles.font10} ${styles.white}`}>
+                                                                {this.context.t("You can add a location by pressing the button.")}
+                                                            </p>
+                                                        </div>
+                                                        <div className={`${styles.col12} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.justifyContentEnd}`}>
+                                                            <div className={`${styles.bubbleBottom}`} />
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                <div className={`${styles.bgWhite} ${styles.widthFull} ${styles.overflowYScroll}`} style={{maxHeight: 171}}>
+                                                    {searchedLocations.map((location, index) => {
+                                                        const find = locations.find(lo => (lo.lat === location.geometry.location.lat()) && (lo.lng === location.geometry.location.lng()))
+                                                        return(
+                                                            <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} onClick={() => this._selectLocation(location)}>
+                                                                <div className={`${styles.col10} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                                                    <div className={`${styles.col1} ${styles.px0}`}>
+                                                                        <p className={`${styles.fontBold} ${styles.font12} ${find ? styles.pink : null}`}>{index + 1}</p>
+                                                                    </div>
+                                                                    <div className={`${styles.col11} ${styles.px0}`}>
+                                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.ml2} ${find ? styles.pink : null}`}>{location.name}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className={`${styles.col2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
+                                                                    <div className={`${styles.circle24} ${find ? styles.bgPink : styles.bgGray5c} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                                                        {find ? (
+                                                                            <MdClose fontSize="15px" color="#ffffff" />
+                                                                        ) : (
+                                                                            <MdAdd fontSize="15px" color="#ffffff" />
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            null
+                                        )}
+                                        <Rodal 
+                                        width={230}
+                                        height={46}
+                                        visible={showLocationAdded}
+                                        showCloseButton={false}
+                                        customStyles={{
+                                            backgroundColor: '#d66c8b',
+                                            padding: 0
+                                        }}
+                                        >
+                                            <p className={`${styles.font12} ${styles.textCenter} ${styles.white} ${styles.py3}`}>
+                                                {this.context.t("Locaion Added")}
+                                            </p>
+                                        </Rodal>
+                                    </div>
+                                </FullModal>
                             </Fragment>
                         )}
                     </div>

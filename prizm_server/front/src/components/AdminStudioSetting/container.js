@@ -149,7 +149,8 @@ class Container extends Component{
             step: 1,
             showCityList: false,
             studioIdError: false,
-            showLocationAdded: false
+            showLocationAdded: false,
+            isStart: true
         }
     }
 
@@ -796,7 +797,8 @@ class Container extends Component{
                     ampm: ampm,
                     hour: hourList,
                     min: minList
-                }
+                },
+                dateRange: []
             })
         }
         else{
@@ -822,7 +824,8 @@ class Container extends Component{
                     ampm: ampm,
                     hour: hourList,
                     min: minList
-                }
+                },
+                dateRange: []
             })
         }
     }
@@ -848,7 +851,8 @@ class Container extends Component{
                 ampm: ampm,
                 hour: hourList,
                 min: minList
-            }
+            },
+            dateRange: []
         })
     }
 
@@ -1057,6 +1061,23 @@ class Container extends Component{
         }
     }
 
+
+
+    _handleStartEnd = () => {
+        const { dateRange } = this.state;
+        if(dateRange.length > 0){
+            this.setState({
+                dateRange: [],
+                isStart: true
+            })
+        }
+        else{
+            this.setState({
+                isStart: !this.state.isStart
+            })
+        }
+    }
+
     render(){
         return(
             <AdminStudioSetting 
@@ -1107,6 +1128,7 @@ class Container extends Component{
             selectCity={this._selectCity}
             changeStep={this._changeStep}
             handleStudioIdChange={this._handleStudioIdChange}
+            handleStartEnd={this._handleStartEnd}
             />
         )
     }

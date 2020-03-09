@@ -59,7 +59,7 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root')
 
 const App = (props) => {
-    if(!props.admin){
+    if(props.admin){
         return(
             <AdminRouteContainer initAdmin={props.initAdmin} logout={props.logout} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} newMessage={props.newMessage} goHome={props.goHome} />
         )
@@ -105,7 +105,8 @@ class GeneralRouteContainer extends Component{
         fetchedNotification: false,
         fetchedNewMessage: false,
         fetchClear: false,
-        hideBtmNav: false
+        hideBtmNav: false,
+        showLocationModal: false,
     }
 
     componentDidMount = async() => {
@@ -162,8 +163,22 @@ class GeneralRouteContainer extends Component{
         })
     }
 
+    _openLocationModal = () => {
+        this.setState({
+            hideBtmNav: true,
+            showLocationModal: true
+        })
+    }
+
+    _closeLocationModal = () => {
+        this.setState({
+            hideBtmNav: false,
+            showLocationModal: false
+        })
+    }
+
     render(){
-        const { loading, hideBtmNav } = this.state;
+        const { loading, hideBtmNav, showLocationModal } = this.state;
         const { showBtmNav, goHome } = this.props;
         if(loading){
             return(
@@ -175,8 +190,10 @@ class GeneralRouteContainer extends Component{
         else{
             return(
                 <div className={`${styles.widthFull} ${styles.minHeightFull}`}>
-                    <Navigation />
-                    <GeneralRoute goHome={goHome} doHideBtmNav={this._doHideBtmNav} undoHideBtmNav={this._undoHideBtmNav} />
+                    {!showLocationModal && (
+                        <Navigation />
+                    )}
+                    <GeneralRoute goHome={goHome} openLocationModal={this._openLocationModal} closeLocationModal={this._closeLocationModal} doHideBtmNav={this._doHideBtmNav} undoHideBtmNav={this._undoHideBtmNav} />
                     <BottomNavigation showBtmNav={showBtmNav} hideBtmNav={hideBtmNav} />
                     <Footer />
                 </div>
@@ -344,7 +361,7 @@ class AdminRouteContainer extends Component{
 
 const GeneralRoute = props => (
     <Switch>
-        <Route exact path='/' render={() => <CustomRequestCreate {...props} doHideBtmNav={props.doHideBtmNav} undoHideBtmNav={props.undoHideBtmNav} />} key={1} />
+        <Route exact path='/' render={() => <CustomRequestCreate {...props} openLocationModal={props.openLocationModal} closeLocationModal={props.closeLocationModal} doHideBtmNav={props.doHideBtmNav} undoHideBtmNav={props.undoHideBtmNav} />} key={1} />
         <Route exact path='/artist/' component={Home} key={21} />
         <Route exact path='/welcome/' component={Welcome} key={2} />
         <Route exact path='/signup/' component={SignUp} key={3} />

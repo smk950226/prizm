@@ -279,7 +279,9 @@ class AdminSignUp extends Component{
         studioIdError: PropTypes.bool.isRequired,
         handleStudioIdChange: PropTypes.func.isRequired,
         showLocationAdded: PropTypes.bool.isRequired,
-        lang: PropTypes.string
+        lang: PropTypes.string,
+        isStart: PropTypes.bool.isRequired,
+        handleStartEnd: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -379,7 +381,8 @@ class AdminSignUp extends Component{
             showCityList,
             studioIdError,
             showLocationAdded,
-            lang
+            lang,
+            isStart
          } = this.props;
         let displayImages = []
         const dragableImages = images.map((image, index) => {
@@ -531,7 +534,21 @@ class AdminSignUp extends Component{
                                             {searchedLocations.map((location, index) => {
                                                 const find = locations.find(lo => (lo.lat === location.geometry.location.lat()) && (lo.lng === location.geometry.location.lng()))
                                                 return(
-                                                    <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} onClick={() => this.props.selectLocation(location)}>
+                                                    <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{position: 'relative'}} onClick={() => this.props.selectLocation(location)}>
+                                                        {(index === 0) && (
+                                                            ((searchedLocations.length > 0) && (locations.length === 0)) && (
+                                                                <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentEnd} ${styles.pxBubble}`} style={{position: 'absolute', right: 0, bottom: -20, zIndex: 99}}>
+                                                                    <div className={`${styles.col12} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.justifyContentEnd}`}>
+                                                                        <div className={`${styles.bubbleBottom2}`} />
+                                                                    </div>
+                                                                    <div className={`${styles.px3} ${styles.py2}`} style={{backgroundColor: '#969696', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5}}>
+                                                                        <p className={`${styles.font10} ${styles.white}`}>
+                                                                            {this.context.t("You can add a location by pressing the button.")}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        )}
                                                         <div className={`${styles.col10} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                                             <div className={`${styles.col1} ${styles.px0}`}>
                                                                 <p className={`${styles.fontBold} ${styles.font12} ${find ? styles.pink : null}`}>{index + 1}</p>
@@ -1587,7 +1604,22 @@ class AdminSignUp extends Component{
                             navigationLabel={({ date, view, label }) => <p className={`${styles.fontBold} ${styles.font14}`}>{label}</p>}
                             tileClassName={`${styles.font12}`}
                             onChange={this.props.selectDateRange}
+                            onClickDay={this.props.handleStartEnd}
                             />
+                            <p className={`${styles.textCenter} ${styles.py3} ${styles.font14}`}>
+                                {dateRange.length > 0 ? (
+                                    <span className={`${styles.fontBold} ${styles.pink}`}>
+                                        {this.context.t("Done")}
+                                    </span>
+                                ) : (
+                                    <Fragment>
+                                        <span className={`${styles.fontBold} ${styles.pink}`}>
+                                            {isStart ? this.context.t("Start Date") : this.context.t("End Date")}
+                                        </span>
+                                        {this.context.t(" should be selected")}
+                                    </Fragment>
+                                )}
+                            </p>
                             <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.btn}`} style={{height: 48}} onClick={this.props.confirmDate}>
                                 <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Done")}</p>
                             </div>

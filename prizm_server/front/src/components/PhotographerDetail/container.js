@@ -86,7 +86,8 @@ class Container extends Component{
                 ampm: ampm,
                 hour: hourList,
                 min: minList
-            }
+            },
+            isStart: true
         }
     }
 
@@ -263,7 +264,8 @@ class Container extends Component{
                     ampm: ampm,
                     hour: hourList,
                     min: minList
-                }
+                },
+                dateRange: []
             })
         }
         else{
@@ -289,7 +291,8 @@ class Container extends Component{
                     ampm: ampm,
                     hour: hourList,
                     min: minList
-                }
+                },
+                dateRange: []
             })
         }
     }
@@ -315,7 +318,8 @@ class Container extends Component{
                 ampm: ampm,
                 hour: hourList,
                 min: minList
-            }
+            },
+            dateRange: []
         })
     }
 
@@ -560,6 +564,21 @@ class Container extends Component{
         }));
     };
 
+    _handleStartEnd = () => {
+        const { dateRange } = this.state;
+        if(dateRange.length > 0){
+            this.setState({
+                dateRange: [],
+                isStart: true
+            })
+        }
+        else{
+            this.setState({
+                isStart: !this.state.isStart
+            })
+        }
+    }
+
     render(){
         return (
             <PhotographerDetail 
@@ -594,6 +613,7 @@ class Container extends Component{
             submit={this._submit}
             send={this._send}
             handleChangeTimes={this._handleChangeTimes}
+            handleStartEnd={this._handleStartEnd}
             />
         )
     }
