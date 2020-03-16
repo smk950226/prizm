@@ -2799,17 +2799,8 @@ class CustomRequestCreate extends Component{
                                                         ))}
                                                         </div>
                                                     )}
-                                                    <div className={`${styles.mobileOnly} ${styles.widthFull}`}>
+                                                    <div className={`${styles.widthFull}`}>
                                                         <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn} ${styles.px3}`} style={{height: 48}} onClick={locationOption === 1 ? showMapModal ? this._closeMapModal : this._openMapModal : null}>
-                                                                <MdAdd fontSize="16px" color="#ffffff" />
-                                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add a location")}</p>
-                                                            <div className={`${styles.hidden}`}>
-                                                                <MdAdd fontSize="16px" color="#ffffff" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className={`${styles.mobileNone} ${styles.widthFull}`}>
-                                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.mt3} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn} ${styles.px3}`} style={{height: 48}} onClick={locationOption === 1 ? showMap ? this._closeMap : this._openMap : null}>
                                                                 <MdAdd fontSize="16px" color="#ffffff" />
                                                             <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Add a location")}</p>
                                                             <div className={`${styles.hidden}`}>
@@ -3144,37 +3135,43 @@ class CustomRequestCreate extends Component{
                                 style={customStyles}
                                 >
                                     <div className={`${styles.widthFull} ${styles.heightFull} ${styles.bgWhite}`} style={{zIndex: 10}}>
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.px3} ${styles.py4} ${styles.bgWhite}`}>
-                                            <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`}>
-                                                <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("go back")} className={`${styles.iconArrowRightLg} ${styles.cursorPointer}`} onClick={this.props.closeLocationModal} />
-                                            </div>
-                                            <div className={`${styles.col8} ${styles.coLSm10} ${styles.px0}`}>
-                                                <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{this.context.t("Search Location")}</p>
-                                            </div>
-                                            <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0} ${styles.cursorPointer}`} onClick={this._closeMapModal}>
-                                                <p className={`${styles.fontBold} ${styles.font13} ${styles.textRight}`}>{this.context.t("Completed")}</p>
+                                        <div className={`${styles.container} ${styles.px0}`}>
+                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.px3} ${styles.py4} ${styles.bgWhite}`}>
+                                                <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`}>
+                                                    <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("go back")} className={`${styles.iconArrowRightLg} ${styles.cursorPointer}`} onClick={this.props.closeLocationModal} />
+                                                </div>
+                                                <div className={`${styles.col8} ${styles.coLSm10} ${styles.px0}`}>
+                                                    <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{this.context.t("Search Location")}</p>
+                                                </div>
+                                                <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0} ${styles.cursorPointer}`} onClick={this._closeMapModal}>
+                                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.textRight}`}>{this.context.t("Completed")}</p>
+                                                </div>
                                             </div>
                                         </div>
                                         {locations && locations.length > 0 && (
-                                            <div className={`${styles.mt2} ${styles.row} ${styles.mx0}`}>
-                                                {locations.map((location, index) => (
-                                                    <div key={index} className={`${styles.col6} ${styles.colMd4}`}>
-                                                        <div className={`${styles.col12} ${styles.colMd10} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
-                                                            <div className={`${styles.col10} ${styles.px0}`}>
-                                                                <p className={`${styles.fontBold} ${styles.font1012} ${styles.white}`}>{this.context.t(`Location ${index + 1}`)}</p>
-                                                                <p className={`${styles.fontBold} ${styles.font1113} ${styles.white} ${styles.mt1}`}>{location.name}</p>
-                                                            </div>
-                                                            <div className={`${styles.cursorPointer} ${styles.col2} ${styles.px0} ${styles.textRight}`} onClick={() => this._removeLocation(location)}>
-                                                                <MdClose fontSize={'24px'} color={'#ffffff'}/>
+                                            <div className={`${styles.container} ${styles.px0}`}>
+                                                <div className={`${styles.mt2} ${styles.row} ${styles.mx0}`}>
+                                                    {locations.map((location, index) => (
+                                                        <div key={index} className={`${styles.col6} ${styles.colMd4} ${styles.colLg3}`}>
+                                                            <div className={`${styles.col12} ${styles.colMd10} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
+                                                                <div className={`${styles.col10} ${styles.px0}`}>
+                                                                    <p className={`${styles.fontBold} ${styles.font1012} ${styles.white}`}>{this.context.t(`Location ${index + 1}`)}</p>
+                                                                    <p className={`${styles.fontBold} ${styles.font1113} ${styles.white} ${styles.mt1}`}>{location.name}</p>
+                                                                </div>
+                                                                <div className={`${styles.cursorPointer} ${styles.col2} ${styles.px0} ${styles.textRight}`} onClick={() => this._removeLocation(location.id)}>
+                                                                    <MdClose fontSize={'24px'} color={'#ffffff'}/>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                ))}
+                                                    ))}
+                                                </div>
                                             </div>
                                         )}
                                         <div className={`${styles.px3} ${styles.py2} ${styles.bgGray5c}`}>
-                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                                <PlacesWithStandaloneSearchBox searchLocation={this._searchLocation} />
+                                            <div className={`${styles.container}`}>
+                                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                                    <PlacesWithStandaloneSearchBox searchLocation={this._searchLocation} />
+                                                </div>
                                             </div>
                                         </div>
                                         <Map
@@ -3191,44 +3188,46 @@ class CustomRequestCreate extends Component{
                                         selectLocation={this._selectLocation}
                                         />
                                         {searchedLocations.length > 0 ? (
-                                            <div className={`${styles.widthFull}`} style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
-                                                {((searchedLocations.length > 0) && (locations.length === 0)) && (
-                                                    <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentEnd} ${styles.pxBubble}`} style={{position: 'absolute', right: 0, top: -20}}>
-                                                        <div className={`${styles.px3} ${styles.py2}`} style={{backgroundColor: '#969696', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5}}>
-                                                            <p className={`${styles.font10} ${styles.white}`}>
-                                                                {this.context.t("You can add a location by pressing the button.")}
-                                                            </p>
-                                                        </div>
-                                                        <div className={`${styles.col12} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.justifyContentEnd}`}>
-                                                            <div className={`${styles.bubbleBottom}`} />
-                                                        </div>
-                                                    </div>
-                                                )}
-                                                <div className={`${styles.bgWhite} ${styles.widthFull} ${styles.overflowYScroll}`} style={{maxHeight: 171}}>
-                                                    {searchedLocations.map((location, index) => {
-                                                        const find = locations.find(lo => (lo.lat === location.geometry.location.lat()) && (lo.lng === location.geometry.location.lng()))
-                                                        return(
-                                                            <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} onClick={() => this._selectLocation(location)}>
-                                                                <div className={`${styles.col10} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                                                    <div className={`${styles.col1} ${styles.px0}`}>
-                                                                        <p className={`${styles.fontBold} ${styles.font12} ${find ? styles.pink : null}`}>{index + 1}</p>
-                                                                    </div>
-                                                                    <div className={`${styles.col11} ${styles.px0}`}>
-                                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.ml2} ${find ? styles.pink : null}`}>{location.name}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div className={`${styles.col2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
-                                                                    <div className={`${styles.circle24} ${find ? styles.bgPink : styles.bgGray5c} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                                                        {find ? (
-                                                                            <MdClose fontSize="15px" color="#ffffff" />
-                                                                        ) : (
-                                                                            <MdAdd fontSize="15px" color="#ffffff" />
-                                                                        )}
-                                                                    </div>
-                                                                </div>
+                                            <div className={`${styles.widthFull} ${styles.bgWhite}`} style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
+                                                <div className={`${styles.container} ${styles.px0}`} style={{position: 'relative'}}>
+                                                    {((searchedLocations.length > 0) && (locations.length === 0)) && (
+                                                        <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentEnd} ${styles.pxBubble}`} style={{position: 'absolute', right: 0, top: -20}}>
+                                                            <div className={`${styles.px3} ${styles.py2}`} style={{backgroundColor: '#969696', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5}}>
+                                                                <p className={`${styles.font10} ${styles.white}`}>
+                                                                    {this.context.t("You can add a location by pressing the button.")}
+                                                                </p>
                                                             </div>
-                                                        )
-                                                    })}
+                                                            <div className={`${styles.col12} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.justifyContentEnd}`}>
+                                                                <div className={`${styles.bubbleBottom}`} />
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    <div className={`${styles.bgWhite} ${styles.widthFull} ${styles.overflowYScroll}`} style={{maxHeight: 171}}>
+                                                        {searchedLocations.map((location, index) => {
+                                                            const find = locations.find(lo => (lo.lat === location.geometry.location.lat()) && (lo.lng === location.geometry.location.lng()))
+                                                            return(
+                                                                <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} onClick={() => this._selectLocation(location)}>
+                                                                    <div className={`${styles.col10} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                                                        <div className={`${styles.col1} ${styles.px0}`}>
+                                                                            <p className={`${styles.fontBold} ${styles.font12} ${find ? styles.pink : null}`}>{index + 1}</p>
+                                                                        </div>
+                                                                        <div className={`${styles.col11} ${styles.px0}`}>
+                                                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.ml2} ${find ? styles.pink : null}`}>{location.name}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className={`${styles.col2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
+                                                                        <div className={`${styles.circle24} ${find ? styles.bgPink : styles.bgGray5c} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                                                            {find ? (
+                                                                                <MdClose fontSize="15px" color="#ffffff" />
+                                                                            ) : (
+                                                                                <MdAdd fontSize="15px" color="#ffffff" />
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
                                                 </div>
                                             </div>
                                         ) : (
