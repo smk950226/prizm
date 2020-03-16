@@ -34,6 +34,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     order
                 }
             }))
+        },
+        getOrderDetail: (orderId) => {
+            return dispatch(userAction.getOrderDetail(orderId))
         }
     }
 }

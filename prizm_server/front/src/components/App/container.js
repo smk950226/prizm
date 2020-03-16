@@ -29,7 +29,8 @@ class Container extends Component{
         fetchedProfile: false,
         fetchClear: false,
         fetchedLang: false,
-        changedLang: false
+        changedLang: false,
+        showFooter: true
     }
 
     componentDidMount = async() => {
@@ -51,6 +52,11 @@ class Container extends Component{
         else if((window.location.href.startsWith('http://prizm.cloud/')) || (window.location.href.startsWith('https://prizm.cloud/'))){
             this.setState({
                 admin: false
+            })
+        }
+        if(window.location.href.indexOf('/message/detail/') > -1){
+            this.setState({
+                showFooter: false
             })
         }
         const { isLoggedIn, getProfile } = this.props;
@@ -101,6 +107,16 @@ class Container extends Component{
             })
         }
         if(prevProps.pathname !== this.props.pathname){
+            if(this.props.pathname.indexOf('/message/detail/') > -1){
+                this.setState({
+                    showFooter: false
+                })
+            }
+            else{
+                this.setState({
+                    showFooter: true
+                })
+            }
             window.scrollTo(0,0)
         }
     }

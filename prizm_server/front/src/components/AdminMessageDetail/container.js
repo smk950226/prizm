@@ -11,7 +11,8 @@ class Container extends Component{
         getMessagesMore: PropTypes.func.isRequired,
         profile: PropTypes.object.isRequired,
         responseToOrder: PropTypes.func.isRequired,
-        goPayment: PropTypes.func.isRequired
+        goPayment: PropTypes.func.isRequired,
+        getOrderDetail: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -71,9 +72,10 @@ class Container extends Component{
         )
     }
 
-    setMessages(messages, redating, redatingMsgId, existNewMessage){
+    setMessages(messages, hasNextPage, redating, redatingMsgId, existNewMessage){
         this.setState({
-            messages: messages.reverse(),
+            messages: messages.reverse(), 
+            hasNextPage,
             loading: false,
             redating,
             redatingMsgId,
@@ -227,7 +229,7 @@ class Container extends Component{
     }
 
     _cancel = async() => {
-        const { responseToOrder, profile } = this.props;
+        const { responseToOrder, profile, getOrderDetail } = this.props;
         const { order, isSubmitting, chatId, messageType, toUser, redatingMsgId } = this.state;
         if(!isSubmitting){
             this.setState({
@@ -243,7 +245,9 @@ class Container extends Component{
                     messageeType: messageType
                 }
                 WebSocketInstance.newChatMessage(messageObj);
+                const newOrder =  await getOrderDetail(order.id)
                 this.setState({
+                    order: newOrder,
                     text: '',
                     isSubmitting: false,
                     redating: false
@@ -265,7 +269,7 @@ class Container extends Component{
     }
 
     _save = async(selectedTime) => {
-        const { responseToOrder, profile } = this.props;
+        const { responseToOrder, profile, getOrderDetail } = this.props;
         const { order, isSubmitting, redatingMsgId, toUser, chatId, messageType } = this.state;
         if(!isSubmitting){
             if(selectedTime.length === order.option.hour){
@@ -292,7 +296,9 @@ class Container extends Component{
                         messageeType: messageType
                     }
                     WebSocketInstance.newChatMessage(messageObj);
+                    const newOrder =  await getOrderDetail(order.id)
                     this.setState({
+                        order: newOrder,
                         text: '',
                         isSubmitting: false,
                         redating: false

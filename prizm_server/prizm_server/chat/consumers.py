@@ -12,6 +12,7 @@ class ChatConsumer(WebsocketConsumer):
         from_user = data['fromUser']
 
         messages = models.ChatMessage.objects.filter(chat__id = chat_id).order_by('-created_at')[:30]
+        messages_all = models.ChatMessage.objects.filter(chat__id = chat_id).count()
         redating = False
         redating_msg_id = -1
         for msg in messages:
@@ -22,24 +23,48 @@ class ChatConsumer(WebsocketConsumer):
                     redating = True
                     redating_msg_id = msg.id
         check = models.ChatMessage.objects.filter(to_user__id = from_user, chat__id = chat_id, is_viewed = False)
-        if check.count() > 0:
-            content = {
-                'command': 'messages',
-                'messages': self.messages_to_json(messages),
-                'exist_new_message': True,
-                'redating': redating,
-                'redating_msg_id': redating_msg_id,
-            }
-            self.send_message(content)
+        if messages_all > 30:
+            if check.count() > 0:
+                content = {
+                    'command': 'messages',
+                    'messages': self.messages_to_json(messages),
+                    'exist_new_message': True,
+                    'has_next_page': True,
+                    'redating': redating,
+                    'redating_msg_id': redating_msg_id,
+                }
+                self.send_message(content)
+            else:
+                content = {
+                    'command': 'messages',
+                    'messages': self.messages_to_json(messages),
+                    'exist_new_message': False,
+                    'has_next_page': True,
+                    'redating': redating,
+                    'redating_msg_id': redating_msg_id,
+                }
+                self.send_message(content)
         else:
-            content = {
-                'command': 'messages',
-                'messages': self.messages_to_json(messages),
-                'exist_new_message': False,
-                'redating': redating,
-                'redating_msg_id': redating_msg_id,
-            }
-            self.send_message(content)
+            if check.count() > 0:
+                content = {
+                    'command': 'messages',
+                    'messages': self.messages_to_json(messages),
+                    'exist_new_message': True,
+                    'has_next_page': False,
+                    'redating': redating,
+                    'redating_msg_id': redating_msg_id,
+                }
+                self.send_message(content)
+            else:
+                content = {
+                    'command': 'messages',
+                    'messages': self.messages_to_json(messages),
+                    'exist_new_message': False,
+                    'has_next_page': False,
+                    'redating': redating,
+                    'redating_msg_id': redating_msg_id,
+                }
+                self.send_message(content)
     
     def new_message(self, data):
         author = data['from_user']

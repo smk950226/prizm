@@ -61,12 +61,12 @@ Modal.setAppElement('#root')
 const App = (props) => {
     if(props.admin){
         return(
-            <AdminRouteContainer initAdmin={props.initAdmin} logout={props.logout} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} newMessage={props.newMessage} goHome={props.goHome} />
+            <AdminRouteContainer initAdmin={props.initAdmin} logout={props.logout} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} photographer={props.photographer} newMessage={props.newMessage} goHome={props.goHome} showFooter={props.showFooter} />
         )
     }
     else{
         return(
-            <GeneralRouteContainer initApp={props.initApp} logout={props.logout} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} newMessage={props.newMessage} goHome={props.goHome} />
+            <GeneralRouteContainer initApp={props.initApp} logout={props.logout} profile={props.profile} isLoggedIn={props.isLoggedIn} showBtmNav={props.showBtmNav} notification={props.notification} newMessage={props.newMessage} goHome={props.goHome} showFooter={props.showFooter} />
         )
     }
 }
@@ -84,7 +84,8 @@ App.propTypes = {
     photographer: PropTypes.any,
     newMessage: PropTypes.bool,
     goHome: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired
+    logout: PropTypes.func.isRequired,
+    showFooter: PropTypes.bool.isRequired
 }
 
 class GeneralRouteContainer extends Component{
@@ -96,7 +97,8 @@ class GeneralRouteContainer extends Component{
         notification: PropTypes.array,
         newMessage: PropTypes.bool,
         goHome: PropTypes.func.isRequired,
-        logout: PropTypes.func.isRequired
+        logout: PropTypes.func.isRequired,
+        showFooter: PropTypes.bool.isRequired
     }
 
     state = {
@@ -179,7 +181,7 @@ class GeneralRouteContainer extends Component{
 
     render(){
         const { loading, hideBtmNav, showLocationModal } = this.state;
-        const { showBtmNav, goHome } = this.props;
+        const { showBtmNav, goHome, showFooter } = this.props;
         if(loading){
             return(
                 <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
@@ -195,7 +197,9 @@ class GeneralRouteContainer extends Component{
                     )}
                     <GeneralRoute goHome={goHome} openLocationModal={this._openLocationModal} closeLocationModal={this._closeLocationModal} doHideBtmNav={this._doHideBtmNav} undoHideBtmNav={this._undoHideBtmNav} />
                     <BottomNavigation showBtmNav={showBtmNav} hideBtmNav={hideBtmNav} />
-                    <Footer />
+                    {showFooter && (
+                        <Footer />
+                    )}
                 </div>
             )
         }
@@ -211,7 +215,8 @@ class AdminRouteContainer extends Component{
         showBtmNav: PropTypes.bool.isRequired,
         newMessage: PropTypes.bool,
         goHome: PropTypes.func.isRequired,
-        logout: PropTypes.func.isRequired
+        logout: PropTypes.func.isRequired,
+        showFooter: PropTypes.bool.isRequired
     }
 
     state = {
@@ -336,7 +341,7 @@ class AdminRouteContainer extends Component{
 
     render(){
         const { loading, showMobile, showLocationModal, showOptionModal, hideBtmNav } = this.state;
-        const { showBtmNav, goHome } = this.props;
+        const { showBtmNav, goHome, showFooter } = this.props;
         if(loading){
             return(
                 <div className={`${styles.widthFull} ${styles.heightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
@@ -352,7 +357,9 @@ class AdminRouteContainer extends Component{
                     {!hideBtmNav && (
                         <AdminBottomNavigation showBtmNav={showBtmNav} />
                     )}
-                    <Footer />
+                    {showFooter && (
+                        <Footer />
+                    )}
                 </div>
             )
         }
