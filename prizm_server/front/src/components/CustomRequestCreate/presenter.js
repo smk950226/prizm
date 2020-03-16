@@ -3138,7 +3138,7 @@ class CustomRequestCreate extends Component{
                                         <div className={`${styles.container} ${styles.px0}`}>
                                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.px3} ${styles.py4} ${styles.bgWhite}`}>
                                                 <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`}>
-                                                    <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("go back")} className={`${styles.iconArrowRightLg} ${styles.cursorPointer}`} onClick={this.props.closeLocationModal} />
+                                                    <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("go back")} className={`${styles.iconArrowRightLg} ${styles.cursorPointer}`} onClick={this._closeMapModal} />
                                                 </div>
                                                 <div className={`${styles.col8} ${styles.coLSm10} ${styles.px0}`}>
                                                     <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{this.context.t("Search Location")}</p>
