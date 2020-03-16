@@ -288,7 +288,6 @@ class CustomRequestCreate extends Component{
         showCreate: false,
         showLanding: true,
         findedCountry: {},
-        msgHeight: 150,
         isStart: true,
         showMapModal: false,
         showLocationAdded: false,
@@ -312,12 +311,6 @@ class CustomRequestCreate extends Component{
     componentDidMount = () => {
         window.scrollTo(0,0)
         const { lang } = this.props;
-        if(this.msgContainer){
-            const msgHeight = this.msgContainer.clientHeight;
-            this.setState({
-                msgHeight
-            })
-        }
         if(lang){
             let findedCountry = COUNTRY_CODE.find(country => country.value.toLocaleLowerCase() === lang)
             if(findedCountry){
@@ -334,12 +327,6 @@ class CustomRequestCreate extends Component{
         }
         if(this.state.fetchedProfile && !this.state.fetchClear){
             if(this.props.profile){
-                if(this.msgContainer){
-                    const msgHeight = this.msgContainer.clientHeight;
-                    this.setState({
-                        msgHeight
-                    })
-                }
                 if(!this.props.profile.is_verified){
                     const result =  await this.props.sendVerificationEmail()
                 }
@@ -360,22 +347,6 @@ class CustomRequestCreate extends Component{
                         findedCountry
                     })
                 }
-            }
-        }
-        if(prevProps.profile !== this.props.profile){
-            if(this.msgContainer){
-                const msgHeight = this.msgContainer.clientHeight;
-                this.setState({
-                    msgHeight
-                })
-            }
-        }
-        if(prevProps.isLoggedIn !== this.props.isLoggedIn){
-            if(this.msgContainer){
-                const msgHeight = this.msgContainer.clientHeight;
-                this.setState({
-                    msgHeight
-                })
             }
         }
     }
@@ -1635,7 +1606,6 @@ class CustomRequestCreate extends Component{
             isCancel,
             showCreate,
             showLanding,
-            msgHeight,
             isStart,
             showMapModal,
             showLocationAdded
@@ -1650,8 +1620,8 @@ class CustomRequestCreate extends Component{
                             {...sliderSettings2}
                             initialSlide={step-1}>
                                 <div className={`${styles.safeareaTop}`}>
-                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
-                                        <div ref={(el) => { this.msgContainer = el }} className={`${styles.containerCustomRequestMsg} ${styles.py3} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.heightFullSafeareaBoth}`} style={{display: 'flex', flexDirection: 'column'}}>
+                                        <div  className={`${styles.containerCustomRequestMsg} ${styles.py3} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{flex: '0 1 auto'}}>
                                             {profile ? (
                                                 <Fragment>
                                                     {profile.custom_request_status.status === 'none' && (
@@ -1699,10 +1669,10 @@ class CustomRequestCreate extends Component{
                                                                 )}
                                                             </p>
                                                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
-                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                <p className={`${styles.font1216} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
                                                                     {this.context.t("Make a new request")}<br/>
                                                                 </p>
-                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                <p className={`${styles.font1216} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
                                                                     {this.context.t("Cancel your request")}<br/>
                                                                 </p>
                                                             </div>
@@ -1777,17 +1747,17 @@ class CustomRequestCreate extends Component{
                                                 </div>
                                             )}
                                         </div>
-                                        <div className={`${styles.bgLandingImg1} ${styles.order1} ${styles.orderMd2}`} style={{height: `calc(100vh - ${msgHeight}px - 56px - 45px)`}}>
+                                        <div className={`${styles.bgLandingImg1} ${styles.order1} ${styles.orderMd2}`} style={{flex: '1 1 auto'}}>
             
                                         </div>
                                     </div>
                                 </div>
                                 <div className={`${styles.safeareaTop}`}>
-                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
-                                        <div className={`${styles.bgLandingImg2} ${styles.order1} ${styles.orderMd1}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.heightFullSafeareaBoth}`} style={{display: 'flex', flexDirection: 'column'}}>
+                                        <div className={`${styles.bgLandingImg2} ${styles.order1} ${styles.orderMd1}`} style={{flex: '1 1 auto'}}>
             
                                         </div>
-                                        <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                        <div className={`${styles.containerCustomRequestMsg} ${styles.py3} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd2} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{flex: '0 1 auto'}}>
                                         {profile ? (
                                                 <Fragment>
                                                     {profile.custom_request_status.status === 'none' && (
@@ -1835,10 +1805,10 @@ class CustomRequestCreate extends Component{
                                                                 )}
                                                             </p>
                                                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
-                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                <p className={`${styles.font1216} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
                                                                     {this.context.t("Make a new request")}<br/>
                                                                 </p>
-                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                <p className={`${styles.font1216} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
                                                                     {this.context.t("Cancel your request")}<br/>
                                                                 </p>
                                                             </div>
@@ -1916,8 +1886,8 @@ class CustomRequestCreate extends Component{
                                     </div>
                                 </div>
                                 <div className={`${styles.safeareaTop}`}>
-                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0}`}>
-                                        <div className={`${styles.containerCustomRequestMsg} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                    <div className={`${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.heightFullSafeareaBoth}`} style={{display: 'flex', flexDirection: 'column'}}>
+                                        <div className={`${styles.containerCustomRequestMsg} ${styles.py3} ${styles.px3} ${styles.bgWhite} ${styles.order2} ${styles.orderMd1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{flex: '0 1 auto'}}>
                                         {profile ? (
                                                 <Fragment>
                                                     {profile.custom_request_status.status === 'none' && (
@@ -1965,10 +1935,10 @@ class CustomRequestCreate extends Component{
                                                                 )}
                                                             </p>
                                                             <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter, styles.justifyContentBetween} ${styles.widthFull} ${styles.mt3}`}>
-                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
+                                                                <p className={`${styles.font1216} ${styles.textCenter} ${styles.white} ${styles.bgGray93} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._makeNew}>
                                                                     {this.context.t("Make a new request")}<br/>
                                                                 </p>
-                                                                <p className={`${styles.font1416} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
+                                                                <p className={`${styles.font1216} ${styles.textCenter} ${styles.white} ${styles.bgGray16} ${styles.cursorPointer} ${styles.btn} ${styles.widthFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`} style={{height: 48, width: 'calc(50% - 8px)'}} onClick={this._openCancel}>
                                                                     {this.context.t("Cancel your request")}<br/>
                                                                 </p>
                                                             </div>
@@ -2043,7 +2013,7 @@ class CustomRequestCreate extends Component{
                                                 </div>
                                             )}
                                         </div>
-                                        <div className={`${styles.bgLandingImg3} ${styles.order1} ${styles.orderMd2}`}>
+                                        <div className={`${styles.bgLandingImg3} ${styles.order1} ${styles.orderMd2}`} style={{flex: '1 1 auto'}}>
             
                                         </div>
                                     </div>

@@ -22,7 +22,7 @@ class Container extends Component{
 
     state = {
         lastScrollTop: 0,
-        delta: 30,
+        delta: 10,
         showBtmNav: true,
         admin: false,
         loading: true,
