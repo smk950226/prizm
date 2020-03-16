@@ -63,7 +63,7 @@ class AdminNavigation extends Component{
             {!showMobile && !showLocationModal && !showOptionModal && showNav && (
                 <div className={`${styles.positionNav} ${styles.containerAdmin} ${styles.pxAdmin2} ${styles.bgWhite}`} style={{zIndex: 2}}>
                     <div className={`${styles.mobileOnly}`}>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.py4} ${styles.bgWhite}`}>
+                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.py3} ${styles.bgWhite}`}>
                             <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
                                 {isLoggedIn && (
                                     <img src={require('../../assets/images/icon_menu.png')} alt={this.context.t("MENU")} className={`${styles.iconMenu} ${styles.cursorPointer}`} onClick={showMenu ? this.props.closeMenu : this.props.openMenu} />
@@ -81,7 +81,7 @@ class AdminNavigation extends Component{
                     </div>
                     <div className={`${styles.mobileNone}`}>
                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.bgWhite}`}>
-                            <div className={`${styles.py4}`}>
+                            <div className={`${styles.py3}`}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.widthFull}`}>
                                     <p className={`${styles.fontBold} ${styles.font171315} ${styles.cursorPointer} ${styles.mr3} ${styles.mrLg5}`} onClick={this.props.goHome}>{this.context.t("PRIZM")}</p>
                                     {isLoggedIn && (

@@ -466,7 +466,7 @@ class AdminSignUp extends Component{
                                 <MdCheckmark fontSize="20px" color="#3cd59e" className={`${mainLocation ? null : styles.hidden}`} />
                             </div>
                             <p className={`${styles.mt1} ${styles.font1012}`} style={{lineHeight: 1.9}}>{this.context.t("Please type in your main photography (business) location.")}</p>
-                            <div className={`${styles.containerStudioInput} ${styles.textInput6} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.p0} ${styles.justifyContentBetween}`} style={{position: 'relative'}} onClick={this.props.handleCityList}>
+                            <div className={`${styles.containerStudioInput} ${styles.textInput6} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.p0} ${styles.justifyContentBetween} ${styles.cursorPointer}`} style={{position: 'relative'}} onClick={this.props.handleCityList}>
                                 <input className={`${styles.mainLocationInput}`} readOnly={true} type={"text"} name={"mainLocation"} value={mainLocation} />
                                 <MdArrowDropdown fontSize="13px" color="#000000" />
                                 {showCityList && (
@@ -521,74 +521,10 @@ class AdminSignUp extends Component{
                                 </div>
                             </div>
                             <div className={`${styles.mobileNone} ${styles.mt3}`}>
-                                <div className={`${styles.width90} ${styles.containerGooglemap} ${styles.row} ${styles.mx0}`}>
-                                    <div className={`${styles.containerGooglemapSearch}`}>
-                                        <div className={`${styles.px2} ${styles.bgGray5c} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`} style={{height: 70}}>
-                                            <div className={`${styles.col12} ${styles.px0}`}>
-                                                <p className={`${styles.fontBold} ${styles.font1012} ${styles.white} ${styles.mb1}`}>{this.context.t("Search location")}</p>
-                                                <PlacesWithStandaloneSearchBox searchLocation={this.props.searchLocation} />
-                                            </div>
-                                        </div>
-                                        {searchedLocations.length > 0 ? (
-                                        <div className={`${styles.bgWhite} ${styles.widthFull} ${styles.containerSearchedLocationPc}`}>
-                                            {searchedLocations.map((location, index) => {
-                                                const find = locations.find(lo => (lo.lat === location.geometry.location.lat()) && (lo.lng === location.geometry.location.lng()))
-                                                return(
-                                                    <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} style={{position: 'relative'}} onClick={() => this.props.selectLocation(location)}>
-                                                        {(index === 0) && (
-                                                            ((searchedLocations.length > 0) && (locations.length === 0)) && (
-                                                                <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentEnd} ${styles.pxBubble}`} style={{position: 'absolute', right: 0, bottom: -20, zIndex: 99}}>
-                                                                    <div className={`${styles.col12} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.justifyContentEnd}`}>
-                                                                        <div className={`${styles.bubbleBottom2}`} />
-                                                                    </div>
-                                                                    <div className={`${styles.px3} ${styles.py2}`} style={{backgroundColor: '#969696', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5}}>
-                                                                        <p className={`${styles.font10} ${styles.white}`}>
-                                                                            {this.context.t("You can add a location by pressing the button.")}
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            )
-                                                        )}
-                                                        <div className={`${styles.col10} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                                            <div className={`${styles.col1} ${styles.px0}`}>
-                                                                <p className={`${styles.fontBold} ${styles.font12} ${find ? styles.pink : null}`}>{index + 1}</p>
-                                                            </div>
-                                                            <div className={`${styles.col11} ${styles.px0}`}>
-                                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.ml2} ${find ? styles.pink : null}`}>{location.name}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className={`${styles.col2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
-                                                            <div className={`${styles.circle24} ${find ? styles.bgPink : styles.bgGray5c} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                                                {find ? (
-                                                                    <MdClose fontSize="15px" color="#ffffff" />
-                                                                ) : (
-                                                                    <MdAdd fontSize="15px" color="#ffffff" />
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
-                                    ) : (
-                                        null
-                                    )}
-                                    </div>
-                                    <div className={`${styles.containerGooglemapMap}`}>
-                                        <Map
-                                        isMarkerShown={locationSearched}
-                                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-                                        loadingElement={<div style={{ height: `100%` }} />}
-                                        containerElement={<div className={`${styles.widthFull} ${styles.heightFullPercent}`} />}
-                                        mapElement={<div style={{ height: `100%` }} />}
-                                        searchedLocations={searchedLocations}
-                                        locations={locations}
-                                        lng={locationSearched ? 126.9748523 : 126.9748523}
-                                        lat={locationSearched ? 37.5796212 : 37.5796212}
-                                        selectedLocation={selectedLocation}
-                                        selectLocation={this.props.selectLocation}
-                                        />
-                                    </div>
+                                <div className={`${styles.containerStudioInput} ${styles.bgGray16} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.btn}`} style={{height: 48}} onClick={this.props.openLocationModal}>
+                                    <p className={`${styles.font3240} ${styles.white}`}>{`+`}</p>
+                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t("Add a new location")}</p>
+                                    <p className={`${styles.font3240} ${styles.white} ${styles.hidden}`}>{`+`}</p>
                                 </div>
                             </div>
                             {locations && locations.length > 0 && (
@@ -735,189 +671,191 @@ class AdminSignUp extends Component{
                             <input id={`profile`} className={`${styles.none}`} type={"file"} accept={".jpg,.jpeg,.png"} onChange={this.props.submitProfile} />
                         </div>
                         <div className={`${styles.containerAdminStudio} ${styles.mobileNone} ${styles.bgGrayF8} ${styles.minHeightFull} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                            <div className={`${styles.containerMobileCard} ${styles.bgWhite} ${styles.my3} ${styles.overflowYScroll}`} style={{position: 'relative'}}>
-                                <div className={`${styles.widthFull} ${styles.py4} ${styles.bgWhite} ${styles.px3}`} style={{zIndex: 2, position: 'relative'}}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                        <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <img src={require('../../assets/images/icon_menu.png')} alt={this.context.t("MENU")} className={`${styles.iconMenu} ${styles.cursorPointer}`} />
-                                        </div>
-                                        <div className={`${styles.col10} ${styles.px0}`}>
-                                            <p className={`${styles.textCenter} ${styles.fontBold} ${styles.font16} ${styles.cursorPointer}`}>{this.context.t("PRIZM")}</p>
-                                        </div>
-                                    </div>
-                                    <div className={`${styles.widthFull} ${styles.positionNavDescription}`}>
-                                        <p className={`${styles.textCenter} ${styles.font10}`}>{this.context.t("a whole new photography experience")}</p>
-                                    </div>
-                                </div>
-                                <div className={`${styles.containerMobileCard2} ${styles.bgWhite} ${styles.overflowYScroll}`} style={{position: 'relative'}}>
-                                <PortfolioSlider portfolio={displayImages} nickname={nickname} lg={false} />
-                                <div className={`${styles.px3}`}>
-                                    <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                        {profileImage ? (
-                                            <ProfileDivLg image={profileImage.image ? profileImage.image : profileImage} />
-                                        ) : (
-                                            <EmptyProfileDivLg />
-                                        )}
-                                        <div className={`${styles.ml3}`}>
-                                            <p className={`${styles.fontBold} ${styles.font14}`}>{nickname}</p>
-                                            <p className={`${styles.font12} ${styles.mt1}`}>{mainLocation}</p>
-                                        </div>
-                                    </div>
-                                    <div className={`${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                        <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Career")}</p>
-                                        <p className={`${styles.font10}`}>{career}</p>
-                                    </div>
-                                    {equipment ? (
-                                    <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
-                                        <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Equipment")}</p>
-                                        <p className={`${styles.font10}`}>{equipment}</p>
-                                    </div>
-                                    ) : (
-                                        null
-                                    )}
-                                    <div className={`${styles.mt3}`}>
-                                        <p className={`${styles.font11}`} style={{lineHeight: 1.45}}>
-                                                {description}
-                                        </p>
-                                    </div>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.my3}`}>
-                                        <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Review")}</p>
+                            {!showLocationModal && (
+                                <div className={`${styles.containerMobileCard} ${styles.bgWhite} ${styles.my3} ${styles.overflowYScroll}`} style={{position: 'relative'}}>
+                                    <div className={`${styles.widthFull} ${styles.py4} ${styles.bgWhite} ${styles.px3}`} style={{zIndex: 2, position: 'relative'}}>
                                         <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                            <p className={`${styles.fontBold} ${styles.font11} ${styles.mr1}`}>{4}</p>
-                                            <Rating 
-                                            initialRating={4} 
-                                            emptySymbol={<MdStar fontSize={"15px"} color={"#f4f4f4"} />}
-                                            fullSymbol={<MdStar fontSize={"15px"} color={"#fffb64"} />}
-                                            fractions={2}
-                                            readonly
-                                            />
-                                            <p className={`${styles.font9} ${styles.ml1}`}>({30})</p>
-                                            <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Go Review")} className={`${styles.ml2} ${styles.cursorPointer}`} style={{width: 15, height: 12}} />
+                                            <div className={`${styles.col1} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                                <img src={require('../../assets/images/icon_menu.png')} alt={this.context.t("MENU")} className={`${styles.iconMenu} ${styles.cursorPointer}`} />
+                                            </div>
+                                            <div className={`${styles.col10} ${styles.px0}`}>
+                                                <p className={`${styles.textCenter} ${styles.fontBold} ${styles.font16} ${styles.cursorPointer}`}>{this.context.t("PRIZM")}</p>
+                                            </div>
+                                        </div>
+                                        <div className={`${styles.widthFull} ${styles.positionNavDescription}`}>
+                                            <p className={`${styles.textCenter} ${styles.font10}`}>{this.context.t("a whole new photography experience")}</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
-                                <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={show1 ? customerSelectedLocation.id ? this.props.close1 : null : this.props.open1}>
-                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Select Location")}<span className={`${styles.pink}`}>{`  (${locations ? locations.length : '0'})`}</span></p>
-                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} />
-                                    </div>
-                                    <Collapse isOpened={show1} theme={{collapse: styles.collapse}}>
-                                        {locations && locations.length > 0 ? (
-                                            <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
-                                                {locations.map((location, index) => (
-                                                    <LocationComp key={index} location={location} selectedLocation={customerSelectedLocation} index={index} total={locations.length} blankLocation={this.props.blankCustomerLocation} selectLocation={this.props.selectCustomerLocation} />
-                                                ))}
+                                    <div className={`${styles.containerMobileCard2} ${styles.bgWhite} ${styles.overflowYScroll}`} style={{position: 'relative'}}>
+                                    <PortfolioSlider portfolio={displayImages} nickname={nickname} lg={false} />
+                                    <div className={`${styles.px3}`}>
+                                        <div className={`${styles.mt4} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                            {profileImage ? (
+                                                <ProfileDivLg image={profileImage.image ? profileImage.image : profileImage} />
+                                            ) : (
+                                                <EmptyProfileDivLg />
+                                            )}
+                                            <div className={`${styles.ml3}`}>
+                                                <p className={`${styles.fontBold} ${styles.font14}`}>{nickname}</p>
+                                                <p className={`${styles.font12} ${styles.mt1}`}>{mainLocation}</p>
                                             </div>
+                                        </div>
+                                        <div className={`${styles.mt3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                            <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Career")}</p>
+                                            <p className={`${styles.font10}`}>{career}</p>
+                                        </div>
+                                        {equipment ? (
+                                        <div className={`${styles.mt1} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`}>
+                                            <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Equipment")}</p>
+                                            <p className={`${styles.font10}`}>{equipment}</p>
+                                        </div>
                                         ) : (
-                                            <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("There is no available location.")}</p>
+                                            null
                                         )}
-                                        {customerSelectedLocation.lat ? (
-                                            <div className={`${styles.mt3}`}>
-                                                <Map2
-                                                isMarkerShown={true}
-                                                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-                                                loadingElement={<div style={{ height: `100%` }} />}
-                                                containerElement={<div style={{height: 170}} />}
-                                                mapElement={<div style={{ height: `100%` }} />}
-                                                lng={customerSelectedLocation.lng}
-                                                lat={customerSelectedLocation.lat}
+                                        <div className={`${styles.mt3}`}>
+                                            <p className={`${styles.font11}`} style={{lineHeight: 1.45}}>
+                                                    {description}
+                                            </p>
+                                        </div>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.my3}`}>
+                                            <p className={`${styles.fontBold} ${styles.font12}`}>{this.context.t("Review")}</p>
+                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                                <p className={`${styles.fontBold} ${styles.font11} ${styles.mr1}`}>{4}</p>
+                                                <Rating 
+                                                initialRating={4} 
+                                                emptySymbol={<MdStar fontSize={"15px"} color={"#f4f4f4"} />}
+                                                fullSymbol={<MdStar fontSize={"15px"} color={"#fffb64"} />}
+                                                fractions={2}
+                                                readonly
                                                 />
+                                                <p className={`${styles.font9} ${styles.ml1}`}>({30})</p>
+                                                <img src={require('../../assets/images/icon_arrow_right.png')} alt={this.context.t("Go Review")} className={`${styles.ml2} ${styles.cursorPointer}`} style={{width: 15, height: 12}} />
                                             </div>
-                                        ) : null}
-                                    </Collapse>
-                                </div>
-            
-                                <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
-                                <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={(dateConfirm ) ? show2 ? this.props.close2 : this.props.open2 : null}>
-                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Date&Time")}</p>
-                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`}/>
-                                    </div>
-                                    <Collapse isOpened={show2} theme={{collapse: styles.collapse}} initialStyle={{height: 'auto'}}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 1 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(1)}>
-                                        <div className={`${styles.checkBox} ${dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                            {dateOption === 1 && (
-                                                <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I have a specific date in mind")} className={`${styles.iconCheck}`} />
-                                            )}
-                                        </div>
-                                        <div className={`${styles.checkBoxText}`}>
-                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I have a specific date in mind")}</p>
                                         </div>
                                     </div>
-                                    {dateConfirm && (dateOption === 1) && (
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
-                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => this.props.openCalendar1(1)}>
-                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()}`}</p>
-                                            </div>
-                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => this.props.openCalendar1()}>
-                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedAmPm} ${selectedHour}:${selectedMin}`}</p>
-                                            </div>
+                                    <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
+                                    <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={show1 ? customerSelectedLocation.id ? this.props.close1 : null : this.props.open1}>
+                                            <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("1. Select Location")}<span className={`${styles.pink}`}>{`  (${locations ? locations.length : '0'})`}</span></p>
+                                            <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show1 ? styles.rotate : null}`} />
                                         </div>
-                                    )}
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 2 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(2)}>
-                                        <div className={`${styles.checkBox} ${dateOption !== 2 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                            {dateOption === 2 && (
-                                                <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")} className={`${styles.iconCheck}`} />
-                                            )}
-                                        </div>
-                                        <div className={`${styles.checkBoxText}`}>
-                                            <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}</p>
-                                        </div>
-                                    </div>
-                                    {dateConfirm && (dateOption === 2) && (
-                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
-                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={this.props.openCalendar2}>
-                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedStartDate.getFullYear()}/${String(selectedStartDate.getMonth() + 1).length === 2 ? (selectedStartDate.getMonth() + 1) : '0'.concat(String(selectedStartDate.getMonth() + 1))}/${selectedStartDate.getDate()}`}</p>
-                                            </div>
-                                            <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={this.props.openCalendar2}>
-                                                <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedEndDate.getFullYear()}/${String(selectedEndDate.getMonth() + 1).length === 2 ? (selectedEndDate.getMonth() + 1) : '0'.concat(String(selectedEndDate.getMonth() + 1))}/${selectedEndDate.getDate()}`}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                    </Collapse>
-                                </div>
-                                <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
-                                <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={customerSelectedOption.id ? show3 ?  this.props.close3 : this.props.open3 : null}>
-                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. Service&Pricing")}</p>
-                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`}/>
-                                    </div>
-                                    <Collapse isOpened={show3} theme={{collapse: styles.collapse}}>
-                                    <div className={`${styles.my3}`}>
-                                        {options && options.length > 0 ? (
-                                            options.map((option, index) => (
-                                                <div key={index} className={`${styles.py4} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.index === options.length - 1 ? null : styles.mb2} ${styles.cursorPointer} ${customerSelectedOption.id === option.id ? styles.borderPink : styles.borderGrayD9} ${customerSelectedOption.id === option.id ? styles.bgPink : styles.bgWhite}`} onClick={customerSelectedOption.id === option.id ? this.props.blankOption : () => this.props.selectOption(option)}>
-                                                    <div>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{`${option.title} (${option.person > 1 ? `${option.person} people` : `${option.person} person`}, ${option.hour > 1 ? `${option.hour} hrs` : `${option.hour} hr`})`}</p>
-                                                        <p className={`${styles.font10} ${styles.mt2} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{option.description}</p>
-                                                    </div>
-                                                    <div>
-                                                        <p className={`${styles.font14} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{`$${numberWithCommas(option.price)}`}</p>
-                                                    </div>
+                                        <Collapse isOpened={show1} theme={{collapse: styles.collapse}}>
+                                            {locations && locations.length > 0 ? (
+                                                <div className={`${styles.containerLocationOutside} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.mt3} ${styles.flexNowrap}`}>
+                                                    {locations.map((location, index) => (
+                                                        <LocationComp key={index} location={location} selectedLocation={customerSelectedLocation} index={index} total={locations.length} blankLocation={this.props.blankCustomerLocation} selectLocation={this.props.selectCustomerLocation} />
+                                                    ))}
                                                 </div>
-                                            ))
-                                        ) : (
-                                            <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("There is no available service & pricing option.")}</p>
+                                            ) : (
+                                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("There is no available location.")}</p>
+                                            )}
+                                            {customerSelectedLocation.lat ? (
+                                                <div className={`${styles.mt3}`}>
+                                                    <Map2
+                                                    isMarkerShown={true}
+                                                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                                                    loadingElement={<div style={{ height: `100%` }} />}
+                                                    containerElement={<div style={{height: 170}} />}
+                                                    mapElement={<div style={{ height: `100%` }} />}
+                                                    lng={customerSelectedLocation.lng}
+                                                    lat={customerSelectedLocation.lat}
+                                                    />
+                                                </div>
+                                            ) : null}
+                                        </Collapse>
+                                    </div>
+                
+                                    <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
+                                    <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={(dateConfirm ) ? show2 ? this.props.close2 : this.props.open2 : null}>
+                                            <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("2. Date&Time")}</p>
+                                            <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show2 ? styles.rotate : null}`}/>
+                                        </div>
+                                        <Collapse isOpened={show2} theme={{collapse: styles.collapse}} initialStyle={{height: 'auto'}}>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 1 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(1)}>
+                                            <div className={`${styles.checkBox} ${dateOption !== 1 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                                {dateOption === 1 && (
+                                                    <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I have a specific date in mind")} className={`${styles.iconCheck}`} />
+                                                )}
+                                            </div>
+                                            <div className={`${styles.checkBoxText}`}>
+                                                <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I have a specific date in mind")}</p>
+                                            </div>
+                                        </div>
+                                        {dateConfirm && (dateOption === 1) && (
+                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+                                                <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => this.props.openCalendar1(1)}>
+                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedDate.getFullYear()}/${String(selectedDate.getMonth() + 1).length === 2 ? (selectedDate.getMonth() + 1) : '0'.concat(String(selectedDate.getMonth() + 1))}/${selectedDate.getDate()}`}</p>
+                                                </div>
+                                                <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={() => this.props.openCalendar1()}>
+                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedAmPm} ${selectedHour}:${selectedMin}`}</p>
+                                                </div>
+                                            </div>
                                         )}
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`} onClick={dateOption === 2 ? this.props.blankDateOption : () => this.props.handleChangeDateOption(2)}>
+                                            <div className={`${styles.checkBox} ${dateOption !== 2 && styles.unchecked} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                                {dateOption === 2 && (
+                                                    <img src={require('../../assets/images/icon_check.png')} alt={this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")} className={`${styles.iconCheck}`} />
+                                                )}
+                                            </div>
+                                            <div className={`${styles.checkBoxText}`}>
+                                                <p className={`${styles.fontBold} ${styles.font13} ${styles.ml1}`} style={{marginTop: 3}}>{this.context.t("I don't have a specific date in mind, but my availability in Seoul is as follows :")}</p>
+                                            </div>
+                                        </div>
+                                        {dateConfirm && (dateOption === 2) && (
+                                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mt3}`}>
+                                                <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={this.props.openCalendar2}>
+                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedStartDate.getFullYear()}/${String(selectedStartDate.getMonth() + 1).length === 2 ? (selectedStartDate.getMonth() + 1) : '0'.concat(String(selectedStartDate.getMonth() + 1))}/${selectedStartDate.getDate()}`}</p>
+                                                </div>
+                                                <div className={`${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.py3} ${styles.cursorPointer}`} style={{width: 'calc(50% - 8px)'}} onClick={this.props.openCalendar2}>
+                                                    <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{`${selectedEndDate.getFullYear()}/${String(selectedEndDate.getMonth() + 1).length === 2 ? (selectedEndDate.getMonth() + 1) : '0'.concat(String(selectedEndDate.getMonth() + 1))}/${selectedEndDate.getDate()}`}</p>
+                                                </div>
+                                            </div>
+                                        )}
+                                        </Collapse>
                                     </div>
-                                    </Collapse>
-                                </div>
-                                <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
-                                <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
-                                        <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments (Optional)")}</p>
-                                        <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show4 ? styles.rotate : null}`} />
+                                    <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
+                                    <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`} onClick={customerSelectedOption.id ? show3 ?  this.props.close3 : this.props.open3 : null}>
+                                            <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("3. Service&Pricing")}</p>
+                                            <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show3 ? styles.rotate : null}`}/>
+                                        </div>
+                                        <Collapse isOpened={show3} theme={{collapse: styles.collapse}}>
+                                        <div className={`${styles.my3}`}>
+                                            {options && options.length > 0 ? (
+                                                options.map((option, index) => (
+                                                    <div key={index} className={`${styles.py4} ${styles.px3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.index === options.length - 1 ? null : styles.mb2} ${styles.cursorPointer} ${customerSelectedOption.id === option.id ? styles.borderPink : styles.borderGrayD9} ${customerSelectedOption.id === option.id ? styles.bgPink : styles.bgWhite}`} onClick={customerSelectedOption.id === option.id ? this.props.blankOption : () => this.props.selectOption(option)}>
+                                                        <div>
+                                                            <p className={`${styles.fontBold} ${styles.font14} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{`${option.title} (${option.person > 1 ? `${option.person} people` : `${option.person} person`}, ${option.hour > 1 ? `${option.hour} hrs` : `${option.hour} hr`})`}</p>
+                                                            <p className={`${styles.font10} ${styles.mt2} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{option.description}</p>
+                                                        </div>
+                                                        <div>
+                                                            <p className={`${styles.font14} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{`$${numberWithCommas(option.price)}`}</p>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <p className={`${styles.font13} ${styles.textCenter} ${styles.mt3}`}>{this.context.t("There is no available service & pricing option.")}</p>
+                                            )}
+                                        </div>
+                                        </Collapse>
                                     </div>
-                                    <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
-                                    <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("Please leave your message here.")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
-                                    <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
-                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Submit the request")}</p>
+                                    <div className={`${styles.bgGrayF4}`} style={{height: 10}} />
+                                    <div className={`${styles.pt4} ${styles.px3} ${styles.mb3}`}>
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.cursorPointer}`}>
+                                            <p className={`${styles.fontBold} ${styles.font13}`}>{this.context.t("4. Comments (Optional)")}</p>
+                                            <img src={require('../../assets/images/icon_arrow_down.png')} alt={this.context.t("More")} className={`${styles.iconArrowDown} ${styles.arrowAnimated} ${show4 ? styles.rotate : null}`} />
+                                        </div>
+                                        <Collapse isOpened={show4} theme={{collapse: styles.collapse}}>
+                                        <textarea className={`${styles.textArea} ${styles.mt3} ${styles.py3} ${styles.px2}`} placeholder={this.context.t("Please leave your message here.")} value={comment} name={"comment"} onChange={this.props.handleInputChange} />
+                                        <div className={`${styles.widthFull} ${styles.bgGray16} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.mt3} ${styles.btn}`} style={{height: 48}}>
+                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.white}`}>{this.context.t("Submit the request")}</p>
+                                        </div>
+                                        </Collapse>
                                     </div>
-                                    </Collapse>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -1354,37 +1292,43 @@ class AdminSignUp extends Component{
                 style={customStyles}
                 >
                     <div className={`${styles.widthFull} ${styles.heightFull} ${styles.bgWhite}`} style={{zIndex: 10}}>
-                        <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.px3} ${styles.py4} ${styles.bgWhite}`}>
-                            <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`}>
-                                <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("go back")} className={`${styles.iconArrowRightLg} ${styles.cursorPointer}`} onClick={this.props.closeLocationModal} />
-                            </div>
-                            <div className={`${styles.col8} ${styles.coLSm10} ${styles.px0}`}>
-                                <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{this.context.t("Search Location")}</p>
-                            </div>
-                            <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0} ${styles.cursorPointer}`} onClick={this.props.completeLocationSearch}>
-                                <p className={`${styles.fontBold} ${styles.font13} ${styles.textRight}`}>{this.context.t("Completed")}</p>
+                        <div className={`${styles.container} ${styles.px0}`}>
+                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.px3} ${styles.py4} ${styles.bgWhite}`}>
+                                <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0}`}>
+                                    <img src={require('../../assets/images/icon_left.png')} alt={this.context.t("go back")} className={`${styles.iconArrowRightLg} ${styles.cursorPointer}`} onClick={this.props.closeLocationModal} />
+                                </div>
+                                <div className={`${styles.col8} ${styles.coLSm10} ${styles.px0}`}>
+                                    <p className={`${styles.fontBold} ${styles.font16} ${styles.textCenter}`}>{this.context.t("Search Location")}</p>
+                                </div>
+                                <div className={`${styles.col2} ${styles.coLSm1} ${styles.px0} ${styles.cursorPointer}`} onClick={this.props.completeLocationSearch}>
+                                    <p className={`${styles.fontBold} ${styles.font13} ${styles.textRight}`}>{this.context.t("Completed")}</p>
+                                </div>
                             </div>
                         </div>
                         {locations && locations.length > 0 && (
-                            <div className={`${styles.mt2} ${styles.row} ${styles.mx0}`}>
-                                {locations.map((location, index) => (
-                                    <div key={index} className={`${styles.col6} ${styles.colMd4}`}>
-                                        <div className={`${styles.col12} ${styles.colMd10} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
-                                            <div className={`${styles.col10} ${styles.px0}`}>
-                                                <p className={`${styles.fontBold} ${styles.font1012} ${styles.white}`}>{this.context.t(`Location ${index + 1}`)}</p>
-                                                <p className={`${styles.fontBold} ${styles.font1113} ${styles.white} ${styles.mt1}`}>{location.name}</p>
-                                            </div>
-                                            <div className={`${styles.cursorPointer} ${styles.col2} ${styles.px0} ${styles.textRight}`} onClick={() => this.props.removeLocation(location)}>
-                                                <MdClose fontSize={'24px'} color={'#ffffff'}/>
+                            <div className={`${styles.container} ${styles.px0}`}>
+                                <div className={`${styles.mt2} ${styles.row} ${styles.mx0}`}>
+                                    {locations.map((location, index) => (
+                                        <div key={index} className={`${styles.col6} ${styles.colMd4}`}>
+                                            <div className={`${styles.col12} ${styles.colMd10} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2} ${styles.bgPink} ${styles.px2} ${styles.py2} ${styles.containerLocationBox}`}>
+                                                <div className={`${styles.col10} ${styles.px0}`}>
+                                                    <p className={`${styles.fontBold} ${styles.font1012} ${styles.white}`}>{this.context.t(`Location ${index + 1}`)}</p>
+                                                    <p className={`${styles.fontBold} ${styles.font1113} ${styles.white} ${styles.mt1}`}>{location.name}</p>
+                                                </div>
+                                                <div className={`${styles.cursorPointer} ${styles.col2} ${styles.px0} ${styles.textRight}`} onClick={() => this.props.removeLocation(location)}>
+                                                    <MdClose fontSize={'24px'} color={'#ffffff'}/>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         )}
                         <div className={`${styles.px3} ${styles.py2} ${styles.bgGray5c}`}>
-                            <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                <PlacesWithStandaloneSearchBox searchLocation={this.props.searchLocation} />
+                            <div className={`${styles.container}`}>
+                                <div className={`${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                    <PlacesWithStandaloneSearchBox searchLocation={this.props.searchLocation} />
+                                </div>
                             </div>
                         </div>
                         <Map
@@ -1401,44 +1345,46 @@ class AdminSignUp extends Component{
                         selectLocation={this.props.selectLocation}
                         />
                         {searchedLocations.length > 0 ? (
-                            <div className={`${styles.widthFull}`} style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
-                                {((searchedLocations.length > 0) && (locations.length === 0)) && (
-                                    <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentEnd} ${styles.pxBubble}`} style={{position: 'absolute', right: 0, top: -20}}>
-                                        <div className={`${styles.px3} ${styles.py2}`} style={{backgroundColor: '#969696', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5}}>
-                                            <p className={`${styles.font10} ${styles.white}`}>
-                                                {this.context.t("You can add a location by pressing the button.")}
-                                            </p>
-                                        </div>
-                                        <div className={`${styles.col12} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.justifyContentEnd}`}>
-                                            <div className={`${styles.bubbleBottom}`} />
-                                        </div>
-                                    </div>
-                                )}
-                                <div className={`${styles.bgWhite} ${styles.widthFull} ${styles.overflowYScroll}`} style={{maxHeight: 171}}>
-                                    {searchedLocations.map((location, index) => {
-                                        const find = locations.find(lo => (lo.lat === location.geometry.location.lat()) && (lo.lng === location.geometry.location.lng()))
-                                        return(
-                                            <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} onClick={() => this.props.selectLocation(location)}>
-                                                <div className={`${styles.col10} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
-                                                    <div className={`${styles.col1} ${styles.px0}`}>
-                                                        <p className={`${styles.fontBold} ${styles.font12} ${find ? styles.pink : null}`}>{index + 1}</p>
-                                                    </div>
-                                                    <div className={`${styles.col11} ${styles.px0}`}>
-                                                        <p className={`${styles.fontBold} ${styles.font14} ${styles.ml2} ${find ? styles.pink : null}`}>{location.name}</p>
-                                                    </div>
-                                                </div>
-                                                <div className={`${styles.col2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
-                                                    <div className={`${styles.circle24} ${find ? styles.bgPink : styles.bgGray5c} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
-                                                        {find ? (
-                                                            <MdClose fontSize="15px" color="#ffffff" />
-                                                        ) : (
-                                                            <MdAdd fontSize="15px" color="#ffffff" />
-                                                        )}
-                                                    </div>
-                                                </div>
+                            <div className={`${styles.widthFull} ${styles.bgWhite}`} style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
+                                <div className={`${styles.container} ${styles.px0}`} style={{position: 'relative'}}>
+                                    {((searchedLocations.length > 0) && (locations.length === 0)) && (
+                                        <div className={`${styles.row} ${styles.mx0} ${styles.justifyContentEnd} ${styles.pxBubble}`} style={{position: 'absolute', right: 0, top: -20}}>
+                                            <div className={`${styles.px3} ${styles.py2}`} style={{backgroundColor: '#969696', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5}}>
+                                                <p className={`${styles.font10} ${styles.white}`}>
+                                                    {this.context.t("You can add a location by pressing the button.")}
+                                                </p>
                                             </div>
-                                        )
-                                    })}
+                                            <div className={`${styles.col12} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.justifyContentEnd}`}>
+                                                <div className={`${styles.bubbleBottom}`} />
+                                            </div>
+                                        </div>
+                                    )}
+                                    <div className={`${styles.bgWhite} ${styles.widthFull} ${styles.overflowYScroll}`} style={{maxHeight: 171}}>
+                                        {searchedLocations.map((location, index) => {
+                                            const find = locations.find(lo => (lo.lat === location.geometry.location.lat()) && (lo.lng === location.geometry.location.lng()))
+                                            return(
+                                                <div key={index} className={`${index === searchedLocations.length - 1 ? null : styles.borderBtmGrayDc} ${styles.px3} ${styles.py3} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween}`} onClick={() => this.props.selectLocation(location)}>
+                                                    <div className={`${styles.col10} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter}`}>
+                                                        <div className={`${styles.col1} ${styles.px0}`}>
+                                                            <p className={`${styles.fontBold} ${styles.font12} ${find ? styles.pink : null}`}>{index + 1}</p>
+                                                        </div>
+                                                        <div className={`${styles.col11} ${styles.px0}`}>
+                                                            <p className={`${styles.fontBold} ${styles.font14} ${styles.ml2} ${find ? styles.pink : null}`}>{location.name}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className={`${styles.col2} ${styles.px0} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentEnd}`}>
+                                                        <div className={`${styles.circle24} ${find ? styles.bgPink : styles.bgGray5c} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentCenter}`}>
+                                                            {find ? (
+                                                                <MdClose fontSize="15px" color="#ffffff" />
+                                                            ) : (
+                                                                <MdAdd fontSize="15px" color="#ffffff" />
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         ) : (
