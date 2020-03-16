@@ -219,6 +219,7 @@ export const translations = {
     'Payment Successful!': '결제가 완료되었습니다!',
     'Start Date': '시작일',
     'End Date': '종료일',
+    "Can't send a message until you receive a reply": '답장이 오기 전에는 메세지를 보낼 수 없습니다.',
     ' should be selected': '을 선택해주세요.',
     'Please add payment details by : ': '다음의 기한까지 결제정보를 입력해주세요 : ',
     'Already made a reservation?': '이미 예약을 신청하셨나요?',

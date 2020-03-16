@@ -404,7 +404,7 @@ class MessageList extends Component{
             )}
             <div className={`${styles.bgWhite} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentCenter} ${styles.widthFull}`} style={{position: 'fixed', bottom: 0, height: 50, marginLeft: 'auto', marginRight: 'auto'}}>
                 <div className={`${styles.bgWhite} ${styles.row} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.px3} ${styles.containerCustomer} ${styles.widthFull}`}>
-                    <TextareaAutosize readOnly={((order.status === 'cancelled') || (order.status === 'pending') || (order.status === 'completed')) ? true : redating} maxRows={3} className={`${styles.textInput10}`} type={"text"} name={"text"} value={text} placeholder={this.context.t("Message")} onChange={this.props.handleInputChange} onKeyPress={this.props.handleKeyPress} />
+                    <TextareaAutosize readOnly={((order.status === 'cancelled') || (order.status === 'pending') || (order.status === 'completed')) ? true : redating} maxRows={3} className={`${styles.textInput10}`} type={"text"} name={"text"} value={text} placeholder={((order.status === 'cancelled') || (order.status === 'pending') || (order.status === 'completed')) ? this.context.t("Can't send a message until you receive a reply") : redating ? this.context.t("Can't send a message until you receive a reply") : this.context.t("Message")} onChange={this.props.handleInputChange} onKeyPress={this.props.handleKeyPress} />
                     <img src={require('../../assets/images/icon_send.png')} alt={this.context.t("Send")} style={{width: 40, height: 40}} onClick={this.props.send} />
                 </div>
             </div>
