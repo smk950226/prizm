@@ -98,6 +98,18 @@ class Container extends Component{
         }
     }
 
+    _afterRender = async(photographerId) => {
+        const { photographerList } = this.state;
+        const { getPhotographerPortfoliomore } = this.props;
+        const result = await getPhotographerPortfoliomore(photographerId)
+        if(result.status === 'ok'){
+            return result.portfolios
+        }
+        else{
+            return []
+        }
+    }
+
     render(){
         const { photographerList } = this.state;
         return (
@@ -109,6 +121,7 @@ class Container extends Component{
             handleKeyPress={this._handleKeyPress}
             submit={this._submit}
             photographerListMore={this._photographerListMore}
+            afterRender={this._afterRender}
             />
         )
     }

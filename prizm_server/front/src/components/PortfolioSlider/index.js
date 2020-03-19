@@ -8,12 +8,31 @@ class PortfolioSlider extends Component{
     static propTypes = {
         portfolio: PropTypes.array.isRequired,
         nickname: PropTypes.string,
-        lg: PropTypes.bool.isRequired
+        lg: PropTypes.bool.isRequired,
+        afterRender: PropTypes.func,
+        photographerId: PropTypes.number
     }
 
-    state = {
-        isOpen: false,
-        photoIndex: 0
+    constructor(props){
+        super(props)
+        const { portfolio } = props;
+        this.state = {
+            portfolio,
+            isOpen: false,
+            photoIndex: 0
+        }
+    }
+
+    componentDidMount = async() => {
+        const { afterRender, photographerId } = this.props;
+        if(afterRender && photographerId){
+            const portfolios = await afterRender(photographerId)
+            if(portfolios.length > 0){
+                this.setState({
+                    portfolio: [...this.state.portfolio, ...portfolios]
+                })
+            }
+        }
     }
 
     _openPortfolio = (photoIndex) => {
@@ -31,8 +50,9 @@ class PortfolioSlider extends Component{
     }
 
     render(){
-        const { portfolio, nickname, lg } = this.props;
-        const { isOpen, photoIndex } = this.state;
+        const { nickname, lg } = this.props;
+        const { portfolio, isOpen, photoIndex } = this.state;
+        console.log(portfolio)
         const images = []
         portfolio.map(port => {
             images.push(port.image)

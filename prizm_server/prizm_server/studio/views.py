@@ -24,17 +24,40 @@ from prizm_server.notification import models as notification_models
 import datetime, pytz, json, os, mimetypes, zipfile, io
 from dateutil.relativedelta import relativedelta
 from urllib.request import urlopen
+from io import BytesIO
+from PIL import Image
+from django.core.files import File
 
 User = get_user_model()
+
+def compress(image):
+    im = Image.open(image)
+    im_io = BytesIO() 
+    im.save(im_io, 'JPEG', quality=60) 
+    new_image = File(im_io, name=image.name)
+    return new_image
 
 class Photographer(APIView):
     def get(self, request, format = None):
         photographers = models.Photographer.objects.all().order_by('-id')
         paginator = MainPageNumberPagination()
         result_page = paginator.paginate_queryset(photographers, request)
-        serializer = serializers.PhotographerPortfolioSerializer(result_page, many = True, context = {'request': request})
+        serializer = serializers.PhotographerPortfolio3Serializer(result_page, many = True, context = {'request': request})
 
         return Response(status = status.HTTP_200_OK, data = serializer.data)
+    
+    def put(self, request, format = None):
+        photographer_id = request.query_params.get('photographerId')
+        if photographer_id:
+            try:
+                photographer = models.Photographer.objects.get(id = photographer_id)
+                portfolios = photographer.portfolio_set.all().order_by('id')[3:]
+                serializer = serializers.PortfolioSerializer(portfolios, many = True, context = {'request': request})
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok', 'portfolios': serializer.data})
+            except:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
 
 
 class PhotographerDetail(APIView):
@@ -459,7 +482,8 @@ class Studio(APIView):
                     if type(profile_image) == type('text'):
                         pass
                     else:
-                        photographer.profile_image = profile_image
+                        if profile_image:
+                            photographer.profile_image = compress(profile_image)
                     photographer.main_location = main_location
                     photographer.equipment = equipment
                     photographer.career = career
@@ -483,7 +507,7 @@ class Studio(APIView):
                         else:
                             img = models.Portfolio.objects.create(
                                 photographer = photographer,
-                                image = image
+                                image = compress(image)
                             )
                             img.save()
                     new_locations = []
@@ -536,7 +560,7 @@ class Studio(APIView):
                     photographer = models.Photographer.objects.create(
                         user = user,
                         nickname = nickname,
-                        profile_image = profile_image,
+                        profile_image = compress(profile_image),
                         main_location = main_location,
                         equipment = equipment,
                         career = career,
@@ -561,7 +585,7 @@ class Studio(APIView):
                         else:
                             img = models.Portfolio.objects.create(
                                 photographer = photographer,
-                                image = image
+                                image = compress(image)
                             )
                             img.save()
                     new_locations = []
@@ -1022,3 +1046,19 @@ def create_zip(request, order_id):
     mail.attach('{}.zip'.format(order.user.name), f.getvalue(), "application/zip")
     mail.send()
     return response
+
+class CompressImage(APIView):
+    def get(self, request,format = None):
+        code = request.query_params.get('code', None)
+        if code:
+            if code == 'tmdals236':
+                portfolios = models.Portfolio.objects.all()
+                for port in portfolios:
+                    new_image = compress(port.image)
+                    port.image = new_image
+                    port.save()
+                return Response(status = status.HTTP_200_OK, data = {'status': 'ok'})
+            else:
+                return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})
+        else:
+            return Response(status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, data = {'error': _('Invalid request!')})

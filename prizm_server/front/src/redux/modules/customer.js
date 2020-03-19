@@ -82,6 +82,19 @@ function getPhotographerListMore(page){
         .then(json => json)
     }
 }
+function getPhotographerPortfoliomore(photographerId){
+    return (dispatch) => {
+        return fetch(`${FETCH_URL}/api/studio/photographer/?photographerId=${photographerId}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(json => json)
+    }
+}
 
 function getPhotographerDetail(photographerId){
     return (dispatch) => {
@@ -663,7 +676,8 @@ const actionCreators = {
     cancelCustomRequest,
     getRequestOrderList,
     getRequestOrderListMore,
-    responsetToRequsetOrder
+    responsetToRequsetOrder,
+    getPhotographerPortfoliomore
 }
 
 export { actionCreators }

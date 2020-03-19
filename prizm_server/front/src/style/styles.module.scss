@@ -1148,12 +1148,12 @@ textarea {
     }
 }
 .container-portfolio-lg{
-    height: 100px;
+    height: auto;
     width: 100%;
     overflow-x: scroll !important;
 }
 .container-portfolio{
-    height: 100px;
+    height: auto;
     width: 100%;
     overflow-x: scroll !important;
 }
@@ -1340,7 +1340,7 @@ textarea {
 }
 @media (min-width: 768px){
     .container-portfolio-lg{
-        height: 300px;
+        height: auto;
         width: 100%;
         overflow-x: scroll !important;
     }

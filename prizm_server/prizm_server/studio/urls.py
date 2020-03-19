@@ -21,4 +21,5 @@ urlpatterns = [
     path('review/create/', views.ReviewCreate.as_view()),
     path('custom/request/', views.CustomRequest.as_view()),
     path('custom/request/order/', views.RequestOrder.as_view()),
+    path('compress/image/', views.CompressImage.as_view()),
 ]

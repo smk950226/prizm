@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getPhotographerListMore: (page) => {
             return dispatch(customerAction.getPhotographerListMore(page))
+        },
+        getPhotographerPortfoliomore: (photographerId) => {
+            return dispatch(customerAction.getPhotographerPortfoliomore(photographerId))
         }
     }
 }

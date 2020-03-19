@@ -22,7 +22,8 @@ class Home extends Component{
     static propTypes = {
         photographerList: PropTypes.array,
         isLoadingMore: PropTypes.bool.isRequired,
-        loading: PropTypes.bool.isRequired
+        loading: PropTypes.bool.isRequired,
+        afterRender: PropTypes.func.isRequired
     }
 
     static contextTypes = {
@@ -83,8 +84,8 @@ class Home extends Component{
                                             <p className={`${styles.fontBold} ${styles.font11} ${styles.white} ${styles.ml1}`}>Instagram</p>
                                         </a>
                                     </div>
-                                    {photographer.portfolio_set.length > 0 ? (
-                                        <PortfolioSlider portfolio={photographer.portfolio_set} nickname={photographer.nickname} lg={true} />
+                                    {photographer.portfolios.length > 0 ? (
+                                        <PortfolioSlider photographerId={photographer.id} afterRender={this.props.afterRender} portfolio={photographer.portfolios} nickname={photographer.nickname} lg={true} />
                                     ) : (
                                         null
                                     )}

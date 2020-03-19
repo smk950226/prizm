@@ -52,6 +52,24 @@ class PhotographerPortfolioSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'equipment', 'career', 'studio_id', 'portfolio_set', 'description', 'total_rating', 'review_count']
 
 
+class PhotographerPortfolio3Serializer(serializers.ModelSerializer):
+    user = users_serializers.PhotographerProfileSerializer()
+    portfolios = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Photographer
+        fields = ['id', 'user', 'nickname', 'profile_image', 'main_location', 'equipment', 'career', 'studio_id', 'portfolios', 'description', 'total_rating', 'review_count']
+    
+    def get_portfolios(self, obj):
+        try:
+            request = self.context.get('request')
+            portfolios = obj.portfolio_set.all().order_by('id')[:3]
+            serializer = PortfolioSerializer(portfolios, many = True, context = {'request': request})
+            return serializer.data
+        except:
+            return []
+
+
 class PhotographerShortSerializer(serializers.ModelSerializer):
     user = users_serializers.PhotographerProfileSerializer()
 
