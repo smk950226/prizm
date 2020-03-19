@@ -116,7 +116,7 @@ class RequestOrderList extends Component{
                                             <span className={`${styles.fontBold}`}>
                                                 {this.context.t("Price")}
                                             </span>
-                                            {` : $${numberWithCommas(order.price)}`}
+                                            {` : `}{this.context.t("$")}{`${numberWithCommas(order.price)}`}
                                         </p>
                                     </div>
                                 </div>

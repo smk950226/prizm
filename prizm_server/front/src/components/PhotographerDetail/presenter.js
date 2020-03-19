@@ -277,7 +277,7 @@ class PhotographerDetail extends Component{
                                                         <p className={`${styles.font10} ${styles.mt2} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{option.description}</p>
                                                     </div>
                                                     <div>
-                                                        <p className={`${styles.font14} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{`$${numberWithCommas(option.price)}`}</p>
+                                                        <p className={`${styles.font14} ${selectedOption.id === option.id ? styles.white : styles.black}`}>{this.context.t("$")}{`${numberWithCommas(option.price)}`}</p>
                                                     </div>
                                                 </div>
                                             ))

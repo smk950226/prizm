@@ -182,7 +182,7 @@ class PhotographerDetail extends Component{
                                 </div>
                                 <Collapse isOpened={show2} theme={{collapse: styles.collapse}}>
                                 <div className={`${styles.row} ${styles.mx0} ${styles.mt4} ${styles.cursorPointer}`}>
-                                    <p className={`${styles.font13} ${styles.fontBold}`}>{`$${numberWithCommas(order.price)}`} <span className={`${styles.pink} ${styles.fontNormal}`}>{`(${order.custom_request.person} ${order.custom_request.person > 1 ? `people` : `person`}, ${order.custom_request.hour} ${order.custom_request.hour > 1 ? `hours` : `hour`})`}</span></p>
+                                    <p className={`${styles.font13} ${styles.fontBold}`}>{this.context.t("$")}{`${numberWithCommas(order.price)}`} <span className={`${styles.pink} ${styles.fontNormal}`}>{`(${order.custom_request.person} ${order.custom_request.person > 1 ? this.context.t("people") : this.context.t("person")}, ${order.custom_request.hour} ${order.custom_request.hour > 1 ? this.context.t("hours") : this.context.t("hour")})`}</span></p>
                                 </div>
                                 </Collapse>
                             </div>

@@ -625,7 +625,7 @@ class AdminSignUp extends Component{
                                             <div className={`${styles.px3} ${styles.py3} ${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2}`} style={{opacity: 0.8}}>
                                                 <div>
                                                     <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t(`${option.title}`)}</p>
-                                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.white} ${styles.mt1}`}>{this.context.t(`${option.photograpy_type} / ${numberWithCommas(option.person)} person(s) ${numberWithCommas(option.hour)} hour(s) $${numberWithCommas(option.price)}`)}</p>
+                                                    <p className={`${styles.fontBold} ${styles.font1214} ${styles.white} ${styles.mt1}`}>{`${option.photograpy_type} / ${numberWithCommas(option.person)} `}{this.context.t("person(s)")}{` ${numberWithCommas(option.hour)} `}{this.context.t("hour(s)")}{this.context.t(" ")}{this.context.t("$")}{`${numberWithCommas(option.price)}`}</p>
                                                 </div>
                                                 <div className={`${styles.cursorPointer}`} onClick={() => this.props.removeOption(option)}>
                                                     <MdClose fontSize={'24px'} color={'#ffffff'}/>
@@ -830,7 +830,7 @@ class AdminSignUp extends Component{
                                                             <p className={`${styles.font10} ${styles.mt2} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{option.description}</p>
                                                         </div>
                                                         <div>
-                                                            <p className={`${styles.font14} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{`$${numberWithCommas(option.price)}`}</p>
+                                                            <p className={`${styles.font14} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{this.context.t("$")}{`${numberWithCommas(option.price)}`}</p>
                                                         </div>
                                                     </div>
                                                 ))
@@ -1056,7 +1056,7 @@ class AdminSignUp extends Component{
                                                     <div className={`${styles.px3} ${styles.py3} ${styles.bgPink} ${styles.row} ${styles.mx0} ${styles.alignItemsCenter} ${styles.justifyContentBetween} ${styles.mb2}`} style={{opacity: 0.8}}>
                                                         <div>
                                                             <p className={`${styles.fontBold} ${styles.font1214} ${styles.white}`}>{this.context.t(`${option.title}`)}</p>
-                                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.white} ${styles.mt1}`}>{this.context.t(`${option.photograpy_type} / ${numberWithCommas(option.person)} person(s) ${numberWithCommas(option.hour)} hour(s) $${numberWithCommas(option.price)}`)}</p>
+                                                            <p className={`${styles.fontBold} ${styles.font1214} ${styles.white} ${styles.mt1}`}>{`${option.photograpy_type} / ${numberWithCommas(option.person)} `}{this.context.t("person(s)")}{` ${numberWithCommas(option.hour)} `}{this.context.t("hour(s)")}{this.context.t(" ")}{this.context.t("$")}{`${numberWithCommas(option.price)}`}</p>
                                                         </div>
                                                         <div className={`${styles.cursorPointer}`} onClick={() => this.props.removeOption(option)}>
                                                             <MdClose fontSize={'24px'} color={'#ffffff'}/>
@@ -1257,7 +1257,7 @@ class AdminSignUp extends Component{
                                                     <p className={`${styles.font10} ${styles.mt2} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{option.description}</p>
                                                 </div>
                                                 <div>
-                                                    <p className={`${styles.font14} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{`$${numberWithCommas(option.price)}`}</p>
+                                                    <p className={`${styles.font14} ${customerSelectedOption.id === option.id ? styles.white : styles.black}`}>{this.context.t("$")}{`${numberWithCommas(option.price)}`}</p>
                                                 </div>
                                             </div>
                                         ))
