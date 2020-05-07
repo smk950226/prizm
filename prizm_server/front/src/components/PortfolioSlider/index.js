@@ -26,12 +26,21 @@ class PortfolioSlider extends Component{
     componentDidMount = async() => {
         const { afterRender, photographerId } = this.props;
         if(afterRender && photographerId){
+            console.log('?!!?!?')
             const portfolios = await afterRender(photographerId)
             if(portfolios.length > 0){
                 this.setState({
                     portfolio: [...this.state.portfolio, ...portfolios]
                 })
             }
+        }
+    }
+
+    componentDidUpdate = async(prevProps, prevState) => {
+        if(prevProps.portfolio !== this.props.portfolio){
+            this.setState({
+                portfolio: this.props.portfolio
+            })
         }
     }
 
@@ -52,7 +61,6 @@ class PortfolioSlider extends Component{
     render(){
         const { nickname, lg } = this.props;
         const { portfolio, isOpen, photoIndex } = this.state;
-        console.log(portfolio)
         const images = []
         portfolio.map(port => {
             images.push(port.image)
@@ -64,15 +72,15 @@ class PortfolioSlider extends Component{
                     {lg ? (
                         <Fragment>
                             {portfolio.map((port, index) => (
-                                <img key={port.id} src={port.image} alt={port.photographer} className={`${index === portfolio.length - 1 ? null : styles.mr2} ${styles.cursorPointer} ${styles.portfolioImage} ${styles.mobileOnly}`} style={{width: port.width > port.height ? 100 : port.width*100/port.height, height: port.height > port.width ? 100 : port.height*100/port.width}} onClick={() => this._openPortfolio(index)} />
+                                <img key={port.image} src={port.image} alt={port.photographer} className={`${index === portfolio.length - 1 ? null : styles.mr2} ${styles.cursorPointer} ${styles.portfolioImage} ${styles.mobileOnly}`} style={{width: port.width > port.height ? 100 : port.width*100/port.height, height: port.height > port.width ? 100 : port.height*100/port.width}} onClick={() => this._openPortfolio(index)} />
                             ))}
                             {portfolio.map((port, index) => (
-                                <img key={port.id} src={port.image} alt={port.photographer} className={`${index === portfolio.length - 1 ? null : styles.mr2} ${styles.cursorPointer} ${styles.portfolioImage} ${styles.mobileNone}`} style={{width: port.width > port.height ? 300 : port.width*300/port.height, height: port.height > port.width ? 300 : port.height*300/port.width}} onClick={() => this._openPortfolio(index)} />
+                                <img key={port.image} src={port.image} alt={port.photographer} className={`${index === portfolio.length - 1 ? null : styles.mr2} ${styles.cursorPointer} ${styles.portfolioImage} ${styles.mobileNone}`} style={{width: port.width > port.height ? 300 : port.width*300/port.height, height: port.height > port.width ? 300 : port.height*300/port.width}} onClick={() => this._openPortfolio(index)} />
                             ))}
                         </Fragment>
                     ) : (
                         portfolio.map((port, index) => (
-                            <img key={port.id} src={port.image} alt={port.photographer} className={`${index === portfolio.length - 1 ? null : styles.mr2} ${styles.cursorPointer} ${styles.portfolioImage}`} style={{width: port.width > port.height ? 100 : port.width*100/port.height, height: port.height > port.width ? 100 : port.height*100/port.width}} onClick={() => this._openPortfolio(index)} />
+                            <img key={port.image} src={port.image} alt={port.photographer} className={`${index === portfolio.length - 1 ? null : styles.mr2} ${styles.cursorPointer} ${styles.portfolioImage}`} style={{width: port.width > port.height ? 100 : port.width*100/port.height, height: port.height > port.width ? 100 : port.height*100/port.width}} onClick={() => this._openPortfolio(index)} />
                         ))
                     )}
                 

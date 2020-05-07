@@ -13,7 +13,6 @@ class Container extends Component{
     componentDidUpdate = (prevProps, prevState) => {
         if(prevProps !== this.props){
             const menu = this.props.navigation.getParam('menu', null)
-            console.log(menu)
             this.setState({
                 menu
             })
